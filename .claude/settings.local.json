@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node -e \"console.log\\(require\\('fs'\\).readFileSync\\('c:/Users/DAO/Desktop/Claude/docs/specs/us08-specs.md','utf8'\\).split\\(/\\\\r?\\\\n/\\).slice\\(0,8\\).join\\('\\\\n'\\)\\)\")",
+      "Bash(powershell -Command \"Get-Content 'c:/Users/DAO/Desktop/Claude/docs/specs/us08-specs.md' -TotalCount 8\")"
+    ]
+  }
+}
