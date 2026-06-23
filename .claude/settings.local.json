@@ -2,7 +2,16 @@
   "permissions": {
     "allow": [
       "Bash(node -e \"console.log\\(require\\('fs'\\).readFileSync\\('c:/Users/DAO/Desktop/Claude/docs/specs/us08-specs.md','utf8'\\).split\\(/\\\\r?\\\\n/\\).slice\\(0,8\\).join\\('\\\\n'\\)\\)\")",
-      "Bash(powershell -Command \"Get-Content 'c:/Users/DAO/Desktop/Claude/docs/specs/us08-specs.md' -TotalCount 8\")"
+      "Bash(powershell -Command \"Get-Content 'c:/Users/DAO/Desktop/Claude/docs/specs/us08-specs.md' -TotalCount 8\")",
+      "Bash(xxd test-cases/US27/US27_testcase.csv)",
+      "Bash(cp test-cases/US27/US27_testcase.csv test-cases/US27/US27_testcase.csv.bak)",
+      "Bash(node .fix-br.cjs \"test-cases/US27/US27_testcase.csv\")",
+      "Bash(cd \"/c/Users/ADMIN/OneDrive/Máy tính/Auto Test/AI_Claude\" && rm -f test-cases/US27/US27_testcase.csv.bak)",
+      "Bash(grep -v \"^\\\\./\\\\.git\")",
+      "Bash(xxd test-cases/US27B/US27B_testcase.csv)"
+    ],
+    "additionalDirectories": [
+      "c:\\c\\Users\\ADMIN\\OneDrive\\Máy tính\\Auto Test\\AI_Claude\\test-cases\\US27"
     ]
   }
 }

@@ -1,0 +1,47 @@
+﻿"ID","TCs description","Role","Test steps","Expected result","Note"
+"US27B_TC01","Happy path: luồng phê duyệt 2 cấp đầy đủ (Employee → Manager → HR), annual leave","Employee → Manager → HR","1. [Employee] Đăng nhập hệ thống với vai trò Employee, ghi nhận balance phép năm hiện tại (12 ngày).
+2. [Employee] Submit yêu cầu nghỉ phép loại annual, 01/07/2026 - 05/07/2026 (5 ngày), điền đầy đủ thông tin hợp lệ.
+3. [Manager] Mở tab mới, đăng nhập vai trò Manager, mở Manager Queue.
+4. [Manager] Approve yêu cầu vừa submit ở bước 2.
+5. [HR] Mở tab mới, đăng nhập vai trò HR, mở HR Queue.
+6. [HR] Approve yêu cầu đó.
+7. [Employee] Quay lại tab Employee, mở ""Yêu cầu của tôi"", xem chi tiết yêu cầu và balance hiện tại.","2. Yêu cầu được tạo với status pending_manager, hiển thị message ""Yêu cầu nghỉ phép đã được gửi thành công!"", xuất hiện trong Manager Queue.
+4. Status chuyển pending_manager → pending_hr; yêu cầu biến mất khỏi Manager Queue và xuất hiện trong HR Queue; balance Employee vẫn giữ 12 ngày (chưa trừ).
+6. Status chuyển pending_hr → approved (final); balance giảm đúng 5 ngày (còn 7 ngày); yêu cầu biến mất khỏi HR Queue.
+7. Hiển thị status approved; lịch sử action đủ 3 dòng: created (Employee), manager_action approve (Manager), hr_action approve (HR).",""
+"US27B_TC02","Manager reject: dừng sớm luồng, yêu cầu không bao giờ tới HR","Employee → Manager → HR","1. [Employee] Đăng nhập vai trò Employee, submit yêu cầu nghỉ phép loại annual hợp lệ.
+2. [Manager] Mở tab mới, đăng nhập vai trò Manager, mở Manager Queue, Reject yêu cầu vừa submit.
+3. [HR] Mở tab mới, đăng nhập vai trò HR, mở HR Queue.
+4. [Employee] Quay lại tab Employee, mở ""Yêu cầu của tôi"", xem chi tiết yêu cầu.","2. Status chuyển pending_manager → rejected_by_manager (final); yêu cầu biến mất khỏi Manager Queue.
+3. Yêu cầu KHÔNG xuất hiện trong HR Queue.
+4. Hiển thị status rejected_by_manager; lịch sử action có 2 dòng: created (Employee), manager_action reject (Manager); balance Employee không đổi.",""
+"US27B_TC03","HR reject sau khi Manager đã approve: balance được bảo toàn","Employee → Manager → HR","1. [Employee] Đăng nhập vai trò Employee, ghi nhận balance hiện tại, submit yêu cầu nghỉ phép loại annual 5 ngày hợp lệ.
+2. [Manager] Mở tab mới, đăng nhập vai trò Manager, Approve yêu cầu đó.
+3. [HR] Mở tab mới, đăng nhập vai trò HR, mở HR Queue, Reject yêu cầu đó.
+4. [Employee] Quay lại tab Employee, mở ""Yêu cầu của tôi"", xem chi tiết yêu cầu và balance hiện tại.","3. Status chuyển pending_hr → rejected_by_hr (final); yêu cầu biến mất khỏi HR Queue.
+4. Balance giữ nguyên như bước 1 (không bị trừ); lịch sử action có 3 dòng: created (Employee), manager_action approve (Manager), hr_action reject (HR).",""
+"US27B_TC04","Sick leave được approve đầy đủ 2 cấp nhưng không trừ balance phép năm","Employee → Manager → HR","1. [Employee] Đăng nhập vai trò Employee, ghi nhận balance phép năm hiện tại, submit yêu cầu nghỉ phép loại sick 5 ngày hợp lệ.
+2. [Manager] Mở tab mới, đăng nhập vai trò Manager, Approve yêu cầu đó.
+3. [HR] Mở tab mới, đăng nhập vai trò HR, Approve yêu cầu đó.
+4. [Employee] Quay lại tab Employee, kiểm tra lại balance phép năm.","3. Status chuyển thành approved (final).
+4. Balance phép năm giữ nguyên như bước 1 (sick không trừ balance), mặc dù yêu cầu đã approved.",""
+"US27B_TC05","Manager Queue chỉ hiển thị yêu cầu đang ở pending_manager","Employee → Manager","1. [Employee] Đăng nhập vai trò Employee, submit yêu cầu A (Nhân viên 1) và yêu cầu B (Nhân viên 2), cả 2 ở status pending_manager.
+2. [Manager] Đăng nhập vai trò Manager, mở Manager Queue, Approve yêu cầu A.
+3. [Manager] Mở lại Manager Queue, quan sát danh sách.","2. Status yêu cầu A chuyển pending_manager → pending_hr.
+3. Manager Queue chỉ còn hiển thị yêu cầu B (pending_manager); yêu cầu A không còn xuất hiện.",""
+"US27B_TC06","HR Queue chỉ hiển thị yêu cầu đã qua Manager, không bao giờ thấy yêu cầu bị Manager reject","Employee → Manager → HR","1. [Employee] Đăng nhập vai trò Employee, submit yêu cầu C và yêu cầu D.
+2. [Manager] Đăng nhập vai trò Manager, mở Manager Queue, Approve yêu cầu C, Reject yêu cầu D.
+3. [HR] Mở tab mới, đăng nhập vai trò HR, mở HR Queue, quan sát danh sách.","2. Yêu cầu C chuyển pending_hr; yêu cầu D chuyển rejected_by_manager (final).
+3. HR Queue chỉ hiển thị yêu cầu C; yêu cầu D không xuất hiện trong HR Queue.",""
+"US27B_TC07","Employee theo dõi đúng tiến trình khi yêu cầu đang ở giữa luồng (đã qua Manager, chưa tới HR)","Employee → Manager","1. [Employee] Đăng nhập vai trò Employee, submit yêu cầu nghỉ phép hợp lệ.
+2. [Manager] Mở tab mới, đăng nhập vai trò Manager, Approve yêu cầu đó.
+3. [Employee] Quay lại tab Employee, mở ""Yêu cầu của tôi"", xem chi tiết yêu cầu (trước khi HR xử lý).","3. Status hiển thị pending_hr; lịch sử action có đúng 2 dòng: created (Employee) và manager_action approve (Manager); chưa xuất hiện dòng hr_action.",""
+"US27B_TC08","Tính độc lập giữa yêu cầu của các nhân viên khác nhau (xử lý 1 yêu cầu không ảnh hưởng yêu cầu khác)","Employee → Manager","1. [Employee] Nhân viên 1 đăng nhập vai trò Employee, submit yêu cầu A.
+2. [Employee] Nhân viên 2 đăng nhập vai trò Employee (tab khác), submit yêu cầu B.
+3. [Manager] Đăng nhập vai trò Manager, Reject yêu cầu A.
+4. [Employee] Đăng nhập lại với Nhân viên 2, mở ""Yêu cầu của tôi"", xem yêu cầu B.","3. Yêu cầu A chuyển rejected_by_manager; balance Nhân viên 1 không đổi.
+4. Yêu cầu B của Nhân viên 2 vẫn ở status pending_manager, không bị ảnh hưởng bởi việc xử lý yêu cầu A.",""
+"US27B_TC09","Employee không thể tự phê duyệt yêu cầu của chính mình qua Manager/HR Queue","Employee","1. [Employee] Đăng nhập vai trò Employee, submit 1 yêu cầu nghỉ phép.
+2. [Employee] Trong cùng phiên đăng nhập Employee, thử truy cập Manager Queue hoặc HR Queue để approve/reject yêu cầu vừa submit.","2. Hệ thống chặn truy cập hoặc không hiển thị action Approve/Reject cho vai trò Employee.","<cần confirm>: spec không mô tả cơ chế phân quyền/giới hạn truy cập giữa các role tại Manager Queue và HR Queue."
+"US27B_TC10","Yêu cầu ở trạng thái final không thể bị tác động lại","Manager → HR","1. [Manager hoặc HR] Chuẩn bị 1 yêu cầu đã ở trạng thái final (approved, rejected_by_manager hoặc rejected_by_hr).
+2. [Manager hoặc HR] Thử tìm lại yêu cầu đó trong Manager Queue/HR Queue để Approve/Reject thêm lần nữa.","2. Yêu cầu không còn nằm trong Queue tương ứng nên không thể bị tác động lại; hệ thống không cho thay đổi status đã ở trạng thái final.","<cần confirm>: spec mô tả trạng thái final qua sơ đồ trạng thái nhưng không nêu rõ hành vi UI/hệ thống khi cố tác động lại yêu cầu đã final."
