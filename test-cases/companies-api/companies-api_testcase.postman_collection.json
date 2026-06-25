@@ -1,0 +1,258 @@
+{
+  "info": {
+    "_postman_id": "4951f8d4-0fbe-4ce2-bc80-28f35a0dc141",
+    "name": "Companies API - Get Company List",
+    "description": "Tự động sinh từ test-cases/companies-api/companies-api_testcase.csv. Mỗi request tương ứng 1 test case (TC01-TC08).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "TC01 - Lấy danh sách company thành công với token hợp lệ",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{token}}" },
+          { "key": "accept", "value": "application/json" }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/v1/companies",
+          "host": ["{{base_url}}"],
+          "path": ["api", "v1", "companies"]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test(\"Response is JSON\", function () {",
+              "    pm.response.to.be.json;",
+              "});",
+              "",
+              "// TODO: cần confirm tên field chính xác (total/rows hoặc data/meta) trước khi assert schema chi tiết"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "TC02 - Gửi request không có header accept",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{token}}" },
+          { "key": "accept", "value": "application/json", "disabled": true }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/v1/companies",
+          "host": ["{{base_url}}"],
+          "path": ["api", "v1", "companies"]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "// TODO: cần confirm hành vi thực tế khi thiếu header accept (200 trả JSON mặc định, hay 406 Not Acceptable)",
+              "console.log(\"Actual status:\", pm.response.code);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "TC03 - Gửi request với header accept không hợp lệ",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{token}}" },
+          { "key": "accept", "value": "text/html" }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/v1/companies",
+          "host": ["{{base_url}}"],
+          "path": ["api", "v1", "companies"]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "// TODO: cần confirm hành vi thực tế khi accept không hợp lệ (200 trả JSON, hay 406 Not Acceptable)",
+              "console.log(\"Actual status:\", pm.response.code);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "TC04 - Gửi request không có header Authorization",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{token}}", "disabled": true },
+          { "key": "accept", "value": "application/json" }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/v1/companies",
+          "host": ["{{base_url}}"],
+          "path": ["api", "v1", "companies"]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 401\", function () {",
+              "    pm.response.to.have.status(401);",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "TC05 - Gửi token không có tiền tố Bearer",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "{{token}}" },
+          { "key": "accept", "value": "application/json" }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/v1/companies",
+          "host": ["{{base_url}}"],
+          "path": ["api", "v1", "companies"]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 401\", function () {",
+              "    pm.response.to.have.status(401);",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "TC06 - Gửi token rỗng",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer " },
+          { "key": "accept", "value": "application/json" }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/v1/companies",
+          "host": ["{{base_url}}"],
+          "path": ["api", "v1", "companies"]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 401\", function () {",
+              "    pm.response.to.have.status(401);",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "TC07 - Gửi token không hợp lệ hoặc bị chỉnh sửa",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{tampered_token}}" },
+          { "key": "accept", "value": "application/json" }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/v1/companies",
+          "host": ["{{base_url}}"],
+          "path": ["api", "v1", "companies"]
+        },
+        "description": "tampered_token được tự sinh ở Pre-request Script bằng cách phá signature của {{token}}. Cần điền {{token}} hợp lệ trước khi chạy."
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "// Tạo token không hợp lệ bằng cách phá signature của token gốc",
+              "// Dùng pm.variables.get để tự ưu tiên Environment trước Collection",
+              "const original = pm.variables.get(\"token\") || \"\";",
+              "pm.collectionVariables.set(\"tampered_token\", original.slice(0, -5) + \"XXXXX\");"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 401\", function () {",
+              "    pm.response.to.have.status(401);",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "TC08 - Gửi token đã hết hạn",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{expired_token}}" },
+          { "key": "accept", "value": "application/json" }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/v1/companies",
+          "host": ["{{base_url}}"],
+          "path": ["api", "v1", "companies"]
+        },
+        "description": "QA cần tự cung cấp 1 JWT hợp lệ nhưng đã hết hạn (claim exp < hiện tại) vào biến môi trường expired_token trước khi chạy test case này. Không thể tự sinh vì cần chữ ký hợp lệ từ server."
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 401\", function () {",
+              "    pm.response.to.have.status(401);",
+              "});"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    { "key": "base_url", "value": "https://develop.snipeitapp.com" },
+    { "key": "token", "value": "" },
+    { "key": "tampered_token", "value": "" },
+    { "key": "expired_token", "value": "" }
+  ]
+}
