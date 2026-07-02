@@ -22,3 +22,4 @@ Dự án room booking là 1 dự án được xây dựng trên nền tảng web
 2. Naming convention: thực hiện đặt tên file teho nguyên tắc kebap.
    1. testcase sẽ sử dụng format là CSV BOM UTF-8
    2. Check list sử dụng markdown
+

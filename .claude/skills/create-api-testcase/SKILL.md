@@ -1,253 +1,181 @@
-
 ---
 name: create-api-testcase
-description: Đây là skill để thực hiện tạo API test case từ curl
-trigger: "create test case cho [feature/ functionality]" hoặc "tạo test case cho [feature/ functionality]"
+description: Tạo test case kiểm thử API từ tài liệu CURL hoặc API docs, xuất ra CSV UTF-8 BOM (ID, Description, Method, Payload, Expected result) và Postman Collection JSON v2.1 có sẵn test script kiểm tra HTTP status code.
+trigger: "create api test case từ [CURL/API docs]" hoặc "tạo test case API từ [CURL/API docs]"
 ---
 ## Hướng dẫn tạo test case
 
-### Bước 1: Đọc hiểu cURL
+### Bước 1: Tiếp nhận và xác định nguồn đầu vào
 
-Mục tiêu của bước này là phân tích cURL để hiểu API trước khi tạo test case.
+Xác định nguồn tài liệu API cần tạo test case. Nguồn đầu vào có thể là:
 
-1. Phân tích RequestXác định các thông tin sau:
+* Một hoặc nhiều câu lệnh CURL
+* API docs (OpenAPI/Swagger, Postman collection, mô tả endpoint dạng text...)
 
-   * HTTP Method (GET, POST, PUT, PATCH, DELETE...)
-   * Base URL
-   * Endpoint
-   * Path Parameter
-   * Query Parameter
-   * Header
-   * Authentication (Bearer Token, API Key, Cookie...)
-   * Request Body
-   * Content-Type
-   * Mục đích của API (Create / Update / Delete / Search / Get Detail...)
-2. Phân tích Input
+Trong trường hợp người dùng chưa cung cấp tài liệu cụ thể, hãy hỏi lại để có được:
 
-   Đối với từng input (Header, Path Param, Query Param, Body):
+* Endpoint (URL) và HTTP method
+* Header bắt buộc (ví dụ: Authorization, Content-Type)
+* Cấu trúc payload (request body / query params) và ý nghĩa từng trường
+* Các ràng buộc của từng trường (bắt buộc/không, kiểu dữ liệu, min/max, định dạng, giá trị hợp lệ)
+* Response mong đợi (status code, cấu trúc body) cho từng trường hợp.
 
-   * Tên field
-   * Kiểu dữ liệu (nếu suy luận được)
-   * Giá trị mặc định
-   * Giá trị được truyền trong cURL
-   * Vai trò của field
-   * Có khả năng là Required hay Optional
-   * Có thể suy luận rule validate nào
-3. Phân tích Business
+### Bước 2: Phân tích tài liệu
 
-   Nếu có thể suy luận:
+Đọc kỹ tài liệu và phân tích để hiểu rõ:
 
-   * API đang xử lý nghiệp vụ gì
-   * Đối tượng chính của API
-   * Dữ liệu nào có khả năng ảnh hưởng đến DB
-   * API có yêu cầu Authentication hoặc Authorization hay không
+* Method, endpoint, authentication
+* Từng trường trong payload: bắt buộc/optional, kiểu dữ liệu, ràng buộc giá trị
+* Các mã trạng thái (status code) và body response mong đợi
+* **Nếu endpoint thao tác trên 1 resource có state** (VD PATCH/action endpoint chỉ hợp lệ khi resource đang ở 1 số status nhất định): liệt kê đầy đủ TẤT CẢ status nguồn hợp lệ theo tài liệu (không suy đoán/không chỉ lấy 1 status đại diện), và tách riêng test case cho từng status hợp lệ đó — không gộp thành 1 case rồi coi các status hợp lệ khác là tương đương.
 
-   Nếu cURL không đủ thông tin để xác định, hãy sử dụng tag `<cần confirm>` để đánh dấu, không tự bịa nghiệp vụ.
+Trong trường hợp phát hiện điểm không rõ ràng hoặc mâu thuẫn (ví dụ: ràng buộc trường không nêu rõ, không biết status code mong đợi), hãy đặt câu hỏi để làm rõ.
 
-### Bước 2: Tạo test case
+### Bước 3: Tiếp nhận câu trả lời
 
-##### 2.1 Các kỹ thuật sử dụng
+Tiếp nhận các câu trả lời của người dùng. Trường hợp không có đủ thông tin để xác định kết quả mong đợi của một test case, hãy thêm tag <cần confirm> vào cột Expected result của test case đó để người dùng dễ nhận biết và xác nhận lại. Nghiêm cấm bịa kết quả mong đợi.
 
-Áp dụng các kỹ thuật phù hợp với API:
+### Bước 4: Thực hiện tạo test case
 
-* Happy Path
-* Validation Testing
-* Negative Testing
-* Boundary Value Analysis (BVA)
-* Equivalence Partitioning (EP)
-* Decision Table (nếu có business rule)
-* State Transition (nếu API phụ thuộc trạng thái dữ liệu)
-* Authentication Testing
-* Authorization Testing
-* Error Handling
-* Response Validation
-* Database Validation (nếu có thể suy luận)
-* Business Rule Validation
-* Idempotency (đối với PUT/PATCH/DELETE khi phù hợp)
+Tạo test case dựa trên tài liệu đã phân tích, áp dụng các kỹ thuật kiểm thử API chuẩn:
 
-Không áp dụng máy móc tất cả kỹ thuật. Chỉ sử dụng kỹ thuật phù hợp với từng API.
+Bao gồm
 
-##### 2.2 Phạm vi test case cần tạo
+1. Kiểm thử với header bao gồm các yếu tố như Authentication, token... Với endpoint cần đăng nhập (🔒), bao phủ đầy đủ các trường hợp authorization sau (bỏ qua trường hợp nào nếu tài liệu xác nhận không áp dụng):
+   1. **Happy case**: token hợp lệ, đúng quyền → thành công (2xx)
+   2. **Thiếu header Authorization**: không gửi header → 401 (vd: `No access token provided.`)
+   3. **Token sai cấu trúc**: token không đủ 3 phần / không đúng định dạng JWT → 401 (vd: `Invalid token structure`)
+   4. **Token sai chữ ký**: phần signature bị sửa, không khớp → 401 (vd: `Invalid token signature`)
+   5. **Token payload không hợp lệ**: payload lỗi / thiếu `exp` → 401 (vd: `Invalid token payload`)
+   6. **Token hết hạn**: `exp` đã qua → 401 (vd: `Token has expired`)
+   7. **Sai loại token**: dùng nhầm refresh token cho endpoint cần access token (hoặc ngược lại) → 401 (vd: `Invalid token type. Use an access token.`)
+   8. **Token của user không còn tồn tại**: user trong token đã bị xóa → 401 (vd: `Token invalid.`)
+   9. **Token đã bị thu hồi / vô hiệu hóa**: token cấp trước thời điểm logout, hoặc tái sử dụng sau khi logout → 401 (vd: `Token expired.`)
+   10. **Bearer token để trống**: header `Authorization: Bearer`  không có giá trị → 401
+   11. **Sai scheme**: header thiếu tiền tố `Bearer`  → 401
+   12. **Không đủ quyền (role)**: token hợp lệ nhưng role không có quyền truy cập endpoint → 403
+2. Kiểm thử với body: bao gồm việc validate các dữ liệu trên payload
 
-Ưu tiên tạo test case theo thứ tự sau:
+Với 2 thành phần trên thì sử dụng các kỹ thuật sau
 
-**A. Functional**
+- **Phân vùng tương đương** (equivalence partitioning): nhóm payload hợp lệ / không hợp lệ
+- **Phân tích giá trị biên** (boundary value analysis): min, max, min-1, max+1 cho các trường số/độ dài chuỗi
+- **Bảng quyết định** (decision table): tổ hợp các điều kiện đầu vào
+- Bao phủ các nhóm trường hợp:
+  - **Happy path**: payload hợp lệ → kết quả thành công (2xx)
+  - **Thiếu trường bắt buộc**: bỏ từng trường required
+  - **Sai kiểu dữ liệu / sai định dạng**: ví dụ email sai định dạng, số âm
+  - **Vi phạm ràng buộc giá trị**: vượt min/max, vượt độ dài
+  - **Authentication / Authorization**: thiếu token, token sai, không đủ quyền (401/403)
+  - **Resource state precondition** (nếu endpoint là action/transition trên resource có state): 1 test case Happy riêng cho MỖI status nguồn hợp lệ (không gộp đại diện), cộng thêm ít nhất 1 test case resource đang ở status KHÔNG hợp lệ → verify đúng lỗi (409/400) theo tài liệu
+  - **Trường hợp đặc biệt**: payload rỗng, dữ liệu trùng lặp, resource không tồn tại (404)
 
-* API hoạt động đúng với dữ liệu hợp lệ
-* Status Code
-* Response Body
-* Response Message
+##### 4.1 Quy định về output
 
-**B. Validation**
+Mỗi test case gồm các cột:
 
-Đối với từng field:
+- **ID**: định dạng `APIName_TCNumber` hoặc `userstoryID_TCNumber` (ví dụ: `LOGIN_TC01`, `US1234_TC01`)
+- **Description**: mô tả ngắn gọn mục đích của test case (test gì, với điều kiện nào)
+- **Method**: HTTP method và endpoint (ví dụ: `POST /api/v1/rooms/booking`)
+- **Payload**: nội dung request gửi đi (JSON body / query params / header liên quan). Với JSON nên giữ nguyên định dạng để dễ đọc/copy
+- **Expected result**: status code mong đợi \+ mô tả response body/thông báo lỗi mong đợi dựa trên tài liệu. Trường hợp tài liệu không nêu rõ → dùng tag `<cần confirm>`
 
-* Required
-* Null
-* Empty
-* Sai kiểu dữ liệu
-* Sai format
-* Boundary (Min/Max)
-* Giá trị đặc biệt
-* Duplicate (nếu phù hợp)
+| ID          | Description                                        | Method                  | Payload                                                              | Expected result                                    |
+| :---------- | :------------------------------------------------- | :---------------------- | :------------------------------------------------------------------- | :------------------------------------------------- |
+| LOGIN\_TC01 | Đăng nhập thành công với thông tin hợp lệ | POST /api/v1/auth/login | {"email":"[user@abc.com](mailto:user@abc.com)","password":"Abc@1234"} | 200 OK, response trả về accessToken hợp lệ     |
+| LOGIN\_TC02 | Đăng nhập với mật khẩu sai                   | POST /api/v1/auth/login | {"email":"[user@abc.com](mailto:user@abc.com)","password":"wrong"}    | 401 Unauthorized, message "Invalid credentials"    |
+| LOGIN\_TC03 | Thiếu trường email (bắt buộc)                 | POST /api/v1/auth/login | {"password":"Abc@1234"}                                              | 400 Bad Request, message báo email là bắt buộc |
 
-**C. Parameter**
 
-Đối với:
+##### 4.2 Quy định về file
 
-* Header
-* Path Param
-* Query Param
-* Body
+- **File format**: CSV UTF-8 BOM
+- Mỗi cột được đặt trong dấu `"` để chống vỡ layout khi nội dung chứa dấu phẩy, dấu ngoặc hoặc xuống dòng
+- Sử dụng ký tự xuống dòng chuẩn (`\n`) khi cần xuống dòng trong một cell
+- **Naming**: `APIName_api-testcase.csv` (đứng riêng, không gắn userstoryID) hoặc `userstoryID_api-testcase.csv` khi API thuộc phạm vi 1 userstoryID (kebab/snake theo tên API, ví dụ: `login_api-testcase.csv`, `US1234_api-testcase.csv`). KHÔNG dùng tên `userstoryID_testcase.csv` — tên đó là file gộp chung của `create-testcases`/`create-permission-testcase`/`create-system-testcase`/`create-impact-testcase`, trùng tên sẽ ghi đè mất dữ liệu của nhau.
+- **Folder**: lưu trong `testcases/APIName` hoặc `test-cases/userstoryID` khi thuộc phạm vi 1 userstoryID (ví dụ: `testcases/login`, `test-cases/US1234`) — cùng thư mục với file test case gộp của userstoryID đó nếu có.
 
-Kiểm tra:
+### Bước 5: Xuất file JSON để import vào Postman
 
-* Thiếu
-* Sai
-* Không hợp lệ
+Ngoài file CSV, sinh thêm một **Postman Collection v2.1** (JSON) để import trực tiếp vào Postman. Mỗi test case ở Bước 4 trở thành một request trong collection. Quy định:
 
-**D. Authentication**
+##### 5.1. Cấu trúc collection
 
-* Không truyền Token
-* Token sai
-* Token hết hạn
+- Dùng schema: `https://schema.getpostman.com/json/collection/v2.1.0/collection.json`
+- `info.name` \= tên API \+ " \- API Test Cases" (vd: `Register - API Test Cases`)
+- Mỗi request đặt tên theo `ID - Description` (vd: `REGISTER_TC01 - Happy path đăng ký thành công`)
+- Dùng **collection variable** để tái sử dụng:
+  - `{{baseUrl}}` cho base URL (vd `http://localhost/api`)
+  - `{{accessToken}}` cho access token ở các endpoint cần đăng nhập
+  - Khai báo sẵn các biến này trong mảng `variable` của collection (giá trị mặc định hợp lý hoặc rỗng kèm mô tả)
+- Body dạng `raw` \+ `options.raw.language = "json"`; header `Content-Type: application/json` khi có body.
+- Endpoint cần đăng nhập (🔒): thêm header `Authorization: Bearer {{accessToken}}` (riêng các case test lỗi auth thì chỉnh header theo đúng kịch bản: bỏ header, token sai, token rỗng...).
 
-**E. Authorization**
+##### 5.2. Trường ngẫu nhiên / duy nhất trong happy path → dùng biến động Postman
 
-* Không đủ quyền
-* Đúng quyền
+Với các case **happy path** có trường yêu cầu giá trị ngẫu nhiên hoặc duy nhất (để tránh trùng dữ liệu khi chạy lại nhiều lần), KHÔNG hard-code mà dùng biến động (dynamic variables) của Postman trong body:
 
-**F. Business Rule**
+| Loại trường                   | Biến Postman gợi ý   |
+| :------------------------------- | :---------------------- |
+| username                         | `{{$randomUserName}}` |
+| email                            | `{{$randomEmail}}`    |
+| password                         | `{{$randomPassword}}` |
+| họ tên                         | `{{$randomFullName}}` |
+| số nguyên                      | `{{$randomInt}}`      |
+| UUID / id duy nhất              | `{{$guid}}`           |
+| chuỗi duy nhất theo thời gian | `{{$timestamp}}`      |
 
-Nếu có thể suy luận:
+Ví dụ body happy path:
 
-* Duplicate Data
-* Resource Not Found
-* Invalid State
-* Conflict Data
-* Business Validation
+{ "username": "{{$randomUserName}}", "email": "{{$randomEmail}}", "password": "secret123", "role": "librarian" }
 
-**G. Response**
+Lưu ý: chỉ áp dụng biến động cho **happy path** (giá trị hợp lệ ngẫu nhiên). Các case kiểm thử biên/validation/lỗi vẫn phải dùng giá trị cố định, có chủ đích (vd chuỗi 51 ký tự, email sai định dạng) để đảm bảo đúng điều kiện test. Case test trùng lặp (409) phải dùng giá trị cố định đã tồn tại, không dùng biến ngẫu nhiên.
 
-Kiểm tra:
+##### 5.3. Test script kiểm tra HTTP status code
 
-* Status Code
-* Response Schema
-* Response Data
-* Error Message
+Mỗi request phải có một test script (đặt trong `event` với `listen: "test"`) để Postman tự kiểm tra status code mong đợi:
 
-**H. Database**
+pm.test("Status code is 201", function () {
 
-Nếu API có tác động dữ liệu:
+    pm.response.to.have.status(201);
 
-* Insert
-* Update
-* Delete
-* Không thay đổi dữ liệu khi request thất bại
+});
 
-Không tạo các test case không thể suy luận từ cURL.
+- Status code lấy đúng theo cột Expected result của test case tương ứng (201, 401, 409, 422, 429...).
+- Khuyến khích thêm assertion kiểm tra `message`/`success` trong body khi tài liệu nêu rõ, ví dụ:
 
-##### 2.3 Định dạng mong muốn
+pm.test("Status code is 409", function () {
 
-* Xuất file dưới dạng CSV UTF-8 BOM, mỗi cột được đặt trong `""` để chống hiện tượng vỡ layout
-* Sử dụng ký tự xuống dòng chuẩn `/n`
-* **Thông tin API:**
+    pm.response.to.have.status(409);
 
-  Thông tin API phải được hiển thị **cùng file** với bảng test case (cùng 1 file CSV), ở **phần đầu tiên của file**, sau đó mới đến bảng test case. Không hiển thị thông tin này riêng ở chat mà thiếu trong file.
+});
 
-  Trước bảng test case, ghi thông tin tổng quan của API:
+pm.test("Message khớp tài liệu", function () {
 
-  * API Name
-  * Method
-  * Endpoint
-  * Authentication
-  * Description (nếu suy luận được)
+    pm.expect(pm.response.json().message).to.eql("Email already registered.");
 
-  Mỗi thông tin là 1 dòng CSV gồm 2 cột "Label","Value", theo sau bởi 1 dòng trống để ngăn cách với bảng test case phía dưới. Ví dụ:
+});
 
-  "API Name","Create Product"
-  "Method","POST"
-  "Endpoint","/api/products"
-  "Authentication","Unknown"
-  "Description","Unknown"
-  "",""
+- Với test case gắn `<cần confirm>` (chưa chắc status/message), chỉ assert phần đã chắc chắn và thêm comment `// <cần confirm>` trong script.
 
-  Nếu không xác định được một thông tin từ cURL thì ghi**Unknown** .
+##### 5.4. Quy định về file JSON
 
-  Các thông tin này chỉ hiển thị một lần ở đầu file, không lặp lại trong từng test case.
-* **Định dạng bảng Test Case:**
+- **File format**: JSON UTF-8 (không BOM)
+- **Naming**: `APIName_postman_collection.json` (vd: `register_postman_collection.json`)
+- **Folder**: lưu cùng thư mục với file CSV — `testcases/APIName` (vd: `testcases/register`)
 
-| ID | Test Case Description       | Path | Detail     | Request Data                                                                                                                                                                                                     | Expected Result                                                                                                                                             | Actual Response | Result | Test Date | Note |
-| -- | --------------------------- | ---- | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- | ------ | --------- | ---- |
-| 1  | Create product successfully | API  | Happy Path | ``Body:``{``  "name": "123",``  "address": "ha noi",``  "address2": "test",``  "city": "hanoi",``  "state": "ha noi",``  "country": "viet nam",``  "zip": "10001",``  "currency": "vnd",``  "manager_id": "1"``} | - HTTP Status: 201 Created<br />- Product được tạo thành công.<br />- Response trả về Product ID.<br />- Database có thêm một Product mới. |                 |        |           |      |
+### Bước 6: Thông báo tới người dùng
 
-* Chỉ sinh dữ liệu cho các cột từ **ID** đến  **Expected Response** .
-* Các cột  **Actual Response** ,  **Result** , **Test Date** và **Note** để trống vì đây là các cột dùng trong quá trình execute test.
-* Mỗi test case chỉ kiểm tra  **một mục tiêu kiểm thử** .
-* **Path** ghi thành phần của Request đang được kiểm thử (API, Header, Path Parameter, Query Parameter hoặc Request Body).
-* **Detail** mô tả ngắn gọn loại kiểm thử (Happy Path, Required, Boundary, Authentication, Duplicate, Resource Not Found...).
-* **Request** chỉ ghi phần dữ liệu thay đổi so với request gốc trong cURL.
-* **Expected Response** luôn trình bày theo thứ tự:
-  1. HTTP Status
-  2. Response Message (nếu có)
-  3. Response Data hoặc Business Result
-  4. Database Impact (nếu có)
+- Số lượng test case đã tạo
+- Số lượng test case cần confirm (`<cần confirm>`)
+- Các nhóm trường hợp đã bao phủ (happy path, validation, auth...)
+- Đường dẫn 2 file đầu ra: file CSV và file Postman Collection JSON
 
-### Bước 3: Sinh Postman Collection
+## Ràng buộc
 
-Mục tiêu: cho phép import trực tiếp vào Postman và chạy tự động (Postman Runner hoặc Newman CLI) toàn bộ test case vừa tạo, không phải dựng tay từng request.
+- Chỉ thao tác trong folder LopAI, nghiêm cấm thao tác trên folder khác.
+- Không được bịa kết quả mong đợi nếu tài liệu/người dùng không cung cấp đủ thông tin; dùng tag `<cần confirm>` để đánh dấu.
+- Luôn tuân thủ định dạng CSV UTF-8 BOM và cấu trúc 5 cột (ID, Description, Method, Payload, Expected result) để đảm bảo tính nhất quán.
+- Luôn xuất kèm file Postman Collection JSON v2.1 (UTF-8, không BOM), mỗi request có test script kiểm tra HTTP status code đúng theo Expected result; happy path dùng biến động Postman cho trường ngẫu nhiên/duy nhất.
+- Không bịa thêm endpoint, trường hay ràng buộc không có trong tài liệu.
 
-* Sau khi đã hoàn thành bảng test case CSV, luôn sinh thêm 1 file Postman Collection (schema v2.1, JSON) đặt **cùng thư mục** với file CSV, cùng tên gốc, đổi đuôi thành `.postman_collection.json` (ví dụ: `companies-api_testcase.csv` → `companies-api_testcase.postman_collection.json`).
-* Sinh kèm 1 file Postman Environment (`<tên-api>.postman_environment.json`) chứa các biến dùng chung (`base_url`, `token`,...). Các giá trị nhạy cảm (token, secret) để **trống** trong file, không hardcode giá trị thật vào Collection/Environment — QA tự điền vào Postman sau khi import.
-* Quy tắc dựng Collection:
-  * 1 request Postman = 1 dòng test case, giữ đúng thứ tự trong CSV. Tên request bắt đầu bằng ID (ví dụ `TC01 - <Test Case Description>`).
-  * Request gốc (Method, URL, Header, Body) lấy từ cURL đầu vào; áp thêm đúng phần thay đổi ở cột Request Data của từng test case (header thiếu thì đánh dấu `disabled: true` thay vì xoá field, để vẫn thấy được trong Postman).
-  * Tham số hoá giá trị dùng lại nhiều lần (domain, token) thành biến Postman (`{{base_url}}`, `{{token}}`) thay vì lặp lại giá trị thật trong từng request.
-  * Mỗi request có 1 script Tests (`pm.test`) dịch từ cột Expected Result sang assertion:
-    * Chỉ `pm.response.to.have.status(<code>)` khi status code đã được xác nhận (không gắn `<cần confirm>`).
-    * Với Expected Result đang gắn `<cần confirm>`, không assert cứng — viết `// TODO: cần confirm ...` kèm `console.log(pm.response.code)` để QA tự quan sát kết quả thực tế ở lần chạy đầu rồi mới chốt assertion.
-  * Test case cần dữ liệu không thể tự sinh hợp lệ từ máy (ví dụ token hết hạn cần chữ ký thật từ server) thì dùng biến riêng (`{{expired_token}}`) và ghi rõ trong `description` của request rằng QA cần tự cung cấp giá trị trước khi chạy.
-  * Test case có thể tự sinh được bằng cách biến đổi dữ liệu gốc (ví dụ token bị chỉnh sửa 1 ký tự để sai signature) thì dùng Pre-request Script để tự tạo giá trị đó từ `{{token}}`, không cần QA can thiệp tay.
-* Không sinh Collection nếu bảng test case CSV chưa hoàn chỉnh.
-
-##### 2.4 Các quy định khác
-
-* Đây là  **test case API** , tập trung kiểm thử Request và Response của API, không kiểm thử giao diện (UI) hoặc các validation chỉ hiển thị trên màn hình.
-* Một test case chỉ kiểm tra  **một mục tiêu kiểm thử (One Test Case = One Testing Objective)** . Không kết hợp nhiều mục tiêu trong cùng một test case.
-* Luôn ưu tiên sinh test case theo đúng thứ tự:
-  1. Functional (Happy Path)
-  2. Validation
-  3. Boundary Value
-  4. Authentication
-  5. Authorization
-  6. Business Rule
-  7. Response Validation
-  8. Database Validation (nếu phù hợp)
-* Chỉ tạo test case dựa trên thông tin có trong cURL và các thông tin người dùng cung cấp. Không tự suy diễn Business Rule hoặc Rule Validate nếu không có căn cứ.
-* Validation phải được phân tích trên toàn bộ Request theo thứ tự:
-  * Header
-  * Path Parameter
-  * Query Parameter
-  * Request Body
-* Mỗi Request Component (Header, Path Parameter, Query Parameter, Request Body) cần được xem xét để tạo test case nếu có giá trị kiểm thử. Không bỏ sót Request Component nào.
-* Chỉ tạo test case khi có giá trị kiểm thử. Không tạo các test case trùng lặp hoặc chỉ khác nhau về cách diễn đạt.
-* Cột **Request** chỉ ghi phần dữ liệu thay đổi so với request gốc trong cURL. Không lặp lại toàn bộ Request của API.
-* Cột **Expected Response** phải mô tả các kết quả có thể kiểm chứng được, ưu tiên theo thứ tự:
-  * HTTP Status Code
-  * Response Message
-  * Response Data hoặc Business Result
-  * Database Impact (nếu có)
-* Không sử dụng các Expected Response mang tính chung chung như:
-  * API hoạt động đúng.
-  * API xử lý thành công.
-  * Hệ thống trả về đúng.
-* Đối với API yêu cầu Authentication hoặc Authorization, cần tạo đầy đủ các test case tương ứng. Nếu API không yêu cầu xác thực hoặc phân quyền thì không tạo các test case này.
-* Database Validation chỉ áp dụng cho các API có khả năng tạo mới, cập nhật, xóa hoặc thay đổi trạng thái dữ liệu. Đối với API chỉ đọc dữ liệu (GET), không tạo Database Validation nếu không có yêu cầu đặc biệt.
-* Các cột  **Actual Response** ,  **Result** , **Test Date** và **Note** là các cột phục vụ quá trình execute test, luôn để trống khi sinh test case.
-* Sau khi hoàn thành, tự rà soát bộ test case để đảm bảo:
-  * Không có test case trùng lặp.
-  * Không bỏ sót Request Component cần kiểm thử.
-  * Không bỏ sót nhóm kiểm thử quan trọng.
-  * Expected Response đầy đủ, rõ ràng và có thể kiểm chứng.
-  * Bộ test case có tính nhất quán về cách trình bày và mức độ chi tiết.
-* Ưu tiên chất lượng và độ bao phủ của bộ test case hơn số lượng test case.
