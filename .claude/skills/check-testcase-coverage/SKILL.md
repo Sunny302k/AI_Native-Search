@@ -71,4 +71,4 @@ Xuất file markdown checklist:
 
 - Không tự thêm/sửa test case trong các file CSV đã có — skill này chỉ đọc và báo cáo, không ghi đè.
 - Không được suy diễn rule không có trong spec để tạo áp lực coverage giả — chỉ đối chiếu đúng những gì spec nêu.
-- Chỉ thao tác trong folder dự án hiện tại (Timind Hub), nghiêm cấm thao tác trên folder khác.
+- Chỉ thao tác trong folder dự án hiện tại (Native Search / Claude), nghiêm cấm thao tác trên folder khác.

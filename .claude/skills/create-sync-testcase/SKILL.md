@@ -18,6 +18,8 @@ Native Search là hệ thống trung gian: lấy dữ liệu sync về từ BigC
 Với mỗi field thuộc nhóm **Sync trực tiếp**, xác định theo 3 trục:
 
 1. **Trạng thái dữ liệu nguồn BigCommerce** — liệt kê state khả dĩ theo đúng entity của field đó (tra `docs/sync-fields-glossary.md` + note/spec liên quan), ví dụ với Product: in-stock/out-of-stock, visible/hidden theo channel, thuộc/không thuộc category đang xét, có price list riêng theo customer group, đã bị xoá/archive bên BigCommerce. Không tự bịa state không có căn cứ trong glossary/note — nếu nghi ngờ có state khác chưa được liệt kê, hỏi lại thay vì đoán.
+
+   Khi cần xác nhận 1 chi tiết về **hành vi/data model của chính BigCommerce** (VD: xoá là hard hay soft delete, entity con có bị cascade xoá theo không) — đây là **Loại 1** theo `docs/bigcommerce-platform-facts.md` mục 1: tra file đó trước, nếu chưa có thì tra BigCommerce Developer Docs qua `WebFetch`/`WebSearch` và ghi lại fact + nguồn. Câu hỏi về việc **Native Search tự chọn phản ứng thế nào** trước 1 trạng thái BC (Loại 2) thì KHÔNG tra ở đây — xử lý bằng `<cần confirm>` như bình thường (xem Bước 3).
 2. **Thời điểm/tiến trình sync** — dữ liệu đã sync xong (Success), đang sync (In Progress), sync gần nhất Failed, hoặc dữ liệu đã đổi bên BigCommerce nhưng CHƯA chạy lại sync (stale — Admin/Storefront vẫn đang hiển thị data cũ).
 3. **Loại sync** (chỉ thêm nếu spec/note có phân biệt hành vi) — Manual Sync vs Schedule Sync.
 
@@ -51,6 +53,7 @@ Cùng schema 10 cột nên gộp vào chung `userstoryID_testcase.csv` với `cr
 ## Ràng buộc
 
 - Không tự bịa trạng thái dữ liệu BigCommerce không có căn cứ trong `docs/sync-fields-glossary.md` hoặc note/spec liên quan — nghi ngờ có state khác thì hỏi lại, không liệt kê tràn lan cho đủ số lượng.
+- Không tự đoán fact về nền tảng BigCommerce (Loại 1) khi chưa tra được qua `docs/bigcommerce-platform-facts.md` hoặc BC Developer Docs — nếu tra không ra hoặc docs mâu thuẫn, vẫn dùng `<cần confirm>` như câu hỏi Loại 2, không suy đoán để lấp khoảng trống.
 - Không viết test case cho field **Config nội bộ** trong skill này — chuyển người dùng sang `create-testcases`.
 - Không tự trigger sync thật hoặc thao tác trên dữ liệu BigCommerce thật khi soạn test case — skill này chỉ soạn case, việc thực thi/test thật thuộc giai đoạn execution sau.
 - Không được phép bịa test case nếu thiếu thông tin — dùng tag `<cần confirm>` giống `create-testcases`.

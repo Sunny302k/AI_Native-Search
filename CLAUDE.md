@@ -32,12 +32,11 @@ Module **Analytics** có nhắc tên trong tài liệu tổng quan nhưng chưa 
 .
 ├── checklists/        # checklist QA (hiện đang rỗng)
 ├── docs/
-│   └── specs/         # spec từng user story/feature Native Search, 1 file/story
-├── test-cases/        # tài liệu test case
-└── test-reports/      # báo cáo kết quả test (hiện đang rỗng)
+│   ├── sync-fields-glossary.md   # whitelist entity/field sync từ BigCommerce, dùng để gắn nhãn Nguồn dữ liệu
+│   └── specs/          # spec từng feature Native Search, viết ra từ extract-figma-spec hoặc viết ngược từ test case sheet gốc
+├── test-cases/         # tài liệu test case, 1 folder/feature (kebab-case)
+└── test-reports/       # báo cáo kết quả test (hiện đang rỗng)
 ```
-
-> Lưu ý: `docs/specs/` và `test-cases/` hiện đang có 1 số file không liên quan tới Native Search (VD `us07-specs.md`, `us08-specs.md`, `xin_nghi.md`, `register_leave.md`, `companies-api/`, test case US07/US27/US27B) — có vẻ là nội dung sót lại từ project khác (room booking, xin nghỉ phép, companies API). Chưa xoá/di chuyển gì — cần hỏi lại người dùng trước khi dọn dẹp.
 
 # Ràng buộc
 
@@ -45,4 +44,6 @@ Module **Analytics** có nhắc tên trong tài liệu tổng quan nhưng chưa 
 2. Naming convention: thực hiện đặt tên file teho nguyên tắc kebap.
    1. testcase sẽ sử dụng format là CSV BOM UTF-8
    2. Check list sử dụng markdown
+3. Khi 1 yêu cầu khớp trigger của bất kỳ skill viết test case nào (`create-testcases`, `create-permission-testcase`, `create-system-testcase`, `create-api-testcase`, `create-impact-testcase`, `create-sync-testcase`, `create-testcase-suite`, `check-testcase-coverage`) — luôn invoke qua tool `Skill`, không tự thực thi lại bằng script/trí nhớ nội dung skill. Đặc biệt lưu ý: vừa đọc/sửa chính skill đó trong cùng phiên KHÔNG phải lý do để bỏ qua bước invoke — trí nhớ diễn giải lại dễ lệch so với bản text hiện tại của skill.
+4. Khi báo cáo kết quả sau khi viết test case, luôn nói rõ đã viết qua skill nào — hoặc nói rõ nếu viết tay không qua skill nào kèm lý do. Không im lặng bỏ qua chi tiết này.
 

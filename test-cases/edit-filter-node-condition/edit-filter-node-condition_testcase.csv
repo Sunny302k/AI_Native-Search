@@ -1,0 +1,127 @@
+﻿ID,Test Type,Field / Phần,Chi tiết test,Cụ thể hơn,Preconditions,Test Steps,Input DB/Setting,Expected Result,Note
+EFNCOND_TC01,Happy,Mở màn Edit,Click icon Edit trên node Condition đã tồn tại,,Đã có filter node Condition trong Filter Nodes panel,"1. Tại MH Edit filter tree, ở Filter Nodes panel chọn node Condition.
+2. Click icon Edit.",,"2. Hiển thị MH [Edit filter node - Condition], load đúng toàn bộ cấu hình đã lưu trước đó (Title, Filter options, Option select type, Display Style, Sort Order, Appearance).",
+EFNCOND_TC02,Happy,Panel trái - danh sách node,Chuyển sang node khác rồi quay lại Condition không lẫn dữ liệu,,"Filter tree có ≥2 node, trong đó có Condition","1. Đang edit 1 node khác.
+2. Click chọn node Condition ở panel trái.",,"2. Nội dung bên phải đổi đúng sang cấu hình của node Condition, không lẫn dữ liệu của node vừa edit trước đó.",
+EFNCOND_TC03,Happy,Title,Giá trị Title đã lưu trước đó load đúng khi mở Edit,,"Node Condition đã lưu Title tuỳ chỉnh (khác mặc định ""Condition"")","1. Mở màn Edit filter node - Condition.
+2. Quan sát field Title.","Title đã lưu = ""Product Condition""","2. Title hiển thị đúng ""Product Condition"", không phải giá trị mặc định ""Condition"".",
+EFNCOND_TC04,Happy,Title,Sửa Title → Preview cập nhật ngay,,Đang ở MH Edit,"1. Sửa nội dung Title.
+2. Quan sát Preview.",,"2. Preview hiển thị Title mới ngay lập tức, chưa cần Save.",
+EFNCOND_TC05,Negative,Title,Không cho save khi Title rỗng,,Đang ở MH Edit,"1. Xoá trắng Title.
+2. Click Save Changes.",Title = rỗng,2. Không cho save; hiển thị lỗi required tại field Title.,
+EFNCOND_TC06,Happy,Title text color,"Màu Title đã lưu trước đó load đúng, đổi màu áp dụng lên Preview",,Node Condition đã lưu 1 màu Title tuỳ chỉnh,"1. Mở màn Edit, quan sát màu Title hiện tại.
+2. Chọn màu mới.
+3. Quan sát Preview.",,"1. Màu hiển thị đúng màu đã lưu trước đó.
+3. Title đổi màu đúng theo màu mới chọn.",
+EFNCOND_TC07,Happy,Title alignment,"Giá trị alignment đã lưu trước đó load đúng, đổi alignment áp dụng lên Preview",,Node Condition đã lưu Title alignment = Center,"1. Mở màn Edit, quan sát Title alignment.
+2. Đổi sang Left hoặc Right.
+3. Quan sát Preview.",Alignment đã lưu = Center,"1. Alignment hiển thị đúng Center (giá trị đã lưu).
+3. Title căn đúng theo vị trí mới chọn.",
+EFNCOND_TC08,Happy,Filter options,Trạng thái checked/unchecked của 3 option load đúng theo cấu hình đã lưu,,"Node Condition đã lưu New = unchecked, Used/Refurbished = checked","1. Mở màn Edit.
+2. Quan sát trạng thái checkbox của New, Used, Refurbished.",,"2. New hiển thị unchecked, Used và Refurbished hiển thị checked — đúng theo cấu hình đã lưu, không phải mặc định ""cả 3 đều checked"".",
+EFNCOND_TC09,Happy,Filter options,"Uncheck 1 option đang checked, Save → storefront ẩn đúng option",,Cả 3 option đang checked; đã publish filter tree,"1. Uncheck option Used.
+2. Click Save Changes.
+3. Kiểm tra filter Condition trên storefront.",,3. Option Used không còn hiển thị trên storefront filter; Preview chỉ còn New và Refurbished.,
+EFNCOND_TC10,Happy,Filter options,Re-check option đã uncheck từ trước → hiển thị lại trên storefront,,Option New đang unchecked (đã publish với trạng thái này),"1. Check lại option New.
+2. Click Save Changes.
+3. Kiểm tra storefront.",,3. Option New hiển thị lại trên storefront filter.,
+EFNCOND_TC11,Negative,Filter options,Uncheck tất cả 3 option → validation required,,Cả 3 option đang checked,"1. Uncheck New, Used, Refurbished.
+2. Click Save Changes.",,2. Không cho save; hiển thị thông báo required (phải chọn tối thiểu 1 option).,
+EFNCOND_TC12,Sync,Filter options,Trạng thái nguồn: Product bị xoá hẳn trên BC (không chỉ đổi Condition),Sau khi node đã Edit (label/thứ tự tuỳ chỉnh),"Node Condition đã Edit (label ""Refurbished""→""Renewed"", thứ tự tuỳ chỉnh); Product B: Condition = Refurbished, đã sync trước đó (count Refurbished hiện tại > 0)","1. Xoá hẳn Product B trên BigCommerce.
+2. Chạy sync.
+3. Kiểm tra storefront.",Product B bị xoá khỏi BC,"3. Count Refurbished giảm đúng 1; Product B không còn xuất hiện trong kết quả filter Refurbished; label ""Renewed"" và thứ tự đã Edit trước đó vẫn giữ nguyên, không bị reset về mặc định.",
+EFNCOND_TC13,Sync,Filter options,Trạng thái nguồn: Product bị ẩn theo channel trên BC nhưng vẫn còn Condition value,,"Product C: Condition = New, đang visible trên storefront channel; node Condition đã publish","1. Tắt visibility của Product C khỏi storefront channel trên BC (không xoá, không đổi Condition).
+2. Chạy sync.
+3. Kiểm tra count New và kết quả filter New trên storefront.","Product C: hidden theo channel, Condition vẫn = New",3. `<cần confirm>` — chưa có case nào (kể cả ở Add flow) xác nhận rule khi product bị ẩn theo channel (khác trường hợp bị xoá hẳn hoặc bị Merchandising Hide) có tiếp tục tính vào count/kết quả filter Condition hay không.,<cần confirm>: product hidden theo channel có tính vào count Filter options không
+EFNCOND_TC14,Sync,Filter options,Tiến trình sync: Đang In Progress — storefront hiển thị dữ liệu nào,,"Product D: Condition = New (count New hiện tại = X); vừa đổi Condition D → Used trên BC; batch sync vừa trigger, đang ở trạng thái In Progress","1. Trong lúc batch đang In Progress, mở storefront kiểm tra count New và Used.",Batch sync = In Progress,"1. `<cần confirm>` — giả thuyết theo nguyên tắc chung ở sync-manual-sync-specs.md (dữ liệu là snapshot, chỉ cập nhật khi sync Success): storefront vẫn hiển thị count theo lần sync Success gần nhất, chưa phản ánh thay đổi đang chạy dở — nhưng chưa có case cụ thể nào xác nhận riêng cho field Filter options.","<cần confirm>: hành vi hiển thị khi sync đang In Progress, dựa theo rule chung chưa có case riêng xác nhận"
+EFNCOND_TC15,Sync,Filter options,Tiến trình sync: Lần sync gần nhất Failed — storefront không mất dữ liệu,,Batch sync gần nhất = Failed; dữ liệu Condition hiện tại trên storefront là từ lần sync Success trước đó,"1. Trigger sync và giả lập lỗi (mock fail).
+2. Kiểm tra filter Condition trên storefront.",Batch sync = Failed,2. Storefront vẫn hiển thị đúng dữ liệu/count theo lần sync Success gần nhất; không bị trắng hoặc lỗi hiển thị dù lần sync vừa rồi Failed.,
+EFNCOND_TC16,Sync,Filter options,Dữ liệu stale: BC đã đổi Condition nhưng chưa chạy sync lại,,Product E vừa đổi Condition Used → New trên BC; CHƯA chạy sync (cả Manual lẫn Schedule) sau thay đổi này,1. Kiểm tra ngay filter Condition trên storefront (chưa sync).,"Product E: Used → New trên BC, chưa sync","1. Storefront vẫn hiển thị theo dữ liệu cũ (Product E vẫn tính vào count Used, chưa vào New) cho tới khi lượt sync tiếp theo chạy xong.",
+EFNCOND_TC17,Sync,Filter options,Loại sync: Manual và Schedule Sync cập nhật Condition như nhau,,Node Condition đã Edit; Product F và Product G lần lượt đổi Condition trên BC ở 2 thời điểm khác nhau,"1. Đổi Condition Product F trên BC, chạy Manual Sync, kiểm tra count.
+2. Đổi Condition Product G trên BC, đợi/trigger Schedule Sync tới lượt của Products, kiểm tra count.",,"1. Manual Sync cập nhật đúng count theo thay đổi của Product F.
+2. Schedule Sync cập nhật đúng count theo thay đổi của Product G — không có khác biệt hành vi giữa Manual và Schedule cho field Filter options (khớp sync-data-type-matrix-specs.md).",
+EFNCOND_TC18,Sync,Filter options,Trạng thái nguồn: Product không có Condition value trên BC,,"Product H chưa từng được set Condition value trên BC; đã publish filter tree, đã sync","1. Chạy sync với Product H chưa có Condition value.
+2. Kiểm tra count 3 option và kết quả filter trên storefront.",Product H: Condition = null/chưa set,2. Product H không được tính vào count của bất kỳ option nào (New/Used/Refurbished); không xuất hiện khi filter theo option nào trong 3 option.,
+EFNCOND_TC19,Sync,Filter options,Trạng thái nguồn: Product out-of-stock nhưng vẫn có Condition value,,"Product I: Condition = New, vừa hết hàng (out of stock) trên BC; đã sync","1. Set Product I hết hàng trên BC (không đổi Condition).
+2. Chạy sync.
+3. Kiểm tra count New và kết quả filter New trên storefront.","Product I: out of stock, Condition vẫn = New",3. `<cần confirm>` — chưa có case nào (kể cả Add flow) xác nhận count/kết quả Filter options có loại trừ product out-of-stock hay không (khác với rule Trending Products đã xác nhận rõ loại trừ out-of-stock ở docs/specs/instant-search-widget-specs.md).,<cần confirm>: product out-of-stock có bị loại khỏi count/kết quả Filter options không
+EFNCOND_TC20,Happy,Filter options - Label,Label custom đã lưu trước đó load đúng khi mở Edit,,"Option New đã đổi label thành ""Brand New"" ở lần Edit trước","1. Mở màn Edit.
+2. Quan sát label của option New.",,"2. Label hiển thị đúng ""Brand New"", không phải mặc định ""New"".",
+EFNCOND_TC21,Happy,Filter options - Label,"Sửa label, Save → storefront hiển thị label mới",,"Option Used đang có label mặc định ""Used""","1. Sửa label option Used thành ""Pre-owned"".
+2. Click Save Changes.
+3. Kiểm tra storefront.","Label mới = ""Pre-owned""","3. Storefront hiển thị ""Pre-owned"" thay cho ""Used""; Preview cập nhật đúng.",
+EFNCOND_TC22,Negative,Filter options - Label,Không cho save khi label rỗng,,Đang ở MH Edit,"1. Xoá trắng label của option New.
+2. Click Save Changes.",,2. Không cho save; hiển thị lỗi required tại field label.,
+EFNCOND_TC23,Edge,Filter options - Label,Custom label không ảnh hưởng logic filter thật,Label ≠ giá trị BC gốc,"Label ""New"" đã đổi thành ""Brand New""; đã publish","1. Truy cập storefront.
+2. Chọn filter ""Brand New"".
+3. Kiểm tra kết quả.",,"3. Product có Condition = New trên BigCommerce vẫn được lọc đúng, dù label hiển thị đã đổi tên.",
+EFNCOND_TC24,Edge,Filter options - Label,Đổi label trùng với label của option khác,Conflict label,Đang ở MH Edit; 2 option sẽ có cùng label sau khi đổi,"1. Đổi label ""Used"" thành ""New"" (trùng label option New).
+2. Click Save Changes.",,"2. `<cần confirm>` — case gốc (Add flow) cũng chưa chốt hành vi khi 2 option trùng label, chỉ ghi ""xử lý nhất quán, không gây confusion cho user"" mà không nêu rule cụ thể (chặn save/cho phép/tự thêm hậu tố).",<cần confirm>: hành vi khi 2 filter option trùng label — case gốc Add flow (case #82) cũng chưa xác nhận rule cụ thể
+EFNCOND_TC25,Happy,Option select type,Giá trị Single/Multiple đã lưu trước đó load đúng,,Node Condition đã lưu Option select type = Multiple,"1. Mở màn Edit.
+2. Quan sát Option select type.",,"2. Hiển thị đúng ""Multiple"" (giá trị đã lưu), không phải mặc định ""Single"".",
+EFNCOND_TC26,Happy,Option select type,"Switch Single → Multiple, Save → storefront cho multi-select",,Node đang là Single,"1. Chọn Multiple.
+2. Click Save Changes.
+3. Kiểm tra storefront.",,3. Storefront cho phép chọn đồng thời nhiều option Condition.,
+EFNCOND_TC27,Happy,Option select type,"Switch Multiple → Single, Save → storefront chỉ cho chọn 1",,Node đang là Multiple,"1. Chọn Single.
+2. Click Save Changes.
+3. Kiểm tra storefront.",,3. Storefront chỉ cho phép chọn 1 option Condition tại 1 thời điểm.,
+EFNCOND_TC28,Happy,Display Style,Giá trị List/Grid đã lưu trước đó load đúng,,Node Condition đã lưu Display Style = Grid,"1. Mở màn Edit.
+2. Quan sát Display Style.",,"2. Hiển thị đúng ""Grid"" (giá trị đã lưu), không phải mặc định ""List"".",
+EFNCOND_TC29,Happy,Display Style,"Đổi Display Style, Save → Preview và storefront đổi đúng",,Display Style đang là List,"1. Chọn Grid.
+2. Click Save Changes.
+3. Kiểm tra Preview và storefront.",,3. Preview và storefront hiển thị 3 option Condition dạng Grid đúng design.,
+EFNCOND_TC30,Happy,Sort Order,"Thứ tự đã lưu trước đó load đúng, không phải mặc định",,Node Condition đã lưu thứ tự Refurbished → New → Used,"1. Mở màn Edit.
+2. Quan sát section Sort Order.",,"2. Thứ tự hiển thị đúng Refurbished (1), New (2), Used (3) — đúng giá trị đã lưu, không phải mặc định New→Used→Refurbished.",
+EFNCOND_TC31,Happy,Sort Order,"Kéo thả đổi thứ tự, Save → storefront phản ánh đúng",,Sort Order đang là New → Used → Refurbished,"1. Kéo thả Refurbished lên vị trí đầu tiên.
+2. Click Save Changes.
+3. Kiểm tra filter trên storefront.",,3. Storefront hiển thị option Condition theo đúng thứ tự vừa kéo thả.,
+EFNCOND_TC32,Happy,Sort Order,Thứ tự mới persist sau Save + reload,,Đã Save thứ tự mới,"1. Reload trang.
+2. Mở lại màn Edit filter node - Condition.
+3. Kiểm tra Sort Order.",,"3. Thứ tự vẫn giữ đúng như đã Save, không bị reset về mặc định.",
+EFNCOND_TC33,Happy,Hide on customer group,Selection đã lưu trước đó load đúng khi mở lại Edit,,Node Condition đã lưu Hide on customer group cho 1 nhóm khách hàng cụ thể,"1. Mở màn Edit.
+2. Quan sát field Hide on customer group.",,"2. Hiển thị đúng số lượng/tên customer group đã chọn từ trước, không bị reset về rỗng.",
+EFNCOND_TC34,Edge,Hide on customer group,Customer group đã chọn trước đó bị xoá bên BigCommerce,,"Node Condition đã lưu Hide on customer group = nhóm A; nhóm A vừa bị xoá trên BC, đã chạy sync","1. Mở lại màn Edit filter node - Condition.
+2. Quan sát field Hide on customer group.",Customer group A đã bị xoá bên BC,"2. `<cần confirm>` — case gốc (Add flow #43) chỉ xác nhận nhóm bị xoá không còn hiển thị TRONG POPUP khi chọn mới, chưa có case nào xác nhận hành vi khi node đã Save selection đó từ trước rồi nguồn bị mất (hiển thị rỗng/giữ tên cũ/báo lỗi).",<cần confirm>: hành vi selection cũ khi customer group nguồn đã bị xoá bên BC sau khi node đã Save
+EFNCOND_TC35,Sync,Hide on customer group,Trạng thái nguồn: Customer bị remove khỏi customer group trên BC,,Node đã set Hide on customer group = Group A (đã Save); Customer X thuộc Group A (filter Condition đang bị ẩn với X); đã sync,"1. Remove Customer X khỏi Group A trên BC.
+2. Chạy sync.
+3. Đăng nhập storefront bằng account Customer X, kiểm tra filter Condition.",Customer X: removed khỏi Group A,"3. Filter Condition hiển thị lại bình thường với Customer X (không còn bị ẩn), vì X không còn thuộc Group A.",
+EFNCOND_TC36,Sync,Hide on customer group,Trạng thái nguồn: Customer group nguồn bị xoá hẳn trên BC — ảnh hưởng thực tế trên storefront,Khác TC kiểm tra ở màn Admin (chỉ xác nhận UI popup),Node đã set Hide on customer group = Group A (đã Save); Group A bị xoá trên BC; đã chạy sync,"1. Đăng nhập storefront bằng account từng thuộc Group A (nếu tài khoản còn tồn tại).
+2. Kiểm tra filter Condition.",Customer group A đã bị xoá bên BC,"2. `<cần confirm>` — chưa rõ hành vi khi group nguồn bị xoá: filter tự động hiện lại cho toàn bộ customer (vì rule ""hide"" không còn base để áp dụng) hay vẫn giữ ẩn theo dữ liệu cache cũ.",<cần confirm>: hành vi storefront khi customer group nguồn bị xoá hẳn trên BC
+EFNCOND_TC37,Sync,Hide on customer group,Dữ liệu stale: Customer group thay đổi thành viên nhưng chưa sync,,Customer Y vừa được thêm vào Group A trên BC; CHƯA chạy sync,"1. Đăng nhập storefront bằng account Customer Y, kiểm tra filter Condition ngay (chưa sync).","Customer Y: mới thêm vào Group A, chưa sync",1. Filter Condition vẫn hiển thị bình thường với Customer Y (chưa bị ẩn) cho tới khi lượt sync tiếp theo chạy xong và cập nhật membership mới.,
+EFNCOND_TC38,Sync,Hide on customer group,Tiến trình sync: Lần sync gần nhất Failed,,Batch sync gần nhất = Failed; dữ liệu Hide on customer group hiện tại trên storefront là từ lần sync Success trước đó (Group A đang hide đúng),"1. Trigger sync và giả lập lỗi (mock fail).
+2. Đăng nhập storefront bằng account thuộc Group A, kiểm tra filter Condition.",Batch sync = Failed,2. Filter Condition vẫn ẩn đúng với Group A theo dữ liệu của lần sync Success gần nhất; không tự động hiện lại hoặc lỗi hiển thị dù lần sync vừa rồi Failed.,
+EFNCOND_TC39,Happy,Hide on customer group - Popup,Search partial/full match trong popup,,Click [Edit] tại Hide on customer group để mở popup,"1. Nhập 1 phần tên customer group.
+2. Kiểm tra kết quả.
+3. Nhập đầy đủ tên customer group.
+4. Kiểm tra kết quả.",,"2. Hiển thị đúng dữ liệu khớp 1 phần.
+4. Hiển thị đúng dữ liệu khớp toàn phần.",
+EFNCOND_TC40,Happy,Appearance - Display tooltips,Trạng thái ON/OFF và nội dung tooltip đã lưu trước đó load đúng,,Node Condition đã lưu Display tooltips = ON kèm nội dung tuỳ chỉnh,"1. Mở màn Edit.
+2. Quan sát toggle Display tooltips và tooltip content.",,2. Toggle hiển thị đúng ON; tooltip content hiển thị đúng nội dung đã lưu.,
+EFNCOND_TC41,Negative,Appearance - Display tooltips,Không cho bật toggle khi tooltip content đang rỗng,,"Tooltip content đang rỗng, toggle đang OFF","1. Xoá trắng tooltip content (nếu chưa rỗng).
+2. Bật toggle Display tooltips ON.",Tooltip content = rỗng,2. Không cho phép bật; hiển thị cảnh báo.,
+EFNCOND_TC42,Happy,Appearance - Show all irrelevant values,Giá trị đã lưu trước đó load đúng,,Node Condition đã lưu Show all irrelevant values = ON,"1. Mở màn Edit.
+2. Quan sát toggle.",,2. Toggle hiển thị đúng ON (giá trị đã lưu).,
+EFNCOND_TC43,Happy,Appearance - Pagination type,Giá trị đã lưu trước đó load đúng,,Node Condition đã lưu Pagination type = Show more,"1. Mở màn Edit.
+2. Quan sát dropdown Pagination type.",,"2. Hiển thị đúng ""Show more"" (giá trị đã lưu).",
+EFNCOND_TC44,Happy,Appearance - Collapse/Expand,"Giá trị Desktop và Mobile đã lưu trước đó load đúng, độc lập nhau",,"Node Condition đã lưu Desktop = Expand, Mobile = Collapse","1. Mở màn Edit.
+2. Quan sát Collapse/Expand ở cả Preview Desktop và Mobile.",,2. Desktop hiển thị đúng Expand; Mobile hiển thị đúng Collapse — đúng 2 giá trị độc lập đã lưu.,
+EFNCOND_TC45,Happy,Appearance - Display all values in uppercase,Giá trị đã lưu trước đó load đúng,,Node Condition đã lưu Display all values in uppercase = ON,"1. Mở màn Edit.
+2. Quan sát toggle và Preview.",,"2. Toggle hiển thị đúng ON; Preview hiển thị 3 option (NEW, USED, REFURBISHED) dạng chữ in hoa.",
+EFNCOND_TC46,Happy,Appearance - Show search box,Giá trị Desktop/Mobile đã lưu trước đó load đúng,,"Node Condition đã lưu Show search box on desktop = ON, on mobile = OFF","1. Mở màn Edit.
+2. Quan sát 2 toggle Show search box (Desktop/Mobile).",,2. Desktop hiển thị đúng ON; Mobile hiển thị đúng OFF.,
+EFNCOND_TC47,Happy,Button [Save Changes],Disable khi chưa có thay đổi nào trong màn Edit,,"Vừa mở màn Edit, chưa chỉnh gì",1. Quan sát trạng thái nút Save Changes.,,1. Nút Save Changes ở trạng thái disable.,
+EFNCOND_TC48,Happy,Button [Save Changes],Enable ngay khi sửa 1 field bất kỳ,,Đang ở màn Edit,"1. Sửa 1 field bất kỳ (VD Title, hoặc toggle 1 filter option).
+2. Quan sát nút Save Changes.",,2. Nút Save Changes chuyển sang trạng thái enable.,
+EFNCOND_TC49,Happy,Button [Save Changes],Double-click không tạo lưu trùng/duplicate,,"Có thay đổi hợp lệ, Save Changes đang enable",1. Double-click liên tiếp nút Save Changes.,,1. Chỉ 1 request lưu được gửi; không tạo node/cấu hình trùng lặp.,
+EFNCOND_TC50,Negative,Button [Save Changes],Chặn save khi có field invalid,,Title đang bị xoá trắng (invalid),1. Click Save Changes.,Title = rỗng,1. Không cho save; hiển thị lỗi đúng tại field đang invalid.,
+EFNCOND_TC51,Happy,Điều hướng khi có unsaved changes,Popup cảnh báo + Discard/Cancel hoạt động đúng,,"Đang sửa dở dữ liệu ở node Condition, chưa Save","1. Click [Back] hoặc chọn chuyển sang node khác.
+2. Ở popup cảnh báo, click [Discard].
+3. Lặp lại bước 1, lần này click [Cancel]/[Stay].",,"1. Hiển thị popup cảnh báo unsaved changes.
+2. Bỏ thay đổi chưa lưu và điều hướng tiếp theo yêu cầu ban đầu.
+3. Đóng popup, ở lại màn Edit filter node - Condition với dữ liệu đang sửa dở còn nguyên.",
+EFNCOND_TC52,Happy,Button [Save to template],Lưu cấu hình Condition hiện tại thành template mới,,Cấu hình node Condition hợp lệ,1. Click button [Save to template].,,1. Lưu thành công; template mới xuất hiện ở tab [My Templates] trong popup Add filter node.,
+EFNCOND_TC53,Integration,Storefront sau khi Edit,Thay đổi từ Edit (không phải Add mới) áp dụng đúng ra storefront,,Đã Edit và Save thành công (VD đổi label + thứ tự),"1. Mở storefront (SRP hoặc Category Page đã gắn filter tree này).
+2. Kiểm tra filter Condition.",,"2. Storefront phản ánh đúng toàn bộ thay đổi vừa Edit (label, thứ tự, option ẩn/hiện), không dùng dữ liệu/cache cũ trước khi Edit.",
+EFNCOND_TC54,Integration,Sync sau khi Edit,Product đổi Condition trên BC sau khi node đã Edit → count cập nhật đúng 2 chiều,,"Node Condition đã qua ít nhất 1 lần Edit + Save; Product A: Condition = New (đã sync, count New hiện tại > 0)","1. Đổi Condition của Product A từ New → Used trên BigCommerce.
+2. Chạy sync.
+3. Kiểm tra count của New và Used trên storefront.",Product A: Condition New → Used,"3. Count của New giảm 1, count của Used tăng 1; Product A xuất hiện khi filter Used, không còn khi filter New — đúng theo cấu hình (label/thứ tự) đã Edit trước đó.",

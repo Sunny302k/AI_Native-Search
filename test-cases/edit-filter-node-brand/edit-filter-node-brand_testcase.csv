@@ -1,0 +1,165 @@
+﻿ID,Test Type,Field / Phần,Chi tiết test,Cụ thể hơn,Preconditions,Test Steps,Input DB/Setting,Expected Result,Note
+EFNBRAND_TC01,Happy,Mở màn Edit,Load đúng cấu hình đã lưu,,Đã có filter node Brand trong Filter Nodes panel,"1. Tại Filter Nodes panel chọn node Brand.
+2. Click icon Edit.",,"2. Hiển thị MH [Edit filter node - Brand], load đúng toàn bộ cấu hình đã lưu trước đó.",
+EFNBRAND_TC02,Happy,Panel trái - danh sách node,Chuyển node không lẫn dữ liệu,,"Filter tree có ≥2 node, trong đó có Brand","1. Đang edit 1 node khác.
+2. Click chọn node Brand ở panel trái.",,"2. Nội dung bên phải đổi đúng sang cấu hình node Brand, không lẫn dữ liệu node trước đó.",
+EFNBRAND_TC03,Happy,Title,Giá trị đã lưu load đúng,,"Node Brand đã lưu Title tuỳ chỉnh (khác mặc định ""Brand"")","1. Mở màn Edit.
+2. Quan sát field Title.","Title đã lưu = ""Shop by Brand""","2. Title hiển thị đúng ""Shop by Brand"", không phải mặc định ""Brand"".",
+EFNBRAND_TC04,Happy,Title,"Sửa Title, Preview cập nhật",,Đang ở MH Edit,"1. Sửa nội dung Title.
+2. Quan sát Preview.",,"2. Preview hiển thị Title mới ngay lập tức, chưa cần Save.",
+EFNBRAND_TC05,Negative,Title,Không cho save khi rỗng,,Đang ở MH Edit,"1. Xoá trắng Title.
+2. Click Save Changes.",Title = rỗng,2. Không cho save; hiển thị lỗi required.,
+EFNBRAND_TC06,Happy,Title text color,Màu đã lưu load đúng,,Node Brand đã lưu 1 màu Title tuỳ chỉnh,"1. Mở màn Edit, quan sát màu hiện tại.
+2. Chọn màu mới.
+3. Quan sát Preview.",,"1. Màu hiển thị đúng màu đã lưu.
+3. Title đổi màu đúng theo màu mới.",
+EFNBRAND_TC07,Happy,Title alignment,Alignment đã lưu load đúng,,Node Brand đã lưu Title alignment = Right,"1. Mở màn Edit, quan sát alignment.
+2. Đổi sang Left/Center.
+3. Quan sát Preview.",Alignment đã lưu = Right,"1. Alignment hiển thị đúng Right (giá trị đã lưu).
+3. Title căn đúng vị trí mới.",
+EFNBRAND_TC08,Happy,Filter Options,Count đã lưu load đúng,,Node Brand đã chọn 5 value,"1. Mở màn Edit.
+2. Quan sát field Filter Options.",,"2. Hiển thị đúng ""5 selected"".",
+EFNBRAND_TC09,Happy,Filter Options - Popup [Select filter options],"Mở popup, load đúng selection hiện tại",,Node Brand đã chọn sẵn 1 số value,1. Click [Edit] tại Filter Options.,,1. Popup mở đúng; các option name/value đã chọn trước đó hiển thị đúng trạng thái ticked.,
+EFNBRAND_TC10,Happy,Filter Options - Popup [Select filter options],"Search theo Option name, khớp 1 phần",,Popup đang mở,1. Nhập 1 phần tên option vào ô search.,,1. Hiển thị đúng option name khớp 1 phần.,
+EFNBRAND_TC11,Happy,Filter Options - Popup [Select filter options],"Search theo Option name, khớp toàn phần",,Popup đang mở,1. Nhập đầy đủ tên option vào ô search.,,1. Hiển thị đúng option name khớp toàn phần.,
+EFNBRAND_TC12,Happy,Filter Options - Popup [Select filter options],Search theo Value,,Popup đang mở,"1. Nhập keyword trùng với 1 value (VD ""Black"").",,1. Hiển thị đúng option name chứa value khớp và value tương ứng.,
+EFNBRAND_TC13,Happy,Filter Options - Popup [Select filter options],"Chọn 1 Option name, cột Values load đúng",,Popup đang mở,1. Click 1 option name.,,1. Option name được chọn đúng selected state; cột Values load đúng dữ liệu của option đó.,
+EFNBRAND_TC14,Happy,Filter Options - Popup [Select filter options],Tick thêm 1 value mới,Thêm vào selection,Đã có value A được chọn,1. Tick chọn thêm value B.,,"1. Value B được thêm vào selection, không mất value A.",
+EFNBRAND_TC15,Happy,Filter Options - Popup [Select filter options],Untick 1 value đã chọn,Bỏ khỏi selection,Value A đang được chọn,1. Untick value A.,,1. Value A bị bỏ chọn đúng; không ảnh hưởng sai sang value khác.,
+EFNBRAND_TC16,Happy,Filter Options - Popup [Select filter options],Tick nhiều value cùng lúc,Multi-select,Popup đang mở,1. Tick chọn 3 value liên tiếp.,,1. Cả 3 value đều ở trạng thái selected cùng lúc.,
+EFNBRAND_TC17,Happy,Filter Options - Popup [Select filter options],Save selection mới,,Đã đổi selection trong popup,1. Click Save.,,1. Đóng popup; selection mới hiển thị đúng ở màn Edit và Preview.,
+EFNBRAND_TC18,Negative,Filter Options - Popup [Select filter options],Search không khớp,,Popup đang mở,1. Nhập keyword không tồn tại.,,1. Hiển thị empty state/no result.,
+EFNBRAND_TC19,Negative,Filter Options - Popup [Select filter options],Bỏ chọn hết toàn bộ value,,Đang có ≥1 value được chọn,"1. Untick toàn bộ value đang chọn.
+2. Quan sát nút Save.",,2. Nút Save disable hoặc không cho lưu (theo rule: filter node cần tối thiểu 1 giá trị).,
+EFNBRAND_TC20,Negative,Filter Options - Popup [Select filter options],Cancel không lưu thay đổi,,Đã đổi selection nhưng chưa Save; selection cũ = value A,"1. Đổi selection trong popup (VD tick thêm B).
+2. Click Cancel.
+3. Mở lại popup.",,"3. Selection vẫn giữ nguyên value A ban đầu, không lưu thay đổi vừa đổi ở bước 1.",<cần confirm>: case gốc ở Add flow (case #31) đang NG — cần verify lại đúng ở Edit
+EFNBRAND_TC21,Negative,Filter Options - Popup [Select filter options],Icon [X] không lưu thay đổi,,Đã đổi selection nhưng chưa Save; selection cũ = value A,"1. Đổi selection trong popup.
+2. Click icon [X].
+3. Mở lại popup.",,"3. Selection vẫn giữ nguyên value A ban đầu, không lưu thay đổi.",<cần confirm>: case gốc ở Add flow (case #32) đang NG — cần verify lại đúng ở Edit
+EFNBRAND_TC22,Edge,Filter Options - Popup [Select filter options],Trim khoảng trắng,,"Popup đang mở, có option phù hợp",1. Nhập keyword có khoảng trắng đầu/cuối.,,1. Hệ thống trim khoảng trắng và trả về đúng kết quả.,
+EFNBRAND_TC23,Sync,Filter Options - Popup [Select filter options],Trạng thái nguồn: BC thêm value mới cho Brand,,"Node Brand đã Edit trước đó (label/selection tuỳ chỉnh); BC vừa thêm value Brand mới ""Sagaform""","1. Chạy sync.
+2. Mở lại popup [Select filter options].
+3. Kiểm tra danh sách Values.",BC thêm value Brand mới,"3. Value mới ""Sagaform"" xuất hiện trong danh sách, có thể tick chọn; cấu hình Edit trước đó (Title/selection cũ) không bị ảnh hưởng.",
+EFNBRAND_TC24,Sync,Filter Options - Popup [Select filter options],Trạng thái nguồn: BC xoá hẳn 1 value đang được chọn trong filter node,"Khác Condition — value ở đây là dữ liệu BC thật, có thể bị xoá (Condition chỉ có 3 giá trị cố định không thể xoá)","Node Brand đã chọn value ""Nike"" (đang publish); value ""Nike"" bị xoá hẳn bên BC","1. Xoá hẳn Brand value ""Nike"" trên BigCommerce.
+2. Chạy sync.
+3. Mở lại popup [Select filter options] và kiểm tra storefront.","Brand value ""Nike"" bị xoá khỏi BC","3. `<cần confirm>` — chưa có case nào (kể cả Add flow) xác nhận: node tự động bỏ chọn value đã bị xoá, hay vẫn giữ selection cũ nhưng value không còn dữ liệu để hiển thị trên storefront (dữ liệu rác)?",<cần confirm>: hành vi khi 1 Brand value đang được filter node chọn bị xoá hẳn bên BC — khác biệt so với Condition vì values ở đây không cố định
+EFNBRAND_TC25,Sync,Filter Options - Popup [Select filter options],Trạng thái nguồn: Product đổi assign sang Brand value khác,,"Product A đang assign Brand = ""Nike"" (tính vào count Nike); node Brand đã publish","1. Đổi Brand của Product A từ ""Nike"" sang ""Adidas"" trên BC.
+2. Chạy sync.
+3. Kiểm tra product count của ""Nike"" và ""Adidas"" trong popup và trên storefront.",Product A: Nike → Adidas,"3. Count ""Nike"" giảm 1, count ""Adidas"" tăng 1; Product A xuất hiện khi filter theo Adidas, không còn khi filter theo Nike.",
+EFNBRAND_TC26,Sync,Filter Options - Popup [Select filter options],Tiến trình sync: Đang In Progress,,"Product B vừa đổi Brand trên BC; batch sync vừa trigger, đang ở trạng thái In Progress","1. Trong lúc batch đang In Progress, mở storefront kiểm tra count Brand liên quan.",Batch sync = In Progress,"1. `<cần confirm>` — theo nguyên tắc chung ở sync-manual-sync-specs.md, giả thuyết storefront vẫn hiển thị theo lần sync Success gần nhất, chưa có case riêng xác nhận cho field Filter Options của Brand.","<cần confirm>: hành vi hiển thị khi sync đang In Progress, dựa theo rule chung chưa có case riêng xác nhận"
+EFNBRAND_TC27,Sync,Filter Options - Popup [Select filter options],Tiến trình sync: Lần sync gần nhất Failed,,Batch sync gần nhất = Failed; dữ liệu Brand hiện tại trên storefront là từ lần sync Success trước đó,"1. Trigger sync và giả lập lỗi (mock fail).
+2. Kiểm tra filter Brand trên storefront.",Batch sync = Failed,2. Storefront vẫn hiển thị đúng dữ liệu/count Brand theo lần sync Success gần nhất; không mất dữ liệu dù lần sync vừa rồi Failed.,
+EFNBRAND_TC28,Sync,Filter Options - Popup [Select filter options],Dữ liệu stale: BC đã đổi Brand nhưng chưa sync lại,,"Product C vừa đổi Brand ""Adidas"" → ""Nike"" trên BC; CHƯA chạy sync",1. Kiểm tra ngay filter Brand trên storefront (chưa sync).,"Product C: Adidas → Nike trên BC, chưa sync","1. Storefront vẫn hiển thị theo dữ liệu cũ (Product C vẫn tính vào count Adidas, chưa vào Nike) cho tới khi lượt sync tiếp theo chạy xong.",
+EFNBRAND_TC29,Sync,Filter Options - Popup [Select filter options],Loại sync: Manual và Schedule Sync cập nhật Brand như nhau,,Node Brand đã Edit; 2 product lần lượt đổi Brand ở 2 thời điểm khác nhau,"1. Đổi Brand Product D trên BC, chạy Manual Sync, kiểm tra count.
+2. Đổi Brand Product E trên BC, đợi/trigger Schedule Sync tới lượt Products, kiểm tra count.",,"1. Manual Sync cập nhật đúng theo thay đổi Product D.
+2. Schedule Sync cập nhật đúng theo thay đổi Product E — không có khác biệt hành vi giữa 2 loại sync (khớp sync-data-type-matrix-specs.md).",
+EFNBRAND_TC30,Sync,Filter Options - Popup [Select filter options],Trạng thái nguồn: BC sửa/rename tên 1 value đang được chọn,"Khác thêm mới/xoá — đây là đổi tên, không đổi identity","Node Brand đã chọn value ""Nike""; đã publish, đã sync","1. Đổi tên Brand value ""Nike"" thành ""Nike Inc."" trên BigCommerce.
+2. Chạy sync.
+3. Mở lại popup [Select filter options] và kiểm tra Preview/storefront.","Brand value ""Nike"" đổi tên thành ""Nike Inc.""","3. Value hiển thị đúng tên mới ""Nike Inc."" ở popup, Preview và storefront; vẫn giữ nguyên trạng thái đã được chọn (selected) — không bị coi là value mới hay mất selection do đổi tên.",
+EFNBRAND_TC31,Happy,Option select type,Giá trị đã lưu load đúng,,Node Brand đã lưu Option select type = Single,"1. Mở màn Edit.
+2. Quan sát Option select type.",,"2. Hiển thị đúng ""Single"" (giá trị đã lưu), không phải mặc định ""Multiple"".",
+EFNBRAND_TC32,Happy,Option select type,Switch Single sang Multiple,,Node đang là Single,"1. Chọn Multiple.
+2. Save.",,2. Save thành công; storefront cho phép multi-select.,
+EFNBRAND_TC33,Edge,Option select type,Switch Multiple sang Single khi đang multi-selected,Không rơi vào 2 option cùng selected,"Node đang Multiple, đang có 2 value cùng active trong Preview","1. Đổi Multiple → Single.
+2. Save.
+3. Quan sát selected state trong Preview.","2 value đang active: A, B","3. Chỉ còn đúng 1 value ở trạng thái active; hệ thống xử lý nhất quán, không giữ cả 2 cùng selected.",
+EFNBRAND_TC34,Edge,Option select type,Đổi Single/Multiple không làm mất danh sách option,,Node có sẵn danh sách option đã cấu hình,"1. Đổi Single ↔ Multiple.
+2. Save.
+3. Kiểm tra danh sách option trong Filter Options.",,3. Danh sách option/value đã cấu hình không bị mất hay đổi sai.,<cần confirm>: case gốc (Add flow #54) đang NG
+EFNBRAND_TC35,Happy,Display Style,Giá trị đã lưu load đúng,,Node Brand đã lưu Display Style = Swatch,"1. Mở màn Edit.
+2. Quan sát Display Style.",,"2. Hiển thị đúng ""Swatch"" (giá trị đã lưu).",
+EFNBRAND_TC36,Happy,Display Style,Chuyển sang List,,Display Style đang khác List,"1. Chọn List.
+2. Save.
+3. Quan sát Preview.",,3. Preview hiển thị option dạng list đúng design.,
+EFNBRAND_TC37,Happy,Display Style,Chuyển sang Swatch,Mở khối Manage Swatch,Display Style đang khác Swatch,"1. Chọn Swatch.
+2. Save.",,"2. Hiển thị hộp/nút ""Manage Swatch"".",
+EFNBRAND_TC38,Edge,Display Style,Chuyển sang Grid với nhiều option,Layout ổn định 20+ item,Filter node có 20+ option,"1. Chọn Grid.
+2. Save.
+3. Quan sát Preview.",20+ option,"3. Layout grid không lệch cột, không overlap text.",<cần confirm>: case gốc (Add flow #61) đang NG
+EFNBRAND_TC39,Happy,Display Style - Manage Swatch,Mở màn Manage Swatch,,Display Style = Swatch,1. Click button [Manage Swatch].,,"1. Hiển thị đúng MH [Manage Swatch], tiêu đề ""Manage Swatch"".",
+EFNBRAND_TC40,Happy,Display Style - Manage Swatch,Bảng hiển thị đủ cột,,Đang ở MH Manage Swatch,1. Quan sát bảng.,,"1. Hiển thị đủ cột Image, Swatch Name, Image Source, URL — đúng 1 dòng cho mỗi value đã chọn.",<cần confirm>: case gốc (Add flow #66) đang NG
+EFNBRAND_TC41,Happy,Display Style - Manage Swatch,"Image Source = Online URL, nhập URL hợp lệ",,Đang ở MH Manage Swatch,"1. Chọn Image Source = Online URL.
+2. Nhập URL hợp lệ.
+3. Click Save.",URL hợp lệ,3. Save thành công.,
+EFNBRAND_TC42,Happy,Display Style - Manage Swatch,Save cập nhật Preview,,Đã setup dữ liệu Manage Swatch hợp lệ,1. Click Save.,,1. MH Preview hiển thị đúng dữ liệu vừa setup.,
+EFNBRAND_TC43,Happy,Display Style - Manage Swatch,Cancel không lưu,,Đã sửa dữ liệu Manage Swatch nhưng chưa Save,1. Click Cancel.,,1. Dữ liệu không được lưu; MH Preview vẫn hiển thị dữ liệu cũ.,
+EFNBRAND_TC44,Happy,Display Style - Manage Swatch,Swatch border radius,,Đã setup Swatch,1. Kéo thả thanh border radius.,,1. Ảnh được border theo đúng giá trị vừa set; Preview và storefront hiển thị đồng nhất.,
+EFNBRAND_TC45,Happy,Display Style - Manage Swatch,Toggle Display filter option name in swatch,,Display Style = Swatch,"1. Bật toggle ON.
+2. Quan sát Preview.
+3. Tắt toggle OFF.
+4. Quan sát Preview.",,"2. Filter option hiển thị kèm tên brand.
+4. Filter option không hiển thị kèm tên brand.",
+EFNBRAND_TC46,Negative,Display Style - Manage Swatch,Online URL rỗng,,Image Source = Online URL,"1. Để trống URL.
+2. Click Save.",URL = rỗng,2. Hiển thị lỗi required.,
+EFNBRAND_TC47,Negative,Display Style - Manage Swatch,Online URL sai định dạng,,Image Source = Online URL,"1. Nhập URL không hợp lệ.
+2. Click Save.",URL sai định dạng,2. Hiển thị thông báo lỗi; ảnh hiển thị là ảnh lỗi chung của hệ thống.,
+EFNBRAND_TC48,Sync,Display Style - Manage Swatch,Trạng thái nguồn: BC đổi ảnh Brand khi Image Source = Big Commerce,,"Manage Swatch của value ""Nike"" đang set Image Source = Big Commerce; ảnh hiện tại đã sync trước đó","1. Đổi ảnh Brand ""Nike"" trên BigCommerce.
+2. Chạy sync.
+3. Kiểm tra ảnh Swatch ở Preview và storefront.","Ảnh Brand ""Nike"" đã đổi trên BC","3. Ảnh Swatch cập nhật đúng theo ảnh mới nhất từ BC, cả ở Preview lẫn storefront.",
+EFNBRAND_TC49,Sync,Display Style - Manage Swatch,"Trạng thái nguồn: BC brand chưa có ảnh, Image Source = Big Commerce",,"Value ""Adidas"" chưa từng set ảnh bên BC; Image Source = Big Commerce","1. Chạy sync.
+2. Kiểm tra ảnh Swatch của ""Adidas"" ở Preview.","Brand ""Adidas"" không có ảnh trên BC","2. `<cần confirm>` — chưa có case nào xác nhận Swatch hiển thị gì khi Image Source = Big Commerce nhưng brand nguồn không có ảnh (ảnh trống chung hệ thống, hay ẩn swatch đó, hay báo lỗi).",<cần confirm>: Swatch hiển thị gì khi Image Source=Big Commerce nhưng brand nguồn chưa có ảnh
+EFNBRAND_TC50,Sync,Display Style - Manage Swatch,Dữ liệu stale: ảnh đã đổi bên BC nhưng chưa sync,,"Image Source = Big Commerce; ảnh Brand ""Nike"" vừa đổi trên BC, CHƯA chạy sync",1. Kiểm tra ngay Swatch ở Preview (chưa sync).,"Ảnh Nike vừa đổi trên BC, chưa sync",1. Swatch vẫn hiển thị ảnh cũ cho tới khi lượt sync tiếp theo chạy xong.,
+EFNBRAND_TC51,Happy,Toggle [Setup dynamic option],Enable khi Display Style = List/Grid,,Display Style = List,1. Quan sát trạng thái toggle.,,1. Toggle ở trạng thái enable.,
+EFNBRAND_TC52,Edge,Toggle [Setup dynamic option],Disable khi Display Style = Swatch,,Display Style = Swatch,1. Quan sát trạng thái toggle.,,"1. `<cần confirm>` — toggle disable đúng theo case gốc, nhưng chưa rõ dữ liệu hiển thị/hành vi cụ thể khi ở trạng thái disable này là gì (case gốc #97-98 tự đặt câu hỏi, không trả lời).",<cần confirm>: mục đích và hành vi cụ thể của toggle này khi disable — case gốc chưa trả lời
+EFNBRAND_TC53,Happy,Sort order,Thứ tự đã lưu load đúng,,Node Brand đã lưu Sort order = Alphabetical - Descending,"1. Mở màn Edit.
+2. Quan sát Sort order.",,"2. Hiển thị đúng ""Alphabetical - Descending"" (giá trị đã lưu), không phải mặc định ""Alphabetical - Ascending"".",
+EFNBRAND_TC54,Happy,Sort order,Popup hiển thị đủ 5 lựa chọn,,Click [Edit] tại Sort order,1. Quan sát popup [Sort Order].,,"1. Hiển thị đủ 5 lựa chọn: Alphabetical - Ascending, Alphabetical - Descending, Product number - Ascending, Product number - Descending, Custom order.",<cần confirm>: case gốc (Add flow #84) đang NG
+EFNBRAND_TC55,Happy,Sort order,Chọn Alphabetical - Ascending,,Popup Sort Order đang mở,"1. Chọn Alphabetical - Ascending.
+2. Kiểm tra Preview.",,2. Option sắp đúng theo alphabet tăng dần.,
+EFNBRAND_TC56,Happy,Sort order,Chọn Alphabetical - Descending,,Popup Sort Order đang mở,"1. Chọn Alphabetical - Descending.
+2. Kiểm tra Preview.",,2. Option sắp đúng theo alphabet giảm dần.,
+EFNBRAND_TC57,Happy,Sort order,"Chọn Custom order, kéo thả",,Popup Sort Order đang mở,"1. Chọn Custom order.
+2. Kéo thả đổi thứ tự 1 option.
+3. Save.
+4. Kiểm tra Preview/storefront.",,4. Thứ tự vừa kéo thả được áp dụng đúng ở Preview và storefront.,
+EFNBRAND_TC58,Sync,Sort order,Trạng thái nguồn: Product count thay đổi ảnh hưởng Product number sort,,"Sort order = Product number - Descending; value ""Nike"" đang count = 10, ""Adidas"" count = 8","1. Thêm 3 product mới assign Brand = ""Adidas"" trên BC.
+2. Chạy sync.
+3. Kiểm tra lại thứ tự option trong Preview/storefront.",Adidas count: 8 → 11,"3. ""Adidas"" (count = 11) đổi lên trên ""Nike"" (count = 10) theo đúng thứ tự Product number - Descending mới.",
+EFNBRAND_TC59,Happy,Appearance - Display tooltips,Trạng thái + nội dung đã lưu load đúng,,Node Brand đã lưu Display tooltips = ON kèm nội dung tuỳ chỉnh,"1. Mở màn Edit.
+2. Quan sát toggle và tooltip content.",,2. Toggle hiển thị đúng ON; nội dung hiển thị đúng giá trị đã lưu.,
+EFNBRAND_TC60,Negative,Appearance - Display tooltips,Không cho bật khi content rỗng,,"Tooltip content đang rỗng, toggle đang OFF",1. Bật toggle ON khi content rỗng.,Tooltip content = rỗng,1. Không cho phép bật; hiển thị cảnh báo.,
+EFNBRAND_TC61,Happy,Appearance - Show all irrelevant values,Giá trị đã lưu load đúng,,Node Brand đã lưu Show all irrelevant values = ON,"1. Mở màn Edit.
+2. Quan sát toggle.",,2. Toggle hiển thị đúng ON (giá trị đã lưu).,
+EFNBRAND_TC62,Happy,Appearance - Pagination type,Giá trị đã lưu load đúng,,Node Brand đã lưu Pagination type = Infinite scroll,"1. Mở màn Edit.
+2. Quan sát dropdown Pagination type.",,"2. Hiển thị đúng ""Infinite scroll"" (giá trị đã lưu).",
+EFNBRAND_TC63,Happy,Appearance - Collapse/Expand,"Giá trị Desktop/Mobile đã lưu load đúng, độc lập",,"Node Brand đã lưu Desktop = Collapse, Mobile = Expand","1. Mở màn Edit.
+2. Quan sát Collapse/Expand ở Preview Desktop và Mobile.",,2. Desktop hiển thị đúng Collapse; Mobile hiển thị đúng Expand.,
+EFNBRAND_TC64,Negative,Appearance - Collapse/Expand,Collapse rồi Expand lại làm mất option đã chọn,,Có option đang được chọn trong Preview,"1. Chọn 1 option bất kỳ trong Preview.
+2. Collapse filter.
+3. Expand lại filter.",Option A đang được chọn,3. Option A vẫn giữ đúng trạng thái selected sau khi Expand lại.,<cần confirm>: case gốc (Add flow #113) đang NG — option bị mất selected state sau Collapse/Expand
+EFNBRAND_TC65,Happy,Appearance - Display all values in uppercase,Giá trị đã lưu load đúng,,Node Brand đã lưu toggle = ON,"1. Mở màn Edit.
+2. Quan sát toggle và Preview.",,2. Toggle hiển thị đúng ON; Preview hiển thị toàn bộ option dạng chữ in hoa.,
+EFNBRAND_TC66,Happy,Appearance - Show search box,Giá trị Desktop/Mobile đã lưu load đúng,,"Node Brand đã lưu Show search box on desktop = OFF, on mobile = ON","1. Mở màn Edit.
+2. Quan sát 2 toggle Show search box.",,2. Desktop hiển thị đúng OFF; Mobile hiển thị đúng ON.,
+EFNBRAND_TC67,Happy,Button [Save Changes],Disable khi chưa có thay đổi,,"Vừa mở màn Edit, chưa chỉnh gì",1. Quan sát trạng thái nút Save Changes.,,1. Nút Save Changes ở trạng thái disable.,
+EFNBRAND_TC68,Happy,Button [Save Changes],Enable khi sửa 1 field bất kỳ,,Đang ở màn Edit,"1. Sửa 1 field bất kỳ.
+2. Quan sát nút Save Changes.",,2. Nút Save Changes chuyển sang enable.,
+EFNBRAND_TC69,Happy,Button [Save Changes],Double-click không tạo lưu trùng,,"Có thay đổi hợp lệ, Save Changes đang enable",1. Double-click liên tiếp nút Save Changes.,,1. Chỉ 1 request lưu được gửi; không tạo cấu hình trùng lặp.,
+EFNBRAND_TC70,Negative,Button [Save Changes],Chặn save khi có field invalid,,Title đang bị xoá trắng,1. Click Save Changes.,Title = rỗng,1. Không cho save; hiển thị lỗi đúng tại field invalid.,
+EFNBRAND_TC71,Happy,Điều hướng khi có unsaved changes,Popup cảnh báo + Discard/Cancel,,"Đang sửa dở dữ liệu ở node Brand, chưa Save","1. Click [Back] hoặc chọn chuyển sang node khác.
+2. Ở popup cảnh báo, click [Discard].
+3. Lặp lại bước 1, lần này click [Cancel]/[Stay].",,"1. Hiển thị popup cảnh báo unsaved changes.
+2. Bỏ thay đổi chưa lưu và điều hướng tiếp theo yêu cầu ban đầu.
+3. Đóng popup, ở lại màn Edit filter node - Brand với dữ liệu đang sửa dở còn nguyên.",
+EFNBRAND_TC72,Happy,Button [Save to template],Lưu cấu hình hiện tại thành template,,Cấu hình node Brand hợp lệ,1. Click button [Save to template].,,1. Lưu thành công; template mới xuất hiện ở tab [My Templates].,
+EFNBRAND_TC73,Happy,Hide on customer group,Load đúng selection đã lưu khi mở lại Edit,,Node Brand đã lưu Hide on customer group cho 1 nhóm khách hàng cụ thể,"1. Mở màn Edit.
+2. Quan sát field Hide on customer group.",,"2. Hiển thị đúng số lượng/tên customer group đã chọn từ trước, không bị reset về rỗng.",
+EFNBRAND_TC74,Negative,Hide on customer group,Chọn 1 group → ẩn đúng filter (Storefront),,Đã chọn customer group A và Save,"1. Đăng nhập storefront bằng account thuộc customer group A.
+2. Kiểm tra filter Brand.",,2. Filter Brand không hiển thị với customer thuộc group A.,<cần confirm>: case gốc Add flow (case #95) đang NG cho đúng hành vi này
+EFNBRAND_TC75,Sync,Hide on customer group,Trạng thái nguồn: Customer bị remove khỏi customer group trên BC,,Node đã set Hide on customer group = Group A (đã Save); Customer X thuộc Group A (filter Brand đang bị ẩn với X); đã sync,"1. Remove Customer X khỏi Group A trên BC.
+2. Chạy sync.
+3. Đăng nhập storefront bằng account Customer X, kiểm tra filter Brand.",Customer X: removed khỏi Group A,"3. Filter Brand hiển thị lại bình thường với Customer X (không còn bị ẩn), vì X không còn thuộc Group A.",
+EFNBRAND_TC76,Sync,Hide on customer group,Trạng thái nguồn: Customer group nguồn bị xoá hẳn trên BC,Ảnh hưởng thực tế trên storefront,Node đã set Hide on customer group = Group A (đã Save); Group A bị xoá trên BC; đã chạy sync,"1. Đăng nhập storefront bằng account từng thuộc Group A (nếu tài khoản còn tồn tại).
+2. Kiểm tra filter Brand.",Customer group A đã bị xoá bên BC,2. `<cần confirm>` — chưa rõ hành vi khi group nguồn bị xoá: filter tự động hiện lại cho toàn bộ customer hay vẫn giữ ẩn theo dữ liệu cache cũ (cùng câu hỏi đã nêu ở edit-filter-node-condition).,<cần confirm>: hành vi storefront khi customer group nguồn bị xoá hẳn trên BC
+EFNBRAND_TC77,Sync,Hide on customer group,Tiến trình sync: Lần sync gần nhất Failed,,Batch sync gần nhất = Failed; dữ liệu Hide on customer group hiện tại trên storefront là từ lần sync Success trước đó (Group A đang hide đúng),"1. Trigger sync và giả lập lỗi (mock fail).
+2. Đăng nhập storefront bằng account thuộc Group A, kiểm tra filter Brand.",Batch sync = Failed,2. Filter Brand vẫn ẩn đúng với Group A theo dữ liệu của lần sync Success gần nhất; không tự động hiện lại hoặc lỗi hiển thị dù lần sync vừa rồi Failed.,
+EFNBRAND_TC78,Sync,Hide on customer group,Dữ liệu stale: Customer group thay đổi thành viên nhưng chưa sync,,Customer Y vừa được thêm vào Group A trên BC; CHƯA chạy sync,"1. Đăng nhập storefront bằng account Customer Y, kiểm tra filter Brand ngay (chưa sync).","Customer Y: mới thêm vào Group A, chưa sync",1. Filter Brand vẫn hiển thị bình thường với Customer Y (chưa bị ẩn) cho tới khi lượt sync tiếp theo chạy xong và cập nhật membership mới.,
+EFNBRAND_TC79,Happy,Hide on customer group - Popup [Select customer group],"Mở popup, search khớp 1 phần",,Click [Edit] tại Hide on customer group,"1. Nhập 1 phần tên customer group.
+2. Kiểm tra kết quả.",,2. Hiển thị đúng dữ liệu khớp 1 phần.,
+EFNBRAND_TC80,Happy,Hide on customer group - Popup [Select customer group],Search khớp toàn phần,,Popup đang mở,"1. Nhập đầy đủ tên customer group.
+2. Kiểm tra kết quả.",,2. Hiển thị đúng dữ liệu khớp toàn phần.,
+EFNBRAND_TC81,Negative,Hide on customer group - Popup [Select customer group],Chọn 1 group → ẩn đúng filter (Admin),,"Popup đang mở, có customer group hợp lệ","1. Click chọn customer group A.
+2. Đóng popup, quan sát field Hide on customer group ở MH Edit và Preview.",,"2. Số lượng đã chọn hiển thị khớp giữa popup, field ngoài MH Edit và Preview; filter Brand thể hiện đúng trạng thái sẽ bị ẩn với group A.",<cần confirm>: case gốc Add flow (case #94) đang NG cho đúng hành vi này
+EFNBRAND_TC82,Edge,Hide on customer group - Popup [Select customer group],Customer bị xoá bên BC không còn hiển thị trong popup,,"Customer A đang có trong danh sách; Customer A vừa bị xoá bên BC, đã sync","1. Mở lại popup [Select customer group].
+2. Kiểm tra danh sách.",Customer A đã bị xoá bên BC,2. Customer A không còn hiển thị trong danh sách popup.,

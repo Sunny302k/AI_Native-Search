@@ -42,7 +42,10 @@ Viết lại toàn bộ dữ liệu đã thu thập theo cấu trúc sau (đồn
 3. **Business rule & dependency** — mục riêng, KHÔNG gộp chung vào bảng field ở trên. Với mỗi rule: trích nguyên văn note gốc trong 1 block quote, sau đó diễn giải. Đặc biệt gắn nhãn rõ các rule dạng "field A = X → field B buộc = Y / bị ẩn / bị disable" vì đây là loại dễ bị bỏ sót khi viết test case.
 4. **Modal/sub-flow con** — mỗi modal (VD Option display picker, Sort order picker) là 1 mục riêng: cách trigger mở, field bên trong, hành vi khi Save/Cancel, có đóng lại state cũ không.
 5. **Validation & giới hạn cụ thể** — liệt kê riêng các threshold/range nêu trong note (VD "Number of filter options per click: range 5 → 10").
-6. **Câu hỏi mở** — mọi chỗ Figma không thể hiện rõ và không có note giải thích, dùng đúng tag `[CẦN XÁC NHẬN BA]` kèm 1 giả thuyết cụ thể (theo quy tắc global CLAUDE.md), KHÔNG tự bịa hành vi.
+6. **Câu hỏi mở** — mọi chỗ Figma không thể hiện rõ và không có note giải thích. Trước khi gắn `[CẦN XÁC NHẬN BA]`, phân loại câu hỏi theo `docs/bigcommerce-platform-facts.md` mục 1:
+   - **Loại 1 (BC platform fact — hành vi cố định của BigCommerce, không phụ thuộc Native Search implement thế nào)**: tra `docs/bigcommerce-platform-facts.md` mục 3 trước; nếu chưa có, tra BigCommerce Developer Docs qua `WebFetch`/`WebSearch`, ghi fact + nguồn vào file đó, rồi dùng fact tra được thay cho `[CẦN XÁC NHẬN BA]`.
+   - **Loại 2 (Native Search tự chọn phản ứng thế nào)**: giữ nguyên `[CẦN XÁC NHẬN BA]` kèm 1 giả thuyết cụ thể (theo quy tắc global CLAUDE.md) — KHÔNG tra BC docs cho loại này, không tự bịa hành vi.
+   - Phân vân không rõ loại nào → mặc định coi là Loại 2 (gắn `[CẦN XÁC NHẬN BA]`), không tự suy diễn thành fact kỹ thuật để né hỏi BA.
 
 ## Bước 4: Ghi file output
 

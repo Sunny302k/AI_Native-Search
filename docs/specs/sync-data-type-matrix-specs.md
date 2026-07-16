@@ -16,9 +16,9 @@ Mọi thay đổi (Create/Update/Delete) trên BigCommerce chỉ phản ánh và
 | --- | --- | --- | --- |
 | **Categories** | Category mới xuất hiện trong NS; log ghi ở Sync History *(MS-014, SS-014)* | Field (tên/mô tả) cập nhật đúng theo BC *(MS-015, SS-015)* | `[CẦN XÁC NHẬN BA]` hard delete hay soft delete? *(MS-016, SS-016)* |
 | **Customers** | Customer mới xuất hiện *(MS-017, SS-017)* | Thông tin cập nhật đúng *(MS-018, SS-018)* | `[CẦN XÁC NHẬN BA]` xoá customer ảnh hưởng Orders liên quan thế nào? *(MS-019, SS-019)* |
-| **Orders** | Order mới xuất hiện *(MS-020, SS-020)* | Status/field cập nhật đúng *(MS-021, SS-021)* | `[CẦN XÁC NHẬN BA]` BC có cơ chế "xoá" order thật hay không? *(MS-022, SS-022)* |
+| **Orders** | Order mới xuất hiện *(MS-020, SS-020)* | Status/field cập nhật đúng *(MS-021, SS-021)* | **Đã xác nhận qua BC docs** (xem `docs/bigcommerce-platform-facts.md`): BC "xoá" order qua API thực chất là **archive (soft delete)**, không hard delete. `[CẦN XÁC NHẬN BA]` phần còn lại (Loại 2, chưa tra được): sync có coi order đã archive là "cần loại khỏi NS" hay vẫn giữ nguyên vì bản chất order chưa mất hẳn? *(MS-022, SS-022)* |
 | **Pages** *(xem lưu ý naming ở mục 4)* | Bài viết mới xuất hiện *(MS-023, SS-023)* | Nội dung/tiêu đề cập nhật đúng *(MS-024, SS-024)* | `[CẦN XÁC NHẬN BA]` bài unpublished có bị loại khỏi NS không? *(MS-025, SS-025)* |
-| **Price List Assignments** | Mapping assignment xuất hiện *(MS-026, SS-026)* | Mapping cập nhật đúng *(MS-027, SS-027)* | `[CẦN XÁC NHẬN BA]` rule ưu tiên khi 1 product có nhiều mapping? *(MS-028, SS-028)* |
+| **Price List Assignments** | Mapping assignment xuất hiện *(MS-026, SS-026)* | Mapping cập nhật đúng *(MS-027, SS-027)* | **Đã xác nhận 1 phần qua BC docs**: BC dùng cơ chế "cascading price lists" — mỗi price list có tối đa 1 layer dự phòng, resolve theo thứ tự primary → layer → catalog price gốc (tính năng đang "beta" phía BC tại thời điểm tra, xem `docs/bigcommerce-platform-facts.md`). `[CẦN XÁC NHẬN BA]` còn lại: Native Search có áp dụng đúng logic cascading này khi index, hay chỉ lấy 1 mapping "trực tiếp nhất" theo cách riêng? *(MS-028, SS-028)* |
 | **Product Category Assignment** | Quan hệ product–category xuất hiện *(MS-029, SS-029)* | Gỡ category → quan hệ biến mất *(MS-030, SS-030)*; re-assign nhiều category → NS phản ánh đúng snapshot hiện tại *(MS-031, SS-031)* | — |
 | **Product Channel Assignment** | Mapping product–channel xuất hiện *(MS-032, SS-032)* | Gỡ product khỏi channel → mapping biến mất *(MS-033, SS-033)* | `[CẦN XÁC NHẬN BA]` gỡ khỏi channel storefront: loại khỏi search/index hay chỉ mất mapping channel? *(MS-034, SS-034)* |
 | **Products** | Product mới xuất hiện *(MS-035, SS-035)* | Tên/mô tả/SKU *(MS-036, SS-036 — cả 2 đang **NG**, xem mục 5)*; giá (price/calculated_price) *(MS-037, SS-037)*; brand/availability/condition *(MS-038, SS-038)*; weight/dimensions/bin picking number *(MS-040, SS-040)* | `[CẦN XÁC NHẬN BA]` product disabled/hidden ở BC có coi là "removed" khỏi NS không? *(MS-039, SS-039)* |
@@ -34,7 +34,9 @@ Mọi thay đổi (Create/Update/Delete) trên BigCommerce chỉ phản ánh và
 
 ## 4. Lưu ý naming: "Pages" vs "Blog"
 
-Tài liệu Sync tham khảo (`docs/sync-fields-glossary.md`, dựng từ `SPEC_Sync_Readme`) gọi entity thứ 4 là **"Pages"**, nhưng cả 2 sheet test case đều dùng tên **"Blog"** cho nhóm case Create/Update/Delete tương ứng. `[CẦN XÁC NHẬN BA]` — "Blog" có phải chính là entity "Pages" trong whitelist sync, hay BigCommerce coi Blog Post và Page là 2 entity khác nhau (chỉ "Pages" được liệt kê chính thức, phạm vi "Blog" chưa rõ)?
+Tài liệu Sync tham khảo (`docs/sync-fields-glossary.md`, dựng từ `SPEC_Sync_Readme`) gọi entity thứ 4 là **"Pages"**, nhưng cả 2 sheet test case đều dùng tên **"Blog"** cho nhóm case Create/Update/Delete tương ứng.
+
+**Đã xác nhận qua BC docs** (xem `docs/bigcommerce-platform-facts.md`): ở tầng nền tảng BigCommerce, **Blog Posts và Pages là 2 API resource kỹ thuật khác nhau** (`/blog/posts` riêng, tách biệt khỏi Pages API) — dù Pages API có hỗ trợ 1 page-type gọi là "blog" (trang danh sách). `[CẦN XÁC NHẬN BA]` phần còn lại (Loại 2, BC docs không trả lời được): module Sync của Native Search coi Blog Posts là 1 phần thuộc "Pages" khi đồng bộ, hay đồng bộ như 1 entity riêng chưa được liệt kê trong whitelist? Cần hỏi lại BA/dev Sync, không phải tra thêm BC docs.
 
 ## 5. Trạng thái thực thi tại thời điểm viết spec (không phải rule — chỉ tham khảo)
 
@@ -43,14 +45,16 @@ Tài liệu Sync tham khảo (`docs/sync-fields-glossary.md`, dựng từ `SPEC_
 
 ## 6. Danh sách câu hỏi cần xác nhận với BA (data type matrix)
 
+Đã đối chiếu qua `docs/bigcommerce-platform-facts.md` — 3 câu hỏi được thu hẹp thành câu hỏi Loại 2 (đánh dấu *đã thu hẹp*), 2 câu hỏi tra không ra vẫn giữ nguyên, 5 câu hỏi còn lại chưa thuộc phạm vi tra BC docs (thuần Loại 2 ngay từ đầu).
+
 | # | Câu hỏi | Data Type |
 | --- | --- | --- |
-| 1 | Xoá Category ở BC → NS xử lý hard delete hay soft delete? | Categories |
-| 2 | Xoá Customer ảnh hưởng tới Orders liên quan như thế nào? | Customers |
-| 3 | BigCommerce có cơ chế "xoá" Order thật sự hay không? | Orders |
+| 1 | Xoá Category ở BC → NS xử lý hard delete hay soft delete? *(đã tra BC docs nhưng không tìm được câu trả lời)* | Categories |
+| 2 | Xoá Customer ảnh hưởng tới Orders liên quan như thế nào? *(đã tra BC docs nhưng không tìm được câu trả lời)* | Customers |
+| 3 | *(đã thu hẹp)* BC archive order (không hard delete) khi "xoá" — sync có coi order đã archive là cần loại khỏi NS hay vẫn giữ? | Orders |
 | 4 | Bài viết (Blog/Pages) unpublished có bị loại khỏi Native Search không? | Pages/Blog |
-| 5 | "Blog" trong test case có phải cùng entity với "Pages" trong whitelist sync không? | Naming Pages vs Blog |
-| 6 | Rule ưu tiên khi 1 product có nhiều Price List Assignment mapping? | Price List Assignments |
+| 5 | *(đã thu hẹp)* Blog Posts và Pages là 2 entity kỹ thuật khác nhau ở BC — module Sync có gộp chung hay đồng bộ riêng? | Naming Pages vs Blog |
+| 6 | *(đã thu hẹp)* BC resolve Price List theo cơ chế cascading (primary → layer → catalog) — Native Search có áp dụng đúng logic này khi index không? | Price List Assignments |
 | 7 | Gỡ product khỏi channel storefront: bị loại khỏi search/index hay chỉ mất mapping channel? | Product Channel Assignment |
 | 8 | Product bị disabled/hidden ở BC có được coi là "removed" khỏi Native Search không? | Products |
 | 9 | Cơ chế reconcile mapping orphan khi category/product bị xoá nhưng còn assignment liên quan là gì? | Cross-data consistency |
@@ -59,5 +63,5 @@ Tài liệu Sync tham khảo (`docs/sync-fields-glossary.md`, dựng từ `SPEC_
 ## 7. Metadata
 
 - **Áp dụng cho:** Sync — Manual Sync & Schedule Sync (phần data-type-level, không phụ thuộc trigger)
-- **Nguồn:** `Sync_Manual Sync` (MS-014→044), `Sync_Schedule Sync` (SS-014→044)
-- **Số câu hỏi CẦN XÁC NHẬN BA:** 10
+- **Nguồn:** `Sync_Manual Sync` (MS-014→044), `Sync_Schedule Sync` (SS-014→044); đối chiếu bổ sung `docs/bigcommerce-platform-facts.md` (2026-07-16)
+- **Số câu hỏi CẦN XÁC NHẬN BA:** 10 (không giảm số lượng — nhưng 3 câu đã thu hẹp phạm vi rõ hơn, cụ thể hơn để hỏi BA đúng trọng tâm thay vì hỏi chung chung)
