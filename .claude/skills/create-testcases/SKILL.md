@@ -46,7 +46,7 @@ Quy định về output:
     - Negative: Cố ý dùng input không hợp lệ/ thiếu/ sai để xác minh hệ thống từ chối đúng cách
     - Edge: Giá trị biên: nhỏ nhất/ lớn nhất, bằng nhau, ngay tại ranh giới chuyển trạng thái (có thể vẫn hợp lệ, không nhất thiết là lỗi)
     - Other: Không thuộc 3 nhóm trên
-    - (File gộp có thể còn chứa giá trị `Permission`, `Integration`, `System` do `create-permission-testcase`/`create-impact-testcase`/`create-system-testcase` sinh ra — skill này không tự tạo 3 loại đó, chỉ giữ nguyên khi gộp file)
+    - (File gộp có thể còn chứa giá trị `Permission`, `Integration`, `System`, `Sync` do `create-permission-testcase`/`create-impact-testcase`/`create-system-testcase`/`create-sync-testcase` sinh ra — skill này không tự tạo 4 loại đó, chỉ giữ nguyên khi gộp file)
   - **Field / Phần** (cột con 1 của Test Objective): tên feature/section/component/màn hình chính bị tác động (ví dụ: Title, Search, Table, Button [Export], Field [Zone Name]). Với test case Integration, ghi tên chức năng/màn hình bị ảnh hưởng, KHÔNG ghi task ID/task name.
   - **Chi tiết test** (cột con 2 của Test Objective): mô tả ngắn gọn cái gì đang được test (ví dụ: Placeholder, Required, Default value, Display data, Disabled state)
   - **Cụ thể hơn** (cột con 3 của Test Objective): CHỈ 1 cụm từ ngắn (2-6 từ), KHÔNG viết thành câu, KHÔNG diễn giải lại rule/công thức đã có ở Expected Result hay Preconditions (VD đúng: `Boundary: 30 ngày`, `Loại trừ Cancelled`, `Case-insensitive`, `Hướng tăng`; VD SAI — nghiêm cấm: `"Chart hiển thị đủ 3 nhóm cột con EU/US/China trong 1 ngày khi có dữ liệu đủ cả 3 location"` vì đây là câu dài lặp lại nội dung đã có ở Expected Result). Nếu không có cụm từ ngắn nào cần thêm, để trống — không cố nhét nội dung vào cho đầy cột.
@@ -87,7 +87,7 @@ Quy định về output:
   - Nếu file `userstoryID_testcase.csv` CHƯA tồn tại: tạo file mới, chỉ chứa test case vừa sinh ở bước này.
   - Nếu file ĐÃ tồn tại (do `create-permission-testcase`/`create-impact-testcase` đã chạy trước): đọc toàn bộ rows hiện có, giữ nguyên nội dung từng ô, thêm rows mới vào, rồi sắp xếp lại TOÀN BỘ file:
     1. Nhóm theo **Field / Phần** trước (test hết 1 Field/Phần mới sang Field/Phần khác, không xen kẽ).
-    2. Trong cùng 1 nhóm Field/Phần, sắp theo thứ tự ưu tiên Test Type: Happy → Negative → Edge → Permission → Integration → System → Other.
+    2. Trong cùng 1 nhóm Field/Phần, sắp theo thứ tự ưu tiên Test Type: Happy → Negative → Edge → Sync → Permission → Integration → System → Other.
     3. Renumber lại cột **ID** tuần tự theo thứ tự mới sau khi sắp xếp: `US1234_TC01, TC02, TC03...` (bỏ hậu tố riêng như `_PERM_`/`_IMP_` vì cột Test Type đã phân biệt loại).
   - Không xoá hoặc sửa nội dung rows đã có từ trước — chỉ thêm mới, sắp xếp lại, renumber ID.
 

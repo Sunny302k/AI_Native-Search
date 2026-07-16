@@ -8,7 +8,14 @@
       "Bash(node .fix-br.cjs \"test-cases/US27/US27_testcase.csv\")",
       "Bash(cd \"/c/Users/ADMIN/OneDrive/Máy tính/Auto Test/AI_Claude\" && rm -f test-cases/US27/US27_testcase.csv.bak)",
       "Bash(grep -v \"^\\\\./\\\\.git\")",
-      "Bash(xxd test-cases/US27B/US27B_testcase.csv)"
+      "Bash(xxd test-cases/US27B/US27B_testcase.csv)",
+      "Bash(find \"/c/Users/hangu/OneDrive/Máy tính/Auto Test/Native-Search\" -type f -not -path \"*/.git/*\" | sort)",
+      "Read(//c/Users/hangu/OneDrive/Máy tính/Auto Test/Native-Search/**)",
+      "Read(//c/Users/hangu/OneDrive/Máy tính/Auto Test/Native-Search/00_README/**)",
+      "Read(//c/Users/hangu/OneDrive/Máy tính/Auto Test/Native-Search/02_TESTING/**)",
+      "Read(//c/Users/hangu/OneDrive/Máy tính/Auto Test/Native-Search/02_TESTING/01_Test_Scenarios/**)",
+      "Read(//c/Users/hangu/OneDrive/Máy tính/Auto Test/Native-Search/03_CHANGELOG/**)",
+      "Bash(node -e ' *)"
     ],
     "additionalDirectories": [
       "c:\\c\\Users\\ADMIN\\OneDrive\\Máy tính\\Auto Test\\AI_Claude\\test-cases\\US27"
