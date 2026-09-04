@@ -1,7 +1,7 @@
 ---
 name: review-figma-spec-consistency
 description: Đối chiếu nhiều spec/frame Figma cùng pattern (VD nhiều loại filter node — Price, Category, Collection... dùng chung UI) hoặc đối chiếu ngược 1 spec đã extract với thiết kế Figma gốc, để phát hiện field/rule thiếu sót, không nhất quán giữa các biến thể — tránh việc tự mặc định "chắc là cố ý" khi thực ra là thiếu sót trong lúc thiết kế/extract.
-trigger: "so sánh spec [feature A] với [feature B]", "check spec [feature] có nhất quán với các cụm tương tự không", "review lại spec đã extract từ figma", "audit spec figma" — áp dụng khi đã có ≥2 spec/frame cùng pattern cần đối chiếu chéo, hoặc cần verify 1 spec đã extract (từ extract-figma-spec) có sót nội dung so với Figma gốc không. KHÔNG dùng để tạo spec mới (→ extract-figma-spec) hay tạo test case (→ create-testcases/create-testcase-suite).
+trigger: "so sánh spec [feature A] với [feature B]", "check spec [feature] có nhất quán với các cụm tương tự không", "review lại spec đã extract từ figma", "audit spec figma" — áp dụng khi đã có ≥2 spec/frame cùng pattern cần đối chiếu chéo, hoặc cần verify 1 spec đã extract (từ extract-figma-spec) có sót nội dung so với Figma gốc không. KHÔNG dùng để tạo spec mới (→ extract-figma-spec) hay tạo test case (→ create-functional-testcase/create-testcase-suite).
 ---
 
 ## Bối cảnh

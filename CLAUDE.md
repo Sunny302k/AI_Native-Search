@@ -44,6 +44,6 @@ Module **Analytics** có nhắc tên trong tài liệu tổng quan nhưng chưa 
 2. Naming convention: thực hiện đặt tên file teho nguyên tắc kebap.
    1. testcase sẽ sử dụng format là CSV BOM UTF-8
    2. Check list sử dụng markdown
-3. Khi 1 yêu cầu khớp trigger của bất kỳ skill viết test case nào (`create-testcases`, `create-permission-testcase`, `create-system-testcase`, `create-api-testcase`, `create-impact-testcase`, `create-sync-testcase`, `create-testcase-suite`, `check-testcase-coverage`) — luôn invoke qua tool `Skill`, không tự thực thi lại bằng script/trí nhớ nội dung skill. Đặc biệt lưu ý: vừa đọc/sửa chính skill đó trong cùng phiên KHÔNG phải lý do để bỏ qua bước invoke — trí nhớ diễn giải lại dễ lệch so với bản text hiện tại của skill.
+3. Khi 1 yêu cầu khớp trigger của bất kỳ skill viết test case nào (`create-functional-testcase`, `create-permission-testcase`, `create-system-testcase`, `create-api-testcase`, `create-impact-testcase`, `create-sync-testcase`, `create-testcase-suite`, `check-testcase-coverage`) — luôn invoke qua tool `Skill`, không tự thực thi lại bằng script/trí nhớ nội dung skill. Đặc biệt lưu ý: vừa đọc/sửa chính skill đó trong cùng phiên KHÔNG phải lý do để bỏ qua bước invoke — trí nhớ diễn giải lại dễ lệch so với bản text hiện tại của skill.
 4. Khi báo cáo kết quả sau khi viết test case, luôn nói rõ đã viết qua skill nào — hoặc nói rõ nếu viết tay không qua skill nào kèm lý do. Không im lặng bỏ qua chi tiết này.
 

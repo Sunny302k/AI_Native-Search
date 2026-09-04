@@ -2,9 +2,17 @@
 
 ## 0. Nguồn gốc tài liệu
 
-Viết ngược từ sheet test case `Add filter node - Brand` (145 case, Google Sheet `TC_Native Search`), đối chiếu với pattern khung Edit chung đã tổng hợp ở `filter-tree-common-specs.md` (mục 3) và với `edit-filter-node-condition` (feature anh em cùng pattern filter node, đã làm trước). Không có quyền Figma Edit cho riêng màn này.
+Viết ngược từ sheet test case `Add filter node - Brand` (145 case, Google Sheet `TC_Native Search`), đối chiếu với pattern khung Edit chung đã tổng hợp ở `filter-tree-common-specs.md` (mục 3) và với `edit-filter-node-condition` (feature anh em cùng pattern filter node, đã làm trước). Không có quyền Figma Edit cho toàn màn Edit filter node - Brand.
 
-**Lưu ý dữ liệu nguồn**: 4 case cuối sheet (case #139-142, nói về "Is Featured/Not Featured" và "Storefront Details - Set featured product") có nội dung không khớp chủ đề Brand — nghi ngờ copy nhầm từ sheet Featured Products. Không dùng làm căn cứ cho spec này.
+**Cập nhật (2026-07-20)**: người dùng gửi trực tiếp ảnh chụp màn hình popup **[Manage Swatch]** thật (bảng Swatch Name/Image Source/URL với dữ liệu Brand thật: Anker, Apple, Bosch, HP, Huawei, Samsung, Xiaomi, LG) — bổ sung xác nhận hành vi field URL khi Image Source = Big Commerce, xem mục 5.1.
+
+**Cập nhật (2026-08-13) — sửa lại nhận định về ranh giới dữ liệu nguồn, phát hiện khi người dùng báo lỗi thực thi case #171 từ sheet**: nhận định gốc "145 case, trừ 4 case cuối" ở trên là **sai/thiếu** — do trước đó chưa fetch hết toàn bộ sheet nên tưởng nhầm sheet kết thúc quanh case #145. Đối chiếu lại toàn bộ sheet (195 row) cho kết quả chính xác hơn:
+
+- **Case #1-138**: nội dung Brand thật, hợp lệ — đây là phần đã dùng làm căn cứ chính cho spec này.
+- **Case #139-141** (không phải 139-142): vẫn gắn nhãn "Edit filter node - Brand" nhưng Expected Result lại mô tả "Storefront Details - Set featured product" — đúng là nghi copy nhầm từ sheet Featured Products như nhận định gốc, **không dùng làm căn cứ**.
+- **Case #142-195** (54 case, phát hiện mới): đây **không phải case Brand bị lỗi** mà là toàn bộ 1 sheet **"Edit filter node - Condition"** hoàn chỉnh, mạch lạc, bị nối tiếp vào cùng tab ngay sau phần Brand — hoàn toàn không liên quan tới Brand, không phải "case cuối bị lỗi" như nhận định gốc.
+
+Đã rà soát lại toàn bộ `test-cases/edit-filter-node-brand/edit-filter-node-brand_testcase.csv` (85 case) — xác nhận **không có case nào bị lẫn nội dung Condition** (mọi chỗ nhắc "Condition" đều là so sánh chủ động, đúng ngữ cảnh, đối chiếu 2 node dùng chung pattern). Việc sửa lần này chỉ đính chính lại metadata mô tả nguồn (mục 12), không có thay đổi nội dung nghiệp vụ nào trong spec hay trong file test case.
 
 ## 1. Tổng quan
 
@@ -70,16 +78,40 @@ Brand là 1 loại filter node lấy **giá trị động (dynamic)** từ BigCo
 | Swatch border radius                            | Slider kéo thả                                                                                   | Config nội bộ                                                                     | #80         |
 | Toggle [Display filter option name in swatch]   | ON hiện kèm tên brand cạnh swatch; OFF ẩn                                                     | Config nội bộ                                                                     | #81, 82     |
 
-**Lưu ý coverage**: 9 case con của Manage Swatch (#67-77, phần Image/Image Source/URL) đang ở trạng thái **SKIP** trong sheet gốc — chưa từng được thực thi thật.
+**Lưu ý coverage**: 9 case con của Manage Swatch (#67-77, phần Image/Image Source/URL) đang ở trạng thái **SKIP** trong sheet gốc — chưa từng được thực thi thật bằng case, nhưng đã có ảnh chụp UI thật đối chiếu (xem mục 5.1.1 ngay dưới) cho riêng field URL.
+
+### 5.1.1 Trường URL khi Image Source = Big Commerce — xác nhận qua ảnh UI thật (2026-07-20)
+
+Trước đây case #77 (SKIP) để ngỏ câu hỏi: khi Image Source = Big Commerce nhưng brand nguồn chưa có ảnh trên BC, Swatch hiển thị gì? Ảnh popup [Manage Swatch] thật (dữ liệu brand: Anker, Apple, Bosch, HP, Huawei, Samsung, Xiaomi, LG) xác nhận rõ **2 trạng thái**:
+
+| Trạng thái brand trên BC | Hiển thị trường URL | Ví dụ trong ảnh |
+| --- | --- | --- |
+| Brand đã có ảnh trên BC | Tự động điền đúng URL ảnh lấy từ BC (dạng text, màu muted — có dấu hiệu read-only, chưa xác nhận được thao tác sửa tay vì nút Save trong ảnh đang disable) | Anker, Huawei, Samsung, Xiaomi |
+| Brand **chưa có ảnh** trên BC | Hiển thị **đúng placeholder rỗng giống hệt** trạng thái Image Source = Online URL chưa nhập: *"Insert jpg., jpeg., png. swatch image url: https://…"* | LG |
+
+Điều này trả lời dứt điểm câu hỏi mở cũ (đã gỡ khỏi danh sách câu hỏi BA, xem mục 11) — **không phải ảnh lỗi, không để trống im lặng, mà hiển thị đúng placeholder rỗng chung với chế độ nhập tay**.
+
+`[CẦN XÁC NHẬN BA]` — vẫn còn 1 điểm chưa rõ từ ảnh: trường URL khi Image Source = Big Commerce có cho phép merchant **sửa tay đè lên** giá trị tự động lấy từ BC không, hay hoàn toàn read-only? Ảnh chụp ở trạng thái nút Save đang disable nên chưa quan sát được thao tác edit trực tiếp.
 
 ## 6. Toggle [Setup dynamic option]
 
-| Trạng thái Display Style | Toggle  | Nguồn |
-| -------------------------- | ------- | ------ |
-| List / Grid                | Enable  | #98    |
-| Swatch                     | Disable | #97    |
+**Cập nhật (2026-08-27) — mục đích đã xác nhận qua ảnh Figma thật (frame "Dynamic option" người dùng gửi trực tiếp):** đây là tính năng **localization cho giá trị filter option** — cho phép merchant tuỳ biến label/giá trị của từng filter value theo từng locale (đa ngôn ngữ/khu vực/tiền tệ), KHÔNG phải cơ chế "tự động thêm value mới khi sync" như suy đoán trước đây (đã đính chính). Nguyên văn mô tả trong popup: *"Offer customized filter options, so customers can have better localized store experiences"*.
 
-`[CẦN XÁC NHẬN BA]` — cả 2 case gốc (#97, #98) đều tự đặt câu hỏi ngay trong Expected Result ("Khi toggle disable thì dữ liệu hiển thị như thế nào?") mà không trả lời — chưa rõ mục đích của toggle này là gì và hành vi cụ thể khi enable/disable.
+**Cơ chế popup [Setup dynamic option]** (mở qua nút "Setup now" cạnh toggle khi ON):
+
+| Field | Mô tả | Nguồn |
+| --- | --- | --- |
+| Locale tag/pill (đầu popup) | Danh sách locale gợi ý nhanh (VD Korean Size, US Size, UK Size) | Ảnh Figma |
+| Bảng "Customize filter options" | Cột = từng locale (bắt đầu "US - Default" — locale gốc, cộng thêm locale merchant tự thêm qua "+ Add new locale", có dropdown chọn locale + icon xoá riêng từng cột); dòng = từng giá trị filter option gốc (VD Size: XS/S/M/L) | Ảnh Figma |
+| Ô giao value × locale | Merchant nhập giá trị/label tương đương cho đúng locale đó (VD Size ở Korea → "KOR-XS", ở Germany → quy đổi cm) | Ảnh Figma |
+| Validate | Bắt buộc chọn **≥1 locale** trước khi Save; case n locales báo lỗi rõ: *"Select at least 1 locale to setup dynamic options"*. Trạng thái Default (chưa thêm locale) → Save disable. | Ảnh Figma |
+| Toast khi Save thành công | *"Dynamic options are created successfully!"* | Ảnh Figma |
+
+**Rule phụ thuộc chéo quan trọng**: khi Display Style = Swatch, nếu merchant tắt toggle **"Display filter option name in swatch"** → hệ thống cảnh báo popup riêng: *"Turn off name will affect dynamic option — If you remove the filter name option, the dynamic options might not work properly."* (Cancel / "Yes, turn it off"). Cơ chế dynamic option phụ thuộc vào tên filter option hiển thị để map đúng giá trị theo locale — tắt tên đi có nguy cơ làm sai match locale.
+
+**Case đặc biệt — filter dạng range/số (VD Rate Currency)**: khác filter dạng danh sách rời rạc (Size), với filter dạng khoảng giá trị, merchant **chỉ cần nhập giá trị quy đổi cho 2 đầu mút (min/max)**, hệ thống tự nội suy (tính toán) các giá trị ở giữa — không bắt nhập từng mốc trung gian.
+
+`[CẦN XÁC NHẬN BA]` — **mâu thuẫn phát hiện được**: ảnh demo "Setup dynamic option" mới (dùng ví dụ filter "Size") cho thấy Display Style = Swatch **VÀ** toggle Setup dynamic option đang ở trạng thái **ON/enable đồng thời** — trái ngược hoàn toàn với rule đã ghi nhận ở bảng cũ trong mục này (Swatch → Disable, dựa theo case #97 gốc của sheet Brand). Chưa rõ: (a) rule cũ "Swatch disable toggle" chỉ đúng riêng cho Brand còn filter "Size" (loại khác) không áp dụng, (b) ảnh demo là ví dụ minh hoạ chung không đại diện đúng cho Brand, hay (c) rule cũ đã sai/lỗi thời. Cần verify lại thực tế trên chính node Brand trước khi kết luận, không tự chọn 1 trong 2 rule.
 
 ## 7. Sort order
 
@@ -119,13 +151,18 @@ Case đang **Fail (NG)** đáng chú ý: #31, 32 (Cancel/X ở popup Select filt
 
 | # | Câu hỏi                                                                                                                                                                                                                   | Mục |
 | - | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---- |
-| 1 | Toggle [Setup dynamic option] dùng để làm gì, và khi disable (ở Swatch) thì dữ liệu hiển thị ra sao?                                                                                                            | 6    |
+| 1 | Rule "Swatch → Setup dynamic option disable" (case #97 gốc) có còn đúng không, hay chỉ áp dụng riêng 1 số trường hợp — ảnh demo mới cho thấy 1 ví dụ (filter Size) có cả Swatch lẫn Setup dynamic option ON đồng thời | 6    |
 | 2 | Product count mỗi value trong popup Select filter options có cập nhật ngay khi product đổi assign Brand trên BC + sync không, hay chỉ cập nhật khi mở lại popup? (case#22 gốc không có Expected Result rõ) | 3    |
+| 3 | Trường URL khi Image Source = Big Commerce có cho phép merchant sửa tay đè lên giá trị tự động lấy từ BC không, hay hoàn toàn read-only? | 5.1.1 |
+
+**Đã gỡ khỏi danh sách** (2026-07-20, có bằng chứng ảnh UI thật): câu hỏi cũ "Swatch hiển thị gì khi Image Source = Big Commerce nhưng brand nguồn chưa có ảnh?" — đã xác nhận hiển thị placeholder rỗng, xem mục 5.1.1.
+
+**Đã gỡ khỏi danh sách** (2026-08-27, có bằng chứng ảnh UI thật frame "Dynamic option"): câu hỏi cũ "Toggle Setup dynamic option dùng để làm gì?" — đã xác nhận rõ mục đích + cơ chế popup, xem mục 6. Thay bằng câu hỏi mới #1 (mâu thuẫn về rule Swatch disable).
 
 ## 12. Metadata
 
 - **Feature:** Filter — Filter Tree/Node Setup — Brand filter node (Add + Edit)
 - **Tài liệu liên quan:** `filter-tree-common-specs.md` (khung Edit chung), `edit-filter-node-condition` (feature anh em cùng pattern, xem `docs/sync-fields-glossary.md` cách phân loại Nguồn dữ liệu)
-- **Nguồn:** Sheet test case `Add filter node - Brand` (145 case, trừ 4 case cuối nghi copy nhầm)
-- **Số câu hỏi CẦN XÁC NHẬN BA:** 2
+- **Nguồn:** Sheet test case `Add filter node - Brand` (gid=1224314320, sheet có 195 row nhưng chỉ case #1-138 là Brand thật; #139-141 nghi copy nhầm từ Featured Products; #142-195 thực chất là nguyên 1 bộ case "Edit filter node - Condition" bị nối vào cùng tab — xem mục 0, đính chính 2026-08-13) + ảnh chụp UI thật popup [Manage Swatch] (người dùng gửi trực tiếp, 2026-07-20)
+- **Số câu hỏi CẦN XÁC NHẬN BA:** 3
 - **Coverage thực thi tại thời điểm viết spec:** nhiều case NG ở Filter Options/Swatch/Sort Order/Hide on customer group/Collapse-Expand; toàn bộ nhánh Manage Swatch (Image/URL) chưa thực thi (SKIP)

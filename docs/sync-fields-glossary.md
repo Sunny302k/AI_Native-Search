@@ -13,7 +13,7 @@ Khi gặp 1 field cần gắn nhãn nguồn dữ liệu, đối chiếu theo th�
 3. Field không liên quan gì tới danh sách dưới, do Native Search tự định nghĩa (toggle, display option, sort order, pagination type...) → **Config nội bộ**.
 4. Không đủ căn cứ để xếp vào 1 trong 3 loại trên → gắn `[CẦN XÁC NHẬN BA]`, không tự đoán.
 
-## 8 entity được sync từ BigCommerce
+## 10 entity được sync từ BigCommerce
 
 1. Categories
 2. Customers
@@ -36,8 +36,10 @@ Khi gặp 1 field cần gắn nhãn nguồn dữ liệu, đối chiếu theo th�
    - categories
    - weight / width / depth / height
    - bin_picking_number
+9. **Reviews** (Product Reviews) — `[BỔ SUNG 2026-08-12, chưa đối chiếu tài liệu Sync gốc]` — chưa từng xuất hiện trong 8 entity trên dù đã có bằng chứng gián tiếp khá mạnh: `edit-filter-node-review-rating-specs.md` (dựa SPEC PDF Filter — "Get all 'approved' reviews of a product → From reviews rating -> calculate") xác nhận Review Ratings filter đọc dữ liệu review đã sync để tính average rating; ảnh chụp màn hình BC Admin → Reviews (2026-08-12) xác nhận cấu trúc field: Product, Review Title, Review (nội dung), Author, Status (Approved/Disapproved), Rating (1-5 sao), Date. Đây là **field-level detail suy ra từ 1 feature cụ thể (Filter) + ảnh BC Admin, KHÔNG phải đọc trực tiếp tài liệu Sync gốc** như 8 entity trên — độ tin cậy thấp hơn, cần đối chiếu lại `SPEC_Sync` gốc khi có điều kiện để nâng lên cùng mức tin cậy.
+10. **Product Variant Options** (BC gọi là "Product Options" → tab Variations → Variant Options, KHÔNG phải Modifiers) — `[BỔ SUNG 2026-08-21, chưa đối chiếu tài liệu Sync gốc]` — bằng chứng: ảnh chụp BC Admin thật (product mẫu "TShirt_24", 2026-08-21) xác nhận cấu trúc field Option Name (`display_name`)/Type (Dropdown, Rectangle List...)/Values (label), và Variants (tổ hợp value → SKU/Default Price/Purchasable status); người dùng xác nhận trực tiếp dữ liệu này được sync về filter node "Product options" (popup [Select filter options]: Option name pane = Option Name, Values pane = Values kèm product count tính từ Purchasable/SKU). Modifier Options (khác Variant Options) ở cùng ảnh đang rỗng ("No modifier option has been added yet") nên **chưa có bằng chứng Modifiers cũng được sync** — chỉ Variant Options được coi là Sync trực tiếp tại thời điểm này. Đây là **field-level detail suy ra từ 1 feature cụ thể (Filter node Product options) + ảnh BC Admin do người dùng cung cấp, KHÔNG phải đọc trực tiếp tài liệu Sync gốc** — độ tin cậy thấp hơn, cần đối chiếu lại `SPEC_Sync` gốc khi có điều kiện.
 
-Chỉ **Products** có field-level detail trong tài liệu Sync gốc. 7 entity còn lại mới chỉ có tên entity, chưa rõ field cụ thể — nếu gặp 1 field cụ thể thuộc các entity này mà không chắc có nằm trong phạm vi sync hay không, dùng `[CẦN XÁC NHẬN BA]` thay vì suy đoán field đó có/không được sync.
+Chỉ **Products** có field-level detail trong tài liệu Sync gốc. 8 entity còn lại (trừ Reviews và Product Variant Options mới bổ sung) mới chỉ có tên entity, chưa rõ field cụ thể — nếu gặp 1 field cụ thể thuộc các entity này mà không chắc có nằm trong phạm vi sync hay không, dùng `[CẦN XÁC NHẬN BA]` thay vì suy đoán field đó có/không được sync.
 
 **Trường hợp ngoại lệ đã ghi nhận — Customer Groups**: entity "Customers" ở trên chỉ xác nhận qua tài liệu Sync gốc ở mức entity (khách hàng), KHÔNG có bằng chứng tài liệu Sync gốc xác nhận riêng "Customer Group" (nhóm khách hàng) có được sync hay không. Tuy nhiên có bằng chứng gián tiếp từ test case (`Add filter node - Condition`, case "Hide on customer group - Popup": *"Danh sách data sync từ BigCommerce"*) cho thấy Customer Group thực tế có được sync. Tạm coi Customer Group là **Sync trực tiếp** dựa trên bằng chứng này, nhưng đây KHÔNG phải xác nhận từ tài liệu Sync gốc — nếu cần độ chắc chắn cao hơn, vẫn nên hỏi lại BA/đối chiếu lại `SPEC_Sync` gốc.
 

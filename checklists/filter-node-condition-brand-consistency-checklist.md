@@ -1,0 +1,24 @@
+# Consistency review - Edit filter node (Condition vs Brand)
+
+## Tổng quan
+
+- Số spec đối chiếu: 2 (`edit-filter-node-condition-specs.md`, `edit-filter-node-brand-specs.md`)
+- Số điểm khác biệt: 9 (Có vẻ cố ý: 3 / Cần xác nhận BA: 6)
+
+## Chi tiết
+
+- [OK] General Settings (Title/Title text color/Title alignment) — cấu trúc giống hệt nhau giữa 2 spec, chỉ default Title text khác tên node (hợp lý).
+- [OK] Hide on customer group — cùng pattern popup search + sync list ở cả 2 spec.
+- [OK] Appearance settings nhóm 5 field cơ bản (Display tooltip + content, Collapse/Expand Desktop/Mobile, Display uppercase, Show search box Desktop/Mobile) — cùng field set ở cả 2 spec.
+- [~] Cơ chế chọn Filter Options: Brand dùng popup [Select filter options] (option động, sync từ BC); Condition dùng checkbox cố định (3 giá trị luôn có sẵn) — **Có vẻ cố ý** — có căn cứ rõ: `condition` là enum cứng của BC platform (New/Used/Refurbished), khác Brand vốn là dynamic list. Đã xác nhận qua BigCommerce Developer Docs, ghi ở `docs/bigcommerce-platform-facts.md`.
+- [~] Display Style: Brand có thêm Swatch (+ modal Manage Swatch riêng); Condition chỉ có List/Grid — **Có vẻ cố ý** — sticky note "Filter options (by default)" của Condition liệt kê tường minh đúng 2 giá trị "DISPLAY STYLE: List, Grid", không có Swatch. Nguồn trực tiếp từ note, không phải suy đoán.
+- [~] Option select type — default: Brand = Multiple, Condition = Single — **Có vẻ cố ý (độ tin cậy thấp hơn 2 mục trên)** — cả 2 spec đều ghi nhận và đối chiếu chéo sự khác biệt này (Brand spec tự note "khác Condition — default Single"), nhưng không có note thiết kế nào giải thích **lý do** vì sao 2 loại node chọn default khác nhau. Giữ ở mức "có vẻ cố ý" vì ít nhất đã được nhận biết nhất quán ở cả 2 nơi, nhưng vẫn đáng hỏi lại nếu cần chắc chắn 100%.
+- [ ] `[CẦN XÁC NHẬN BA]` — **Tooltip content giới hạn 255 ký tự**: `edit-filter-node-brand-specs.md` mục 9 viết "Cùng field set đã xác nhận ở Condition: Display tooltips (+ content, giới hạn 255 ký tự)" — tức Brand spec khẳng định giới hạn này **đã được xác nhận ở chính Condition**. Nhưng `edit-filter-node-condition-specs.md` mục 8 lại **không có bất kỳ giới hạn ký tự nào** cho Tooltip content (không thấy trên ảnh, không thấy trong 54 test case hiện có). Đây là mâu thuẫn trực tiếp giữa 2 spec — cần xác nhận: Condition có thật sự giới hạn 255 ký tự hay không (và nếu có, bổ sung lại vào spec Condition); nếu không, Brand spec cần sửa lại nguồn trích dẫn.
+- [ ] `[CẦN XÁC NHẬN BA]` — **Toggle [Setup dynamic option]**: có ở Brand (mục 6, gắn với Display Style — enable khi List/Grid, disable khi Swatch), nhưng **hoàn toàn không xuất hiện** trong ảnh chụp lẫn 54 test case của Condition. Chưa rõ Condition thực sự không có toggle này (hợp lý vì Condition vốn không phải "dynamic option" theo nghĩa Brand), hay toggle có tồn tại nhưng nằm ngoài vùng ảnh chụp (giống trường hợp "Show all irrelevant values"/"Pagination type" đã phải suy từ test case). Lưu ý thêm: bản thân Brand spec cũng đang tự đánh dấu `[CẦN XÁC NHẬN BA]` cho chính mục đích của toggle này — nên đây là 2 tầng chưa rõ chồng lên nhau.
+- [ ] `[CẦN XÁC NHẬN BA]` — **Sort Order UX**: Brand có popup [Sort Order] với 5 lựa chọn (Alphabetical Ascending/Descending, Product number Ascending/Descending, Custom order); Condition chỉ có 1 danh sách kéo-thả trực tiếp (tương đương mỗi "Custom order"), không có popup/lựa chọn kiểu sort. Spec Condition tự diễn giải "hợp lý vì chỉ có 3 giá trị cố định" — nhưng đây là suy luận khi viết spec, **không phải note thiết kế xác nhận**. Merchant Condition có bị mất khả năng sort theo product count (Ascending/Descending) so với Brand hay không cần hỏi lại, vì đây là mất tính năng thực sự chứ không chỉ khác UI.
+- [ ] `[CẦN XÁC NHẬN BA]` — **Custom label per option**: Condition có field text input riêng để đổi label hiển thị của từng option (New/Used/Refurbished → tên tuỳ ý), độc lập với giá trị filter logic thật (đã xác nhận rule ở mục 10 spec Condition). Spec Brand **không đề cập** khả năng tương đương (đổi label hiển thị cho từng Value đã chọn) trên màn Edit — chỉ có Value gốc lấy nguyên từ BC. Chưa rõ Brand thực sự thiếu tính năng này, hay có nhưng chưa được ảnh/case nào của Brand ghi nhận.
+- [ ] `[CẦN XÁC NHẬN BA]` — **Product count hiển thị trong Preview**: ảnh Condition xác nhận rõ Preview (khung bên phải, không phải popup) hiển thị product count cạnh mỗi option (VD "New (5)"). Spec Brand chỉ xác nhận product count xuất hiện **trong popup [Select filter options]** (cột Values), không nói rõ Preview trên màn Edit (ngoài popup) của Brand có hiển thị count tương tự hay không — spec Brand đang bỏ ngỏ điểm này chứ không phủ định.
+
+## Ghi chú thực thi liên quan (tham khảo, không phải finding mới)
+
+Cả 2 spec đều còn câu hỏi mở riêng độc lập (không liên quan đối chiếu chéo): Brand có 3 câu hỏi BA (mục 11), Condition có 3 câu hỏi BA (mục 12) — không lặp lại ở đây.

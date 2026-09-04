@@ -1,7 +1,7 @@
 ---
 name: extract-figma-spec
-description: Trích xuất 1 cụm chức năng trên Figma (frame chính + toàn bộ sticky note vàng liên quan + modal con) thành 1 file spec viết rõ ràng, có cấu trúc — dùng làm input chuẩn cho create-testcase-suite/create-testcases và các skill test case khác, thay cho việc đọc trực tiếp thiết kế mỗi lần viết test case.
-trigger: "đọc figma [link] rồi viết spec cho [feature]", "phân tích figma [link]", "clear spec từ figma cho [feature]", "convert figma [link] sang spec" — áp dụng khi người dùng cung cấp link/frame Figma và CHƯA có bản spec text đầy đủ. KHÔNG dùng khi đã có sẵn spec text rõ ràng (dùng thẳng create-testcases/create-testcase-suite), và KHÔNG tự viết test case trong skill này.
+description: Trích xuất 1 cụm chức năng trên Figma (frame chính + toàn bộ sticky note vàng liên quan + modal con) thành 1 file spec viết rõ ràng, có cấu trúc — dùng làm input chuẩn cho create-testcase-suite/create-functional-testcase và các skill test case khác, thay cho việc đọc trực tiếp thiết kế mỗi lần viết test case.
+trigger: "đọc figma [link] rồi viết spec cho [feature]", "phân tích figma [link]", "clear spec từ figma cho [feature]", "convert figma [link] sang spec" — áp dụng khi người dùng cung cấp link/frame Figma và CHƯA có bản spec text đầy đủ. KHÔNG dùng khi đã có sẵn spec text rõ ràng (dùng thẳng create-functional-testcase/create-testcase-suite), và KHÔNG tự viết test case trong skill này.
 ---
 
 ## Bối cảnh
@@ -67,5 +67,5 @@ Viết lại toàn bộ dữ liệu đã thu thập theo cấu trúc sau (đồn
 - Không tự bịa hành vi/rule khi Figma không thể hiện rõ và không có sticky note — luôn dùng tag `[CẦN XÁC NHẬN BA]` kèm giả thuyết thay vì khẳng định chắc chắn.
 - Không được bỏ sót sticky note nào trong vùng đọc, kể cả khi nội dung có vẻ lặp lại giữa các frame — liệt kê đủ để bước đối chiếu chéo sau này (`review-figma-spec-consistency`) có dữ liệu so sánh.
 - Không tự đoán 1 field có phải dữ liệu sync từ BigCommerce hay không nếu không đối chiếu được với `docs/sync-fields-glossary.md` hoặc không có tín hiệu rõ trên Figma/note — dùng `[CẦN XÁC NHẬN BA]` cho cột Nguồn dữ liệu thay vì suy đoán.
-- Không tự viết test case trong skill này — output chỉ là file spec, việc viết test case do `create-testcases`/`create-testcase-suite`/các skill con khác đảm nhiệm.
+- Không tự viết test case trong skill này — output chỉ là file spec, việc viết test case do `create-functional-testcase`/`create-testcase-suite`/các skill con khác đảm nhiệm.
 - Chỉ thao tác trong folder dự án hiện tại (Native Search / Claude), nghiêm cấm thao tác trên folder khác.

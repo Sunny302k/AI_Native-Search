@@ -1,7 +1,7 @@
 ---
 name: check-testcase-coverage
-description: Đối chiếu ngược 1 spec với bộ test case đã sinh ra (từ create-testcases/create-permission-testcase/create-system-testcase/create-api-testcase/create-impact-testcase) để phát hiện acceptance criteria/business rule chưa có test case bao phủ.
-trigger: "check coverage cho [userstoryID]", "audit test case [userstoryID] đã đủ chưa", "test case này đã cover hết spec chưa" — áp dụng khi đã CÓ SẴN test case và người dùng muốn kiểm tra độ phủ so với spec, KHÔNG dùng để sinh test case mới (→ create-testcases/create-permission-testcase/create-system-testcase/create-api-testcase/create-impact-testcase)
+description: Đối chiếu ngược 1 spec với bộ test case đã sinh ra (từ create-functional-testcase/create-permission-testcase/create-system-testcase/create-api-testcase/create-impact-testcase/create-sync-testcase/create-matrix-testcase) để phát hiện acceptance criteria/business rule chưa có test case bao phủ.
+trigger: "check coverage cho [userstoryID]", "audit test case [userstoryID] đã đủ chưa", "test case này đã cover hết spec chưa" — áp dụng khi đã CÓ SẴN test case và người dùng muốn kiểm tra độ phủ so với spec, KHÔNG dùng để sinh test case mới (→ create-functional-testcase/create-permission-testcase/create-system-testcase/create-api-testcase/create-impact-testcase/create-sync-testcase)
 ---
 
 ## Hướng dẫn audit độ phủ test case
@@ -9,9 +9,12 @@ trigger: "check coverage cho [userstoryID]", "audit test case [userstoryID] đã
 ### Bước 1: Xác định input
 
 - Spec cần đối chiếu (ví dụ `docs/specs/us07-specs.md`).
-- (Các) file test case đã sinh cho userstoryID đó trong `test-cases/userstoryID/` — thường gồm tối đa 2 file: `userstoryID_testcase.csv` (file gộp chung của create-testcases/create-permission-testcase/create-system-testcase/create-impact-testcase) và `userstoryID_api-testcase.csv` + Postman collection riêng của create-api-testcase nếu có.
+- (Các) file test case đã sinh cho userstoryID đó trong `test-cases/userstoryID/`, gồm:
+  - `userstoryID_testcase.csv` — file gộp chung dạng bảng 10 cột (create-functional-testcase/create-permission-testcase/create-system-testcase/create-impact-testcase/create-sync-testcase).
+  - `userstoryID_api-testcase.csv` + Postman collection — nếu có chạy create-api-testcase.
+  - `userstoryID_matrix-<action>.csv` — **bắt buộc đọc nếu tồn tại**. Case validate/tổ hợp field đã được chuyển hẳn sang matrix và ĐÃ BỊ GỠ khỏi file bảng; nếu bỏ sót file matrix khi audit sẽ báo nhầm hàng loạt rule validate là "Not covered". Rà thư mục `test-cases/userstoryID/` để lấy đủ mọi file matrix (1 task có thể có nhiều file cho nhiều action).
 
-Nếu thiếu 1 trong 2 (spec hoặc test case), hỏi lại người dùng đường dẫn trước khi tiếp tục.
+Nếu thiếu spec hoặc thiếu toàn bộ file test case, hỏi lại người dùng đường dẫn trước khi tiếp tục.
 
 Nếu test case có case Test Type = `Integration` tham chiếu ticket khác (VD ghi trong Chi tiết test/Note dạng `TH-741`, `TH-158`...) mà chưa có quyền truy cập Jira/Confluence trong phiên hiện tại, báo cho người dùng biết cần authorize trước khi audit đầy đủ Bước 2 phần rule phụ từ trigger.
 
@@ -21,21 +24,25 @@ Nếu test case có case Test Type = `Integration` tham chiếu ticket khác (VD
 
 Không gộp nhiều rule khác nhau vào 1 mục — mỗi rule phải đủ nhỏ để có thể trả lời rõ ràng "có test case nào kiểm tra cái này chưa".
 
-**Với các test case Test Type = `Integration`** (sinh từ `create-impact-testcase`): mỗi case này dựa trên 1 trigger ở màn hình/feature KHÁC (không phải spec đang audit). Với từng trigger xuất hiện trong các case Integration hiện có, tra lại spec/Jira gốc của chính trigger đó (không suy đoán) để lấy thêm danh sách rule phụ: trạng thái nguồn hợp lệ, hướng biến thiên (tăng/giảm), phạm vi tác động (toàn bộ/một phần) mà trigger đó cho phép — đưa các rule phụ này vào chung danh sách rule ở Bước 2 (đánh ID riêng, ví dụ `AC-TH741-01`), vì đây chính là loại rule dễ bị bỏ sót nhất (chỉ test 1 trạng thái/1 hướng đại diện thay vì đủ nhánh).
+**Với các test case Test Type = `Integration`** (sinh từ `create-impact-testcase` hoặc `create-system-testcase`): mỗi case này dựa trên 1 trigger ở màn hình/feature KHÁC (không phải spec đang audit), hoặc là 1 luồng xuyên nhiều tác nhân. Với từng trigger xuất hiện trong các case Integration hiện có, tra lại spec/Jira gốc của chính trigger đó (không suy đoán) để lấy thêm danh sách rule phụ: trạng thái nguồn hợp lệ, hướng biến thiên (tăng/giảm), phạm vi tác động (toàn bộ/một phần) mà trigger đó cho phép — đưa các rule phụ này vào chung danh sách rule ở Bước 2 (đánh ID riêng, ví dụ `AC-TH741-01`), vì đây chính là loại rule dễ bị bỏ sót nhất (chỉ test 1 trạng thái/1 hướng đại diện thay vì đủ nhánh).
 
 ### Bước 3: Đối chiếu từng rule với test case đã có
 
-Với mỗi rule ở Bước 2 (kể cả rule phụ rút ra từ trigger), rà toàn bộ các file test case đầu vào (cột Field/Phần, Chi tiết test, Cụ thể hơn, Test Steps, Expected Result) để xác định trạng thái:
+**Lưu ý cấu trúc file bảng 10 cột:** mỗi dòng trong file là 1 test case thật (không có dòng banner/dòng phụ nào). Để tránh lặp chữ, cột Field/Phần CHỈ có giá trị ở dòng đầu tiên của mỗi nhóm liên tiếp cùng Field/Phần — các dòng sau trong cùng nhóm để TRỐNG cột này. Khi audit, nếu 1 test case row có Field/Phần trống, nhóm của nó là nhóm của dòng gần nhất phía trên có giá trị Field/Phần (đọc từ trên xuống, không phải chính ô đó).
+
+**Lưu ý cấu trúc file matrix** (`userstoryID_matrix-<action>.csv`): đọc theo CỘT, không theo dòng — mỗi cột từ cột thứ 4 trở đi (`userstoryID_MTC01`, `MTC02`...) là 1 test case. Để biết 1 test case kiểm tra gì, đọc dọc cột đó: những dòng có điền số bước cho biết tổ hợp field × giá trị (Valid/Invalid) mà case này dùng, và các dòng trong section Output có điền số cho biết expected result của case đó. Rule validate/tổ hợp field thường CHỈ được cover ở đây (đã gỡ khỏi file bảng), nên phải đối chiếu cả file matrix trước khi kết luận 1 rule là "Not covered".
+
+Với mỗi rule ở Bước 2 (kể cả rule phụ rút ra từ trigger), rà toàn bộ các file test case đầu vào — file bảng (cột Field/Phần, Chi tiết test, Cụ thể hơn, Preconditions, Test Steps, Expected Result) và file matrix (đọc dọc từng cột MTC) — để xác định trạng thái:
 
 - **Covered**: có ít nhất 1 test case kiểm tra đúng rule này, đủ điều kiện/bước để xác nhận kết quả mong đợi khớp spec.
 - **Partial**: có test case liên quan nhưng chưa đủ (ví dụ chỉ test happy path, thiếu boundary/negative mà rule ngụ ý cần).
 - **Not covered**: không có test case nào chạm tới rule này.
 
-Ghi lại ID test case liên quan (nếu có) cho từng rule để truy vết ngược dễ dàng.
+Ghi lại ID test case liên quan (nếu có) cho từng rule để truy vết ngược dễ dàng — ghi đúng ID gốc để biết case nằm ở file nào (`userstoryID_TCxx` = file bảng, `userstoryID_MTCxx` = file matrix).
 
 ### Bước 4: Xuất báo cáo coverage
 
-Không tự ý viết bổ sung test case trong skill này — chỉ báo cáo gap để người dùng quyết định dùng skill tạo test case phù hợp (create-testcases cho feature đơn lẻ, create-permission-testcase cho phân quyền, create-system-testcase cho luồng nghiệp vụ, create-api-testcase cho API, create-impact-testcase cho ảnh hưởng chéo).
+Không tự ý viết bổ sung test case trong skill này — chỉ báo cáo gap để người dùng quyết định dùng skill tạo test case phù hợp (`create-functional-testcase` cho feature đơn lẻ, `create-permission-testcase` cho phân quyền, `create-system-testcase` cho luồng nghiệp vụ, `create-api-testcase` cho API, `create-impact-testcase` cho ảnh hưởng chéo, `create-sync-testcase` cho field phụ thuộc dữ liệu đồng bộ từ BigCommerce).
 
 Xuất file markdown checklist:
 

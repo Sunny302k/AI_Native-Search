@@ -1,0 +1,305 @@
+﻿ID,Test Type,Test Objective,,,Preconditions,Test Steps,Input DB/Setting,Expected Result,Note
+,,=== ADD FILTER NODE - WEIGHT ===,,,,,,,
+FNWGT_TC01,UI,Page header,Breadcrumb title,,Mở MH Add Filter Node - Weight,1. Kiểm tra breadcrumb phía trên trái.,,"Breadcrumb hiển thị ""← Weight"".",
+FNWGT_TC02,UI,Button [Save as template] / [Save Changes],Hiển thị,,Mở MH Add Filter Node - Weight,1. Kiểm tra 2 button góc trên phải.,,"- [Save as template]: outlined.
+- [Save Changes]: màu cam (primary), cạnh [Save as template].",
+FNWGT_TC03,UI,Page layout,3 section hiển thị đủ,,Mở MH Add Filter Node - Weight,1. Scroll left panel.,,"3 section đúng thứ tự: GENERAL SETTINGS → FILTER SETTINGS → APPEARANCE SETTINGS, header màu cam.",
+FNWGT_TC04,Happy,Preview panel,Live update không cần Save,,- Đã mở MH Add Filter Node - Weight,"1. Đổi bất kỳ setting nào (VD Title).
+2. Quan sát Preview ngay sau đó.",,2. Preview cập nhật ngay lập tức mà không cần nhấn [Save Changes].,
+FNWGT_TC05,UI,,Desktop / Mobile tabs,,Mở MH Add Filter Node - Weight,1. Kiểm tra Preview panel.,,Tab Desktop và Mobile hiển thị; Desktop active mặc định.,
+FNWGT_TC06,Happy,Field [Title],Đổi giá trị,,- Field Title có giá trị mặc định,"1. Xóa giá trị Title hiện tại, nhập tên mới.
+2. Kiểm tra Preview.",Title = ""Weight (KGS)"","- Field lưu giá trị mới.
+- Preview: tiêu đề filter cập nhật đúng tên mới.",
+FNWGT_TC07,Negative,,Để trống,,,"1. Xóa trống field Title.
+2. Click [Save Changes].",Title = (rỗng),2. Lỗi: Title là bắt buộc; không cho phép lưu.,
+FNWGT_TC08,UI,,Default value lúc tạo mới,,,1. Kiểm tra field Title.,,"Title mặc định = ""Weight"".",
+FNWGT_TC09,Happy,Title text color,Đổi màu,,,"1. Click color swatch.
+2. Chọn màu mới.
+3. Kiểm tra Preview.",,"- Màu lưu thành công.
+- Preview: tiêu đề filter hiển thị đúng màu mới.","<cần confirm>: rủi ro kế thừa — khi title dài >1 dòng, preview có thể luôn căn trái bất kể màu/alignment đã chọn (bug đã xác nhận NG ở Category/Special Offers/Sale Percentage/Width)"
+FNWGT_TC10,UI,,Default value lúc tạo mới,,,1. Kiểm tra color swatch.,,Màu mặc định (dark).,
+FNWGT_TC11,Happy,Title alignment,Chọn Center,,Title alignment = Left,"1. Click option Center.
+2. Kiểm tra Preview.",,"- Option Center active.
+- Preview: tiêu đề filter căn giữa.",
+FNWGT_TC12,Happy,,Chọn Right,,Title alignment = Left,"1. Click option Right.
+2. Kiểm tra Preview.",,"- Option Right active.
+- Preview: tiêu đề filter căn phải.","<cần confirm>: rủi ro kế thừa — title dài >1 dòng luôn căn trái dù chọn Center/Right (xem TC09)"
+FNWGT_TC13,UI,,Default lúc tạo mới,,,1. Kiểm tra trạng thái mặc định.,,Option Left active (viền cam).,
+FNWGT_TC14,Happy,Display Style,Chuyển sang List,,Display Style = Slider - input,"1. Click option List.
+2. Kiểm tra Preview.
+3. Kiểm tra Filter Settings.",,"- Option List active.
+- Preview: filter hiển thị dạng danh sách.
+- Toàn bộ setting chỉ dành cho Slider ẩn/disabled.",
+FNWGT_TC15,Happy,,Chuyển sang Grid,,Display Style = Slider - input,"1. Click option Grid.
+2. Kiểm tra Preview.
+3. Kiểm tra Filter Settings.",,"- Option Grid active.
+- Preview: filter hiển thị dạng lưới.
+- Toàn bộ setting chỉ dành cho Slider ẩn/disabled.","<cần confirm>: rủi ro kế thừa — record đầu tiên luôn bị highlight màu cam sẵn dù merchant chưa chọn gì (bug đã xác nhận NG ở Sale Percentage/Width)"
+FNWGT_TC16,Happy,,Quay lại Slider - input,,Display Style = List hoặc Grid,"1. Click option Slider - input.
+2. Kiểm tra Preview và Filter Settings.",,"- Slider - input active.
+- Preview: slider + input boxes hiển thị lại.
+- Toàn bộ slider-related settings visible trở lại.",
+FNWGT_TC17,Edge,,List/Grid không có sản phẩm nào có Weight khớp,,Display Style = List hoặc Grid,1. Kiểm tra storefront khi không có data khớp.,Không có product nào trong khoảng hiển thị,Field ẩn hoàn toàn (không hiển thị record nào).,"<cần confirm>: rủi ro kế thừa — có thể hiển thị chữ ""null"" thay vì ẩn field, hoặc dư 1 record dạng ""{max} and More"" (bug đã xác nhận NG ở Sale Percentage/Width)"
+FNWGT_TC18,UI,,3 option hiển thị,,,1. Kiểm tra Display Style.,,"3 option: Slider - input, List, Grid. Slider - input active mặc định (viền cam).","<cần confirm>: chưa xác nhận dropdown chỉ đúng 3 giá trị hay thừa option Swatch (đối chiếu bug đã xác nhận ở Sale Percentage/Width)"
+FNWGT_TC19,Happy,Show range slider,Toggle OFF,,Show range slider = ON,"1. Toggle OFF.
+2. Kiểm tra Preview.
+3. Kiểm tra Filter Settings.",,"- Preview: slider ẩn (chỉ còn input nếu Show range input = ON).
+- Slide handle color, Show tooltip, Tooltip color, Has slider steps ẩn/disabled.",
+FNWGT_TC20,Happy,,Toggle ON lại,,Show range slider = OFF,"1. Toggle ON.
+2. Kiểm tra Preview và Filter Settings.",,"- Preview: slider hiển thị lại.
+- Slide handle color, Show tooltip, Has slider steps visible trở lại.",
+FNWGT_TC21,UI,,Default state,,Display Style = Slider - input,1. Kiểm tra toggle.,,Toggle ON.,
+FNWGT_TC22,Happy,Slide handle color,Đổi màu,,- Show range slider = ON,"1. Click color swatch.
+2. Chọn màu mới.
+3. Kiểm tra Preview.",,"- Màu lưu thành công.
+- Preview: handle slider đổi màu mới.",
+FNWGT_TC23,Happy,Decimal Separator,Đổi separator,,,"1. Mở dropdown, chọn option khác (dấu phẩy).
+2. Kiểm tra Preview.",,"- Setting lưu thành công.
+- Preview: giá trị Weight hiển thị đúng format separator mới.",
+FNWGT_TC24,UI,,Default value,,,1. Kiểm tra dropdown.,,"Mặc định ""No separator (E.g. 1000)"".",
+FNWGT_TC25,Happy,Show tooltip of range slider,Uncheck,,Show tooltip of range slider = checked,"1. Uncheck.
+2. Kiểm tra Preview và field Tooltip color.",,"- Preview: tooltip ẩn khỏi slider handles.
+- Tooltip color field ẩn/disabled.",
+FNWGT_TC26,UI,,Default state,,Show range slider = ON,1. Kiểm tra checkbox.,,Checked.,
+FNWGT_TC27,Happy,Tooltip color,Đổi màu,,Show tooltip of range slider = checked,"1. Click color swatch.
+2. Chọn màu mới.
+3. Kiểm tra Preview.",,"- Màu lưu thành công.
+- Preview: tooltip trên slider handle đổi màu mới.",
+FNWGT_TC28,Happy,Has slider steps,Uncheck,,Has slider steps = checked,"1. Uncheck.
+2. Kiểm tra Filter Settings panel và Preview.",,"- Amount of slider steps field ẩn.
+- Show step value checkbox ẩn.
+- Preview: slider không có step ticks và nhãn số.",
+FNWGT_TC29,Happy,,Check lại,,Has slider steps = unchecked,1. Check lại.,,"- Amount of slider steps field hiện lại.
+- Show step value checkbox hiện lại.",
+FNWGT_TC30,UI,,Default state,,Show range slider = ON,1. Kiểm tra checkbox.,,Checked.,
+FNWGT_TC31,Happy,Amount of slider steps,Đổi giá trị,,Has slider steps = checked,"1. Xóa giá trị hiện tại, nhập số mới.
+2. Kiểm tra Preview.",Amount = 6,"- Giá trị lưu thành công.
+- Preview: slider hiển thị đúng số step (6 khoảng → 7 ticks).",
+FNWGT_TC32,Negative,,Nhập 0,,Has slider steps = checked,"1. Nhập Amount = 0.
+2. Click [Save Changes].",Amount = 0,"Lỗi: giá trị không hợp lệ, không cho phép lưu.","<cần confirm>: sheet gốc mô tả rule nhưng chưa có bằng chứng actual rõ ràng (xem spec mục 5)"
+FNWGT_TC33,Negative,,Nhập số âm,,Has slider steps = checked,1. Nhập Amount = -2 và thử save.,Amount = -2,"Lỗi: giá trị không hợp lệ, không cho phép lưu.","<cần confirm>: xem TC32"
+FNWGT_TC34,Negative,,Nhập chữ,,Has slider steps = checked,1. Nhập Amount = ""abc"" và thử save.,Amount = ""abc"",Field chỉ chấp nhận số nguyên dương; không cho lưu giá trị chữ.,
+FNWGT_TC35,UI,,Default value,,Has slider steps = checked,1. Kiểm tra giá trị mặc định.,,Giá trị mặc định = 4.,
+FNWGT_TC36,Happy,Show step value,Uncheck,,Has slider steps = checked; Show step value = checked,"1. Uncheck.
+2. Kiểm tra Preview.",,"- Preview: nhãn số dưới slider ẩn.
+- Slider vẫn giữ step ticks.",
+FNWGT_TC37,Happy,Show range input,Toggle OFF,,Show range input = ON,"1. Toggle OFF.
+2. Kiểm tra Preview và Filter Settings.",,"- Preview: input boxes ẩn.
+- Show placeholder text, Placeholder text, Unit Display Option ẩn/disabled.",
+FNWGT_TC38,Happy,,Toggle ON lại,,Show range input = OFF,"1. Toggle ON.
+2. Kiểm tra Preview và Filter Settings.",,"- Preview: input boxes hiển thị lại.
+- Show placeholder text, Placeholder text, Unit Display Option visible trở lại.",
+FNWGT_TC39,UI,,Default state,,Display Style = Slider - input,1. Kiểm tra toggle.,,Toggle ON.,
+FNWGT_TC40,Happy,Show placeholder text,Uncheck,,Show range input = ON; Show placeholder text = checked,"1. Uncheck.
+2. Kiểm tra field Placeholder text và Preview.",,"- Placeholder text field ẩn.
+- Preview: input boxes không hiển thị placeholder khi trống.",
+FNWGT_TC41,Happy,Placeholder text,Đổi giá trị,,Show range input = ON; Show placeholder text = checked,"1. Xóa giá trị mặc định, nhập text mới.
+2. Kiểm tra Preview.",Placeholder = ""Min - Max"","- Giá trị lưu thành công.
+- Preview: input boxes hiển thị placeholder mới khi trống.",
+FNWGT_TC42,UI,,Default value,,Show range input = ON; Show placeholder text = checked,1. Kiểm tra giá trị mặc định.,,Mặc định: {{From}} - {{To}}.,
+FNWGT_TC43,Happy,Unit Display Option,Đổi option,,Show range input = ON,"1. Mở dropdown, chọn option khác.
+2. Kiểm tra Preview.",,"- Setting lưu thành công.
+- Preview: vị trí đơn vị (KGS) đổi đúng theo option đã chọn.",
+FNWGT_TC44,UI,,Default value,,Show range input = ON,1. Kiểm tra dropdown.,,Mặc định: Inside input.,
+FNWGT_TC45,Happy,Range slider & Range input order,Chọn input on top,,Show range slider = ON; Show range input = ON,"1. Chọn ""input on top"".
+2. Kiểm tra Preview.",,"- Setting lưu thành công.
+- Preview: input boxes hiển thị phía trên slider.",
+FNWGT_TC46,UI,,Default value,,Show range slider = ON; Show range input = ON,1. Kiểm tra lựa chọn mặc định.,,Option ""slider on top"" được chọn mặc định.,
+FNWGT_TC47,Edge,Setup dynamic filter,Bật ON,,Setup dynamic filter = OFF,"1. Toggle ON.
+2. Save Changes.
+3. Kiểm tra storefront khi search/category thay đổi.",,2. Storefront: Weight filter range tự động thu hẹp theo sản phẩm hiện có trong kết quả tìm kiếm.,"<cần confirm>: cơ chế chính xác chưa rõ — tự thu hẹp dựa trên search keyword hiện tại, Category Page đang xem, hay cả 2 (xem spec mục 6.6)"
+FNWGT_TC48,UI,,Default state,,,1. Kiểm tra toggle.,,Toggle OFF (mặc định) + icon tooltip (?) hiển thị.,
+FNWGT_TC49,Edge,Sort Order,Field có tồn tại trên UI không,,,1. Rà toàn bộ Filter Settings tìm field Sort Order (Lowest→Highest / Highest→Lowest / Manual order).,,"Field Sort Order hiển thị, default = Lowest→Highest.","<cần confirm>: sheet gốc KHÔNG có case riêng cho field này nhưng để lại note lạc gợi ý CÓ tồn tại (""Sai thứ tự, hiện tại đang là H-L, L-H, Manual order"" — relocate từ case Decimal Separator, xem spec mục 6.9). Case này viết theo giả thuyết field tồn tại, cần xác nhận lại với BA/ảnh Figma thật."
+FNWGT_TC50,Happy,Hide on customer group,Chọn 1 customer group,,Có ít nhất 1 customer group tồn tại,"1. Click [Edit].
+2. Chọn 1 group, xác nhận.
+3. Save Changes.
+4. Đăng nhập storefront bằng account thuộc group đã chọn.",,"- Admin: hiển thị ""1 selected"".
+- Storefront: Weight filter không hiển thị với customer thuộc group đó.","<cần confirm>: rủi ro kế thừa — bug đã xác nhận NG ở Sale Percentage/Width: storefront vẫn hiển thị filter dù account thuộc group bị hide"
+FNWGT_TC51,Edge,,BC xoá customer group đã chọn,,Filter Weight đã ẩn với ≥1 customer group,"1. Xóa customer group đó trong BC, trigger sync.
+2. Mở lại popup Hide on customer group.",Customer group đã chọn bị xoá bên BC,Số lượng hiển thị ở popup cập nhật đúng (giảm số selected).,"<cần confirm>: rủi ro kế thừa — bug đã xác nhận NG ở Sale Percentage/Width: popup không update số lượng customer group"
+FNWGT_TC52,UI,,Default state,,,1. Kiểm tra field.,,"- Hiển thị ""0 selected"".
+- Button [Edit] màu cam visible.",
+FNWGT_TC53,Happy,Display tooltip,Toggle OFF,,Display tooltip = ON,"1. Toggle OFF.
+2. Save Changes.
+3. Kiểm tra storefront.",,3. Icon tooltip (?) không hiển thị cạnh tiêu đề Weight filter.,
+FNWGT_TC54,UI,,Default state,,Appearance Settings visible,1. Kiểm tra toggle.,,Toggle ON.,
+FNWGT_TC55,Happy,Tooltip content,Đổi nội dung,,Display tooltip = ON,"1. Xóa nội dung, nhập text mới.
+2. Save Changes.
+3. Hover icon (?) trên storefront.",Tooltip = ""Filter by product weight (KGS)"",3. Hover hiển thị đúng nội dung mới.,
+FNWGT_TC56,UI,,Default value,,Display tooltip = ON,1. Kiểm tra field.,,Field hiển thị text mặc định mô tả về Weight filter.,
+FNWGT_TC57,Happy,Content View,Đổi option,,Appearance Settings visible,"1. Chọn option khác.
+2. Save Changes.
+3. Kiểm tra storefront.",,3. Weight filter hiển thị đúng content view đã chọn.,
+FNWGT_TC58,UI,,Default value,,Appearance Settings visible,1. Kiểm tra dropdown.,,Mặc định: Scrollable.,
+FNWGT_TC59,Happy,Collapse / Expand (Desktop) / (Mobile),Desktop = Collapse,,Appearance Settings visible,"1. Chọn Collapse (On Desktop).
+2. Save Changes.
+3. Kiểm tra Desktop storefront.",,3. Weight filter ở trạng thái collapsed (chỉ hiện title + toggle mở rộng).,
+FNWGT_TC60,Happy,,Mobile = Collapse,,Appearance Settings visible,"1. Chọn Collapse (On Mobile).
+2. Save Changes.
+3. Kiểm tra Mobile storefront.",,3. Weight filter ở trạng thái collapsed.,
+FNWGT_TC61,UI,,Default value,,Appearance Settings visible,1. Kiểm tra cả 2 dropdown.,,"- (On Desktop): Expand (mặc định).
+- (On Mobile): Expand (mặc định).",
+FNWGT_TC62,Happy,Show search box on desktop / mobile,Desktop = ON,,Show search box on desktop = OFF,"1. Toggle ON.
+2. Save Changes.
+3. Kiểm tra Desktop storefront.",,3. Search box hiển thị trong Weight filter.,
+FNWGT_TC63,Happy,,Mobile = ON,,Show search box on mobile = OFF,"1. Toggle ON.
+2. Save Changes.
+3. Kiểm tra Mobile storefront.",,3. Search box hiển thị trong Weight filter.,
+FNWGT_TC64,UI,,Default value,,Appearance Settings visible,1. Kiểm tra cả 2 toggle.,,"- On desktop: OFF (mặc định).
+- On mobile: OFF (mặc định).",
+FNWGT_TC65,Happy,Button [Save Changes],Lưu thành công,,Tất cả required field đã điền hợp lệ,"1. Cấu hình các setting cho Weight filter.
+2. Click [Save Changes].
+3. Reload page.
+4. Kiểm tra storefront.",,"2. Toast success hiển thị.
+3. Settings persist sau reload.
+4. Storefront phản ánh đúng settings mới.",
+FNWGT_TC66,Negative,,Title trống,,Field Title đang trống,1. Click [Save Changes].,Title = (rỗng),"Lỗi validation hiển thị, không lưu thành công.",
+FNWGT_TC67,Happy,Button [Save as template],Lưu template,,Settings hợp lệ,"1. Cấu hình settings.
+2. Click [Save as template].",,"- Template lưu thành công.
+- Template có thể tái sử dụng khi tạo filter mới.",
+,,=== EDIT FILTER NODE - WEIGHT ===,,,,,,,
+FNWGT_TC68,Happy,Navigation,Mở đúng Edit screen,,Filter Weight đã tồn tại,"1. Vào danh sách filter node.
+2. Click filter ""Weight"".",,"Mở Edit screen, panel title = ""Weight"", load đúng data hiện có của filter này.",
+FNWGT_TC69,Edge,,Nhiều filter cùng tồn tại — không lẫn data,,Filter Weight và Depth cùng tồn tại,"1. Mở Edit Depth, ghi nhận giá trị.
+2. Quay lại danh sách, mở Edit Weight.
+3. Kiểm tra toàn bộ field.",,"3. Toàn bộ field hiển thị đúng data của Weight (range KGS), không lẫn giá trị từ Depth (cm).",
+FNWGT_TC70,Happy,Pre-fill General Settings,Title / color / Alignment,,"Filter Weight đã lưu Title=""Weight (KGS)"", color khác default, Alignment=Center","1. Mở Edit Weight, kiểm tra 3 setting.",,"Title, color, Alignment hiển thị đúng giá trị đã lưu, không reset về default.",
+FNWGT_TC71,Happy,Pre-fill Display Style,Không reset default,,Filter Weight đã lưu Display Style=List,"1. Mở Edit Weight, kiểm tra Display Style.",,Hiển thị đúng List (không reset về Slider-input default).,
+FNWGT_TC72,Happy,Pre-fill Slider sub-settings,Show range slider / Slide handle color,,Filter Weight đã lưu Show range slider=OFF,"1. Mở Edit Weight, kiểm tra toggle và color swatch.",,"Hiển thị đúng giá trị đã lưu (slider ẩn trên Preview, không hiện lại mặc định).",
+FNWGT_TC73,Happy,,Decimal Separator,,Filter Weight đã lưu Decimal Separator khác default,"1. Mở Edit Weight, kiểm tra dropdown.",,Hiển thị đúng giá trị đã lưu.,
+FNWGT_TC74,Happy,,Show tooltip / Tooltip color,,Filter Weight đã lưu Show tooltip=unchecked,"1. Mở Edit Weight, kiểm tra checkbox và color.",,Hiển thị unchecked đúng như đã lưu; Tooltip color field ẩn tương ứng.,
+FNWGT_TC75,Happy,,Has slider steps / Amount / Show step value,,"Filter Weight đã lưu Amount=6, Show step value=unchecked","1. Mở Edit Weight, kiểm tra 3 setting.",,"Has slider steps=checked, Amount=6, Show step value=unchecked — đúng giá trị đã lưu, không reset về default (4, checked).",
+FNWGT_TC76,Happy,,Show range input / placeholder / Unit Display Option,,"Filter Weight đã lưu Placeholder=""Min kg - Max kg""","1. Mở Edit Weight, kiểm tra 4 setting.",,Hiển thị đúng giá trị đã lưu cho cả 4 field; đơn vị KGS hiển thị đúng vị trí theo Unit Display Option.,
+FNWGT_TC77,Happy,,Range slider & Range input order,,Filter Weight đã lưu order=input on top,"1. Mở Edit Weight, kiểm tra Preview.",,"Preview hiển thị input boxes phía trên slider, đúng order đã lưu.",
+FNWGT_TC78,Happy,Pre-fill Setup dynamic filter,Không reset default,,Filter Weight đã lưu Setup dynamic filter=ON,"1. Mở Edit Weight, kiểm tra toggle.",,Hiển thị ON đúng như đã lưu.,
+FNWGT_TC79,Happy,Pre-fill Hide on customer group,Đúng số group đã ẩn,,Filter Weight đã ẩn với 2 customer group,"1. Mở Edit Weight, kiểm tra setting.",,"Hiển thị ""2 selected"" đúng số đã lưu.",
+FNWGT_TC80,Happy,Pre-fill Appearance Settings,Toàn bộ setting,,Filter Weight đã lưu Appearance setting khác default,"1. Mở Edit Weight, kiểm tra toàn bộ Appearance Settings.",,"Tất cả toggle/dropdown hiển thị đúng giá trị đã lưu, không reset default.",
+FNWGT_TC81,Happy,Display Style,Đổi Display Style khi đã có data pre-loaded,,Filter Weight đã lưu Display Style=Slider-input (đã tồn tại),"1. Mở Edit Weight.
+2. Đổi Display Style sang List.
+3. Kiểm tra Preview và Filter Settings.",,"- Option List active.
+- Preview: filter hiển thị dạng danh sách.
+- Toàn bộ setting chỉ dành cho Slider ẩn/disabled đúng như khi tạo mới (state pre-loaded không gây lỗi cascade ẩn/hiện field).",
+FNWGT_TC82,Happy,Show range slider,Toggle OFF khi đã có data pre-loaded,,Filter Weight đã lưu Show range slider=ON (đã tồn tại),"1. Mở Edit Weight.
+2. Toggle Show range slider OFF.
+3. Kiểm tra Preview và Filter Settings.",,"- Preview: slider ẩn (chỉ còn input nếu Show range input = ON).
+- Slide handle color, Show tooltip, Tooltip color, Has slider steps ẩn/disabled đúng như khi tạo mới.",
+FNWGT_TC83,Happy,Has slider steps,Uncheck khi đã có data pre-loaded,,Filter Weight đã lưu Has slider steps=checked (đã tồn tại),"1. Mở Edit Weight.
+2. Uncheck Has slider steps.
+3. Kiểm tra Filter Settings panel và Preview.",,"- Amount of slider steps field ẩn.
+- Show step value checkbox ẩn.
+- Preview: slider không có step ticks và nhãn số.",
+FNWGT_TC84,Happy,Show range input,Toggle OFF khi đã có data pre-loaded,,Filter Weight đã lưu Show range input=ON (đã tồn tại),"1. Mở Edit Weight.
+2. Toggle Show range input OFF.
+3. Kiểm tra Preview và Filter Settings.",,"- Preview: input boxes ẩn.
+- Show placeholder text, Placeholder text, Unit Display Option ẩn/disabled đúng như khi tạo mới.",
+FNWGT_TC85,Happy,Hide on customer group,Chọn thêm group khi đã có selection sẵn,,Filter Weight đã ẩn với 2 customer group (đã tồn tại),"1. Mở Edit Weight.
+2. Click [Edit] tại Hide on customer group.
+3. Chọn thêm 1 group nữa (tổng 3).
+4. Save Changes.
+5. Đăng nhập storefront bằng account thuộc group mới thêm.",,"- Admin hiển thị ""3 selected"".
+- Storefront ẩn filter đúng với cả 3 group (bao gồm group mới thêm), không ảnh hưởng 2 group cũ.",
+FNWGT_TC86,Sync,Weight Range,Tự tính từ data BC đã sync,,- Products BC đều có Weight (required field) đã sync thành công,"1. Kiểm tra dropdown Weight Range trong Admin.
+2. Kiểm tra Preview slider.","BC Weight: min = 0.5 KGS, max = 50 KGS","- Admin dropdown: [0.5] - [50].
+- Preview: slider min = 0.5, max = 50.",
+FNWGT_TC87,Sync,,BC tăng giá trị max của 1 product,,"Weight Range đã sync lần trước = [0.5, 50]","1. Cập nhật Weight của product trong BC (max mới = 100 KGS).
+2. Trigger re-sync.
+3. Kiểm tra Admin dropdown và Preview.
+4. Kiểm tra storefront.",Weight max mới = 100 KGS,"- Admin dropdown: [0.5] - [100].
+- Preview và storefront: slider max cập nhật = 100 KGS.",
+FNWGT_TC88,Sync,,BC xoá/giảm product có Weight max,,"Weight Range đã sync với range [0.5, 100]","1. Xóa product có Weight = 100 KGS trong BC (hoặc sửa xuống thấp hơn).
+2. Trigger re-sync.
+3. Kiểm tra Admin dropdown và storefront.",,Range thu hẹp theo giá trị max mới còn lại (Admin + storefront khớp nhau).,
+FNWGT_TC89,Sync,,"Required field → range luôn tồn tại, không rơi vào rỗng do thiếu data",,"Tất cả product trong BC đều có Weight (bắt buộc), kể cả product chỉ dùng default=1.00","1. Xóa hết product custom Weight khác default (chỉ còn product Weight=1.00).
+2. Trigger sync.
+3. Mở Edit Weight, kiểm tra Weight Range.",EP: required→always exists,"Range vẫn hiển thị hợp lệ (VD [1.00, 1.00] nếu tất cả cùng default), KHÔNG rơi vào trạng thái null/rỗng như Width/Depth (vì Weight luôn có giá trị).",
+FNWGT_TC90,Sync,,Toàn bộ product bị xoá khỏi BC,,Filter Weight đã từng có range hợp lệ,"1. Xóa toàn bộ product trong BC (hoặc unpublish hết).
+2. Trigger sync.
+3. Mở Edit Weight, kiểm tra Weight Range.",EG: 0 product,"Hiển thị range rỗng/null hoặc cảnh báo ""không có sản phẩm"" — khác TC89 vì đây do KHÔNG còn product, không phải do thiếu giá trị Weight.","<cần confirm>: chưa xác nhận UI cụ thể khi rỗng (null, ẩn field, hay text cảnh báo)"
+FNWGT_TC91,Sync,,Sản phẩm mới thêm giữ default=1.00 chưa custom,,"Filter Weight đang có range = [5, 100]","1. Thêm product mới vào BC, không sửa Weight (giữ default=1.00).
+2. Trigger sync.
+3. Mở Edit Weight, kiểm tra Weight Range.",EP: new product default value,"Range mở rộng xuống min=1.00 (vì 1.00 < 5), thành [1.00, 100] — giá trị default cũng được tính vào range như giá trị thật.",
+FNWGT_TC92,Sync,,Product Type = Digital ẩn field Weight,,1 product Type = Digital tồn tại trong BC,"1. Tạo product Type = Digital (không có field Weight để nhập).
+2. Sync về hệ thống.
+3. Trên storefront, kiểm tra Weight Range và lọc theo Weight.",,"- Product Digital không được tính vào Weight Range/count.
+- Khi lọc theo Weight trên storefront, product Digital không xuất hiện trong bất kỳ khoảng nào.","<cần confirm>: fact BC ẩn field Weight khi Digital mới xác nhận ở độ tin cậy trung bình (xem docs/bigcommerce-platform-facts.md), cần re-verify"
+FNWGT_TC93,Sync,,Đổi Product Type từ Physical sang Digital (đã có Weight cũ),,"Product đang Type=Physical, có Weight custom, đã sync vào range hiện tại","1. Đổi Product Type sang Digital.
+2. Update product, trigger sync.
+3. Trên storefront, thực hiện lọc theo Weight cũ của product.",,"Sau sync, lọc theo Weight cũ của product KHÔNG còn trả về product này (field không còn áp dụng).","<cần confirm>: xem TC92"
+FNWGT_TC94,Sync,,Weight = 0,,,"1. Nhập Weight = 0 trong BC (nếu BC cho lưu).
+2. Save product, trigger sync.
+3. Kiểm tra staging/Admin và storefront.",Weight = 0,Nếu BC cho lưu: Weight Range/filter storefront bao gồm giá trị 0 KGS.,"<cần confirm>: chưa xác nhận BC có chặn Weight=0 như số âm hay coi là hợp lệ (xem spec mục 9.1 câu hỏi #7)"
+FNWGT_TC95,Sync,,Nhiều chữ số thập phân,,,"1. Nhập Weight = 1.123456 trong BC.
+2. Save product, trigger sync.
+3. Kiểm tra staging và storefront.",Weight = 1.123456 KGS,Staging/storefront phản ánh đúng giá trị BC đã lưu (nguyên hoặc làm tròn theo giới hạn thập phân của BC).,"<cần confirm>: chưa xác nhận BC làm tròn bao nhiêu chữ số thập phân (xem spec mục 9.1 câu hỏi #8)"
+FNWGT_TC96,Sync,,Số rất lớn,,,"1. Nhập Weight = 999999.99 trong BC.
+2. Save product, trigger sync.
+3. Kiểm tra Weight Range max ở Admin và storefront.",Weight = 999999.99 KGS,"Range max cập nhật đúng giá trị, không lỗi hiển thị/tràn số.","<cần confirm>: chưa xác nhận BC có giới hạn max value không (xem spec mục 9.1 câu hỏi #8)"
+FNWGT_TC97,Sync,,Sync đang In Progress,,"Filter Weight đang hiển thị range cũ [0.5,50]","1. BC đổi Weight 1 product (max mới=100), trigger sync.
+2. Trong lúc batch sync đang chạy (In Progress), kiểm tra Admin Weight Range và storefront.",Batch sync hiện tại = In Progress,Admin/Storefront hiển thị data theo config cũ hay mới trong lúc đang sync — cần xác nhận theo pattern chung dự án.,"<cần confirm>: câu hỏi Loại 2 đã ghi nhận chung ở docs/bigcommerce-platform-facts.md mục 4, áp dụng lại cho Weight Range"
+FNWGT_TC98,Sync,,Batch sync gần nhất Failed,,"Filter Weight đang hiển thị range [0.5,50]","1. BC đổi Weight 1 product.
+2. Trigger sync nhưng để batch fail (giả lập lỗi).
+3. Kiểm tra Admin Weight Range và storefront.",Batch sync = Failed,"Admin/Storefront giữ nguyên range cũ (data lần sync Success gần nhất), không hiển thị data lỗi/rỗng.","<cần confirm>: chưa có bằng chứng rõ trong spec, cần xác nhận BA"
+FNWGT_TC99,Sync,,Data BC đổi nhưng chưa trigger sync lại (stale),,"Filter Weight đang hiển thị range [0.5,50], sync gần nhất Success","1. BC đổi Weight 1 product (max mới=100), KHÔNG trigger sync.
+2. Kiểm tra Admin Weight Range và storefront ngay sau đó.","BC đã đổi data, sync chưa chạy lại","Admin dropdown và storefront vẫn hiển thị range CŨ [0.5,50], chưa phản ánh thay đổi mới cho tới khi sync chạy lại.",
+FNWGT_TC100,Sync,,Sync độc lập trong lúc Admin đang mở Edit,,Đang mở Edit Weight (chưa Save),"1. Đồng thời sửa Weight của 1 product trong BC, trigger sync.
+2. Admin Save Edit screen (không đụng field range), kiểm tra storefront.",,"Sync data Weight (BC→staging→storefront) hoạt động độc lập, range cập nhật đúng dù Admin đang mở Edit screen của filter này.",5W1H: When (sync độc lập)
+FNWGT_TC101,Sync,,Preview/Weight Range trên MH Edit có tự refresh real-time không,,"Đang mở Edit Weight, range hiển thị [0.5,50]","1. Trigger sync làm range đổi thành [0.5,100] (ở tab/thiết bị khác).
+2. Quay lại tab Edit Weight (không reload), kiểm tra Weight Range và Preview.",,"Xác nhận spec: Preview/Weight Range có tự refresh real-time, hay giữ snapshot tại thời điểm mở Edit cho đến khi reload trang.","<cần confirm>: 5W1H: Where (xem spec mục 9.3)"
+FNWGT_TC102,Sync,,Manual Sync và Schedule Sync trả kết quả Weight Range như nhau,,"Cùng 1 thay đổi Weight bên BC, chưa sync","1. Trigger Manual Sync, kiểm tra Weight Range.
+2. Revert lại thay đổi, lặp lại nhưng dùng Schedule Sync tới lượt Products.
+3. So sánh kết quả 2 lần.",,Weight Range cập nhật giống nhau bất kể trigger qua Manual Sync hay Schedule Sync.,
+FNWGT_TC103,Sync,Weight filter — kết quả lọc storefront,Lọc đúng theo range đã chọn,,Weight filter đã sync; storefront đang mở,"1. Trên storefront kéo slider Weight về khoảng [2, 10].
+2. Kiểm tra danh sách sản phẩm.",Weight range selected = 2–10 KGS,"Chỉ hiển thị sản phẩm có Weight từ 2 đến 10 KGS, số lượng khớp data BC.","<cần confirm>: rủi ro kế thừa — bug đã xác nhận NG ở Category/Special Offers/Sale Percentage/Width: list product không filter theo giá trị đã chọn"
+FNWGT_TC104,Sync,,Input From/To đồng bộ 2 chiều với slider,,Show range input = ON; storefront đang mở,"1. Nhập From = 5, To = 20 vào input boxes.
+2. Confirm / Apply.
+3. Kiểm tra danh sách sản phẩm.
+4. Kiểm tra slider handles.","From = 5 KGS, To = 20 KGS","- Chỉ hiển thị sản phẩm có Weight từ 5 đến 20 KGS.
+- Slider handles tự cập nhật về [5, 20].","<cần confirm>: bổ sung theo đối chiếu filter-node-height (rule tương đương đã được cover đầy đủ ở Height, backfill ngược cho Weight)"
+FNWGT_TC105,Sync,,Clear filter → reset toàn bộ,,Weight filter đang được áp dụng,"1. Clear / reset Weight filter trên storefront.
+2. Kiểm tra danh sách sản phẩm.
+3. Kiểm tra slider và input.",,"- Slider reset về full range.
+- Input fields reset về giá trị min/max.
+- Toàn bộ sản phẩm hiển thị lại.","<cần confirm>: bổ sung theo đối chiếu filter-node-height, xem TC104"
+FNWGT_TC106,Sync,,Input From > To khi nhập tay,,Show range input = ON; storefront đang mở,"1. Nhập From = 50, To = 5 (From > To).
+2. Confirm / Apply.","From = 50 KGS, To = 5 KGS","BC không cho phép apply filter với From > To, hoặc tự swap lại thành [5, 50].","<cần confirm>: chưa xác nhận cơ chế chặn hay tự swap; bổ sung theo đối chiếu filter-node-height, xem TC104"
+FNWGT_TC107,Sync,,Slider kéo 2 handles về cùng 1 điểm,,Show range slider = ON; storefront đang mở,"1. Kéo cả 2 handles về cùng giá trị (vd: cả 2 tại 5 KGS).
+2. Kiểm tra kết quả.",From = To = 5 KGS,"Hiển thị sản phẩm có Weight = 5 KGS (exact match), hoặc xử lý khác theo spec (prevent/swap).","<cần confirm>: chưa xác nhận cơ chế xử lý; bổ sung theo đối chiếu filter-node-height, xem TC104"
+FNWGT_TC108,Sync,,Merchandising — product Hidden có tính vào Range/filter không,,1 product có Weight trong range hiện tại nhưng bị set Hidden trên BC,"1. Trigger sync.
+2. Kiểm tra Weight Range và kết quả filter trên storefront có còn tính product Hidden này không.",,Product Hidden không tính vào Weight Range/count filter.,"<cần confirm>: suy luận theo pattern chung dự án, sheet gốc không có case riêng cho Weight (xem spec mục 9.2)"
+FNWGT_TC109,Sync,Setup dynamic filter (Edit — live impact),Admin đổi Amount of slider steps khi customer đang ở range tuỳ chỉnh,,"Customer đang chọn range [5,20] KGS trên storefront slider (Setup dynamic filter=ON)","1. Admin sửa Amount of slider steps từ 4 thành 8, Save, trigger sync.
+2. Customer (không reload) tiếp tục tương tác.
+3. Customer reload trang.",,"- Trước reload: vị trí slider customer giữ nguyên [5,20].
+- Sau reload: slider hiển thị số step mới, vị trí reset về mặc định (không giữ [5,20]).",
+FNWGT_TC110,Sync,,Weight Range co lại khi customer đang chọn range cũ ngoài phạm vi mới,,"Customer đang chọn range [80,100] KGS trên storefront, range cũ=[0.5,100]","1. Sản phẩm có Weight=100 bị xóa khỏi BC, trigger sync → range mới=[0.5,50].
+2. Customer (không reload) tiếp tục tương tác.
+3. Customer reload trang.",,"- Trước reload: customer vẫn ở range cũ (có thể trả về 0 kết quả vì vượt range mới).
+- Sau reload: slider tự động giới hạn theo range mới [0.5,50], reset về full range hoặc clamp giá trị hợp lý.",
+FNWGT_TC111,Happy,Button [Save Changes] (Edit),Sửa 1 field,,Filter Weight đã tồn tại,"1. Chỉ sửa Amount of slider steps.
+2. Save Changes.
+3. Reload, kiểm tra toàn bộ field.",Amount mới = 8,3. Amount cập nhật đúng; tất cả field khác giữ nguyên giá trị cũ.,
+FNWGT_TC112,Happy,,Sửa nhiều field cùng lúc,,Filter Weight đã tồn tại,"1. Sửa Title, Display Style, và Placeholder text.
+2. Save Changes.
+3. Reload, kiểm tra.",3 field thay đổi cùng lúc,"3. Cả 3 thay đổi được lưu đồng thời, không có field nào bị bỏ sót.",
+FNWGT_TC113,Negative,,Title trống,,Title đang trống,1. Click [Save Changes].,Title = (rỗng),"Lỗi validation hiển thị, không lưu thành công.",
+FNWGT_TC114,Edge,,Save khi không sửa gì (no-op),,Filter Weight đã tồn tại,"1. Mở Edit Weight.
+2. Click [Save Changes] ngay.",Chưa sửa gì,"Lưu thành công bình thường, không lỗi.",
+FNWGT_TC115,Happy,Button [Save as template] (Edit),Không ảnh hưởng filter gốc,,Settings hợp lệ,"1. Cấu hình lại 1 vài setting.
+2. Click [Save as template] (không Save Changes).",,Template mới được tạo với settings hiện tại; filter Weight gốc KHÔNG bị thay đổi cho đến khi Save Changes.,
+FNWGT_TC116,Happy,Navigation guard,Cảnh báo unsaved changes,,Filter Weight đã tồn tại,"1. Sửa Amount of slider steps (chưa Save).
+2. Click Back (←).",,"Hiển thị dialog cảnh báo có thay đổi chưa lưu, với option Discard/Save/Cancel.",
+FNWGT_TC117,Happy,,Chọn Discard,,Đang hiển thị warning dialog,"1. Chọn ""Discard"".
+2. Mở lại Edit Weight.",,Data hiển thị lại đúng giá trị gốc trước khi sửa.,
+FNWGT_TC118,Edge,,Reload/đóng tab khi có thay đổi chưa lưu,,"Đang sửa field, chưa Save","1. Sửa 1 field.
+2. Nhấn F5 hoặc đóng tab.",,Trình duyệt hiển thị cảnh báo native (nếu có implement) hoặc không có cảnh báo gì.,"<cần confirm>: chưa rõ có cảnh báo native browser hay không implement (xem spec mục 10)"
+FNWGT_TC119,Happy,Button [Delete],Confirm Delete,,Edit Weight đang mở,"1. Click Delete, confirm.
+2. Kiểm tra danh sách filter node.
+3. Trigger sync.
+4. Kiểm tra storefront.",,"2. Filter Weight biến mất khỏi danh sách admin.
+4. Sau sync, không còn hiển thị trên storefront.",
+FNWGT_TC120,Happy,,Cancel Delete,,Đang hiển thị confirm dialog,1. Click Cancel.,,"Filter Weight không bị xóa, vẫn còn nguyên.",
+FNWGT_TC121,UI,,Hiển thị action Delete,,Mở Edit Weight,1. Kiểm tra toàn bộ Edit screen tìm action Delete.,,Có button/icon Delete filter node (Create screen không có action này).,
+FNWGT_TC122,Edge,Concurrent edit,2 admin cùng edit đồng thời,,2 admin cùng mở Edit Weight,"1. Admin A sửa Title, Save.
+2. Admin B đã mở từ trước (chưa refresh), sửa Display Style, Save sau Admin A.",,"Xác nhận spec: thay đổi Admin B có ghi đè mất thay đổi Admin A không (lost update), hay có cảnh báo conflict.","<cần confirm>: xem spec mục 10"
+FNWGT_TC123,Edge,Đổi Title,Không vỡ liên kết,,Filter Weight đang được tham chiếu ở filter tree/storefront,"1. Đổi Title thành ""Product Weight"".
+2. Save.
+3. Kiểm tra filter tree và storefront.",,"3. Filter vẫn hoạt động đúng, không gãy link, không tạo filter trùng lặp.",

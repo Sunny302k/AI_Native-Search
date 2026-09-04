@@ -80,6 +80,8 @@ Mỗi test case gồm các cột:
 - **Payload**: nội dung request gửi đi (JSON body / query params / header liên quan). Với JSON nên giữ nguyên định dạng để dễ đọc/copy
 - **Expected result**: status code mong đợi \+ mô tả response body/thông báo lỗi mong đợi dựa trên tài liệu. Trường hợp tài liệu không nêu rõ → dùng tag `<cần confirm>`
 
+**Ngắn gọn, không trích dẫn ticket**: `Description` và `Expected result` viết ngắn gọn, đúng trọng tâm. Nghiêm cấm trích dẫn mã task/ticket/AC (vd `NS-2473`, `AC-4`) trong nội dung — kể cả trong lý do đính kèm `<cần confirm>`. Mô tả rule/hành vi bằng ngôn ngữ nghiệp vụ thuần, không dẫn nguồn.
+
 | ID          | Description                                        | Method                  | Payload                                                              | Expected result                                    |
 | :---------- | :------------------------------------------------- | :---------------------- | :------------------------------------------------------------------- | :------------------------------------------------- |
 | LOGIN\_TC01 | Đăng nhập thành công với thông tin hợp lệ | POST /api/v1/auth/login | {"email":"[user@abc.com](mailto:user@abc.com)","password":"Abc@1234"} | 200 OK, response trả về accessToken hợp lệ     |
@@ -91,8 +93,10 @@ Mỗi test case gồm các cột:
 
 - **File format**: CSV UTF-8 BOM
 - Mỗi cột được đặt trong dấu `"` để chống vỡ layout khi nội dung chứa dấu phẩy, dấu ngoặc hoặc xuống dòng
-- Sử dụng ký tự xuống dòng chuẩn (`\n`) khi cần xuống dòng trong một cell
-- **Naming**: `APIName_api-testcase.csv` (đứng riêng, không gắn userstoryID) hoặc `userstoryID_api-testcase.csv` khi API thuộc phạm vi 1 userstoryID (kebab/snake theo tên API, ví dụ: `login_api-testcase.csv`, `US1234_api-testcase.csv`). KHÔNG dùng tên `userstoryID_testcase.csv` — tên đó là file gộp chung của `create-testcases`/`create-permission-testcase`/`create-system-testcase`/`create-impact-testcase`, trùng tên sẽ ghi đè mất dữ liệu của nhau.
+- Khi cần xuống dòng trong 1 cell: dùng **ký tự ngắt dòng thật** (byte LF) bên trong cặp ngoặc kép của ô đó. NGHIÊM CẤM giả ngắt dòng bằng thẻ HTML `<br>` / `<br/>` / `<br />` hoặc chuỗi literal `\n` (2 ký tự `\` + `n`) — CSV là text thuần, Excel/Google Sheets không parse HTML nên sẽ hiển thị nguyên văn các ký tự đó trong ô
+- Ký tự ngắt dòng cuối mỗi record dùng CRLF (`\r\n`) theo đúng chuẩn RFC 4180, không dùng LF đơn
+- **Kiểm tra trước khi báo hoàn thành**: 3 byte đầu file đúng BOM `EF BB BF`; số lần xuất hiện chuỗi `<br` trong file bằng **0**, không có chuỗi literal `\n` trong nội dung ô; toàn bộ ký tự xuống dòng cuối record là CRLF; parse lại bằng 1 CSV reader chuẩn để xác nhận số record data đúng bằng số test case và mỗi record đủ 5 cột
+- **Naming**: `APIName_api-testcase.csv` (đứng riêng, không gắn userstoryID) hoặc `userstoryID_api-testcase.csv` khi API thuộc phạm vi 1 userstoryID (kebab/snake theo tên API, ví dụ: `login_api-testcase.csv`, `US1234_api-testcase.csv`). KHÔNG dùng tên `userstoryID_testcase.csv` — tên đó là file gộp chung của `create-functional-testcase`/`create-permission-testcase`/`create-system-testcase`/`create-impact-testcase`/`create-sync-testcase`, trùng tên sẽ ghi đè mất dữ liệu của nhau.
 - **Folder**: lưu trong `testcases/APIName` hoặc `test-cases/userstoryID` khi thuộc phạm vi 1 userstoryID (ví dụ: `testcases/login`, `test-cases/US1234`) — cùng thư mục với file test case gộp của userstoryID đó nếu có.
 
 ### Bước 5: Xuất file JSON để import vào Postman
@@ -173,9 +177,10 @@ pm.test("Message khớp tài liệu", function () {
 
 ## Ràng buộc
 
-- Chỉ thao tác trong folder LopAI, nghiêm cấm thao tác trên folder khác.
+- Chỉ thao tác trong folder dự án hiện tại (Native Search), nghiêm cấm thao tác trên folder khác.
 - Không được bịa kết quả mong đợi nếu tài liệu/người dùng không cung cấp đủ thông tin; dùng tag `<cần confirm>` để đánh dấu.
 - Luôn tuân thủ định dạng CSV UTF-8 BOM và cấu trúc 5 cột (ID, Description, Method, Payload, Expected result) để đảm bảo tính nhất quán.
 - Luôn xuất kèm file Postman Collection JSON v2.1 (UTF-8, không BOM), mỗi request có test script kiểm tra HTTP status code đúng theo Expected result; happy path dùng biến động Postman cho trường ngẫu nhiên/duy nhất.
 - Không bịa thêm endpoint, trường hay ràng buộc không có trong tài liệu.
+- Nghiêm cấm trích dẫn mã task/ticket/AC trong `Description`/`Expected result` — viết ngắn gọn, mô tả bằng ngôn ngữ nghiệp vụ thuần.
 

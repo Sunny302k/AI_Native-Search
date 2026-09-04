@@ -1,0 +1,227 @@
+﻿ID,Test Type,Test Objective,,,Preconditions,Test Steps,Input DB/Setting,Expected Result,Note
+,,=== ADD FILTER NODE - REVIEW RATINGS ===,,,,,,,
+FNRR_TC01,Happy,Button [Add Filter Node],Add Review Ratings node,,"Đang ở MH Create new filter tree
+Chưa có filter node nào","1. Click button [Add Filter Node].
+2. Tại popup, click card [Review Ratings].
+3. Click button [Add Filter Node] trong card.",,"3. Quay lại MH [Create new filter tree]; Filter Nodes panel có thêm mục [Review Ratings]; Preview hiển thị dữ liệu Review Ratings.",
+FNRR_TC02,UI,Template card [Review Ratings],Hiển thị đúng design,,Đang ở popup Add filter node,1. Kiểm tra hiển thị card [Review Ratings].,,"Card hiển thị đúng trong nhóm [Product filter] theo design.",
+FNRR_TC03,UI,,Nội dung card,,Đang ở popup Add filter node,1. Kiểm tra nội dung card.,,"Card hiển thị đúng: thumbnail, title, mô tả ngắn, button [Add Filter Node].",
+FNRR_TC04,UI,,Search khớp keyword,,Đang ở popup Add filter node,"1. Nhập keyword ""Review Ratings"" vào ô search.
+2. Kiểm tra kết quả.",,Card vẫn hiển thị đúng trong kết quả.,
+FNRR_TC05,UI,,Search không khớp,,Đang ở popup Add filter node,"1. Nhập keyword không liên quan.
+2. Kiểm tra kết quả.",,Card không hiển thị; popup hiển thị empty state / no result.,
+FNRR_TC06,UI,Title,Default value lúc tạo mới,,,1. Kiểm tra field Title.,,"Mặc định ""Review Ratings"".",
+FNRR_TC07,UI,Title text color,Default value lúc tạo mới,,,1. Kiểm tra color swatch.,,Màu mặc định.,
+FNRR_TC08,UI,Title alignment,Default (Left) lúc tạo mới,,,1. Kiểm tra trạng thái mặc định.,,Option Left active.,
+FNRR_TC09,UI,Display Style,Default = Star lúc tạo mới,,,1. Kiểm tra giá trị mặc định.,,Display Style = Star được chọn mặc định.,
+FNRR_TC10,UI,Star color,Default value lúc tạo mới,,,1. Kiểm tra color swatch.,,Màu mặc định (vàng).,"Field xác nhận từ ảnh UI Figma thật, không có trong sheet Add gốc — xem spec mục 4."
+FNRR_TC11,UI,Empty star color line,Default value lúc tạo mới,,,1. Kiểm tra color swatch.,,Màu mặc định (xám nhạt).,"Field xác nhận từ ảnh UI Figma thật, không có trong sheet Add gốc — xem spec mục 4."
+FNRR_TC12,UI,Option select type,Default value lúc tạo mới,,,1. Kiểm tra dropdown.,,"`<cần confirm>` — dự kiến default ""Selected ratings and above"" (khớp 2/3 khung ảnh UI thật).","<cần confirm>: xem spec mục 5, câu hỏi #3"
+FNRR_TC13,UI,Sort order,Default value lúc tạo mới,,,1. Kiểm tra field.,,"Mặc định ""Highest - Lowest"".",
+FNRR_TC14,UI,Hide on customer group,Default state lúc tạo mới,,,1. Kiểm tra field.,,"""0 selected""; button [Edit] hiển thị.",
+FNRR_TC15,UI,Appearance - Display tooltips,Default state lúc tạo mới,,,1. Kiểm tra toggle.,,Toggle ON.,
+FNRR_TC16,UI,Appearance - Collapse/Expand,Default value cả Desktop/Mobile lúc tạo mới,,,1. Kiểm tra 2 dropdown.,,Desktop và Mobile đều mặc định Expand.,
+FNRR_TC17,UI,Button [Save Changes],Disable khi chưa cấu hình đủ,,Title = [rỗng],1. Quan sát trạng thái nút trước khi hoàn tất cấu hình.,,Nút disable nếu field required chưa hợp lệ.,
+FNRR_TC18,Happy,,Save thành công → quay lại Create new filter tree,,Đã cấu hình hợp lệ lúc Add,1. Click Save Changes.,,Lưu thành công; quay lại MH Create new filter tree; Filter Nodes panel có node Review Ratings.,
+,,=== EDIT FILTER NODE - REVIEW RATINGS ===,,,,,,,
+FNRR_TC19,Happy,Mở màn Edit,Load đúng cấu hình đã lưu,,Đã có filter node Review Ratings trong Filter Nodes panel,"1. Tại Filter Nodes panel chọn node Review Ratings.
+2. Click icon Edit.",,"2. Hiển thị MH [Edit filter node - Review Ratings], load đúng toàn bộ cấu hình đã lưu (Title, Display Style, Star color, Empty star color line, Option select type, Sort order, Appearance).",
+FNRR_TC20,Happy,Panel trái - danh sách node,Chuyển node không lẫn dữ liệu,,"Filter tree có ≥2 node, trong đó có Review Ratings","1. Đang edit 1 node khác.
+2. Click chọn node Review Ratings ở panel trái.",,"2. Nội dung bên phải đổi đúng sang cấu hình node Review Ratings, không lẫn dữ liệu node trước đó.",
+FNRR_TC21,Happy,Title,Giá trị đã lưu load đúng,,"Node đã lưu Title tuỳ chỉnh (khác mặc định ""Review Ratings"")","1. Mở màn Edit.
+2. Quan sát field Title.","Title đã lưu = ""Customer Rating""","2. Title hiển thị đúng ""Customer Rating"", không phải mặc định.",
+FNRR_TC22,Happy,,"Sửa Title, Preview cập nhật",,Đang ở MH Edit,"1. Sửa nội dung Title.
+2. Quan sát Preview.",,"2. Preview hiển thị Title mới ngay lập tức, chưa cần Save.",
+FNRR_TC23,Negative,,Không cho save khi rỗng,,Đang ở MH Edit,"1. Xoá trắng Title.
+2. Click Save Changes.",Title = rỗng,2. Không cho save; hiển thị lỗi required.,
+FNRR_TC24,Happy,Title text color,"Màu đã lưu load đúng, đổi màu mới",,Node đã lưu 1 màu Title tuỳ chỉnh,"1. Mở màn Edit, quan sát màu hiện tại.
+2. Chọn màu mới.
+3. Quan sát Preview.",,"1. Màu hiển thị đúng đã lưu.
+3. Title đổi màu đúng theo màu mới.",
+FNRR_TC25,Happy,Title alignment,"Alignment đã lưu load đúng, đổi vị trí",,Node đã lưu Title alignment = Right,"1. Mở màn Edit, quan sát alignment.
+2. Đổi sang Left/Center.
+3. Quan sát Preview.",,"1. Alignment hiển thị đúng Right (đã lưu).
+3. Title căn đúng vị trí mới.",
+FNRR_TC26,Happy,Display Style,Giá trị đã lưu load đúng,,Node đã lưu Display Style = List,"1. Mở màn Edit.
+2. Quan sát Display Style.",,"2. Hiển thị đúng ""List"" (đã lưu), không phải mặc định ""Star"".",
+FNRR_TC27,Happy,,Chuyển sang Star,,Display Style đang khác Star,"1. Chọn Star.
+2. Save.
+3. Quan sát Preview và storefront.",,3. Preview và storefront hiển thị đúng giao diện dạng star.,
+FNRR_TC28,Happy,,Chuyển sang List,,Display Style đang khác List,"1. Chọn List.
+2. Save.
+3. Quan sát Preview và storefront.",,3. Preview và storefront hiển thị đúng giao diện dạng list.,
+FNRR_TC29,Happy,,Chuyển sang Grid,,Display Style đang khác Grid,"1. Chọn Grid.
+2. Save.
+3. Quan sát Preview và storefront.",,3. Preview và storefront hiển thị đúng giao diện dạng grid.,
+FNRR_TC30,Edge,,"List render với nhiều rating option",Layout ổn định,"Display Style = List; đủ dữ liệu rating cho cả 5 bucket","1. Chọn List, Save.
+2. Quan sát Preview/storefront.",,2. Layout list không vỡ; hiển thị đủ 5 dòng rating.,"<cần confirm>: case gốc (sheet Add #17) SKIP, chưa từng thực thi"
+FNRR_TC31,Edge,,Grid render với nhiều rating option,Layout ổn định,"Display Style = Grid; đủ dữ liệu rating cho cả 5 bucket","1. Chọn Grid, Save.
+2. Quan sát Preview/storefront.",,"2. Layout grid không lệch cột, không overlap text.","<cần confirm>: case gốc (sheet Add #19) SKIP, chưa từng thực thi"
+FNRR_TC32,Happy,Star color,Giá trị đã lưu load đúng,,Node đã lưu 1 màu Star color tuỳ chỉnh,"1. Mở màn Edit.
+2. Quan sát Star color.",,2. Hiển thị đúng màu đã lưu.,<cần confirm>: field mới phát hiện từ ảnh UI Figma thật — xem spec mục 4
+FNRR_TC33,Happy,,Đổi màu mới → Preview cập nhật,,Đang ở MH Edit,"1. Chọn màu mới cho Star color.
+2. Quan sát Preview.",,"2. Sao đã rate trong Preview đổi đúng theo màu mới, áp dụng ở cả 3 Display Style.",<cần confirm>: field mới phát hiện từ ảnh UI Figma thật — xem spec mục 4
+FNRR_TC34,Happy,Empty star color line,Giá trị đã lưu load đúng,,Node đã lưu 1 màu Empty star color line tuỳ chỉnh,"1. Mở màn Edit.
+2. Quan sát Empty star color line.",,2. Hiển thị đúng màu đã lưu.,<cần confirm>: field mới phát hiện từ ảnh UI Figma thật — xem spec mục 4
+FNRR_TC35,Happy,,Đổi màu mới → Preview cập nhật,,Đang ở MH Edit,"1. Chọn màu mới cho Empty star color line.
+2. Quan sát Preview.",,2. Phần sao/viền rỗng chưa rate trong Preview đổi đúng theo màu mới.,<cần confirm>: field mới phát hiện từ ảnh UI Figma thật — xem spec mục 4
+FNRR_TC36,Happy,Option select type,Giá trị đã lưu load đúng,,"Node đã lưu Option select type = ""Selected ratings only""","1. Mở màn Edit.
+2. Quan sát Option select type.",,"2. Hiển thị đúng ""Selected ratings only"" (đã lưu), không phải mặc định ""Selected ratings and above"".",<cần confirm>: tên field/giá trị dựa theo ảnh UI Figma + sticky note — xem spec mục 5
+FNRR_TC37,Happy,,"Switch ""and above"" sang ""only""",,"Node đang là ""Selected ratings and above""","1. Chọn ""Selected ratings only"".
+2. Save.",,2. Save thành công.,<cần confirm>: xem spec mục 5
+FNRR_TC38,Happy,,"Switch ""only"" sang ""and above""",,"Node đang là ""Selected ratings only""","1. Chọn ""Selected ratings and above"".
+2. Save.",,2. Save thành công.,<cần confirm>: xem spec mục 5
+FNRR_TC39,Happy,,"Storefront: ""and above"" lọc cumulative",Chọn 3★,"Option select type = ""and above""; đã publish; có product rating 3★, 4★, 5★","1. Truy cập storefront.
+2. Chọn filter 3★.
+3. Kiểm tra kết quả.",,"3. `<cần confirm>` — dự kiến hiển thị product rating 3★ TRỞ LÊN (gồm cả 4★, 5★).",<cần confirm>: xem spec mục 5
+FNRR_TC40,Happy,,"Storefront: ""only"" lọc exact-match",Chọn 3★,"Option select type = ""only""; đã publish; có product rating 3★, 4★, 5★","1. Truy cập storefront.
+2. Chọn filter 3★.
+3. Kiểm tra kết quả.",,"3. `<cần confirm>` — dự kiến chỉ hiển thị đúng product rating 3★, KHÔNG gồm 4★/5★.",<cần confirm>: xem spec mục 5
+FNRR_TC41,UI,,"Đối chiếu nghi vấn giá trị ""Single"" ở khung Grid",,Display Style = Grid,"1. Mở dropdown Option select type khi Display Style = Grid.
+2. Kiểm tra danh sách giá trị.",,"`<cần confirm>` — khung Grid trên ảnh UI hiện giá trị ""Single"" thay vì ""and above/only""; cần xác nhận đây là artifact từ component chung hay giá trị hợp lệ thứ 3.",<cần confirm>: xem spec mục 5
+FNRR_TC42,Happy,Sort order,Giá trị đã lưu load đúng,,Node đã lưu Sort order = Lowest - Highest,"1. Mở màn Edit.
+2. Quan sát Sort order.",,"2. Hiển thị đúng ""Lowest - Highest"" (đã lưu), không phải mặc định ""Highest - Lowest"".",
+FNRR_TC43,Happy,,Popup hiển thị đủ option theo Figma note,,Click [Edit] tại Sort order,1. Quan sát popup Sort Order.,,"`<cần confirm>` — theo sticky note phải đủ 3 option (Highest-Lowest/Lowest-Highest/Manual); sheet Add gốc chỉ xác nhận thực thi 2 option, chưa verify Manual.",<cần confirm>: xem spec mục 7
+FNRR_TC44,Happy,,Chọn Lowest - Highest,,Popup Sort Order đang mở,"1. Chọn Lowest - Highest.
+2. Save.
+3. Kiểm tra storefront.",,3. 1★ hiển thị ở vị trí đầu tiên trong filter.,
+FNRR_TC45,Happy,,Chọn Highest - Lowest,,Popup Sort Order đang mở,"1. Chọn Highest - Lowest.
+2. Save.
+3. Kiểm tra storefront.",,3. 5★ hiển thị ở vị trí đầu tiên trong filter.,
+FNRR_TC46,Edge,,"Chọn Manual, kéo thả",,Popup Sort Order đang mở,"1. Chọn Manual (nếu có).
+2. Kéo thả đổi thứ tự 1 bucket.
+3. Save.
+4. Kiểm tra Preview/storefront.",,"4. `<cần confirm>` — option Manual chưa từng được sheet Add test, chưa thấy trên ảnh UI, cần xác nhận có tồn tại thật không.",<cần confirm>: xem spec mục 7
+FNRR_TC47,Happy,Hide on customer group,Load đúng selection đã lưu khi mở lại Edit,,Node đã lưu Hide on customer group cho 1 nhóm,"1. Mở màn Edit.
+2. Quan sát field.",,"2. Hiển thị đúng số lượng/tên đã chọn, không reset về rỗng.",
+FNRR_TC48,Happy,,Click [Edit] mở popup,,Đang ở MH Edit,1. Click button [Edit] tại Hide on customer group.,,1. Popup Select customer group hiển thị.,
+FNRR_TC49,Negative,,Chọn 1 group → ẩn đúng filter (Storefront),,Đã chọn customer group A và Save,"1. Đăng nhập storefront bằng account thuộc group A.
+2. Kiểm tra filter Review Ratings.",,2. Filter không hiển thị với customer thuộc group A.,"<cần confirm>: case gốc (sheet Add #44) SKIP, chưa từng thực thi"
+FNRR_TC50,Sync,,Customer bị remove khỏi customer group trên BC,,"Hide on customer group = Group A; Customer X thuộc Group A (filter đang bị ẩn với X); đã sync","1. Remove Customer X khỏi Group A trên BC.
+2. Chạy sync.
+3. Đăng nhập storefront bằng Customer X, kiểm tra filter.",Customer X: removed khỏi Group A,"3. Filter hiển thị lại bình thường với Customer X (không còn thuộc Group A).",
+FNRR_TC51,Happy,Hide on customer group - Popup,Search khớp 1 phần,,Popup đang mở,"1. Nhập 1 phần tên customer group.
+2. Kiểm tra kết quả.",,2. Hiển thị đúng dữ liệu khớp 1 phần.,
+FNRR_TC52,Happy,,Search khớp toàn phần,,Popup đang mở,"1. Nhập đầy đủ tên customer group.
+2. Kiểm tra kết quả.",,2. Hiển thị đúng dữ liệu khớp toàn phần.,
+FNRR_TC53,Happy,,Danh sách sync từ BigCommerce,,Popup đang mở,1. Kiểm tra danh sách hiển thị.,,1. Hiển thị đúng customer group được sync từ BC.,
+FNRR_TC54,Edge,,Customer group bị xoá bên BC không còn hiển thị trong popup,,Customer group đang có trong danh sách; vừa bị xoá bên BC + đã sync,"1. Mở lại popup Select customer group.
+2. Kiểm tra danh sách.",,2. Customer group đã xoá không còn hiển thị trong danh sách popup.,
+FNRR_TC55,Happy,Appearance - Display tooltips,Trạng thái + nội dung đã lưu load đúng,,Node đã lưu Display tooltip = ON kèm nội dung tuỳ chỉnh,"1. Mở màn Edit.
+2. Quan sát toggle và tooltip content.",,2. Toggle ON; nội dung đúng đã lưu.,
+FNRR_TC56,Happy,,Bật ON → hiển thị tooltip,,"Toggle OFF, tooltip content đã có nội dung","1. Bật toggle ON.
+2. Quan sát Preview.",,2. Tooltip hiển thị trên filter option.,
+FNRR_TC57,Happy,,Tắt OFF → ẩn tooltip,,Toggle đang ON,"1. Tắt toggle OFF.
+2. Quan sát Preview.",,2. Tooltip ẩn.,
+FNRR_TC58,Negative,,Không cho bật khi content rỗng,,"Tooltip content rỗng, toggle OFF",1. Bật toggle ON khi content rỗng.,Tooltip content = rỗng,1. Không cho phép bật; hiển thị cảnh báo.,
+FNRR_TC59,Edge,,Content rỗng → không hiển thị tooltip dù toggle ON,,Tooltip content rỗng (toggle đã bật từ trước),"1. Để trống tooltip content.
+2. Quan sát Preview và storefront.",Tooltip content = rỗng,2. Preview và storefront không hiển thị tooltip.,
+FNRR_TC60,Negative,,Giới hạn 255 ký tự,Vượt 255 ký tự,Tooltip content đang có nội dung,1. Nhập quá 255 ký tự.,Nội dung > 255 ký tự,"1. Giới hạn đúng 255 ký tự, không xô lệch layout.",
+FNRR_TC61,Happy,Appearance - Collapse/Expand (Desktop),Giá trị Desktop đã lưu load đúng,,Node đã lưu Desktop = Collapse,"1. Mở màn Edit.
+2. Quan sát Preview Desktop.",,2. Desktop hiển thị đúng Collapse (đã lưu).,
+FNRR_TC62,Happy,,Desktop Expand/Collapse hiển thị đúng,,Có rating options,"1. Set Expand, Save, quan sát.
+2. Set Collapse, Save, quan sát.",,"1. Filter mở sẵn, hiển thị đầy đủ danh sách rating.
+2. Filter thu gọn, chỉ hiển thị title/header.",
+FNRR_TC63,Happy,,Đổi trạng thái Desktop cập nhật preview realtime,,Đang ở Desktop preview,"1. Đổi Expand → Collapse.
+2. Quan sát.
+3. Đổi lại Collapse → Expand.",,"Preview cập nhật đúng ngay lập tức, không cần Save trước.",
+FNRR_TC64,Negative,,Collapse rồi Expand lại làm mất rating đã chọn,,Có rating đang được chọn trong Preview Desktop,"1. Chọn 1 rating bất kỳ.
+2. Collapse filter.
+3. Expand lại filter.",Rating 4★ đang được chọn,3. Rating 4★ vẫn giữ đúng trạng thái selected sau khi Expand lại.,<cần confirm>: case gốc đang NG — rating bị mất selected state sau Collapse/Expand
+FNRR_TC65,Happy,Appearance - Collapse/Expand (Mobile),Giá trị Mobile đã lưu load đúng,,Node đã lưu Mobile = Expand,"1. Mở màn Edit.
+2. Quan sát Preview Mobile.",,2. Mobile hiển thị đúng Expand (đã lưu).,
+FNRR_TC66,Happy,,Mobile Expand/Collapse hiển thị đúng,,Có rating options,"1. Chuyển Mobile preview.
+2. Set Expand, Save, quan sát.
+3. Set Collapse, Save, quan sát.",,"2. Filter mở sẵn, đầy đủ rating option.
+3. Filter thu gọn, chỉ hiển thị title.",
+FNRR_TC67,Happy,,Đổi trạng thái Mobile cập nhật preview realtime,,Đang ở Mobile preview,"1. Đổi Expand ↔ Collapse.
+2. Quan sát.",,Preview cập nhật đúng ngay lập tức.,
+FNRR_TC68,Happy,Appearance - Collapse/Expand,Desktop Expand / Mobile Collapse - độc lập,Desktop Expand + Mobile Collapse,Có rating options,"1. Set Desktop = Expand, Mobile = Collapse.
+2. Save.
+3. Kiểm tra cả 2 preview.",,"3. Desktop mở sẵn; Mobile thu gọn; không ảnh hưởng lẫn nhau.",
+FNRR_TC69,Happy,,Desktop Collapse / Mobile Expand - độc lập,Desktop Collapse + Mobile Expand,Có rating options,"1. Set Desktop = Collapse, Mobile = Expand.
+2. Save.
+3. Kiểm tra cả 2 preview.",,3. Desktop thu gọn; Mobile mở sẵn.,
+FNRR_TC70,Happy,Storefront widget rendering theo Display Style,Star hiển thị dạng thu gọn,,"Display Style = Star, đã publish","1. Truy cập storefront.
+2. Kiểm tra hiển thị widget.",,"2. Widget hiển thị dạng thu gọn 1 dòng tổng hợp (VD ""5 stars (6)"") kèm chevron mở rộng.",<cần confirm>: xem spec mục 10
+FNRR_TC71,Happy,,List hiển thị đầy đủ,,"Display Style = List, đã publish","1. Truy cập storefront.
+2. Kiểm tra hiển thị widget.",,2. Widget hiển thị đầy đủ cả 5 dòng rating (5★→1★) kèm count riêng từng dòng.,<cần confirm>: xem spec mục 10
+FNRR_TC72,UI,Button [Save Changes],Disable khi chưa có thay đổi,,"Vừa mở màn Edit, chưa chỉnh gì",1. Quan sát trạng thái nút.,,Nút ở trạng thái disable.,
+FNRR_TC73,Happy,,Enable khi sửa 1 field bất kỳ,,Đang ở màn Edit,"1. Sửa 1 field bất kỳ.
+2. Quan sát nút.",,Nút chuyển sang enable.,
+FNRR_TC74,Happy,,Double-click không tạo lưu trùng,,"Có thay đổi hợp lệ, Save Changes đang enable",1. Double-click liên tiếp nút Save Changes.,,Chỉ 1 request lưu được gửi; không tạo cấu hình trùng lặp.,
+FNRR_TC75,Negative,,Chặn save khi có field invalid,,Title đang bị xoá trắng,1. Click Save Changes.,Title = rỗng,Không cho save; hiển thị lỗi đúng tại field invalid.,
+FNRR_TC76,Happy,Điều hướng khi có unsaved changes,Popup cảnh báo + Discard/Cancel,,"Đang sửa dở dữ liệu ở node Review Ratings, chưa Save","1. Click [Back] hoặc chọn chuyển sang node khác.
+2. Ở popup cảnh báo, click [Discard].
+3. Lặp lại bước 1, lần này click [Cancel]/[Stay].",,"1. Hiển thị popup cảnh báo unsaved changes.
+2. Bỏ thay đổi chưa lưu, điều hướng tiếp theo yêu cầu ban đầu.
+3. Đóng popup, ở lại màn Edit với dữ liệu đang sửa dở còn nguyên.",
+FNRR_TC77,Happy,Button [Save to template],Lưu cấu hình hiện tại thành template,,Cấu hình node hợp lệ,1. Click button [Save to template].,,Lưu thành công; template mới xuất hiện ở tab [My Templates].,
+FNRR_TC78,Happy,Filter [Review Ratings] - Storefront,Product count hiển thị cạnh mỗi rating bucket,,"Đã sync data từ BC; đã publish filter tree","1. Truy cập storefront.
+2. Kiểm tra filter Review Ratings.",,2. Product count hiển thị cạnh mỗi rating (VD ★★★★★ (5)).,
+FNRR_TC79,Happy,,Product count = số product có average rating thuộc đúng bucket,,3 product có average rating 5★; đã sync,1. Kiểm tra count cạnh bucket 5★.,3 product với average 5★,1. Count hiển thị đúng = 3.,
+FNRR_TC80,Happy,,Filter by 5★ → chỉ hiển thị product rating 5★,,Đã sync; đã publish,"1. Truy cập storefront.
+2. Chọn filter 5★.
+3. Kiểm tra kết quả.",,3. Chỉ product có average rating 5★ hiển thị (bucket cao nhất nên không khác biệt and-above/only).,
+FNRR_TC81,Happy,,Kết hợp Review Ratings + Price filter,AND logic,Filter tree có cả 2 filter; đã publish,"1. Truy cập storefront.
+2. Chọn filter 5★.
+3. Thêm filter Price range.
+4. Kiểm tra kết quả.",,4. Chỉ product vừa rating 5★ vừa trong khoảng giá được chọn hiển thị.,
+FNRR_TC82,Happy,,Hiển thị đúng trên Search Result Page,,Filter tree gắn vào SRP; đã publish,"1. Search từ khoá bất kỳ.
+2. Kiểm tra filter panel.",,2. Filter hiển thị đúng style và rating values đã cấu hình.,
+FNRR_TC83,Happy,,Hiển thị đúng trên Category Page,,Filter tree gắn vào Category Page; đã publish,"1. Truy cập 1 Category Page.
+2. Kiểm tra filter panel.",,2. Filter hiển thị đúng style và rating values đã cấu hình.,
+FNRR_TC84,Edge,,Store không có Approved review nào,Filter rỗng,0 Approved review toàn store; đã sync,"1. Truy cập storefront.
+2. Kiểm tra filter Review Ratings.",,"2. `<cần confirm>` — filter không hiện bucket nào; chưa xác nhận tự ẩn hẳn hay hiện empty state.",<cần confirm>: xem spec mục 11 câu hỏi #7
+FNRR_TC85,Happy,Filter [Review Ratings] - Merchandising,Product bị Hidden không tính vào count và không hiện khi filter,,Product A rating 5★; bị Hidden trong Merchandising campaign đang active,"1. Truy cập storefront trong context campaign.
+2. Kiểm tra count 5★.
+3. Chọn filter 5★.",,"2. Count 5★ giảm 1.
+3. Product A không xuất hiện khi filter 5★.",
+FNRR_TC86,Happy,Filter [Review Ratings] - Data source,Chỉ Approved review được tính rating,,Product A: 1 review 5★ Approved + 1 review 3★ Disapproved; đã sync,1. Kiểm tra Product A xuất hiện ở bucket nào.,"- Review 5★: Approved
+- Review 3★: Disapproved","Product A chỉ xuất hiện bucket 5★, không xuất hiện bucket 3★.",
+FNRR_TC87,Happy,,Multiple Approved reviews → average rating tính đúng,,Product A: 2 Approved review (5★ và 3★); đã sync,1. Kiểm tra Product A xuất hiện ở bucket nào.,"- Review 5★: Approved
+- Review 3★: Approved
+- Average = 4★",Product A xuất hiện bucket 4★.,
+FNRR_TC88,Edge,,Rule làm tròn rating tại boundary .5,Average = 4.5★,"Product A: 2 Approved review (5★, 4★) → average = 4.5★; đã sync",1. Kiểm tra Product A xuất hiện ở bucket nào.,Average = 4.5★,"`<cần confirm>` — theo sticky note (floor .0→.9), Product A dự kiến bucket 4★ chứ không phải 5★; chưa có nguồn xác nhận chính thức công thức.",<cần confirm>: xem spec mục 6
+FNRR_TC89,Happy,,Sửa nội dung text (Author/Review Title/Review) của review đã Approved,,Review đã Approved có Rating=5★ (đang tính vào bucket 5★ của Product A); đã sync,"1. Tại BC Admin → Reviews, sửa Review Title/Review/Author (KHÔNG đổi Rating/Status).
+2. Chạy sync.
+3. Kiểm tra bucket/count của Product A.",Review Title/Author đổi; Rating giữ nguyên 5★,"3. Product A vẫn ở bucket 5★, count không đổi — nội dung text không ảnh hưởng rating.","<cần confirm>: case mới (2026-08-12), suy luận theo cấu trúc field BC — xem spec mục 1.1"
+FNRR_TC90,Sync,Filter [Review Ratings] - Sync,Approve review mới → rating và count xuất hiện sau sync,,Product A chưa có Approved review; đã sync lần trước,"1. Tại BC Admin → Reviews, Approve review 5★ cho Product A.
+2. Chạy sync.
+3. Kiểm tra filter trên storefront.",1 review 5★ được Approve,3. Product A xuất hiện bucket 5★; count 5★ tăng 1.,
+FNRR_TC91,Sync,,Review Approved → sau sync filter cập nhật (full end-to-end),Customer viết review → Admin approve → sync,Product B chưa có Approved review; đã sync lần trước,"1. Customer viết review 4★ cho Product B trên storefront.
+2. Admin Approve review đó trên BC.
+3. Chạy sync.
+4. Kiểm tra filter.",Review 4★ được Approve,4. Product B xuất hiện bucket 4★; count 4★ tăng 1.,
+FNRR_TC92,Sync,,Disapprove review → không được tính vào rating,,Product A: 1 Approved review 5★ (count 5★ = 1); đã sync,"1. Tại BC, Disapprove review 5★ của Product A.
+2. Chạy sync.
+3. Kiểm tra filter.",Review 5★ → Disapproved,3. Product A không xuất hiện bucket nào; count 5★ giảm 1.,
+FNRR_TC93,Sync,,Rating recalculate khi review đổi trạng thái (giảm),Shift 4★ → 3★,"Product A: 2 Approved review (5★, 3★) → average 4★; count 4★ = 3; đã sync","1. Tại BC, Disapprove review 5★ của Product A.
+2. Chạy sync.
+3. Kiểm tra rating của Product A.",Review 5★ → Disapproved,"3. Product A recalculate → average 3★; count 4★ giảm 1, count 3★ tăng 1.",
+FNRR_TC94,Sync,,Rating recalculate khi review đổi trạng thái (tăng),Shift 3★ → 4★,Product A: chỉ 1 Approved review 3★; đã sync,"1. Tại BC, Approve thêm review 5★ (trước đó Disapproved) cho Product A.
+2. Chạy sync.
+3. Kiểm tra rating của Product A.",Review 5★ → Approved → average = 4★,"3. Product A recalculate → average 4★; count 3★ giảm 1, count 4★ tăng 1.",
+FNRR_TC95,Sync,,Delete review trên BC → rating recalculate sau sync,,Product A: 1 Approved review 5★ (count 5★ = 1); đã sync,"1. Tại BC → Reviews, Delete review của Product A.
+2. Chạy sync.
+3. Kiểm tra filter.",Review 5★ bị Delete,3. Product A không xuất hiện bucket nào; count 5★ giảm 1.,
+FNRR_TC96,Sync,,Sửa Rating của 1 review đã Approved (không qua Approve/Disapprove) → rating recalculate,,Product A: 1 Approved review Rating=5★ (bucket 5★); đã sync,"1. Tại BC Admin → Reviews → Edit Review, đổi Rating từ 5★ xuống 2★ (giữ Status = Approved).
+2. Chạy sync.
+3. Kiểm tra bucket của Product A.",Rating: 5★ → 2★ (Status vẫn Approved),"3. Product A chuyển từ bucket 5★ sang bucket 2★; count 5★ giảm 1, count 2★ tăng 1.","<cần confirm>: case mới (2026-08-12) — sheet gốc chưa từng test sửa thẳng Rating của review đã Approved, chỉ test qua Approve/Disapprove/Delete. Xem spec mục 1.1, 11."
+FNRR_TC97,Sync,,Bulk Approve Selected nhiều review cùng lúc → recalculate đúng cho từng product,,"Product A, B, C mỗi product 1 review Pending, chưa Approved; đã sync lần trước","1. Tại BC Admin → Reviews, tick chọn cả 3 review.
+2. Click [Approve Selected].
+3. Chạy sync.
+4. Kiểm tra bucket của cả 3 product.",3 review được Approve đồng thời,4. Cả 3 product xuất hiện đúng bucket tương ứng rating của từng review; không sót/nhầm product.,"<cần confirm>: case mới (2026-08-12) — sheet gốc chưa test action hàng loạt [Approve Selected]/[Disapprove Selected]/[Delete Selected]."
+FNRR_TC98,Sync,,Multi-cycle: 2 lần sync liên tiếp với thay đổi review giữa 2 lần,"Chuỗi ≥2 sync, tích luỹ","Product A: 1 Approved review 3★; đã sync lần 1 (bucket 3★)","1. Sync lần 1: xác nhận Product A ở bucket 3★.
+2. Giữa 2 lần sync: Approve thêm 1 review 5★ cho Product A (average tạm tính 4★).
+3. Sync lần 2: kiểm tra lại bucket Product A.
+4. Giữa 2 lần sync tiếp theo: Disapprove review 3★ ban đầu (chỉ còn review 5★).
+5. Sync lần 3: kiểm tra lại bucket Product A.",Review 3★ (có sẵn) → thêm 5★ → sau đó bỏ 3★,"3. Sau sync lần 2: Product A chuyển sang bucket 4★ (average của 3★+5★).
+5. Sau sync lần 3: Product A chuyển sang bucket 5★ (chỉ còn đúng 1 review 5★) — xác nhận rating luôn tính lại từ TOÀN BỘ review Approved hiện tại tại mỗi lần sync, không cộng dồn/giữ lịch sử.",
+FNRR_TC99,Edge,,Review mới trên storefront chưa Approve chưa vào filter,,Product B chưa có review,"1. Customer viết review 5★ cho Product B trên storefront.
+2. Vào BC → Reviews, kiểm tra Status = chưa Approved.
+3. Chạy sync.
+4. Kiểm tra filter.","`<cần confirm>` — Status mặc định của review mới (Approved hay Disapproved/Pending)",4. Product B chưa xuất hiện bucket nào (nếu default không phải Approved).,"<cần confirm>: Status mặc định của review mới submit từ storefront — xem spec mục 1.2, câu hỏi #8"
+FNRR_TC100,Edge,,Tất cả review bị Disapprove → product biến mất khỏi filter,,"Product A: 2 Approved review (4★, 5★); đã sync","1. Tại BC, Disapprove toàn bộ review của Product A.
+2. Chạy sync.
+3. Kiểm tra filter.",Toàn bộ review → Disapproved,"3. Product A không xuất hiện bucket nào; count cả 4★ và 5★ đều giảm 1.",

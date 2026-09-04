@@ -1,0 +1,202 @@
+﻿ID,Test Type,Test Objective,,,Preconditions,Test Steps,Input DB/Setting,Expected Result,Note
+,,=== ADD FILTER NODE - QUICK FILTERS ===,,,,,,,
+FNQF_TC01,Happy,Button [Add Filter Node],Add Quick Filters node,,"Filter tree = [chưa có node nào]
+Role = [Merchant Admin]","1. Click button [Add Filter Node].
+2. Tại popup, click card [Quick Filters].
+3. Click button [Add Filter Node] trong card.",,"3. Quay lại MH [Create new filter tree]; Filter Nodes panel có thêm mục [Quick Filters]; Preview hiển thị 4 toggle: Best-seller, Special Offers, In Stock, Free Shipping (đều ON mặc định).",
+FNQF_TC02,UI,Template card [Quick Filters],Hiển thị đúng design,,,1. Kiểm tra hiển thị card [Quick Filters] trong nhóm phù hợp (Product filter hoặc Advanced filter).,,Card hiển thị đúng theo design.,<cần confirm>: chưa xác nhận card thuộc nhóm nào trong popup Add filter node — xem spec
+FNQF_TC03,UI,,Nội dung card,,,1. Kiểm tra nội dung card.,,"Card hiển thị đúng: thumbnail, title, mô tả ngắn, button [Add Filter Node].",
+FNQF_TC04,UI,,Search khớp keyword,,,"1. Nhập keyword ""Quick"" vào ô search.
+2. Kiểm tra kết quả.",,Card [Quick Filters] vẫn hiển thị đúng trong kết quả.,
+FNQF_TC05,UI,,Search không khớp,,,"1. Nhập keyword không liên quan.
+2. Kiểm tra kết quả.",,Card không hiển thị; popup hiển thị empty state / no result.,
+FNQF_TC06,UI,Title,Giá trị mặc định lúc tạo mới,,Đang ở MH Add (chưa có Title tuỳ chỉnh),1. Kiểm tra field Title.,,"Title hiển thị giá trị mặc định ""Quick Filters"".",
+FNQF_TC07,UI,Filter options - Toggle options,4 toggle mặc định hiển thị đủ + checked lúc tạo mới,,,1. Kiểm tra danh sách Toggle options.,,"Hiển thị đúng 4 toggle cố định: Is Featured (label ""Best-seller""), Special Offers, In Stock, Free Shipping; cả 4 đều checked mặc định.",
+FNQF_TC08,UI,Display Style,Default = Text - Right lúc tạo mới,,,1. Kiểm tra giá trị mặc định Display Style.,,"Display Style = ""Text - Right"" được chọn mặc định.",
+FNQF_TC09,UI,Option Select Type,Xác định giá trị mặc định lúc tạo mới,,,1. Kiểm tra giá trị mặc định Option Select Type.,,"`<cần confirm>` — chưa xác nhận default là Single hay Multiple; theo bản chất 4 toggle độc lập nhau, dự kiến hợp lý hơn là Multiple.",<cần confirm>: xem spec mục 9 câu hỏi #5
+FNQF_TC10,UI,Sort Order,Thứ tự mặc định hiển thị đủ 4 item lúc tạo mới,,,1. Kiểm tra danh sách Sort Order (kéo-thả inline).,,"Hiển thị đúng thứ tự mặc định: Best-seller, Special Offers, In Stock, Free Shipping — mỗi item có icon drag-and-drop.",
+FNQF_TC11,UI,Hide on customer group,Default state lúc tạo mới,,,1. Kiểm tra Hide on customer group.,,"Hiển thị ""0 selected""; button [Edit] hiển thị.",
+FNQF_TC12,UI,Appearance - Display tooltips,Default state lúc tạo mới,,,1. Kiểm tra toggle Display tooltip.,,Toggle ON (mặc định).,
+FNQF_TC13,UI,Appearance - Collapse/Expand,Default value cả 2 lúc tạo mới,,,1. Kiểm tra Collapse/Expand Desktop và Mobile.,,Cả 2 mặc định = Expand.,
+FNQF_TC14,UI,Button [Save Changes],Disable khi chưa cấu hình đủ (lúc tạo mới),,"Vừa mở popup Add filter node
+Title = [rỗng]",1. Quan sát trạng thái nút Save Changes trước khi hoàn tất cấu hình.,,Nút disable nếu có field required chưa hợp lệ (VD Title rỗng).,
+FNQF_TC15,Happy,,Save thành công → quay lại Create new filter tree,,Đã cấu hình hợp lệ lúc Add,1. Click Save Changes.,,Lưu thành công; quay lại MH [Create new filter tree]; Filter Nodes panel có node Quick Filters.,
+,,=== EDIT FILTER NODE - QUICK FILTERS ===,,,,,,,
+FNQF_TC16,Happy,Mở màn Edit,Load đúng cấu hình đã lưu,,Filter node Quick Filters = [đã tồn tại],"1. Tại Filter Nodes panel chọn node Quick Filters.
+2. Click icon Edit.",,"2. Hiển thị MH [Edit filter node - Quick Filters], load đúng toàn bộ cấu hình đã lưu trước đó (Title, Toggle options, Display Style, Option select type, Sort Order, Appearance).",
+FNQF_TC17,Happy,Panel trái - danh sách node,Chuyển node không lẫn dữ liệu,,"Filter tree = [≥2 node, có Quick Filters]","1. Đang edit 1 node khác.
+2. Click chọn node Quick Filters ở panel trái.",,"2. Nội dung bên phải đổi đúng sang cấu hình node Quick Filters, không lẫn dữ liệu node trước đó.",
+FNQF_TC18,Happy,Title,Giá trị đã lưu load đúng,,Title đã lưu = [khác mặc định],"1. Mở màn Edit.
+2. Quan sát field Title.","Title đã lưu = ""Shop Smart""","2. Title hiển thị đúng ""Shop Smart"", không phải mặc định.",
+FNQF_TC19,Happy,,"Sửa Title, Preview cập nhật",,Đang ở MH Edit,"1. Sửa nội dung Title.
+2. Quan sát Preview.",,"2. Preview hiển thị Title mới ngay lập tức, chưa cần Save.",
+FNQF_TC20,Validation,,Không cho save khi rỗng,,Đang ở MH Edit,"1. Xoá trắng Title.
+2. Click Save Changes.",Title = rỗng,2. Không cho save; hiển thị lỗi required.,
+FNQF_TC21,Edge Case,,Title dài hơn 1 dòng + Center/Right — verify alignment thật,Boundary: title wrap,Title = [chuỗi đủ dài để wrap 2 dòng trong Preview],"1. Nhập Title đủ dài để tự động xuống 2 dòng ở Preview.
+2. Chọn alignment Center, sau đó Right.
+3. Quan sát Preview mỗi lần đổi.",,3. Title vẫn căn đúng theo alignment đã chọn (Center/Right) dù hiển thị 2 dòng.,"Rủi ro NG kế thừa: node Stock/Category/Special Offers/Sale Percentage gốc đều ghi nhận bug NG ở đúng case này (title >1 dòng luôn căn trái bất kể alignment) — ưu tiên kiểm tra kỹ khi thực thi thật. Xem spec mục 2.1 #7."
+FNQF_TC22,Happy,Title text color,"Màu đã lưu load đúng, đổi màu mới",,Title text color đã lưu = [tuỳ chỉnh],"1. Mở màn Edit, quan sát màu hiện tại.
+2. Chọn màu mới.
+3. Quan sát Preview.",,"1. Màu hiển thị đúng màu đã lưu.
+3. Title đổi màu đúng theo màu mới.",
+FNQF_TC23,Happy,Title alignment,"Alignment đã lưu load đúng, đổi vị trí",,Title alignment đã lưu = [Right],"1. Mở màn Edit, quan sát alignment.
+2. Đổi sang Left/Center.
+3. Quan sát Preview.",,"1. Alignment hiển thị đúng Right (giá trị đã lưu).
+3. Title căn đúng vị trí mới.",
+FNQF_TC24,Happy,Filter options - Toggle options,Trạng thái checked + label đã lưu load đúng,,"Special Offers = [unchecked]
+Label Free Shipping = [""Ship miễn phí""]","1. Mở màn Edit.
+2. Quan sát 4 toggle.",,"2. Special Offers hiển thị unchecked; label Free Shipping hiển thị đúng ""Ship miễn phí""; các toggle/label khác giữ đúng giá trị đã lưu, không reset về mặc định.",
+FNQF_TC25,Happy,,Edit label bất kỳ → preview/storefront cập nhật,,Đang ở MH Edit,"1. Sửa label toggle Is Featured từ ""Best-seller"" thành ""Bán chạy"".
+2. Save Changes.
+3. Kiểm tra storefront.","Label = ""Bán chạy""","3. Storefront hiển thị ""Bán chạy"" thay cho ""Best-seller"".",
+FNQF_TC26,Validation,,Không cho lưu khi label rỗng,,Đang ở MH Edit,"1. Xoá trắng label của 1 toggle bất kỳ.
+2. Click Save Changes.",Label = rỗng,2. Không cho save; hiển thị lỗi required tại field label.,
+FNQF_TC27,Happy,,Uncheck 1 toggle → ẩn khỏi storefront,,"Cả 4 toggle đang checked
+Filter tree = [đã publish]","1. Uncheck toggle In Stock.
+2. Save Changes.
+3. Kiểm tra storefront.",,3. Storefront chỉ còn 3 toggle (Best-seller/Special Offers/Free Shipping); In Stock không hiển thị.,"Rủi ro NG kế thừa: Featured Products ghi nhận case tương đương (#12 uncheck option không ẩn đúng) đang NG — ưu tiên kiểm tra kỹ. Xem spec mục 2.2."
+FNQF_TC28,Happy,,Re-check toggle đã uncheck → hiển thị lại đúng vị trí,,1 toggle đang unchecked,"1. Check lại toggle đã uncheck.
+2. Save Changes.
+3. Kiểm tra storefront.",,3. Toggle hiển thị lại đúng vị trí theo Sort Order.,
+FNQF_TC29,Edge Case,,Uncheck cả 4 toggle → behavior,Boundary: 0 toggle,Cả 4 toggle đang checked,"1. Uncheck cả 4 toggle.
+2. Click Save Changes.",,"2. `<cần confirm>` — chặn save báo lỗi hay cho save rồi filter node ẩn/empty state.",<cần confirm>: chưa có tài liệu nguồn xác nhận riêng cho Quick Filters
+FNQF_TC30,Happy,,Custom label không ảnh hưởng logic filter,Label ≠ giá trị BC,"Label Best-seller = [""Bán chạy""]
+Filter tree = [đã publish]","1. Truy cập storefront.
+2. Chọn filter ""Bán chạy"".
+3. Kiểm tra kết quả.",,3. Product có Featured Star trong BC vẫn được lọc đúng dù label đổi tên.,
+FNQF_TC31,Happy,Display Style,Giá trị đã lưu load đúng,,Display Style đã lưu = [Text - Bottom],"1. Mở màn Edit.
+2. Quan sát Display Style.",,"2. Hiển thị đúng ""Text - Bottom"" (giá trị đã lưu), không phải mặc định ""Text - Right"".",
+FNQF_TC32,Happy,,Chuyển sang Text - Left,,Display Style ≠ [Text - Left],"1. Chọn ""Text - Left"".
+2. Save Changes.
+3. Quan sát Preview.",,3. Label của mỗi toggle hiển thị bên trái toggle switch.,
+FNQF_TC33,Happy,,Chuyển sang Text - Bottom,,Display Style ≠ [Text - Bottom],"1. Chọn ""Text - Bottom"".
+2. Save Changes.
+3. Quan sát Preview.",,3. Label của mỗi toggle hiển thị bên dưới toggle switch.,
+FNQF_TC34,Happy,Option Select Type,Giá trị đã lưu load đúng,,Option Select Type đã lưu = [Single],"1. Mở màn Edit.
+2. Quan sát Option Select Type.",,"2. `<cần confirm>` — hiển thị đúng ""Single"" (giá trị đã lưu); chưa xác nhận default thật của field này là Single hay Multiple.",<cần confirm>: xem spec mục 9 câu hỏi #5
+FNQF_TC35,Happy,,Switch Single sang Multiple + verify storefront,,Option Select Type = [Single],"1. Chọn Multiple.
+2. Save Changes.
+3. Truy cập storefront, bật đồng thời nhiều toggle.",,3. Storefront cho phép bật nhiều toggle cùng lúc.,
+FNQF_TC36,Happy,,Switch Multiple sang Single + verify storefront,,Option Select Type = [Multiple],"1. Chọn Single.
+2. Save Changes.
+3. Truy cập storefront, bật toggle A rồi bật toggle B.",,3. Chỉ 1 toggle ON tại 1 thời điểm (bật toggle mới tự tắt toggle cũ).,"`<cần confirm>` — hành vi suy luận từ Featured Products #18 (Single ↔ Multiple đã xác nhận OK ở node gốc), nhưng Featured Products chỉ có 2 giá trị của CÙNG 1 câu hỏi (Is Featured/Not Featured) trong khi Quick Filters có 4 toggle độc lập từ 4 nguồn dữ liệu khác nhau — cần xác nhận hành vi ""auto tắt toggle cũ"" có thực sự áp dụng đúng ngữ nghĩa cho Quick Filters không. Xem spec mục 9."
+FNQF_TC37,Happy,Sort Order,Thứ tự đã lưu load đúng,,Sort Order đã lưu = [Free Shipping → Best-seller → In Stock → Special Offers],"1. Mở màn Edit.
+2. Quan sát danh sách Sort Order (kéo-thả inline).",,2. Hiển thị đúng thứ tự đã lưu (không phải mặc định Best-seller → Special Offers → In Stock → Free Shipping).,
+FNQF_TC38,UI,,Popup [Edit] hiển thị đủ 5 mode,,Click [Edit] tại field Sort Order,1. Quan sát popup [Sort Order].,,"1. Hiển thị đủ 5 option: Alphabetical - Ascending, Alphabetical - Descending, Product number - Ascending, Product number - Descending, Custom order.",
+FNQF_TC39,Happy,,Kéo thả đổi thứ tự (inline) → Preview cập nhật ngay,,Đang ở MH Edit,"1. Kéo thả In Stock lên vị trí đầu tiên.
+2. Quan sát Preview.",,2. Preview hiển thị thứ tự mới: In Stock → ....,
+FNQF_TC40,Happy,,Save thứ tự mới → storefront đúng + persist sau reload,,Đã kéo thả đổi thứ tự,"1. Click Save Changes.
+2. Kiểm tra storefront.
+3. Reload trang Edit, kiểm tra Sort Order.",,"2. Storefront hiển thị đúng thứ tự đã kéo thả.
+3. Thứ tự vẫn giữ nguyên sau reload.",
+FNQF_TC41,Happy,Hide on customer group,Load đúng selection đã lưu khi mở lại Edit,,Hide on customer group đã lưu = [1 nhóm khách hàng],"1. Mở màn Edit.
+2. Quan sát field Hide on customer group.",,"2. Hiển thị đúng số lượng/tên customer group đã chọn từ trước, không bị reset về rỗng.",
+FNQF_TC42,Happy,,Click [Edit] mở popup,,Đang ở MH Edit,1. Click button [Edit] tại Hide on customer group.,,1. Popup [Select customer group] hiển thị.,
+FNQF_TC43,Happy,,Search khớp 1 phần,,Popup đang mở,"1. Nhập 1 phần tên customer group.
+2. Kiểm tra kết quả.",,2. Hiển thị đúng dữ liệu khớp 1 phần.,
+FNQF_TC44,Happy,,Chọn 1 group → ẩn đúng filter (Storefront),,Popup đang mở,"1. Click chọn customer group A.
+2. Save Changes.
+3. Đăng nhập storefront bằng account thuộc group A.
+4. Kiểm tra filter Quick Filters.",,"2. Số lượng selected cập nhật đúng ngoài MH.
+4. Filter Quick Filters ẩn với customer group A.",
+FNQF_TC45,Edge Case,Hide on customer group - Popup [Select customer group],BC xoá customer group → không còn hiển thị trong popup,,Customer group = [đang có trong danh sách],"1. Xoá customer group trên BC.
+2. Mở lại popup [Select customer group].",,2. Customer group vừa xoá không còn hiển thị trong danh sách.,
+FNQF_TC46,Happy,Appearance - Display tooltips,Trạng thái + nội dung đã lưu load đúng,,Display tooltip đã lưu = [ON + nội dung tuỳ chỉnh],"1. Mở màn Edit.
+2. Quan sát toggle và tooltip content.",,2. Toggle hiển thị đúng ON; nội dung hiển thị đúng giá trị đã lưu.,
+FNQF_TC47,Happy,,Bật ON / tắt OFF → tooltip hiện/ẩn,,Đang ở MH Edit,"1. Bật toggle ON → quan sát Preview.
+2. Tắt toggle OFF → quan sát Preview.",,"1. Tooltip hiển thị đúng.
+2. Tooltip ẩn.",
+FNQF_TC48,Validation,,Bật ON khi tooltip content rỗng,,Tooltip content rỗng,1. Bật toggle ON.,,1. Không cho phép bật / hiển thị cảnh báo.,
+FNQF_TC49,Happy,Appearance - Collapse/Expand,"Giá trị Desktop/Mobile đã lưu load đúng, độc lập",,"Desktop = [Collapse]
+Mobile = [Expand]","1. Mở màn Edit.
+2. Quan sát Collapse/Expand ở Preview Desktop và Mobile.",,2. Desktop hiển thị đúng Collapse; Mobile hiển thị đúng Expand.,"Rủi ro NG kế thừa: node Stock gốc ghi nhận nhiều lần ""CẦN CHECK LẠI PHẦN MOBILE: ĐANG KHÔNG SHOW ĐƯỢC FILTER"" — ưu tiên kiểm tra kỹ preview/storefront Mobile. Xem spec mục 2.1 #6."
+FNQF_TC50,Happy,,Desktop Expand / Mobile Collapse - độc lập,,Đang ở MH Edit,"1. Set Desktop = Expand, Mobile = Collapse.
+2. Save Changes.
+3. Kiểm tra Preview cả 2.",,"3. Desktop: filter mở sẵn.
+3. Mobile: filter thu gọn.
+3. Không ảnh hưởng lẫn nhau.","Rủi ro NG kế thừa tương tự TC49 — riêng chiều Mobile."
+FNQF_TC51,UI,Appearance settings,Đối chiếu field Show all irrelevant values/Uppercase/Search box có tồn tại không,,Đang ở MH Edit,1. Kiểm tra toàn bộ khối Appearance Settings.,,"1. `<cần confirm>` — ảnh UI Figma thật chỉ show Display tooltip + Collapse/Expand; cần xác nhận panel Quick Filters có thêm 3 field này (như Featured Products) hay không (như Category/Sale Percentage).",<cần confirm>: xem spec mục 8 câu hỏi #4
+FNQF_TC52,UI,Button [Save Changes],Disable khi chưa có thay đổi,,"Vừa mở màn Edit, chưa chỉnh gì",1. Quan sát trạng thái nút Save Changes.,,1. Nút Save Changes ở trạng thái disable.,
+FNQF_TC53,Happy,,Enable khi sửa 1 field bất kỳ,,Đang ở màn Edit,"1. Sửa 1 field bất kỳ.
+2. Quan sát nút Save Changes.",,2. Nút Save Changes chuyển sang enable.,
+FNQF_TC54,Happy,,Double-click không tạo lưu trùng,,Save Changes đang enable,1. Double-click liên tiếp nút Save Changes.,,1. Chỉ 1 request lưu được gửi; không tạo cấu hình trùng lặp.,
+FNQF_TC55,Validation,,Chặn save khi có field invalid,,Title đang bị xoá trắng,1. Click Save Changes.,Title = rỗng,1. Không cho save; hiển thị lỗi đúng tại field invalid.,
+FNQF_TC56,Happy,Điều hướng khi có unsaved changes,Popup cảnh báo + Discard/Cancel,,Đang sửa dở dữ liệu ở node Quick Filters chưa Save,"1. Click [Back] hoặc chọn chuyển sang node khác.
+2. Ở popup cảnh báo, click [Discard].
+3. Lặp lại bước 1, lần này click [Cancel]/[Stay].",,"1. Hiển thị popup cảnh báo unsaved changes.
+2. Bỏ thay đổi chưa lưu và điều hướng tiếp theo yêu cầu ban đầu.
+3. Đóng popup, ở lại màn Edit filter node - Quick Filters với dữ liệu đang sửa dở còn nguyên.","Rủi ro NG kế thừa: node Stock gốc ghi nhận NG toàn bộ nhóm case này (""Không hiển thị cảnh báo"" khi Back/reload/F5) — cần verify kỹ tính năng có thực sự hoạt động trước khi coi đây là luồng an toàn. Xem spec mục 2.1 #5."
+FNQF_TC57,Happy,Button [Save to template],Lưu cấu hình hiện tại thành template,,Cấu hình node Quick Filters hợp lệ,1. Click button [Save to template].,,1. Lưu thành công; template mới xuất hiện ở tab [My Templates].,
+FNQF_TC58,Happy,Filter [Quick Filters] - Best-seller,Product có Featured Star → tính vào Best-seller,,"Product A Featured Star = [ON]
+Đã sync, đã publish","1. Truy cập storefront.
+2. Chọn toggle Best-seller.
+3. Kiểm tra kết quả.",,3. Product A xuất hiện trong kết quả.,"Rủi ro NG kế thừa từ Featured Products: count hiển thị sai (#37), count không khớp BC (#39), AND logic với filter khác sai (#42). Xem spec mục 2.2."
+FNQF_TC59,Happy,,Product không có Featured Star → không tính vào Best-seller,,"Product B Featured Star = [OFF]
+Đã sync","1. Chọn toggle Best-seller.
+2. Kiểm tra Product B.",,2. Product B không xuất hiện trong kết quả.,
+FNQF_TC60,Happy,Filter [Quick Filters] - Special Offers,Product có Sale Price ≠ 0 → tính vào Special Offers,,"Product A Sale Price = [₫28]
+Đã sync","1. Chọn toggle Special Offers.
+2. Kiểm tra Product A.",,2. Product A xuất hiện trong kết quả.,"RỦI RO CAO — node Special Offers gốc ghi nhận NG xuyên suốt gần như toàn bộ nhóm storefront-filter (""chọn filter Special Offers không thực sự lọc sản phẩm"", cùng root cause với Category/Sale Percentage). Quick Filters tái sử dụng đúng data source + cơ chế lọc này. Ưu tiên kiểm tra kỹ khi thực thi thật. Xem spec mục 2.2."
+FNQF_TC61,Happy,,Product có Sale Price = 0 → không tính vào Special Offers,,"Product B Sale Price = [₫0]
+Đã sync","1. Chọn toggle Special Offers.
+2. Kiểm tra Product B.",,2. Product B không xuất hiện trong kết quả.,"Cùng rủi ro NG kế thừa như TC60."
+FNQF_TC62,Happy,Filter [Quick Filters] - In Stock,Total Current Stock > 0 → tính vào In Stock (kể cả mức Low Stock của node Stock gốc),,"Product A Current stock = [3]
+Low stock threshold = [5]
+Đã sync","1. Chọn toggle In Stock.
+2. Kiểm tra Product A.",,2. Product A xuất hiện trong kết quả (theo quyết định gộp Low Stock vào In Stock ở Quick Filters).,"RỦI RO CAO — node Stock gốc ghi nhận NG cơ chế OR 2 option ""In Stock"" + ""Low Stock"" (chọn thêm option thứ 2 không gộp đúng kết quả, vẫn chỉ show list của option đầu). Đây chính là cơ chế mà quyết định gộp của Quick Filters dựa vào. Xem spec mục 2.1 #1."
+FNQF_TC63,Happy,,Total Current Stock = 0 → không tính vào In Stock,,"Product B Current stock = [0] mọi location
+Đã sync","1. Chọn toggle In Stock.
+2. Kiểm tra Product B.",,2. Product B không xuất hiện trong kết quả (Out of Stock).,"RỦI RO CAO — node Stock gốc ghi nhận NG nặng ở đúng bucket Out of Stock (""Không thấy xuất hiện product ở bất cứ option stock nào cả""), lặp lại nhiều lần kể cả khi chuyển trạng thái do Order tự động. Xem spec mục 2.1 #2."
+FNQF_TC64,Edge Case,,Location không track inventory → luôn tính In Stock,Boundary: untracked,"Product C Current stock = [""—""] mọi location
+Đã sync","1. Chọn toggle In Stock.
+2. Kiểm tra Product C.",,2. Product C xuất hiện trong kết quả (coi như unlimited).,
+FNQF_TC65,Edge Case,,Availability (BC) OFF nhưng Current stock > 0 → có bị loại khỏi In Stock không,Boundary: Availability override,"Product D Availability (BC) = [OFF]
+Product D Current stock = [10]
+Đã sync","1. Chọn toggle In Stock.
+2. Kiểm tra Product D.",,"2. `<cần confirm>` — chưa xác nhận Availability OFF có override thành Out of Stock (loại khỏi In Stock) hay không; sheet Stock gốc (case #49, #132) cũng để ngỏ câu hỏi này.",<cần confirm>: xem spec mục 2 câu hỏi #1
+FNQF_TC66,Happy,Filter [Quick Filters] - Free Shipping,Product có checkbox Free Shipping = checked → tính vào Free Shipping,,"Product A Free Shipping = [checked]
+Đã sync","1. Chọn toggle Free Shipping.
+2. Kiểm tra Product A.",,2. Product A xuất hiện trong kết quả.,"Sheet Shipping nguồn chưa từng được thực thi (không có cột Tester/Result) — không coi đây là nguồn rủi ro thấp một cách chắc chắn."
+FNQF_TC67,Happy,,Fixed Shipping Price > 0 nhưng Free Shipping checked → vẫn tính Free Shipping,,"Product B Fixed Shipping Price = [50]
+Product B Free Shipping = [checked]
+Đã sync","1. Chọn toggle Free Shipping.
+2. Kiểm tra Product B.",,2. Product B vẫn xuất hiện trong kết quả (checkbox Free Shipping ưu tiên hơn Fixed Price).,
+FNQF_TC68,UI,Filter [Quick Filters] - Product count,Count có/không hiển thị cạnh mỗi toggle,,"Đã sync, đã publish",1. Quan sát UI mỗi toggle trên storefront.,,"`<cần confirm>` — chưa xác nhận Quick Filters (UI toggle) có hiển thị product count cạnh mỗi toggle như Featured Products/Special Offers (dạng list) hay không. Nếu có, cả 3 node nguồn (Stock/Special Offers/Featured Products) đều đang NG phần hiển thị count.","<cần confirm>: xem spec mục 2.1 #3"
+FNQF_TC69,Happy,Filter [Quick Filters],Kết hợp nhiều toggle cùng lúc (Multiple mode) → OR logic,,"Option Select Type = [Multiple]
+Đã publish","1. Bật cả Best-seller và Free Shipping.
+2. Kiểm tra kết quả.",,2. Hiển thị product thoả ít nhất 1 trong 2 điều kiện (OR logic giữa các toggle trong cùng node).,
+FNQF_TC70,Happy,Filter [Quick Filters] + Filter khác,Kết hợp Quick Filters + Brand filter,AND logic,"Filter tree = [có cả Quick Filters và Brand]
+Đã publish","1. Bật toggle Best-seller.
+2. Thêm filter Brand = OFS.
+3. Kiểm tra kết quả.",,3. Chỉ product vừa là Best-seller vừa có Brand = OFS hiển thị (AND logic giữa 2 filter node khác nhau).,
+FNQF_TC71,Happy,Filter [Quick Filters] - Merchandising,Product bị Hidden không tính vào kết quả bất kỳ toggle nào,,"Product A Best-seller = [ON]
+Product A = [Hidden trong Merchandising campaign đang active]","1. Truy cập storefront trong context campaign.
+2. Bật toggle Best-seller.",,2. Product A không xuất hiện trong kết quả dù thoả điều kiện Best-seller.,
+FNQF_TC72,Sync,Filter [Quick Filters] - Sync,BC đổi Featured Star → sync → chỉ Best-seller cập nhật,Isolation: nguồn Featured Star,"Product A: Best-seller/Special Offers/In Stock/Free Shipping = [ON cả 4]
+Đã sync","1. Tại BC, tắt Featured Star của Product A (chỉ đổi 1 thuộc tính).
+2. Chạy sync.
+3. Kiểm tra cả 4 toggle với Product A.",Featured Star: ON→OFF,3. Product A không còn xuất hiện khi lọc Best-seller; vẫn xuất hiện đúng khi lọc Special Offers/In Stock/Free Shipping (3 toggle còn lại không bị ảnh hưởng).,
+FNQF_TC73,Sync,,BC đổi Sale Price → sync → chỉ Special Offers cập nhật,Isolation: nguồn Sale Price,"Product A: cả 4 toggle = [ON]
+Đã sync","1. Tại BC, đổi Sale Price Product A từ ₫28 về ₫0 (chỉ đổi 1 thuộc tính).
+2. Chạy sync.
+3. Kiểm tra cả 4 toggle với Product A.",Sale Price: ₫28→₫0,3. Product A không còn xuất hiện khi lọc Special Offers; 3 toggle còn lại (Best-seller/In Stock/Free Shipping) không bị ảnh hưởng.,
+FNQF_TC74,Sync,,BC đổi checkbox Free Shipping → sync → chỉ Free Shipping cập nhật,Isolation: nguồn Free Shipping,"Product B: cả 4 toggle = [OFF do chưa thoả điều kiện]
+Đã sync","1. Tại BC, check checkbox Free Shipping của Product B (chỉ đổi 1 thuộc tính).
+2. Chạy sync.
+3. Kiểm tra cả 4 toggle với Product B.",Free Shipping: unchecked→checked,3. Product B bắt đầu xuất hiện khi lọc Free Shipping; 3 toggle còn lại không bị ảnh hưởng.,
+FNQF_TC75,Sync,,BC đổi Current stock (admin sửa tay) → sync → chỉ In Stock cập nhật,Isolation: nguồn Inventory,"Product A: cả 4 toggle = [ON]
+Đã sync","1. Tại BC, admin sửa tay Current stock Product A về 0 tại mọi location (chỉ đổi 1 thuộc tính).
+2. Chạy sync.
+3. Kiểm tra cả 4 toggle với Product A.",Current stock: 3→0,3. Product A không còn xuất hiện khi lọc In Stock; 3 toggle còn lại không bị ảnh hưởng.,"`<cần confirm>` — field Inventory/Current stock chưa có tên cụ thể trong whitelist docs/sync-fields-glossary.md (chỉ liệt kê ""availability"" cho Products, không có field tồn kho riêng) — cần xác nhận field này thực sự Sync trực tiếp hay Tính toán từ dữ liệu sync khác."
+FNQF_TC76,Sync,,Order tự động trừ kho (không phải admin sửa tay) → sync → In Stock cập nhật đúng,Trigger: Order tự động,"Product A: In Stock = [ON], Current stock = [20]
+Đã sync","1. Khách đặt Order khiến Current stock Product A giảm về 0 (không phải admin sửa tay).
+2. Chạy sync.
+3. Kiểm tra toggle In Stock với Product A.",Current stock (do Order): 20→0,3. Product A không còn xuất hiện khi lọc In Stock (chuyển đúng sang Out of Stock).,"Rủi ro NG kế thừa: node Stock gốc ghi nhận NG đúng case tương đương (""Product chuyển từ In Stock sang Out of Stock do Order tự động, không phải admin sửa tay"" — đang sai). Xem spec mục 2.1 #2."
+FNQF_TC77,Sync,,Current stock cộng dồn nhiều location → sync → Total Current Stock tính đúng tổng,Multi-location sum,"Product A: Current stock location 1 (default) = [0], location 2 = [5]
+Đã sync","1. Tại BC, set Current stock location 2 (không phải default location) = 5, giữ location 1 = 0.
+2. Chạy sync.
+3. Kiểm tra toggle In Stock với Product A.",Total Current Stock kỳ vọng = 0+5 = 5,"3. Product A xuất hiện trong kết quả khi lọc In Stock (Total Current Stock = 5 > 0, tính đúng tổng mọi location).","Rủi ro NG kế thừa: node Stock gốc ghi nhận NG ""đang tính theo default location"" thay vì cộng dồn tất cả location. Xem spec mục 2.1 #4."
+FNQF_TC78,Sync,,BC đổi dữ liệu nguồn nhưng CHƯA chạy sync → Admin/Storefront vẫn hiển thị data cũ,Stale data,"Product A: Best-seller = [ON]
+Đã sync lần trước","1. Tại BC, tắt Featured Star của Product A.
+2. KHÔNG trigger sync.
+3. Kiểm tra toggle Best-seller với Product A trên storefront.",Featured Star: ON→OFF (chưa sync),3. Product A vẫn xuất hiện khi lọc Best-seller (dữ liệu storefront chưa cập nhật cho tới khi sync chạy lại) — xác nhận hành vi không tự động realtime mà phụ thuộc tiến trình sync.,

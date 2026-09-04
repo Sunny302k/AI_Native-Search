@@ -1,0 +1,298 @@
+﻿ID,Test Type,Test Objective,,,Preconditions,Test Steps,Input DB/Setting,Expected Result,Note
+,,=== ADD FILTER NODE - WIDTH ===,,,,,,,
+FNW_TC01,UI,Page header,Breadcrumb title,,Mở MH Add Filter Node - Width,1. Kiểm tra breadcrumb phía trên trái.,,"Breadcrumb hiển thị ""← Width"".",
+FNW_TC02,UI,Button [Save as template] / [Save Changes],Hiển thị,,Mở MH Add Filter Node - Width,1. Kiểm tra 2 button góc trên phải.,,"- [Save as template]: outlined.
+- [Save Changes]: màu cam (primary), cạnh [Save as template].",
+FNW_TC03,UI,Page layout,3 section hiển thị đủ,,Mở MH Add Filter Node - Width,1. Scroll left panel.,,"3 section đúng thứ tự: GENERAL SETTINGS → FILTER SETTINGS → APPEARANCE SETTINGS, header màu cam.",
+FNW_TC04,UI,Preview panel,Desktop / Mobile tabs,,Mở MH Add Filter Node - Width,1. Kiểm tra Preview panel.,,Tab Desktop và Mobile hiển thị; Desktop active mặc định.,
+FNW_TC05,UI,Title,Default value lúc tạo mới,,,1. Kiểm tra field Title.,,"Title mặc định = ""Width"".",
+FNW_TC06,UI,Title text color,Default value lúc tạo mới,,,1. Kiểm tra color swatch.,,Màu mặc định (dark).,
+FNW_TC07,UI,Title alignment,Default (Left) lúc tạo mới,,,1. Kiểm tra trạng thái mặc định.,,Option Left active.,
+FNW_TC08,UI,Display Style,Default lúc tạo mới,,,1. Kiểm tra Display Style.,,"`<cần confirm>` — ""Slider - input"" active mặc định; chưa xác nhận dropdown chỉ đúng 3 giá trị hay thừa Swatch (đối chiếu bug Sale Percentage).","<cần confirm>: xem spec mục 4, câu hỏi #2"
+FNW_TC09,UI,Show range slider,Default state lúc tạo mới,,Display Style = Slider - input,1. Kiểm tra toggle.,,Toggle ON.,
+FNW_TC10,UI,Decimal Separator,Default value lúc tạo mới,,,1. Kiểm tra dropdown.,,"Mặc định ""No separator (E.g. 1000)"".",
+FNW_TC11,UI,Show tooltip of range slider,Default state lúc tạo mới,,Show range slider = ON,1. Kiểm tra checkbox.,,Checked.,
+FNW_TC12,UI,Has slider steps,Default state lúc tạo mới,,Show range slider = ON,1. Kiểm tra checkbox.,,Checked.,
+FNW_TC13,UI,Amount of slider steps,Default value lúc tạo mới,,Has slider steps = checked,1. Kiểm tra giá trị mặc định.,,Mặc định = 4.,
+FNW_TC14,UI,Show range input,Default state lúc tạo mới,,Display Style = Slider - input,1. Kiểm tra toggle.,,Toggle ON.,
+FNW_TC15,UI,Placeholder text,Default value lúc tạo mới,,"Show range input = ON, Show placeholder text = checked",1. Kiểm tra field.,,"Mặc định: {{From}} - {{To}}.",
+FNW_TC16,UI,Unit Display Option,Default value lúc tạo mới,,Show range input = ON,1. Kiểm tra dropdown.,,"Mặc định ""Inside input"".",
+FNW_TC17,UI,Range slider & Range input order,Default order lúc tạo mới,,"Show range slider = ON, Show range input = ON",1. Kiểm tra lựa chọn mặc định.,,"Option ""slider on top"" được chọn.",
+FNW_TC18,UI,Width Range,Default value lúc tạo mới,,,1. Kiểm tra dropdown.,,"Mặc định: [Lowest available width] - [Highest available width] theo data BC hiện tại.",
+FNW_TC19,UI,Sort Order,Default value lúc tạo mới,,,1. Kiểm tra field Sort Order (nếu tồn tại).,,"`<cần confirm>` — field Sort Order có tồn tại trên Width không; nếu có, dự kiến default Lowest→Highest giống Sale Percentage.","<cần confirm>: xem spec mục 6.9 — sheet gốc thiếu case, chỉ có bằng chứng gián tiếp"
+FNW_TC20,UI,Setup dynamic filter,Default state lúc tạo mới,,,1. Kiểm tra toggle.,,"Toggle OFF (mặc định) + icon tooltip (?) hiển thị.",
+FNW_TC21,UI,Hide on customer group,Default state lúc tạo mới,,,1. Kiểm tra field.,,"""0 selected""; button [Edit] hiển thị.",
+FNW_TC22,UI,Appearance - Display tooltip,Default state lúc tạo mới,,,1. Kiểm tra toggle.,,Toggle ON.,
+FNW_TC23,UI,Appearance - Content View,Default value lúc tạo mới,,,1. Kiểm tra dropdown.,,"Mặc định ""Scrollable"".",
+FNW_TC24,UI,Appearance - Collapse/Expand,Default value cả 2 lúc tạo mới,,,1. Kiểm tra 2 dropdown.,,Desktop và Mobile đều mặc định Expand.,
+FNW_TC25,UI,Appearance - Show search box,Default state cả 2 lúc tạo mới,,,1. Kiểm tra 2 toggle.,,Desktop và Mobile đều mặc định OFF.,
+FNW_TC26,UI,Button [Save Changes],Disable khi chưa cấu hình đủ,,Title = [rỗng],1. Quan sát trạng thái nút trước khi hoàn tất cấu hình.,,Nút disable nếu field required chưa hợp lệ.,
+FNW_TC27,Happy,,Save thành công → quay lại Create new filter tree,,Đã cấu hình hợp lệ lúc Add,1. Click Save Changes.,,Lưu thành công; quay lại MH Create new filter tree; Filter Nodes panel có node Width.,
+,,=== EDIT FILTER NODE - WIDTH ===,,,,,,,
+FNW_TC28,Happy,Mở màn Edit,Load đúng cấu hình đã lưu,,Filter node Width = [đã tồn tại],"1. Chọn node Width ở Filter Nodes panel.
+2. Click icon Edit.",,Hiển thị MH Edit filter node - Width; load đúng toàn bộ cấu hình đã lưu (không reset default).,
+FNW_TC29,Happy,Navigation,Click filter Width từ danh sách → mở đúng Edit screen,,Filter Width đã tồn tại trong danh sách,"1. Vào danh sách filter node.
+2. Click filter ""Width"".",,"Mở Edit screen, panel title = ""Width"", load đúng data hiện có.",
+FNW_TC30,Edge Case,,Nhiều filter cùng tồn tại (Width/Depth/Height/Weight) → không lẫn data,EG: ID mismatch,"Có nhiều filter: Width, Depth, Height, Weight","1. Mở Edit Height, ghi nhận giá trị.
+2. Quay lại danh sách, mở Edit Width.
+3. Kiểm tra toàn bộ field.",,"Toàn bộ field hiển thị đúng data của Width, không lẫn giá trị từ Height.",
+FNW_TC31,Happy,Title,Giá trị đã lưu load đúng,,Title đã lưu ≠ default,"1. Mở Edit.
+2. Quan sát Title.","Title = ""Width (cm)""","Hiển thị đúng ""Width (cm)"", không phải default.",
+FNW_TC32,Happy,,Edit title → preview cập nhật,,Đang ở MH Edit,"1. Xoá Title hiện tại, nhập tên mới.
+2. Kiểm tra Preview.","Title = ""Width (cm)""",Preview cập nhật đúng tên mới ngay lập tức.,
+FNW_TC33,Validation,,Required,,Đang ở MH Edit,"1. Xoá trắng Title.
+2. Click Save Changes.",Title = rỗng,Lỗi required hiển thị; không cho lưu.,
+FNW_TC34,Edge Case,,Title dài hơn 1 dòng + Center/Right — verify alignment thật,Boundary: title wrap,Title = [chuỗi đủ dài wrap 2 dòng],"1. Nhập Title đủ dài.
+2. Chọn Center, sau đó Right.
+3. Quan sát Preview.",,Title vẫn căn đúng theo alignment đã chọn dù 2 dòng.,"Rủi ro NG kế thừa: bug title đa dòng luôn căn trái đã xác nhận ở Category/Special Offers/Sale Percentage/Stock. Xem spec mục 3."
+FNW_TC35,Happy,Title text color,"Màu đã lưu load đúng, đổi màu mới",,Title text color đã lưu ≠ default,"1. Mở Edit, quan sát màu hiện tại.
+2. Chọn màu mới.
+3. Quan sát Preview.",,"1. Màu hiển thị đúng đã lưu.
+3. Title đổi màu đúng.",
+FNW_TC36,Happy,Title alignment,"Đã lưu load đúng, đổi vị trí",,Title alignment đã lưu = [Center],"1. Mở Edit, quan sát alignment.
+2. Chọn Right.
+3. Quan sát Preview.",,"1. Hiển thị đúng Center (đã lưu).
+3. Title căn phải.",
+FNW_TC37,Happy,Display Style,Giá trị đã lưu load đúng,,Display Style đã lưu = [List],"1. Mở Edit.
+2. Quan sát Display Style.",,"Hiển thị đúng ""List"", không reset về default ""Slider - input"".",
+FNW_TC38,Happy,,Chọn List → preview + settings cập nhật,,Display Style = Slider - input,"1. Chọn ""List"".
+2. Kiểm tra Preview.
+3. Kiểm tra các setting Slider-input.",,"2. Preview: filter hiển thị dạng danh sách.
+3. Toàn bộ setting chỉ dành riêng Slider ẩn hoặc disabled.","Rủi ro NG kế thừa: khi không có data, storefront hiển thị chữ ""null"" thay vì ẩn; luôn dư 1 record dạng ""{max} and More"". Xem spec mục 4."
+FNW_TC39,Happy,,Chọn Grid → preview + settings cập nhật,,Display Style = Slider - input,"1. Chọn ""Grid"".
+2. Kiểm tra Preview.
+3. Kiểm tra các setting Slider-input.",,"2. Preview: filter hiển thị dạng lưới.
+3. Toàn bộ setting chỉ dành riêng Slider ẩn hoặc disabled.","Rủi ro NG kế thừa: record đầu tiên luôn bị highlight màu cam sẵn dù chưa chọn gì (khớp bug đã xác nhận NG ở Sale Percentage). Xem spec mục 4."
+FNW_TC40,Happy,,Quay lại Slider - input,,Display Style = List hoặc Grid,"1. Chọn ""Slider - input"".
+2. Kiểm tra Preview và Filter Settings.",,Slider + input boxes hiển thị lại; toàn bộ setting Slider visible trở lại.,"Rủi ro NG kế thừa: sheet gốc ghi nhận NG ""không show lỗi và cho lưu thành công"" ở case này — cần verify kỹ."
+FNW_TC41,Happy,Show range slider,Giá trị đã lưu load đúng,,Show range slider đã lưu = OFF,"1. Mở Edit.
+2. Quan sát toggle.",,"Hiển thị đúng OFF (đã lưu), không reset ON.",
+FNW_TC42,Happy,,Toggle OFF → preview + sub-settings ẩn,,Show range slider = ON,"1. Toggle OFF.
+2. Kiểm tra Preview.
+3. Kiểm tra Filter Settings.",,"2. Slider ẩn (chỉ còn input nếu Show range input = ON).
+3. Slide handle color/Show tooltip/Tooltip color/Has slider steps ẩn hoặc disabled.","Rủi ro NG kế thừa: sheet gốc ghi nhận NG ""không validate""."
+FNW_TC43,Happy,,Toggle ON → khôi phục,Sau khi đã OFF,Show range slider = OFF,"1. Toggle ON.
+2. Kiểm tra Preview và Filter Settings.",,Slider hiển thị lại; Slide handle color/Show tooltip/Has slider steps visible trở lại.,"Rủi ro NG kế thừa: sheet gốc ghi nhận NG ""không validate""."
+FNW_TC44,Happy,Slide handle color,Thay đổi màu → preview cập nhật,,"Show range slider = ON, Display Style = Slider - input","1. Click color swatch.
+2. Chọn màu mới.
+3. Kiểm tra Preview.",,"3. Handle của slider đổi đúng màu mới.",
+FNW_TC45,Happy,Decimal Separator,Giá trị đã lưu load đúng,,Decimal Separator đã lưu ≠ default,"1. Mở Edit.
+2. Quan sát dropdown.",,Hiển thị đúng giá trị đã lưu.,
+FNW_TC46,Happy,,Thay đổi option → preview cập nhật,,Đang ở MH Edit,"1. Mở dropdown.
+2. Chọn option khác.
+3. Kiểm tra Preview.",,"3. Giá trị width hiển thị đúng format separator mới.",
+FNW_TC47,Happy,Show tooltip of range slider,Giá trị đã lưu load đúng,,Show tooltip đã lưu = unchecked,"1. Mở Edit.
+2. Quan sát checkbox.",,"Hiển thị unchecked (đã lưu); Tooltip color field ẩn tương ứng.",
+FNW_TC48,Happy,,Uncheck → tooltip ẩn + Tooltip color ẩn,,Show tooltip = checked,"1. Uncheck.
+2. Kiểm tra Preview.
+3. Kiểm tra Tooltip color field.",,"2. Tooltip ẩn khỏi slider handles.
+3. Tooltip color field ẩn hoặc disabled.",
+FNW_TC49,Happy,Tooltip color,Thay đổi màu → preview cập nhật,,Show tooltip = checked,"1. Click color swatch.
+2. Chọn màu mới.
+3. Kiểm tra Preview.",,3. Tooltip trên slider handles đổi đúng màu mới.,
+FNW_TC50,Happy,Has slider steps,Giá trị đã lưu load đúng,,Has slider steps đã lưu = unchecked,"1. Mở Edit.
+2. Quan sát checkbox.",,"Hiển thị unchecked (đã lưu); Amount + Show step value ẩn tương ứng.",
+FNW_TC51,Happy,,Uncheck → Amount + Show step value ẩn,,Has slider steps = checked,"1. Uncheck.
+2. Kiểm tra Filter Settings.
+3. Kiểm tra Preview.",,"2. Amount of slider steps + Show step value ẩn.
+3. Slider không có step ticks/nhãn số.",
+FNW_TC52,Happy,,Re-check → Amount + Show step value hiện lại,Sau khi đã uncheck,Has slider steps = unchecked,"1. Check lại.
+2. Kiểm tra Filter Settings.",,Amount + Show step value hiện lại.,
+FNW_TC53,Happy,Amount of slider steps,Giá trị đã lưu load đúng,,Amount đã lưu = 6,"1. Mở Edit.
+2. Quan sát giá trị.",,"Hiển thị đúng 6 (đã lưu), không reset về 4.",
+FNW_TC54,Happy,,Thay đổi số bước → preview cập nhật,,Has slider steps = checked,"1. Xoá giá trị hiện tại, nhập số mới.
+2. Kiểm tra Preview.",Amount = 8,3. Slider hiển thị đúng số step (8 khoảng → 9 ticks).,
+FNW_TC55,Edge Case,,Nhập 0 hoặc số âm,Boundary: 0,Has slider steps = checked,"1. Nhập Amount = 0.
+2. Click Save Changes.",Amount = 0,"`<cần confirm>` — kỳ vọng báo lỗi/chặn save, nhưng sheet gốc chưa có bằng chứng actual rõ ràng.",<cần confirm>: xem spec mục 5
+FNW_TC56,Validation,,Nhập ký tự không phải số,,Has slider steps = checked,"1. Nhập Amount = ""abc"".
+2. Thử save.","Amount = ""abc""",Field chỉ chấp nhận số nguyên dương; không cho lưu ký tự.,
+FNW_TC57,Happy,Show step value,Uncheck → nhãn số ẩn khỏi preview,,"Has slider steps = checked, Show step value = checked","1. Uncheck.
+2. Kiểm tra Preview.",,Nhãn số bên dưới slider ẩn; slider vẫn giữ step ticks.,
+FNW_TC58,Happy,Show range input,Giá trị đã lưu load đúng,,Show range input đã lưu = OFF,"1. Mở Edit.
+2. Quan sát toggle.",,"Hiển thị đúng OFF (đã lưu); Show placeholder text/Placeholder text/Unit Display Option ẩn tương ứng.",
+FNW_TC59,Happy,,Toggle OFF → input + sub-settings ẩn,,Show range input = ON,"1. Toggle OFF.
+2. Kiểm tra Preview.
+3. Kiểm tra Filter Settings.",,"2. Input boxes ẩn.
+3. Show placeholder text/Placeholder text/Unit Display Option ẩn hoặc disabled.",
+FNW_TC60,Happy,,Toggle ON → khôi phục,Sau khi đã OFF,Show range input = OFF,"1. Toggle ON.
+2. Kiểm tra Preview và Filter Settings.",,Input boxes hiển thị lại; 3 setting con visible trở lại.,
+FNW_TC61,Happy,Show placeholder text,Uncheck → placeholder ẩn,,"Show range input = ON, Show placeholder text = checked","1. Uncheck.
+2. Kiểm tra field Placeholder text.
+3. Kiểm tra Preview.",,"2. Field ẩn.
+3. Input boxes không hiển thị placeholder khi trống.",
+FNW_TC62,Happy,Placeholder text,Giá trị đã lưu load đúng,,Placeholder đã lưu = [""Min - Max""],"1. Mở Edit.
+2. Quan sát field.",,"Hiển thị đúng ""Min - Max"" (đã lưu), không reset về {{From}} - {{To}}.",
+FNW_TC63,Happy,,Edit → preview cập nhật,,"Show range input = ON, Show placeholder text = checked","1. Xoá giá trị hiện tại, nhập text mới.
+2. Kiểm tra Preview.","Placeholder = ""Min - Max""",Input boxes hiển thị đúng placeholder mới khi trống.,
+FNW_TC64,Happy,Unit Display Option,Giá trị đã lưu load đúng,,Unit Display Option đã lưu ≠ default,"1. Mở Edit.
+2. Quan sát dropdown.",,Hiển thị đúng giá trị đã lưu.,
+FNW_TC65,Happy,,Thay đổi option → preview cập nhật,,Show range input = ON,"1. Mở dropdown, chọn option khác.
+2. Kiểm tra Preview.",,Vị trí đơn vị (cm) thay đổi đúng theo option đã chọn.,
+FNW_TC66,Happy,Range slider & Range input order,Giá trị đã lưu load đúng,,Order đã lưu = [input on top],"1. Mở Edit.
+2. Quan sát Preview.",,"Input boxes hiển thị phía trên slider (đã lưu), không reset về slider on top.",
+FNW_TC67,Happy,,Chuyển sang input on top,,"Show range slider = ON, Show range input = ON","1. Chọn ""input on top"".
+2. Kiểm tra Preview.",,Input boxes hiển thị phía trên slider.,
+FNW_TC68,Happy,Width Range,Pre-fill đúng range hiện tại theo data đã sync (không phải range lúc tạo filter),,"Filter tạo lúc range=[5,120], hiện tại BC đã có product mới → range=[5,250]","1. Mở Edit.
+2. Kiểm tra dropdown Width Range và slider Preview.",,"Hiển thị range MỚI NHẤT = [5, 250], không phải range cũ lúc tạo.","Business rule quan trọng: Width Range luôn tính lại theo data hiện tại, không snapshot tại thời điểm tạo."
+FNW_TC69,Edge Case,,Range khi không còn product nào có Width (data rỗng vì optional),EG: data trống,Tất cả product bị xoá Width,"1. Xoá Width khỏi tất cả product BC.
+2. Trigger sync.
+3. Mở Edit, kiểm tra Width Range.",,"`<cần confirm>` — hiển thị range rỗng/null hay cảnh báo ""không có data"", không giữ range cũ đã lỗi thời.",<cần confirm>: chưa có bằng chứng actual rõ ràng
+FNW_TC70,Edge Case,,"1 phần product có Width, phần còn lại trống (optional) → range chỉ tính trên product có data",,"50% product có Width, 50% để trống","1. Mở Edit, kiểm tra Width Range.
+2. So sánh với số lượng product thực tế có Width.",,"Range chỉ tính trên product CÓ giá trị Width, không tính product để trống vào min/max.",
+FNW_TC71,Validation,,Admin có được nhập tay override min/max không,5W1H: How,Dropdown Width Range hiển thị [Lowest]-[Highest],1. Thử click vào dropdown Width Range kiểm tra có cho nhập tay custom hay chỉ auto-tính.,,"`<cần confirm>` — xác nhận Width Range chỉ đọc tự động (read-only) hay Admin override được (nếu được, cần thêm case validate min<max).","<cần confirm>: xem spec mục 6, câu hỏi #4"
+FNW_TC72,Sync,,"BC có nhiều product Width khác nhau → sync → range [min,max] đúng",,"Products BC có Width, đã sync","1. Kiểm tra dropdown Width Range trong admin.
+2. Kiểm tra Preview slider.","BC Width: min = 5cm, max = 120cm","Admin dropdown: [5] - [120]; Preview slider min=5, max=120.",
+FNW_TC73,Sync,,Tất cả product BC không có Width → sync → range rỗng/filter ẩn,Data rỗng toàn bộ,Tất cả product BC: Width = empty,"1. Trigger sync.
+2. Kiểm tra Width filter trên storefront.",,"`<cần confirm>` — Width filter ẩn hoặc disabled hoàn toàn (không có data để filter); sheet gốc chưa có bằng chứng actual rõ ràng ngoài mô tả kỳ vọng.",<cần confirm>: chưa có actual xác nhận rõ
+FNW_TC74,Sync,,Product mới thêm để trống Width (optional) → không ảnh hưởng range hiện có,"EP: new product, optional empty","Filter Width đang có range=[5,120]","1. Thêm product mới vào BC, để trống Width.
+2. Trigger sync.
+3. Kiểm tra Width Range.",Product mới: Width = (empty),"Range giữ nguyên [5,120], không bị ảnh hưởng — khác Weight (required, mọi product đều có giá trị nên luôn kéo vào tính toán).",
+FNW_TC75,Sync,,BC Width cập nhật (thêm product max mới) → re-sync → storefront cập nhật,,"Width filter đã sync với range cũ [5, 120]","1. Cập nhật Width của product trong BC (thêm giá trị max mới = 250cm).
+2. Trigger re-sync.
+3. Kiểm tra admin Width Range.
+4. Kiểm tra storefront.",Width max mới = 250cm,"Admin Width Range = [5, 250]; staging + storefront slider max cập nhật = 250cm.",
+FNW_TC76,UI,Field [Width] (BC),Label + Optional indicator,,Mở product BC > tab Fulfillment,1. Kiểm tra label và ký hiệu của field Width.,,"- Label: ""Width (Centimeters)"" + icon tooltip (?).
+- Không có dấu * → optional (khác Weight là required).",
+FNW_TC77,Validation,,Nhập số âm,,Mở product BC > tab Fulfillment,"1. Nhập Width = -10.
+2. Save product.",Width = -10,"`<cần confirm>` — BC có chặn lưu hoặc hiển thị lỗi validation không (fact về hành vi BC, chưa tra được BC Developer Docs).",<cần confirm>: cần xác nhận hành vi validate của chính BigCommerce
+FNW_TC78,Validation,,Nhập ký tự không phải số,,Mở product BC > tab Fulfillment,"1. Nhập Width = ""abc"".
+2. Thử save.","Width = ""abc""",BC không nhận ký tự text; field chỉ chấp nhận số (input type number chuẩn BC).,
+FNW_TC79,Sync,,Nhập decimal → sync → staging + storefront đúng,Decimal,Product đã tồn tại trong BC,"1. Nhập Width = 15.5 trong BC.
+2. Save product.
+3. Trigger sync.
+4. Kiểm tra staging.
+5. Kiểm tra Width filter trên storefront.",Width = 15.5cm,"4. Staging: Width = 15.5cm.
+5. Storefront: Width filter range bao gồm giá trị 15.5cm.",
+FNW_TC80,Sync,,Nhập số nguyên → sync → staging + storefront đúng,Số nguyên dương,Product đã tồn tại trong BC,"1. Nhập Width = 40 trong BC.
+2. Save product.
+3. Trigger sync.
+4. Kiểm tra staging và storefront.",Width = 40cm,Staging và storefront đều phản ánh đúng Width = 40cm.,
+FNW_TC81,Sync,,Để trống (optional) → sync → loại khỏi Width Range,Empty (optional),Product đã tồn tại trong BC,"1. Xoá giá trị Width trong BC (để trống).
+2. Save product.
+3. Trigger sync.
+4. Kiểm tra staging và storefront.",Width = (empty),"BC lưu thành công (field optional); staging Width = null/empty; product không tính vào Width Range/filter.",
+FNW_TC82,Sync,,Cập nhật giá trị cũ → mới → re-sync → staging + storefront cập nhật,,Width đã có giá trị cũ và đã sync,"1. Đổi Width sang giá trị mới trong BC.
+2. Save product.
+3. Trigger re-sync.
+4. Kiểm tra staging và storefront.",Width cũ = 30cm → mới = 60cm,Staging cập nhật = 60cm; storefront Width Range phản ánh giá trị mới.,
+FNW_TC83,Sync,,Xoá giá trị (có → rỗng) → re-sync → loại khỏi range,,Width đã có giá trị cũ và đã sync,"1. Xoá giá trị Width trong BC.
+2. Save product.
+3. Trigger re-sync.
+4. Kiểm tra staging và storefront.",Width cũ = 40cm → mới = (empty),Staging = null/empty; product bị loại khỏi Width Range.,
+FNW_TC84,Sync,,Cập nhật BC nhưng CHƯA re-sync → giữ giá trị cũ (stale),Stale data,Width đã sync với giá trị cũ,"1. Đổi Width trong BC.
+2. Save product.
+3. KHÔNG trigger sync.
+4. Kiểm tra staging và storefront.",,"Staging và Width filter range vẫn giữ giá trị cũ, chưa cập nhật cho tới khi sync chạy lại.",
+FNW_TC85,Edge Case,,Nhiều chữ số thập phân → sync,EP: nhiều chữ số,Product đã tồn tại trong BC,"1. Nhập Width = 10.123456 trong BC.
+2. Save product.
+3. Trigger sync.
+4. Kiểm tra staging và storefront.",Width = 10.123456cm,"`<cần confirm>` — BC lưu nguyên hay làm tròn theo giới hạn thập phân; staging sync đúng theo giá trị BC đã lưu.",<cần confirm>: chưa xác nhận số chữ số thập phân tối đa BC cho phép
+FNW_TC86,Edge Case,,Số rất lớn → sync,EP: giá trị lớn,Product đã tồn tại trong BC,"1. Nhập Width = 999999.99 trong BC.
+2. Save product.
+3. Trigger sync.
+4. Kiểm tra staging và storefront.",Width = 999999.99cm,"`<cần confirm>` — BC lưu thành công hay cảnh báo giới hạn max; nếu lưu được, slider max cập nhật đúng.",<cần confirm>: chưa xác nhận giới hạn max của BC
+FNW_TC87,Happy,Sort Order,Giá trị đã lưu load đúng,,Sort Order đã lưu = [Highest → Lowest],"1. Mở Edit (nếu field tồn tại).
+2. Quan sát field.",,"`<cần confirm>` — hiển thị đúng Highest → Lowest (đã lưu), không reset default.",<cần confirm>: xem spec mục 6.9
+FNW_TC88,Happy,,Chọn Highest → Lowest,,Sort Order = [Lowest → Highest],"1. Chọn Highest → Lowest.
+2. Kiểm tra storefront.",,"`<cần confirm>` — storefront hiển thị đúng thứ tự Highest → Lowest.","<cần confirm>: sheet gốc (note lạc) tự nghi vấn thứ tự H-L/L-H/Manual đang sai — xem spec mục 6.9"
+FNW_TC89,Happy,,Chọn Manual order,,Sort Order = [Lowest → Highest],"1. Chọn Manual order.
+2. Kiểm tra storefront.",,"`<cần confirm>` — cơ chế Manual order (kéo thả) cho range liên tục hoạt động thế nào (khác Sale Percentage — range rời rạc dễ kéo thả hơn).","<cần confirm>: chưa rõ Manual order áp dụng thế nào cho range liên tục — xem spec mục 6.9"
+FNW_TC90,Happy,Setup dynamic filter,Giá trị đã lưu load đúng,,Setup dynamic filter đã lưu = ON,"1. Mở Edit.
+2. Quan sát toggle.",,Hiển thị đúng ON (đã lưu).,
+FNW_TC91,Happy,,Toggle ON → filter range tự động theo context,,Setup dynamic filter = OFF,"1. Toggle ON.
+2. Save Changes.
+3. Kiểm tra storefront khi search/category thay đổi.",,"`<cần confirm>` — Width filter range tự động thu hẹp theo sản phẩm hiện có trong kết quả tìm kiếm/category.",<cần confirm>: cơ chế chính xác chưa rõ — xem spec mục 6.6
+FNW_TC92,Edge Case,Filter [Width] - Live storefront impact,Admin đổi Amount of slider steps khi customer đang kéo slider ở vị trí tuỳ chỉnh,ST: mid-interaction,"Customer đang chọn range [10,50] trên storefront","1. Admin sửa Amount từ 4 thành 8, Save, sync.
+2. Customer (không reload) tiếp tục tương tác.
+3. Customer reload trang.",,"2. Trước reload: vị trí slider customer giữ nguyên [10,50].
+3. Sau reload: slider hiển thị số step mới, vị trí reset (không giữ [10,50]).",
+FNW_TC93,Edge Case,,Width Range đổi (do data BC mới) khi customer đang chọn range cũ ngoài phạm vi mới,ST: mid-interaction,"Customer đang chọn [200,250], range cũ=[5,250]","1. Product Width=250 bị xoá khỏi BC, sync → range mới=[5,120].
+2. Customer (không reload) tiếp tục tương tác.
+3. Customer reload trang.",,"`<cần confirm>` — trước reload trả 0 kết quả (vượt range mới); sau reload có tự clamp về range mới hay reset full range.","<cần confirm>: chưa xác nhận hành vi clamp — xem spec mục 9"
+FNW_TC94,Happy,Hide on customer group,Load đúng selection đã lưu,,Hide on customer group đã lưu = [2 nhóm],"1. Mở Edit.
+2. Quan sát field.",,"Hiển thị ""2 selected"" đúng số đã lưu.",
+FNW_TC95,Happy,,Click [Edit] → chọn group → filter ẩn với group đó,,Có ít nhất 1 customer group tồn tại,"1. Click [Edit].
+2. Chọn 1 group.
+3. Save Changes.
+4. Đăng nhập account thuộc group đó → storefront.",,"3. Admin hiển thị số group được chọn.
+4. `<cần confirm>` — Width filter phải ẩn với group đó, nhưng rủi ro NG kế thừa từ Sale Percentage (vẫn hiển thị filter dù thuộc group).","<cần confirm>: rủi ro NG kế thừa — xem spec mục 7"
+FNW_TC96,Edge Case,,BC xoá customer group → popup có update số lượng không,,Customer group đang có trong danh sách,"1. Xoá customer group trên BC.
+2. Mở lại popup Select customer group.",,"`<cần confirm>` — rủi ro NG kế thừa: popup không update số lượng hiển thị ngoài MH Edit (bug đã xác nhận ở Sale Percentage).","<cần confirm>: rủi ro NG kế thừa — xem spec mục 7"
+FNW_TC97,Happy,Appearance - Display tooltip,Load đúng trạng thái + nội dung đã lưu,,Display tooltip đã lưu = [ON + nội dung tuỳ chỉnh],"1. Mở Edit.
+2. Quan sát toggle + content.",,Toggle ON; nội dung đúng đã lưu.,
+FNW_TC98,Happy,,Toggle OFF → icon tooltip ẩn trên storefront,,Display tooltip = ON,"1. Toggle OFF.
+2. Save Changes.
+3. Kiểm tra storefront.",,3. Icon tooltip (?) không hiển thị cạnh tiêu đề Width filter.,
+FNW_TC99,Validation,,Tooltip content required khi ON,,Tooltip content rỗng,1. Bật toggle ON.,,Không cho phép bật / cảnh báo required.,
+FNW_TC100,Happy,Appearance - Content View,Load đúng giá trị đã lưu,,Content View đã lưu ≠ default,"1. Mở Edit.
+2. Quan sát dropdown.",,Hiển thị đúng giá trị đã lưu.,
+FNW_TC101,Happy,,Thay đổi option → storefront cập nhật,,Đang ở MH Edit,"1. Mở dropdown, chọn option khác.
+2. Save Changes.
+3. Kiểm tra storefront.",,3. Width filter hiển thị đúng content view đã chọn.,
+FNW_TC102,Happy,Appearance - Collapse/Expand,"Load đúng giá trị Desktop/Mobile đã lưu, độc lập",,"Desktop = [Collapse], Mobile = [Expand]","1. Mở Edit.
+2. Quan sát Preview Desktop và Mobile.",,Desktop đúng Collapse; Mobile đúng Expand.,
+FNW_TC103,Happy,,Đổi Desktop/Mobile độc lập,,Đang ở MH Edit,"1. Set Desktop = Collapse, Mobile = Expand.
+2. Save Changes.
+3. Kiểm tra Preview cả 2.",,"Desktop và Mobile hoạt động độc lập, đúng trạng thái tương ứng.",
+FNW_TC104,Happy,Appearance - Show search box,"Load đúng trạng thái Desktop/Mobile đã lưu",,"Desktop = ON, Mobile = OFF","1. Mở Edit.
+2. Quan sát 2 toggle.",,Desktop ON; Mobile OFF — đúng đã lưu.,
+FNW_TC105,Happy,,Toggle ON Desktop → search box hiển thị,,Show search box on desktop = OFF,"1. Toggle ON.
+2. Save Changes.
+3. Kiểm tra Desktop storefront.",,3. Search box hiển thị trong Width filter.,
+FNW_TC106,Happy,,Toggle ON Mobile → search box hiển thị,,Show search box on mobile = OFF,"1. Toggle ON.
+2. Save Changes.
+3. Kiểm tra Mobile storefront.",,3. Search box hiển thị trong Width filter.,
+FNW_TC107,Happy,Preview panel,Switch Desktop → Mobile,,Đang ở MH Edit,"1. Click tab Mobile.
+2. Kiểm tra layout.",,Tab Mobile active; Preview hiển thị layout mobile.,
+FNW_TC108,Happy,,Real-time cập nhật khi đổi setting,,Đang ở MH Edit,"1. Đổi bất kỳ setting nào.
+2. Quan sát Preview ngay sau đó.",,"Preview cập nhật ngay lập tức, không cần Save.",
+FNW_TC109,UI,Button [Save Changes],Disable khi chưa có thay đổi,,"Vừa mở MH Edit, chưa chỉnh gì",1. Quan sát trạng thái nút.,,Nút ở trạng thái disable.,
+FNW_TC110,Happy,,Enable khi sửa 1 field bất kỳ,,Đang ở MH Edit,"1. Sửa 1 field bất kỳ.
+2. Quan sát nút.",,Nút chuyển sang enable.,
+FNW_TC111,Happy,,"Edit 1 field → Save → chỉ field đó cập nhật, field khác giữ nguyên",,Filter Width đã tồn tại với data cũ,"1. Chỉ sửa Amount of slider steps.
+2. Save Changes.
+3. Reload, kiểm tra toàn bộ field.",Amount mới = 8,Amount cập nhật đúng; các field khác giữ nguyên giá trị cũ.,
+FNW_TC112,Happy,,Edit nhiều field cùng lúc → Save → tất cả cập nhật đồng thời,,Filter Width đã tồn tại,"1. Sửa Title, Display Style, Placeholder text.
+2. Save Changes.
+3. Reload, kiểm tra.",3 field thay đổi cùng lúc,"Cả 3 thay đổi được lưu đồng thời, không sót field nào.",
+FNW_TC113,Edge Case,,Save khi không sửa gì (no-op),EG: no-op save,Chưa sửa gì,"1. Mở Edit.
+2. Click Save Changes ngay.",,"Lưu thành công bình thường, không lỗi.",
+FNW_TC114,Validation,,Chặn save khi field invalid,,Title đang bị xoá trắng,1. Click Save Changes.,Title = rỗng,Không cho save; lỗi đúng tại field invalid.,
+FNW_TC115,Happy,Button [Save as template],"Lưu template từ filter đang edit, không ảnh hưởng filter gốc",,Settings hợp lệ,"1. Cấu hình lại 1 vài setting.
+2. Click Save as template (không Save Changes).",,Template mới tạo với settings hiện tại; filter Width gốc KHÔNG đổi cho tới khi Save Changes.,
+FNW_TC116,Happy,Navigation guard,"Sửa field, click Back chưa Save → hiển thị warning",ST: unsaved state,Filter Width đã tồn tại,"1. Sửa Amount of slider steps (chưa Save).
+2. Click Back (←).",,"Hiển thị dialog cảnh báo unsaved changes, option Discard/Save/Cancel.",
+FNW_TC117,Happy,,Chọn Discard → revert về data cũ,,Đang hiển thị warning dialog,"1. Chọn Discard.
+2. Mở lại Edit Width.",,Data hiển thị đúng giá trị gốc trước khi sửa.,
+FNW_TC118,Edge Case,,Reload/đóng tab khi có thay đổi chưa lưu,EG: browser-level,"Đang sửa field, chưa Save","1. Sửa 1 field.
+2. Nhấn F5 hoặc đóng tab.",,"`<cần confirm>` — browser hiển thị cảnh báo native, hay tính năng này chưa implement.",<cần confirm>: chưa xác nhận actual
+FNW_TC119,Happy,Button [Delete],Hiển thị action Delete trên Edit screen (không có ở Create),,Mở Edit Width,1. Kiểm tra toàn bộ Edit screen tìm action Delete.,,Có button/icon Delete filter node; Create screen không có action này.,
+FNW_TC120,Happy,,Confirm Delete → filter bị xoá khỏi danh sách + storefront,,"Edit Width đang mở, đã click Delete","1. Confirm Delete.
+2. Kiểm tra danh sách filter node.
+3. Trigger sync.
+4. Kiểm tra storefront.",,Filter Width biến mất khỏi danh sách admin; sau sync không còn trên storefront.,
+FNW_TC121,Happy,,Cancel Delete → filter giữ nguyên,,Đang hiển thị confirm dialog,1. Click Cancel.,,"Filter Width không bị xoá, vẫn còn nguyên.",
+FNW_TC122,Edge Case,Concurrent edit,2 admin cùng Edit filter Width đồng thời,EG: race condition,2 admin cùng mở Edit Width,"1. Admin A sửa Title, Save.
+2. Admin B (đã mở từ trước, chưa refresh) sửa Display Style, Save sau A.",,"`<cần confirm>` — thay đổi B có ghi đè mất thay đổi A (lost update) hay có cảnh báo conflict.",<cần confirm>: xem spec mục 10
+FNW_TC123,Happy,Field [Title] - Liên kết nội bộ,Đổi Title không làm vỡ liên kết filter (ID/slug nội bộ),,Filter Width đang được tham chiếu ở filter tree/storefront,"1. Đổi Title.
+2. Save.
+3. Kiểm tra filter tree và storefront.",,"Filter vẫn hoạt động đúng, không gãy link, không tạo filter trùng lặp.",
+FNW_TC124,Happy,Filter [Width] - Storefront,Width optional để trống → loại khỏi Width Range/filter,,Product B: Width = [để trống],"1. Trigger sync.
+2. Kiểm tra Width Range và filter trên storefront.",Width = (empty),"BC lưu thành công (optional); product B không tính vào Width Range, không xuất hiện khi filter theo bất kỳ khoảng nào.",
+FNW_TC125,Happy,,Filter theo range đã chọn → chỉ product trong range,,"Width filter đã sync, storefront đang mở","1. Kéo slider về khoảng [20, 80].
+2. Kiểm tra danh sách sản phẩm.",Width range selected = 20–80cm,"`<cần confirm>` — chỉ hiển thị sản phẩm có Width 20-80cm, khớp data BC.","<cần confirm>: rủi ro NG kế thừa — root cause bug lọc storefront chung Category/Special Offers/Sale Percentage. Xem spec mục 9."
+FNW_TC126,Happy,,User nhập range vào input boxes → kết quả đúng + slider đồng bộ,,Show range input = ON,"1. Nhập From = 10, To = 50.
+2. Confirm/Apply.
+3. Kiểm tra danh sách sản phẩm.
+4. Kiểm tra slider handles.","From = 10cm, To = 50cm","Chỉ hiển thị sản phẩm Width 10-50cm; slider tự cập nhật về [10,50].","<cần confirm>: cùng rủi ro NG kế thừa như TC125."
+FNW_TC127,Happy,,User clear filter → toàn bộ sản phẩm trở lại,,Width filter đang được áp dụng,"1. Clear/reset filter.
+2. Kiểm tra danh sách sản phẩm, slider, input.",,Slider + input reset về full range; toàn bộ sản phẩm hiển thị lại.,
+FNW_TC128,Edge Case,,Input From > To,,Show range input = ON,"1. Nhập From = 80, To = 10.
+2. Confirm/Apply.","From = 80cm, To = 10cm","`<cần confirm>` — chặn apply hay tự swap thành [10, 80].",<cần confirm>: chưa xác nhận actual
+FNW_TC129,Edge Case,,Slider kéo 2 handle về cùng 1 điểm,,Show range slider = ON,"1. Kéo cả 2 handle về cùng giá trị (VD 40cm).
+2. Kiểm tra kết quả.",From = To = 40cm,"`<cần confirm>` — hiển thị exact match (Width=40cm) hay xử lý khác (prevent/swap).",<cần confirm>: chưa xác nhận actual
+FNW_TC130,Happy,,AND logic với filter khác,,Filter tree có cả Width và Brand; đã publish,"1. Chọn range Width [20,80].
+2. Thêm filter Brand = OFS.
+3. Kiểm tra kết quả.",,"`<cần confirm>` — chỉ product vừa trong range Width vừa Brand=OFS hiển thị (AND logic).","<cần confirm>: sheet gốc không có case riêng cho AND logic — suy luận theo pattern chung. Xem spec mục 9."
+FNW_TC131,Happy,Filter [Width] - Merchandising,Product bị Hidden không tính vào Width Range/count,,Product A trong Merchandising campaign đang active bị Hidden,"1. Truy cập storefront trong context campaign.
+2. Kiểm tra Width Range và filter.",,"`<cần confirm>` — Product A không tính vào Width Range/count dù có Width hợp lệ.","<cần confirm>: sheet gốc không có case riêng — suy luận theo pattern chung mọi node. Xem spec mục 9."

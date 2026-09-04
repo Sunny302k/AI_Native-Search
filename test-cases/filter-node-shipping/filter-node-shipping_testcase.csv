@@ -1,0 +1,252 @@
+﻿ID,Test Type,Test Objective,,,Preconditions,Test Steps,Input DB/Setting,Expected Result,Note
+,,=== ADD FILTER NODE - SHIPPING ===,,,,,,,
+FNSHP_TC01,UI,Page header,Breadcrumb title,,Mở MH Add Filter Node - Shipping,1. Kiểm tra breadcrumb phía trên trái.,,"Breadcrumb hiển thị ""← Shipping"".",
+FNSHP_TC02,UI,Button [Save as template] / [Save Changes],Hiển thị,,Mở MH Add Filter Node - Shipping,1. Kiểm tra 2 button góc trên phải.,,"- [Save as template]: outlined.
+- [Save Changes]: màu cam (primary).",
+FNSHP_TC03,UI,Page layout,3 section hiển thị đủ,,Mở MH Add Filter Node - Shipping,1. Scroll left panel.,,"3 section đúng thứ tự: GENERAL SETTINGS → FILTER SETTINGS → APPEARANCE SETTINGS, header màu cam.",
+FNSHP_TC04,Happy,Preview panel,Live update không cần Save,,- Đã mở MH Add Filter Node - Shipping,"1. Đổi bất kỳ setting nào (VD Title).
+2. Quan sát Preview ngay sau đó.",,2. Preview cập nhật ngay lập tức mà không cần nhấn [Save Changes].,
+FNSHP_TC05,Happy,,Switch tab Mobile,,,"1. Click tab Mobile trong Preview.
+2. Kiểm tra layout.",,"- Tab Mobile active.
+- Preview hiển thị layout mobile của Shipping filter.",
+FNSHP_TC06,UI,,Desktop / Mobile tabs,,Mở MH Add Filter Node - Shipping,1. Kiểm tra Preview panel.,,Tab Desktop và Mobile hiển thị; Desktop active mặc định.,
+FNSHP_TC07,Happy,Field [Title],Đổi giá trị,,- Field Title có giá trị mặc định,"1. Xóa giá trị Title hiện tại, nhập tên mới.
+2. Kiểm tra Preview.",Title = ""Shipping Method"","- Field lưu giá trị mới.
+- Preview: tiêu đề filter cập nhật đúng tên mới.",
+FNSHP_TC08,Negative,,Để trống,,,"1. Xóa trống field Title.
+2. Click [Save Changes].",Title = (rỗng),Lỗi: Title là bắt buộc; không cho phép lưu.,
+FNSHP_TC09,UI,,Default value lúc tạo mới,,,1. Kiểm tra field Title.,,"Title mặc định = ""Shipping"".",
+FNSHP_TC10,Happy,Title text color,Đổi màu,,,"1. Click color swatch.
+2. Chọn màu mới.
+3. Kiểm tra Preview.",,"- Màu lưu thành công.
+- Preview: tiêu đề filter hiển thị đúng màu mới.","<cần confirm>: rủi ro bug hệ thống-wide (title dài >1 dòng luôn căn trái) đã xác nhận NG ở nhiều node khác — sheet Shipping không nhắc tới, chưa rõ có áp dụng"
+FNSHP_TC11,UI,,Default value lúc tạo mới,,,1. Kiểm tra color swatch.,,Màu mặc định (dark).,
+FNSHP_TC12,Happy,Title alignment,Chọn Center,,Title alignment = Left,"1. Click option Center.
+2. Kiểm tra Preview.",,"- Option Center active.
+- Preview: tiêu đề filter căn giữa.",
+FNSHP_TC13,Happy,,Chọn Right,,Title alignment = Left,"1. Click option Right.
+2. Kiểm tra Preview.",,"- Option Right active.
+- Preview: tiêu đề filter căn phải.",
+FNSHP_TC14,UI,,Default lúc tạo mới,,,1. Kiểm tra trạng thái mặc định.,,Option Left active (viền cam).,
+FNSHP_TC15,Happy,Filter options,Đổi label Free Shipping,,Filter options: cả 2 đang checked,"1. Sửa label ""Free Shipping"" thành text mới.
+2. Kiểm tra Preview.",Label = ""Miễn phí vận chuyển"","- Label lưu thành công.
+- Preview: option hiển thị ""Miễn phí vận chuyển"" thay vì ""Free Shipping"".",
+FNSHP_TC16,Happy,,Đổi label Paid,,Filter options: cả 2 đang checked,"1. Sửa label ""Paid"" thành text mới.
+2. Kiểm tra Preview.",Label = ""Trả phí"","- Label lưu thành công.
+- Preview: option hiển thị ""Trả phí"" thay vì ""Paid"".",
+FNSHP_TC17,Happy,,Uncheck Free Shipping,,Filter options: cả 2 đang checked,"1. Uncheck option ""Free Shipping"".
+2. Kiểm tra Preview.
+3. Save Changes.
+4. Kiểm tra storefront.",,"- Preview: chỉ còn option ""Paid"".
+- Storefront: filter Shipping chỉ hiển thị ""Paid"".",
+FNSHP_TC18,Happy,,Uncheck Paid,,Filter options: cả 2 đang checked,"1. Uncheck option ""Paid"".
+2. Kiểm tra Preview.
+3. Save Changes.
+4. Kiểm tra storefront.",,"- Preview: chỉ còn option ""Free Shipping"".
+- Storefront: filter Shipping chỉ hiển thị ""Free Shipping"".",
+FNSHP_TC19,Happy,,Check lại option đã uncheck,,Một option đang bị unchecked,"1. Check lại option đã uncheck.
+2. Kiểm tra Preview.
+3. Save Changes.
+4. Kiểm tra storefront.",,"- Preview: option hiển thị lại.
+- Storefront: filter Shipping hiển thị đầy đủ 2 options.",
+FNSHP_TC20,Negative,,Uncheck cả 2 option,,Filter options: cả 2 đang checked,"1. Uncheck cả ""Free Shipping"" và ""Paid"".
+2. Click [Save Changes].",,"Lỗi: phải có ít nhất 1 option được chọn. Hoặc filter ẩn hoàn toàn trên storefront (theo spec).","<cần confirm>: chưa chốt giữa 2 khả năng (xem spec mục 3)"
+FNSHP_TC21,Edge,,Label rỗng,,Filter Settings visible,"1. Xóa toàn bộ nội dung label của option ""Free Shipping"".
+2. Click [Save Changes].",Label = (empty),"Lỗi: label không được để trống. Hoặc reverts về giá trị mặc định (theo spec).","<cần confirm>: chưa chốt giữa 2 khả năng (xem spec mục 3)"
+FNSHP_TC22,Edge,,2 option trùng label,,Filter Settings visible,"1. Sửa label ""Paid"" thành ""Free Shipping"" (giống label kia).
+2. Click [Save Changes].",Label Paid = ""Free Shipping"",Cảnh báo hoặc lỗi: 2 options không được có label giống nhau (theo spec).,"<cần confirm>: chưa chốt hành vi (xem spec mục 3)"
+FNSHP_TC23,UI,,Default state,,Filter Settings visible,1. Kiểm tra Filter options section.,,"- 2 options: ""Free Shipping"" và ""Paid"".
+- Cả 2 checkbox checked mặc định.
+- Mỗi option có editable label bên dưới.",
+FNSHP_TC24,Happy,Option Select Type,Chọn Multiple,,Option Select Type = Single,"1. Chọn Multiple.
+2. Kiểm tra Preview.
+3. Save Changes.
+4. Kiểm tra storefront.",,"- Preview: filter cho phép chọn cả 2 options cùng lúc.
+- Storefront: tick được cả ""Free Shipping"" và ""Paid"" đồng thời.",
+FNSHP_TC25,Happy,,Chọn lại Single,,Option Select Type = Multiple,"1. Chọn Single.
+2. Save Changes.
+3. Kiểm tra storefront.",,"Storefront: khi chọn 1 option, option kia tự deselect.",
+FNSHP_TC26,UI,,Default value,,Filter Settings visible,1. Kiểm tra Option Select Type mặc định.,,Dropdown hiển thị: Single (mặc định).,
+FNSHP_TC27,Happy,Display Style,Chuyển sang Grid,,Display Style = List,"1. Chọn Grid.
+2. Kiểm tra Preview.",,"- Grid active.
+- Preview: Free Shipping và Paid hiển thị dạng lưới.",
+FNSHP_TC28,Happy,,Chuyển sang Toggle,,Display Style = List,"1. Chọn Toggle.
+2. Kiểm tra Preview.",,"- Toggle active.
+- Preview: Free Shipping và Paid hiển thị dạng toggle switch.",
+FNSHP_TC29,Happy,,Quay lại List,,Display Style = Grid hoặc Toggle,"1. Chọn List.
+2. Kiểm tra Preview.",,"- List active.
+- Preview: Free Shipping và Paid hiển thị dạng danh sách với checkbox.",
+FNSHP_TC30,UI,,Default value,,Filter Settings visible,1. Kiểm tra Display Style mặc định.,,Dropdown hiển thị: List (mặc định).,
+FNSHP_TC31,Happy,Hide on customer group,Chọn 1 customer group,,Có ít nhất 1 customer group tồn tại,"1. Click [Edit].
+2. Chọn group.
+3. Xác nhận.
+4. Save Changes.
+5. Login với account thuộc group → vào storefront.",,"- Admin: số group được chọn cập nhật.
+- Storefront: Shipping filter không hiển thị với customer thuộc group đó.","<cần confirm>: rủi ro bug hệ thống-wide (storefront vẫn hiện filter dù bị hide) đã xác nhận NG ở nhiều node khác — sheet Shipping không nhắc tới, chưa rõ có áp dụng (xem spec mục 7)"
+FNSHP_TC32,UI,,Default state,,Filter Settings visible,1. Kiểm tra HIDE ON CUSTOMER GROUP.,,"- Hiển thị ""0 selected"".
+- Button [Edit] màu cam visible.",
+FNSHP_TC33,Happy,Sort Order,Kéo thả đổi thứ tự,,Filter Settings visible,"1. Kéo ""Paid"" lên trên ""Free Shipping"".
+2. Kiểm tra Preview.
+3. Save Changes.
+4. Kiểm tra storefront.",,"- Preview: ""Paid"" trên, ""Free Shipping"" dưới.
+- Storefront: thứ tự phản ánh đúng custom order.",
+FNSHP_TC34,UI,,Default value,,Filter Settings visible,1. Kiểm tra Sort Order mặc định.,,"Thứ tự mặc định: ""Free Shipping"" trên, ""Paid"" dưới.",
+FNSHP_TC35,Happy,Display tooltip,Toggle OFF,,Display tooltip = ON,"1. Toggle OFF.
+2. Save Changes.
+3. Kiểm tra storefront.",,3. Icon tooltip (?) không hiển thị cạnh tiêu đề Shipping filter.,
+FNSHP_TC36,UI,,Default state,,Appearance Settings visible,1. Kiểm tra toggle Display tooltip.,,Toggle ON (mặc định).,
+FNSHP_TC37,Happy,Tooltip content,Đổi nội dung,,Display tooltip = ON,"1. Xóa Tooltip content, nhập text mới.
+2. Save Changes.
+3. Hover icon (?) trên storefront.",Tooltip = ""Filter by shipping type"",3. Hover hiển thị đúng nội dung mới.,
+FNSHP_TC38,UI,,Default value,,Display tooltip = ON,1. Kiểm tra field Tooltip content.,,Field hiển thị text mặc định mô tả về Shipping filter.,
+FNSHP_TC39,Happy,Collapse / Expand (Desktop) / (Mobile),Desktop = Collapse,,Appearance Settings visible,"1. Chọn Collapse (On Desktop).
+2. Save Changes.
+3. Kiểm tra Desktop storefront.",,"3. Shipping filter collapsed (ẩn options, chỉ hiện title).",
+FNSHP_TC40,Happy,,Mobile = Collapse,,Appearance Settings visible,"1. Chọn Collapse (On Mobile).
+2. Save Changes.
+3. Kiểm tra Mobile storefront.",,3. Shipping filter collapsed.,
+FNSHP_TC41,UI,,Default value,,Appearance Settings visible,1. Kiểm tra cả 2 dropdown Collapse/Expand.,,"- (On Desktop): Expand (mặc định).
+- (On Mobile): Expand (mặc định).",
+FNSHP_TC42,Happy,Display all values in uppercase form,Toggle ON,,Toggle OFF (mặc định),"1. Toggle ON.
+2. Save Changes.
+3. Kiểm tra storefront Shipping filter.",,"3. Storefront: options hiển thị ALL CAPS: ""FREE SHIPPING"" và ""PAID"".",
+FNSHP_TC43,Happy,,Toggle OFF lại,,Toggle ON,"1. Toggle OFF.
+2. Save Changes.
+3. Kiểm tra storefront.",,"3. Storefront: options hiển thị normal case: ""Free Shipping"" và ""Paid"".",
+FNSHP_TC44,Happy,,Uppercase áp dụng lên custom label,,Toggle uppercase = OFF,"1. Sửa label ""Free Shipping"" → ""Miễn phí"".
+2. Toggle uppercase = ON.
+3. Save Changes.
+4. Kiểm tra storefront.","Label = ""Miễn phí"", Uppercase = ON","4. Storefront hiển thị ""MIỄN PHÍ"" (uppercase của custom label, không phải label gốc).",
+FNSHP_TC45,UI,,Default state,,Appearance Settings visible,1. Kiểm tra toggle Display all values in uppercase form.,,Toggle OFF (mặc định).,
+FNSHP_TC46,Happy,Show search box on desktop / mobile,Toggle cả 2 ON,,Show search box = OFF cả 2,"1. Toggle Show search box on desktop = ON.
+2. Toggle Show search box on mobile = ON.
+3. Save Changes.
+4. Kiểm tra Desktop và Mobile storefront.",,"- Desktop: search box hiển thị trong Shipping filter.
+- Mobile: search box hiển thị trong Shipping filter.",
+FNSHP_TC47,UI,,Default state,,Appearance Settings visible,1. Kiểm tra cả 2 toggle Show search box.,,"Show search box on desktop: OFF (mặc định). Show search box on mobile: OFF (mặc định).",
+FNSHP_TC48,Happy,Button [Save Changes],Lưu thành công,,Tất cả required field đã điền hợp lệ,"1. Cấu hình settings cho Shipping filter.
+2. Click [Save Changes].",,"Toast success hiển thị. Settings persist khi reload page. Storefront phản ánh settings mới.",
+FNSHP_TC49,Negative,,Title trống,,Field Title đang trống,1. Click [Save Changes].,Title = (rỗng),"Lỗi validation hiển thị, không lưu thành công.",
+FNSHP_TC50,Happy,Button [Save as template],Lưu template,,Settings hợp lệ,"1. Cấu hình settings.
+2. Click [Save as template].",,"Template lưu thành công. Template có thể tái sử dụng khi tạo filter mới.",
+,,=== EDIT FILTER NODE - SHIPPING ===,,,,,,,
+FNSHP_TC51,Happy,Navigation,Mở đúng Edit screen,,Filter Shipping đã tồn tại,"1. Vào danh sách filter node.
+2. Click filter ""Shipping"".",,"Mở Edit screen, panel title = ""Shipping"", load đúng data hiện có của filter này.",
+FNSHP_TC52,Edge,,Nhiều filter cùng tồn tại — không lẫn data,,"Filter Shipping, Stock, Featured Products cùng tồn tại","1. Mở Edit Stock, ghi nhận giá trị.
+2. Quay lại danh sách, mở Edit Shipping.
+3. Kiểm tra toàn bộ field.",,"3. Toàn bộ field hiển thị đúng data của Shipping, không lẫn giá trị từ Stock/Featured Products.",
+FNSHP_TC53,Happy,Pre-fill General Settings,Title / color / Alignment,,"Filter Shipping đã lưu Title=""Shipping"", color khác default, Alignment=Center","1. Mở Edit Shipping, kiểm tra 3 setting.",,"Title, color, Alignment hiển thị đúng giá trị đã lưu, không reset về default.",
+FNSHP_TC54,Happy,Pre-fill Filter options,Checkbox + label đã lưu,,"Filter Shipping đã lưu: Free Shipping=unchecked, Paid=checked, label custom","1. Mở Edit Shipping, kiểm tra Filter options.",,"Checkbox và label của cả 2 option hiển thị đúng giá trị đã lưu (VD ""Miễn phí vận chuyển"" cho Free Shipping).",
+FNSHP_TC55,Happy,Filter options,Check lại option đã unchecked,,Option ""Free Shipping"" đang unchecked (đã lưu từ trước),"1. Check lại ""Free Shipping"".
+2. Save Changes.
+3. Trigger sync.
+4. Kiểm tra storefront.",,"Option ""Free Shipping"" xuất hiện lại trên storefront với count đúng theo data thực tế hiện tại (không mất count do thời gian đã ẩn).",
+FNSHP_TC56,Negative,,Uncheck cả 2 option,,Cả 2 option đang checked,"1. Uncheck cả ""Free Shipping"" và ""Paid"".
+2. Click [Save Changes].",,"Lỗi: phải có ít nhất 1 option được chọn, hoặc filter ẩn hoàn toàn trên storefront (theo spec).","<cần confirm>: xem TC20"
+FNSHP_TC57,Negative,,Cảnh báo khi uncheck option đang có count,,"Option ""Paid"" hiện có count=5","1. Uncheck ""Paid"".
+2. Click [Save Changes].",Paid count=5 tại thời điểm edit,"Xác nhận spec: có cảnh báo ""5 sản phẩm đang Paid sẽ bị ẩn khỏi filter"" trước khi cho Save hay không.","<cần confirm>: sheet gốc tự đặt câu hỏi, chưa chốt (xem spec mục 9.2)"
+FNSHP_TC58,Edge,,2 option trùng label sau khi Edit,,Filter Shipping đã tồn tại,"1. Sửa label ""Paid"" thành ""Free Shipping"" (trùng).
+2. Click [Save Changes].",,"Cảnh báo/lỗi: không cho 2 option trùng label (xác nhận spec).","<cần confirm>: xem TC22"
+FNSHP_TC59,Happy,Pre-fill Option Select Type / Display Style,Không reset default,,"Filter Shipping đã lưu Option Select Type=Multiple, Display Style=Grid","1. Mở Edit Shipping, kiểm tra 2 dropdown.",,"Hiển thị đúng Multiple/Grid (không reset về Single/List default).",
+FNSHP_TC60,Happy,Option Select Type,Đổi Single→Multiple khi customer đã chọn,,"Customer đang chọn ""Free Shipping"" trên storefront, hiện tại Single","1. Customer chọn ""Free Shipping"" trên storefront.
+2. Admin đổi sang Multiple, Save.
+3. Customer reload.",,"Selection cũ giữ nguyên, customer chọn thêm được ""Paid"" (Multiple mode).",
+FNSHP_TC61,Happy,Pre-fill Hide on customer group,Đúng số group đã ẩn,,Filter Shipping đã ẩn với 2 customer group,"1. Mở Edit Shipping, kiểm tra setting.",,"Hiển thị ""2 selected"" đúng số đã lưu.",
+FNSHP_TC62,Happy,Hide on customer group,Đổi group đang ẩn,,Đang ẩn với 2 group,"1. Click Edit, bỏ 1 group, thêm 1 group khác.
+2. Save Changes.
+3. Login account thuộc group mới/cũ → kiểm tra storefront.",,"Account thuộc group mới: filter Shipping bị ẩn. Account thuộc group đã bỏ: filter Shipping hiện lại.",
+FNSHP_TC63,Happy,Pre-fill Sort Order,Giữ đúng custom order,,"Filter Shipping đã custom order: Paid trên, Free Shipping dưới","1. Mở Edit Shipping, kiểm tra thứ tự.",,"Hiển thị đúng: Paid → Free Shipping (giữ custom order, không reset).",
+FNSHP_TC64,Happy,Sort Order,Kéo lại thứ tự,,Filter Shipping đã có custom order,"1. Kéo ""Free Shipping"" lên đầu.
+2. Save Changes.
+3. Kiểm tra storefront.",,Thứ tự mới áp dụng đúng trên storefront.,
+FNSHP_TC65,Happy,Pre-fill Appearance Settings,Toàn bộ setting,,Filter Shipping đã lưu Appearance setting khác default,"1. Mở Edit Shipping, kiểm tra toàn bộ Appearance Settings.",,"Tất cả toggle/dropdown hiển thị đúng giá trị đã lưu, không reset default.",
+FNSHP_TC66,Happy,Display all values in uppercase form,Toggle OFF sau khi đã lưu ON + label unicode,,"Toggle đã lưu = ON, label = ""Sắp hết""","1. Mở Edit Shipping, xác nhận toggle ON và storefront hiện ""SẮP HẾT"".
+2. Toggle OFF.
+3. Save Changes.
+4. Kiểm tra storefront.",,"Toggle OFF lưu thành công; storefront hiển thị lại đúng case gốc ""Sắp hết"" (không còn uppercase).",EG: Unicode
+FNSHP_TC67,Happy,Preview panel,Pre-load đúng count hiện tại,,"Filter Shipping đang live với count: Free Shipping(6), Paid(9)","1. Mở Edit Shipping, kiểm tra Preview ngay khi load.",,"Preview hiển thị đúng count hiện tại: Free Shipping(6), Paid(9).",
+FNSHP_TC68,Sync,Shipping filter — phân loại & count,Product is_free_shipping=checked → phân loại Free Shipping,,Product BC có Free Shipping checkbox = checked,"1. Trigger sync.
+2. Kiểm tra Shipping filter trên storefront.",Free Shipping = ✅ checked,"Staging: product được index với value = ""Free Shipping"". Storefront: count bên cạnh ""Free Shipping"" tăng đúng số lượng.",
+FNSHP_TC69,Sync,,Product is_free_shipping=unchecked → phân loại Paid,,Product BC có Free Shipping checkbox = unchecked,"1. Trigger sync.
+2. Kiểm tra Shipping filter trên storefront.",Free Shipping = ☐ unchecked,"Staging: product được index với value = ""Paid"". Storefront: count bên cạnh ""Paid"" tăng đúng số lượng.",
+FNSHP_TC70,Sync,,Fixed Shipping Price KHÔNG ảnh hưởng phân loại (Free Shipping=checked),,,1. Trigger sync.,"Fixed Shipping Price = 50, Free Shipping = ✅","Staging: product index là ""Free Shipping"" — is_free_shipping checkbox quyết định, Fixed Shipping Price bị bỏ qua hoàn toàn. Storefront: product xuất hiện trong count của ""Free Shipping"".",
+FNSHP_TC71,Sync,,Fixed Shipping Price KHÔNG ảnh hưởng phân loại (Free Shipping=unchecked),,,1. Trigger sync.,"Fixed Shipping Price = 0, Free Shipping = ☐","Staging: product index là ""Paid"" dù Fixed Shipping Price = 0 — chỉ is_free_shipping checkbox quyết định. Storefront: product xuất hiện trong count của ""Paid"".",
+FNSHP_TC72,Sync,,BC đổi checked→unchecked → re-sync,,Product BC đã sync với Free Shipping = checked,"1. Uncheck [Free Shipping] của product trong BC.
+2. Save product.
+3. Trigger re-sync.
+4. Kiểm tra Shipping filter trên storefront.",Free Shipping: checked → unchecked,"Staging: product chuyển từ ""Free Shipping"" sang ""Paid"". Storefront: count ""Free Shipping"" giảm 1, count ""Paid"" tăng 1.",
+FNSHP_TC73,Sync,,BC đổi unchecked→checked → re-sync,,Product BC đã sync với Free Shipping = unchecked,"1. Check [Free Shipping] của product trong BC.
+2. Save product.
+3. Trigger re-sync.
+4. Kiểm tra Shipping filter trên storefront.",Free Shipping: unchecked → checked,"Staging: product chuyển từ ""Paid"" sang ""Free Shipping"". Storefront: count ""Paid"" giảm 1, count ""Free Shipping"" tăng 1.",
+FNSHP_TC74,Sync,,BC đổi checkbox nhưng chưa re-sync (stale),,Product BC đã sync,"1. Thay đổi Free Shipping checkbox trong BC.
+2. Save product.
+3. KHÔNG trigger sync.
+4. Kiểm tra storefront Shipping filter.",,Staging: count vẫn giữ giá trị cũ. Storefront: count không thay đổi cho đến khi có re-sync.,
+FNSHP_TC75,Sync,,Nhiều product mix — count đúng từng option,,"BC có nhiều products, mix Free Shipping và Paid, đã sync","1. Vào storefront, kiểm tra count của từng option trong Shipping filter.","3 products Free Shipping, 5 products Paid","Option ""Free Shipping"" hiển thị count = 3. Option ""Paid"" hiển thị count = 5.",
+FNSHP_TC76,Sync,,Product bị xoá khỏi BC → count giảm,,"Product BC đã sync, tồn tại trong count","1. Xóa product trong BC.
+2. Trigger re-sync.
+3. Kiểm tra count trong Shipping filter.",,Count của option tương ứng (Free Shipping hoặc Paid) giảm đúng 1.,
+FNSHP_TC77,Sync,,Toàn bộ product cùng Free Shipping=checked,,Tất cả products BC có Free Shipping = checked,"1. Trigger sync.
+2. Kiểm tra Shipping filter trên storefront.",,"Option ""Free Shipping"": count = tổng số products. Option ""Paid"": count = 0 hoặc ẩn option (theo spec).","<cần confirm>: chưa xác nhận UI cụ thể khi count=0"
+FNSHP_TC78,Sync,,Toàn bộ product cùng Free Shipping=unchecked,,Tất cả products BC có Free Shipping = unchecked,"1. Trigger sync.
+2. Kiểm tra Shipping filter trên storefront.",,"Option ""Paid"": count = tổng số products. Option ""Free Shipping"": count = 0 hoặc ẩn (theo spec).","<cần confirm>: chưa xác nhận UI cụ thể khi count=0"
+FNSHP_TC79,Sync,,Product Type = Digital có ẩn field Free Shipping không,,1 product Type = Digital tồn tại trong BC,"1. Tạo product Type = Digital.
+2. Sync về hệ thống.
+3. Trên storefront, kiểm tra product Digital có được tính vào Shipping filter không.",,"Xác nhận spec: product Digital có tính vào count Free Shipping/Paid hay bị loại hoàn toàn khỏi filter Shipping (nếu BC ẩn field Free Shipping khi Digital).","<cần confirm>: suy luận theo pattern đã xác nhận ở Weight/Height (độ tin cậy thấp — sheet Shipping không có case riêng, xem spec mục 9.1)"
+FNSHP_TC80,Sync,,Sync đang In Progress,,Filter Shipping đang hiển thị count cũ,"1. BC đổi Free Shipping 1 product, trigger sync.
+2. Trong lúc batch sync đang chạy (In Progress), kiểm tra Admin và storefront.",Batch sync hiện tại = In Progress,Admin/Storefront hiển thị data theo config cũ hay mới trong lúc đang sync — cần xác nhận theo pattern chung dự án.,"<cần confirm>: câu hỏi Loại 2 đã ghi nhận chung ở docs/bigcommerce-platform-facts.md mục 4"
+FNSHP_TC81,Sync,,Batch sync gần nhất Failed,,Filter Shipping đang hiển thị count cũ,"1. BC đổi Free Shipping 1 product.
+2. Trigger sync nhưng để batch fail (giả lập lỗi).
+3. Kiểm tra Admin và storefront.",Batch sync = Failed,"Admin/Storefront giữ nguyên count cũ (data lần sync Success gần nhất), không hiển thị data lỗi/rỗng.","<cần confirm>: chưa có bằng chứng rõ trong spec, cần xác nhận BA"
+FNSHP_TC82,Sync,,Manual Sync và Schedule Sync trả kết quả như nhau,,"Cùng 1 thay đổi Free Shipping bên BC, chưa sync","1. Trigger Manual Sync, kiểm tra count.
+2. Revert lại thay đổi, lặp lại nhưng dùng Schedule Sync tới lượt Products.
+3. So sánh kết quả 2 lần.",,Count cập nhật giống nhau bất kể trigger qua Manual Sync hay Schedule Sync.,
+FNSHP_TC83,Sync,Shipping filter — kết quả lọc storefront,Single mode: click Free Shipping,,"Option Select Type = Single, storefront đang mở","1. Click ""Free Shipping"" trong Shipping filter.
+2. Kiểm tra danh sách sản phẩm.",,Chỉ hiển thị products có Free Shipping = checked trong BC. Số lượng = count hiển thị cạnh option.,
+FNSHP_TC84,Sync,,Single mode: click Paid,,"Option Select Type = Single, storefront đang mở","1. Click ""Paid"" trong Shipping filter.
+2. Kiểm tra danh sách sản phẩm.",,"Chỉ hiển thị products có Free Shipping = unchecked. Số lượng = count hiển thị cạnh option. ""Free Shipping"" tự deselect (Single mode).",
+FNSHP_TC85,Sync,,Multiple mode: tick cả 2,,"Option Select Type = Multiple, storefront đang mở","1. Tick cả ""Free Shipping"" và ""Paid"".
+2. Kiểm tra danh sách sản phẩm.",,Hiển thị tất cả sản phẩm (both Free và Paid). Tổng = count Free Shipping + count Paid.,
+FNSHP_TC86,Sync,,Clear filter → reset toàn bộ,,Shipping filter đang được áp dụng,"1. Deselect / clear Shipping filter trên storefront.
+2. Kiểm tra danh sách sản phẩm.",,"Filter reset, không còn option nào được chọn. Toàn bộ sản phẩm hiển thị lại.",
+FNSHP_TC87,Sync,,AND logic với filter khác,,Shipping filter kết hợp với 1 filter khác (VD Brand),"1. Chọn Shipping = ""Free Shipping"" + Brand = X.
+2. Kiểm tra danh sách sản phẩm.",,Chỉ hiển thị sản phẩm thoả CẢ 2 điều kiện đồng thời (AND logic).,"<cần confirm>: suy luận theo pattern chung dự án, sheet gốc không có case riêng cho Shipping"
+FNSHP_TC88,Sync,,Merchandising — product Hidden có tính vào count/filter không,,1 product Free Shipping=checked nhưng bị set Hidden trên BC,"1. Trigger sync.
+2. Kiểm tra count và kết quả filter trên storefront có còn tính product Hidden này không.",,Product Hidden không tính vào count/filter Shipping.,"<cần confirm>: suy luận theo pattern chung dự án, sheet gốc không có case riêng cho Shipping"
+FNSHP_TC89,Sync,,Admin sửa label khi customer đang xem filter,,Customer đang mở storefront; filter Shipping hiển thị label cũ,"1. Admin sửa label ""Free Shipping"" → ""Miễn phí"", Save, trigger sync.
+2. Customer (không reload) tiếp tục tương tác.
+3. Customer reload trang.",,"Trước reload: label cũ vẫn hiển thị (không tự cập nhật real-time). Sau reload: label mới ""Miễn phí"" hiển thị đúng.",
+FNSHP_TC90,Sync,,Admin uncheck option mà customer đang chọn,,"Customer đang chọn ""Paid"" trên storefront","1. Admin uncheck ""Paid"", Save, sync.
+2. Customer reload.",,"Option không còn hiển thị; kết quả sản phẩm của customer trả về toàn bộ (filter cũ bị reset do option không còn).","<cần confirm>: sheet gốc mô tả hành vi này nhưng chưa hoàn toàn chắc chắn (xem spec mục 9.3)"
+FNSHP_TC91,Sync,,Sync độc lập trong lúc Admin đang mở Edit,,Đang mở Edit Shipping (chưa Save),"1. Đồng thời check/uncheck Free Shipping của 1 product trong BC, trigger sync.
+2. Admin Save Edit screen (không liên quan product đó), kiểm tra storefront.",,"Sync data Shipping (BC→staging→storefront) hoạt động độc lập, không bị block hay ảnh hưởng bởi việc Admin đang mở Edit screen của filter Shipping.",5W1H: When (sync độc lập)
+FNSHP_TC92,Sync,,Count trên Preview khớp count storefront khi mở Edit,,Filter Shipping đang live với count thực tế,"1. Mở Edit Shipping, kiểm tra count hiển thị trên Preview ngay khi load so với count thực tế trên storefront.",,"Count trên Preview khớp đúng với count trên storefront tại thời điểm mở Edit (đồng nhất dữ liệu).",5W1H: Where
+FNSHP_TC93,Happy,Button [Save Changes] (Edit),Sửa 1 field,,Filter Shipping đã tồn tại với data cũ,"1. Chỉ sửa Title.
+2. Save Changes.
+3. Reload, kiểm tra toàn bộ field.",Title mới,Title cập nhật đúng; tất cả field khác giữ nguyên giá trị cũ.,
+FNSHP_TC94,Happy,,Sửa nhiều field cùng lúc,,Filter Shipping đã tồn tại,"1. Sửa Title, Display Style, và uncheck 1 option.
+2. Save Changes.
+3. Reload, kiểm tra.",3 field thay đổi cùng lúc,"Cả 3 thay đổi được lưu đồng thời, không có field nào bị bỏ sót.",
+FNSHP_TC95,Edge,,Save khi không sửa gì (no-op),,Chưa sửa gì,"1. Mở Edit Shipping.
+2. Click [Save Changes] ngay.",,"Lưu thành công bình thường, không lỗi.",EG: no-op save
+FNSHP_TC96,Negative,,Title trống,,Title đang trống,1. Click [Save Changes].,,"Lỗi validation hiển thị, không lưu thành công.",
+FNSHP_TC97,Happy,Button [Save as template] (Edit),Không ảnh hưởng filter gốc,,Settings hợp lệ,"1. Cấu hình lại 1 vài setting.
+2. Click [Save as template] (không Save Changes).",,"Template mới được tạo với settings hiện tại; filter Shipping gốc KHÔNG bị thay đổi cho đến khi Save Changes.",
+FNSHP_TC98,Happy,Navigation guard,Cảnh báo unsaved changes,,Filter Shipping đã tồn tại,"1. Sửa Title (chưa Save).
+2. Click Back (←).",,"Hiển thị dialog cảnh báo có thay đổi chưa lưu, với option Discard/Save/Cancel.",ST: unsaved state
+FNSHP_TC99,Happy,,Chọn Discard,,Đang hiển thị warning dialog,"1. Chọn ""Discard"".
+2. Mở lại Edit Shipping.",,Data hiển thị lại đúng giá trị gốc trước khi sửa.,
+FNSHP_TC100,Edge,,Reload/đóng tab khi có thay đổi chưa lưu,,Đang sửa field chưa Save,"1. Sửa 1 field.
+2. Nhấn F5 hoặc đóng tab.",,"Browser hiển thị cảnh báo native (nếu có implement), hoặc xác nhận spec không có tính năng này.","<cần confirm>: xem spec mục 10"
+FNSHP_TC101,UI,Button [Delete],Hiển thị action Delete,,Mở Edit Shipping,1. Kiểm tra toàn bộ Edit screen tìm action Delete.,,Có button/icon Delete filter node (Create screen không có action này).,
+FNSHP_TC102,Happy,,Confirm Delete,,"Edit Shipping đang mở, đã click Delete","1. Confirm Delete.
+2. Kiểm tra danh sách filter node.
+3. Trigger sync.
+4. Kiểm tra storefront.",,"Filter Shipping biến mất khỏi danh sách admin; sau sync, không còn hiển thị trên storefront.",
+FNSHP_TC103,Happy,,Cancel Delete,,Đang hiển thị confirm dialog,1. Click Cancel.,,"Filter Shipping không bị xóa, vẫn còn nguyên.",
+FNSHP_TC104,Happy,Đổi Title,Không vỡ liên kết,,Filter Shipping đang được tham chiếu ở filter tree/storefront,"1. Đổi Title thành ""Shipping Method"".
+2. Save.
+3. Kiểm tra filter tree và storefront.",,"Filter vẫn hoạt động đúng, không gãy link, không tạo filter trùng lặp.",
+FNSHP_TC105,Edge,Concurrent edit,2 admin cùng edit đồng thời,,2 admin cùng mở Edit Shipping,"1. Admin A sửa Title, Save.
+2. Admin B đã mở từ trước (chưa refresh), sửa Display Style, Save sau Admin A.",,"Xác nhận spec: thay đổi Admin B có ghi đè mất thay đổi Admin A không (lost update), hay có cảnh báo conflict.","<cần confirm>: xem spec mục 10"
