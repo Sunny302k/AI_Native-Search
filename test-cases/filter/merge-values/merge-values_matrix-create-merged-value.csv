@@ -1,0 +1,26 @@
+﻿Field,Valid/Invalid,Giá trị,MTC01,MTC02,MTC03,MTC04,MTC05,MTC06,MTC07,MTC08
+Màn hình / Action,,MH [Merged Values] — modal Create new merged value — click [Save] ở bước 2,,,,,,,,
+Precondition,,"Đang ở màn Merged Values, vừa mở modal Create new merged value tại bước 1",0,0,0,0,0,0,0,0
+Test Type,,,Happy,Happy,Edge,Negative,Negative,Negative,Negative,Negative
+Dropdown lọc nguồn,Valid,Giữ mặc định All sources - không thao tác,,,,,,,,
+Ô Search value,Valid,Không thao tác,,,,,,,,
+Selected values,Valid,Chọn ≥2 value,1,1,1,,,1,1,1
+,Invalid,Chọn đúng 1 value,,,,1,,,,
+,Invalid,Không chọn value nào,,,,,1,,,
+,,Click [Next],2,2,2,2,,2,2,2
+Filter option,Valid,Chọn tên từ dropdown,3,,,,,,,
+,Valid,Nhập tay tên hợp lệ,,3,,,,,,
+,Valid,Nhập tay đúng 255 ký tự,,,3,,,,,
+,Invalid,Để trống,,,,,,3,,
+,Invalid,Trùng tên filter option đã tồn tại,,,,,,,3,
+,Invalid,Nhập tay 256 ký tự,,,,,,,,3
+,,Click [Save],4,4,4,,,4,4,4
+Output,,"Tạo thành công; hiện toast ""Merged value is created successfully!""",4,4,4,,,,,
+,,Merged value mới xuất hiện ở Merged Value List với Status = ON,4,4,4,,,,,
+,,Tên đầy đủ 255 ký tự hiển thị đúng ở cột Filter option,,,4,,,,,
+,,Không sang được bước 2; yêu cầu chọn tối thiểu 2 value,,,,2,,,,
+,,Nút [Next] ở trạng thái disable; không click được,,,,,1,,,
+,,Chặn lưu; hiển thị lỗi required tại ô Filter option,,,,,,4,,
+,,Chặn lưu; báo lỗi trùng tên filter option,,,,,,,4,
+,,Chặn lưu; báo vượt giới hạn 255 ký tự,,,,,,,,4
+Test Result,,,,,,,,,,

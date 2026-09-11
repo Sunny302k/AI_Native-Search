@@ -1,6 +1,6 @@
 # Coverage checklist - filter-node-height
 
-Đối chiếu `docs/specs/filter-node-height-specs.md` với `test-cases/filter-node-height/filter-node-height_testcase.csv` (124 case, FNHGT_TC01-124, tổ chức theo 2 banner ADD/EDIT).
+Đối chiếu `docs/specs/filter-node-height-specs.md` với `test-cases/filter/filter-tree/filter-node-height/filter-node-height_testcase.csv` (124 case, FNHGT_TC01-124, tổ chức theo 2 banner ADD/EDIT).
 
 **So với Weight**: sheet gốc Height đầy đủ hơn hẳn (có sẵn bidirectional input/slider sync, Clear filter, From>To, 2 handle trùng điểm — 4 rule từng bị bỏ sót ở Weight) nên coverage lần này tốt hơn rõ rệt: chỉ còn **3 Not covered** (so với 9 của Weight).
 
@@ -121,4 +121,4 @@
 
 **1 rule Partial**: AC-21 (Sort Order) — chỉ test được sự tồn tại, tương tự Width/Weight.
 
-**Tín hiệu tích cực**: 4 rule từng là gap ở Weight (AC-45 đến AC-48 tương ứng bidirectional sync/Clear filter/From>To/2-handle) đã được Height cover đầy đủ nhờ sheet gốc phong phú hơn — không phải do cải thiện quy trình viết test case, mà do chất lượng input khác nhau giữa 2 sheet. Cân nhắc bổ sung ngược 4 case này cho Weight (`test-cases/filter-node-weight/filter-node-weight_testcase.csv`) để đồng bộ độ phủ giữa các node cùng pattern.
+**Tín hiệu tích cực**: 4 rule từng là gap ở Weight (AC-45 đến AC-48 tương ứng bidirectional sync/Clear filter/From>To/2-handle) đã được Height cover đầy đủ nhờ sheet gốc phong phú hơn — không phải do cải thiện quy trình viết test case, mà do chất lượng input khác nhau giữa 2 sheet. Cân nhắc bổ sung ngược 4 case này cho Weight (`test-cases/filter/filter-tree/filter-node-weight/filter-node-weight_testcase.csv`) để đồng bộ độ phủ giữa các node cùng pattern.

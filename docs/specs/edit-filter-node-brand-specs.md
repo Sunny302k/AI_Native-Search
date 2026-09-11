@@ -12,7 +12,7 @@ Viết ngược từ sheet test case `Add filter node - Brand` (145 case, Google
 - **Case #139-141** (không phải 139-142): vẫn gắn nhãn "Edit filter node - Brand" nhưng Expected Result lại mô tả "Storefront Details - Set featured product" — đúng là nghi copy nhầm từ sheet Featured Products như nhận định gốc, **không dùng làm căn cứ**.
 - **Case #142-195** (54 case, phát hiện mới): đây **không phải case Brand bị lỗi** mà là toàn bộ 1 sheet **"Edit filter node - Condition"** hoàn chỉnh, mạch lạc, bị nối tiếp vào cùng tab ngay sau phần Brand — hoàn toàn không liên quan tới Brand, không phải "case cuối bị lỗi" như nhận định gốc.
 
-Đã rà soát lại toàn bộ `test-cases/edit-filter-node-brand/edit-filter-node-brand_testcase.csv` (85 case) — xác nhận **không có case nào bị lẫn nội dung Condition** (mọi chỗ nhắc "Condition" đều là so sánh chủ động, đúng ngữ cảnh, đối chiếu 2 node dùng chung pattern). Việc sửa lần này chỉ đính chính lại metadata mô tả nguồn (mục 12), không có thay đổi nội dung nghiệp vụ nào trong spec hay trong file test case.
+Đã rà soát lại toàn bộ `test-cases/filter/filter-tree/edit-filter-node-brand/edit-filter-node-brand_testcase.csv` (85 case) — xác nhận **không có case nào bị lẫn nội dung Condition** (mọi chỗ nhắc "Condition" đều là so sánh chủ động, đúng ngữ cảnh, đối chiếu 2 node dùng chung pattern). Việc sửa lần này chỉ đính chính lại metadata mô tả nguồn (mục 12), không có thay đổi nội dung nghiệp vụ nào trong spec hay trong file test case.
 
 ## 1. Tổng quan
 

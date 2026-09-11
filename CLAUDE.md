@@ -34,7 +34,10 @@ Module **Analytics** có nhắc tên trong tài liệu tổng quan nhưng chưa 
 ├── docs/
 │   ├── sync-fields-glossary.md   # whitelist entity/field sync từ BigCommerce, dùng để gắn nhãn Nguồn dữ liệu
 │   └── specs/          # spec từng feature Native Search, viết ra từ extract-figma-spec hoặc viết ngược từ test case sheet gốc
-├── test-cases/         # tài liệu test case, 1 folder/feature (kebab-case)
+├── test-cases/         # tài liệu test case, gom theo MODULE rồi mới tới feature (kebab-case)
+│   └── filter/         # module Filter
+│       ├── filter-tree/    # Filter Tree/Node Setup — 1 folder/filter node
+│       └── merge-values/   # Merge Values
 └── test-reports/       # báo cáo kết quả test (hiện đang rỗng)
 ```
 

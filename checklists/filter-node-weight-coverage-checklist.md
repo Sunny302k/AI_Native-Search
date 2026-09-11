@@ -1,6 +1,6 @@
 # Coverage checklist - filter-node-weight
 
-Đối chiếu `docs/specs/filter-node-weight-specs.md` với `test-cases/filter-node-weight/filter-node-weight_testcase.csv` (123 case, FNWGT_TC01-123, tổ chức theo 2 banner ADD/EDIT).
+Đối chiếu `docs/specs/filter-node-weight-specs.md` với `test-cases/filter/filter-tree/filter-node-weight/filter-node-weight_testcase.csv` (123 case, FNWGT_TC01-123, tổ chức theo 2 banner ADD/EDIT).
 
 > **Cập nhật 2026-08-12 (lần 1)**: theo yêu cầu người dùng, đã bổ sung 5 case Happy re-test trong context Edit (pre-loaded state) cho các field có cascading show/hide logic — Display Style, Show range slider, Has slider steps, Show range input, Hide on customer group — thay vì chỉ test 1 lần ở Add.
 > **Cập nhật 2026-08-12 (lần 2)**: backfill ngược 4 case còn thiếu (AC-45 đến AC-48) sau khi đối chiếu với `filter-node-height-coverage-checklist.md` — sheet gốc Height có sẵn các rule này nhưng Weight thì không, nay bổ sung cho đồng bộ. Toàn bộ ID tham chiếu bên dưới đã cập nhật theo số thứ tự mới sau mỗi lần chèn case.

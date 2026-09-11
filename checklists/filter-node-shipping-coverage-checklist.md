@@ -1,6 +1,6 @@
 # Coverage checklist - filter-node-shipping
 
-Đối chiếu `docs/specs/filter-node-shipping-specs.md` với `test-cases/filter-node-shipping/filter-node-shipping_testcase.csv` (105 case, FNSHP_TC01-105, tổ chức theo 2 banner ADD/EDIT).
+Đối chiếu `docs/specs/filter-node-shipping-specs.md` với `test-cases/filter/filter-tree/filter-node-shipping/filter-node-shipping_testcase.csv` (105 case, FNSHP_TC01-105, tổ chức theo 2 banner ADD/EDIT).
 
 ## Tổng quan
 

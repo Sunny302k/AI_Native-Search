@@ -8,7 +8,7 @@ Không có quyền truy cập Figma trực tiếp (không có MCP Figma khả d�
 2. Frame **Edit filter node - Condition** (panel General Settings / Filter Settings / Appearance Settings + Preview).
 3. Frame **Create new filter** (khung builder chung, General Setting + Filter Nodes panel, Condition node đã add).
 
-Đối chiếu chéo bổ sung với `test-cases/edit-filter-node-condition/edit-filter-node-condition_testcase.csv` (54 case, đã có sẵn trong dự án trước khi viết spec này) cho các field/rule không quan sát được trực tiếp trên ảnh (VD: field bị cắt ngoài vùng chụp, hành vi validate). Field/rule lấy từ nguồn này được ghi rõ "Nguồn: test case" thay vì "Nguồn: ảnh Figma" ở cột tương ứng. Tham chiếu khung dùng chung ở `filter-tree-common-specs.md` và pattern loại filter node anh em ở `edit-filter-node-brand-specs.md`.
+Đối chiếu chéo bổ sung với `test-cases/filter/filter-tree/edit-filter-node-condition/edit-filter-node-condition_testcase.csv` (54 case, đã có sẵn trong dự án trước khi viết spec này) cho các field/rule không quan sát được trực tiếp trên ảnh (VD: field bị cắt ngoài vùng chụp, hành vi validate). Field/rule lấy từ nguồn này được ghi rõ "Nguồn: test case" thay vì "Nguồn: ảnh Figma" ở cột tương ứng. Tham chiếu khung dùng chung ở `filter-tree-common-specs.md` và pattern loại filter node anh em ở `edit-filter-node-brand-specs.md`.
 
 ## 1. Tổng quan
 
