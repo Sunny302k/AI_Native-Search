@@ -26,15 +26,31 @@ Trước khi viết test case, xác định vùng rủi ro cao trong feature đ�
 
 Tiếp nhận các câu trả lời của người dùng. Trường hợp không có câu trả lời tất cả các test case mà cần phải làm rõ thì hãy thêm tag <cần confirm> vào phần test case đó để người dùng có thể dễ dàng nhận biết và xác nhận lại.
 
+### Bước 3.5: Áp dụng đủ bộ kỹ thuật test — BẮT BUỘC cho từng field, từng action, từng trạng thái
+
+Chạy đủ 7 kỹ thuật dưới đây trước khi viết case. Với skill này, đơn vị áp dụng là **từng field / từng action / từng trạng thái hiển thị trên UI** (lấy từ spec + Figma kèm note trên frame), không phải cả màn hình gộp lại.
+
+| Kỹ thuật | Áp dụng thế nào trong test chức năng |
+|---|---|
+| **5W1H** | *What*: đổi giá trị field/thực hiện action thì ảnh hưởng gì (màn Admin khác, kết quả trên Storefront ISW/SRP/Category Page) · *Who*: role nào thấy/thao tác được · *When*: khi nào field hiện/ẩn, enable/disable (eligibility precondition, trạng thái entity Draft/Active/Inactive, dữ liệu chưa sync về) · *Where*: liệt kê ĐỦ entry point (click, phím tắt, bulk action, import) và nơi kết quả hiển thị lại — cấu hình ở Admin quyết định hiển thị trên Storefront thì phải có case kiểm chứng trên Storefront · *Why*: sai thì merchant/shopper chịu hậu quả gì · *How*: giá trị được áp dụng thế nào (Save/Publish, có cần sync/re-index mới lên Storefront không). Field lấy dữ liệu từ BigCommerce thì xét thêm trước/sau sync theo `create-sync-testcase` |
+| **Equivalence Partitioning** | Mỗi field chia lớp hợp lệ/không hợp lệ; mỗi option của dropdown/toggle/radio dẫn tới hành vi khác nhau là 1 lớp riêng — không lấy 1 option đại diện cho cả danh sách khi các option cho kết quả khác nhau |
+| **Boundary Value Analysis** | Mọi field có ràng buộc số/độ dài/số lượng: `min-1`, `min`, `max`, `max+1`. Thêm biên hay quên: rỗng vs chỉ có khoảng trắng, 0, số thập phân, 1 phần tử vs nhiều phần tử, đúng ngưỡng hợp lệ (không chỉ vượt ngưỡng) |
+| **Decision Table** | Bắt buộc khi kết quả phụ thuộc ≥2 field/điều kiện (field B chỉ hiện khi field A = X; nút chỉ enable khi đủ nhiều điều kiện; hành vi đổi theo loại entity × trạng thái) |
+| **State Transition** | Entity/element có trạng thái (Draft/Active/Inactive, bật/tắt, đang chỉnh sửa, đang sync...): chuyển hợp lệ, chuyển bị chặn, trạng thái ranh giới (rỗng/cuối cùng/duy nhất), và **quay lui** (Cancel, bỏ thay đổi chưa lưu, rời trang khi chưa Save, tắt lại sau khi bật) |
+| **Error Guessing** | Spam click / double submit; mất mạng khi lưu; 2 tab cùng chỉnh 1 bản ghi; reload giữa chừng; thao tác đúng lúc job sync đang chạy; paste nội dung rất dài hoặc định dạng lạ; khoảng trắng đầu/cuối; emoji/Unicode/có dấu tiếng Việt; chuỗi dạng script/HTML |
+| **Exploratory** | Đề xuất 3-5 charter, ưu tiên các field/action mà spec mô tả sơ sài (đặc biệt module Search và Filter Tree/Node Setup) hoặc chỉ có trong note Figma |
+
+**Bảng rà kỹ thuật** — lập trước khi viết case và trình bày trong báo cáo cuối:
+
+| Field / Action | EP | BVA | Decision Table | State Transition | Error Guessing |
+|---|---|---|---|---|---|
+
+Ô không áp dụng ghi `–` kèm lý do ngắn. Không được ghi `–` cho **BVA** ở field có bất kỳ ràng buộc số/độ dài/số lượng nào, không được ghi `–` cho **State Transition** ở entity/element có trạng thái, và không được ghi `–` cho **Error Guessing** ở action có ghi dữ liệu.
+
 ### Bước 4: Thực hiện tạo test case
 
 - Tạo test case dựa trên đặc tả đã phân tích,
-- Sử dụng các kỹ thuật viết test case chuẩn như:
-
-  - phân vùng tương đương
-  - phân tích giá trị biên
-  - bảng quyết định
-  - sơ đồ trạng thái
+- Viết case theo đúng kết quả của Bước 3.5 — mỗi dòng trong bảng rà kỹ thuật phải có case tương ứng, đủ 7 kỹ thuật: 5W1H, phân vùng tương đương, phân tích giá trị biên, bảng quyết định, sơ đồ trạng thái, error guessing, exploratory (riêng exploratory xuất ra dạng charter trong báo cáo, không viết thành case).
 
 Quy định về output:
 
@@ -159,9 +175,13 @@ Chỉ bỏ qua bước này khi task không có case validate nào VÀ không c�
 - Số lượng test case đã tạo
 - Số lượng test case cần confirm
 - (Các) file matrix đã sinh, hoặc lý do task này không cần matrix
+- **Bảng rà kỹ thuật** (Bước 3.5) — đầy đủ mọi field/action, kèm lý do cho từng ô ghi `–`
+- **3-5 charter exploratory testing**, ưu tiên field/action spec mô tả sơ sài hoặc chỉ có trong note Figma
+- **Gợi ý bước tiếp theo**: nhắc người dùng chạy skill `review-testcase-quality` để review độc lập (đối chiếu Figma + rà lại 7 kỹ thuật). KHÔNG tự review tại chỗ trong cùng lượt vừa viết case — skill đó chạy qua subagent với context sạch để tránh tự xác nhận chính mình.
 
 ## Ràng buộc
 
+- **Không được viết test case khi chưa chạy đủ 7 kỹ thuật ở Bước 3.5 và chưa lập bảng rà kỹ thuật.** Không báo hoàn thành khi báo cáo thiếu bảng rà hoặc thiếu charter exploratory. Áp dụng theo từng field/action/trạng thái cụ thể, không áp dụng ở mức "màn hình nói chung".
 - Không được phép bịa test case nếu không có đủ thông tin từ đặc tả hoặc người dùng. Trong trường hợp này, hãy sử dụng tag <cần confirm> để đánh dấu các test case cần xác nhận lại.
 - Luôn tuân thủ quy định về định dạng và nội dung của test case để đảm bảo tính nhất quán và dễ hiểu cho người dùng.
 - **Không tự viết case Test Type = Integration trong skill này.** Nếu trong lúc phân tích phát hiện cần case Integration (ảnh hưởng luồng/feature khác, đặc biệt khi story hiện tại có issuelinks trên Jira trỏ tới ticket khác mô tả nơi tiêu thụ dữ liệu/entity vừa thay đổi), dừng lại và chạy skill `create-impact-testcase` đúng quy trình (dò đủ nhánh/trạng thái của trigger theo Bước 2 của skill đó) — không tự bịa 1 case đại diện rồi gắn nhãn Integration. Lấy 1 case đại diện cho cả không gian trạng thái của trigger là lỗi đã xảy ra thực tế và bỏ sót các nhánh quan trọng (ví dụ: giá đã có sẵn vs giá chưa từng override vs giá hoàn toàn thiếu — mỗi trạng thái cho hành vi khác nhau).

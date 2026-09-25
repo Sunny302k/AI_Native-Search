@@ -38,6 +38,27 @@ Chủ động tìm ảnh hưởng thay vì chỉ dựa vào những gì spec hi�
 
 Trình bày danh sách luồng/feature bị ảnh hưởng **kèm danh sách nhánh của từng trigger** (Bước 2.4-6) cho người dùng xác nhận **trước khi** viết test case ở Bước 3. Không tự ý mở rộng phạm vi nếu người dùng không xác nhận; loại nào người dùng gạt bỏ thì không đưa vào test case.
 
+### Bước 2.5: Áp dụng đủ bộ kỹ thuật test — BẮT BUỘC cho từng trigger và từng điểm tiêu thụ dữ liệu
+
+Chạy đủ 7 kỹ thuật dưới đây trước khi viết case. Với skill này, đơn vị áp dụng là **cặp (trigger thay đổi → điểm tiêu thụ dữ liệu)**, không phải feature nói chung.
+
+| Kỹ thuật | Áp dụng thế nào trong test impact |
+|---|---|
+| **5W1H** | *What*: dữ liệu/entity nào bị thay đổi · *Who*: role nào gây ra thay đổi, ai nhìn thấy hậu quả (Merchant ở Admin hay Shopper ở Storefront) · *When*: hậu quả xuất hiện ngay, hay chỉ sau lần sync/re-index/re-evaluate Score tiếp theo · **Where: liệt kê ĐỦ nơi tiêu thụ dữ liệu đó** (màn Admin khác, Storefront ISW/SRP/Category Page, index Elasticsearch, Filter Cache, Merchandise Score, Sync History) — đây là chỗ hay sót nhất · *Why*: hậu quả nghiệp vụ nếu điểm tiêu thụ hiển thị sai · *How*: thay đổi có thể xảy ra qua mấy đường (UI Admin, import, API, Manual/Schedule Sync từ BigCommerce) |
+| **Equivalence Partitioning** | Mỗi **trạng thái khác nhau của trigger** là 1 nhánh riêng, không lấy 1 case đại diện cho cả không gian trạng thái. Ví dụ: giá trị đã từng được ghi đè · giá trị chưa từng ghi đè · giá trị hoàn toàn chưa có — 3 nhánh cho hành vi khác nhau |
+| **Boundary Value Analysis** | Biên của dữ liệu bị ảnh hưởng: bản ghi cuối cùng còn tham chiếu, bản ghi đầu tiên, số lượng bản ghi liên quan = 0 / 1 / nhiều; mốc thời gian giữa lúc thay đổi và lúc điểm tiêu thụ đọc lại (trước/sau lần sync kế tiếp) |
+| **Decision Table** | Bắt buộc khi hậu quả phụ thuộc đồng thời trạng thái trigger × trạng thái bên tiêu thụ (VD: entity bị xoá × điểm tiêu thụ đang ở trạng thái Active/Inactive/Draft) |
+| **State Transition** | Rà cả 2 chiều: thay đổi rồi → điểm tiêu thụ hiển thị gì; và hoàn tác/khôi phục thay đổi → điểm tiêu thụ có trở lại đúng trạng thái cũ không. Đặc biệt chú ý trạng thái "tham chiếu treo" khi bản gốc bị xoá (VD dữ liệu đã bị xoá bên BigCommerce nhưng index/filter vẫn còn tham chiếu) |
+| **Error Guessing** | Thay đổi xảy ra trong lúc bên tiêu thụ đang mở (2 tab / 2 user); thay đổi đúng lúc job sync đang chạy; Storefront đọc trước khi re-index xong; thay đổi rồi hoàn tác ngay; xoá bản gốc rồi tạo lại bản mới cùng tên; dữ liệu cũ tạo trước khi rule thay đổi |
+| **Exploratory** | Đề xuất 3-5 charter, ưu tiên các điểm tiêu thụ mà tài liệu KHÔNG mô tả hậu quả (thường là nơi bug ẩn lâu nhất) |
+
+**Bảng rà kỹ thuật** — lập trước khi viết case và trình bày trong báo cáo cuối:
+
+| Trigger → Điểm tiêu thụ | EP *(số nhánh trạng thái)* | BVA | Decision Table | State Transition | Error Guessing |
+|---|---|---|---|---|---|
+
+Ô không áp dụng ghi `–` kèm lý do ngắn. Không được ghi `–` cho **EP** — mọi trigger đều phải liệt kê đủ nhánh trạng thái; lấy 1 case đại diện cho cả không gian trạng thái là lỗi đã xảy ra thực tế.
+
 ### Bước 3: Viết test case cho từng luồng bị ảnh hưởng
 
 Áp dụng kỹ thuật: phân tích luồng dữ liệu (data flow), bảng quyết định cho tổ hợp trạng thái/quyền, kiểm tra ngược (regression) tại các điểm tiêu thụ dữ liệu.
@@ -87,9 +108,13 @@ Sắp xếp: gom nhóm theo từng luồng/feature bị ảnh hưởng (test h�
 - Danh sách luồng/feature được xác định là bị ảnh hưởng (đã qua xác nhận ở Bước 2).
 - Số lượng test case đã tạo.
 - Số lượng test case cần confirm.
+- **Bảng rà kỹ thuật** (Bước 2.5) — đầy đủ mọi cặp trigger → điểm tiêu thụ, kèm lý do cho từng ô ghi `–`.
+- **3-5 charter exploratory testing**, ưu tiên điểm tiêu thụ mà tài liệu không mô tả hậu quả.
+- **Gợi ý bước tiếp theo**: nhắc người dùng chạy skill `review-testcase-quality` để review độc lập (đối chiếu Figma + rà lại 7 kỹ thuật). KHÔNG tự review tại chỗ trong cùng lượt vừa viết case — skill đó chạy qua subagent với context sạch để tránh tự xác nhận chính mình.
 
 ## Ràng buộc
 
+- **Không được viết test case khi chưa chạy đủ 7 kỹ thuật ở Bước 2.5 và chưa lập bảng rà kỹ thuật.** Không báo hoàn thành khi báo cáo thiếu bảng rà hoặc thiếu charter exploratory. Áp dụng theo từng cặp (trigger → điểm tiêu thụ) cụ thể, không áp dụng ở mức "thay đổi nói chung".
 - Không tự bịa luồng bị ảnh hưởng nếu không có căn cứ từ spec hoặc xác nhận của người dùng — sai ở bước truy vết (Bước 2) sẽ kéo theo test case sai phạm vi.
 - Không được lấy 1 test case "đại diện" cho 1 trigger rồi coi là đủ nếu trigger đó có nhiều trạng thái nguồn/hướng biến thiên/phạm vi tác động hợp lệ theo spec gốc (xem Bước 2.4 và Bước 3) — đây là lỗi đã xảy ra thực tế và làm bỏ sót logic quan trọng (ví dụ: xoá toàn bộ vs xoá một phần cho kết quả khác hẳn nhau).
 - Không được phép bịa test case nếu không có đủ thông tin từ đặc tả hoặc người dùng. Dùng tag `<cần confirm>` trong cột Note để đánh dấu.

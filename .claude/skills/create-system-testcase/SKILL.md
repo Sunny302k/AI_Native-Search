@@ -11,6 +11,27 @@ Tìm hiểu xem trong luồng nghiệp vụ có những tác nhân (role/actor) 
 
 Trong trường hợp có điểm chưa rõ ràng hãy đặt câu hỏi cho người dùng.
 
+### Bước 1.5: Áp dụng đủ bộ kỹ thuật test — BẮT BUỘC cho từng bước luồng / từng trạng thái / từng role
+
+Chạy đủ 7 kỹ thuật dưới đây trước khi viết case. Với skill này, đơn vị áp dụng là **từng bước trong luồng nghiệp vụ**, không phải từng field lẻ — nhưng vẫn phải đi tới mức field ở những bước có nhập liệu.
+
+| Kỹ thuật | Áp dụng thế nào trong test luồng nghiệp vụ |
+|---|---|
+| **5W1H** | *What*: luồng đi từ đâu tới đâu (thường là cấu hình ở Admin → hậu quả trên Storefront) · *Who*: mỗi bước do role nào thực hiện, kể cả actor hệ thống tự động (Schedule Sync, re-evaluate Score), bàn giao giữa các actor ở điểm nào · *When*: điều kiện để bước sau khả dụng · *Where*: luồng bắt đầu được từ mấy entry point khác nhau · *Why*: hỏng ở bước nào thì thiệt hại lớn nhất (quyết định độ sâu) · *How*: mỗi bước thao tác được bằng mấy cách |
+| **Equivalence Partitioning** | Chia các nhánh rẽ của luồng thành lớp tương đương; mỗi nhánh rẽ nghiệp vụ tối thiểu 1 case. Không gộp 2 nhánh chỉ vì cùng kết thúc ở 1 màn hình — nếu đường đi khác nhau thì code path khác nhau |
+| **Boundary Value Analysis** | Biên của luồng: bước đầu tiên và bước cuối cùng, số lượng bản ghi tối thiểu/tối đa để luồng chạy được, mốc thời gian (hết hạn phiên, đúng giờ lịch Schedule Sync, lịch chạy/kết thúc campaign), mốc chuyển giai đoạn |
+| **Decision Table** | Bắt buộc lập bảng khi kết quả 1 bước phụ thuộc đồng thời ≥2 yếu tố (role × trạng thái, cấu hình × dữ liệu). Dùng one-variable-at-a-time để chống bùng nổ tổ hợp |
+| **State Transition** | **Trọng tâm của skill này.** Vẽ đủ vòng đời entity qua toàn luồng; rà 4 hướng: chuyển hợp lệ, chuyển bị chặn (action nào bị từ chối ở trạng thái nào), trạng thái ranh giới (rỗng/0/cuối cùng), và quay lui (back/cancel/tắt campaign/sync Failed trả dữ liệu về đâu) |
+| **Error Guessing** | Ngắt luồng giữa chừng: đóng tab ở bước n, mất mạng khi submit bước n, 2 role thao tác đồng thời trên cùng bản ghi, job sync tự động chạy chồng lên thao tác của Merchant, sync Failed giữa luồng, quay lại bước trước bằng nút Back trình duyệt, mở cùng luồng ở 2 tab, bấm submit 2 lần |
+| **Exploratory** | Đề xuất 3-5 charter trong báo cáo cuối, ưu tiên các điểm bàn giao giữa 2 actor và các bước spec mô tả mơ hồ |
+
+**Bảng rà kỹ thuật** — lập trước khi viết case và trình bày trong báo cáo cuối:
+
+| Bước luồng / Chức năng | EP | BVA | Decision Table | State Transition | Error Guessing |
+|---|---|---|---|---|---|
+
+Ô không áp dụng ghi `–` kèm lý do ngắn, không để trống. Không được ghi `–` cho **State Transition** ở bất kỳ bước nào làm đổi trạng thái entity, và không được ghi `–` cho **Error Guessing** ở bước có ghi dữ liệu.
+
 ### Bước 2: Tạo test case
 
 ##### 2.1 Các kỹ thuật sử dụng
@@ -102,8 +123,15 @@ US1234_TC02,Integration,,Sync lỗi giữa chừng — Failed → giữ data cũ
 
 Thống kê số lượng test case đã tạo được, số lượng cần confirm.
 
+Kèm theo:
+
+- **Bảng rà kỹ thuật** (Bước 1.5) — đầy đủ mọi bước luồng/chức năng, kèm lý do cho từng ô ghi `–`.
+- **3-5 charter exploratory testing** đề xuất cho QA chạy tay, ưu tiên điểm bàn giao giữa các actor.
+- **Gợi ý bước tiếp theo**: nhắc người dùng chạy skill `review-testcase-quality` để review độc lập (đối chiếu Figma + rà lại 7 kỹ thuật). KHÔNG tự review tại chỗ trong cùng lượt vừa viết case — skill đó chạy qua subagent với context sạch để tránh tự xác nhận chính mình.
+
 ## Ràng buộc
 
+- **Không được viết test case khi chưa chạy đủ 7 kỹ thuật ở Bước 1.5 và chưa lập bảng rà kỹ thuật.** Không báo hoàn thành khi báo cáo thiếu bảng rà hoặc thiếu charter exploratory. Áp dụng kỹ thuật theo từng bước luồng/trạng thái/actor cụ thể, không áp dụng ở mức "luồng nói chung".
 - Không được phép bịa test case nếu không có đủ thông tin từ đặc tả hoặc người dùng. Trong trường hợp này, hãy sử dụng tag `<cần confirm>` trong cột Note để đánh dấu các test case cần xác nhận lại.
 - Luôn tuân thủ quy định về định dạng và nội dung của test case để đảm bảo tính nhất quán và dễ hiểu cho người dùng.
 - Chỉ thao tác trong folder dự án hiện tại (Native Search / Claude), nghiêm cấm thao tác trên folder khác.

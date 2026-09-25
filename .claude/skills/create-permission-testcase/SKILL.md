@@ -32,6 +32,27 @@ Trình bày ma trận dạng bảng cho người dùng xác nhận trước khi 
 
 Ô nào chưa rõ theo spec, đánh dấu `<cần confirm>` trong ma trận thay vì tự đoán, và hỏi người dùng.
 
+### Bước 2.5: Áp dụng đủ bộ kỹ thuật test — BẮT BUỘC cho từng ô role × action
+
+Chạy đủ 7 kỹ thuật dưới đây trước khi sinh case từ ma trận. Với skill này, đơn vị áp dụng là **từng ô (role × action)**, không phải từng role.
+
+| Kỹ thuật | Áp dụng thế nào trong test phân quyền |
+|---|---|
+| **5W1H** | *Who*: liệt kê đủ role, kể cả role hiếm (chưa đăng nhập, tài khoản bị khoá, phiên hết hạn) · *What*: action bị chặn ở mức nào (ẩn nút / hiện nhưng disable / cho bấm rồi báo lỗi / chặn ở server) · *When*: quyền có đổi theo trạng thái entity không (VD Filter Tree Draft vs Active) · **Where: liệt kê ĐỦ entry point của action** — ẩn nút trên UI không có nghĩa là chặn được qua phím tắt, URL trực tiếp, hoặc API · *Why*: rò rỉ quyền ở action nào gây thiệt hại lớn nhất (VD sửa được Merchandise Campaign/Filter đang chạy thật trên Storefront) · *How*: mỗi cách gọi action phải kiểm tra riêng |
+| **Equivalence Partitioning** | Nhóm role có cùng bộ quyền thành 1 lớp, mỗi lớp 1 đại diện. **Nhưng không gộp** nếu 2 role cùng kết quả "bị chặn" mà **lý do chặn khác nhau** (chưa đăng nhập ≠ đã đăng nhập nhưng sai role ≠ đúng role nhưng sai trạng thái entity) — 3 đường code khác nhau |
+| **Boundary Value Analysis** | Biên của phạm vi quyền: bản ghi do chính user tạo vs bản ghi của user khác; ranh giới sở hữu theo nhóm/store/team; quyền vừa được cấp/vừa bị thu hồi (trước và sau thời điểm đổi quyền) |
+| **Decision Table** | **Trọng tâm của skill này.** Ma trận role × action đã là bảng quyết định; bổ sung chiều thứ 3 khi quyền còn phụ thuộc trạng thái entity (role × action × trạng thái) |
+| **State Transition** | Quyền thay đổi giữa chừng: user đang mở màn hình thì bị đổi role / bị thu hồi quyền / phiên hết hạn — thao tác tiếp theo phải bị chặn đúng cách, không để lọt |
+| **Error Guessing** | Gọi thẳng URL/deep-link của màn hình không có quyền; gọi API trực tiếp bỏ qua UI; mở 2 tab với 2 role khác nhau; dùng nút Back sau khi bị chặn; thao tác bằng phím tắt khi nút đã bị ẩn; trigger Manual Sync bằng role không có quyền |
+| **Exploratory** | Đề xuất 3-5 charter, ưu tiên hướng "tìm đường vòng để lách quyền" thay vì kiểm tra lại đúng đường chính |
+
+**Bảng rà kỹ thuật** — lập trước khi viết case và trình bày trong báo cáo cuối:
+
+| Role × Action | EP *(gộp/không gộp + lý do)* | BVA *(biên phạm vi sở hữu)* | Decision Table | State Transition | Error Guessing *(đường vòng đã thử)* |
+|---|---|---|---|---|---|
+
+Ô không áp dụng ghi `–` kèm lý do ngắn. Không được ghi `–` cho **Error Guessing** ở bất kỳ action nào bị chặn — mọi action bị chặn đều phải có ít nhất 1 case thử lách qua đường khác (URL trực tiếp, API, phím tắt).
+
 ### Bước 3: Viết test case từ ma trận
 
 Với mỗi ô đã xác nhận, sinh test case tương ứng:
@@ -81,9 +102,13 @@ Sắp xếp: gom nhóm theo Field/Phần (action), trong mỗi action gom theo r
 - Ma trận role × action đã dùng (đã qua xác nhận ở Bước 2).
 - Số lượng test case đã tạo, phân theo Allowed/Denied/Conditional.
 - Số lượng ô/test case cần confirm.
+- **Bảng rà kỹ thuật** (Bước 2.5) — đầy đủ mọi ô role × action, kèm lý do cho từng ô ghi `–`.
+- **3-5 charter exploratory testing**, ưu tiên hướng tìm đường vòng để lách quyền.
+- **Gợi ý bước tiếp theo**: nhắc người dùng chạy skill `review-testcase-quality` để review độc lập (đối chiếu Figma + rà lại 7 kỹ thuật). KHÔNG tự review tại chỗ trong cùng lượt vừa viết case — skill đó chạy qua subagent với context sạch để tránh tự xác nhận chính mình.
 
 ## Ràng buộc
 
+- **Không được viết test case khi chưa chạy đủ 7 kỹ thuật ở Bước 2.5 và chưa lập bảng rà kỹ thuật.** Không báo hoàn thành khi báo cáo thiếu bảng rà hoặc thiếu charter exploratory. Mọi action bị chặn phải có ít nhất 1 case thử lách qua đường khác (URL trực tiếp, API, phím tắt) — chặn trên UI không đồng nghĩa với chặn thật.
 - Không tự bịa role, action hoặc trạng thái quyền (Allowed/Denied/Conditional) nếu spec không nêu rõ — dùng `<cần confirm>` và hỏi lại người dùng.
 - Không được phép bịa test case nếu không có đủ thông tin. Dùng tag `<cần confirm>` trong cột Note để đánh dấu.
 - Chỉ thao tác trong folder dự án hiện tại (Native Search / Claude), nghiêm cấm thao tác trên folder khác.

@@ -35,6 +35,27 @@ Trong trường hợp phát hiện điểm không rõ ràng hoặc mâu thuẫn 
 
 Tiếp nhận các câu trả lời của người dùng. Trường hợp không có đủ thông tin để xác định kết quả mong đợi của một test case, hãy thêm tag <cần confirm> vào cột Expected result của test case đó để người dùng dễ nhận biết và xác nhận lại. Nghiêm cấm bịa kết quả mong đợi.
 
+### Bước 3.5: Áp dụng đủ bộ kỹ thuật test — BẮT BUỘC cho từng endpoint và từng param
+
+Chạy đủ 7 kỹ thuật dưới đây trước khi viết case. Với skill này, đơn vị áp dụng là **từng param của từng endpoint** (path param, query param, body field, header), không phải cả endpoint gộp lại.
+
+| Kỹ thuật | Áp dụng thế nào trong test API |
+|---|---|
+| **5W1H** | *What*: endpoint làm gì, tác dụng phụ nào lên dữ liệu (config Admin, index, kết quả Storefront) · *Who*: cần token/scope gì, gọi không token thì sao · *When*: có phụ thuộc trạng thái resource không (VD đang có job sync chạy) · *Where*: endpoint này có bản song song ở kênh khác không (UI Admin / import / webhook / job sync từ BigCommerce cùng ghi 1 dữ liệu) — nếu có, rule validate phải giống nhau · *Why*: gọi sai gây hậu quả gì lên dữ liệu thật · *How*: content-type nào được chấp nhận, method nào hợp lệ |
+| **Equivalence Partitioning** | Mỗi param chia lớp hợp lệ/không hợp lệ. **Bắt buộc tách riêng từng param bắt buộc thành 1 case thiếu param riêng** — dù thiếu param nào cũng trả cùng mã lỗi, vì mỗi param nhiều khả năng được validate bằng đoạn code độc lập, test đại diện sẽ sót |
+| **Boundary Value Analysis** | Với mọi param có ràng buộc: `min-1`, `min`, `max`, `max+1`. Thêm biên hay quên: chuỗi rỗng vs null vs không gửi field (3 trường hợp KHÁC nhau), số 0 vs số âm, mảng rỗng vs mảng 1 phần tử vs mảng vượt giới hạn, page/limit ở biên phân trang |
+| **Decision Table** | Bắt buộc khi kết quả phụ thuộc tổ hợp param (param B chỉ bắt buộc khi param A có giá trị X) hoặc tổ hợp trạng thái resource × quyền |
+| **State Transition** | Resource có vòng đời: gọi endpoint ở trạng thái không cho phép (sửa bản ghi đã xoá, kích hoạt bản ghi đã Active); gọi 2 lần liên tiếp cùng payload (idempotency); gọi tuần tự sai thứ tự |
+| **Error Guessing** | Sai kiểu dữ liệu (số thành chuỗi, chuỗi thành mảng); JSON sai cú pháp; thừa field lạ; body rỗng; sai content-type; token hết hạn/sai định dạng; ID không tồn tại vs ID có thật nhưng khác chủ sở hữu (store khác); giá trị cực lớn; ký tự Unicode/emoji/có dấu tiếng Việt; payload vượt kích thước cho phép; gọi trong lúc job sync đang chạy |
+| **Exploratory** | Đề xuất 3-5 charter, ưu tiên hướng gửi payload mà UI Admin không bao giờ tạo ra được (vì UI có ràng buộc dropdown/validate client-side, còn API thì không) |
+
+**Bảng rà kỹ thuật** — lập trước khi viết case và trình bày trong báo cáo cuối:
+
+| Endpoint / Param | EP | BVA | Decision Table | State Transition | Error Guessing |
+|---|---|---|---|---|---|
+
+Ô không áp dụng ghi `–` kèm lý do ngắn. Không được ghi `–` cho **BVA** ở param có bất kỳ ràng buộc số/độ dài/số lượng nào, và không được ghi `–` cho **Error Guessing** ở endpoint có ghi dữ liệu.
+
 ### Bước 4: Thực hiện tạo test case
 
 Tạo test case dựa trên tài liệu đã phân tích, áp dụng các kỹ thuật kiểm thử API chuẩn:
@@ -174,9 +195,13 @@ pm.test("Message khớp tài liệu", function () {
 - Số lượng test case cần confirm (`<cần confirm>`)
 - Các nhóm trường hợp đã bao phủ (happy path, validation, auth...)
 - Đường dẫn 2 file đầu ra: file CSV và file Postman Collection JSON
+- **Bảng rà kỹ thuật** (Bước 3.5) — đầy đủ mọi endpoint/param, kèm lý do cho từng ô ghi `–`
+- **3-5 charter exploratory testing**, ưu tiên payload mà UI Admin không bao giờ tạo ra được
+- **Gợi ý bước tiếp theo**: nhắc người dùng chạy skill `review-testcase-quality` để review độc lập (đối chiếu Figma + rà lại 7 kỹ thuật). KHÔNG tự review tại chỗ trong cùng lượt vừa viết case — skill đó chạy qua subagent với context sạch để tránh tự xác nhận chính mình.
 
 ## Ràng buộc
 
+- **Không được viết test case khi chưa chạy đủ 7 kỹ thuật ở Bước 3.5 và chưa lập bảng rà kỹ thuật.** Không báo hoàn thành khi báo cáo thiếu bảng rà hoặc thiếu charter exploratory. Áp dụng theo từng param của từng endpoint, không áp dụng ở mức "endpoint nói chung".
 - Chỉ thao tác trong folder dự án hiện tại (Native Search), nghiêm cấm thao tác trên folder khác.
 - Không được bịa kết quả mong đợi nếu tài liệu/người dùng không cung cấp đủ thông tin; dùng tag `<cần confirm>` để đánh dấu.
 - Luôn tuân thủ định dạng CSV UTF-8 BOM và cấu trúc 5 cột (ID, Description, Method, Payload, Expected result) để đảm bảo tính nhất quán.
