@@ -3,202 +3,564 @@ Purpose:,,"Chỉnh chung 1 lần cho toàn bộ panel filter trên storefront (k
 1,Happy,Show smart filter search,Bật ô search toàn cục,,- Filter tree đang test có ≥1 node Display style = List/Grid,"1. Bật toggle ""Show smart filter search"".
 2. Click Save Changes.
 3. Ra storefront, mở panel filter (Desktop).",,"3. Xuất hiện đúng 1 ô search, placeholder ""Search ...."", nằm phía trên block Refine by, không nằm trong node nào.",
-2,Happy,,Tắt lại ô search,,- Toggle đang ON (theo TC01),"1. Tắt toggle ""Show smart filter search"".
+2,Happy,,Tắt lại ô search,,"- Toggle ""Show smart filter search"" = ON (đã Save)","1. Tắt toggle ""Show smart filter search"".
 2. Click Save Changes.
 3. Ra storefront, mở panel filter.",,3. Ô search global không còn hiển thị trên panel.,
 3,Happy,,Song song với search box per-node,,"- Toggle ""Show smart filter search"" ON
 - 1 filter node có riêng ""Show search box on desktop"" cũng đang ON","1. Ra storefront, mở panel filter.
 2. Quan sát cả ô search global và ô search riêng trong node.",,"2. Cả 2 ô search cùng hiển thị, hoạt động độc lập, không xung đột/không trùng lặp chức năng.",
-4,Negative,,Nhập input bất thường vào ô search,,- Toggle ON,"1. Gõ emoji, ký tự đặc biệt (VD !@#$%), hoặc chuỗi có khoảng trắng đầu/cuối vào ô search global.",,"1. Hệ thống không lỗi/crash; trả về danh sách rỗng hoặc không lọc gì, không hiển thị lỗi kỹ thuật ra UI.",
-5,Edge,,Phạm vi node được search,Option select type vs Display style,,"1. Với toggle đang ON, gõ vào ô search với 1 node Option select type = Multiple, Display style = List.
-2. Thử tương tự với 1 node Option select type = Single.",,1-2. Xác nhận đúng field nào (Display style hay Option select type) quyết định node có được search hay không.,"<cần confirm> Q6 — tooltip ghi List/Grid nhưng đó là Display style, không phải Option select type"
-6,Edge,,Node dạng Slider/Swatch,,- Có node Display style = Slider (VD Price) và 1 node Display style = Swatch,"1. Toggle ON, gõ từ khoá trùng tên value của node Slider/Swatch vào ô search.",,1. Xác nhận node Slider/Swatch có được lọc theo từ khoá hay không.,<cần confirm> Q6
-7,Edge,,Hiển thị trên Mobile,,- Toggle ON,"1. Ra storefront trên Mobile (hoặc responsive Mobile), mở drawer filter.",,1. Xác nhận ô search global có xuất hiện trong drawer Mobile hay không.,<cần confirm> Q4 — preview mobile trong design không có ô search
-8,Edge,,Decision table: global search × per-node search box,"Global OFF, per-node ON","- Toggle ""Show smart filter search"" = OFF
-- 1 filter node có riêng ""Show search box on desktop"" đang ON","1. Ra storefront, mở panel filter.",,"1. Ô search riêng trong node vẫn hoạt động độc lập, không phụ thuộc trạng thái OFF của toggle toàn cục.",
-9,Edge,,Decision table: global search × per-node search box,"Global ON, per-node OFF","- Toggle ""Show smart filter search"" = ON
-- Filter node đang test KHÔNG bật ""Show search box on desktop""","1. Ra storefront, mở panel filter.",,1. Chỉ có đúng 1 ô search toàn cục hiển thị; node không có ô search riêng của chính nó.,
-10,UI,,Default value + tooltip,,"- Role = [Merchant Admin]
+4,Happy,,Lọc ngay khi đang gõ,Không cần Enter,"- Show smart filter search = ON (đã Save)
+- Filter tree đang test: Status = ON
+- Node Color (Display Style = List): Aura, Black, Glacier blue, Mammut red, Marine","1. Ra storefront (Desktop), click vào ô smart filter search.
+2. Gõ ""a"" (không bấm Enter).
+3. Gõ tiếp ""u"" thành ""au"" (không bấm Enter).",,"2. Danh sách lọc ngay: node Color còn đủ 5 value (đều chứa chữ ""a"").
+3. Danh sách lọc ngay: node Color chỉ còn ""Aura"".",
+5,Happy,,"Khớp một phần, không phân biệt hoa/thường","Từ khoá ""BL""","- Show smart filter search = ON (đã Save)
+- Filter tree đang test: Status = ON
+- Node Color (Display Style = List): Aura, Black, Glacier blue, Mammut red, Marine","1. Gõ ""BL"" (chữ hoa) vào ô smart filter search.",,"1. Node Color chỉ còn ""Black"" và ""Glacier blue"" (khớp một phần ""bl"", không phân biệt hoa/thường); ""Aura"", ""Mammut red"", ""Marine"" bị ẩn.",
+6,Happy,,Node trong phạm vi nhưng không có value khớp bị ẩn cả node,,"- Show smart filter search = ON (đã Save)
+- Filter tree đang test: Status = ON
+- Node Color (Display Style = List): Aura, Black, Glacier blue, Mammut red, Marine
+- Node Condition (Display Style = List): Used, New, Refurbished
+- Node Featured Products (Display Style = List): Is Featured, Not Featured","1. Gõ ""bl"" vào ô smart filter search.",,"1. Node Color còn ""Black"", ""Glacier blue"". Node Condition và node Featured Products không có value nào khớp nên bị ẩn cả node (kể cả tiêu đề).",
+7,Happy,,Không có kết quả nào,Thông báo No results found,"- Show smart filter search = ON (đã Save)
+- Filter tree đang test: Status = ON
+- Node Color (Display Style = List): Aura, Black, Glacier blue, Mammut red, Marine
+- Node Condition (Display Style = List): Used, New, Refurbished
+- Node Featured Products (Display Style = List): Is Featured, Not Featured","1. Gõ ""zzz"" vào ô smart filter search.",,"1. Không node nào hiển thị; panel hiển thị đúng `No results found for ""zzz""`.",
+8,Happy,,Lọc trên Mobile,Drawer filter,"- Show smart filter search = ON (đã Save)
+- Filter tree đang test: Status = ON
+- Node Color (Display Style = List): Aura, Black, Glacier blue, Mammut red, Marine","1. Ra storefront Mobile (hoặc responsive Mobile), mở drawer Filter.
+2. Gõ ""bl"" vào ô search.",,"2. Lọc ngay như Desktop: node Color chỉ còn ""Black"" và ""Glacier blue"".",
+9,Happy,,Node ngoài phạm vi vẫn hiển thị khi chưa gõ từ khoá,Trước khi search,"- Show smart filter search = ON (đã Save)
+- Filter tree đang test: Status = ON
+- Node Color: Display Style = List
+- Node Price: Display Style = Slider-input
+- Node Brand: Display Style = Swatch","1. Ra storefront, mở panel filter, chưa gõ gì vào ô search.",,1. Ô search hiển thị; mọi node (kể cả Price dạng Slider-input và Brand dạng Swatch) hiển thị đầy đủ value như khi toggle tắt.,
+10,Happy,,Xoá từ khoá,Trở lại ban đầu,"- Show smart filter search = ON (đã Save)
+- Filter tree đang test: Status = ON
+- Node Color: Display Style = List, có value ""Aura""
+- Node Price: Display Style = Slider-input
+- Node Brand: Display Style = Swatch","1. Gõ ""aura"" vào ô smart filter search.
+2. Quan sát panel.
+3. Xoá hết từ khoá.",,"2. Chỉ còn node Color với ""Aura""; node Price và Brand bị ẩn.
+3. Mọi node hiển thị lại đầy đủ như trước khi gõ.",<cần confirm> việc hiện lại đầy đủ khi xoá từ khoá suy ra từ quy tắc ẩn đã chốt; chưa được xác nhận trực tiếp
+11,Negative,,Nhập input bất thường vào ô search,,- Toggle ON,"1. Gõ chuỗi emoji (VD 😀) vào ô smart filter search.
+2. Xoá, gõ chuỗi ký tự đặc biệt (VD !@#$%).",,"1-2. Không lỗi/không crash, không hiển thị lỗi kỹ thuật ra UI; panel hiển thị đúng thông báo `No results found for ""[keyword]""` với [keyword] là chuỗi vừa gõ.",
+12,Edge,,Phạm vi node được search,Display Style quyết định phạm vi search,"- Show smart filter search = ON (đã Save)
+- Filter tree đang test: Status = ON
+- Node Color: Display Style = List, Option select type = Multiple, có value ""Aura""
+- Node Condition: Display Style = List, Option select type = Single, có value ""Used""","1. Gõ ""aura"" vào ô smart filter search.
+2. Xoá từ khoá, gõ ""used"".",,"1. Value ""Aura"" của node Color hiển thị trong kết quả.
+2. Value ""Used"" của node Condition hiển thị trong kết quả — Option select type (Multiple/Single) không ảnh hưởng việc node có được search hay không.",
+13,Edge,,"Node ngoài phạm vi (Slider-input, Swatch, Dropdown) bị ẩn khi đang search",Ngoài phạm vi List/Grid,"- Show smart filter search = ON (đã Save)
+- Filter tree đang test: Status = ON
+- Node Color: Display Style = List, có value ""Aura""
+- Node Price: Display Style = Slider-input
+- Node Brand: Display Style = Swatch
+- Node Product options (Size): Display Style = Dropdown","1. Gõ ""aura"" vào ô smart filter search.",,"1. Chỉ node Color hiển thị với value ""Aura""; node Price, Brand và Size bị ẩn vì không thuộc phạm vi search (Display Style không phải List/Grid).",
+14,Edge,,Hiển thị trên Mobile,,"- Show smart filter search = ON (đã Save)
+- Filter tree đang test: Status = ON
+- Node Color (Display Style = List): Aura, Black, Glacier blue, Mammut red, Marine","1. Ra storefront trên Mobile (hoặc responsive Mobile), mở drawer filter.
+2. Quan sát đầu drawer.",,2. Ô search hiển thị ở đầu drawer Filter trên Mobile.,
+15,Edge,,"Chỉ khớp theo tên value, không khớp theo tên node",Từ khoá = tên node,"- Show smart filter search = ON (đã Save)
+- Filter tree đang test: Status = ON
+- Node Color (Display Style = List): Aura, Black, Glacier blue, Mammut red, Marine
+- Node Condition (Display Style = List): Used, New, Refurbished
+- Node Featured Products (Display Style = List): Is Featured, Not Featured","1. Gõ ""color"" vào ô smart filter search.",,"1. Không có value nào chứa ""color"" nên không node nào hiển thị; panel hiển thị `No results found for ""color""`; node Color không được hiện toàn bộ chỉ vì trùng tên node.",
+16,Edge,,Khoảng trắng đầu/cuối từ khoá,Bị cắt bỏ,"- Show smart filter search = ON (đã Save)
+- Filter tree đang test: Status = ON
+- Node Color (Display Style = List): Aura, Black, Glacier blue, Mammut red, Marine","1. Gõ ""  black  "" (khoảng trắng ở 2 đầu) vào ô smart filter search.",,"1. Khoảng trắng 2 đầu bị cắt bỏ: kết quả giống hệt khi gõ ""black"" — node Color chỉ còn ""Black"".",
+17,Edge,,Value đang được chọn nhưng không khớp từ khoá,Value đang chọn bị ẩn,"- Show smart filter search = ON (đã Save)
+- Show Refine by block = OFF (đã Save)
+- Filter tree đang test: Status = ON
+- Node Color (Display Style = List): Aura, Black, Glacier blue, Mammut red, Marine
+- Shopper đã chọn ""Aura"", danh sách sản phẩm đang lọc theo Aura","1. Gõ ""bl"" vào ô smart filter search.
+2. Quan sát node Color và danh sách sản phẩm.
+3. Xoá từ khoá.",,"2. ""Aura"" bị ẩn cùng các value không khớp; danh sách sản phẩm vẫn lọc theo Aura (filter không bị bỏ).
+3. Các node hiển thị lại; ""Aura"" vẫn ở trạng thái đã chọn.",<cần confirm> việc hiện lại đầy đủ khi xoá từ khoá suy ra từ quy tắc ẩn đã chốt; chưa được xác nhận trực tiếp
+18,Edge,,Node đang thu gọn có value khớp,Không tự mở,"- Show smart filter search = ON (đã Save)
+- Filter tree đang test: Status = ON
+- Node Condition (Display Style = List): Used, New, Refurbished; Collapse/Expand on Desktop = Collapse","1. Gõ ""used"" vào ô smart filter search.",,"1. Node Condition vẫn thu gọn (không tự mở), tiêu đề node hiển thị; shopper phải tự mở mới thấy value ""Used"".",
+19,Edge,,Value nằm sau nút Show more,Không Show more/phân trang,"- Show smart filter search = ON (đã Save)
+- Filter tree đang test: Status = ON
+- Node Brand (Display Style = List): Pagination type = Show more, có 20 value, ""Samsung"" nằm sau nút Show more (chưa hiển thị)","1. Quan sát node Brand, xác nhận ""Samsung"" chưa hiển thị.
+2. Gõ ""samsung"" vào ô smart filter search.",,"2. ""Samsung"" hiển thị trong kết quả (search trên toàn bộ value của node); kết quả hiện đủ, không có nút Show more hay phân trang.",
+20,Edge,,Ô search chung và ô search riêng của node,Độc lập nhau,"- Show smart filter search = ON (đã Save)
+- Filter tree đang test: Status = ON
+- Node Color (Display Style = List): Aura, Black, Glacier blue, Mammut red, Marine; Show search box on desktop = ON
+- Node Condition (Display Style = List): Used, New, Refurbished","1. Gõ ""bl"" vào ô search chung.
+2. Quan sát ô search riêng trong node Color.
+3. Xoá ô search chung, gõ ""aura"" vào ô search riêng của node Color.
+4. Quan sát ô search chung và node Condition.",,"2. Ô search riêng của node Color vẫn trống (không nhận chữ ""bl"").
+4. Ô search chung vẫn trống; chỉ node Color lọc theo ""aura"", node Condition giữ nguyên hiển thị đầy đủ.",
+21,Integration,,Đổi Display Style ở Edit filter node làm đổi phạm vi node được smart search — List → Swatch,Nguồn List,"- Show smart filter search = ON (đã Save)
+- Filter tree đang test: Status = ON
+- Node Brand: Display Style = List, có value ""Samsung"" (đã sync)","1. Ra storefront (Desktop), gõ ""Samsung"" vào ô smart filter search.
+2. Vào Edit filter node của node Brand, đổi Display Style = Swatch, click Save Changes.
+3. Reload trang, gõ lại ""Samsung"" vào ô smart filter search.",,"1. Value ""Samsung"" của node Brand hiển thị trong kết quả search.
+3. Value ""Samsung"" của node Brand không còn hiển thị trong kết quả search (node đã ra khỏi phạm vi List/Grid).",
+22,Integration,,Swatch → List,Đích List,"- Show smart filter search = ON (đã Save)
+- Filter tree đang test: Status = ON
+- Node Brand: Display Style = Swatch (đã setup Manage Swatch), có value ""Samsung"" (đã sync)","1. Ra storefront (Desktop), gõ ""Samsung"" vào ô smart filter search.
+2. Vào Edit filter node của node Brand, đổi Display Style = List, click Save Changes.
+3. Reload trang, gõ lại ""Samsung"" vào ô smart filter search.",,"1. Value ""Samsung"" không hiển thị trong kết quả search (node Swatch nằm ngoài phạm vi List/Grid).
+3. Value ""Samsung"" của node Brand hiển thị trong kết quả search.",
+23,Integration,,List → Dropdown,Node Product options,"- Show smart filter search = ON (đã Save)
+- Filter tree đang test: Status = ON
+- Node Product options (option ""Size""): Display Style = List, có value ""XS"" (đã sync)","1. Ra storefront (Desktop), gõ ""XS"" vào ô smart filter search.
+2. Vào Edit filter node của node Product options, đổi Display Style = Dropdown, click Save Changes.
+3. Reload trang, gõ lại ""XS"" vào ô smart filter search.",,"1. Value ""XS"" của node Product options hiển thị trong kết quả search.
+3. Value ""XS"" không còn hiển thị trong kết quả search (Dropdown không thuộc List/Grid).",
+24,Integration,,Đổi sang Swatch khi node đang có value được chọn,Value đang được chọn,"- Show smart filter search = ON (đã Save)
+- Show Refine by block = ON (đã Save)
+- Filter tree đang test: Status = ON
+- Node Brand: Node title = ""Brand"", Display Style = List, có value ""Samsung""
+- Shopper đã chọn value ""Samsung"" trên storefront, danh sách sản phẩm đang lọc theo Samsung","1. Vào Edit filter node của node Brand, đổi Display Style = Swatch, click Save Changes.
+2. Reload trang (giữ nguyên URL đang lọc).
+3. Quan sát block Refine by, danh sách sản phẩm và node Brand.
+4. Gõ ""Samsung"" vào ô smart filter search.",,"3. Filter Samsung vẫn đang được áp dụng: chip ""Brand: Samsung"" vẫn còn trên Refine by; danh sách sản phẩm vẫn lọc đúng Samsung; node Brand hiển thị dạng Swatch với Samsung ở trạng thái được chọn.
+4. Value ""Samsung"" không xuất hiện trong kết quả search, nhưng filter Samsung đang áp dụng không bị mất.",
+25,Integration,,Storefront nhận Display Style mới ngay sau Save,Hiệu lực ngay,"- Show smart filter search = ON (đã Save)
+- Filter tree đang test: Status = ON
+- Node Brand: Display Style = List, có value ""Samsung"" (đã sync)","1. Vào Edit filter node của node Brand, đổi Display Style = Swatch, click Save Changes.
+2. Ra storefront, reload trang, gõ ""Samsung"" vào ô smart filter search.",,"2. Kết quả search phản ánh ngay Display Style mới: value ""Samsung"" không còn hiển thị (node Brand dạng Swatch bị ẩn khi đang search).",
+26,Integration,,Swatch ẩn tên: gõ tên value,Ẩn tên trên swatch,"- Show smart filter search = ON (đã Save)
+- Filter tree đang test: Status = ON
+- Node Brand: Display Style = Swatch, value ""Samsung"" có ảnh swatch
+- Manage Swatch: Display filter option name in swatch = ON","1. Vào Edit filter node của node Brand, mở Manage Swatch, tắt toggle ""Display filter option name in swatch"", chọn ""Yes, turn it off"" trên popup cảnh báo, Save popup, click Save Changes.
+2. Ra storefront, reload trang, gõ ""Samsung"" vào ô smart filter search.",,"2. Theo quy tắc Swatch không thuộc phạm vi search: node Brand bị ẩn khi đang search, kể cả khi đã tắt hiển thị tên trên swatch.","<cần confirm> câu trả lời ""swatch ẩn tên vẫn tìm ra được"" mâu thuẫn với quy tắc Swatch ngoài phạm vi search; chờ chốt trước khi chạy"
+27,Integration,,Đổi Display Style nhưng chỉ Save to template,Save to template,"- Show smart filter search = ON (đã Save)
+- Filter tree đang test: Status = ON
+- Node Brand: Display Style = List, có value ""Samsung"" (đã sync)","1. Vào Edit filter node của node Brand, đổi Display Style = Swatch.
+2. Click Save to template (KHÔNG click Save Changes).
+3. Mở storefront ở tab khác, gõ ""Samsung"" vào ô smart filter search.",,"2. Template được lưu, xuất hiện ở tab My Templates.
+3. Kết quả search giữ nguyên như trước (value ""Samsung"" vẫn hiển thị) vì Display Style của node gốc chưa được lưu.",
+28,Integration,,Đổi Display Style rồi Discard,Discard unsaved changes,"- Show smart filter search = ON (đã Save)
+- Filter tree đang test: Status = ON
+- Node Brand: Display Style = List, có value ""Samsung"" (đã sync)","1. Vào Edit filter node của node Brand, đổi Display Style = Swatch (chưa Save).
+2. Click Back, chọn Discard trên popup cảnh báo unsaved changes.
+3. Ra storefront, reload trang, gõ ""Samsung"" vào ô smart filter search.",,"2. Rời màn Edit filter node; Display Style của node Brand giữ nguyên List.
+3. Kết quả search giữ nguyên như trước (value ""Samsung"" vẫn hiển thị).",
+29,Integration,,Node List/Grid cuối cùng đổi sang Swatch,Boundary: 1 → 0 node,"- Show smart filter search = ON (đã Save)
+- Filter tree đang test: Status = ON
+- Node Brand là node DUY NHẤT trong tree có Display Style thuộc List/Grid; các node còn lại đều là Slider hoặc Swatch","1. Vào Edit filter node của node Brand, đổi Display Style = Swatch, click Save Changes.
+2. Reload trang, quan sát panel filter.
+3. Nếu ô smart filter search còn hiển thị, gõ ""Samsung"".",Số node thuộc phạm vi List/Grid: 1 → 0,"2. Xác nhận ô smart filter search còn hiển thị hay tự ẩn khi không còn node nào thuộc phạm vi.
+3. Nếu ô còn hiển thị: search không lỗi/không crash, trả về trạng thái không có kết quả.","<cần confirm> chưa chốt: khi không còn node nào thuộc phạm vi, ô search tự ẩn hay vẫn hiển thị"
+30,Integration,,Merchant đổi Display Style khi shopper đang mở trang,Trang storefront đang mở,"- Show smart filter search = ON (đã Save)
+- Filter tree đang test: Status = ON
+- Node Brand: Display Style = List, có value ""Samsung"" (đã sync)
+- Shopper đang mở storefront, đã gõ ""Samsung"" và đang thấy kết quả search","1. Merchant vào Edit filter node của node Brand, đổi Display Style = Swatch, click Save Changes (shopper KHÔNG reload).
+2. Trên trang đang mở, shopper xoá từ khoá rồi gõ lại ""Samsung"".
+3. Shopper reload trang, gõ lại ""Samsung"".",,"2. Không lỗi/không crash; xác nhận kết quả vẫn theo cấu hình cũ cho tới khi reload hay cập nhật ngay.
+3. Kết quả search theo Display Style mới (value ""Samsung"" không còn hiển thị).",<cần confirm> storefront nhận thay đổi ngay sau Save; chưa rõ trang shopper đang mở có tự cập nhật hay chỉ sau khi reload
+31,Integration,,Display Style bị sync từ BigCommerce ghi đè,Sync từ BigCommerce,"- Show smart filter search = ON (đã Save)
+- Filter tree đang test: Status = ON
+- Node Product options (option ""Size""): Display Style = Grid, variant option ""Size"" bên BigCommerce đang type = Rectangles
+- Value ""XS"" đang tìm thấy qua smart filter search","1. Bên BigCommerce, đổi type của variant option ""Size"" từ Rectangles sang Swatch.
+2. Chạy sync (Manual hoặc Schedule).
+3. Vào Edit filter node của node Product options, quan sát Display Style.
+4. Ra storefront, reload trang, gõ ""XS"" vào ô smart filter search.",Batch sync gần nhất = Success,"3. Xác nhận Display Style của node tự đổi theo type mới bên BigCommerce (Swatch) hay giữ nguyên lựa chọn của merchant (Grid).
+4. Kết quả search nhất quán với Display Style quan sát ở bước 3: Grid → vẫn tìm thấy ""XS""; Swatch → value ""XS"" không còn hiển thị.","<cần confirm> (1) ""default theo BC"" là tự động map theo type hay chỉ gợi ý lúc tạo node — câu hỏi mở ở spec Product options; (2) Product options chưa xác nhận thuộc whitelist Sync"
+32,Integration,,Smart filter search với merged value,Merged value,"- Show smart filter search = ON (đã Save)
+- Filter tree đang test: Status = ON
+- Node Color (Display Style = List)
+- Merged value ""Greenery"" (Status = ON) = Emerald + Lime, tên nhập tay không trùng value con
+- Không node nào khác có value chứa ""Emerald""","1. Ra storefront, gõ ""Greenery"" vào ô smart filter search.
+2. Xoá từ khoá, gõ ""Emerald"".",,"1. Node Color chỉ còn ""Greenery"".
+2. Không tìm ra ""Greenery"" (tên value con không được khớp); panel hiển thị `No results found for ""Emerald""`.",
+33,UI,,Default value + tooltip,,"- Role = [Merchant Admin]
 - Chưa từng Save Advanced Settings (trạng thái mặc định)","1. Vào Filter > Advanced Settings.
 2. Quan sát trạng thái toggle ""Show smart filter search"".
 3. Hover icon (?) cạnh field.",,"2. Toggle ở trạng thái OFF.
-3. Tooltip hiển thị đúng nội dung ""Applied to filter nodes having list/grid option select type"".","<cần confirm> Q6 — tooltip dùng thuật ngữ List/Grid (Display Style) nhưng tên field là Option select type, chưa xác nhận đây có phải lỗi thuật ngữ"
-11,Happy,Show product count,Hiển thị số lượng sản phẩm,,- Toggle giữ ON (default),"1. Click Save Changes.
+3. Tooltip hiển thị nguyên văn ""Applied to filter nodes having list/grid option select type"".","<cần confirm> tooltip ghi ""option select type"" nhưng phạm vi thực tế theo Display Style — chữ tooltip có cần sửa không"
+34,Happy,Show product count,Hiển thị số lượng sản phẩm,,- Toggle giữ ON (default),"1. Click Save Changes.
 2. Ra storefront, mở panel filter.",,"2. Mỗi filter option hiển thị đúng số lượng sản phẩm khớp với dữ liệu đã sync, đặt cạnh tên option.",
-12,Happy,,Ẩn số lượng,,,"1. Tắt toggle ""Show product count"".
+35,Happy,,Ẩn số lượng,,,"1. Tắt toggle ""Show product count"".
 2. Click Save Changes.
 3. Ra storefront, mở panel filter.",,3. Số lượng sản phẩm không còn hiển thị cạnh bất kỳ filter option nào.,
-13,Happy,,Bật lại số lượng,,- Toggle đang OFF (theo TC10),"1. Bật lại toggle ""Show product count"".
+36,Happy,,Bật lại số lượng,,"- Toggle ""Show product count"" = OFF (đã Save)","1. Bật lại toggle ""Show product count"".
 2. Click Save Changes.
 3. Ra storefront, mở panel filter.",,3. Số lượng sản phẩm hiển thị lại đúng số liệu hiện tại cạnh mỗi option.,
-14,Edge,,Ẩn số nhưng rule ẩn theo count vẫn chạy,,"- Toggle ""Show product count"" = OFF
+37,Edge,,Ẩn số nhưng rule ẩn theo count vẫn chạy,,"- Toggle ""Show product count"" = OFF
 - Toggle ""Hide filter node with only one filter option"" = ON
 - Có 1 node option_count = 1","1. Ra storefront, mở panel filter, kiểm tra node có option_count = 1.",,"1. Node vẫn bị ẩn theo đúng rule của toggle #5, dù không thấy số lượng hiển thị ở bất kỳ option nào.",
-15,Sync,,Count tăng theo sản phẩm mới sync,,"- Toggle Show product count = ON
+38,Sync,,Count tăng theo sản phẩm mới sync,,"- Toggle Show product count = ON
 - Filter option A hiện có product count = 3","1. Bên BigCommerce, gán thêm 1 sản phẩm mới vào option A.
 2. Chạy sync (Manual hoặc Schedule).
 3. Ra storefront, kiểm tra count của option A.",Batch sync gần nhất = Success,"3. Count của option A cập nhật thành 4, đúng theo dữ liệu vừa sync.",
-16,Sync,,Count giảm khi sản phẩm bị xoá/archive bên BigCommerce,,- Filter option A hiện có product count = 4,"1. Bên BigCommerce, xoá/archive 1 sản phẩm đang thuộc option A.
+39,Sync,,Count giảm khi sản phẩm bị xoá/archive bên BigCommerce,,- Filter option A hiện có product count = 4,"1. Bên BigCommerce, xoá/archive 1 sản phẩm đang thuộc option A.
 2. Chạy sync.
 3. Ra storefront, kiểm tra count của option A.",Batch sync gần nhất = Success,3. Count của option A giảm còn 3.,
-17,Sync,,Sản phẩm unpublish khỏi channel storefront (chưa xoá hẳn),,- 1 sản phẩm thuộc option A đang published trên channel storefront đang test,"1. Bên BigCommerce, unpublish sản phẩm đó khỏi channel storefront (không xoá).
+40,Sync,,Sản phẩm unpublish khỏi channel storefront (chưa xoá hẳn),,- 1 sản phẩm thuộc option A đang published trên channel storefront đang test,"1. Bên BigCommerce, unpublish sản phẩm đó khỏi channel storefront (không xoá).
 2. Chạy sync.
 3. Ra storefront, kiểm tra count của option A.",Batch sync gần nhất = Success,"3. Xác nhận count có trừ sản phẩm vừa unpublish hay vẫn tính, tuỳ cách Native Search lọc dữ liệu theo channel visibility khi sync.",<cần confirm>
-18,Sync,,Count trong lúc sync đang chạy dở,,,"1. Bắt đầu 1 lần sync trong lúc dữ liệu BC vừa đổi số lượng sản phẩm của option A.
+41,Sync,,Count trong lúc sync đang chạy dở,,,"1. Bắt đầu 1 lần sync trong lúc dữ liệu BC vừa đổi số lượng sản phẩm của option A.
 2. Trong lúc sync đang In Progress, ra storefront kiểm tra count của option A.",Trạng thái sync = In Progress,"2. Xác nhận count hiển thị theo dữ liệu lần sync Success gần nhất trước đó, không nhảy số hoặc hiển thị giá trị rỗng/lỗi giữa chừng.",<cần confirm>
-19,Sync,,Count khi lần sync gần nhất Failed,,- Có 1 lần sync bị Failed sau lần sync Success gần nhất,"1. Ra storefront, kiểm tra count của option A.",Batch sync gần nhất = Failed (lần Success trước đó ghi nhận count = 4),"1. Count vẫn giữ nguyên theo dữ liệu lần sync Success gần nhất (4), không hiển thị lỗi/rỗng do sync Failed.",<cần confirm>
-20,Sync,,Dữ liệu đã đổi bên BC nhưng chưa chạy lại sync (stale),,"- Bên BigCommerce vừa thêm sản phẩm mới vào option A
+42,Sync,,Count khi lần sync gần nhất Failed,,- Có 1 lần sync bị Failed sau lần sync Success gần nhất,"1. Ra storefront, kiểm tra count của option A.",Batch sync gần nhất = Failed (lần Success trước đó ghi nhận count = 4),"1. Count vẫn giữ nguyên theo dữ liệu lần sync Success gần nhất (4), không hiển thị lỗi/rỗng do sync Failed.",<cần confirm>
+43,Sync,,Dữ liệu đã đổi bên BC nhưng chưa chạy lại sync (stale),,"- Bên BigCommerce vừa thêm sản phẩm mới vào option A
 - CHƯA chạy sync lại sau thay đổi này","1. Ra storefront, kiểm tra count của option A ngay (chưa sync).",Batch sync gần nhất (trước khi có thay đổi) = Success,"1. Count vẫn hiển thị theo dữ liệu cũ (chưa cộng thêm sản phẩm vừa thêm bên BC), do chưa qua lần sync mới.",
-21,UI,,Default value,,,"1. Vào Filter > Advanced Settings (chưa từng đổi).
-2. Quan sát toggle ""Show product count"".",,2. Toggle ở trạng thái ON; không có icon tooltip (?) cạnh field.,
-22,Happy,Show Refine by block,Hiển thị block khi chọn filter,,"- Toggle ON, đã Save","1. Ra storefront, chọn 1 filter value bất kỳ.",,"1. Block ""Refine by"" xuất hiện ở đầu panel filter, gồm tiêu đề ""Refine by"" và link ""Clear all"".",
-23,Happy,,Nhiều value cùng 1 node,Không gộp chip,,"1. Chọn 2 value cùng thuộc 1 node (VD Color: Aura, Color: Black).",,"1. Hiển thị đúng 2 chip riêng biệt cho 2 value, không gộp chung 1 chip.",
-24,Happy,,Node dạng range,1 chip duy nhất,- Có node dạng range (VD Price),1. Chọn khoảng giá trên node range.,,"1. Hiển thị đúng 1 chip duy nhất dạng ""Price: $500 – $1000"".",
-25,Happy,,Bỏ chọn qua nút ×,,- Có ≥1 chip đang hiển thị,"1. Click nút ""×"" trên 1 chip.",,1. Chip biến mất khỏi block Refine by; value tương ứng bị bỏ chọn; checkbox trong node tương ứng chuyển về trạng thái chưa chọn.,
-26,Happy,,Clear all,,- Có ≥2 chip đang hiển thị,"1. Click link ""Clear all"".",,1. Toàn bộ value đang chọn bị bỏ chọn cùng lúc; tất cả chip biến mất; danh sách sản phẩm trả về trạng thái chưa lọc.,
-27,Happy,,Đổi Node title,,- Có 1 chip đang hiển thị ứng với 1 node cụ thể,"1. Vào Edit filter node của node đó, đổi Node title ở General Settings, Save.
+44,Integration,,Show product count áp dụng cho merged value,Merged value,"- Show product count = ON (đã Save)
+- Filter tree đang test: Status = ON, có node Color (Title = ""Color"")
+- Merged value ""Greenery"" (Status = ON) = Emerald + Lime, tên nhập tay không trùng value con
+- Node Color đã chọn Emerald, Lime","1. Ra storefront, quan sát số cạnh ""Greenery"".
+2. Tắt toggle ""Show product count"", Save Changes.
+3. Reload, quan sát ""Greenery"".","Emerald: 3 sản phẩm, Lime: 2 sản phẩm, trong đó 1 sản phẩm mang cả 2 value","1. ""Greenery"" hiển thị (4) — đếm distinct, sản phẩm mang cả 2 value chỉ tính 1 lần.
+3. Không còn số cạnh ""Greenery"", giống các value thường.",<cần confirm> cách đếm không trùng lặp khi 1 sản phẩm thuộc cả 2 value (hợp hay giao) theo câu hỏi mở của Merge Values
+45,Happy,Show Refine by block,Hiển thị block khi chọn filter,,"- Toggle ON, đã Save","1. Ra storefront, chọn 1 filter value bất kỳ.",,"1. Block ""Refine by"" xuất hiện ở đầu panel filter, gồm tiêu đề ""Refine by"" và link ""Clear all"".",
+46,Happy,,Nhiều value cùng 1 node,Không gộp chip,,"1. Chọn 2 value cùng thuộc 1 node (VD Color: Aura, Color: Black).",,"1. Hiển thị đúng 2 chip riêng biệt cho 2 value, không gộp chung 1 chip.",
+47,Happy,,Node dạng range,1 chip duy nhất,- Có node dạng range (VD Price),1. Chọn khoảng giá trên node range.,,"1. Hiển thị đúng 1 chip duy nhất dạng ""Price: $500 – $1000"".",
+48,Happy,,Bỏ chọn qua nút ×,,- Có ≥1 chip đang hiển thị,"1. Click nút ""×"" trên 1 chip.",,1. Chip biến mất khỏi block Refine by; value tương ứng bị bỏ chọn; checkbox trong node tương ứng chuyển về trạng thái chưa chọn.,
+49,Happy,,Clear all,,- Có ≥2 chip đang hiển thị,"1. Click link ""Clear all"".",,1. Toàn bộ value đang chọn bị bỏ chọn cùng lúc; tất cả chip biến mất; danh sách sản phẩm trả về trạng thái chưa lọc.,
+50,Happy,,Đổi Node title,,- Có 1 chip đang hiển thị ứng với 1 node cụ thể,"1. Vào Edit filter node của node đó, đổi Node title ở General Settings, Save.
 2. Quay lại storefront, mở panel filter.",,2. Chip trên block Refine by hiển thị đúng Node title mới.,
-28,Happy,,Checkbox đồng bộ trạng thái,,"- Có ≥1 value đang chọn, Refine by đang hiển thị",1. Quan sát checkbox của value đang chọn trong node tương ứng trên panel filter.,,1. Checkbox hiển thị màu cam đúng tại value đang được chọn.,
-29,Edge,,Xoá hết chip,,- Chỉ còn đúng 1 chip đang hiển thị,"1. Click ""×"" trên chip cuối cùng.",,1. Xác nhận block Refine by ẩn hoàn toàn hay hiển thị ở trạng thái rỗng khi không còn chip nào.,<cần confirm> Q12
-30,Edge,,Chưa chọn filter nào,,"- Toggle ON, chưa chọn bất kỳ filter value nào","1. Ra storefront, mở panel filter, chưa chọn gì.",,1. Xác nhận block Refine by ẩn hẳn hay hiển thị dạng rỗng khi chưa có filter nào được chọn.,<cần confirm> Q12
-31,Edge,,Xoá chip trên Mobile,,"- Đang ở drawer Mobile, có ≥1 chip","1. Click ""×"" trên 1 chip trong drawer Mobile (chưa bấm Apply).",,"1. Xác nhận việc bỏ chọn có áp dụng lọc ngay lập tức hay phải bấm ""Apply"" mới áp dụng.",<cần confirm> Q8
-32,Integration,,Xoá node đang có value active trên Refine by — chip duy nhất,0 chip còn lại sau xoá,"- Refine by đang hiển thị ĐÚNG 1 chip, thuộc node sắp bị xoá","1. Vào Edit filter node/Filter Tree List, xoá hẳn node đó.
+51,Happy,,Checkbox đồng bộ trạng thái,,"- Có ≥1 value đang chọn, Refine by đang hiển thị",1. Quan sát checkbox của value đang chọn trong node tương ứng trên panel filter.,,1. Checkbox hiển thị màu cam đúng tại value đang được chọn.,
+52,Edge,,Xoá hết chip,,- Chỉ còn đúng 1 chip đang hiển thị,"1. Click ""×"" trên chip cuối cùng.",,"1. Block ""Refine by"" ẩn hoàn toàn (không còn tiêu đề rỗng).",<cần confirm> Q12 — giả thuyết ẩn hẳn khi không còn chip
+53,Edge,,Chưa chọn filter nào,,"- Toggle ON, chưa chọn bất kỳ filter value nào","1. Ra storefront, mở panel filter, chưa chọn gì.",,"1. Block ""Refine by"" không hiển thị khi chưa có filter nào được chọn.",<cần confirm> Q12 — giả thuyết ẩn hẳn khi chưa chọn filter
+54,Edge,,Xoá chip trên Mobile,,"- Đang ở drawer Mobile, có ≥1 chip","1. Click ""×"" trên 1 chip trong drawer Mobile (chưa bấm Apply).",,"1. Bỏ chọn áp dụng ngay (danh sách sản phẩm cập nhật), không cần bấm ""Apply"".",<cần confirm> Q8 — giả thuyết áp dụng ngay giống Desktop
+55,Integration,,Xoá node đang có value active trên Refine by — chip duy nhất,0 chip còn lại sau xoá,"- Refine by đang hiển thị ĐÚNG 1 chip, thuộc node sắp bị xoá","1. Vào Edit filter node/Filter Tree List, xoá hẳn node đó.
 2. Ra storefront, kiểm tra lại panel filter (session đã mở từ trước hoặc load lại).",,"2. Chip của node đã xoá biến mất khỏi Refine by; không còn tham chiếu ""mồ côi"" tới node đã xoá; xác nhận block Refine by ẩn/rỗng theo đúng hành vi khi hết chip (Q12).",
-33,Integration,,Xoá node đang có value active trên Refine by — còn chip khác,≥1 chip còn lại sau xoá,- Refine by đang hiển thị ≥2 chip thuộc ≥2 node khác nhau,"1. Vào Edit filter node/Filter Tree List, xoá 1 trong các node đang có chip.
+56,Integration,,Xoá node đang có value active trên Refine by — còn chip khác,≥1 chip còn lại sau xoá,- Refine by đang hiển thị ≥2 chip thuộc ≥2 node khác nhau,"1. Vào Edit filter node/Filter Tree List, xoá 1 trong các node đang có chip.
 2. Ra storefront, kiểm tra lại panel filter.",,"2. Chỉ chip của node bị xoá biến mất; các chip còn lại của node khác vẫn hiển thị đúng, không bị ảnh hưởng.",
-34,UI,,Default value + tooltip,,,"1. Vào Filter > Advanced Settings (chưa từng đổi).
+57,Integration,,Chip Refine by khi chọn merged value,Merged value,"- Show Refine by block = ON (đã Save)
+- Filter tree đang test: Status = ON, có node Color (Title = ""Color"")
+- Merged value ""Greenery"" (Status = ON) = Emerald + Lime, tên nhập tay không trùng value con
+- Node Color đã chọn Emerald, Lime","1. Ra storefront, trong node Color chọn ""Greenery"".
+2. Quan sát block Refine by.
+3. Click ""×"" trên chip.",,"2. Đúng 1 chip ""Color: Greenery"" (text merge), không tách thành chip Emerald/Lime.
+3. Chip biến mất; ""Greenery"" bỏ chọn; danh sách sản phẩm không còn lọc theo nhóm Emerald + Lime.",<cần confirm> suy ra từ việc merged value hiển thị như 1 option; chưa có spec riêng cho chip của merged value
+58,UI,,Default value + tooltip,,,"1. Vào Filter > Advanced Settings (chưa từng đổi).
 2. Quan sát toggle ""Show Refine by block"".
 3. Hover icon (?).",,"2. Toggle OFF.
 3. Tooltip hiển thị đúng nội dung ""Shows the filters you've chosen. You can change or remove them here."".",
-35,UI,,Format chip,,,1. Quan sát chip vừa tạo ở TC20.,,"1. Chip đúng format ""{Node title}: {value}"", phần value in đậm, có nút ""×"" bên cạnh.",
-36,UI,,Hiển thị trên Mobile,,"- Toggle ON, đã chọn ≥1 filter value",1. Mở drawer filter trên Mobile.,,"1. Block Refine by hiển thị trong drawer Mobile tương tự Desktop, đủ chip + Clear all.",
-37,UI,Shorten URLs when selecting multiple filter options,Default value,,,"1. Vào Filter > Advanced Settings (chưa từng đổi).
-2. Quan sát toggle ""Shorten URLs when selecting multiple filter options"".",,2. Toggle ở trạng thái OFF; không có icon tooltip (?) cạnh field.,
-38,Happy,Hide filter node with only one filter option,Ẩn node chỉ còn 1 option,Boundary: option_count = 1,- Có 1 filter node với option_count = 1 (theo dữ liệu đã sync),"1. Bật toggle, Save Changes.
-2. Ra storefront, mở panel filter.",option_count của node test = 1,2. Node có option_count = 1 không còn hiển thị trên panel filter.,"<cần confirm> Q3 — giả thuyết theo nhãn panel, mâu thuẫn với bullet note trong thiết kế"
-39,Happy,,Tắt lại toggle,,"- Toggle đang ON (theo TC36), node option_count = 1","1. Tắt toggle, Save Changes.
+59,UI,,Format chip,,"- Show Refine by block = ON (đã Save)
+- Shopper đã chọn value ""Aura"" ở node Color","1. Quan sát chip của value ""Aura"" trên block Refine by.",,"1. Chip đúng format ""{Node title}: {value}"", phần value in đậm, có nút ""×"" bên cạnh.",
+60,UI,,Hiển thị trên Mobile,,"- Toggle ON, đã chọn ≥1 filter value",1. Mở drawer filter trên Mobile.,,"1. Block Refine by hiển thị trong drawer Mobile tương tự Desktop, đủ chip + Clear all.",
+61,Integration,Shorten URLs when selecting multiple filter options,"Merged value hiển thị là 1 option nhưng gồm nhiều value con, dễ bị Shorten tính nhầm thành chọn nhiều value — chỉ chọn 1 merged value",1 merged value,"- Shorten URLs when selecting multiple filter options = ON (đã Save)
+- URL STRUCTURE = SEO-friendly URL
+- Filter tree đang test: Status = ON, có node Color (Title = ""Color"")
+- Merged value ""Greenery"" (Status = ON) = Emerald + Lime, tên nhập tay không trùng value con
+- Node Color đã chọn Emerald, Lime và value thường ""Navy""","1. Ra storefront, trong node Color chỉ chọn ""Greenery"".
+2. Quan sát URL.",,"2. URL = /?Color=Greenery: đúng 1 phần tử là text merge; không bị Shorten gộp thành danh sách value con (không chứa ""Emerald"", ""Lime"").",Rule đã xác nhận: chọn merged value → URL theo text merge
+62,Integration,,Merged value + value thường cùng node,Merged + value thường,"- Shorten URLs when selecting multiple filter options = ON (đã Save)
+- URL STRUCTURE = SEO-friendly URL
+- Filter tree đang test: Status = ON, có node Color (Title = ""Color"")
+- Merged value ""Greenery"" (Status = ON) = Emerald + Lime, tên nhập tay không trùng value con
+- Node Color đã chọn Emerald, Lime và value thường ""Navy""","1. Ra storefront, trong node Color chọn ""Greenery"" và ""Navy"".
+2. Quan sát URL.",,"2. URL gộp 2 phần tử: /?Color=Greenery,Navy — merged value tính là 1 phần tử; không chứa ""Emerald"", ""Lime"".",
+63,Integration,,2 merged value cùng node,2 merged value,"- Shorten URLs when selecting multiple filter options = ON (đã Save)
+- URL STRUCTURE = SEO-friendly URL
+- Filter tree đang test: Status = ON, có node Color (Title = ""Color"")
+- Merged value ""Greenery"" (Status = ON) = Emerald + Lime, tên nhập tay không trùng value con
+- Merged value ""Oceanic"" (Status = ON) = Sky + Marine, tên nhập tay không trùng value con
+- Node Color đã chọn Emerald, Lime, Sky, Marine","1. Ra storefront, trong node Color chọn ""Greenery"" và ""Oceanic"".
+2. Quan sát URL.",,"2. URL gộp 2 phần tử: /?Color=Greenery,Oceanic — mỗi merged value là 1 phần tử; không chứa ""Emerald"", ""Lime"", ""Sky"", ""Marine"".",
+64,Integration,,Đối chứng khi tắt Shorten URLs,Đối chứng Shorten OFF,"- Shorten URLs when selecting multiple filter options = OFF (đã Save)
+- URL STRUCTURE = SEO-friendly URL
+- Filter tree đang test: Status = ON, có node Color (Title = ""Color"")
+- Merged value ""Greenery"" (Status = ON) = Emerald + Lime, tên nhập tay không trùng value con
+- Node Color đã chọn Emerald, Lime và value thường ""Navy""","1. Ra storefront, trong node Color chọn ""Greenery"" và ""Navy"".
+2. Quan sát URL.",,"2. Mỗi value 1 tham số riêng: /?Color=Greenery&Color=Navy; merged value vẫn là 1 tham số text merge, không tách thành value con.",
+65,Integration,,Mở trực tiếp URL đã gộp có chứa text merge,Chiều URL → filter,"- Shorten URLs when selecting multiple filter options = ON (đã Save)
+- URL STRUCTURE = SEO-friendly URL
+- Filter tree đang test: Status = ON, có node Color (Title = ""Color"")
+- Merged value ""Greenery"" (Status = ON) = Emerald + Lime, tên nhập tay không trùng value con
+- Node Color đã chọn Emerald, Lime và value thường ""Navy""","1. Mở trực tiếp URL /?Color=Greenery,Navy (đúng cú pháp hệ thống sinh ra khi chọn 2 value này) trên tab mới.
+2. Quan sát node Color và danh sách sản phẩm.",,"2. ""Greenery"" và ""Navy"" ở trạng thái được chọn; danh sách sản phẩm giống hệt khi shopper tự chọn 2 value này trên panel.",
+66,Integration,,Tên merged value chứa dấu phẩy,Trùng ký tự phân cách,"- Shorten URLs when selecting multiple filter options = ON (đã Save)
+- URL STRUCTURE = SEO-friendly URL
+- Filter tree đang test: Status = ON, có node Color (Title = ""Color"")
+- Merged value ""Green, Olive"" (Status = ON) = Emerald + Lime, tên nhập tay có dấu phẩy
+- Node Color đã chọn Emerald, Lime và value thường ""Navy""","1. Ra storefront, chọn ""Green, Olive"" và ""Navy"".
+2. Quan sát URL.
+3. Copy URL, mở ở tab mới.",,"3. Tab mới áp dụng đúng 2 value ""Green, Olive"" và ""Navy"", không bị tách thành 3 value ""Green"", ""Olive"", ""Navy"".",<cần confirm> Q17 — cách mã hoá dấu phẩy trong tên chưa có spec (ưu tiên thấp)
+67,Integration,,Tên merged value dài tối đa,Boundary: 255 ký tự,"- Shorten URLs when selecting multiple filter options = ON (đã Save)
+- URL STRUCTURE = SEO-friendly URL
+- Filter tree đang test: Status = ON, có node Color (Title = ""Color"")
+- Merged value (Status = ON) = Emerald + Lime, tên nhập tay dài đúng 255 ký tự
+- Node Color đã chọn Emerald, Lime và value thường ""Navy""","1. Ra storefront, chọn merged value đó và ""Navy"".
+2. Quan sát URL.
+3. Reload trang.",Tên Filter option = chuỗi đúng 255 ký tự,"2. URL chứa đủ tên merged value, không bị cắt.
+3. Sau reload, merged value và ""Navy"" vẫn ở trạng thái được chọn, danh sách sản phẩm không đổi.",
+68,Integration,,Tên merged value có dấu tiếng Việt và khoảng trắng,Ký tự cần mã hoá,"- Shorten URLs when selecting multiple filter options = ON (đã Save)
+- URL STRUCTURE = SEO-friendly URL
+- Filter tree đang test: Status = ON, có node Color (Title = ""Color"")
+- Merged value ""Xanh lá"" (Status = ON) = Emerald + Lime
+- Node Color đã chọn Emerald, Lime và value thường ""Navy""","1. Ra storefront, chọn ""Xanh lá"" và ""Navy"".
+2. Quan sát URL.
+3. Copy URL, mở ở tab mới.",,"2. URL mã hoá tên hợp lệ, không vỡ URL.
+3. Tab mới áp dụng đúng ""Xanh lá"" và ""Navy"".",<cần confirm> Q9 — cách mã hoá ký tự (giữ nguyên/%XX/bỏ dấu) chưa có spec
+69,Integration,,Tắt Status merged value khi link cũ đang chứa text merge,Status OFF · tên riêng,"- Shorten URLs when selecting multiple filter options = ON (đã Save)
+- URL STRUCTURE = SEO-friendly URL
+- Filter tree đang test: Status = ON, có node Color (Title = ""Color"")
+- Merged value ""Greenery"" (Status = ON) = Emerald + Lime, tên nhập tay không trùng value con
+- Node Color đã chọn Emerald, Lime và value thường ""Navy""","1. Ra storefront, chọn ""Greenery"" và ""Navy"", copy URL (link cũ).
+2. Vào Merge Values, tắt Status của ""Greenery"".
+3. Mở link cũ ở tab mới.
+4. Quan sát node Color và danh sách sản phẩm.",,"4. Không lỗi/không crash; node Color hiển thị lại Emerald, Lime riêng lẻ; filter ""Navy"" vẫn được áp dụng, chỉ bỏ phần tử ""Greenery"" không còn tồn tại.",<cần confirm> Q15 — chưa có spec về cách xử lý khi 1 phần tử trong tham số đã gộp không còn hợp lệ (giả thuyết: chỉ bỏ phần tử đó)
+70,Integration,,Tắt Status merged value có tên trùng value con,Status OFF · tên trùng con,"- Shorten URLs when selecting multiple filter options = ON (đã Save)
+- URL STRUCTURE = SEO-friendly URL
+- Filter tree đang test: Status = ON, có node Color (Title = ""Color"")
+- Merged value ""Avocado"" (Status = ON) = Avocado + Fern, tên chọn từ dropdown (trùng value con Avocado)
+- Node Color đã chọn Avocado, Fern và value thường ""Navy""","1. Ra storefront, chọn ""Avocado"" và ""Navy"", copy URL (link cũ).
+2. Vào Merge Values, tắt Status của ""Avocado"".
+3. Mở link cũ ở tab mới.
+4. Quan sát node Color và danh sách sản phẩm.",,"4. Link cũ vẫn chạy nhưng ""Avocado"" chỉ còn lọc value Avocado gốc (không còn sản phẩm của Fern); filter ""Navy"" vẫn áp dụng; node Color hiển thị lại Avocado, Fern riêng lẻ.",<cần confirm> Q16 — link cũ đổi nghĩa (thu hẹp kết quả) mà không báo; cần xác nhận đây là hành vi mong muốn
+71,Integration,,Xoá merged value khi link cũ đang chứa text merge,Delete · tên riêng,"- Shorten URLs when selecting multiple filter options = ON (đã Save)
+- URL STRUCTURE = SEO-friendly URL
+- Filter tree đang test: Status = ON, có node Color (Title = ""Color"")
+- Merged value ""Greenery"" (Status = ON) = Emerald + Lime, tên nhập tay không trùng value con
+- Node Color đã chọn Emerald, Lime và value thường ""Navy""","1. Ra storefront, chọn ""Greenery"" và ""Navy"", copy URL (link cũ).
+2. Vào Merge Values, xoá ""Greenery"" (thao tác xoá không có popup xác nhận).
+3. Mở link cũ ở tab mới.
+4. Quan sát node Color và danh sách sản phẩm.",,"4. Không lỗi/không crash; node Color hiển thị lại Emerald, Lime riêng lẻ; filter ""Navy"" vẫn được áp dụng, chỉ bỏ phần tử ""Greenery"" không còn tồn tại.",<cần confirm> Q15 — chưa có spec về cách xử lý khi 1 phần tử trong tham số đã gộp không còn hợp lệ (giả thuyết: chỉ bỏ phần tử đó)
+72,Integration,,Xoá merged value có tên trùng value con,Delete · tên trùng con,"- Shorten URLs when selecting multiple filter options = ON (đã Save)
+- URL STRUCTURE = SEO-friendly URL
+- Filter tree đang test: Status = ON, có node Color (Title = ""Color"")
+- Merged value ""Avocado"" (Status = ON) = Avocado + Fern, tên chọn từ dropdown (trùng value con Avocado)
+- Node Color đã chọn Avocado, Fern và value thường ""Navy""","1. Ra storefront, chọn ""Avocado"" và ""Navy"", copy URL (link cũ).
+2. Vào Merge Values, xoá ""Avocado"" (thao tác xoá không có popup xác nhận).
+3. Mở link cũ ở tab mới.
+4. Quan sát node Color và danh sách sản phẩm.",,"4. Link cũ vẫn chạy nhưng ""Avocado"" chỉ còn lọc value Avocado gốc (không còn sản phẩm của Fern); filter ""Navy"" vẫn áp dụng; node Color hiển thị lại Avocado, Fern riêng lẻ.",<cần confirm> Q16 — link cũ đổi nghĩa (thu hẹp kết quả) mà không báo; cần xác nhận đây là hành vi mong muốn
+73,Integration,,Bật lại Status merged value,Status OFF → ON,"- Shorten URLs when selecting multiple filter options = ON (đã Save)
+- URL STRUCTURE = SEO-friendly URL
+- Filter tree đang test: Status = ON, có node Color (Title = ""Color"")
+- Merged value ""Greenery"" = Emerald + Lime, Status = OFF
+- Node Color đã chọn Emerald, Lime và value thường ""Navy""
+- Có link cũ /?Color=Greenery,Navy lưu từ lúc merged value còn Status = ON","1. Vào Merge Values, bật lại Status của ""Greenery"".
+2. Mở link cũ ở tab mới.
+3. Quan sát node Color và danh sách sản phẩm.",,"3. ""Greenery"" và ""Navy"" được chọn lại đúng; danh sách sản phẩm giống lúc trước khi tắt Status.",
+74,Integration,,Đổi tên Filter option của merged value,Đổi tên merged,"- Shorten URLs when selecting multiple filter options = ON (đã Save)
+- URL STRUCTURE = SEO-friendly URL
+- Filter tree đang test: Status = ON, có node Color (Title = ""Color"")
+- Merged value ""Greenery"" (Status = ON) = Emerald + Lime, tên nhập tay không trùng value con
+- Node Color đã chọn Emerald, Lime và value thường ""Navy""","1. Ra storefront, chọn ""Greenery"" và ""Navy"", copy URL (link cũ).
+2. Vào Merge Values, Edit ""Greenery"", đổi Filter option thành ""Verdant"", Save.
+3. Mở link cũ ở tab mới.
+4. Trên trang, bỏ chọn hết rồi chọn lại ""Verdant"" và ""Navy"", quan sát URL.",,"3. Xác nhận link cũ (chứa ""Greenery"") còn áp dụng được merged value hay bị xử lý như phần tử không hợp lệ.
+4. URL mới dùng tên mới: /?Color=Verdant,Navy.",<cần confirm> hành vi link cũ sau khi đổi tên merged value chưa có spec
+75,Integration,,Thêm value con vào merged value,Hướng thêm value con,"- Shorten URLs when selecting multiple filter options = ON (đã Save)
+- URL STRUCTURE = SEO-friendly URL
+- Filter tree đang test: Status = ON, có node Color (Title = ""Color"")
+- Merged value ""Greenery"" (Status = ON) = Emerald + Lime, tên nhập tay không trùng value con
+- Node Color đã chọn Emerald, Lime, Mint và value thường ""Navy""; Mint chưa thuộc merged value nào","1. Ra storefront, chọn ""Greenery"" và ""Navy"", ghi nhận URL và danh sách sản phẩm.
+2. Vào Merge Values, Edit ""Greenery"", thêm value ""Mint"", Save.
+3. Mở lại URL ở bước 1.
+4. Quan sát URL, danh sách sản phẩm và node Color.",,"4. URL giữ nguyên như bước 1 (không thêm ""Mint""); danh sách sản phẩm có thêm sản phẩm của Mint; Mint không còn hiển thị riêng lẻ trên node Color.",
+76,Integration,,Bớt value con khỏi merged value,"Hướng bớt, còn 2 value","- Shorten URLs when selecting multiple filter options = ON (đã Save)
+- URL STRUCTURE = SEO-friendly URL
+- Filter tree đang test: Status = ON, có node Color (Title = ""Color"")
+- Merged value ""Greenery"" (Status = ON) = Emerald + Lime + Mint
+- Node Color đã chọn Emerald, Lime, Mint và value thường ""Navy""","1. Ra storefront, chọn ""Greenery"" và ""Navy"", ghi nhận URL và danh sách sản phẩm.
+2. Vào Merge Values, Edit ""Greenery"", bỏ value ""Mint"" (còn đúng 2 value), Save.
+3. Mở lại URL ở bước 1.
+4. Quan sát URL, danh sách sản phẩm và node Color.",Số value con: 3 → 2 (mức tối thiểu để merge),4. URL giữ nguyên như bước 1; sản phẩm chỉ mang Mint không còn trong kết quả; Mint hiển thị lại riêng lẻ trên node Color.,
+77,Integration,,Xoá rồi tạo lại merged value cùng tên,Tạo lại cùng tên,"- Shorten URLs when selecting multiple filter options = ON (đã Save)
+- URL STRUCTURE = SEO-friendly URL
+- Filter tree đang test: Status = ON, có node Color (Title = ""Color"")
+- Merged value ""Greenery"" (Status = ON) = Emerald + Lime, tên nhập tay không trùng value con
+- Node Color đã chọn Emerald, Lime và value thường ""Navy""","1. Ra storefront, chọn ""Greenery"" và ""Navy"", copy URL (link cũ).
+2. Vào Merge Values, xoá ""Greenery"".
+3. Tạo mới merged value ""Greenery"" = Emerald + Lime, Save.
+4. Mở link cũ ở tab mới.",,"4. Link cũ hoạt động lại như ban đầu: ""Greenery"" và ""Navy"" được chọn, danh sách sản phẩm như ở bước 1.",<cần confirm> suy ra từ rule URL theo text merge; chưa xác nhận hệ thống khớp link theo text hay theo mã nội bộ của bản ghi cũ
+78,Integration,,Value con của merged value bị đổi tên bên BigCommerce,Sync từ BigCommerce,"- Shorten URLs when selecting multiple filter options = ON (đã Save)
+- URL STRUCTURE = SEO-friendly URL
+- Filter tree đang test: Status = ON, có node Color (Title = ""Color"")
+- Merged value ""Greenery"" (Status = ON) = Emerald + Lime, nguồn Product options
+- Node Color đã chọn Emerald, Lime và value thường ""Navy""","1. Ra storefront, chọn ""Greenery"" và ""Navy"", ghi nhận URL.
+2. Bên BigCommerce, đổi tên value ""Lime"" thành ""Lime Green"".
+3. Chạy sync (Manual hoặc Schedule).
+4. Ra storefront, reload trang, chọn lại ""Greenery"" và ""Navy"", quan sát URL và danh sách sản phẩm.",Batch sync gần nhất = Success,"4. URL giữ nguyên /?Color=Greenery,Navy (text merge do merchant đặt, không đổi theo tên mới bên BigCommerce); sản phẩm của value vừa đổi tên vẫn nằm trong kết quả của ""Greenery"".",
+79,Integration,,URL dùng text merge ngay sau khi tạo merged value,Hiệu lực ngay sau Save,"- Shorten URLs when selecting multiple filter options = ON (đã Save)
+- URL STRUCTURE = SEO-friendly URL
+- Filter tree đang test: Status = ON
+- Node Color có Emerald, Lime; chưa có merged value nào chứa 2 value này","1. Vào Merge Values, tạo merged value ""Greenery"" = Emerald + Lime, Save.
+2. Ra storefront, reload trang, chọn ""Greenery"".
+3. Quan sát URL.",,"3. ""Greenery"" hiển thị ngay sau Save; URL = /?Color=Greenery.",
+80,Integration,,Merged value + value thường ở dạng New URL,URL STRUCTURE = New URL,"- Shorten URLs when selecting multiple filter options = ON (đã Save)
+- URL STRUCTURE = New URL
+- Filter tree đang test: Status = ON, có node Color (Title = ""Color"")
+- Merged value ""Greenery"" (Status = ON) = Emerald + Lime, tên nhập tay không trùng value con
+- Node Color đã chọn Emerald, Lime và value thường ""Navy""","1. Ra storefront, chọn ""Greenery"" và ""Navy"".
+2. Quan sát URL.
+3. Copy URL, mở ở tab mới.",,"2. Ghi nhận merged value được ghi bằng mã riêng của merged value, bằng danh sách mã của value con, hay bằng text merge.
+3. Tab mới áp dụng đúng ""Greenery"" và ""Navy"".","<cần confirm> Q14 — cú pháp nối đã chốt (dấu phẩy, VD ?Color_3=100,101); còn mở: merged value được ghi bằng mã nào ở dạng mã số"
+81,Integration,,Merged value + value thường ở dạng Old URL,URL STRUCTURE = Old URL,"- Shorten URLs when selecting multiple filter options = ON (đã Save)
+- URL STRUCTURE = Old URL
+- Filter tree đang test: Status = ON, có node Color (Title = ""Color"")
+- Merged value ""Greenery"" (Status = ON) = Emerald + Lime, tên nhập tay không trùng value con
+- Node Color đã chọn Emerald, Lime và value thường ""Navy""","1. Ra storefront, chọn ""Greenery"" và ""Navy"".
+2. Quan sát URL.
+3. Copy URL, mở ở tab mới.",,"2. Ghi nhận merged value được ghi bằng mã riêng của merged value, bằng danh sách mã của value con, hay bằng text merge.
+3. Tab mới áp dụng đúng ""Greenery"" và ""Navy"".",<cần confirm> Q5/Q14 — Old URL + Shorten ON chưa có cú pháp tham chiếu; còn mở: merged value được ghi bằng mã nào
+82,Happy,Hide filter node with only one filter option,Ẩn node chỉ còn 1 option,Boundary: option_count = 1,- Có 1 filter node với option_count = 1 (theo dữ liệu đã sync),"1. Bật toggle, Save Changes.
+2. Ra storefront, mở panel filter.",option_count của node test = 1,"2. Node có option_count = 1 không còn hiển thị trên panel filter (ẩn cả node, kể cả tiêu đề).",
+83,Happy,,Tắt lại toggle,,"- Toggle ""Hide filter node with only one filter option"" = ON (đã Save)
+- Node có option_count = 1 đang bị ẩn","1. Tắt toggle, Save Changes.
 2. Ra storefront, mở panel filter.",,2. Node có option_count = 1 hiển thị lại bình thường.,
-40,Edge,,Node còn ≥2 option vẫn hiển thị,Boundary: option_count = 2,"- Toggle ON
+84,Edge,,Node còn ≥2 option vẫn hiển thị,Boundary: option_count = 2,"- Toggle ON
 - Có 1 filter node với option_count = 2","1. Ra storefront, mở panel filter.",option_count của node test = 2,1. Node vẫn hiển thị đầy đủ với cả 2 option.,
-41,Edge,,Node option_count = 0,Boundary: option_count = 0,"- Toggle ON
+85,Edge,,Node option_count = 0,Boundary: option_count = 0,"- Toggle ON
 - Có 1 filter node với option_count = 0 (hết dữ liệu khớp)","1. Ra storefront, mở panel filter.",option_count của node test = 0,1. Xác nhận node hiển thị thế nào khi option_count = 0 (ẩn hay hiện node rỗng).,<cần confirm>
-42,Edge,,Tất cả node đều bị ẩn,,"- Toggle ON
+86,Edge,,Tất cả node đều bị ẩn,,"- Toggle ON
 - TẤT CẢ filter node trong tree đều có option_count = 1","1. Ra storefront, mở panel filter.",,1. Xác nhận khối filter hiển thị thế nào khi không còn node nào đủ điều kiện hiển thị.,<cần confirm> Q13
-43,Edge,,Node có ≥2 option nhưng mỗi option đều count=1,Phân biệt ẩn node vs ẩn option (Q3),"- Toggle = ON
-- Node Y có đúng 2 option, mỗi option đều có product count = 1 (giống data mẫu Aura(1), Marine(1) trong design)","1. Ra storefront, mở panel filter, kiểm tra node Y.",option_count của node Y = 2; MỖI option trong node đều có product count = 1,"1. Theo giả thuyết nhãn panel (ẩn cả NODE khi node chỉ còn 1 option): node Y vẫn hiển thị đủ cả 2 option vì option_count = 2, không bị ẩn.
-- Nếu hệ thống lại ẩn mất 1 hoặc cả 2 option này (theo cách hiểu bullet note ""ẩn option có count=1""), đây là bằng chứng xác định Q3 theo hướng ngược lại với giả thuyết.","<cần confirm> Q3 — case DUY NHẤT phân biệt được 2 cách hiểu, vì data mẫu trong design (Aura(1)/Marine(1)...) rơi đúng vào tình huống này"
-44,Sync,,Node tự động hết ẩn khi option_count tăng sau sync,Sync đưa option_count: 1 → 2,"- Toggle = ON
+87,Edge,,"Option duy nhất đang được chọn, Refine by tắt",Shopper kẹt filter,"- Hide filter node with only one filter option = ON (đã Save)
+- Show Refine by block = OFF (đã Save)
+- Filter tree đang test: Status = ON
+- Node Condition có 3 option Used, New, Refurbished; node Color có ""Black""
+- Khi chọn ""Black"", node Condition chỉ còn đúng 1 option ""Used""","1. Ra storefront, chọn ""Used"" ở node Condition.
+2. Chọn ""Black"" ở node Color.
+3. Quan sát node Condition và tìm cách bỏ chọn ""Used"".",,"3. Xác nhận node Condition bị ẩn hay vẫn hiển thị; nếu bị ẩn, shopper vẫn bỏ chọn được ""Used"" bằng ít nhất 1 cách trên giao diện (không bị kẹt filter).",<cần confirm> chưa có spec: option_count tính theo toàn catalog hay theo kết quả đang lọc; node ẩn mà option duy nhất đang được chọn
+88,Edge,,"Option duy nhất đang được chọn, Refine by bật",Gỡ qua chip,"- Hide filter node with only one filter option = ON (đã Save)
+- Show Refine by block = ON (đã Save)
+- Filter tree đang test: Status = ON
+- Node Condition có 3 option Used, New, Refurbished; node Color có ""Black""
+- Khi chọn ""Black"", node Condition chỉ còn đúng 1 option ""Used""","1. Ra storefront, chọn ""Used"" ở node Condition.
+2. Chọn ""Black"" ở node Color.
+3. Quan sát block Refine by.
+4. Click ""×"" trên chip ""Condition: Used"".",,"3. Chip ""Condition: Used"" vẫn hiển thị dù node Condition có thể bị ẩn.
+4. Filter ""Used"" được bỏ; danh sách sản phẩm không còn lọc theo ""Used"".",<cần confirm> chưa có spec: option_count tính theo toàn catalog hay theo kết quả đang lọc
+89,Sync,,Node tự động hết ẩn khi option_count tăng sau sync,Sync đưa option_count: 1 → 2,"- Toggle = ON
 - Node X đang có option_count = 1 → đang bị ẩn trên storefront","1. Bên BigCommerce, gán thêm dữ liệu để node X có thêm 1 option (VD thêm sản phẩm thuộc value thứ 2).
 2. Chạy sync.
 3. Ra storefront, kiểm tra node X.","Batch sync gần nhất = Success, option_count node X sau sync = 2","3. Node X tự động hiển thị lại, không cần merchant vào Advanced Settings thao tác gì thêm.",
-45,Sync,,Node tự động bị ẩn khi option_count giảm sau sync,Sync đưa option_count: 2 → 1,"- Toggle = ON
+90,Sync,,Node tự động bị ẩn khi option_count giảm sau sync,Sync đưa option_count: 2 → 1,"- Toggle = ON
 - Node X đang có option_count = 2 → đang hiển thị bình thường","1. Bên BigCommerce, xoá/archive sản phẩm khiến node X chỉ còn 1 option.
 2. Chạy sync.
 3. Ra storefront, kiểm tra node X.","Batch sync gần nhất = Success, option_count node X sau sync = 1",3. Node X tự động bị ẩn khỏi storefront ngay sau sync.,
-46,Sync,,Hành vi khi option_count đang ở ranh giới lúc sync chưa hoàn tất,,"- Toggle = ON
+91,Sync,,Hành vi khi option_count đang ở ranh giới lúc sync chưa hoàn tất,,"- Toggle = ON
 - Node X đang chuyển từ option_count = 2 sang 1 do dữ liệu BC vừa đổi","1. Bắt đầu sync trong lúc node X đang ở trạng thái chuyển tiếp.
 2. Trong lúc sync đang In Progress, ra storefront kiểm tra node X.",Trạng thái sync = In Progress,"2. Xác nhận node X hiển thị theo trạng thái option_count TRƯỚC khi sync này, không tự ẩn/hiện nhấp nháy trước khi sync hoàn tất.",<cần confirm>
-47,Sync,,Hành vi khi lần sync gần nhất Failed,,"- Toggle = ON
+92,Sync,,Hành vi khi lần sync gần nhất Failed,,"- Toggle = ON
 - Có 1 lần sync Failed sau lần Success gần nhất (option_count node X tại lần Success gần nhất = 1)","1. Ra storefront, kiểm tra node X.",Batch sync gần nhất = Failed,"1. Node X giữ nguyên trạng thái ẩn/hiện theo dữ liệu lần sync Success gần nhất, không đổi theo dữ liệu BC mới chưa sync thành công.",<cần confirm>
-48,UI,,Default value,,,"1. Vào Filter > Advanced Settings (chưa từng đổi).
-2. Quan sát toggle ""Hide filter node with only one filter option"".",,2. Toggle ở trạng thái OFF; không có icon tooltip (?) cạnh field.,
-49,Edge,Change label of Refine By button on mobile when tapping on it,Đổi nhãn khi tap trên Mobile,,"- Toggle ON, đã Save","1. Ra storefront Mobile, tap vào nút mở filter.",,1. Xác nhận đúng nút nào đổi nhãn (nút mở drawer hay tiêu đề trong drawer) và đổi từ chữ gì sang chữ gì.,<cần confirm> Q7 — không có tài liệu/note mô tả hành vi cụ thể
-50,UI,,Default value,,,"1. Vào Filter > Advanced Settings (chưa từng đổi).
-2. Quan sát toggle.",,2. Toggle ở trạng thái OFF; không có icon tooltip (?) cạnh field.,
-51,Happy,URL STRUCTURE,Chọn Old URL,,,"1. Chọn ""Old URL"", Save Changes.
+93,Integration,,Node chỉ còn 1 option sau khi merge,Boundary: 2 → 1 option,"- Hide filter node with only one filter option = ON (đã Save)
+- Filter tree đang test: Status = ON, có node Color (Title = ""Color"")
+- Node Color chỉ có 2 value Emerald, Lime (đang hiển thị vì có 2 option)","1. Vào Merge Values, tạo merged value ""Greenery"" = Emerald + Lime, Save.
+2. Reload, quan sát node Color.
+3. Vào Merge Values, tắt Status của ""Greenery"".
+4. Reload, quan sát node Color.",Số option của node Color: 2 → 1 → 2,"2. Node Color chỉ còn 1 option ""Greenery"" nên bị ẩn khỏi panel.
+4. Node Color hiển thị lại với 2 option Emerald, Lime.",<cần confirm> chưa xác nhận merged value được tính là 1 option khi xét rule ẩn node
+94,Happy,Change label of Refine By button on mobile when tapping on it,Đổi nhãn nút Refine By khi tap,,"- Change label of Refine By button on mobile when tapping on it = ON (đã Save)
+- Filter tree đang test: Status = ON","1. Ra storefront Mobile, quan sát nút ""Refine By"".
+2. Tap nút ""Refine By"" để mở drawer filter.
+3. Quan sát nhãn nút.
+4. Tap lại nút để đóng drawer, quan sát nhãn.",,"1. Nút hiển thị ""Refine By"".
+3. Nhãn nút đổi thành ""Hide filter"".
+4. Nhãn nút trở về ""Refine By"" sau khi đóng drawer.","<cần confirm> nhãn ""Hide filter"" lấy theo tài liệu app tham chiếu, chưa có note trong design; nhãn trở về khi đóng drawer là suy ra"
+95,Happy,,Toggle OFF: nhãn nút giữ nguyên,Đối chứng,"- Change label of Refine By button on mobile when tapping on it = OFF (đã Save)
+- Filter tree đang test: Status = ON","1. Ra storefront Mobile, quan sát nút ""Refine By"".
+2. Tap nút ""Refine By"" để mở drawer filter.
+3. Quan sát nhãn nút.",,"1. Nút hiển thị ""Refine By"".
+3. Nhãn nút giữ nguyên ""Refine By"".",
+96,Happy,URL STRUCTURE,Chọn Old URL,,,"1. Chọn ""Old URL"", Save Changes.
 2. Ra storefront, chọn 1 filter value.
 3. Quan sát URL.",,"3. URL theo dạng ""/?filter[Color_3][]=100"" (dùng id nội bộ của node và value).",
-52,Happy,,Chọn New URL,,,"1. Chọn ""New URL"", Save Changes.
+97,Happy,,Chọn New URL,,,"1. Chọn ""New URL"", Save Changes.
 2. Ra storefront, chọn 1 filter value.
 3. Quan sát URL.",,"3. URL theo dạng ""/?Color_3=100"".",
-53,Happy,,Chọn SEO-friendly URL,,,"1. Chọn ""SEO-friendly URL"", Save Changes.
+98,Happy,,Chọn SEO-friendly URL,,,"1. Chọn ""SEO-friendly URL"", Save Changes.
 2. Ra storefront, chọn 1 filter value.
 3. Quan sát URL.",,"3. URL theo dạng ""/?Color=Grey"" (dùng tên thật của node và value).",
-54,Edge,,Value đã Merge Values,,"- URL STRUCTURE = SEO-friendly URL
-- Có 1 value đã được Merge Values","1. Ra storefront, chọn value đã merge.
-2. Quan sát URL.",,2. Xác nhận URL hiển thị tên gốc hay tên merged.,<cần confirm> Q9
-55,Edge,,Value chứa ký tự đặc biệt/dấu tiếng Việt,,"- URL STRUCTURE = SEO-friendly URL
+99,Edge,,Value chứa ký tự đặc biệt/dấu tiếng Việt,,"- URL STRUCTURE = SEO-friendly URL
 - Có value chứa dấu tiếng Việt/khoảng trắng/ký tự đặc biệt","1. Ra storefront, chọn value đó.
 2. Quan sát URL.",,2. Xác nhận cách encode ký tự trong URL (giữ nguyên/encode %XX/loại bỏ dấu).,<cần confirm> Q9
-56,Edge,,2 node có value trùng tên,,"- URL STRUCTURE = SEO-friendly URL
+100,Edge,,2 node có value trùng tên,,"- URL STRUCTURE = SEO-friendly URL
 - 2 node khác nhau có value trùng tên","1. Ra storefront, chọn value trùng tên ở từng node.
 2. Quan sát URL sinh ra ở mỗi trường hợp.",,2. Xác nhận URL có phân biệt được 2 node hay bị nhầm lẫn value.,<cần confirm> Q9
-57,Edge,,"Đổi URL STRUCTURE sang kiểu khác, kiểm tra link cũ đã bookmark theo kiểu trước đó",,"- URL STRUCTURE đang = Old URL
-- Có sẵn 1 URL đã bookmark/share theo dạng Old URL (VD /?filter[Color_3][]=100)","1. Đổi URL STRUCTURE sang SEO-friendly URL, Save Changes.
-2. Truy cập trực tiếp URL cũ đã bookmark (vẫn ở dạng Old URL).",,"2. Xác nhận URL cũ (dạng Old URL) còn lọc đúng sản phẩm sau khi hệ thống đã đổi sang kiểu SEO-friendly, hay không còn khớp filter nào (404/không lọc được).","<cần confirm> — tương tự Q9 nhưng là đổi chính kiểu URL STRUCTURE, không phải đổi tên value"
-58,Sync,,URL SEO-friendly cập nhật theo tên value mới sau khi đổi bên BigCommerce,,"- URL STRUCTURE = SEO-friendly URL
+101,Sync,,URL SEO-friendly cập nhật theo tên value mới sau khi đổi bên BigCommerce,,"- URL STRUCTURE = SEO-friendly URL
 - 1 value đang có tên cũ (VD ""Grey"")","1. Bên BigCommerce, đổi tên value đó (VD ""Grey"" → ""Silver Grey"").
 2. Chạy sync.
 3. Ra storefront, chọn value đó, quan sát URL.",Batch sync gần nhất = Success,"3. URL hiển thị đúng tên MỚI (""Silver Grey""), không còn tên cũ.",
-59,Sync,,URL vẫn dùng tên cũ khi chưa chạy lại sync (stale),,- Đã đổi tên value bên BigCommerce nhưng CHƯA chạy sync lại,"1. Ra storefront, chọn value đó, quan sát URL ngay (chưa sync).",Batch sync gần nhất (trước khi đổi tên) = Success,"1. URL vẫn dùng tên CŨ theo dữ liệu lần sync gần nhất, chưa phản ánh tên mới.",
-60,Sync,,Link cũ (dùng tên trước khi đổi) đã được khách bookmark/share/index trước đó,,"- Value đã đổi tên bên BC và đã sync xong (tên mới đang có hiệu lực)
+102,Sync,,URL vẫn dùng tên cũ khi chưa chạy lại sync (stale),,- Đã đổi tên value bên BigCommerce nhưng CHƯA chạy sync lại,"1. Ra storefront, chọn value đó, quan sát URL ngay (chưa sync).",Batch sync gần nhất (trước khi đổi tên) = Success,"1. URL vẫn dùng tên CŨ theo dữ liệu lần sync gần nhất, chưa phản ánh tên mới.",
+103,Sync,,Link cũ (dùng tên trước khi đổi) đã được khách bookmark/share/index trước đó,,"- Value đã đổi tên bên BC và đã sync xong (tên mới đang có hiệu lực)
 - Có sẵn 1 URL dùng tên CŨ (VD lưu từ trước khi đổi)",1. Truy cập trực tiếp URL cũ (chứa tên value trước khi đổi).,,"1. Xác nhận URL cũ còn lọc đúng sản phẩm theo value đã đổi tên, hay không còn khớp filter nào (404/không lọc được).",<cần confirm> Q9
-61,Sync,,URL sinh ra trong lúc sync đang chạy dở đúng lúc khách chọn filter,,- Value đang được sync đổi tên (từ tên cũ sang tên mới),"1. Trong lúc sync đang In Progress, khách chọn value đó trên storefront.
+104,Sync,,URL sinh ra trong lúc sync đang chạy dở đúng lúc khách chọn filter,,- Value đang được sync đổi tên (từ tên cũ sang tên mới),"1. Trong lúc sync đang In Progress, khách chọn value đó trên storefront.
 2. Quan sát URL sinh ra.",Trạng thái sync = In Progress,"2. Xác nhận URL dùng tên theo trạng thái nào (tên cũ ổn định cho tới khi sync xong, hay có thể đổi giữa chừng).",<cần confirm>
-62,Integration,,URL SEO-friendly dùng tên nào khi value đã qua Merge Values,Value đã merge ≥2 value gốc,"- URL STRUCTURE = SEO-friendly URL
-- Có 1 value là kết quả Merge Values của ≥2 value gốc (VD Emerald + Green → Green)","1. Ra storefront, chọn value đã merge trên filter node.
-2. Quan sát URL trên thanh địa chỉ.",,2. Xác nhận URL dùng tên merged (VD Green) hay 1 trong các tên gốc (VD Emerald) — không được hiển thị tên đã bị merge/không còn tồn tại.,<cần confirm> Q9
-63,UI,,Default hiển thị khi đóng dropdown,,,"1. Vào Filter > Advanced Settings (chưa từng đổi).
+105,Integration,,URL SEO-friendly dùng tên nào khi value đã qua Merge Values,Tên merge trùng value con,"- URL STRUCTURE = SEO-friendly URL
+- Merged value ""Green"" (Status = ON) = Emerald + Green, tên chọn từ dropdown (trùng value con Green)","1. Ra storefront, trong node Color chọn ""Green"".
+2. Quan sát URL trên thanh địa chỉ và danh sách sản phẩm.",,"2. URL = /?Color=Green (text merge); danh sách sản phẩm gồm sản phẩm của cả Emerald và Green (cả nhóm), không chỉ riêng value Green gốc.",Rule đã xác nhận: chọn merged value → URL theo text merge
+106,Integration,,"Link dạng Old URL đã lưu, merchant đổi sang SEO-friendly",Old → SEO-friendly,"- URL STRUCTURE = Old URL (đã Save)
+- Filter tree đang test: Status = ON
+- Node Color có value ""Grey""","1. Ra storefront, chọn ""Grey"", copy URL (dạng /?filter[Color_3][]=100) làm link cũ.
+2. Vào Advanced Settings, đổi URL STRUCTURE = SEO-friendly URL, Save Changes.
+3. Mở link cũ ở tab mới.
+4. Quan sát node Color và danh sách sản phẩm.",,"4. Xác nhận link cũ vẫn áp dụng đúng filter ""Grey"" (danh sách sản phẩm như lúc chọn) hay không còn khớp (không lọc/lỗi).",<cần confirm> Q18 — chưa có spec về link đã chia sẻ hoặc đã index khi merchant đổi URL STRUCTURE
+107,Integration,,"Link dạng New URL đã lưu, merchant đổi sang SEO-friendly",New → SEO-friendly,"- URL STRUCTURE = New URL (đã Save)
+- Filter tree đang test: Status = ON
+- Node Color có value ""Grey""","1. Ra storefront, chọn ""Grey"", copy URL (dạng /?Color_3=100) làm link cũ.
+2. Vào Advanced Settings, đổi URL STRUCTURE = SEO-friendly URL, Save Changes.
+3. Mở link cũ ở tab mới.
+4. Quan sát node Color và danh sách sản phẩm.",,"4. Xác nhận link cũ vẫn áp dụng đúng filter ""Grey"" hay không còn khớp (không lọc/lỗi).",<cần confirm> Q18 — chưa có spec về link đã chia sẻ hoặc đã index khi merchant đổi URL STRUCTURE
+108,Integration,,"Link dạng SEO-friendly đã lưu, merchant đổi sang Old URL",SEO-friendly → Old,"- URL STRUCTURE = SEO-friendly URL (đã Save)
+- Filter tree đang test: Status = ON
+- Node Color có value ""Grey""","1. Ra storefront, chọn ""Grey"", copy URL (dạng /?Color=Grey) làm link cũ.
+2. Vào Advanced Settings, đổi URL STRUCTURE = Old URL, Save Changes.
+3. Mở link cũ ở tab mới.
+4. Quan sát node Color và danh sách sản phẩm.",,"4. Xác nhận link cũ vẫn áp dụng đúng filter ""Grey"" hay không còn khớp (không lọc/lỗi).",<cần confirm> Q18 — chưa có spec về link đã chia sẻ hoặc đã index khi merchant đổi URL STRUCTURE
+109,UI,,Default hiển thị khi đóng dropdown,,,"1. Vào Filter > Advanced Settings (chưa từng đổi).
 2. Quan sát dòng ""URL STRUCTURE"".",,"2. Hiển thị nhãn ""SEO-friendly URL"" (chữ xám) kèm URL mẫu ""/?Color=Grey"" (chữ đậm).",<cần confirm> chưa xác nhận đây có phải giá trị default hệ thống hay chỉ là giá trị minh hoạ
-64,UI,,Mở dropdown,,,1. Click vào dòng URL STRUCTURE.,,"1. Dropdown mở ra, hiển thị đủ 3 lựa chọn: Old URL, New URL, SEO-friendly URL.",<cần confirm> chưa xác nhận đủ 3 lựa chọn và đúng nhãn hiển thị trong list
-65,UI,,Đóng dropdown không chọn,,"- Dropdown đang mở, giá trị hiện tại là SEO-friendly URL",1. Click ra ngoài dropdown mà không chọn giá trị mới.,,"1. Dropdown đóng lại, giá trị đang chọn giữ nguyên như trước khi mở (không tự đổi).",
-66,Happy,Save Changes,Lưu thay đổi thành công,,,"1. Đổi giá trị ≥1 field bất kỳ.
+110,UI,,Mở dropdown,,,1. Click vào dòng URL STRUCTURE.,,"1. Dropdown mở ra, hiển thị đủ 3 lựa chọn: Old URL, New URL, SEO-friendly URL.",<cần confirm> chưa xác nhận đủ 3 lựa chọn và đúng nhãn hiển thị trong list
+111,UI,,Đóng dropdown không chọn,,"- Dropdown đang mở, giá trị hiện tại là SEO-friendly URL",1. Click ra ngoài dropdown mà không chọn giá trị mới.,,"1. Dropdown đóng lại, giá trị đang chọn giữ nguyên như trước khi mở (không tự đổi).",
+112,Happy,Save Changes,Lưu thay đổi thành công,,,"1. Đổi giá trị ≥1 field bất kỳ.
 2. Click Save Changes.
 3. Reload lại trang.",,"2. Toast xác nhận lưu thành công hiển thị.
-3. Giá trị vừa đổi vẫn giữ nguyên sau khi reload.",
-67,Negative,,2 tab cùng sửa,,- Mở 2 tab cùng vào Advanced Settings,"1. Ở tab 1, đổi field A, Save Changes.
+3. Giá trị vừa đổi vẫn giữ nguyên sau khi reload.",<cần confirm> design không có toast; cần xác nhận phản hồi sau khi lưu
+113,Negative,,2 tab cùng sửa,,- Mở 2 tab cùng vào Advanced Settings,"1. Ở tab 1, đổi field A, Save Changes.
 2. Ở tab 2 (đang mở từ trước, chưa reload), đổi field B, Save Changes.",,"2. Xác nhận kết quả sau cùng: tab 2 ghi đè hoàn toàn lên thay đổi của tab 1, hay có cảnh báo xung đột.",
-68,Edge,,Double-click Save Changes,,- Đã đổi ≥1 field,1. Click liên tiếp 2 lần thật nhanh vào Save Changes.,,"1. Chỉ ghi nhận đúng 1 lần lưu, không phát sinh request/lỗi trùng.",<cần confirm> Q10
-69,Edge,,Rời trang khi chưa lưu,,"- Đã đổi ≥1 field, CHƯA Save",1. Click nút Back/điều hướng sang trang khác.,,1. Xác nhận có popup cảnh báo unsaved changes trước khi rời trang hay không.,<cần confirm> Q10
-70,UI,,Trạng thái ban đầu,,"- Vừa vào màn, chưa đổi giá trị nào",1. Quan sát nút Save Changes.,,1. Xác nhận nút đang enable sẵn (theo design) dù chưa có thay đổi nào.,<cần confirm> Q10 — khác khung chung Filter Tree (Save Changes phải disable khi chưa đổi gì)
-71,UI,Preview Desktop/Mobile,Tab mặc định,,,"1. Vào Filter > Advanced Settings.
+114,Edge,,Double-click Save Changes,,- Đã đổi ≥1 field,1. Click liên tiếp 2 lần thật nhanh vào Save Changes.,,"1. Chỉ ghi nhận đúng 1 lần lưu, không phát sinh request/lỗi trùng.",<cần confirm> Q10
+115,Edge,,Rời trang khi chưa lưu,,"- Đã đổi ≥1 field, CHƯA Save",1. Click nút Back/điều hướng sang trang khác.,,1. Xác nhận có popup cảnh báo unsaved changes trước khi rời trang hay không.,<cần confirm> Q10
+116,UI,,Trạng thái ban đầu,,"- Vừa vào màn, chưa đổi giá trị nào",1. Quan sát nút Save Changes.,,1. Xác nhận nút đang enable sẵn (theo design) dù chưa có thay đổi nào.,<cần confirm> Q10 — khác khung chung Filter Tree (Save Changes phải disable khi chưa đổi gì)
+117,UI,Preview Desktop/Mobile,Tab mặc định,,,"1. Vào Filter > Advanced Settings.
 2. Quan sát panel Preview bên phải.",,"2. Tab ""Desktop"" đang active mặc định.",
-72,UI,,Chuyển tab Mobile,,"- Bật toggle ""Show Refine by block"" = ON
-- Bật toggle ""Show smart filter search"" = ON (chưa Save)","1. Click tab ""Mobile"".",,"1. Preview đổi sang layout Mobile.
-- Refine by block hiển thị đúng trong preview Mobile.
-- Ghi nhận rõ ô smart search có xuất hiện trong preview Mobile hay không.",<cần confirm> Q4 — liên quan trực tiếp câu hỏi smart search có áp dụng Mobile không
-73,Integration,Phạm vi áp dụng (multi-tree),Thay đổi lan truyền sang filter tree khác — kiểm tra Advanced Settings là setting toàn cục hay riêng từng tree,Toggle Show product count,"- Store có ≥2 filter tree khác nhau (Tree A, Tree B), cả 2 Active
-- Tree A và Tree B hiện cùng giá trị Show product count = ON (default)","1. Vào Advanced Settings từ Tree A, tắt toggle ""Show product count"", Save Changes.
+118,UI,,Chuyển tab Mobile,,- Đã bật 1 vài toggle (chưa cần Save),"1. Click tab ""Mobile"".",,"1. Preview đổi sang layout Mobile, phản ánh đúng trạng thái các toggle đang được bật/tắt.",
+119,UI,,Preview Desktop phản ánh toggle chưa Save,Nhiều toggle,"- Vào Filter > Advanced Settings, Preview = tab Desktop
+- Show smart filter search = OFF, Show product count = ON, Show Refine by block = OFF (chưa đổi)","1. Bật ""Show smart filter search"".
+2. Bật ""Show Refine by block"".
+3. Tắt ""Show product count"".
+4. Quan sát Preview Desktop (chưa Save).",,"4. Preview hiển thị ô search ở đầu panel; block ""Refine by"" (tiêu đề + Clear all) ở đầu panel; không còn số lượng cạnh các option.",
+120,UI,,Preview Mobile hiển thị ô search,Smart search trên Mobile,"- Vào Filter > Advanced Settings
+- Show smart filter search = OFF","1. Bật ""Show smart filter search"" (chưa Save).
+2. Click tab ""Mobile"" trên Preview.
+3. Quan sát Preview Mobile.",,3. Preview Mobile hiển thị ô search ở đầu drawer Filter.,"<cần confirm> preview Mobile trong design (khung Toggle On) không có ô search, trong khi Mobile storefront đã chốt có ô search"
+121,Integration,Phạm vi áp dụng (multi-tree),Đổi 1 lần áp dụng cho mọi filter tree,Show product count,"- Store có ≥2 filter tree Status = ON (Tree A, Tree B)
+- Show product count = ON ở cả 2 tree (default)","1. Vào Advanced Settings, tắt toggle ""Show product count"", Save Changes.
 2. Ra storefront kiểm tra Tree A.
 3. Ra storefront kiểm tra Tree B (không thao tác gì trên Tree B).",,"2. Tree A không còn hiển thị số lượng sản phẩm.
-3. Xác nhận Tree B có cùng bị ẩn số lượng theo (setting toàn cục) hay vẫn giữ nguyên hiển thị (setting riêng từng tree).",<cần confirm> Q1
-74,Integration,,Thay đổi rule ẩn node lan truyền sang tree khác,Toggle Hide filter node 1 option,- Tree A và Tree B đều có ≥1 node option_count = 1,"1. Vào Advanced Settings từ Tree A, bật toggle ""Hide filter node with only one filter option"", Save Changes.
+3. Tree B cũng không còn hiển thị số lượng sản phẩm (setting áp dụng toàn cục).",
+122,Integration,,Rule ẩn node áp dụng cho mọi filter tree,Hide filter node 1 option,"- Store có ≥2 filter tree Status = ON (Tree A, Tree B), mỗi tree có ≥1 node option_count = 1
+- Hide filter node with only one filter option = OFF","1. Vào Advanced Settings, bật toggle ""Hide filter node with only one filter option"", Save Changes.
 2. Ra storefront kiểm tra node option_count = 1 của Tree A.
 3. Ra storefront kiểm tra node option_count = 1 của Tree B.",,"2. Node của Tree A bị ẩn.
-3. Xác nhận node của Tree B có bị ẩn theo hay không — đối chiếu cùng kết luận phạm vi với case trên.",<cần confirm> Q1
-75,Integration,Filter Cache,Storefront có cập nhật ngay sau Save Changes hay cần chạy lại Filter Cache,Nhánh: cập nhật ngay,- Chưa chạy Manual Sync/Filter Cache rebuild sau khi Save,"1. Đổi 1 toggle bất kỳ (VD Show Refine by block), Save Changes.
-2. KHÔNG chạy lại Filter Cache.
-3. Ra storefront kiểm tra ngay.",,"3. Xác nhận storefront đã phản ánh thay đổi ngay, không cần đợi rebuild cache.","<cần confirm> Q11 — 2 nhánh loại trừ nhau với case tiếp theo, chỉ 1 nhánh đúng"
-76,Integration,,Storefront chỉ cập nhật sau khi Filter Cache được rebuild,Nhánh: cần rebuild cache,"- Đã Save Changes ở case trên, storefront CHƯA đổi","1. Vào Filter Cache, chạy rebuild/clear cache thủ công.
-2. Ra storefront kiểm tra lại.",,2. Xác nhận storefront chỉ phản ánh thay đổi sau bước rebuild cache này.,<cần confirm> Q11
-77,Edge,Phạm vi hiển thị (SRP vs Category Page),Cùng 1 field hiển thị nhất quán trên cả SRP và Category Page,,"- Toggle Show product count = ON
-- Cùng filter node/value áp dụng cho cả Search Result Page (SRP) và Category Page","1. Ra storefront, mở panel filter tại Search Result Page, ghi nhận count hiển thị.
-2. Ra storefront, mở panel filter tại Category Page cùng dữ liệu, ghi nhận count hiển thị.",,"1-2. Count hiển thị nhất quán giữa SRP và Category Page cho cùng 1 node/value, không lệch nhau.",
-78,Happy,Shorten URLs × URL STRUCTURE (tổ hợp),Kết hợp Shorten URLs × URL STRUCTURE khi chọn nhiều filter value,Shorten ON × Old URL,- Node đang test có ≥2 filter value khả dụng để chọn đồng thời,"1. Bật toggle ""Shorten URLs when selecting multiple filter options"".
-2. Chọn ""Old URL"" ở URL STRUCTURE.
+3. Node của Tree B cũng bị ẩn (setting áp dụng toàn cục).",
+123,Integration,Thời điểm có hiệu lực,Storefront cập nhật ngay sau Save Changes,,,"1. Đổi 1 toggle bất kỳ (VD Show Refine by block), Save Changes.
+2. Ra storefront, reload trang, kiểm tra ngay.",,"2. Storefront phản ánh thay đổi ngay sau khi Save, không cần thao tác thêm.",
+124,UI,Bố cục màn Advanced Settings,Nhãn và thành phần màn hình,,- Role = [Merchant Admin],"1. Vào Filter > Advanced Settings.
+2. Đối chiếu tiêu đề, nhãn từng toggle, dropdown và nút.",,"2. Header ""← Advanced Settings""; nút ""Save Changes""; section ""ADVANCED SETTINGS"" gồm đúng thứ tự: ""Show smart filter search"", ""Show product count"", ""Show Refine by block"", ""Shorten URLs when selecting multiple filter options"", ""Hide filter node with only one filter option"", ""Change label of Refine By button on mobile when tapping on it"", và dropdown ""URL STRUCTURE"".
+   Panel Preview bên phải có tab Desktop/Mobile; không có nút Delete hay Save as template.",
+125,UI,,Trạng thái mặc định của các toggle và dropdown,Chưa từng Save,- Chưa từng Save Advanced Settings (trạng thái mặc định),"1. Vào Filter > Advanced Settings, quan sát từng toggle và dropdown.",,"1. ""Show smart filter search"" = OFF; ""Show product count"" = ON (không có icon tooltip); ""Show Refine by block"" = OFF; ""Shorten URLs when selecting multiple filter options"" = OFF; ""Hide filter node with only one filter option"" = OFF; ""Change label of Refine By button on mobile when tapping on it"" = OFF.
+   ""URL STRUCTURE"" hiển thị ""SEO-friendly URL"" kèm mẫu ""/?Color=Grey"".",<cần confirm> chưa xác nhận SEO-friendly URL là giá trị mặc định hệ thống hay chỉ là giá trị minh hoạ trong design
+126,Happy,Shorten URLs × URL STRUCTURE (tổ hợp),Kết hợp Shorten URLs × URL STRUCTURE khi chọn nhiều filter value,Shorten ON × Old URL,- Node đang test có ≥2 filter value khả dụng để chọn đồng thời,"1. Vào Advanced Settings, đặt ""Shorten URLs when selecting multiple filter options"" = ON.
+2. Đặt URL STRUCTURE = Old URL.
 3. Click Save Changes.
-4. Ra storefront, chọn đúng 2 filter value cùng 1 node, quan sát URL.",,"4. Nhiều value gộp bằng dấu phẩy, giữ id nội bộ dạng filter[Color_3][]=100,101 (chưa xác nhận cú pháp thật).","<cần confirm> Q5 — design chỉ có ví dụ URL của nền tảng khác (Shopify), chưa xác nhận định dạng thật"
-79,Happy,,Kết hợp Shorten URLs × URL STRUCTURE khi chọn nhiều filter value,Shorten ON × New URL,- Node đang test có ≥2 filter value khả dụng để chọn đồng thời,"1. Bật toggle ""Shorten URLs when selecting multiple filter options"".
-2. Chọn ""New URL"" ở URL STRUCTURE.
+4. Ra storefront, chọn ≥2 filter value cùng 1 node, quan sát URL.",,"4. Nhiều value gộp bằng dấu phẩy, giữ id nội bộ: filter[Color_3][]=100,101.",<cần confirm> Old URL + Shorten ON chưa có cú pháp tham chiếu
+127,Happy,,Kết hợp Shorten URLs × URL STRUCTURE khi chọn nhiều filter value,Shorten ON × New URL,- Node đang test có ≥2 filter value khả dụng để chọn đồng thời,"1. Vào Advanced Settings, đặt ""Shorten URLs when selecting multiple filter options"" = ON.
+2. Đặt URL STRUCTURE = New URL.
 3. Click Save Changes.
-4. Ra storefront, chọn đúng 2 filter value cùng 1 node, quan sát URL.",,"4. Nhiều value gộp bằng dấu phẩy, dùng id phẳng dạng Color_3=100,101 (chưa xác nhận cú pháp thật).",<cần confirm> Q5
-80,Happy,,Kết hợp Shorten URLs × URL STRUCTURE khi chọn nhiều filter value,Shorten ON × SEO-friendly URL,- Node đang test có ≥2 filter value khả dụng để chọn đồng thời,"1. Bật toggle ""Shorten URLs when selecting multiple filter options"".
-2. Chọn ""SEO-friendly URL"" ở URL STRUCTURE.
+4. Ra storefront, chọn ≥2 filter value cùng 1 node, quan sát URL.",,"4. Nhiều value gộp bằng dấu phẩy, id phẳng: Color_3=100,101.",
+128,Happy,,Kết hợp Shorten URLs × URL STRUCTURE khi chọn nhiều filter value,Shorten ON × SEO-friendly URL,- Node đang test có ≥2 filter value khả dụng để chọn đồng thời,"1. Vào Advanced Settings, đặt ""Shorten URLs when selecting multiple filter options"" = ON.
+2. Đặt URL STRUCTURE = SEO-friendly URL.
 3. Click Save Changes.
-4. Ra storefront, chọn đúng 2 filter value cùng 1 node, quan sát URL.",,"4. Nhiều value gộp bằng dấu phẩy, dùng tên thật dạng Color=Grey,Black (chưa xác nhận cú pháp thật — ảnh minh hoạ trong spec là URL của nền tảng khác).",<cần confirm> Q5
-81,Happy,,Kết hợp Shorten URLs × URL STRUCTURE khi chọn nhiều filter value,Shorten OFF × Old URL,- Node đang test có ≥2 filter value khả dụng để chọn đồng thời,"1. Tắt toggle ""Shorten URLs when selecting multiple filter options"".
-2. Chọn ""Old URL"" ở URL STRUCTURE.
+4. Ra storefront, chọn ≥2 filter value cùng 1 node, quan sát URL.",,"4. Nhiều value gộp bằng dấu phẩy, tên thật: Color=Grey,Black.",
+129,Happy,,Kết hợp Shorten URLs × URL STRUCTURE khi chọn nhiều filter value,Shorten OFF × Old URL,- Node đang test có ≥2 filter value khả dụng để chọn đồng thời,"1. Vào Advanced Settings, đặt ""Shorten URLs when selecting multiple filter options"" = OFF.
+2. Đặt URL STRUCTURE = Old URL.
 3. Click Save Changes.
-4. Ra storefront, chọn đúng 2 filter value cùng 1 node, quan sát URL.",,"4. Mỗi value giữ 1 tham số riêng, suy ra từ format Old URL đơn value: filter[Color_3][]=100&filter[Color_3][]=101.",<cần confirm>
-82,Happy,,Kết hợp Shorten URLs × URL STRUCTURE khi chọn nhiều filter value,Shorten OFF × New URL,- Node đang test có ≥2 filter value khả dụng để chọn đồng thời,"1. Tắt toggle ""Shorten URLs when selecting multiple filter options"".
-2. Chọn ""New URL"" ở URL STRUCTURE.
+4. Ra storefront, chọn ≥2 filter value cùng 1 node, quan sát URL.",,4. Mỗi value giữ 1 tham số riêng: filter[Color_3][]=100&filter[Color_3][]=101.,
+130,Happy,,Kết hợp Shorten URLs × URL STRUCTURE khi chọn nhiều filter value,Shorten OFF × New URL,- Node đang test có ≥2 filter value khả dụng để chọn đồng thời,"1. Vào Advanced Settings, đặt ""Shorten URLs when selecting multiple filter options"" = OFF.
+2. Đặt URL STRUCTURE = New URL.
 3. Click Save Changes.
-4. Ra storefront, chọn đúng 2 filter value cùng 1 node, quan sát URL.",,"4. Mỗi value giữ 1 tham số riêng, suy ra từ format New URL đơn value: Color_3=100&Color_3=101.",<cần confirm>
-83,Happy,,Kết hợp Shorten URLs × URL STRUCTURE khi chọn nhiều filter value,Shorten OFF × SEO-friendly URL,- Node đang test có ≥2 filter value khả dụng để chọn đồng thời,"1. Tắt toggle ""Shorten URLs when selecting multiple filter options"".
-2. Chọn ""SEO-friendly URL"" ở URL STRUCTURE.
+4. Ra storefront, chọn ≥2 filter value cùng 1 node, quan sát URL.",,4. Mỗi value giữ 1 tham số riêng: Color_3=100&Color_3=101.,
+131,Happy,,Kết hợp Shorten URLs × URL STRUCTURE khi chọn nhiều filter value,Shorten OFF × SEO-friendly URL,- Node đang test có ≥2 filter value khả dụng để chọn đồng thời,"1. Vào Advanced Settings, đặt ""Shorten URLs when selecting multiple filter options"" = OFF.
+2. Đặt URL STRUCTURE = SEO-friendly URL.
 3. Click Save Changes.
-4. Ra storefront, chọn đúng 2 filter value cùng 1 node, quan sát URL.",,"4. Mỗi value giữ 1 tham số riêng, suy ra từ format SEO-friendly đơn value: Color=Grey&Color=Black.",<cần confirm>
-84,Edge,,Kết hợp Shorten URLs × URL STRUCTURE khi chọn nhiều filter value,Boundary: ≥3 value (Shorten ON × SEO-friendly URL),- Node đang test có ≥3 filter value khả dụng để chọn đồng thời,"1. Bật toggle ""Shorten URLs when selecting multiple filter options"".
-2. Chọn ""SEO-friendly URL"" ở URL STRUCTURE.
-3. Click Save Changes.
-4. Ra storefront, chọn đúng 3 filter value cùng 1 node, quan sát URL.",,"4. Với ĐÚNG 3 value (không phải 2), vẫn gộp đủ cả 3 bằng dấu phẩy theo tên thật dạng Color=Grey,Black,Navy — không bị cắt/lỗi logic nối chỉ đúng cho 2 value.",<cần confirm>
+4. Ra storefront, chọn ≥2 filter value cùng 1 node, quan sát URL.",,4. Mỗi value giữ 1 tham số riêng: Color=Grey&Color=Black.,
