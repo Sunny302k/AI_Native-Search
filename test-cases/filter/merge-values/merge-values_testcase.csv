@@ -1,174 +1,175 @@
 ﻿ID,Test Type,Test Objective,,,Preconditions,Test Steps,Input DB/Setting,Expected Result,Note
+Purpose:,,"Gộp nhiều filter value gần giống nhau (VD Emerald, Lime) thành 1 lựa chọn duy nhất, để shopper không phải chọn lần lượt từng value.",,,,,,,
 ,,=== MERGED VALUES LIST ===,,,,,,,
-MRGVAL_TC01,Happy,Entry point - card [Merge Values],Mở màn Merged Values từ màn Filter,,Role = [Merchant Admin],"1. Vào màn Filter.
+1,Happy,Entry point - card [Merge Values],Mở màn Merged Values từ màn Filter,,Role = [Merchant Admin],"1. Vào màn Filter.
 2. Tại khối [Filter Settings], click card [Merge Values].",,"2. Chuyển sang màn [Merged Values]; card mô tả đúng ""Combine similar product options into a single, unified display.""",
-MRGVAL_TC02,UI,Feature Tour,Nội dung khối hướng dẫn,,Đang ở màn Merged Values,1. Quan sát khối FEATURE TOUR đầu màn.,,"1. Tiêu đề ""What is merge values ?""; nội dung ""Use merge options for simpler customer navigation"" kèm ảnh minh hoạ gộp value thành 1 filter option.",
-MRGVAL_TC03,UI,,Thu gọn/mở lại,,Khối Feature Tour đang mở,"1. Click chevron thu gọn khối.
+2,UI,Feature Tour,Nội dung khối hướng dẫn,,Đang ở màn Merged Values,1. Quan sát khối FEATURE TOUR đầu màn.,,"1. Tiêu đề ""What is merge values ?""; nội dung ""Use merge options for simpler customer navigation"" kèm ảnh minh hoạ gộp value thành 1 filter option.",
+3,UI,,Thu gọn/mở lại,,Khối Feature Tour đang mở,"1. Click chevron thu gọn khối.
 2. Click lại để mở.",,"1. Khối thu gọn, chỉ còn tiêu đề.
 2. Khối mở lại đầy đủ nội dung.",
-MRGVAL_TC04,UI,Empty state,Chưa có merged value nào,,Merged Value List = [rỗng],1. Quan sát khu vực bảng danh sách.,,"1. Hiển thị ""There is currently no merged value."" kèm nút [Create new] ở giữa màn.",
-MRGVAL_TC05,Happy,Button [Create new],Mở modal từ nút góc phải,,Đang ở màn Merged Values,1. Click nút [Create new] góc phải khối Merged Value List.,,1. Mở modal [Create new merged value] tại bước 1 Choose values.,
-MRGVAL_TC06,Happy,,Mở modal từ nút giữa màn (empty state),,Merged Value List = [rỗng],1. Click nút [Create new] ở giữa màn.,,1. Mở đúng modal như nút góc phải.,
-MRGVAL_TC07,Happy,Merged Value List - bảng,Dữ liệu dòng mới sau khi tạo,,Vừa tạo thành công 1 merged value,1. Quan sát dòng vừa được thêm vào bảng.,"- Values đã gộp = Avocado, Fern, Emerald, Lime
+4,UI,Empty state,Chưa có merged value nào,,Merged Value List = [rỗng],1. Quan sát khu vực bảng danh sách.,,"1. Hiển thị ""There is currently no merged value."" kèm nút [Create new] ở giữa màn.",
+5,Happy,Button [Create new],Mở modal từ nút góc phải,,Đang ở màn Merged Values,1. Click nút [Create new] góc phải khối Merged Value List.,,1. Mở modal [Create new merged value] tại bước 1 Choose values.,
+6,Happy,,Mở modal từ nút giữa màn (empty state),,Merged Value List = [rỗng],1. Click nút [Create new] ở giữa màn.,,1. Mở đúng modal như nút góc phải.,
+7,Happy,Merged Value List - bảng,Dữ liệu dòng mới sau khi tạo,,Vừa tạo thành công 1 merged value,1. Quan sát dòng vừa được thêm vào bảng.,"- Values đã gộp = Avocado, Fern, Emerald, Lime
 - Filter option = Avocado","1. Cột Values hiển thị chuỗi ""Avocado, Fern, Emerald, Lime""; cột Filter option hiển thị ""Avocado""; Status = toggle ON.",
-MRGVAL_TC08,UI,,Cấu trúc cột,,Bảng có ≥1 dòng dữ liệu,1. Quan sát tiêu đề bảng.,,1. Đủ 4 cột theo thứ tự: Status | Values | Filter option | Actions; cột Actions có icon Edit (bút chì) và icon Delete (thùng rác).,
-MRGVAL_TC09,UI,,Toast xác nhận tạo thành công,,Vừa bấm Save ở modal,1. Quan sát góc màn hình sau khi modal đóng.,,"1. Hiển thị toast ""Success — Merged value is created successfully!"".",
+8,UI,,Cấu trúc cột,,Bảng có ≥1 dòng dữ liệu,1. Quan sát tiêu đề bảng.,,1. Đủ 4 cột theo thứ tự: Status | Values | Filter option | Actions; cột Actions có icon Edit (bút chì) và icon Delete (thùng rác).,
+9,UI,,Toast xác nhận tạo thành công,,Vừa bấm Save ở modal,1. Quan sát góc màn hình sau khi modal đóng.,,"1. Hiển thị toast ""Success — Merged value is created successfully!"".",
 ,,=== CREATE NEW MERGED VALUE ===,,,,,,,
-MRGVAL_TC10,UI,Modal - Stepper,Trạng thái 2 bước,,Vừa mở modal,1. Quan sát thanh stepper đầu modal.,,"1. Bước ① ""Choose values"" đang active (màu cam); bước ② ""Merge values & Review Filter Node"" ở trạng thái chưa active.",
-MRGVAL_TC11,Happy,Bước 1 - Dropdown nguồn,Lọc theo 1 nguồn cụ thể,,Đang ở bước 1,"1. Mở dropdown nguồn, bỏ tick tất cả trừ [Product options].
+10,UI,Modal - Stepper,Trạng thái 2 bước,,Vừa mở modal,1. Quan sát thanh stepper đầu modal.,,"1. Bước ① ""Choose values"" đang active (màu cam); bước ② ""Merge values & Review Filter Node"" ở trạng thái chưa active.",
+11,Happy,Bước 1 - Dropdown nguồn,Lọc theo 1 nguồn cụ thể,,Đang ở bước 1,"1. Mở dropdown nguồn, bỏ tick tất cả trừ [Product options].
 2. Quan sát danh sách value bên trái.",,2. Danh sách chỉ còn value thuộc Product options (đồng bộ từ BC Variant Options).,
-MRGVAL_TC12,Happy,,Nguồn Custom fields,,Đang ở bước 1,"1. Chỉ tick nguồn [Custom fields].
+12,Happy,,Nguồn Custom fields,,Đang ở bước 1,"1. Chỉ tick nguồn [Custom fields].
 2. Quan sát danh sách value.",BC có product khai báo Custom Field Name/Value,2. Danh sách hiển thị đúng các value lấy từ trường Custom Fields của BC.,
-MRGVAL_TC13,Happy,,Nguồn Custom filter builder,,Đang ở bước 1,"1. Chỉ tick nguồn [Custom filter builder].
+13,Happy,,Nguồn Custom filter builder,,Đang ở bước 1,"1. Chỉ tick nguồn [Custom filter builder].
 2. Quan sát danh sách value.",Đã có filter option tự định nghĩa ở node My own filter,2. Danh sách hiển thị đúng các value do merchant tự định nghĩa trong Native Search.,
-MRGVAL_TC14,UI,,Giá trị mặc định của dropdown,,Vừa mở modal,1. Quan sát dropdown nguồn.,,"1. Hiển thị ""All sources""; mở ra thấy tất cả nguồn đang được tick.",
-MRGVAL_TC15,UI,Bước 1 - Search value,Lọc theo từ khoá,,Đang ở bước 1,"1. Nhập 1 phần tên value vào ô Search value.
+14,UI,,Giá trị mặc định của dropdown,,Vừa mở modal,1. Quan sát dropdown nguồn.,,"1. Hiển thị ""All sources""; mở ra thấy tất cả nguồn đang được tick.",
+15,UI,Bước 1 - Search value,Lọc theo từ khoá,,Đang ở bước 1,"1. Nhập 1 phần tên value vào ô Search value.
 2. Quan sát danh sách.",,2. Chỉ hiển thị value khớp từ khoá.,
-MRGVAL_TC16,UI,,Từ khoá không khớp,,Đang ở bước 1,1. Nhập từ khoá không tồn tại.,,"1. Danh sách rỗng, hiển thị empty state, không lỗi/crash.",
-MRGVAL_TC17,Happy,Bước 1 - Chọn value,Tick nhiều value,,Đang ở bước 1,"1. Tick chọn 3 value bất kỳ.
+16,UI,,Từ khoá không khớp,,Đang ở bước 1,1. Nhập từ khoá không tồn tại.,,"1. Danh sách rỗng, hiển thị empty state, không lỗi/crash.",
+17,Happy,Bước 1 - Chọn value,Tick nhiều value,,Đang ở bước 1,"1. Tick chọn 3 value bất kỳ.
 2. Quan sát panel Selected values và counter.",,"2. Panel [Selected values] liệt kê đúng 3 value đã tick; counter hiển thị ""3 selected""; nút Next enable.",
-MRGVAL_TC18,Happy,,Xoá 1 value ở panel Selected values,,Đã chọn 3 value,"1. Click icon thùng rác ở 1 dòng trong panel Selected values.
+18,Happy,,Xoá 1 value ở panel Selected values,,Đã chọn 3 value,"1. Click icon thùng rác ở 1 dòng trong panel Selected values.
 2. Quan sát counter và checkbox bên trái.",,"2. Value đó bị gỡ khỏi panel; counter còn ""2 selected""; checkbox tương ứng bên trái được bỏ tick.",
-MRGVAL_TC19,Happy,,Remove all,,Đã chọn ≥2 value,1. Click link [Remove all].,,"1. Panel Selected values trống; counter về ""0 selected""; nút Next disable.",
-MRGVAL_TC20,Happy,,Cancel không lưu,,Đã chọn value nhưng chưa Save,"1. Click [Cancel].
+19,Happy,,Remove all,,Đã chọn ≥2 value,1. Click link [Remove all].,,"1. Panel Selected values trống; counter về ""0 selected""; nút Next disable.",
+20,Happy,,Cancel không lưu,,Đã chọn value nhưng chưa Save,"1. Click [Cancel].
 2. Quan sát màn Merged Values.",,"2. Modal đóng, không tạo merged value nào; danh sách giữ nguyên như trước.",
-MRGVAL_TC21,Edge,,Value đã thuộc merged value khác,,Đã tồn tại merged value chứa value Emerald,"1. Mở modal tạo merged value mới.
+21,Edge,,Value đã thuộc merged value khác,,Đã tồn tại merged value chứa value Emerald,"1. Mở modal tạo merged value mới.
 2. Tìm value Emerald trong danh sách.",,"2. Emerald ở trạng thái disable, không tick chọn được (1 value không được thuộc 2 merged value cùng lúc).",
-MRGVAL_TC22,UI,Bước 2 - Selected values,Ô hiển thị read-only,,"Đã chọn 4 value: Avocado, Fern, Emerald, Lime",1. Sang bước 2 và quan sát ô Selected values.,,"1. Ô nền xám, không sửa trực tiếp được, hiển thị chuỗi ""Avocado, Fern, Emerald, Lime""; bên phải là dấu = rồi tới ô Filter option.",
-MRGVAL_TC23,Happy,Bước 2 - Filter option,Chọn tên từ dropdown,,Đang ở bước 2,"1. Mở dropdown [Select filter option].
+22,UI,Bước 2 - Selected values,Ô hiển thị read-only,,"Đã chọn 4 value: Avocado, Fern, Emerald, Lime",1. Sang bước 2 và quan sát ô Selected values.,,"1. Ô nền xám, không sửa trực tiếp được, hiển thị chuỗi ""Avocado, Fern, Emerald, Lime""; bên phải là dấu = rồi tới ô Filter option.",
+23,Happy,Bước 2 - Filter option,Chọn tên từ dropdown,,Đang ở bước 2,"1. Mở dropdown [Select filter option].
 2. Chọn 1 value làm tên đại diện.",,2. Ô Filter option hiển thị đúng value vừa chọn.,
-MRGVAL_TC24,Happy,,Chuyển sang chế độ nhập tay,,Đang ở chế độ dropdown,1. Click link [+ or enter manually].,,"1. Ô Filter option đổi thành input text với placeholder ""Enter filter option""; link đổi thành [+ Select filter option].",
-MRGVAL_TC25,Happy,,Chuyển ngược về chế độ dropdown,,Đang ở chế độ nhập tay,1. Click link [+ Select filter option].,,1. Ô Filter option trở lại dạng dropdown.,
-MRGVAL_TC26,UI,,Danh sách trong dropdown,,"Đã chọn 4 value ở bước 1: Avocado, Fern, Emerald, Lime",1. Mở dropdown [Select filter option] và đối chiếu danh sách.,,1. Dropdown CHỈ liệt kê 4 value đang có trong Selected values; không xuất hiện value ngoài danh sách đã chọn.,
-MRGVAL_TC27,UI,Bước 2 - Review Filter Node,Khối minh hoạ hiển thị,,Đang ở bước 2,1. Quan sát khối [Review Filter Node].,,1. Khối hiển thị dạng minh hoạ before → after cho filter node.,"<cần confirm> Khối này là ẢNH DEMO TĨNH, không phản ánh dữ liệu filter tree thật — KHÔNG dùng số liệu trong khối này làm căn cứ verify; điểm đối chiếu thật là storefront."
-MRGVAL_TC28,Happy,Bước 2 - Button [Back]/[Save],Back giữ nguyên selection,,Đã chọn 3 value và sang bước 2,"1. Click [Back].
+24,Happy,,Chuyển sang chế độ nhập tay,,Đang ở chế độ dropdown,1. Click link [+ or enter manually].,,"1. Ô Filter option đổi thành input text với placeholder ""Enter filter option""; link đổi thành [+ Select filter option].",
+25,Happy,,Chuyển ngược về chế độ dropdown,,Đang ở chế độ nhập tay,1. Click link [+ Select filter option].,,1. Ô Filter option trở lại dạng dropdown.,
+26,UI,,Danh sách trong dropdown,,"Đã chọn 4 value ở bước 1: Avocado, Fern, Emerald, Lime",1. Mở dropdown [Select filter option] và đối chiếu danh sách.,,1. Dropdown CHỈ liệt kê 4 value đang có trong Selected values; không xuất hiện value ngoài danh sách đã chọn.,
+27,UI,Bước 2 - Review Filter Node,Khối minh hoạ hiển thị,,Đang ở bước 2,1. Quan sát khối [Review Filter Node].,,1. Khối hiển thị dạng minh hoạ before → after cho filter node.,"<cần confirm> Khối này là ẢNH DEMO TĨNH, không phản ánh dữ liệu filter tree thật — KHÔNG dùng số liệu trong khối này làm căn cứ verify; điểm đối chiếu thật là storefront."
+28,Happy,Bước 2 - Button [Back]/[Save],Back giữ nguyên selection,,Đã chọn 3 value và sang bước 2,"1. Click [Back].
 2. Quan sát panel Selected values.",,"2. Quay lại bước 1; 3 value vẫn còn nguyên trạng thái đã tick, counter không đổi.",
-MRGVAL_TC29,Happy,Kết quả merge trên storefront,Hiển thị gộp đúng ở mọi filter node liên quan,Verify từng node,"- Đã tạo merged value gồm Avocado, Emerald, Lime → tên Green
+29,Happy,Kết quả merge trên storefront,Hiển thị gộp đúng ở mọi filter node liên quan,Verify từng node,"- Đã tạo merged value gồm Avocado, Emerald, Lime → tên Green
 - Có ≥2 filter node đang dùng các value này","1. Sau khi Save, chờ dữ liệu cập nhật.
 2. Truy cập storefront, kiểm tra LẦN LƯỢT từng filter node đang dùng value đã gộp.",,"2. Mỗi node hiển thị 1 dòng duy nhất tên ""Green"" kèm product count của cả nhóm; không còn hiển thị Avocado/Emerald/Lime riêng lẻ.",
-MRGVAL_TC30,Happy,,Node chỉ chọn 1 phần value con,Cơ chế tất cả hoặc không gì,"- Merged value gồm Avocado, Emerald, Lime → tên Green
+30,Happy,,Node chỉ chọn 1 phần value con,Cơ chế tất cả hoặc không gì,"- Merged value gồm Avocado, Emerald, Lime → tên Green
 - Filter node chỉ chọn duy nhất Emerald","1. Truy cập storefront tại page dùng node đó.
 2. Quan sát dòng hiển thị.",,"2. Node hiển thị TRỌN VẸN merged value ""Green"" kèm count của cả nhóm (không phải riêng count của Emerald).",
-MRGVAL_TC31,Happy,,Count không đếm trùng sản phẩm,Đếm distinct,"- Merged value gồm Avocado + Emerald
+31,Happy,,Count không đếm trùng sản phẩm,Đếm distinct,"- Merged value gồm Avocado + Emerald
 - Sản phẩm X có ĐỒNG THỜI cả Avocado và Emerald","1. Truy cập storefront, đọc count cạnh merged value.
 2. Click lọc theo merged value và đếm số sản phẩm trả về.","- Avocado: 3 sản phẩm (gồm X)
 - Emerald: 2 sản phẩm (gồm X)","1. Count hiển thị = 4 (đếm distinct, sản phẩm X chỉ tính 1 lần), KHÔNG phải 5.
 2. Số sản phẩm trả về khớp đúng với count hiển thị.","<cần confirm> Đang viết theo cách hiểu ""lấy hợp - mỗi sản phẩm đếm 1 lần"". Nếu BA xác nhận là ""lấy giao"" (chỉ đếm sản phẩm có ĐỦ mọi value trong nhóm) thì expected result phải sửa lại."
-MRGVAL_TC32,Happy,,Merge áp dụng hồi tố cho node tạo trước,Tính hồi tố,Filter node đã tồn tại TRƯỚC khi merged value được tạo,"1. Tạo merged value chứa value mà node cũ đang dùng.
+32,Happy,,Merge áp dụng hồi tố cho node tạo trước,Tính hồi tố,Filter node đã tồn tại TRƯỚC khi merged value được tạo,"1. Tạo merged value chứa value mà node cũ đang dùng.
 2. Kiểm tra storefront tại node cũ.",,2. Node cũ cũng hiển thị theo merged value mới (merge áp dụng cả cho cấu hình đã tồn tại từ trước).,
-MRGVAL_TC33,Happy,,Popup chọn value của filter node không bị gộp,Merge chỉ tác động khâu hiển thị,Đã tồn tại merged value chứa Avocado/Emerald/Lime,"1. Vào Edit 1 filter node.
+33,Happy,,Popup chọn value của filter node không bị gộp,Merge chỉ tác động khâu hiển thị,Đã tồn tại merged value chứa Avocado/Emerald/Lime,"1. Vào Edit 1 filter node.
 2. Mở popup [Select filter options] và quan sát danh sách value.",,"2. Các value con vẫn hiển thị RIÊNG LẺ dạng checkbox như khi chưa merge; merge chỉ ảnh hưởng khâu hiển thị kết quả, không ảnh hưởng khâu chọn.",
-MRGVAL_TC34,Edge,,Value con có swatch image khác nhau,,"- Display Style của node = Swatch
+34,Edge,,Value con có swatch image khác nhau,,"- Display Style của node = Swatch
 - Các value con có ảnh swatch khác nhau",1. Kiểm tra swatch hiển thị của merged value trên storefront.,,1. <cần confirm> — chưa xác định merged value lấy swatch của value nào.,<cần confirm> Người dùng sẽ xác nhận sau.
 ,,=== EDIT / DELETE MERGED VALUE ===,,,,,,,
-MRGVAL_TC35,Happy,Toggle Status,Tắt Status,,Merged value đang có Status = ON,"1. Tắt toggle Status trên danh sách.
+35,Happy,Toggle Status,Tắt Status,,Merged value đang có Status = ON,"1. Tắt toggle Status trên danh sách.
 2. Kiểm tra storefront tại từng filter node liên quan.",,2. Mỗi node hiển thị lại các value con RIÊNG LẺ kèm count riêng của từng value; không còn hiển thị merged value.,
-MRGVAL_TC36,Happy,,Bật lại Status,,Merged value đang có Status = OFF,"1. Bật lại toggle Status.
+36,Happy,,Bật lại Status,,Merged value đang có Status = OFF,"1. Bật lại toggle Status.
 2. Kiểm tra storefront tại từng filter node liên quan.",,2. Mỗi node hiển thị lại dạng gộp như trước khi tắt.,
-MRGVAL_TC37,Happy,Edit merged value,Mở màn chỉnh sửa,,Đã có ≥1 merged value,1. Click icon Edit (bút chì) ở cột Actions.,,"1. Mở giao diện chỉnh sửa, load đúng danh sách value con và tên Filter option đã lưu.","<cần confirm> Chưa rõ Edit mở lại modal 2 bước như Create hay modal rút gọn, và có hiển thị cảnh báo tác động không."
-MRGVAL_TC38,Happy,,Thêm value con,,"Merged value hiện có 3 value: Avocado, Emerald, Lime","1. Mở Edit, thêm value Fern vào nhóm.
+37,Happy,Edit merged value,Mở màn chỉnh sửa,,Đã có ≥1 merged value,1. Click icon Edit (bút chì) ở cột Actions.,,"1. Mở giao diện chỉnh sửa, load đúng danh sách value con và tên Filter option đã lưu.","<cần confirm> Chưa rõ Edit mở lại modal 2 bước như Create hay modal rút gọn, và có hiển thị cảnh báo tác động không."
+38,Happy,,Thêm value con,,"Merged value hiện có 3 value: Avocado, Emerald, Lime","1. Mở Edit, thêm value Fern vào nhóm.
 2. Lưu và kiểm tra storefront ở từng node liên quan.",,2. Cột Values trên danh sách có thêm Fern; storefront hiển thị count tăng đúng theo số sản phẩm bổ sung (đếm distinct).,
-MRGVAL_TC39,Happy,,Bớt value con,,"Merged value hiện có 4 value: Avocado, Fern, Emerald, Lime","1. Mở Edit, gỡ value Lime khỏi nhóm.
+39,Happy,,Bớt value con,,"Merged value hiện có 4 value: Avocado, Fern, Emerald, Lime","1. Mở Edit, gỡ value Lime khỏi nhóm.
 2. Lưu và kiểm tra storefront ở từng node liên quan.",,2. Lime quay lại hiển thị RIÊNG LẺ trên storefront (kèm count riêng); merged value còn 3 value và count giảm tương ứng.,
-MRGVAL_TC40,Happy,,Đổi tên Filter option,,Merged value đang có Filter option = Avocado,"1. Mở Edit, đổi Filter option thành Green.
+40,Happy,,Đổi tên Filter option,,Merged value đang có Filter option = Avocado,"1. Mở Edit, đổi Filter option thành Green.
 2. Lưu và kiểm tra storefront ở từng node liên quan.",Filter option mới = Green,"2. Cột Filter option trên danh sách hiển thị Green; mọi node liên quan trên storefront đổi tên hiển thị thành Green, count giữ nguyên.",
-MRGVAL_TC41,Negative,,Đổi tên thành tên đã tồn tại,,Đã có filter option khác tên Green,"1. Mở Edit, đổi Filter option thành Green.
+41,Negative,,Đổi tên thành tên đã tồn tại,,Đã có filter option khác tên Green,"1. Mở Edit, đổi Filter option thành Green.
 2. Lưu.",,2. Chặn lưu; báo lỗi trùng tên.,
-MRGVAL_TC42,Happy,Delete merged value,Xoá không có popup xác nhận,Khác pattern Filter Tree,Đã có ≥1 merged value,1. Click icon Delete (thùng rác) ở cột Actions.,,"1. Merged value bị xoá NGAY, KHÔNG hiển thị popup xác nhận trước đó.","Điểm khác biệt có chủ đích so với Filter Tree (xoá filter tree CÓ popup xác nhận) — không phải bug, QA không báo nhầm."
-MRGVAL_TC43,Happy,,Value con rollback sau khi xoá,,Vừa xoá 1 merged value,1. Kiểm tra storefront tại từng filter node từng dùng merged value đó.,,"1. Mọi value con quay lại hiển thị RIÊNG LẺ kèm count riêng, đúng như trạng thái trước khi merge.",
-MRGVAL_TC44,UI,Setup dynamic option,Không có cấu hình localization,,Đang xem/chỉnh 1 merged value,1. Rà toàn bộ giao diện merged value.,,1. Không có toggle/mục [Setup dynamic option] — merged value không hỗ trợ cấu hình localization riêng.,
+42,Happy,Delete merged value,Xoá không có popup xác nhận,Khác pattern Filter Tree,Đã có ≥1 merged value,1. Click icon Delete (thùng rác) ở cột Actions.,,"1. Merged value bị xoá NGAY, KHÔNG hiển thị popup xác nhận trước đó.","Điểm khác biệt có chủ đích so với Filter Tree (xoá filter tree CÓ popup xác nhận) — không phải bug, QA không báo nhầm."
+43,Happy,,Value con rollback sau khi xoá,,Vừa xoá 1 merged value,1. Kiểm tra storefront tại từng filter node từng dùng merged value đó.,,"1. Mọi value con quay lại hiển thị RIÊNG LẺ kèm count riêng, đúng như trạng thái trước khi merge.",
+44,UI,Setup dynamic option,Không có cấu hình localization,,Đang xem/chỉnh 1 merged value,1. Rà toàn bộ giao diện merged value.,,1. Không có toggle/mục [Setup dynamic option] — merged value không hỗ trợ cấu hình localization riêng.,
 ,,=== ẢNH HƯỞNG SANG LUỒNG KHÁC ===,,,,,,,
-MRGVAL_TC45,Integration,Filter Tree Setup,Tắt Status filter tree chứa node đang dùng merged value,Hướng ON→OFF,"- Filter tree A Status = [ON]
+45,Integration,Filter Tree Setup,Tắt Status filter tree chứa node đang dùng merged value,Hướng ON→OFF,"- Filter tree A Status = [ON]
 - Tree A có node đang hiển thị merged value Green","1. Tắt Status của filter tree A.
 2. Kiểm tra màn Merged Values.
 3. Kiểm tra storefront tại page áp dụng tree A.",,"2. Merged value Green vẫn tồn tại nguyên vẹn trong Merged Value List (không bị xoá/ẩn theo tree).
 3. Storefront không còn hiển thị filter của tree A.","<cần confirm> Tài liệu Filter Tree cũ ghi nhận Status ON/OFF của filter tree ảnh hưởng hiển thị đồng thời ở storefront VÀ màn Merge Value — cần xác nhận rule này còn đúng với thiết kế Merge Values mới (vốn làm việc trên pool value đã sync, không theo phạm vi tree)."
-MRGVAL_TC46,Integration,,Bật lại Status filter tree,Hướng OFF→ON,Filter tree A Status = [OFF],"1. Bật lại Status của tree A.
+46,Integration,,Bật lại Status filter tree,Hướng OFF→ON,Filter tree A Status = [OFF],"1. Bật lại Status của tree A.
 2. Kiểm tra storefront tại page áp dụng tree A.",,2. Filter của tree A hiển thị lại; node liên quan hiển thị đúng merged value Green như trước khi tắt.,
-MRGVAL_TC47,Integration,,Xoá filter tree đang chứa node dùng merged value,Phạm vi: tree có liên quan,"- Tree A có node đang dùng merged value Green
+47,Integration,,Xoá filter tree đang chứa node dùng merged value,Phạm vi: tree có liên quan,"- Tree A có node đang dùng merged value Green
 - Merged value Green còn được node của tree B dùng","1. Xoá filter tree A.
 2. Kiểm tra Merged Value List.
 3. Kiểm tra storefront tại page áp dụng tree B.",,"2. Merged value Green KHÔNG bị xoá theo, vẫn còn trong danh sách.
 3. Node của tree B vẫn hiển thị merged value Green bình thường (xoá tree không làm hỏng merged value dùng chung).",
-MRGVAL_TC48,Integration,,Xoá filter tree không liên quan merged value nào,Phạm vi: tree không liên quan,Tree C không có node nào dùng value thuộc merged value,"1. Xoá filter tree C.
+48,Integration,,Xoá filter tree không liên quan merged value nào,Phạm vi: tree không liên quan,Tree C không có node nào dùng value thuộc merged value,"1. Xoá filter tree C.
 2. Kiểm tra Merged Value List và storefront các tree còn lại.",,2. Merged Value List không đổi; các tree còn lại hiển thị merged value như cũ.,
-MRGVAL_TC49,Integration,Filter node - cấu hình value,Xoá filter node đang dùng value thuộc merged value,,"- Node N1 (tree A) đang hiển thị merged value Green
+49,Integration,Filter node - cấu hình value,Xoá filter node đang dùng value thuộc merged value,,"- Node N1 (tree A) đang hiển thị merged value Green
 - Node N2 (tree B) cũng đang hiển thị merged value Green","1. Xoá node N1.
 2. Kiểm tra Merged Value List.
 3. Kiểm tra storefront tại tree B.",,"2. Merged value Green vẫn tồn tại nguyên vẹn.
 3. Node N2 vẫn hiển thị merged value Green đúng tên và count như trước.",
-MRGVAL_TC50,Integration,,Node bỏ chọn hết value con của merged value,,Node N1 đang chọn 2 value con thuộc merged value Green,"1. Mở Edit node N1, untick toàn bộ value con thuộc merged value Green, lưu lại.
+50,Integration,,Node bỏ chọn hết value con của merged value,,Node N1 đang chọn 2 value con thuộc merged value Green,"1. Mở Edit node N1, untick toàn bộ value con thuộc merged value Green, lưu lại.
 2. Kiểm tra storefront tại page dùng node N1.
 3. Kiểm tra Merged Value List.",,"2. Node N1 không còn hiển thị merged value Green.
 3. Merged value Green vẫn tồn tại trong danh sách và vẫn hiển thị đúng ở các node khác đang dùng.",
-MRGVAL_TC51,Integration,My own filter (Custom filter builder),Sửa tên filter option gốc đang nằm trong merged value,,"- Merchant đã tạo filter option ""Eco"" ở node My own filter
+51,Integration,My own filter (Custom filter builder),Sửa tên filter option gốc đang nằm trong merged value,,"- Merchant đã tạo filter option ""Eco"" ở node My own filter
 - Merged value Green đang chứa value Eco","1. Đổi tên filter option gốc từ Eco thành Eco-Friendly trong My own filter.
 2. Kiểm tra cột Values ở Merged Value List.
 3. Kiểm tra storefront.",,"2. Cột Values cập nhật theo tên mới (Eco-Friendly).
 3. Merged value vẫn hiển thị đúng tên Filter option đã đặt, count không đổi.",<cần confirm> Chưa có tài liệu mô tả hành vi khi value gốc của nguồn Custom filter builder bị đổi tên trong khi đang thuộc 1 merged value.
-MRGVAL_TC52,Integration,,Xoá filter option gốc đang nằm trong merged value,,Merged value Green đang chứa value Eco của My own filter,"1. Xoá filter option Eco trong My own filter.
+52,Integration,,Xoá filter option gốc đang nằm trong merged value,,Merged value Green đang chứa value Eco của My own filter,"1. Xoá filter option Eco trong My own filter.
 2. Kiểm tra cột Values ở Merged Value List.
 3. Kiểm tra storefront.",,"2. Value Eco bị gỡ khỏi nhóm merged value.
 3. Merged value còn lại các value khác; count giảm tương ứng theo số sản phẩm chỉ thuộc riêng Eco.",<cần confirm> Chưa có tài liệu mô tả hành vi khi value gốc bị xoá khiến merged value chỉ còn 1 value con — có tự huỷ merged value hay giữ nguyên nhóm 1 phần tử.
-MRGVAL_TC53,Integration,Filter node - nguồn hỗn hợp,Merged value gộp value từ nhiều nguồn khác nhau,Product options + Custom fields,Merged value Eco-Line gồm 1 value từ Product options và 1 value từ Custom fields,"1. Tạo merged value gộp value của 2 nguồn khác nhau.
+53,Integration,Filter node - nguồn hỗn hợp,Merged value gộp value từ nhiều nguồn khác nhau,Product options + Custom fields,Merged value Eco-Line gồm 1 value từ Product options và 1 value từ Custom fields,"1. Tạo merged value gộp value của 2 nguồn khác nhau.
 2. Kiểm tra storefront tại node đang dùng value nguồn Product options.
 3. Kiểm tra storefront tại node đang dùng value nguồn Custom fields.",,"2. Node nguồn Product options hiển thị merged value Eco-Line với count của cả nhóm.
 3. Node nguồn Custom fields cũng hiển thị merged value Eco-Line với cùng tên và cùng count.","<cần confirm> Chưa có tài liệu xác nhận hành vi khi 1 merged value gộp value đến từ nhiều nguồn khác nhau — đặc biệt khi các nguồn có thời điểm hiệu lực khác nhau (nguồn BC chờ sync, nguồn nội bộ áp dụng ngay)."
-MRGVAL_TC54,Integration,Filter Cache,Tạo merged value khi Filter Cache đang bật,,Filter Cache = [đang bật],"1. Tạo mới 1 merged value.
+54,Integration,Filter Cache,Tạo merged value khi Filter Cache đang bật,,Filter Cache = [đang bật],"1. Tạo mới 1 merged value.
 2. Truy cập storefront ngay sau khi Save (chưa refresh cache thủ công).",,2. Storefront hiển thị merged value mới ngay mà không cần thao tác refresh cache thủ công.,<cần confirm> Chưa xác định tạo/sửa/xoá merged value có bắt buộc refresh Filter Cache để storefront cập nhật hay không — người dùng sẽ xác nhận sau.
-MRGVAL_TC55,Integration,,Xoá merged value khi Filter Cache đang bật,,"- Filter Cache = [đang bật]
+55,Integration,,Xoá merged value khi Filter Cache đang bật,,"- Filter Cache = [đang bật]
 - Đã có merged value đang hiển thị trên storefront","1. Xoá merged value.
 2. Truy cập storefront ngay sau khi xoá.",,2. Storefront hiển thị lại các value con riêng lẻ ngay mà không cần refresh cache thủ công.,<cần confirm> Cùng câu hỏi với case trên về việc có bắt buộc refresh Filter Cache hay không.
-MRGVAL_TC56,Integration,Merchandise Campaign,Campaign dùng action Filter trỏ tới value đã bị merge,,"- Campaign đang active, dùng action Filter theo value Emerald
+56,Integration,Merchandise Campaign,Campaign dùng action Filter trỏ tới value đã bị merge,,"- Campaign đang active, dùng action Filter theo value Emerald
 - Value Emerald sau đó bị gộp vào merged value Green","1. Tạo merged value chứa value Emerald.
 2. Truy cập storefront trong ngữ cảnh campaign đang chạy.
 3. Kiểm tra kết quả lọc/hiển thị sản phẩm của campaign.",,3. Campaign vẫn lọc đúng tập sản phẩm như trước khi merge (value bị gộp không làm campaign trỏ sai).,<cần confirm> Chưa xác định campaign đang trỏ tới value đã bị merge còn hoạt động đúng hay không.
-MRGVAL_TC57,Integration,,Xoá merged value đang được campaign tham chiếu,,Campaign đang trỏ tới value nằm trong merged value Green,"1. Xoá merged value Green.
+57,Integration,,Xoá merged value đang được campaign tham chiếu,,Campaign đang trỏ tới value nằm trong merged value Green,"1. Xoá merged value Green.
 2. Kiểm tra lại campaign trên storefront.",,2. Campaign hoạt động đúng như trước khi merged value tồn tại; không lỗi do mất tham chiếu.,<cần confirm> Cùng nhóm câu hỏi với case trên về tương tác giữa Merge Values và Merchandise Campaign.
 ,,=== ĐỒNG BỘ DỮ LIỆU TỪ BIGCOMMERCE ===,,,,,,,
-MRGVAL_TC58,Sync,Value con - nguồn Product options,BC đổi tên value gốc đang nằm trong merged value,,"- Merged value Green gồm Avocado, Emerald, Lime
+58,Sync,Value con - nguồn Product options,BC đổi tên value gốc đang nằm trong merged value,,"- Merged value Green gồm Avocado, Emerald, Lime
 - Filter option = Green","1. Trên BigCommerce, đổi tên value Emerald thành Emerald Deep.
 2. Chạy sync tới khi Success.
 3. Kiểm tra cột Values ở Merged Value List.
 4. Kiểm tra storefront tại từng filter node liên quan.",Value gốc: Emerald → Emerald Deep,"3. Cột Values hiển thị tên mới Emerald Deep; value vẫn thuộc nhóm merged value Green.
 4. Storefront vẫn hiển thị tên Filter option Green, count không đổi (đổi tên value con không làm đổi tên hiển thị của nhóm).",
-MRGVAL_TC59,Sync,,BC xoá value gốc đang nằm trong merged value,Nhóm còn ≥2 value,"Merged value Green gồm 3 value: Avocado, Emerald, Lime","1. Trên BigCommerce, xoá hẳn value Lime khỏi Variant Option.
+59,Sync,,BC xoá value gốc đang nằm trong merged value,Nhóm còn ≥2 value,"Merged value Green gồm 3 value: Avocado, Emerald, Lime","1. Trên BigCommerce, xoá hẳn value Lime khỏi Variant Option.
 2. Chạy sync tới khi Success.
 3. Kiểm tra Merged Value List và storefront tại từng node liên quan.","Lime có 1 sản phẩm riêng, không trùng sản phẩm của Avocado/Emerald",3. Lime bị gỡ khỏi cột Values; merged value còn Avocado + Emerald; count giảm đúng 1 (số sản phẩm chỉ thuộc riêng Lime).,
-MRGVAL_TC60,Sync,,BC xoá value khiến merged value chỉ còn 1 value con,Biên: nhóm còn 1 phần tử,"Merged value Green chỉ còn 2 value: Avocado, Emerald","1. Trên BigCommerce, xoá value Emerald.
+60,Sync,,BC xoá value khiến merged value chỉ còn 1 value con,Biên: nhóm còn 1 phần tử,"Merged value Green chỉ còn 2 value: Avocado, Emerald","1. Trên BigCommerce, xoá value Emerald.
 2. Chạy sync tới khi Success.
 3. Kiểm tra Merged Value List và storefront.",,3. <cần confirm> — chưa xác định hệ thống tự huỷ merged value (vì không còn đủ 2 value để gộp) hay giữ nguyên nhóm 1 phần tử và vẫn hiển thị tên Filter option.,"<cần confirm> Quy tắc tạo mới yêu cầu tối thiểu 2 value, nhưng chưa có mô tả cho trường hợp nhóm bị rút xuống còn 1 do dữ liệu nguồn bị xoá."
-MRGVAL_TC61,Sync,,BC thêm value mới chưa thuộc merged value nào,,Đã có ≥1 merged value đang hoạt động,"1. Trên BigCommerce, thêm value mới Mint vào Variant Option.
+61,Sync,,BC thêm value mới chưa thuộc merged value nào,,Đã có ≥1 merged value đang hoạt động,"1. Trên BigCommerce, thêm value mới Mint vào Variant Option.
 2. Chạy sync tới khi Success.
 3. Mở modal Create new merged value, quan sát danh sách value ở bước 1.
 4. Kiểm tra storefront.",,"3. Mint xuất hiện trong danh sách chọn ở trạng thái enable (chưa thuộc merged value nào).
 4. Mint hiển thị RIÊNG LẺ trên storefront, không bị gộp vào merged value đang có.",
-MRGVAL_TC62,Sync,Product count của merged value,BC thêm sản phẩm mang value thuộc merged value,,"- Merged value Green gồm Avocado + Emerald, count hiện tại = 4","1. Trên BigCommerce, tạo sản phẩm mới gắn value Avocado.
+62,Sync,Product count của merged value,BC thêm sản phẩm mang value thuộc merged value,,"- Merged value Green gồm Avocado + Emerald, count hiện tại = 4","1. Trên BigCommerce, tạo sản phẩm mới gắn value Avocado.
 2. Chạy sync tới khi Success.
 3. Kiểm tra count cạnh merged value trên storefront tại từng node liên quan.",Sản phẩm mới chỉ mang 1 value Avocado,3. Count tăng đúng 1 đơn vị (= 5) ở MỌI node đang hiển thị merged value Green.,
-MRGVAL_TC63,Sync,,BC thêm sản phẩm mang ĐỒNG THỜI nhiều value trong nhóm,Đếm distinct,"Merged value Green gồm Avocado + Emerald, count hiện tại = 5","1. Trên BigCommerce, tạo sản phẩm mới gắn ĐỒNG THỜI cả Avocado và Emerald.
+63,Sync,,BC thêm sản phẩm mang ĐỒNG THỜI nhiều value trong nhóm,Đếm distinct,"Merged value Green gồm Avocado + Emerald, count hiện tại = 5","1. Trên BigCommerce, tạo sản phẩm mới gắn ĐỒNG THỜI cả Avocado và Emerald.
 2. Chạy sync tới khi Success.
 3. Kiểm tra count trên storefront.",Sản phẩm mới mang 2 value cùng thuộc nhóm merge,"3. Count chỉ tăng 1 đơn vị (= 6), KHÔNG tăng 2 — sản phẩm mang nhiều value trong cùng nhóm chỉ được đếm 1 lần.","<cần confirm> Đang viết theo cách hiểu ""lấy hợp - đếm distinct"". Nếu BA xác nhận là ""lấy giao"" (chỉ đếm sản phẩm có ĐỦ mọi value trong nhóm) thì expected result phải sửa lại."
-MRGVAL_TC64,Sync,,BC xoá sản phẩm mang value thuộc merged value,,Merged value Green đang có count = 6,"1. Trên BigCommerce, xoá 1 sản phẩm chỉ mang value Avocado.
+64,Sync,,BC xoá sản phẩm mang value thuộc merged value,,Merged value Green đang có count = 6,"1. Trên BigCommerce, xoá 1 sản phẩm chỉ mang value Avocado.
 2. Chạy sync tới khi Success.
 3. Kiểm tra count trên storefront tại từng node liên quan.",,3. Count giảm đúng 1 đơn vị (= 5) ở mọi node đang hiển thị merged value.,
-MRGVAL_TC65,Sync,,Count cập nhật đúng qua 2 chu kỳ sync liên tiếp,Tích luỹ nhiều chu kỳ,Merged value Green vừa được tạo,"1. Chạy sync lần 1, ghi lại count hiển thị trên storefront.
+65,Sync,,Count cập nhật đúng qua 2 chu kỳ sync liên tiếp,Tích luỹ nhiều chu kỳ,Merged value Green vừa được tạo,"1. Chạy sync lần 1, ghi lại count hiển thị trên storefront.
 2. Trên BigCommerce, thêm 2 sản phẩm mang value thuộc nhóm.
 3. Chạy sync lần 2.
 4. Kiểm tra lại count trên storefront.","- Sau sync lần 1: count = 5
 - Thêm 2 sản phẩm ở bước 2","4. Count sau sync lần 2 = 7, phản ánh đúng dữ liệu tích luỹ qua 2 chu kỳ; không bị tính lại sai lệch hay reset về giá trị của chu kỳ đầu.",
-MRGVAL_TC66,Sync,Value con - nguồn Custom fields,BC đổi Custom Field Value đang nằm trong merged value,,Merged value đang chứa 1 value lấy từ trường Custom Fields của BC,"1. Trên BigCommerce, đổi Custom Field Value của sản phẩm sang giá trị khác.
+66,Sync,Value con - nguồn Custom fields,BC đổi Custom Field Value đang nằm trong merged value,,Merged value đang chứa 1 value lấy từ trường Custom Fields của BC,"1. Trên BigCommerce, đổi Custom Field Value của sản phẩm sang giá trị khác.
 2. Chạy sync tới khi Success.
 3. Kiểm tra cột Values ở Merged Value List và storefront.",Custom Field Name giữ nguyên; chỉ đổi Custom Field Value,3. Value cũ không còn gắn với sản phẩm đó; count của merged value giảm tương ứng nếu sản phẩm không còn value nào thuộc nhóm.,
-MRGVAL_TC67,Sync,Tiến trình sync,Sync đang In Progress,,Merged value đang hiển thị bình thường trên storefront,"1. Trigger sync và giữ ở trạng thái đang chạy.
+67,Sync,Tiến trình sync,Sync đang In Progress,,Merged value đang hiển thị bình thường trên storefront,"1. Trigger sync và giữ ở trạng thái đang chạy.
 2. Truy cập storefront tại node đang hiển thị merged value.",Trạng thái sync = In Progress,"2. <cần confirm> — chưa xác định storefront giữ nguyên dữ liệu của lần sync thành công gần nhất, hay có trạng thái trung gian/không nhất quán trong lúc sync chạy.",<cần confirm> Spec không mô tả hành vi khi sync đang chạy giữa chừng.
-MRGVAL_TC68,Sync,,Lần sync gần nhất Failed,,Đã có ít nhất 1 lần sync Success trước đó,"1. Để lần sync gần nhất kết thúc ở trạng thái Failed.
+68,Sync,,Lần sync gần nhất Failed,,Đã có ít nhất 1 lần sync Success trước đó,"1. Để lần sync gần nhất kết thúc ở trạng thái Failed.
 2. Truy cập storefront tại node đang hiển thị merged value.
 3. Kiểm tra Merged Value List trong Admin.",Trạng thái sync gần nhất = Failed,"2-3. <cần confirm> — chưa xác định hệ thống giữ nguyên dữ liệu của lần sync Success gần nhất, hay hiển thị rỗng/báo lỗi.",<cần confirm> Spec không mô tả hành vi khi sync thất bại.
-MRGVAL_TC69,Sync,,Dữ liệu BC đã đổi nhưng chưa chạy sync lại,Trạng thái stale,Merged value đang hiển thị đúng theo lần sync gần nhất,"1. Trên BigCommerce, đổi tên 1 value thuộc merged value.
+69,Sync,,Dữ liệu BC đã đổi nhưng chưa chạy sync lại,Trạng thái stale,Merged value đang hiển thị đúng theo lần sync gần nhất,"1. Trên BigCommerce, đổi tên 1 value thuộc merged value.
 2. KHÔNG chạy sync.
 3. Kiểm tra Merged Value List và storefront.","BC vừa đổi dữ liệu, sync chưa chạy lại",3. Admin và storefront vẫn hiển thị theo dữ liệu của lần sync thành công gần nhất; thay đổi bên BigCommerce chưa có hiệu lực cho tới khi sync chạy lại.,
-MRGVAL_TC70,Sync,Nguồn hỗn hợp - thời điểm hiệu lực,Merged value gộp value nguồn BC và nguồn nội bộ,Lệch pha thời điểm hiệu lực,Merged value gồm 1 value từ Product options (nguồn BC) và 1 value từ Custom filter builder (nguồn nội bộ Native Search),"1. Đổi value nguồn nội bộ trong My own filter và đổi value nguồn BC trên BigCommerce cùng thời điểm.
+70,Sync,Nguồn hỗn hợp - thời điểm hiệu lực,Merged value gộp value nguồn BC và nguồn nội bộ,Lệch pha thời điểm hiệu lực,Merged value gồm 1 value từ Product options (nguồn BC) và 1 value từ Custom filter builder (nguồn nội bộ Native Search),"1. Đổi value nguồn nội bộ trong My own filter và đổi value nguồn BC trên BigCommerce cùng thời điểm.
 2. KHÔNG chạy sync ngay, kiểm tra storefront.
 3. Chạy sync tới khi Success rồi kiểm tra lại storefront.",,"2. Thay đổi ở value nguồn nội bộ có hiệu lực ngay; thay đổi ở value nguồn BC chưa có hiệu lực (chờ sync).
 3. Sau sync, cả 2 thay đổi đều được phản ánh đầy đủ trong cùng 1 merged value.","<cần confirm> Chưa có tài liệu mô tả hệ thống xử lý thế nào ở trạng thái ""nửa vời"" khi các value con trong cùng 1 nhóm có thời điểm hiệu lực lệch nhau."

@@ -1,176 +1,177 @@
 ﻿ID,Test Type,Field / Phần,Chi tiết test,Cụ thể hơn,Preconditions,Test Steps,Input DB/Setting,Expected Result,Note
-EFNFP_TC01,Happy,Mở màn Edit,Load đúng cấu hình đã lưu,,Đã có filter node Featured Products trong Filter Nodes panel,"1. Tại Filter Nodes panel chọn node Featured Products.
+Purpose:,,"Lọc theo sản phẩm merchant gắn sao nổi bật (Is Featured/Not Featured), để shopper xem nhanh các sản phẩm merchant muốn giới thiệu.",,,,,,,
+1,Happy,Mở màn Edit,Load đúng cấu hình đã lưu,,Đã có filter node Featured Products trong Filter Nodes panel,"1. Tại Filter Nodes panel chọn node Featured Products.
 2. Click icon Edit.",,"2. Hiển thị MH [Edit filter node - Featured Products], load đúng toàn bộ cấu hình đã lưu trước đó (Title, Filter options, Option select type, Display Style, Sort Order, Appearance).",
-EFNFP_TC02,Happy,Panel trái - danh sách node,Chuyển node không lẫn dữ liệu,,"Filter tree có ≥2 node, trong đó có Featured Products","1. Đang edit 1 node khác.
+2,Happy,Panel trái - danh sách node,Chuyển node không lẫn dữ liệu,,"Filter tree có ≥2 node, trong đó có Featured Products","1. Đang edit 1 node khác.
 2. Click chọn node Featured Products ở panel trái.",,"2. Nội dung bên phải đổi đúng sang cấu hình node Featured Products, không lẫn dữ liệu node trước đó.",
-EFNFP_TC03,Happy,Title,Giá trị đã lưu load đúng,,"Node Featured Products đã lưu Title tuỳ chỉnh (khác mặc định ""Featured Products"")","1. Mở màn Edit.
+3,Happy,Title,Giá trị đã lưu load đúng,,"Node Featured Products đã lưu Title tuỳ chỉnh (khác mặc định ""Featured Products"")","1. Mở màn Edit.
 2. Quan sát field Title.","Title đã lưu = ""New Arrivals Pick""","2. Title hiển thị đúng ""New Arrivals Pick"", không phải mặc định ""Featured Products"".",
-EFNFP_TC04,Happy,Title,"Sửa Title, Preview cập nhật",,Đang ở MH Edit,"1. Sửa nội dung Title.
+4,Happy,Title,"Sửa Title, Preview cập nhật",,Đang ở MH Edit,"1. Sửa nội dung Title.
 2. Quan sát Preview.",,"2. Preview hiển thị Title mới ngay lập tức, chưa cần Save.",
-EFNFP_TC05,Negative,Title,Không cho save khi rỗng,,Đang ở MH Edit,"1. Xoá trắng Title.
+5,Negative,Title,Không cho save khi rỗng,,Đang ở MH Edit,"1. Xoá trắng Title.
 2. Click Save Changes.",Title = rỗng,2. Không cho save; hiển thị lỗi required.,
-EFNFP_TC06,Happy,Title text color,"Màu đã lưu load đúng, đổi màu mới",,Node Featured Products đã lưu 1 màu Title tuỳ chỉnh,"1. Mở màn Edit, quan sát màu hiện tại.
+6,Happy,Title text color,"Màu đã lưu load đúng, đổi màu mới",,Node Featured Products đã lưu 1 màu Title tuỳ chỉnh,"1. Mở màn Edit, quan sát màu hiện tại.
 2. Chọn màu mới.
 3. Quan sát Preview.",,"1. Màu hiển thị đúng màu đã lưu.
 3. Title đổi màu đúng theo màu mới.",
-EFNFP_TC07,Happy,Title alignment,"Alignment đã lưu load đúng, đổi vị trí",,Node Featured Products đã lưu Title alignment = Right,"1. Mở màn Edit, quan sát alignment.
+7,Happy,Title alignment,"Alignment đã lưu load đúng, đổi vị trí",,Node Featured Products đã lưu Title alignment = Right,"1. Mở màn Edit, quan sát alignment.
 2. Đổi sang Left/Center.
 3. Quan sát Preview.",Alignment đã lưu = Right,"1. Alignment hiển thị đúng Right (giá trị đã lưu).
 3. Title căn đúng vị trí mới.",
-EFNFP_TC08,Happy,Filter options,Trạng thái checked đã lưu load đúng,,"Node đã lưu Is Featured = unchecked, Not Featured = checked","1. Mở màn Edit.
+8,Happy,Filter options,Trạng thái checked đã lưu load đúng,,"Node đã lưu Is Featured = unchecked, Not Featured = checked","1. Mở màn Edit.
 2. Quan sát checkbox Is Featured và Not Featured.",,"2. Is Featured hiển thị unchecked; Not Featured hiển thị checked — đúng giá trị đã lưu, không phải mặc định (cả 2 checked).",
-EFNFP_TC09,Negative,Filter options,Uncheck Is Featured → ẩn khỏi storefront,,"Cả 2 option đang checked, đã publish filter tree","1. Uncheck Is Featured.
+9,Negative,Filter options,Uncheck Is Featured → ẩn khỏi storefront,,"Cả 2 option đang checked, đã publish filter tree","1. Uncheck Is Featured.
 2. Save Changes.
-3. Truy cập storefront, kiểm tra filter Featured Products.",,"3. Is Featured không hiển thị trên storefront; Preview chỉ còn Not Featured.",<cần confirm>: case gốc (Add flow #12) đang NG
-EFNFP_TC10,Negative,Filter options,Uncheck Not Featured → ẩn khỏi storefront,,"Cả 2 option đang checked, đã publish filter tree","1. Uncheck Not Featured.
+3. Truy cập storefront, kiểm tra filter Featured Products.",,3. Is Featured không hiển thị trên storefront; Preview chỉ còn Not Featured.,<cần confirm>: case gốc (Add flow #12) đang NG
+10,Negative,Filter options,Uncheck Not Featured → ẩn khỏi storefront,,"Cả 2 option đang checked, đã publish filter tree","1. Uncheck Not Featured.
 2. Save Changes.
-3. Truy cập storefront, kiểm tra filter Featured Products.",,"3. Not Featured không hiển thị trên storefront; Preview chỉ còn Is Featured.",<cần confirm>: case gốc (Add flow #12) đang NG
-EFNFP_TC11,Happy,Filter options,Re-check option đã uncheck → hiển thị lại đúng vị trí,,"1 option đang unchecked, đã publish filter tree","1. Check lại option vừa uncheck.
+3. Truy cập storefront, kiểm tra filter Featured Products.",,3. Not Featured không hiển thị trên storefront; Preview chỉ còn Is Featured.,<cần confirm>: case gốc (Add flow #12) đang NG
+11,Happy,Filter options,Re-check option đã uncheck → hiển thị lại đúng vị trí,,"1 option đang unchecked, đã publish filter tree","1. Check lại option vừa uncheck.
 2. Save Changes.
 3. Kiểm tra storefront.",,3. Option hiển thị lại trên storefront filter đúng vị trí theo Sort Order.,
-EFNFP_TC12,Happy,Filter options,Edit label Is Featured → custom label trên storefront,,Filter node Featured Products đang mở,"1. Sửa label ""Is Featured"" thành ""Featured Picks"".
+12,Happy,Filter options,Edit label Is Featured → custom label trên storefront,,Filter node Featured Products đang mở,"1. Sửa label ""Is Featured"" thành ""Featured Picks"".
 2. Save Changes.
 3. Kiểm tra storefront.","Is Featured → ""Featured Picks""","3. Storefront hiển thị ""Featured Picks"" thay cho ""Is Featured"".",
-EFNFP_TC13,Happy,Filter options,Edit label Not Featured → custom label trên storefront,,Filter node Featured Products đang mở,"1. Sửa label ""Not Featured"" thành ""Regular"".
+13,Happy,Filter options,Edit label Not Featured → custom label trên storefront,,Filter node Featured Products đang mở,"1. Sửa label ""Not Featured"" thành ""Regular"".
 2. Save Changes.
 3. Kiểm tra storefront.","Not Featured → ""Regular""","3. Storefront hiển thị ""Regular"" thay cho ""Not Featured"".",
-EFNFP_TC14,Negative,Filter options,Không cho lưu khi label rỗng,,Đang ở MH Edit,"1. Xoá trắng label của option Is Featured.
-2. Click Save Changes.",Label Is Featured = rỗng,"2. Không cho save; hiển thị lỗi required tại field label.",
-EFNFP_TC15,Happy,Filter options,Custom label không ảnh hưởng logic filter,Label ≠ giá trị BC,"Label ""Is Featured"" đã đổi thành ""Featured Picks""; đã publish filter tree","1. Truy cập storefront.
+14,Negative,Filter options,Không cho lưu khi label rỗng,,Đang ở MH Edit,"1. Xoá trắng label của option Is Featured.
+2. Click Save Changes.",Label Is Featured = rỗng,2. Không cho save; hiển thị lỗi required tại field label.,
+15,Happy,Filter options,Custom label không ảnh hưởng logic filter,Label ≠ giá trị BC,"Label ""Is Featured"" đã đổi thành ""Featured Picks""; đã publish filter tree","1. Truy cập storefront.
 2. Chọn filter ""Featured Picks"".
 3. Kiểm tra kết quả.",,"3. Product đã set Featured Star trong BC vẫn được lọc đúng dù label đổi thành ""Featured Picks"".",
-EFNFP_TC16,Happy,Option select type,Giá trị đã lưu load đúng,,Node Featured Products đã lưu Option select type = Multiple,"1. Mở màn Edit.
+16,Happy,Option select type,Giá trị đã lưu load đúng,,Node Featured Products đã lưu Option select type = Multiple,"1. Mở màn Edit.
 2. Quan sát Option select type.",,"2. Hiển thị đúng ""Multiple"" (giá trị đã lưu), không phải mặc định ""Single"".",
-EFNFP_TC17,Happy,Option select type,Switch Single sang Multiple + verify storefront,,Node đang là Single,"1. Chọn Multiple.
+17,Happy,Option select type,Switch Single sang Multiple + verify storefront,,Node đang là Single,"1. Chọn Multiple.
 2. Save Changes.
 3. Truy cập storefront, thử chọn đồng thời cả Is Featured và Not Featured.",,3. Storefront cho phép chọn cả 2 option cùng lúc.,
-EFNFP_TC18,Happy,Option select type,Switch Multiple sang Single + verify storefront,,Node đang là Multiple,"1. Chọn Single.
+18,Happy,Option select type,Switch Multiple sang Single + verify storefront,,Node đang là Multiple,"1. Chọn Single.
 2. Save Changes.
 3. Truy cập storefront, chọn Is Featured rồi chọn Not Featured.",,3. Storefront chỉ cho phép chọn 1 option tại 1 thời điểm; chọn option mới tự bỏ option cũ.,
-EFNFP_TC19,Happy,Display Style,Giá trị đã lưu load đúng,,Node Featured Products đã lưu Display Style = Grid,"1. Mở màn Edit.
+19,Happy,Display Style,Giá trị đã lưu load đúng,,Node Featured Products đã lưu Display Style = Grid,"1. Mở màn Edit.
 2. Quan sát Display Style.",,"2. Hiển thị đúng ""Grid"" (giá trị đã lưu), không phải mặc định ""List"".",
-EFNFP_TC20,Happy,Display Style,Dropdown chỉ có đúng 3 option,,Filter node Featured Products đang mở,1. Mở dropdown Display Style.,,"1. Hiển thị đúng 3 option: List, Grid, Toggle — không có Star.",
-EFNFP_TC21,Happy,Display Style,3 style render đúng design trên Preview,,Đang ở MH Edit,"1. Chọn List → quan sát Preview.
+20,Happy,Display Style,Dropdown chỉ có đúng 3 option,,Filter node Featured Products đang mở,1. Mở dropdown Display Style.,,"1. Hiển thị đúng 3 option: List, Grid, Toggle — không có Star.",
+21,Happy,Display Style,3 style render đúng design trên Preview,,Đang ở MH Edit,"1. Chọn List → quan sát Preview.
 2. Chọn Grid → quan sát Preview.
 3. Chọn Toggle → quan sát Preview.",,"1. List: options dạng list checkbox đúng design.
 2. Grid: options dạng grid đúng design.
 3. Toggle: options hiển thị dạng toggle switch đúng design.",<cần confirm>: case gốc (Add flow #21) đang NG
-EFNFP_TC22,Happy,Display Style,Toggle style render đúng trên storefront,,"Display Style = Toggle, đã publish filter tree","1. Truy cập storefront.
+22,Happy,Display Style,Toggle style render đúng trên storefront,,"Display Style = Toggle, đã publish filter tree","1. Truy cập storefront.
 2. Quan sát filter Featured Products.",,"2. Filter hiển thị dạng toggle switch đúng design, user có thể interact với toggle.",<cần confirm>: case gốc (Add flow #22) đang NG
-EFNFP_TC23,Edge,Display Style,Toggle style + Single select behavior,,"Display Style = Toggle, Option select type = Single, đã publish","1. Truy cập storefront.
+23,Edge,Display Style,Toggle style + Single select behavior,,"Display Style = Toggle, Option select type = Single, đã publish","1. Truy cập storefront.
 2. Bật toggle Is Featured ON.
 3. Bật toggle Not Featured ON.",,3. Chỉ 1 toggle active tại 1 thời điểm (Single behavior không cho phép bật đồng thời cả 2).,<cần confirm>: case gốc (Add flow #23) đang NG
-EFNFP_TC24,Happy,Sort Order,Thứ tự đã lưu load đúng,,Node đã lưu Sort Order = Not Featured → Is Featured,"1. Mở màn Edit.
+24,Happy,Sort Order,Thứ tự đã lưu load đúng,,Node đã lưu Sort Order = Not Featured → Is Featured,"1. Mở màn Edit.
 2. Quan sát danh sách Sort Order.",,"2. Hiển thị đúng thứ tự đã lưu: Not Featured → Is Featured (không phải mặc định Is Featured → Not Featured), mỗi item có icon drag-and-drop.",
-EFNFP_TC25,Happy,Sort Order,Kéo thả đổi thứ tự → Preview cập nhật ngay,,Sort Order đang là Is Featured → Not Featured,"1. Kéo thả Not Featured lên vị trí đầu tiên.
+25,Happy,Sort Order,Kéo thả đổi thứ tự → Preview cập nhật ngay,,Sort Order đang là Is Featured → Not Featured,"1. Kéo thả Not Featured lên vị trí đầu tiên.
 2. Quan sát Preview.",,2. Preview hiển thị thứ tự mới: Not Featured → Is Featured.,
-EFNFP_TC26,Happy,Sort Order,Save thứ tự mới → storefront đúng + persist sau reload,,Đã drag-and-drop đổi thứ tự,"1. Click Save Changes.
+26,Happy,Sort Order,Save thứ tự mới → storefront đúng + persist sau reload,,Đã drag-and-drop đổi thứ tự,"1. Click Save Changes.
 2. Truy cập storefront, kiểm tra thứ tự filter options.
 3. Reload trang Edit, kiểm tra Sort Order.",,"2. Storefront hiển thị options theo đúng thứ tự đã kéo thả.
 3. Thứ tự vẫn giữ nguyên sau reload, không reset về mặc định.",
-EFNFP_TC27,Happy,Hide on customer group,Load đúng selection đã lưu khi mở lại Edit,,Node đã lưu Hide on customer group cho 1 nhóm khách hàng cụ thể,"1. Mở màn Edit.
+27,Happy,Hide on customer group,Load đúng selection đã lưu khi mở lại Edit,,Node đã lưu Hide on customer group cho 1 nhóm khách hàng cụ thể,"1. Mở màn Edit.
 2. Quan sát field Hide on customer group.",,"2. Hiển thị đúng số lượng/tên customer group đã chọn từ trước, không bị reset về rỗng.",
-EFNFP_TC28,Happy,Hide on customer group,Click [Edit] mở popup,,Filter node Featured Products đang mở,1. Click button [Edit] tại Hide on customer group.,,1. Popup [Select customer group] hiển thị.,
-EFNFP_TC29,Happy,Hide on customer group,Chọn 1 group → ẩn đúng filter (Storefront),,"Popup đang mở, có customer group hợp lệ","1. Click chọn customer group A.
+28,Happy,Hide on customer group,Click [Edit] mở popup,,Filter node Featured Products đang mở,1. Click button [Edit] tại Hide on customer group.,,1. Popup [Select customer group] hiển thị.,
+29,Happy,Hide on customer group,Chọn 1 group → ẩn đúng filter (Storefront),,"Popup đang mở, có customer group hợp lệ","1. Click chọn customer group A.
 2. Save Changes.
 3. Đăng nhập storefront bằng account thuộc customer group A.
 4. Kiểm tra filter Featured Products.",,"2. Số lượng selected cập nhật đúng ngoài MH.
 4. Filter Featured Products ẩn với customer group A.",
-EFNFP_TC30,Happy,Hide on customer group - Popup [Select customer group],Search khớp 1 phần,,Popup đang mở,"1. Nhập 1 phần tên customer group.
+30,Happy,Hide on customer group - Popup [Select customer group],Search khớp 1 phần,,Popup đang mở,"1. Nhập 1 phần tên customer group.
 2. Kiểm tra kết quả.",,2. Hiển thị đúng dữ liệu khớp 1 phần.,
-EFNFP_TC31,Edge,Hide on customer group - Popup [Select customer group],BC xoá customer group → không còn hiển thị trong popup,,Customer group đang có trong danh sách,"1. Xoá customer group trên BC.
+31,Edge,Hide on customer group - Popup [Select customer group],BC xoá customer group → không còn hiển thị trong popup,,Customer group đang có trong danh sách,"1. Xoá customer group trên BC.
 2. Mở lại popup [Select customer group].",,2. Customer group vừa xoá không còn hiển thị trong danh sách.,
-EFNFP_TC32,Happy,Appearance - Display tooltips,Trạng thái + nội dung đã lưu load đúng,,Node đã lưu Display tooltip = ON kèm nội dung tuỳ chỉnh,"1. Mở màn Edit.
+32,Happy,Appearance - Display tooltips,Trạng thái + nội dung đã lưu load đúng,,Node đã lưu Display tooltip = ON kèm nội dung tuỳ chỉnh,"1. Mở màn Edit.
 2. Quan sát toggle và tooltip content.",,2. Toggle hiển thị đúng ON; nội dung hiển thị đúng giá trị đã lưu.,
-EFNFP_TC33,Happy,Appearance - Display tooltips,Bật ON → hiển thị tooltip,,Toggle đang OFF,"1. Bật toggle ON.
+33,Happy,Appearance - Display tooltips,Bật ON → hiển thị tooltip,,Toggle đang OFF,"1. Bật toggle ON.
 2. Quan sát Preview.",,2. Tooltip hiển thị đúng trên filter.,
-EFNFP_TC34,Happy,Appearance - Display tooltips,Tắt OFF → ẩn tooltip,,Toggle đang ON,"1. Tắt toggle OFF.
+34,Happy,Appearance - Display tooltips,Tắt OFF → ẩn tooltip,,Toggle đang ON,"1. Tắt toggle OFF.
 2. Quan sát Preview.",,2. Tooltip ẩn.,
-EFNFP_TC35,Negative,Appearance - Display tooltips,Bật ON khi tooltip content rỗng,,Tooltip content rỗng,1. Bật toggle ON.,Tooltip content = rỗng,1. Không cho phép bật / hiển thị cảnh báo content required.,
-EFNFP_TC36,Happy,Appearance - Tooltip content,Default content + sửa custom content,,Filter node Featured Products,"1. Kiểm tra tooltip content mặc định.
+35,Negative,Appearance - Display tooltips,Bật ON khi tooltip content rỗng,,Tooltip content rỗng,1. Bật toggle ON.,Tooltip content = rỗng,1. Không cho phép bật / hiển thị cảnh báo content required.,
+36,Happy,Appearance - Tooltip content,Default content + sửa custom content,,Filter node Featured Products,"1. Kiểm tra tooltip content mặc định.
 2. Sửa nội dung tooltip.
 3. Save Changes.
 4. Kiểm tra storefront.",,"1. Tooltip mặc định: ""Featured Products helps to find recom..."".
 4. Nội dung tuỳ chỉnh hiển thị đúng trên storefront.",
-EFNFP_TC37,Other,Appearance - Show all irrelevant values,Đối chiếu field có tồn tại trên màn Edit hay không,,Đang ở MH Edit,"1. Kiểm tra toàn bộ khối Appearance Settings.
-2. Tìm toggle [Show all irrelevant values].",,"2. `<cần confirm>` — sheet Add có case #32 test toggle này nhưng ảnh UI Figma thật (panel Appearance Settings) không có field này; cần xác nhận field có tồn tại trên màn Edit filter node - Featured Products hay không.",<cần confirm>: xem spec mục 8, 11 câu hỏi #1
-EFNFP_TC38,Other,Appearance - Pagination type,Đối chiếu field có tồn tại trên màn Edit hay không,,Đang ở MH Edit,"1. Kiểm tra toàn bộ khối Appearance Settings.
-2. Tìm dropdown [Pagination type].",,"2. `<cần confirm>` — sheet Add có case #33 (đang SKIP, chưa thực thi) nhưng ảnh UI Figma thật không có field này; cần xác nhận field có tồn tại trên màn Edit filter node - Featured Products hay không.",<cần confirm>: xem spec mục 8, 11 câu hỏi #1
-EFNFP_TC39,Happy,Appearance - Collapse/Expand,"Giá trị Desktop/Mobile đã lưu load đúng, độc lập",,"Node đã lưu Desktop = Collapse, Mobile = Expand","1. Mở màn Edit.
+37,Other,Appearance - Show all irrelevant values,Đối chiếu field có tồn tại trên màn Edit hay không,,Đang ở MH Edit,"1. Kiểm tra toàn bộ khối Appearance Settings.
+2. Tìm toggle [Show all irrelevant values].",,2. `<cần confirm>` — sheet Add có case #32 test toggle này nhưng ảnh UI Figma thật (panel Appearance Settings) không có field này; cần xác nhận field có tồn tại trên màn Edit filter node - Featured Products hay không.,"<cần confirm>: xem spec mục 8, 11 câu hỏi #1"
+38,Other,Appearance - Pagination type,Đối chiếu field có tồn tại trên màn Edit hay không,,Đang ở MH Edit,"1. Kiểm tra toàn bộ khối Appearance Settings.
+2. Tìm dropdown [Pagination type].",,"2. `<cần confirm>` — sheet Add có case #33 (đang SKIP, chưa thực thi) nhưng ảnh UI Figma thật không có field này; cần xác nhận field có tồn tại trên màn Edit filter node - Featured Products hay không.","<cần confirm>: xem spec mục 8, 11 câu hỏi #1"
+39,Happy,Appearance - Collapse/Expand,"Giá trị Desktop/Mobile đã lưu load đúng, độc lập",,"Node đã lưu Desktop = Collapse, Mobile = Expand","1. Mở màn Edit.
 2. Quan sát Collapse/Expand ở Preview Desktop và Mobile.",,2. Desktop hiển thị đúng Collapse; Mobile hiển thị đúng Expand.,
-EFNFP_TC40,Happy,Appearance - Collapse/Expand,Desktop Expand / Mobile Collapse - độc lập,Desktop Expand + Mobile Collapse,Đang ở MH Edit,"1. Set Desktop = Expand, Mobile = Collapse.
+40,Happy,Appearance - Collapse/Expand,Desktop Expand / Mobile Collapse - độc lập,Desktop Expand + Mobile Collapse,Đang ở MH Edit,"1. Set Desktop = Expand, Mobile = Collapse.
 2. Save Changes.
 3. Kiểm tra Preview cả 2.",,"3. Desktop: filter mở sẵn.
 3. Mobile: filter thu gọn.
 3. Desktop và Mobile không ảnh hưởng lẫn nhau.",
-EFNFP_TC41,Happy,Appearance - Collapse/Expand,Desktop Collapse / Mobile Expand - độc lập,Desktop Collapse + Mobile Expand,Đang ở MH Edit,"1. Set Desktop = Collapse, Mobile = Expand.
+41,Happy,Appearance - Collapse/Expand,Desktop Collapse / Mobile Expand - độc lập,Desktop Collapse + Mobile Expand,Đang ở MH Edit,"1. Set Desktop = Collapse, Mobile = Expand.
 2. Save Changes.
 3. Kiểm tra Preview cả 2.",,"3. Desktop: filter thu gọn.
 3. Mobile: filter mở sẵn.",
-EFNFP_TC42,Happy,Appearance - Toggle [Display all values in uppercase],ON → uppercase,,Có filter options,"1. Bật toggle ON.
+42,Happy,Appearance - Toggle [Display all values in uppercase],ON → uppercase,,Có filter options,"1. Bật toggle ON.
 2. Quan sát Preview.",,2. Is Featured và Not Featured hiển thị chữ in hoa.,
-EFNFP_TC43,Happy,Appearance - Toggle [Display all values in uppercase],OFF → hiển thị bình thường,,Có filter options,"1. Tắt toggle OFF.
+43,Happy,Appearance - Toggle [Display all values in uppercase],OFF → hiển thị bình thường,,Có filter options,"1. Tắt toggle OFF.
 2. Quan sát Preview.",,2. Options hiển thị đúng format ban đầu.,
-EFNFP_TC44,Happy,Appearance - Show search box,Giá trị Desktop/Mobile đã lưu load đúng,,"Node đã lưu Show search box on desktop = ON, on mobile = OFF","1. Mở màn Edit.
+44,Happy,Appearance - Show search box,Giá trị Desktop/Mobile đã lưu load đúng,,"Node đã lưu Show search box on desktop = ON, on mobile = OFF","1. Mở màn Edit.
 2. Quan sát 2 toggle Show search box.",,2. Desktop hiển thị đúng ON; Mobile hiển thị đúng OFF.,
-EFNFP_TC45,Happy,Appearance - Show search box,Desktop ON/OFF hiển thị đúng,,Đang ở Desktop preview,"1. Bật search box Desktop ON, quan sát Preview.
+45,Happy,Appearance - Show search box,Desktop ON/OFF hiển thị đúng,,Đang ở Desktop preview,"1. Bật search box Desktop ON, quan sát Preview.
 2. Tắt search box Desktop OFF, quan sát Preview.",,"1. Search box hiển thị.
 2. Search box ẩn.",
-EFNFP_TC46,Happy,Appearance - Show search box,Mobile ON/OFF hiển thị đúng,,Đang ở Mobile preview,"1. Bật search box Mobile ON, quan sát Preview.
+46,Happy,Appearance - Show search box,Mobile ON/OFF hiển thị đúng,,Đang ở Mobile preview,"1. Bật search box Mobile ON, quan sát Preview.
 2. Tắt search box Mobile OFF, quan sát Preview.",,"1. Search box hiển thị.
 2. Search box ẩn.",
-EFNFP_TC47,Happy,Button [Save Changes],Disable khi chưa có thay đổi,,"Vừa mở màn Edit, chưa chỉnh gì",1. Quan sát trạng thái nút Save Changes.,,1. Nút Save Changes ở trạng thái disable.,
-EFNFP_TC48,Happy,Button [Save Changes],Enable khi sửa 1 field bất kỳ,,Đang ở màn Edit,"1. Sửa 1 field bất kỳ.
+47,Happy,Button [Save Changes],Disable khi chưa có thay đổi,,"Vừa mở màn Edit, chưa chỉnh gì",1. Quan sát trạng thái nút Save Changes.,,1. Nút Save Changes ở trạng thái disable.,
+48,Happy,Button [Save Changes],Enable khi sửa 1 field bất kỳ,,Đang ở màn Edit,"1. Sửa 1 field bất kỳ.
 2. Quan sát nút Save Changes.",,2. Nút Save Changes chuyển sang enable.,
-EFNFP_TC49,Happy,Button [Save Changes],Double-click không tạo lưu trùng,,"Có thay đổi hợp lệ, Save Changes đang enable",1. Double-click liên tiếp nút Save Changes.,,1. Chỉ 1 request lưu được gửi; không tạo cấu hình trùng lặp.,
-EFNFP_TC50,Negative,Button [Save Changes],Chặn save khi có field invalid,,Title đang bị xoá trắng,1. Click Save Changes.,Title = rỗng,1. Không cho save; hiển thị lỗi đúng tại field invalid.,
-EFNFP_TC51,Happy,Điều hướng khi có unsaved changes,Popup cảnh báo + Discard/Cancel,,"Đang sửa dở dữ liệu ở node Featured Products, chưa Save","1. Click [Back] hoặc chọn chuyển sang node khác.
+49,Happy,Button [Save Changes],Double-click không tạo lưu trùng,,"Có thay đổi hợp lệ, Save Changes đang enable",1. Double-click liên tiếp nút Save Changes.,,1. Chỉ 1 request lưu được gửi; không tạo cấu hình trùng lặp.,
+50,Negative,Button [Save Changes],Chặn save khi có field invalid,,Title đang bị xoá trắng,1. Click Save Changes.,Title = rỗng,1. Không cho save; hiển thị lỗi đúng tại field invalid.,
+51,Happy,Điều hướng khi có unsaved changes,Popup cảnh báo + Discard/Cancel,,"Đang sửa dở dữ liệu ở node Featured Products, chưa Save","1. Click [Back] hoặc chọn chuyển sang node khác.
 2. Ở popup cảnh báo, click [Discard].
 3. Lặp lại bước 1, lần này click [Cancel]/[Stay].",,"1. Hiển thị popup cảnh báo unsaved changes.
 2. Bỏ thay đổi chưa lưu và điều hướng tiếp theo yêu cầu ban đầu.
 3. Đóng popup, ở lại màn Edit filter node - Featured Products với dữ liệu đang sửa dở còn nguyên.",
-EFNFP_TC52,Happy,Button [Save to template],Lưu cấu hình hiện tại thành template,,Cấu hình node Featured Products hợp lệ,1. Click button [Save to template].,,1. Lưu thành công; template mới xuất hiện ở tab [My Templates].,
-EFNFP_TC53,Happy,Filter [Featured Products] - Storefront,Product count hiển thị đúng cạnh mỗi option,,"Đã sync data từ BC; đã Save cấu hình Edit; đã publish filter tree","1. Truy cập storefront.
+52,Happy,Button [Save to template],Lưu cấu hình hiện tại thành template,,Cấu hình node Featured Products hợp lệ,1. Click button [Save to template].,,1. Lưu thành công; template mới xuất hiện ở tab [My Templates].,
+53,Happy,Filter [Featured Products] - Storefront,Product count hiển thị đúng cạnh mỗi option,,Đã sync data từ BC; đã Save cấu hình Edit; đã publish filter tree,"1. Truy cập storefront.
 2. Kiểm tra filter Featured Products.",,"2. Count hiển thị đúng cạnh từng option (VD Is Featured (5), Not Featured (2)).",<cần confirm>: case gốc (Add flow #37) đang NG
-EFNFP_TC54,Happy,Filter [Featured Products] - Storefront,Filter by Is Featured đúng logic,,Đã sync data từ BC; đã publish filter tree,"1. Chọn filter Is Featured.
+54,Happy,Filter [Featured Products] - Storefront,Filter by Is Featured đúng logic,,Đã sync data từ BC; đã publish filter tree,"1. Chọn filter Is Featured.
 2. Kiểm tra kết quả.",,2. Chỉ product đã set Featured Star trên BC hiển thị.,
-EFNFP_TC55,Happy,Filter [Featured Products] - Storefront,Filter by Not Featured đúng logic,,Đã sync data từ BC; đã publish filter tree,"1. Bỏ chọn filter trước.
+55,Happy,Filter [Featured Products] - Storefront,Filter by Not Featured đúng logic,,Đã sync data từ BC; đã publish filter tree,"1. Bỏ chọn filter trước.
 2. Chọn filter Not Featured.
 3. Kiểm tra kết quả.",,3. Chỉ product chưa set Featured Star trên BC hiển thị.,
-EFNFP_TC56,Happy,Filter [Featured Products] - Storefront,Count accuracy — khớp với data trong BC,,"N product có Featured Star trong BC, M product không có; đã sync","1. Kiểm tra count Is Featured và Not Featured trên storefront.",Is Featured: N; Not Featured: M,"1. Count Is Featured = N; Count Not Featured = M, khớp đúng số product tương ứng trong BC.",<cần confirm>: case gốc (Add flow #39) đang NG
-EFNFP_TC57,Happy,Filter [Featured Products] - Storefront,Hiển thị đúng trên Search Result Page,,Filter tree gắn vào Search Result Page; đã publish,"1. Thực hiện search từ khoá bất kỳ.
+56,Happy,Filter [Featured Products] - Storefront,Count accuracy — khớp với data trong BC,,"N product có Featured Star trong BC, M product không có; đã sync",1. Kiểm tra count Is Featured và Not Featured trên storefront.,Is Featured: N; Not Featured: M,"1. Count Is Featured = N; Count Not Featured = M, khớp đúng số product tương ứng trong BC.",<cần confirm>: case gốc (Add flow #39) đang NG
+57,Happy,Filter [Featured Products] - Storefront,Hiển thị đúng trên Search Result Page,,Filter tree gắn vào Search Result Page; đã publish,"1. Thực hiện search từ khoá bất kỳ.
 2. Kiểm tra filter panel.",,2. Filter Featured Products hiển thị đúng options và count trên Search Result Page.,
-EFNFP_TC58,Happy,Filter [Featured Products] - Storefront,Hiển thị đúng trên Category Page,,Filter tree gắn vào Category Page; đã publish,"1. Truy cập 1 Category Page bất kỳ.
+58,Happy,Filter [Featured Products] - Storefront,Hiển thị đúng trên Category Page,,Filter tree gắn vào Category Page; đã publish,"1. Truy cập 1 Category Page bất kỳ.
 2. Kiểm tra filter panel.",,2. Filter Featured Products hiển thị đúng options và count trên Category Page.,
-EFNFP_TC59,Happy,Filter [Featured Products] + Filter khác,Kết hợp Featured Products + Brand filter,AND logic,Filter tree có cả Featured Products và Brand filter; đã publish,"1. Truy cập storefront.
+59,Happy,Filter [Featured Products] + Filter khác,Kết hợp Featured Products + Brand filter,AND logic,Filter tree có cả Featured Products và Brand filter; đã publish,"1. Truy cập storefront.
 2. Chọn Is Featured.
 3. Thêm filter Brand = OFS.
 4. Kiểm tra kết quả.",,4. Chỉ product vừa có Featured Star vừa có Brand = OFS hiển thị (AND logic).,<cần confirm>: case gốc (Add flow #42) đang NG
-EFNFP_TC60,Happy,Filter [Featured Products] - Merchandising,Product bị Hidden không tính vào count và không hiện khi filter,,Product A: Is Featured; Product A bị Hidden trong Merchandising campaign đang active,"1. Truy cập storefront trong context campaign active.
+60,Happy,Filter [Featured Products] - Merchandising,Product bị Hidden không tính vào count và không hiện khi filter,,Product A: Is Featured; Product A bị Hidden trong Merchandising campaign đang active,"1. Truy cập storefront trong context campaign active.
 2. Kiểm tra count Is Featured.
 3. Chọn filter Is Featured.",,"2. Count Is Featured giảm 1 (Product A bị ẩn bởi campaign).
 3. Product A không xuất hiện trong kết quả filter Is Featured.",
-EFNFP_TC61,Sync,Filter [Featured Products],Set Featured Star trên BC → count Is Featured tăng sau sync,,Product A chưa có star (Is Featured count = N); đã sync lần trước,"1. Vào BC Admin → Product A → Storefront Details.
+61,Sync,Filter [Featured Products],Set Featured Star trên BC → count Is Featured tăng sau sync,,Product A chưa có star (Is Featured count = N); đã sync lần trước,"1. Vào BC Admin → Product A → Storefront Details.
 2. Bật star ""Set as a Featured Product on my Storefront"".
 3. Chạy sync.
-4. Kiểm tra count Is Featured và Not Featured trên storefront.",Product A: Featured Star = ON,"4. Count Is Featured = N + 1; count Not Featured giảm 1; Product A xuất hiện trong kết quả filter Is Featured.",
-EFNFP_TC62,Sync,Filter [Featured Products],Bỏ Featured Star → count chuyển sang Not Featured sau sync,,"Product A: Is Featured (star = ON); Is Featured count = N, Not Featured count = M","1. Vào BC Admin → Product A → Storefront Details.
+4. Kiểm tra count Is Featured và Not Featured trên storefront.",Product A: Featured Star = ON,4. Count Is Featured = N + 1; count Not Featured giảm 1; Product A xuất hiện trong kết quả filter Is Featured.,
+62,Sync,Filter [Featured Products],Bỏ Featured Star → count chuyển sang Not Featured sau sync,,"Product A: Is Featured (star = ON); Is Featured count = N, Not Featured count = M","1. Vào BC Admin → Product A → Storefront Details.
 2. Tắt star Featured.
 3. Chạy sync.
 4. Kiểm tra count trên storefront.",Product A: Featured Star = OFF,"4. Count Is Featured = N - 1; count Not Featured = M + 1; Product A không còn xuất hiện khi filter Is Featured, xuất hiện khi filter Not Featured.",
-EFNFP_TC63,Sync,Filter [Featured Products],Product mới không set star → tự tính vào Not Featured sau sync,,Chưa có Product B; Not Featured count = M,"1. Tạo Product B mới trong BC (không bật star Featured).
+63,Sync,Filter [Featured Products],Product mới không set star → tự tính vào Not Featured sau sync,,Chưa có Product B; Not Featured count = M,"1. Tạo Product B mới trong BC (không bật star Featured).
 2. Chạy sync.
-3. Kiểm tra count Not Featured trên storefront.",Product B: Featured Star = không set,"3. Count Not Featured = M + 1; Product B hiển thị trong kết quả filter Not Featured.",
-EFNFP_TC64,Sync,Filter [Featured Products],Product mới có set star → tự tính vào Is Featured sau sync,,Chưa có Product C; Is Featured count = N,"1. Tạo Product C mới trong BC, bật star Featured.
+3. Kiểm tra count Not Featured trên storefront.",Product B: Featured Star = không set,3. Count Not Featured = M + 1; Product B hiển thị trong kết quả filter Not Featured.,
+64,Sync,Filter [Featured Products],Product mới có set star → tự tính vào Is Featured sau sync,,Chưa có Product C; Is Featured count = N,"1. Tạo Product C mới trong BC, bật star Featured.
 2. Chạy sync.
-3. Kiểm tra count Is Featured trên storefront.",Product C: Featured Star = ON,"3. Count Is Featured = N + 1; Product C hiển thị trong kết quả filter Is Featured.",
-EFNFP_TC65,Sync,Filter [Featured Products],Product bị xoá → count giảm tương ứng sau sync,,Product A: Is Featured; Is Featured count = N,"1. Xoá Product A trên BC.
+3. Kiểm tra count Is Featured trên storefront.",Product C: Featured Star = ON,3. Count Is Featured = N + 1; Product C hiển thị trong kết quả filter Is Featured.,
+65,Sync,Filter [Featured Products],Product bị xoá → count giảm tương ứng sau sync,,Product A: Is Featured; Is Featured count = N,"1. Xoá Product A trên BC.
 2. Chạy sync.
-3. Kiểm tra count Is Featured trên storefront.",,"3. Count Is Featured = N - 1; Product A không còn xuất hiện khi filter Is Featured.",
-EFNFP_TC66,Edge,Filter [Featured Products],Uncheck cả 2 option → behavior trên storefront,,Cả 2 option đang checked,"1. Uncheck cả Is Featured và Not Featured.
+3. Kiểm tra count Is Featured trên storefront.",,3. Count Is Featured = N - 1; Product A không còn xuất hiện khi filter Is Featured.,
+66,Edge,Filter [Featured Products],Uncheck cả 2 option → behavior trên storefront,,Cả 2 option đang checked,"1. Uncheck cả Is Featured và Not Featured.
 2. Save Changes.
-3. Kiểm tra storefront.",,"3. `<cần confirm>` — filter Featured Products không hiển thị option nào; chưa xác nhận filter node tự ẩn hẳn hay hiện dạng empty state.",<cần confirm>: case gốc (Add flow #49) tự ghi cần confirm với team
-EFNFP_TC67,Edge,Filter [Featured Products],Không có product nào set Featured Star → Is Featured count = 0,Is Featured rỗng,0 product có Featured Star trong BC; đã sync,1. Kiểm tra filter Featured Products trên storefront.,,"1. `<cần confirm>` — Is Featured hiển thị count = 0 nếu ""Show all irrelevant values"" = ON, bị ẩn nếu OFF; lưu ý field này chưa xác nhận có tồn tại trên màn Edit (xem TC37).",<cần confirm>: phụ thuộc field Show all irrelevant values đang cần xác nhận — xem spec mục 8, 10
-EFNFP_TC68,Edge,Filter [Featured Products],Tất cả product đều set Featured Star → Not Featured count = 0,Not Featured rỗng,Tất cả product đều có Featured Star = ON trong BC; đã sync,1. Kiểm tra filter Featured Products trên storefront.,,"1. `<cần confirm>` — Not Featured hiển thị count = 0 nếu ""Show all irrelevant values"" = ON, bị ẩn nếu OFF; lưu ý field này chưa xác nhận có tồn tại trên màn Edit (xem TC37).",<cần confirm>: phụ thuộc field Show all irrelevant values đang cần xác nhận — xem spec mục 8, 10
-EFNFP_TC69,Edge,Filter [Featured Products],Toggle style khi chỉ 1 option visible,Toggle + 1 option,"Display Style = Toggle; Is Featured bị uncheck (chỉ Not Featured visible); đã publish","1. Truy cập storefront.
-2. Quan sát filter Featured Products.",,"2. `<cần confirm>` — filter chỉ hiển thị toggle cho Not Featured; hành vi cụ thể cần confirm với team khi Toggle có 1 option.",<cần confirm>: case gốc (Add flow #52) tự ghi cần confirm với team
+3. Kiểm tra storefront.",,3. `<cần confirm>` — filter Featured Products không hiển thị option nào; chưa xác nhận filter node tự ẩn hẳn hay hiện dạng empty state.,<cần confirm>: case gốc (Add flow #49) tự ghi cần confirm với team
+67,Edge,Filter [Featured Products],Không có product nào set Featured Star → Is Featured count = 0,Is Featured rỗng,0 product có Featured Star trong BC; đã sync,1. Kiểm tra filter Featured Products trên storefront.,,"1. `<cần confirm>` — Is Featured hiển thị count = 0 nếu ""Show all irrelevant values"" = ON, bị ẩn nếu OFF; lưu ý field này chưa xác nhận có tồn tại trên màn Edit (xem TC37).","<cần confirm>: phụ thuộc field Show all irrelevant values đang cần xác nhận — xem spec mục 8, 10"
+68,Edge,Filter [Featured Products],Tất cả product đều set Featured Star → Not Featured count = 0,Not Featured rỗng,Tất cả product đều có Featured Star = ON trong BC; đã sync,1. Kiểm tra filter Featured Products trên storefront.,,"1. `<cần confirm>` — Not Featured hiển thị count = 0 nếu ""Show all irrelevant values"" = ON, bị ẩn nếu OFF; lưu ý field này chưa xác nhận có tồn tại trên màn Edit (xem TC37).","<cần confirm>: phụ thuộc field Show all irrelevant values đang cần xác nhận — xem spec mục 8, 10"
+69,Edge,Filter [Featured Products],Toggle style khi chỉ 1 option visible,Toggle + 1 option,Display Style = Toggle; Is Featured bị uncheck (chỉ Not Featured visible); đã publish,"1. Truy cập storefront.
+2. Quan sát filter Featured Products.",,2. `<cần confirm>` — filter chỉ hiển thị toggle cho Not Featured; hành vi cụ thể cần confirm với team khi Toggle có 1 option.,<cần confirm>: case gốc (Add flow #52) tự ghi cần confirm với team

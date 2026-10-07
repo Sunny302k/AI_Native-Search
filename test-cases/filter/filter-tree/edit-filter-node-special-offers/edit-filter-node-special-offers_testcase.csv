@@ -1,183 +1,184 @@
 ﻿ID,Test Type,Field / Phần,Chi tiết test,Cụ thể hơn,Preconditions,Test Steps,Input DB/Setting,Expected Result,Note
-EFNSO_TC01,Happy,Mở màn Edit,Load đúng cấu hình đã lưu,,Đã có filter node Special Offers trong Filter Nodes panel,"1. Tại Filter Nodes panel chọn node Special Offers.
+Purpose:,,"Lọc theo sản phẩm đang có giá sale (On sale/Not on sale), để shopper tìm ngay các sản phẩm đang được giảm giá.",,,,,,,
+1,Happy,Mở màn Edit,Load đúng cấu hình đã lưu,,Đã có filter node Special Offers trong Filter Nodes panel,"1. Tại Filter Nodes panel chọn node Special Offers.
 2. Click icon Edit.",,"2. Hiển thị MH [Edit filter node - Special Offers], load đúng toàn bộ cấu hình đã lưu trước đó (Title, Filter options, Option select type, Display Style, Sort Order, Appearance).",
-EFNSO_TC02,Happy,Panel trái - danh sách node,Chuyển node không lẫn dữ liệu,,"Filter tree có ≥2 node, trong đó có Special Offers","1. Đang edit 1 node khác.
+2,Happy,Panel trái - danh sách node,Chuyển node không lẫn dữ liệu,,"Filter tree có ≥2 node, trong đó có Special Offers","1. Đang edit 1 node khác.
 2. Click chọn node Special Offers ở panel trái.",,"2. Nội dung bên phải đổi đúng sang cấu hình node Special Offers, không lẫn dữ liệu node trước đó.",
-EFNSO_TC03,Happy,Title,Giá trị đã lưu load đúng,,"Node Special Offers đã lưu Title tuỳ chỉnh (khác mặc định ""Special Offers"")","1. Mở màn Edit.
+3,Happy,Title,Giá trị đã lưu load đúng,,"Node Special Offers đã lưu Title tuỳ chỉnh (khác mặc định ""Special Offers"")","1. Mở màn Edit.
 2. Quan sát field Title.","Title đã lưu = ""Deals & Promotions""","2. Title hiển thị đúng ""Deals & Promotions"", không phải mặc định ""Special Offers"".",
-EFNSO_TC04,Happy,Title,"Sửa Title, Preview cập nhật",,Đang ở MH Edit,"1. Sửa nội dung Title.
+4,Happy,Title,"Sửa Title, Preview cập nhật",,Đang ở MH Edit,"1. Sửa nội dung Title.
 2. Quan sát Preview.",,"2. Preview hiển thị Title mới ngay lập tức, chưa cần Save.",
-EFNSO_TC05,Negative,Title,Không cho save khi rỗng,,Đang ở MH Edit,"1. Xoá trắng Title.
+5,Negative,Title,Không cho save khi rỗng,,Đang ở MH Edit,"1. Xoá trắng Title.
 2. Click Save Changes.",Title = rỗng,2. Không cho save; hiển thị lỗi required.,
-EFNSO_TC06,Happy,Title text color,"Màu đã lưu load đúng, đổi màu mới",,Node Special Offers đã lưu 1 màu Title tuỳ chỉnh,"1. Mở màn Edit, quan sát màu hiện tại.
+6,Happy,Title text color,"Màu đã lưu load đúng, đổi màu mới",,Node Special Offers đã lưu 1 màu Title tuỳ chỉnh,"1. Mở màn Edit, quan sát màu hiện tại.
 2. Chọn màu mới.
 3. Quan sát Preview.",,"1. Màu hiển thị đúng màu đã lưu.
 3. Title đổi màu đúng theo màu mới.",
-EFNSO_TC07,Negative,Title alignment,Title dài hơn 1 dòng vẫn căn trái dù chọn Center/Right,Bug đã biết,"Title dài (nhiều hơn 1 dòng khi hiển thị), đã chọn alignment = Center","1. Mở màn Edit.
+7,Negative,Title alignment,Title dài hơn 1 dòng vẫn căn trái dù chọn Center/Right,Bug đã biết,"Title dài (nhiều hơn 1 dòng khi hiển thị), đã chọn alignment = Center","1. Mở màn Edit.
 2. Đổi alignment sang Right.
 3. Quan sát Preview.",Title dài >1 dòng,3. Title trong Preview phải căn phải đúng theo lựa chọn.,<cần confirm>: case gốc (Add flow #9) đang NG — title dài luôn hiển thị căn trái bất kể lựa chọn
-EFNSO_TC08,Happy,Filter options,Trạng thái checked đã lưu load đúng,,"Node đã lưu On sale = unchecked, Not on sale = checked","1. Mở màn Edit.
+8,Happy,Filter options,Trạng thái checked đã lưu load đúng,,"Node đã lưu On sale = unchecked, Not on sale = checked","1. Mở màn Edit.
 2. Quan sát checkbox On sale và Not on sale.",,"2. On sale hiển thị unchecked; Not on sale hiển thị checked — đúng giá trị đã lưu, không phải mặc định (cả 2 checked).",
-EFNSO_TC09,Happy,Filter options,Uncheck On sale → ẩn khỏi storefront,,"Cả 2 option đang checked, đã publish filter tree","1. Uncheck On sale.
+9,Happy,Filter options,Uncheck On sale → ẩn khỏi storefront,,"Cả 2 option đang checked, đã publish filter tree","1. Uncheck On sale.
 2. Save Changes.
-3. Truy cập storefront, kiểm tra filter Special Offers.",,"3. On sale không hiển thị trên storefront; Preview chỉ còn Not on sale.",
-EFNSO_TC10,Happy,Filter options,Uncheck Not on sale → ẩn khỏi storefront,,"Cả 2 option đang checked, đã publish filter tree","1. Uncheck Not on sale.
+3. Truy cập storefront, kiểm tra filter Special Offers.",,3. On sale không hiển thị trên storefront; Preview chỉ còn Not on sale.,
+10,Happy,Filter options,Uncheck Not on sale → ẩn khỏi storefront,,"Cả 2 option đang checked, đã publish filter tree","1. Uncheck Not on sale.
 2. Save Changes.
-3. Truy cập storefront, kiểm tra filter Special Offers.",,"3. Not on sale không hiển thị trên storefront; Preview chỉ còn On sale.",
-EFNSO_TC11,Happy,Filter options,Re-check option đã uncheck → hiển thị lại đúng vị trí,,"1 option đang unchecked, đã publish filter tree","1. Check lại option vừa uncheck.
+3. Truy cập storefront, kiểm tra filter Special Offers.",,3. Not on sale không hiển thị trên storefront; Preview chỉ còn On sale.,
+11,Happy,Filter options,Re-check option đã uncheck → hiển thị lại đúng vị trí,,"1 option đang unchecked, đã publish filter tree","1. Check lại option vừa uncheck.
 2. Save Changes.
 3. Kiểm tra storefront.",,3. Option hiển thị lại trên storefront filter đúng vị trí theo Sort Order.,
-EFNSO_TC12,Happy,Filter options,Edit label On sale → custom label trên storefront,,Filter node Special Offers đang mở,"1. Sửa label ""On sale"" thành ""Sale Items"".
+12,Happy,Filter options,Edit label On sale → custom label trên storefront,,Filter node Special Offers đang mở,"1. Sửa label ""On sale"" thành ""Sale Items"".
 2. Save Changes.
 3. Kiểm tra storefront.","On sale → ""Sale Items""","3. Storefront hiển thị ""Sale Items"" thay cho ""On sale"".",
-EFNSO_TC13,Happy,Filter options,Edit label Not on sale → custom label trên storefront,,Filter node Special Offers đang mở,"1. Sửa label ""Not on sale"" thành ""Full Price"".
+13,Happy,Filter options,Edit label Not on sale → custom label trên storefront,,Filter node Special Offers đang mở,"1. Sửa label ""Not on sale"" thành ""Full Price"".
 2. Save Changes.
 3. Kiểm tra storefront.","Not on sale → ""Full Price""","3. Storefront hiển thị ""Full Price"" thay cho ""Not on sale"".",
-EFNSO_TC14,Negative,Filter options,Không cho lưu khi label rỗng,,Đang ở MH Edit,"1. Xoá trắng label của option On sale.
-2. Click Save Changes.",Label On sale = rỗng,"2. Không cho save; hiển thị lỗi required tại field label.",
-EFNSO_TC15,Happy,Filter options,Custom label không ảnh hưởng logic filter,Label ≠ giá trị BC,"Label ""On sale"" đã đổi thành ""Sale Items""; đã publish filter tree","1. Truy cập storefront.
+14,Negative,Filter options,Không cho lưu khi label rỗng,,Đang ở MH Edit,"1. Xoá trắng label của option On sale.
+2. Click Save Changes.",Label On sale = rỗng,2. Không cho save; hiển thị lỗi required tại field label.,
+15,Happy,Filter options,Custom label không ảnh hưởng logic filter,Label ≠ giá trị BC,"Label ""On sale"" đã đổi thành ""Sale Items""; đã publish filter tree","1. Truy cập storefront.
 2. Chọn filter ""Sale Items"".
 3. Kiểm tra kết quả.",,"3. Product có Sale Price ≠ 0 trong BC vẫn được lọc đúng dù label đổi thành ""Sale Items"".",<cần confirm>: case gốc (Add flow #15) đang NG — cùng root cause bug lọc storefront
-EFNSO_TC16,Happy,Option select type,Giá trị đã lưu load đúng,,Node Special Offers đã lưu Option select type = Multiple,"1. Mở màn Edit.
+16,Happy,Option select type,Giá trị đã lưu load đúng,,Node Special Offers đã lưu Option select type = Multiple,"1. Mở màn Edit.
 2. Quan sát Option select type.",,"2. Hiển thị đúng ""Multiple"" (giá trị đã lưu), không phải mặc định ""Single"".",
-EFNSO_TC17,Happy,Option select type,Switch Single sang Multiple + verify storefront,,Node đang là Single,"1. Chọn Multiple.
+17,Happy,Option select type,Switch Single sang Multiple + verify storefront,,Node đang là Single,"1. Chọn Multiple.
 2. Save Changes.
 3. Truy cập storefront, thử chọn đồng thời cả On sale và Not on sale.",,3. Storefront cho phép chọn cả 2 option cùng lúc.,
-EFNSO_TC18,Happy,Option select type,Switch Multiple sang Single + verify storefront,,Node đang là Multiple,"1. Chọn Single.
+18,Happy,Option select type,Switch Multiple sang Single + verify storefront,,Node đang là Multiple,"1. Chọn Single.
 2. Save Changes.
 3. Truy cập storefront, chọn On sale rồi chọn Not on sale.",,3. Storefront chỉ cho phép chọn 1 option tại 1 thời điểm; chọn option mới tự bỏ option cũ.,
-EFNSO_TC19,Happy,Display Style,Giá trị đã lưu load đúng,,Node Special Offers đã lưu Display Style = Grid,"1. Mở màn Edit.
+19,Happy,Display Style,Giá trị đã lưu load đúng,,Node Special Offers đã lưu Display Style = Grid,"1. Mở màn Edit.
 2. Quan sát Display Style.",,"2. Hiển thị đúng ""Grid"" (giá trị đã lưu), không phải mặc định ""List"".",
-EFNSO_TC20,Other,Display Style,Dropdown chỉ có đúng 2 option,,Filter node Special Offers đang mở,1. Mở dropdown Display Style.,,"1. `<cần confirm>` — theo sheet Add chỉ nên có 2 option: List, Grid (không Toggle); cần xác nhận với BA vì không có ảnh Figma riêng đối chiếu, và Featured Products (giao diện được xác nhận tương tự) lại có Toggle.",<cần confirm>: xem spec mục 0, 5 — xung đột giữa sheet Add (không Toggle) và xác nhận chung giống Featured Products (có Toggle)
-EFNSO_TC21,Happy,Display Style,Chuyển sang List,,Display Style đang khác List,"1. Chọn List.
+20,Other,Display Style,Dropdown chỉ có đúng 2 option,,Filter node Special Offers đang mở,1. Mở dropdown Display Style.,,"1. `<cần confirm>` — theo sheet Add chỉ nên có 2 option: List, Grid (không Toggle); cần xác nhận với BA vì không có ảnh Figma riêng đối chiếu, và Featured Products (giao diện được xác nhận tương tự) lại có Toggle.","<cần confirm>: xem spec mục 0, 5 — xung đột giữa sheet Add (không Toggle) và xác nhận chung giống Featured Products (có Toggle)"
+21,Happy,Display Style,Chuyển sang List,,Display Style đang khác List,"1. Chọn List.
 2. Save Changes.
 3. Quan sát Preview.",,3. Preview hiển thị options dạng list checkbox đúng design.,
-EFNSO_TC22,Happy,Display Style,Chuyển sang Grid,,Display Style đang khác Grid,"1. Chọn Grid.
+22,Happy,Display Style,Chuyển sang Grid,,Display Style đang khác Grid,"1. Chọn Grid.
 2. Save Changes.
 3. Quan sát Preview.",,3. Preview hiển thị options dạng grid đúng design.,
-EFNSO_TC23,Happy,Sort Order,Thứ tự đã lưu load đúng,,Node đã lưu Sort Order = Not on sale → On sale,"1. Mở màn Edit.
+23,Happy,Sort Order,Thứ tự đã lưu load đúng,,Node đã lưu Sort Order = Not on sale → On sale,"1. Mở màn Edit.
 2. Quan sát danh sách Sort Order.",,"2. Hiển thị đúng thứ tự đã lưu: Not on sale → On sale (không phải mặc định On sale → Not on sale), mỗi item có icon drag-and-drop.",
-EFNSO_TC24,Happy,Sort Order,Kéo thả đổi thứ tự → Preview cập nhật ngay,,Sort Order đang là On sale → Not on sale,"1. Kéo thả Not on sale lên vị trí đầu tiên.
+24,Happy,Sort Order,Kéo thả đổi thứ tự → Preview cập nhật ngay,,Sort Order đang là On sale → Not on sale,"1. Kéo thả Not on sale lên vị trí đầu tiên.
 2. Quan sát Preview.",,2. Preview hiển thị thứ tự mới: Not on sale → On sale.,
-EFNSO_TC25,Happy,Sort Order,Save thứ tự mới → storefront đúng + persist sau reload,,Đã drag-and-drop đổi thứ tự,"1. Click Save Changes.
+25,Happy,Sort Order,Save thứ tự mới → storefront đúng + persist sau reload,,Đã drag-and-drop đổi thứ tự,"1. Click Save Changes.
 2. Truy cập storefront, kiểm tra thứ tự filter options.
 3. Reload trang Edit, kiểm tra Sort Order.",,"2. Storefront hiển thị options theo đúng thứ tự đã kéo thả.
 3. Thứ tự vẫn giữ nguyên sau reload, không reset về mặc định.",
-EFNSO_TC26,Happy,Hide on customer group,Load đúng selection đã lưu khi mở lại Edit,,Node đã lưu Hide on customer group cho 1 nhóm khách hàng cụ thể,"1. Mở màn Edit.
+26,Happy,Hide on customer group,Load đúng selection đã lưu khi mở lại Edit,,Node đã lưu Hide on customer group cho 1 nhóm khách hàng cụ thể,"1. Mở màn Edit.
 2. Quan sát field Hide on customer group.",,"2. Hiển thị đúng số lượng/tên customer group đã chọn từ trước, không bị reset về rỗng.",
-EFNSO_TC27,Happy,Hide on customer group,Click [Edit] mở popup,,Filter node Special Offers đang mở,1. Click button [Edit] tại Hide on customer group.,,1. Popup [Select customer group] hiển thị.,
-EFNSO_TC28,Happy,Hide on customer group,Search khớp 1 phần,,Popup đang mở,"1. Nhập 1 phần tên customer group.
+27,Happy,Hide on customer group,Click [Edit] mở popup,,Filter node Special Offers đang mở,1. Click button [Edit] tại Hide on customer group.,,1. Popup [Select customer group] hiển thị.,
+28,Happy,Hide on customer group,Search khớp 1 phần,,Popup đang mở,"1. Nhập 1 phần tên customer group.
 2. Kiểm tra kết quả.",,2. Hiển thị đúng dữ liệu khớp 1 phần.,
-EFNSO_TC29,Negative,Hide on customer group,Chọn 1 group → ẩn đúng filter (Storefront),,"Popup đang mở, có customer group hợp lệ","1. Click chọn customer group A.
+29,Negative,Hide on customer group,Chọn 1 group → ẩn đúng filter (Storefront),,"Popup đang mở, có customer group hợp lệ","1. Click chọn customer group A.
 2. Save Changes.
 3. Đăng nhập storefront bằng account thuộc group A.
 4. Kiểm tra filter Special Offers.",,"2. Số lượng selected cập nhật đúng ngoài MH.
 4. Filter Special Offers ẩn với customer group A.",<cần confirm>: case gốc (Add flow #22) đang NG — storefront vẫn hiển thị filter dù account thuộc group bị hide
-EFNSO_TC30,Negative,Hide on customer group - Popup [Select customer group],BC xoá customer group → số lượng không update,,Customer group đang có trong danh sách và đang được chọn,"1. Xoá customer group trên BC.
+30,Negative,Hide on customer group - Popup [Select customer group],BC xoá customer group → số lượng không update,,Customer group đang có trong danh sách và đang được chọn,"1. Xoá customer group trên BC.
 2. Mở lại popup [Select customer group].
 3. Quan sát số lượng ""selected"" ngoài MH Edit.",,"2. Customer group vừa xoá không còn hiển thị trong danh sách.
 3. Số lượng ""X selected"" cập nhật giảm đúng tương ứng.",<cần confirm>: case gốc (Add flow #23) đang NG — không update số lượng customer group khi xoá group ở BC
-EFNSO_TC31,Happy,Appearance - Display tooltips,Trạng thái + nội dung đã lưu load đúng,,Node đã lưu Display tooltip = ON kèm nội dung tuỳ chỉnh,"1. Mở màn Edit.
+31,Happy,Appearance - Display tooltips,Trạng thái + nội dung đã lưu load đúng,,Node đã lưu Display tooltip = ON kèm nội dung tuỳ chỉnh,"1. Mở màn Edit.
 2. Quan sát toggle và tooltip content.",,2. Toggle hiển thị đúng ON; nội dung hiển thị đúng giá trị đã lưu.,
-EFNSO_TC32,Happy,Appearance - Display tooltips,Bật ON → hiển thị tooltip,,Toggle đang OFF,"1. Bật toggle ON.
+32,Happy,Appearance - Display tooltips,Bật ON → hiển thị tooltip,,Toggle đang OFF,"1. Bật toggle ON.
 2. Quan sát Preview.",,2. Tooltip hiển thị đúng trên filter.,
-EFNSO_TC33,Happy,Appearance - Display tooltips,Tắt OFF → ẩn tooltip,,Toggle đang ON,"1. Tắt toggle OFF.
+33,Happy,Appearance - Display tooltips,Tắt OFF → ẩn tooltip,,Toggle đang ON,"1. Tắt toggle OFF.
 2. Quan sát Preview.",,2. Tooltip ẩn.,
-EFNSO_TC34,Negative,Appearance - Display tooltips,Bật ON khi tooltip content rỗng,,Tooltip content rỗng,1. Bật toggle ON.,Tooltip content = rỗng,"1. Không cho phép bật; hiển thị error message ""Tooltip content is required"".",
-EFNSO_TC35,Happy,Appearance - Tooltip content,Default content + sửa custom content,,Filter node Special Offers,"1. Kiểm tra tooltip content mặc định.
+34,Negative,Appearance - Display tooltips,Bật ON khi tooltip content rỗng,,Tooltip content rỗng,1. Bật toggle ON.,Tooltip content = rỗng,"1. Không cho phép bật; hiển thị error message ""Tooltip content is required"".",
+35,Happy,Appearance - Tooltip content,Default content + sửa custom content,,Filter node Special Offers,"1. Kiểm tra tooltip content mặc định.
 2. Sửa nội dung tooltip.
 3. Save Changes.
 4. Kiểm tra storefront.",,"1. `<cần confirm>` — tooltip mặc định phải là ""Special Offers filter helps customers find items..."" theo design, nhưng case gốc ghi nhận actual đang hiển thị sai (placeholder generic ""Unique filters to help you find the perfect product.'').
 4. Nội dung tuỳ chỉnh hiển thị đúng trên storefront.",<cần confirm>: case gốc (Add flow #26) đang NG — default content không khớp design
-EFNSO_TC36,Other,Appearance - Show all irrelevant values,Đối chiếu field có tồn tại trên màn Edit hay không,,Đang ở MH Edit,"1. Kiểm tra toàn bộ khối Appearance Settings.
-2. Tìm toggle [Show all irrelevant values].",,"2. `<cần confirm>` — sheet Add có case #27 test toggle này, nhưng Featured Products (giao diện xác nhận tương tự) không có field này trên ảnh UI thật; cần xác nhận field có tồn tại trên màn Edit filter node - Special Offers hay không.",<cần confirm>: xem spec mục 8, 12 câu hỏi #2
-EFNSO_TC37,Happy,Appearance - Collapse/Expand,"Giá trị Desktop/Mobile đã lưu load đúng, độc lập",,"Node đã lưu Desktop = Collapse, Mobile = Expand","1. Mở màn Edit.
+36,Other,Appearance - Show all irrelevant values,Đối chiếu field có tồn tại trên màn Edit hay không,,Đang ở MH Edit,"1. Kiểm tra toàn bộ khối Appearance Settings.
+2. Tìm toggle [Show all irrelevant values].",,"2. `<cần confirm>` — sheet Add có case #27 test toggle này, nhưng Featured Products (giao diện xác nhận tương tự) không có field này trên ảnh UI thật; cần xác nhận field có tồn tại trên màn Edit filter node - Special Offers hay không.","<cần confirm>: xem spec mục 8, 12 câu hỏi #2"
+37,Happy,Appearance - Collapse/Expand,"Giá trị Desktop/Mobile đã lưu load đúng, độc lập",,"Node đã lưu Desktop = Collapse, Mobile = Expand","1. Mở màn Edit.
 2. Quan sát Collapse/Expand ở Preview Desktop và Mobile.",,2. Desktop hiển thị đúng Collapse; Mobile hiển thị đúng Expand.,
-EFNSO_TC38,Happy,Appearance - Collapse/Expand,Desktop Expand / Mobile Collapse - độc lập,Desktop Expand + Mobile Collapse,Đang ở MH Edit,"1. Set Desktop = Expand, Mobile = Collapse.
+38,Happy,Appearance - Collapse/Expand,Desktop Expand / Mobile Collapse - độc lập,Desktop Expand + Mobile Collapse,Đang ở MH Edit,"1. Set Desktop = Expand, Mobile = Collapse.
 2. Save Changes.
 3. Kiểm tra Preview cả 2.",,"3. Desktop: filter mở sẵn.
 3. Mobile: filter thu gọn.
 3. Không ảnh hưởng lẫn nhau.",
-EFNSO_TC39,Happy,Appearance - Collapse/Expand,Desktop Collapse / Mobile Expand - độc lập,Desktop Collapse + Mobile Expand,Đang ở MH Edit,"1. Set Desktop = Collapse, Mobile = Expand.
+39,Happy,Appearance - Collapse/Expand,Desktop Collapse / Mobile Expand - độc lập,Desktop Collapse + Mobile Expand,Đang ở MH Edit,"1. Set Desktop = Collapse, Mobile = Expand.
 2. Save Changes.
 3. Kiểm tra Preview cả 2.",,"3. Desktop: filter thu gọn.
 3. Mobile: filter mở sẵn.",
-EFNSO_TC40,Happy,Appearance - Toggle [Display all values in uppercase],ON → uppercase,,Có filter options,"1. Bật toggle ON.
+40,Happy,Appearance - Toggle [Display all values in uppercase],ON → uppercase,,Có filter options,"1. Bật toggle ON.
 2. Quan sát Preview.",,2. On sale và Not on sale hiển thị chữ in hoa.,
-EFNSO_TC41,Happy,Appearance - Toggle [Display all values in uppercase],OFF → hiển thị bình thường,,Có filter options,"1. Tắt toggle OFF.
+41,Happy,Appearance - Toggle [Display all values in uppercase],OFF → hiển thị bình thường,,Có filter options,"1. Tắt toggle OFF.
 2. Quan sát Preview.",,2. Options hiển thị đúng format ban đầu.,
-EFNSO_TC42,Happy,Appearance - Show search box,Giá trị Desktop/Mobile đã lưu load đúng,,"Node đã lưu Show search box on desktop = ON, on mobile = OFF","1. Mở màn Edit.
+42,Happy,Appearance - Show search box,Giá trị Desktop/Mobile đã lưu load đúng,,"Node đã lưu Show search box on desktop = ON, on mobile = OFF","1. Mở màn Edit.
 2. Quan sát 2 toggle Show search box.",,2. Desktop hiển thị đúng ON; Mobile hiển thị đúng OFF.,
-EFNSO_TC43,Happy,Appearance - Show search box,Desktop ON/OFF hiển thị đúng,,Đang ở Desktop preview,"1. Bật search box Desktop ON, quan sát Preview.
+43,Happy,Appearance - Show search box,Desktop ON/OFF hiển thị đúng,,Đang ở Desktop preview,"1. Bật search box Desktop ON, quan sát Preview.
 2. Tắt search box Desktop OFF, quan sát Preview.",,"1. Search box hiển thị.
 2. Search box ẩn.",
-EFNSO_TC44,Happy,Appearance - Show search box,Mobile ON/OFF hiển thị đúng,,Đang ở Mobile preview,"1. Bật search box Mobile ON, quan sát Preview.
+44,Happy,Appearance - Show search box,Mobile ON/OFF hiển thị đúng,,Đang ở Mobile preview,"1. Bật search box Mobile ON, quan sát Preview.
 2. Tắt search box Mobile OFF, quan sát Preview.",,"1. Search box hiển thị.
 2. Search box ẩn.",
-EFNSO_TC45,Happy,Button [Save Changes],Disable khi chưa có thay đổi,,"Vừa mở màn Edit, chưa chỉnh gì",1. Quan sát trạng thái nút Save Changes.,,1. Nút Save Changes ở trạng thái disable.,
-EFNSO_TC46,Happy,Button [Save Changes],Enable khi sửa 1 field bất kỳ,,Đang ở màn Edit,"1. Sửa 1 field bất kỳ.
+45,Happy,Button [Save Changes],Disable khi chưa có thay đổi,,"Vừa mở màn Edit, chưa chỉnh gì",1. Quan sát trạng thái nút Save Changes.,,1. Nút Save Changes ở trạng thái disable.,
+46,Happy,Button [Save Changes],Enable khi sửa 1 field bất kỳ,,Đang ở màn Edit,"1. Sửa 1 field bất kỳ.
 2. Quan sát nút Save Changes.",,2. Nút Save Changes chuyển sang enable.,
-EFNSO_TC47,Happy,Button [Save Changes],Double-click không tạo lưu trùng,,"Có thay đổi hợp lệ, Save Changes đang enable",1. Double-click liên tiếp nút Save Changes.,,1. Chỉ 1 request lưu được gửi; không tạo cấu hình trùng lặp.,
-EFNSO_TC48,Negative,Button [Save Changes],Chặn save khi có field invalid,,Title đang bị xoá trắng,1. Click Save Changes.,Title = rỗng,1. Không cho save; hiển thị lỗi đúng tại field invalid.,
-EFNSO_TC49,Happy,Điều hướng khi có unsaved changes,Popup cảnh báo + Discard/Cancel,,"Đang sửa dở dữ liệu ở node Special Offers, chưa Save","1. Click [Back] hoặc chọn chuyển sang node khác.
+47,Happy,Button [Save Changes],Double-click không tạo lưu trùng,,"Có thay đổi hợp lệ, Save Changes đang enable",1. Double-click liên tiếp nút Save Changes.,,1. Chỉ 1 request lưu được gửi; không tạo cấu hình trùng lặp.,
+48,Negative,Button [Save Changes],Chặn save khi có field invalid,,Title đang bị xoá trắng,1. Click Save Changes.,Title = rỗng,1. Không cho save; hiển thị lỗi đúng tại field invalid.,
+49,Happy,Điều hướng khi có unsaved changes,Popup cảnh báo + Discard/Cancel,,"Đang sửa dở dữ liệu ở node Special Offers, chưa Save","1. Click [Back] hoặc chọn chuyển sang node khác.
 2. Ở popup cảnh báo, click [Discard].
 3. Lặp lại bước 1, lần này click [Cancel]/[Stay].",,"1. Hiển thị popup cảnh báo unsaved changes.
 2. Bỏ thay đổi chưa lưu và điều hướng tiếp theo yêu cầu ban đầu.
 3. Đóng popup, ở lại màn Edit filter node - Special Offers với dữ liệu đang sửa dở còn nguyên.",
-EFNSO_TC50,Happy,Button [Save to template],Lưu cấu hình hiện tại thành template,,Cấu hình node Special Offers hợp lệ,1. Click button [Save to template].,,1. Lưu thành công; template mới xuất hiện ở tab [My Templates].,
-EFNSO_TC51,Happy,Filter [Special Offers] - Storefront,Product count hiển thị đúng cạnh mỗi option,,"Đã sync data từ BC; đã Save cấu hình Edit; đã publish filter tree","1. Truy cập storefront.
+50,Happy,Button [Save to template],Lưu cấu hình hiện tại thành template,,Cấu hình node Special Offers hợp lệ,1. Click button [Save to template].,,1. Lưu thành công; template mới xuất hiện ở tab [My Templates].,
+51,Happy,Filter [Special Offers] - Storefront,Product count hiển thị đúng cạnh mỗi option,,Đã sync data từ BC; đã Save cấu hình Edit; đã publish filter tree,"1. Truy cập storefront.
 2. Kiểm tra filter Special Offers.",,"2. Count hiển thị đúng cạnh từng option (VD On sale (3), Not on sale (10)).",<cần confirm>: case gốc (Add flow #31) đang NG
-EFNSO_TC52,Happy,Filter [Special Offers] - Storefront,Filter by On sale đúng logic,,Đã sync data từ BC; đã publish filter tree,"1. Chọn filter On sale.
+52,Happy,Filter [Special Offers] - Storefront,Filter by On sale đúng logic,,Đã sync data từ BC; đã publish filter tree,"1. Chọn filter On sale.
 2. Kiểm tra kết quả.",,2. Chỉ product có Sale Price ≠ 0 trong BC hiển thị.,<cần confirm>: case gốc (Add flow #32) đang NG — bug cốt lõi lọc storefront
-EFNSO_TC53,Happy,Filter [Special Offers] - Storefront,Filter by Not on sale đúng logic,,Đã sync data từ BC; đã publish filter tree,"1. Bỏ chọn filter trước.
+53,Happy,Filter [Special Offers] - Storefront,Filter by Not on sale đúng logic,,Đã sync data từ BC; đã publish filter tree,"1. Bỏ chọn filter trước.
 2. Chọn filter Not on sale.
 3. Kiểm tra kết quả.",,3. Chỉ product có Sale Price = 0 trong BC hiển thị.,<cần confirm>: case gốc (Add flow #32) đang NG — cùng root cause
-EFNSO_TC54,Happy,Filter [Special Offers] - Storefront,Hoạt động đúng trên cả SRP và Category Page,,Filter tree gắn vào cả SRP và Category Page; đã publish,"1. Thực hiện search bất kỳ, kiểm tra filter trên SRP.
+54,Happy,Filter [Special Offers] - Storefront,Hoạt động đúng trên cả SRP và Category Page,,Filter tree gắn vào cả SRP và Category Page; đã publish,"1. Thực hiện search bất kỳ, kiểm tra filter trên SRP.
 2. Truy cập Category Page, kiểm tra filter.",,"1. SRP: filter hiển thị đúng và lọc đúng.
 2. Category Page: filter hiển thị đúng và lọc đúng.",<cần confirm>: case gốc (Add flow #33) đang NG
-EFNSO_TC55,Happy,Filter [Special Offers] + Filter khác,Kết hợp Special Offers + Brand filter,AND logic,Filter tree có cả Special Offers và Brand; đã publish,"1. Chọn On sale.
+55,Happy,Filter [Special Offers] + Filter khác,Kết hợp Special Offers + Brand filter,AND logic,Filter tree có cả Special Offers và Brand; đã publish,"1. Chọn On sale.
 2. Thêm filter Brand = OFS.
 3. Kiểm tra kết quả.",,3. Chỉ product vừa có Sale Price ≠ 0 vừa có Brand = OFS hiển thị (AND logic).,<cần confirm>: case gốc (Add flow #34) đang NG
-EFNSO_TC56,Happy,Filter [Special Offers] - BC Source Logic,Sale Price = 0 → product tính vào Not on sale,,Product A: Sale Price = ₫0 (default); đã sync,"1. Kiểm tra count Not on sale trên storefront.
+56,Happy,Filter [Special Offers] - BC Source Logic,Sale Price = 0 → product tính vào Not on sale,,Product A: Sale Price = ₫0 (default); đã sync,"1. Kiểm tra count Not on sale trên storefront.
 2. Chọn filter Not on sale, kiểm tra.",,"1. Product A tính vào count Not on sale.
 2. Product A xuất hiện khi filter Not on sale.",<cần confirm>: case gốc (Add flow #35) đang NG
-EFNSO_TC57,Happy,Filter [Special Offers] - BC Source Logic,Sale Price ≠ 0 → product tính vào On sale,,Product A: Sale Price = ₫28 (khác 0); đã sync,"1. Kiểm tra count On sale trên storefront.
+57,Happy,Filter [Special Offers] - BC Source Logic,Sale Price ≠ 0 → product tính vào On sale,,Product A: Sale Price = ₫28 (khác 0); đã sync,"1. Kiểm tra count On sale trên storefront.
 2. Chọn filter On sale, kiểm tra.",,"1. Product A tính vào count On sale.
 2. Product A xuất hiện khi filter On sale.",<cần confirm>: case gốc (Add flow #36) đang NG
-EFNSO_TC58,Happy,Filter [Special Offers] - Merchandising,Product bị Hidden không tính vào count và filter result,,Product A: On sale (Sale Price = ₫28); Product A bị Hidden trong Merchandising campaign đang active,"1. Truy cập storefront trong context campaign.
+58,Happy,Filter [Special Offers] - Merchandising,Product bị Hidden không tính vào count và filter result,,Product A: On sale (Sale Price = ₫28); Product A bị Hidden trong Merchandising campaign đang active,"1. Truy cập storefront trong context campaign.
 2. Kiểm tra count On sale.
 3. Chọn filter On sale.",,"2. Count On sale giảm 1 (Product A bị ẩn).
 3. Product A không xuất hiện khi filter On sale.",<cần confirm>: case gốc (Add flow #43) đang NG
-EFNSO_TC59,Sync,Filter [Special Offers],Set Sale Price ≠ 0 trên BC → count On sale tăng sau sync,,TShirt_23: Sale Price = 0 (Not on sale); On sale count = N; Not on sale count = M,"1. Vào BC Admin → TShirt_23 → Pricing → Advanced Pricing.
+59,Sync,Filter [Special Offers],Set Sale Price ≠ 0 trên BC → count On sale tăng sau sync,,TShirt_23: Sale Price = 0 (Not on sale); On sale count = N; Not on sale count = M,"1. Vào BC Admin → TShirt_23 → Pricing → Advanced Pricing.
 2. Set Sale Price = ₫28.
 3. Chạy sync.
-4. Kiểm tra count trên storefront.",TShirt_23: Sale Price = ₫28,"4. Count On sale = N + 1; count Not on sale = M - 1; TShirt_23 chuyển từ Not on sale sang On sale.",<cần confirm>: case gốc (Add flow #37) đang NG
-EFNSO_TC60,Sync,Filter [Special Offers],Xoá Sale Price (set về 0) → chuyển sang Not on sale sau sync,,Product A: Sale Price = ₫28 (On sale); On sale count = N,"1. Vào BC Admin → Product A → Pricing → Advanced Pricing.
+4. Kiểm tra count trên storefront.",TShirt_23: Sale Price = ₫28,4. Count On sale = N + 1; count Not on sale = M - 1; TShirt_23 chuyển từ Not on sale sang On sale.,<cần confirm>: case gốc (Add flow #37) đang NG
+60,Sync,Filter [Special Offers],Xoá Sale Price (set về 0) → chuyển sang Not on sale sau sync,,Product A: Sale Price = ₫28 (On sale); On sale count = N,"1. Vào BC Admin → Product A → Pricing → Advanced Pricing.
 2. Set Sale Price = ₫0.
 3. Chạy sync.
-4. Kiểm tra count trên storefront.",Product A: Sale Price = 0,"4. Count On sale = N - 1; count Not on sale tăng 1; Product A chuyển từ On sale sang Not on sale.",<cần confirm>: case gốc (Add flow #38) đang NG
-EFNSO_TC61,Sync,Filter [Special Offers],Product mới không có Sale Price → tự Not on sale sau sync,,Chưa có Product B; Not on sale count = M,"1. Tạo Product B trong BC với Default Price = ₫50, Sale Price = 0.
+4. Kiểm tra count trên storefront.",Product A: Sale Price = 0,4. Count On sale = N - 1; count Not on sale tăng 1; Product A chuyển từ On sale sang Not on sale.,<cần confirm>: case gốc (Add flow #38) đang NG
+61,Sync,Filter [Special Offers],Product mới không có Sale Price → tự Not on sale sau sync,,Chưa có Product B; Not on sale count = M,"1. Tạo Product B trong BC với Default Price = ₫50, Sale Price = 0.
 2. Chạy sync.
-3. Kiểm tra count Not on sale.",Product B: Sale Price = 0,"3. Count Not on sale = M + 1; Product B xuất hiện khi filter Not on sale.",<cần confirm>: case gốc (Add flow #39) đang NG
-EFNSO_TC62,Sync,Filter [Special Offers],Product mới có Sale Price ≠ 0 → tự On sale sau sync,,Chưa có Product C; On sale count = N,"1. Tạo Product C trong BC với Default Price = ₫100, Sale Price = ₫70.
+3. Kiểm tra count Not on sale.",Product B: Sale Price = 0,3. Count Not on sale = M + 1; Product B xuất hiện khi filter Not on sale.,<cần confirm>: case gốc (Add flow #39) đang NG
+62,Sync,Filter [Special Offers],Product mới có Sale Price ≠ 0 → tự On sale sau sync,,Chưa có Product C; On sale count = N,"1. Tạo Product C trong BC với Default Price = ₫100, Sale Price = ₫70.
 2. Chạy sync.
-3. Kiểm tra count On sale.",Product C: Sale Price = ₫70,"3. Count On sale = N + 1; Product C xuất hiện khi filter On sale.",<cần confirm>: case gốc (Add flow #40) đang NG
-EFNSO_TC63,Sync,Filter [Special Offers],Product bị xoá → count giảm tương ứng sau sync,,Product A: On sale (Sale Price = ₫28); On sale count = N,"1. Xoá Product A trên BC.
+3. Kiểm tra count On sale.",Product C: Sale Price = ₫70,3. Count On sale = N + 1; Product C xuất hiện khi filter On sale.,<cần confirm>: case gốc (Add flow #40) đang NG
+63,Sync,Filter [Special Offers],Product bị xoá → count giảm tương ứng sau sync,,Product A: On sale (Sale Price = ₫28); On sale count = N,"1. Xoá Product A trên BC.
 2. Chạy sync.
-3. Kiểm tra count On sale.",,"3. Count On sale = N - 1; Product A không còn trong kết quả filter On sale.",<cần confirm>: case gốc (Add flow #41) đang NG
-EFNSO_TC64,Sync,Filter [Special Offers] - Price List,Product Not on sale + Price List override giá thấp hơn → status không đổi,PL không ảnh hưởng On sale,"Product A: Sale Price = 0 (Not on sale); Price List ""PL-VIP"": Product A = ₫30; PL-VIP assigned cho group ""Ha Nguyen""","1. Đăng nhập storefront với account thuộc group ""Ha Nguyen"".
+3. Kiểm tra count On sale.",,3. Count On sale = N - 1; Product A không còn trong kết quả filter On sale.,<cần confirm>: case gốc (Add flow #41) đang NG
+64,Sync,Filter [Special Offers] - Price List,Product Not on sale + Price List override giá thấp hơn → status không đổi,PL không ảnh hưởng On sale,"Product A: Sale Price = 0 (Not on sale); Price List ""PL-VIP"": Product A = ₫30; PL-VIP assigned cho group ""Ha Nguyen""","1. Đăng nhập storefront với account thuộc group ""Ha Nguyen"".
 2. Kiểm tra filter Special Offers.
 3. Chọn filter Not on sale, kiểm tra.",,"3. Product A vẫn tính vào Not on sale (vì Sale Price = 0, không phụ thuộc Price List); count On sale không tăng.",<cần confirm>: case gốc (Add flow #44) đang NG
-EFNSO_TC65,Sync,Filter [Special Offers] - Price List,Product On sale + Price List giá cao hơn Sale Price → status không đổi,PL không override Sale status,"Product B: Sale Price = ₫28 (On sale); Price List ""PL-VIP"": Product B = ₫35 (cao hơn Sale Price); PL-VIP assigned cho ""Ha Nguyen""","1. Đăng nhập account Ha Nguyen.
+65,Sync,Filter [Special Offers] - Price List,Product On sale + Price List giá cao hơn Sale Price → status không đổi,PL không override Sale status,"Product B: Sale Price = ₫28 (On sale); Price List ""PL-VIP"": Product B = ₫35 (cao hơn Sale Price); PL-VIP assigned cho ""Ha Nguyen""","1. Đăng nhập account Ha Nguyen.
 2. Kiểm tra filter Special Offers.
-3. Chọn filter On sale, kiểm tra.",,"3. Product B vẫn tính vào On sale (Sale Price ≠ 0) dù Price List (₫35) cao hơn Sale Price (₫28).",<cần confirm>: case gốc (Add flow #45) đang NG
-EFNSO_TC66,Sync,Filter [Special Offers] - Price List,Regular customer và PL customer thấy cùng 1 status On sale,,"Product A: Sale Price = ₫28 (On sale); Price List ""PL-VIP"": Product A = ₫20, assigned cho Ha Nguyen","1. Truy cập storefront không đăng nhập, kiểm tra count On sale.
+3. Chọn filter On sale, kiểm tra.",,3. Product B vẫn tính vào On sale (Sale Price ≠ 0) dù Price List (₫35) cao hơn Sale Price (₫28).,<cần confirm>: case gốc (Add flow #45) đang NG
+66,Sync,Filter [Special Offers] - Price List,Regular customer và PL customer thấy cùng 1 status On sale,,"Product A: Sale Price = ₫28 (On sale); Price List ""PL-VIP"": Product A = ₫20, assigned cho Ha Nguyen","1. Truy cập storefront không đăng nhập, kiểm tra count On sale.
 2. Đăng nhập Ha Nguyen, kiểm tra count On sale.",,"2. Cả 2 thấy cùng count On sale cho Product A; On sale status là global, không phân biệt theo customer group.",<cần confirm>: case gốc (Add flow #46) đang NG
-EFNSO_TC67,Sync,Filter [Special Offers] - Price List,Bỏ Price List assignment → On sale status không đổi,,Price List PL-VIP đang assigned cho group Ha Nguyen,"1. Remove assignment PL-VIP khỏi group Ha Nguyen trên BC.
+67,Sync,Filter [Special Offers] - Price List,Bỏ Price List assignment → On sale status không đổi,,Price List PL-VIP đang assigned cho group Ha Nguyen,"1. Remove assignment PL-VIP khỏi group Ha Nguyen trên BC.
 2. Chạy sync.
 3. Đăng nhập Ha Nguyen, kiểm tra filter Special Offers.",,3. On sale/Not on sale count không thay đổi — xác nhận Price List không liên quan đến On sale status.,<cần confirm>: case gốc (Add flow #47) đang NG
-EFNSO_TC68,Happy,Filter [Special Offers] - Edge case,Uncheck cả 2 option → chặn save,,Cả 2 option đang checked,"1. Uncheck cả On sale và Not on sale.
+68,Happy,Filter [Special Offers] - Edge case,Uncheck cả 2 option → chặn save,,Cả 2 option đang checked,"1. Uncheck cả On sale và Not on sale.
 2. Save Changes.",,"2. Không cho save; hiển thị error message ""Filter options is required"".",
-EFNSO_TC69,Edge,Filter [Special Offers] - Edge case,Sale Price = Default Price (bằng nhau) → On sale hay Not on sale,Boundary,Product A: Default Price = ₫40; Sale Price = ₫40 (bằng nhau); đã sync,1. Kiểm tra Product A xuất hiện ở option nào trong filter.,,"1. `<cần confirm>` — cần xác nhận với BA: Sale Price ≠ 0 → tính On sale dù bằng Default Price, hay phải Sale Price < Default Price mới tính là On sale?",<cần confirm>: xem spec mục 12 câu hỏi #3
-EFNSO_TC70,Edge,Filter [Special Offers] - Edge case,Không có product nào On sale → count = 0,On sale rỗng,0 product có Sale Price ≠ 0 trong BC; đã sync,1. Kiểm tra filter Special Offers trên storefront.,,"1. `<cần confirm>` — On sale hiển thị count = 0 nếu ""Show all irrelevant values"" = ON, ẩn nếu OFF; lưu ý field này đang cần xác nhận tồn tại (xem TC36).",<cần confirm>: phụ thuộc field Show all irrelevant values đang cần xác nhận
-EFNSO_TC71,Edge,Filter [Special Offers] - Edge case,Tất cả product đều On sale → Not on sale count = 0,Not on sale rỗng,Tất cả product có Sale Price ≠ 0; đã sync,1. Kiểm tra filter Special Offers trên storefront.,,"1. `<cần confirm>` — Not on sale hiển thị count = 0 nếu ""Show all irrelevant values"" = ON, ẩn nếu OFF; lưu ý field này đang cần xác nhận tồn tại (xem TC36).",<cần confirm>: phụ thuộc field Show all irrelevant values đang cần xác nhận
+69,Edge,Filter [Special Offers] - Edge case,Sale Price = Default Price (bằng nhau) → On sale hay Not on sale,Boundary,Product A: Default Price = ₫40; Sale Price = ₫40 (bằng nhau); đã sync,1. Kiểm tra Product A xuất hiện ở option nào trong filter.,,"1. `<cần confirm>` — cần xác nhận với BA: Sale Price ≠ 0 → tính On sale dù bằng Default Price, hay phải Sale Price < Default Price mới tính là On sale?",<cần confirm>: xem spec mục 12 câu hỏi #3
+70,Edge,Filter [Special Offers] - Edge case,Không có product nào On sale → count = 0,On sale rỗng,0 product có Sale Price ≠ 0 trong BC; đã sync,1. Kiểm tra filter Special Offers trên storefront.,,"1. `<cần confirm>` — On sale hiển thị count = 0 nếu ""Show all irrelevant values"" = ON, ẩn nếu OFF; lưu ý field này đang cần xác nhận tồn tại (xem TC36).",<cần confirm>: phụ thuộc field Show all irrelevant values đang cần xác nhận
+71,Edge,Filter [Special Offers] - Edge case,Tất cả product đều On sale → Not on sale count = 0,Not on sale rỗng,Tất cả product có Sale Price ≠ 0; đã sync,1. Kiểm tra filter Special Offers trên storefront.,,"1. `<cần confirm>` — Not on sale hiển thị count = 0 nếu ""Show all irrelevant values"" = ON, ẩn nếu OFF; lưu ý field này đang cần xác nhận tồn tại (xem TC36).",<cần confirm>: phụ thuộc field Show all irrelevant values đang cần xác nhận

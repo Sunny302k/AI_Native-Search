@@ -1,241 +1,242 @@
 ﻿ID,Test Type,Test Objective,,,Preconditions,Test Steps,Input DB/Setting,Expected Result,Note
+Purpose:,,"Lọc theo biến thể sản phẩm (Size, Color…) lấy từ Variant Options trên BigCommerce, để shopper chỉ thấy sản phẩm có đúng biến thể mình cần.",,,,,,,
 ,,=== ADD FILTER NODE - PRODUCT OPTIONS ===,,,,,,,
-FNPRODOPT_TC01,Happy,Button [Add Filter Node],Add Product options node,,"Filter tree = [chưa có node nào]
+1,Happy,Button [Add Filter Node],Add Product options node,,"Filter tree = [chưa có node nào]
 Role = [Merchant Admin]","1. Click button [Add Filter Node].
 2. Tại popup, click card [Product options] (nhóm Advanced filter).
 3. Click button [Add Filter Node] trong card.",,"3. Quay lại MH [Create new filter tree]; Filter Nodes panel có thêm mục [Product options]; Preview hiển thị khung filter rỗng, chưa có value nào được chọn.",
-FNPRODOPT_TC02,UI,Template card [Product options],Hiển thị đúng nhóm,,,"1. Kiểm tra card [Product options] hiển thị trong nhóm Advanced filter (cùng Custom fields, Tools).",,Card hiển thị đúng trong nhóm Advanced filter.,
-FNPRODOPT_TC03,UI,,Nội dung card,,,1. Kiểm tra nội dung card.,,"Card hiển thị đúng: thumbnail, title, mô tả ngắn, button [Add Filter Node].",
-FNPRODOPT_TC04,UI,,Search khớp keyword,,,"1. Nhập keyword ""Product"" vào ô search.
+2,UI,Template card [Product options],Hiển thị đúng nhóm,,,"1. Kiểm tra card [Product options] hiển thị trong nhóm Advanced filter (cùng Custom fields, Tools).",,Card hiển thị đúng trong nhóm Advanced filter.,
+3,UI,,Nội dung card,,,1. Kiểm tra nội dung card.,,"Card hiển thị đúng: thumbnail, title, mô tả ngắn, button [Add Filter Node].",
+4,UI,,Search khớp keyword,,,"1. Nhập keyword ""Product"" vào ô search.
 2. Kiểm tra kết quả.",,Card [Product options] vẫn hiển thị đúng trong kết quả.,
-FNPRODOPT_TC05,UI,,Search không khớp,,,"1. Nhập keyword không liên quan.
+5,UI,,Search không khớp,,,"1. Nhập keyword không liên quan.
 2. Kiểm tra kết quả.",,Card không hiển thị; popup hiển thị empty state / no result.,
-FNPRODOPT_TC06,UI,Title,Giá trị mặc định lúc tạo mới,,Đang ở MH Add (chưa có Title tuỳ chỉnh),1. Kiểm tra field Title.,,"Title hiển thị giá trị mặc định ""Product options"".","<cần confirm> — spec chưa có bằng chứng trực tiếp xác nhận default Title, suy theo pattern chung các filter node khác."
-FNPRODOPT_TC07,Happy,Filter options,Mở popup Select filter options lần đầu và chọn value,,Filter options = [0 selected],"1. Click vào Filter options (0 selected) để mở popup Select filter options.
+6,UI,Title,Giá trị mặc định lúc tạo mới,,Đang ở MH Add (chưa có Title tuỳ chỉnh),1. Kiểm tra field Title.,,"Title hiển thị giá trị mặc định ""Product options"".","<cần confirm> — spec chưa có bằng chứng trực tiếp xác nhận default Title, suy theo pattern chung các filter node khác."
+7,Happy,Filter options,Mở popup Select filter options lần đầu và chọn value,,Filter options = [0 selected],"1. Click vào Filter options (0 selected) để mở popup Select filter options.
 2. Chọn 1 Option, tick ≥1 value.
 3. Click Save trong popup.",,"3. Popup đóng; Filter options hiển thị đúng ""N selected""; Preview hiển thị đúng danh sách value vừa chọn.",
-FNPRODOPT_TC08,Negative,,Save Changes disable khi Filter options chưa chọn value nào,,"Vừa mở popup Add filter node
+8,Negative,,Save Changes disable khi Filter options chưa chọn value nào,,"Vừa mở popup Add filter node
 Filter options = [0 selected]","1. Không mở popup chọn Option/Value nào.
 2. Quan sát nút Save Changes.",,"2. Nút Save Changes ở trạng thái disable, không cho lưu khi Filter options chưa có value nào được chọn.",<cần confirm> — spec chưa xác nhận rõ Save Changes có bắt buộc ≥1 value hay cho phép lưu node ở trạng thái rỗng.
-FNPRODOPT_TC09,UI,,Trạng thái mặc định lúc tạo mới,,,1. Kiểm tra field Filter options ngay khi vừa Add node (trước khi mở popup).,,"Hiển thị ""0 selected""; Preview chưa hiển thị value nào cho tới khi cấu hình popup.",
-FNPRODOPT_TC10,UI,Option select type,Giá trị mặc định lúc tạo mới,,,1. Kiểm tra giá trị mặc định Option select type.,,<cần confirm> — chưa xác nhận default là Single hay Multiple; ảnh Figma khung sau khi Save đang hiển thị Single nhưng chưa chắc là default hay do đã chọn tay trong ảnh mẫu.,<cần confirm> — xem spec mục 4
-FNPRODOPT_TC11,UI,Display Style,Giá trị mặc định lúc tạo mới,,,1. Kiểm tra giá trị mặc định Display Style.,,"<cần confirm> — sticky note ghi ""default theo BC"" nhưng chưa rõ cơ chế map cụ thể theo Type của BC Option.",<cần confirm> — xem spec mục 5
-FNPRODOPT_TC12,UI,Setup dynamic option,Trạng thái mặc định lúc tạo mới,,Display Style khác Swatch,1. Kiểm tra toggle Setup dynamic option.,,Toggle ở trạng thái enable mặc định.,
-FNPRODOPT_TC13,UI,Sort order,Giá trị mặc định lúc tạo mới,,,1. Kiểm tra giá trị mặc định Sort order.,,Alphabetical - Ascending được chọn mặc định.,
-FNPRODOPT_TC14,UI,Add on customer group,Trạng thái mặc định lúc tạo mới,,,1. Kiểm tra field Add on customer group.,,"Hiển thị ""0 selected"".",
-FNPRODOPT_TC15,UI,Appearance settings,Trạng thái mặc định lúc tạo mới,,,1. Kiểm tra toàn bộ khối Appearance Settings ngay khi vừa Add node.,,"Display tooltip = ON (nội dung mẫu); Navigation type = Infinite scroll; Collapse/Expand Desktop và Mobile = Expand; Show all irrelevant values, Uppercase, Show search box Desktop/Mobile giữ giá trị mặc định.",<cần confirm> — chưa xác nhận default cụ thể của Show all irrelevant values/Uppercase/Search box qua ảnh tĩnh hiện có.
-FNPRODOPT_TC16,Happy,Button [Save Changes],Save thành công → quay lại Create new filter tree,,"Đã chọn ≥1 value ở Filter options, Title hợp lệ",1. Click Save Changes.,,1. Lưu thành công; quay lại MH [Create new filter tree]; Filter Nodes panel có node Product options.,
+9,UI,,Trạng thái mặc định lúc tạo mới,,,1. Kiểm tra field Filter options ngay khi vừa Add node (trước khi mở popup).,,"Hiển thị ""0 selected""; Preview chưa hiển thị value nào cho tới khi cấu hình popup.",
+10,UI,Option select type,Giá trị mặc định lúc tạo mới,,,1. Kiểm tra giá trị mặc định Option select type.,,<cần confirm> — chưa xác nhận default là Single hay Multiple; ảnh Figma khung sau khi Save đang hiển thị Single nhưng chưa chắc là default hay do đã chọn tay trong ảnh mẫu.,<cần confirm> — xem spec mục 4
+11,UI,Display Style,Giá trị mặc định lúc tạo mới,,,1. Kiểm tra giá trị mặc định Display Style.,,"<cần confirm> — sticky note ghi ""default theo BC"" nhưng chưa rõ cơ chế map cụ thể theo Type của BC Option.",<cần confirm> — xem spec mục 5
+12,UI,Setup dynamic option,Trạng thái mặc định lúc tạo mới,,Display Style khác Swatch,1. Kiểm tra toggle Setup dynamic option.,,Toggle ở trạng thái enable mặc định.,
+13,UI,Sort order,Giá trị mặc định lúc tạo mới,,,1. Kiểm tra giá trị mặc định Sort order.,,Alphabetical - Ascending được chọn mặc định.,
+14,UI,Add on customer group,Trạng thái mặc định lúc tạo mới,,,1. Kiểm tra field Add on customer group.,,"Hiển thị ""0 selected"".",
+15,UI,Appearance settings,Trạng thái mặc định lúc tạo mới,,,1. Kiểm tra toàn bộ khối Appearance Settings ngay khi vừa Add node.,,"Display tooltip = ON (nội dung mẫu); Navigation type = Infinite scroll; Collapse/Expand Desktop và Mobile = Expand; Show all irrelevant values, Uppercase, Show search box Desktop/Mobile giữ giá trị mặc định.",<cần confirm> — chưa xác nhận default cụ thể của Show all irrelevant values/Uppercase/Search box qua ảnh tĩnh hiện có.
+16,Happy,Button [Save Changes],Save thành công → quay lại Create new filter tree,,"Đã chọn ≥1 value ở Filter options, Title hợp lệ",1. Click Save Changes.,,1. Lưu thành công; quay lại MH [Create new filter tree]; Filter Nodes panel có node Product options.,
 ,,=== EDIT FILTER NODE - PRODUCT OPTIONS ===,,,,,,,
-FNPRODOPT_TC17,Happy,Mở màn Edit,Load đúng cấu hình đã lưu,,"Đã có filter node Product options trong Filter Nodes panel, đã cấu hình sẵn Title/Option select type/Display Style/Sort order/Add on customer group/giá trị đã chọn","1. Tại Filter Nodes panel chọn node Product options.
+17,Happy,Mở màn Edit,Load đúng cấu hình đã lưu,,"Đã có filter node Product options trong Filter Nodes panel, đã cấu hình sẵn Title/Option select type/Display Style/Sort order/Add on customer group/giá trị đã chọn","1. Tại Filter Nodes panel chọn node Product options.
 2. Click icon Edit.",,"2. Hiển thị MH [Edit filter node - Product options], load đúng toàn bộ cấu hình đã lưu trước đó.",
-FNPRODOPT_TC18,Happy,,Panel trái - chuyển node không lẫn dữ liệu,,"Filter tree có ≥2 node, trong đó có Product options","1. Đang edit 1 node khác.
+18,Happy,,Panel trái - chuyển node không lẫn dữ liệu,,"Filter tree có ≥2 node, trong đó có Product options","1. Đang edit 1 node khác.
 2. Click chọn node Product options ở panel trái.",,"2. Nội dung bên phải đổi đúng sang cấu hình node Product options, không lẫn dữ liệu node trước đó.",
-FNPRODOPT_TC19,Happy,Title,Giá trị đã lưu load đúng,,Node Product options đã lưu Title tuỳ chỉnh (khác mặc định),"1. Mở màn Edit.
+19,Happy,Title,Giá trị đã lưu load đúng,,Node Product options đã lưu Title tuỳ chỉnh (khác mặc định),"1. Mở màn Edit.
 2. Quan sát field Title.","Title đã lưu = ""Size Options""","2. Title hiển thị đúng ""Size Options"", không phải mặc định.",
-FNPRODOPT_TC20,Happy,,"Sửa Title, Preview cập nhật",,Đang ở MH Edit,"1. Sửa nội dung Title.
+20,Happy,,"Sửa Title, Preview cập nhật",,Đang ở MH Edit,"1. Sửa nội dung Title.
 2. Quan sát Preview.",,"2. Preview hiển thị Title mới ngay lập tức, chưa cần Save.",
-FNPRODOPT_TC21,Negative,,Không cho save khi rỗng,,Đang ở MH Edit,"1. Xoá trắng Title.
+21,Negative,,Không cho save khi rỗng,,Đang ở MH Edit,"1. Xoá trắng Title.
 2. Click Save Changes.",Title = rỗng,2. Không cho save; hiển thị lỗi required.,"<cần confirm> — spec chưa xác nhận rõ hành vi validate Title rỗng riêng cho Product options, suy theo pattern Brand/Category."
-FNPRODOPT_TC22,Edge,,"Title dài tràn dòng, kiểm tra alignment",Title alignment = Center,"Title = chuỗi dài tràn 2 dòng, Title alignment = Center","1. Nhập Title dài tràn 2 dòng.
+22,Edge,,"Title dài tràn dòng, kiểm tra alignment",Title alignment = Center,"Title = chuỗi dài tràn 2 dòng, Title alignment = Center","1. Nhập Title dài tràn 2 dòng.
 2. Chọn Title alignment = Center.
 3. Quan sát Preview.",,"3. Preview căn giữa đúng cả 2 dòng, không bị lệch về trái.","<cần confirm> — Category đang ghi nhận bug tương tự (title dài luôn căn trái dù chọn Center/Right), chưa xác nhận Product options có bug này không."
-FNPRODOPT_TC23,Happy,Title text color,"Màu đã lưu load đúng, đổi màu cập nhật Preview",,Node đã lưu 1 màu Title tuỳ chỉnh,"1. Mở màn Edit, quan sát màu hiện tại.
+23,Happy,Title text color,"Màu đã lưu load đúng, đổi màu cập nhật Preview",,Node đã lưu 1 màu Title tuỳ chỉnh,"1. Mở màn Edit, quan sát màu hiện tại.
 2. Chọn màu mới.
 3. Quan sát Preview.",,"1. Màu hiển thị đúng màu đã lưu.
 3. Title đổi màu đúng theo màu mới.",
-FNPRODOPT_TC24,Happy,Title alignment,"Chọn Left/Center/Right, Preview cập nhật",,Đang ở MH Edit,"1. Lần lượt chọn Left, Center, Right.
+24,Happy,Title alignment,"Chọn Left/Center/Right, Preview cập nhật",,Đang ở MH Edit,"1. Lần lượt chọn Left, Center, Right.
 2. Quan sát Preview sau mỗi lần chọn.",,2. Preview căn đúng theo từng lựa chọn.,
-FNPRODOPT_TC25,Happy,Popup [Select filter options],Mở popup - Option name pane hiển thị đúng list sync từ BC,,"Product trên BC có ≥1 Variant Option (VD Shoe Size, Color)","1. Click mở popup Select filter options.
+25,Happy,Popup [Select filter options],Mở popup - Option name pane hiển thị đúng list sync từ BC,,"Product trên BC có ≥1 Variant Option (VD Shoe Size, Color)","1. Click mở popup Select filter options.
 2. Quan sát cột Option name.",,"2. Cột Option name hiển thị đúng danh sách Option đã sync từ BC, mỗi dòng kèm product count.",
-FNPRODOPT_TC26,Happy,,"Click 1 Option name, cột Values load đúng",,Đang mở popup,"1. Click chọn Option ""Shoe Size"".
+26,Happy,,"Click 1 Option name, cột Values load đúng",,Đang mở popup,"1. Click chọn Option ""Shoe Size"".
 2. Quan sát cột Values.",,"2. Cột Values hiển thị đúng values thuộc Shoe Size (Small, Medium, Large, Too Large), kèm product count từng value.",
-FNPRODOPT_TC27,Happy,,Multi-select nhiều value,,Đang xem Values của 1 Option,"1. Tick chọn Small.
+27,Happy,,Multi-select nhiều value,,Đang xem Values của 1 Option,"1. Tick chọn Small.
 2. Tick chọn thêm Medium.
 3. Quan sát trạng thái 2 checkbox.",,"3. Cả 2 value đều ở trạng thái đã chọn (checked), không mất lựa chọn trước đó.",
-FNPRODOPT_TC28,Happy,,"Edit lại: mở popup, selection cũ hiển thị đúng",,Node đã lưu sẵn 1 số value được chọn,"1. Click Edit mở lại popup Select filter options.
+28,Happy,,"Edit lại: mở popup, selection cũ hiển thị đúng",,Node đã lưu sẵn 1 số value được chọn,"1. Click Edit mở lại popup Select filter options.
 2. Quan sát trạng thái checkbox.",,"2. Các value đã chọn trước đó hiển thị đúng trạng thái checked, value chưa chọn ở trạng thái unchecked.",
-FNPRODOPT_TC29,Happy,,Edit lại: thêm value mới vào selection hiện có,,Đã chọn sẵn value A,"1. Mở lại popup, tick thêm value B.
+29,Happy,,Edit lại: thêm value mới vào selection hiện có,,Đã chọn sẵn value A,"1. Mở lại popup, tick thêm value B.
 2. Click Save.",,"2. Selection sau Save = A, B (giữ nguyên A, thêm B).",
-FNPRODOPT_TC30,Happy,,Edit lại: bỏ chọn 1 value đã có,,"Đã chọn sẵn value A, B","1. Mở lại popup, untick B.
+30,Happy,,Edit lại: bỏ chọn 1 value đã có,,"Đã chọn sẵn value A, B","1. Mở lại popup, untick B.
 2. Click Save.",,2. Selection sau Save chỉ còn A.,
-FNPRODOPT_TC31,Happy,,Edit lại: đổi toàn bộ selection,,"Đã chọn sẵn value A, B","1. Mở lại popup, untick hết A, B.
+31,Happy,,Edit lại: đổi toàn bộ selection,,"Đã chọn sẵn value A, B","1. Mở lại popup, untick hết A, B.
 2. Tick chọn C, D.
 3. Click Save.",,"3. Selection sau Save = C, D; A, B không còn được chọn.",
-FNPRODOPT_TC32,Happy,,Save với ≥1 value đã chọn,,Đã chọn ≥1 value trong popup,"1. Click Save.
+32,Happy,,Save với ≥1 value đã chọn,,Đã chọn ≥1 value trong popup,"1. Click Save.
 2. Quan sát Filter Settings và Preview.",,"2. Popup đóng; Filter Settings hiển thị đúng ""N selected""; Preview hiển thị đúng danh sách value đã chọn.",
-FNPRODOPT_TC33,Negative,,Save khi chưa chọn value nào,,Chưa tick chọn value nào trong popup,"1. Không tick chọn gì.
+33,Negative,,Save khi chưa chọn value nào,,Chưa tick chọn value nào trong popup,"1. Không tick chọn gì.
 2. Quan sát nút Save.",,"2. Nút Save ở trạng thái disable, không cho submit khi chưa chọn value nào.","<cần confirm> — chưa quan sát được trạng thái disable qua ảnh tĩnh, suy theo pattern Brand."
-FNPRODOPT_TC34,Negative,,Cancel/X đóng popup không lưu gì,,"Đang mở popup, đã tick thử 1 số value","1. Tick chọn 1 số value.
+34,Negative,,Cancel/X đóng popup không lưu gì,,"Đang mở popup, đã tick thử 1 số value","1. Tick chọn 1 số value.
 2. Click Cancel (hoặc icon X).
 3. Quan sát Filter Settings.",,"3. Popup đóng, KHÔNG lưu selection vừa tick, KHÔNG tạo node nếu đang ở luồng Add lần đầu.","<cần confirm> — Brand đang ghi nhận bug NG ở hành vi tương tự (Cancel/X vẫn tạo node), chưa xác nhận Product options có bug này không."
-FNPRODOPT_TC35,Edge,,Value có product count = 0,,Có 1 value không còn product nào active (product count = 0),1. Mở popup,quan sát value đó trong cột Values.,,"1. <cần confirm> — chưa rõ value product count=0 có hiển thị (kèm count 0) hay bị ẩn hẳn khỏi popup ngay tại bước chọn (khác với rule ""Show all irrelevant values"" vốn áp dụng cho hiển thị ngoài storefront)."
-FNPRODOPT_TC36,Sync,,Mở popup khi batch sync đang In Progress,,Batch sync đang chạy (In Progress),1. Trong lúc sync đang chạy,mở popup Select filter options và quan sát Option name/Values.,Sync status = In Progress,"1. <cần confirm> — chưa rõ popup hiển thị dữ liệu theo lần sync thành công gần nhất (giữ nguyên, không đổi giữa chừng) hay có báo hiệu ""đang đồng bộ"" riêng."
-FNPRODOPT_TC37,Sync,,Mở popup khi batch sync gần nhất Failed,,Batch sync gần nhất = Failed,1. Mở popup Select filter options khi trạng thái sync gần nhất là Failed.,Batch sync gần nhất = Failed,"1. <cần confirm> — chưa rõ popup hiển thị dữ liệu theo lần sync thành công gần nhất trước đó, hay báo lỗi/rỗng do sync thất bại.",<cần confirm>
-FNPRODOPT_TC38,Sync,,Dữ liệu BC đã đổi nhưng sync chưa chạy lại (stale),,"Value mới vừa được thêm bên BC, sync CHƯA chạy lại","1. Thêm value mới bên BC.
+35,Edge,,Value có product count = 0,,Có 1 value không còn product nào active (product count = 0),1. Mở popup,quan sát value đó trong cột Values.,,"1. <cần confirm> — chưa rõ value product count=0 có hiển thị (kèm count 0) hay bị ẩn hẳn khỏi popup ngay tại bước chọn (khác với rule ""Show all irrelevant values"" vốn áp dụng cho hiển thị ngoài storefront)."
+36,Sync,,Mở popup khi batch sync đang In Progress,,Batch sync đang chạy (In Progress),1. Trong lúc sync đang chạy,mở popup Select filter options và quan sát Option name/Values.,Sync status = In Progress,"1. <cần confirm> — chưa rõ popup hiển thị dữ liệu theo lần sync thành công gần nhất (giữ nguyên, không đổi giữa chừng) hay có báo hiệu ""đang đồng bộ"" riêng."
+37,Sync,,Mở popup khi batch sync gần nhất Failed,,Batch sync gần nhất = Failed,1. Mở popup Select filter options khi trạng thái sync gần nhất là Failed.,Batch sync gần nhất = Failed,"1. <cần confirm> — chưa rõ popup hiển thị dữ liệu theo lần sync thành công gần nhất trước đó, hay báo lỗi/rỗng do sync thất bại.",<cần confirm>
+38,Sync,,Dữ liệu BC đã đổi nhưng sync chưa chạy lại (stale),,"Value mới vừa được thêm bên BC, sync CHƯA chạy lại","1. Thêm value mới bên BC.
 2. KHÔNG chạy sync.
 3. Mở popup Select filter options ngay.",Sync chưa chạy lại sau khi BC vừa đổi dữ liệu,"3. Popup vẫn hiển thị dữ liệu theo lần sync thành công gần nhất (chưa có value mới), không tự lấy dữ liệu real-time từ BC.",
-FNPRODOPT_TC39,Sync,,Product chưa từng có Variant Option nào trên BC,,Product/category context chưa có Variant Option nào từng được sync,1. Mở popup Select filter options cho product/category hoàn toàn chưa có Variant Option.,,"1. Cột Option name hiển thị đúng empty state, không lỗi/crash.",
-FNPRODOPT_TC40,Sync,,Product count đúng ngay sau chu kỳ sync đầu tiên,,"Product mới có Variant Option, chưa từng chạy sync trước đó","1. Chạy sync lần 1.
+39,Sync,,Product chưa từng có Variant Option nào trên BC,,Product/category context chưa có Variant Option nào từng được sync,1. Mở popup Select filter options cho product/category hoàn toàn chưa có Variant Option.,,"1. Cột Option name hiển thị đúng empty state, không lỗi/crash.",
+40,Sync,,Product count đúng ngay sau chu kỳ sync đầu tiên,,"Product mới có Variant Option, chưa từng chạy sync trước đó","1. Chạy sync lần 1.
 2. Mở popup, quan sát product count từng value.",Sync lần 1 vừa chạy xong,2. Product count khớp đúng số Variant đang Purchasable=Enabled tại thời điểm sync lần 1.,
-FNPRODOPT_TC41,Sync,,Product count cập nhật đúng sau chu kỳ sync thứ 2 (tích luỹ),,Đã có product count từ sync lần 1 (TC40),"1. Sau sync lần 1, thêm 1 Variant mới Purchasable=Enabled chứa value đang xét bên BC.
+41,Sync,,Product count cập nhật đúng sau chu kỳ sync thứ 2 (tích luỹ),,Đã có product count từ sync lần 1 (TC40),"1. Sau sync lần 1, thêm 1 Variant mới Purchasable=Enabled chứa value đang xét bên BC.
 2. Chạy sync lần 2.
 3. Mở lại popup, quan sát product count.",Sync lần 2 sau khi phát sinh thêm 1 Variant mới,"3. Product count tăng đúng thêm 1 so với kết quả sync lần 1, phản ánh đúng Variant mới vừa thêm, không phải giá trị tính lại từ đầu bị sai lệch.",
-FNPRODOPT_TC42,UI,,Search theo Option name,,Đang mở popup,"1. Nhập từ khoá trùng 1 phần tên Option (VD ""Colo"").
+42,UI,,Search theo Option name,,Đang mở popup,"1. Nhập từ khoá trùng 1 phần tên Option (VD ""Colo"").
 2. Quan sát cột Option name.",,"2. Cột Option name chỉ hiển thị đúng Option khớp từ khoá (VD Color, Color for Dress).",
-FNPRODOPT_TC43,UI,,Search theo Value,,Đang xem Values của 1 Option,"1. Nhập từ khoá trùng 1 phần tên value.
+43,UI,,Search theo Value,,Đang xem Values của 1 Option,"1. Nhập từ khoá trùng 1 phần tên value.
 2. Quan sát cột Values.",,2. Cột Values chỉ hiển thị đúng value khớp từ khoá.,
-FNPRODOPT_TC44,UI,,Search không khớp kết quả nào,,Đang mở popup,"1. Nhập từ khoá không tồn tại.
+44,UI,,Search không khớp kết quả nào,,Đang mở popup,"1. Nhập từ khoá không tồn tại.
 2. Quan sát kết quả.",,"2. Hiển thị đúng empty state, không lỗi/crash.",
-FNPRODOPT_TC45,Happy,Option select type,Single - chỉ cho chọn 1 value tại 1 thời điểm trên Preview,,"Option select type = Single, đã chọn value A","1. Tại Preview, click chọn value B (khác A).
+45,Happy,Option select type,Single - chỉ cho chọn 1 value tại 1 thời điểm trên Preview,,"Option select type = Single, đã chọn value A","1. Tại Preview, click chọn value B (khác A).
 2. Quan sát trạng thái A.",,2. <cần confirm> — chưa rõ A có tự động bị bỏ chọn khi B được chọn (giống radio button) hay hệ thống chặn không cho chọn B khi A đang chọn.,<cần confirm>
-FNPRODOPT_TC46,Happy,,Multiple - cho phép chọn nhiều value cùng lúc,,Option select type = Multiple,"1. Tại Preview, tick chọn value A.
+46,Happy,,Multiple - cho phép chọn nhiều value cùng lúc,,Option select type = Multiple,"1. Tại Preview, tick chọn value A.
 2. Tick chọn thêm value B.",,2. Cả A và B đều ở trạng thái đã chọn cùng lúc.,
-FNPRODOPT_TC47,Edge,,Đổi Multiple→Single khi đang có sẵn nhiều value multi-selected,,"Option select type = Multiple, đã chọn sẵn A và B","1. Đổi Option select type sang Single.
+47,Edge,,Đổi Multiple→Single khi đang có sẵn nhiều value multi-selected,,"Option select type = Multiple, đã chọn sẵn A và B","1. Đổi Option select type sang Single.
 2. Quan sát trạng thái A, B.",,2. <cần confirm> — chưa rõ hệ thống tự bỏ chọn 1 trong 2 value (giữ lại value nào) hay giữ nguyên cả 2 gây sai trạng thái Single. Brand đang ghi nhận bug NG ở rule tương tự.,<cần confirm>
-FNPRODOPT_TC48,Happy,Display Style,Chọn Dropdown - Preview hiển thị đúng dạng dropdown,,Đang ở MH Edit,"1. Chọn Display Style = Dropdown.
+48,Happy,Display Style,Chọn Dropdown - Preview hiển thị đúng dạng dropdown,,Đang ở MH Edit,"1. Chọn Display Style = Dropdown.
 2. Quan sát Preview.",,2. Preview hiển thị filter dạng dropdown chọn giá trị.,
-FNPRODOPT_TC49,Happy,,Chọn List + Radio buttons - Preview hiển thị đúng dạng list,,,"1. Chọn Display Style = List + Single select – Radio buttons.
+49,Happy,,Chọn List + Radio buttons - Preview hiển thị đúng dạng list,,,"1. Chọn Display Style = List + Single select – Radio buttons.
 2. Quan sát Preview.",,2. Preview hiển thị dạng danh sách radio button.,
-FNPRODOPT_TC50,Happy,,Chọn Grid + Rectangle list - Preview hiển thị đúng dạng grid,,,"1. Chọn Display Style = Grid – Rectangle list.
+50,Happy,,Chọn Grid + Rectangle list - Preview hiển thị đúng dạng grid,,,"1. Chọn Display Style = Grid – Rectangle list.
 2. Quan sát Preview.",,2. Preview hiển thị dạng lưới rectangle.,
-FNPRODOPT_TC51,Happy,,Chọn Swatch - mở thêm cấu hình Manage Swatch,,,"1. Chọn Display Style = Swatch.
+51,Happy,,Chọn Swatch - mở thêm cấu hình Manage Swatch,,,"1. Chọn Display Style = Swatch.
 2. Quan sát màn hình.",,2. <cần confirm> — chưa xác nhận được popup/cấu hình Manage Swatch có xuất hiện và có cấu trúc giống Brand (bảng Image/Swatch Name/Image Source/URL...) hay không.,<cần confirm>
-FNPRODOPT_TC52,Happy,,Chọn Swatch → Setup dynamic option tự động disable,,,"1. Chọn Display Style = Swatch.
+52,Happy,,Chọn Swatch → Setup dynamic option tự động disable,,,"1. Chọn Display Style = Swatch.
 2. Quan sát toggle Setup dynamic option.",,2. Toggle Setup dynamic option chuyển sang trạng thái disable.,
-FNPRODOPT_TC53,Happy,Setup dynamic option,Enable ở Display Style Dropdown/List/Grid,,Display Style = Dropdown (hoặc List/Grid),1. Quan sát toggle Setup dynamic option.,,1. Toggle ở trạng thái enable (bật/tắt được).,
-FNPRODOPT_TC54,Happy,Sort order,Default Alphabetical - Ascending,,"Node mới, chưa từng chỉnh Sort order","1. Mở màn Edit, quan sát Sort order.
+53,Happy,Setup dynamic option,Enable ở Display Style Dropdown/List/Grid,,Display Style = Dropdown (hoặc List/Grid),1. Quan sát toggle Setup dynamic option.,,1. Toggle ở trạng thái enable (bật/tắt được).,
+54,Happy,Sort order,Default Alphabetical - Ascending,,"Node mới, chưa từng chỉnh Sort order","1. Mở màn Edit, quan sát Sort order.
 2. Quan sát thứ tự value trên Preview.",,2. Value sắp theo A→Z.,
-FNPRODOPT_TC55,Happy,,Chọn Alphabetical - Descending,,,"1. Chọn Sort order = Alphabetical - Descending.
+55,Happy,,Chọn Alphabetical - Descending,,,"1. Chọn Sort order = Alphabetical - Descending.
 2. Quan sát Preview.",,2. Value sắp theo Z→A.,
-FNPRODOPT_TC56,Happy,,Chọn Product number - Ascending,,,"1. Chọn Sort order = Product number - Ascending.
+56,Happy,,Chọn Product number - Ascending,,,"1. Chọn Sort order = Product number - Ascending.
 2. Quan sát Preview.",,2. Value sắp theo product count tăng dần.,
-FNPRODOPT_TC57,Happy,,Chọn Product number - Descending,,,"1. Chọn Sort order = Product number - Descending.
+57,Happy,,Chọn Product number - Descending,,,"1. Chọn Sort order = Product number - Descending.
 2. Quan sát Preview.",,2. Value sắp theo product count giảm dần.,
-FNPRODOPT_TC58,Happy,,"Chọn Custom order, kéo thả tự do",,,"1. Chọn Sort order = Custom order.
+58,Happy,,"Chọn Custom order, kéo thả tự do",,,"1. Chọn Sort order = Custom order.
 2. Kéo thả đổi vị trí 1 value.
 3. Save, mở lại Edit.",,3. Thứ tự custom vừa kéo thả được lưu và load lại đúng.,
-FNPRODOPT_TC59,Sync,,Sort order Product number phản ánh đúng product count mới nhất sau sync,,"Sort order = Product number - Ascending, product count vừa đổi sau 1 chu kỳ sync mới","1. Sau khi product count đã cập nhật qua 1 chu kỳ sync mới, quan sát lại thứ tự value trên Preview.",,"1. Thứ tự value tự sắp xếp lại đúng theo product count mới nhất, không giữ thứ tự cũ từ trước khi count đổi.",
-FNPRODOPT_TC60,Happy,Add on customer group,Chọn 1 customer group,,,"1. Mở popup Add on customer group.
+59,Sync,,Sort order Product number phản ánh đúng product count mới nhất sau sync,,"Sort order = Product number - Ascending, product count vừa đổi sau 1 chu kỳ sync mới","1. Sau khi product count đã cập nhật qua 1 chu kỳ sync mới, quan sát lại thứ tự value trên Preview.",,"1. Thứ tự value tự sắp xếp lại đúng theo product count mới nhất, không giữ thứ tự cũ từ trước khi count đổi.",
+60,Happy,Add on customer group,Chọn 1 customer group,,,"1. Mở popup Add on customer group.
 2. Chọn 1 group, Save.",,"2. Field hiển thị đúng ""1 selected"".",
-FNPRODOPT_TC61,Happy,,Bỏ chọn hết,,Đã chọn sẵn 1 group,"1. Mở lại popup, untick hết.
+61,Happy,,Bỏ chọn hết,,Đã chọn sẵn 1 group,"1. Mở lại popup, untick hết.
 2. Save.",,"2. Field trở về ""0 selected"".",
-FNPRODOPT_TC62,Happy,,Hành vi ẩn/hiện filter theo group đã chọn,,Đã chọn 1 customer group ở Add on customer group,"1. Save Changes.
+62,Happy,,Hành vi ẩn/hiện filter theo group đã chọn,,Đã chọn 1 customer group ở Add on customer group,"1. Save Changes.
 2. Truy cập storefront bằng account thuộc group đã chọn.",,"2. <cần confirm> — chưa xác nhận field này nghĩa là ""ẩn filter với group được chọn"" (giống Hide on customer group ở Brand/Category) hay ngược lại ""chỉ hiện filter cho group được chọn"".",<cần confirm>
-FNPRODOPT_TC63,Sync,,Customer Group đã bị xoá bên BC trước khi mở popup lần đầu,,Customer Group đã bị xoá trên BC trước khi sync,1. Mở popup Add on customer group lần đầu.,Customer Group đã xoá trên BC trước lần sync gần nhất,1. Danh sách group hiển thị đúng theo dữ liệu đã sync (không còn group đã xoá) không lỗi/crash.,
-FNPRODOPT_TC64,Sync,,Mở popup Add on customer group khi batch sync đang In Progress,,Batch sync đang chạy (In Progress),1. Trong lúc sync đang chạy,mở popup Add on customer group.,Sync status = In Progress,"1. <cần confirm> — tương tự popup Select filter options, chưa rõ hành vi hiển thị khi sync đang chạy giữa chừng."
-FNPRODOPT_TC65,Happy,Display tooltip,"Enable + nhập content, Preview hiển thị đúng",,,"1. Bật Display tooltip.
+63,Sync,,Customer Group đã bị xoá bên BC trước khi mở popup lần đầu,,Customer Group đã bị xoá trên BC trước khi sync,1. Mở popup Add on customer group lần đầu.,Customer Group đã xoá trên BC trước lần sync gần nhất,1. Danh sách group hiển thị đúng theo dữ liệu đã sync (không còn group đã xoá) không lỗi/crash.,
+64,Sync,,Mở popup Add on customer group khi batch sync đang In Progress,,Batch sync đang chạy (In Progress),1. Trong lúc sync đang chạy,mở popup Add on customer group.,Sync status = In Progress,"1. <cần confirm> — tương tự popup Select filter options, chưa rõ hành vi hiển thị khi sync đang chạy giữa chừng."
+65,Happy,Display tooltip,"Enable + nhập content, Preview hiển thị đúng",,,"1. Bật Display tooltip.
 2. Nhập nội dung tooltip.
 3. Hover icon tooltip trên Preview.","Tooltip content = ""Filter by product options""",3. Tooltip hiển thị đúng nội dung vừa nhập.,
-FNPRODOPT_TC66,Happy,,"Tắt Display tooltip, Save Changes thành công",,,"1. Tắt Display tooltip (content không cần).
+66,Happy,,"Tắt Display tooltip, Save Changes thành công",,,"1. Tắt Display tooltip (content không cần).
 2. Click Save Changes.",,2. Lưu thành công; Preview không hiển thị tooltip.,
-FNPRODOPT_TC67,Negative,,Enable nhưng content rỗng,,Display tooltip = ON,"1. Bật Display tooltip.
+67,Negative,,Enable nhưng content rỗng,,Display tooltip = ON,"1. Bật Display tooltip.
 2. Xoá trắng nội dung.
 3. Click Save Changes.",Tooltip content = rỗng,3. Không cho save; hiển thị lỗi required.,"<cần confirm> — suy theo pattern Brand, chưa có bằng chứng riêng cho Product options."
-FNPRODOPT_TC68,Negative,,Nhập vượt giới hạn ký tự tối đa,,Display tooltip = ON,"1. Nhập nội dung vượt quá giới hạn ký tự tối đa.
+68,Negative,,Nhập vượt giới hạn ký tự tối đa,,Display tooltip = ON,"1. Nhập nội dung vượt quá giới hạn ký tự tối đa.
 2. Click Save Changes.",,2. <cần confirm> — chặn tại Save hay tự động cắt bớt nội dung khi vượt giới hạn.,"<cần confirm> — chưa xác nhận giới hạn ký tự cụ thể (Brand giới hạn 255 ký tự, chưa rõ Product options có giống không)."
-FNPRODOPT_TC69,Edge,,Nhập đúng giới hạn ký tự tối đa,,Display tooltip = ON,"1. Nhập nội dung đúng bằng giới hạn ký tự tối đa.
+69,Edge,,Nhập đúng giới hạn ký tự tối đa,,Display tooltip = ON,"1. Nhập nội dung đúng bằng giới hạn ký tự tối đa.
 2. Click Save Changes.",,2. Lưu thành công; nội dung hiển thị đủ trên Preview.,<cần confirm> — chưa xác nhận giới hạn ký tự cụ thể của Tooltip content.
-FNPRODOPT_TC70,Happy,Show all irrelevant values,Enable - value product count=0 vẫn hiển thị,,Có 1 value product count = 0,"1. Bật toggle.
+70,Happy,Show all irrelevant values,Enable - value product count=0 vẫn hiển thị,,Có 1 value product count = 0,"1. Bật toggle.
 2. Truy cập storefront, quan sát value đó.",,2. Value vẫn hiển thị (dạng disabled/count=0).,
-FNPRODOPT_TC71,Happy,,Disable - value product count=0 bị ẩn,,Có 1 value product count = 0,"1. Tắt toggle.
+71,Happy,,Disable - value product count=0 bị ẩn,,Có 1 value product count = 0,"1. Tắt toggle.
 2. Truy cập storefront, quan sát value đó.",,2. Value bị ẩn hẳn khỏi storefront.,
-FNPRODOPT_TC72,Happy,Navigation type,Chọn Infinite scroll,,,"1. Chọn Navigation type = Infinite scroll.
+72,Happy,Navigation type,Chọn Infinite scroll,,,"1. Chọn Navigation type = Infinite scroll.
 2. Trên storefront, cuộn tới cuối danh sách value.",,"2. Danh sách tự động load thêm value, không cần click.",
-FNPRODOPT_TC73,Edge,,Danh sách lựa chọn đầy đủ của dropdown,,,"1. Mở dropdown Navigation type, xem toàn bộ lựa chọn.",,"1. <cần confirm> — chưa xác nhận dropdown có đủ lựa chọn ""Show more"" button + field phụ ""Number of filter options per click"" giống Brand/Category, hay chỉ có Infinite scroll.",<cần confirm>
-FNPRODOPT_TC74,Happy,Collapse/Expand on Desktop,Default Expand,,Node mới,"1. Mở màn Edit, quan sát Preview trên Desktop.",,1. Filter hiển thị ở trạng thái mở (Expand).,
-FNPRODOPT_TC75,Happy,,Chọn Collapse,,,"1. Chọn Collapse/Expand on Desktop = Collapse.
+73,Edge,,Danh sách lựa chọn đầy đủ của dropdown,,,"1. Mở dropdown Navigation type, xem toàn bộ lựa chọn.",,"1. <cần confirm> — chưa xác nhận dropdown có đủ lựa chọn ""Show more"" button + field phụ ""Number of filter options per click"" giống Brand/Category, hay chỉ có Infinite scroll.",<cần confirm>
+74,Happy,Collapse/Expand on Desktop,Default Expand,,Node mới,"1. Mở màn Edit, quan sát Preview trên Desktop.",,1. Filter hiển thị ở trạng thái mở (Expand).,
+75,Happy,,Chọn Collapse,,,"1. Chọn Collapse/Expand on Desktop = Collapse.
 2. Quan sát Preview.",,2. Filter thu gọn lại trên Desktop.,
-FNPRODOPT_TC76,Edge,,Collapse rồi Expand lại - kiểm tra mất selection,,Đã chọn sẵn ≥1 value,"1. Thu gọn (Collapse) filter trên Preview.
+76,Edge,,Collapse rồi Expand lại - kiểm tra mất selection,,Đã chọn sẵn ≥1 value,"1. Thu gọn (Collapse) filter trên Preview.
 2. Mở lại (Expand).
 3. Quan sát trạng thái value đã chọn.",,3. <cần confirm> — Brand đang ghi nhận bug NG (mất trạng thái selected sau Collapse/Expand); chưa xác nhận Product options có bug tương tự.,<cần confirm>
-FNPRODOPT_TC77,Happy,Collapse/Expand on Mobile,Default Expand,,Node mới,1. Quan sát Preview ở chế độ Mobile.,,1. Filter hiển thị ở trạng thái mở (Expand).,
-FNPRODOPT_TC78,Happy,,Chọn Collapse,,,"1. Chọn Collapse/Expand on Mobile = Collapse.
+77,Happy,Collapse/Expand on Mobile,Default Expand,,Node mới,1. Quan sát Preview ở chế độ Mobile.,,1. Filter hiển thị ở trạng thái mở (Expand).,
+78,Happy,,Chọn Collapse,,,"1. Chọn Collapse/Expand on Mobile = Collapse.
 2. Quan sát Preview Mobile.",,2. Filter thu gọn lại trên Mobile.,
-FNPRODOPT_TC79,Happy,Display all values in uppercase form,Enable - value hiển thị dạng uppercase,,,"1. Bật toggle.
+79,Happy,Display all values in uppercase form,Enable - value hiển thị dạng uppercase,,,"1. Bật toggle.
 2. Quan sát value trên Preview.",,2. Toàn bộ value hiển thị dạng CHỮ HOA.,
-FNPRODOPT_TC80,Happy,Show search box on desktop,Enable - hiện thanh search,,,"1. Bật toggle.
+80,Happy,Show search box on desktop,Enable - hiện thanh search,,,"1. Bật toggle.
 2. Quan sát Preview Desktop.",,2. Thanh search xuất hiện phía trên danh sách value.,
-FNPRODOPT_TC81,Happy,,Disable - ẩn thanh search,,,"1. Tắt toggle.
+81,Happy,,Disable - ẩn thanh search,,,"1. Tắt toggle.
 2. Quan sát Preview Desktop.",,2. Thanh search không hiển thị.,
-FNPRODOPT_TC82,Happy,Show search box on mobile,Enable - hiện thanh search,,,"1. Bật toggle.
+82,Happy,Show search box on mobile,Enable - hiện thanh search,,,"1. Bật toggle.
 2. Quan sát Preview Mobile.",,2. Thanh search xuất hiện phía trên danh sách value.,
-FNPRODOPT_TC83,Happy,,Disable - ẩn thanh search,,,"1. Tắt toggle.
+83,Happy,,Disable - ẩn thanh search,,,"1. Tắt toggle.
 2. Quan sát Preview Mobile.",,2. Thanh search không hiển thị.,
-FNPRODOPT_TC84,Integration,Filter Node - Product options (Add/Edit),BC thêm Option mới trước khi node Product options từng được Add — Option mới hiển thị đúng ngay lần Add đầu tiên,Trigger: thêm Option mới,Product trên BC đã có sẵn ≥1 Variant Option (VD Shoe Size); filter tree chưa từng Add node Product options,"1. Trên BC thêm 1 Variant Option mới vào product (VD Material) kèm giá trị.
+84,Integration,Filter Node - Product options (Add/Edit),BC thêm Option mới trước khi node Product options từng được Add — Option mới hiển thị đúng ngay lần Add đầu tiên,Trigger: thêm Option mới,Product trên BC đã có sẵn ≥1 Variant Option (VD Shoe Size); filter tree chưa từng Add node Product options,"1. Trên BC thêm 1 Variant Option mới vào product (VD Material) kèm giá trị.
 2. Chờ sync hoàn tất.
 3. Vào Filter Tree, Add filter node, chọn Product options, mở popup Select filter options.","Option mới = Material, Values = Cotton, Polyester",3. Cột Option name hiển thị đúng Option Material kèm product count; click vào load đúng 2 value Cotton/Polyester kèm product count từng value.,
-FNPRODOPT_TC85,Integration,,"BC thêm Option mới sau khi node Product options đã tồn tại — Option mới xuất hiện khi mở lại Edit, không ảnh hưởng selection cũ","Trigger: thêm Option mới, node đã tồn tại","Node Product options đã Add, đã chọn sẵn Small và Medium thuộc Option Shoe Size","1. Trên BC thêm 1 Variant Option mới vào cùng product (VD Material).
+85,Integration,,"BC thêm Option mới sau khi node Product options đã tồn tại — Option mới xuất hiện khi mở lại Edit, không ảnh hưởng selection cũ","Trigger: thêm Option mới, node đã tồn tại","Node Product options đã Add, đã chọn sẵn Small và Medium thuộc Option Shoe Size","1. Trên BC thêm 1 Variant Option mới vào cùng product (VD Material).
 2. Chờ sync hoàn tất.
 3. Vào Edit filter node Product options, click Edit mở lại popup Select filter options.",,"3. Option Material xuất hiện thêm trong cột Option name; selection cũ (Small, Medium của Shoe Size) vẫn giữ nguyên, không bị mất/đổi.",
-FNPRODOPT_TC86,Integration,,"Sửa tên Option đang được filter node dùng để lọc — tên mới cập nhật đúng, giữ nguyên selection",Option đang dùng để lọc,Node đã chọn sẵn Small và Medium thuộc Option Shoe Size,"1. Trên BC đổi display_name Option Shoe Size thành Size.
+86,Integration,,"Sửa tên Option đang được filter node dùng để lọc — tên mới cập nhật đúng, giữ nguyên selection",Option đang dùng để lọc,Node đã chọn sẵn Small và Medium thuộc Option Shoe Size,"1. Trên BC đổi display_name Option Shoe Size thành Size.
 2. Chờ sync hoàn tất.
 3. Mở lại Edit filter node Product options, quan sát popup và Preview.",,"3. Option name hiển thị đúng tên mới Size ở popup lẫn Preview; các value đã chọn trước đó (Small, Medium) vẫn giữ trạng thái selected, không bị mất.",Áp dụng theo rule dependency đã xác nhận ở filter node Brand (đổi tên value → popup và Preview cập nhật đúng).
-FNPRODOPT_TC87,Integration,,"Sửa tên Option KHÔNG được filter node dùng để lọc — tên mới cập nhật đúng, không ảnh hưởng cấu hình hiện tại",Option chưa dùng để lọc,"Product có 2 Option: Shoe Size đang dùng, Color chưa dùng","1. Trên BC đổi display_name Option Color (chưa được chọn) thành Colour.
+87,Integration,,"Sửa tên Option KHÔNG được filter node dùng để lọc — tên mới cập nhật đúng, không ảnh hưởng cấu hình hiện tại",Option chưa dùng để lọc,"Product có 2 Option: Shoe Size đang dùng, Color chưa dùng","1. Trên BC đổi display_name Option Color (chưa được chọn) thành Colour.
 2. Chờ sync hoàn tất.
 3. Mở lại popup Select filter options.",,3. Cột Option name hiển thị đúng Colour; cấu hình hiện tại (Shoe Size đã chọn) không đổi.,
-FNPRODOPT_TC88,Integration,,Xoá cả 1 Option đang được filter node dùng để lọc — hệ thống xử lý đúng selection liên quan,Option đang dùng để lọc,Node đã chọn sẵn Small và Medium thuộc Option Shoe Size,"1. Trên BC xoá hẳn Variant Option Shoe Size khỏi product (kéo theo mọi value bên trong).
+88,Integration,,Xoá cả 1 Option đang được filter node dùng để lọc — hệ thống xử lý đúng selection liên quan,Option đang dùng để lọc,Node đã chọn sẵn Small và Medium thuộc Option Shoe Size,"1. Trên BC xoá hẳn Variant Option Shoe Size khỏi product (kéo theo mọi value bên trong).
 2. Chờ sync hoàn tất.
 3. Mở lại Edit filter node Product options, quan sát popup, số đếm N selected và Preview.",,"3. Option Shoe Size không còn xuất hiện trong popup; toàn bộ value thuộc option này bị loại khỏi selection, số đếm N selected giảm đúng tương ứng, Preview không còn hiển thị value đã xoá.","<cần confirm> — spec Brand chưa có case y hệt xoá cả 1 Option đang dùng để lọc, expected result trên suy theo rule dependency chung, cần verify thực tế trước khi chốt."
-FNPRODOPT_TC89,Integration,,Xoá cả 1 Option KHÔNG được filter node dùng để lọc — không ảnh hưởng cấu hình hiện tại,Option chưa dùng để lọc,"Product có 2 Option, node chỉ chọn value thuộc Shoe Size, Color chưa dùng","1. Trên BC xoá hẳn Variant Option Color (chưa được chọn) khỏi product.
+89,Integration,,Xoá cả 1 Option KHÔNG được filter node dùng để lọc — không ảnh hưởng cấu hình hiện tại,Option chưa dùng để lọc,"Product có 2 Option, node chỉ chọn value thuộc Shoe Size, Color chưa dùng","1. Trên BC xoá hẳn Variant Option Color (chưa được chọn) khỏi product.
 2. Chờ sync hoàn tất.
 3. Mở lại popup Select filter options.",,3. Option Color không còn xuất hiện trong popup; cấu hình hiện tại (Shoe Size đã chọn) không đổi.,
-FNPRODOPT_TC90,Integration,,"Thêm value mới vào Option đang được filter node dùng để lọc — value mới xuất hiện, không tự động được chọn",Trigger: thêm value mới,Node đã chọn Small và Medium thuộc Option Shoe Size,"1. Trên BC thêm value mới XXL vào Option Shoe Size.
+90,Integration,,"Thêm value mới vào Option đang được filter node dùng để lọc — value mới xuất hiện, không tự động được chọn",Trigger: thêm value mới,Node đã chọn Small và Medium thuộc Option Shoe Size,"1. Trên BC thêm value mới XXL vào Option Shoe Size.
 2. Chờ sync hoàn tất.
 3. Mở lại popup Select filter options, click vào Option Shoe Size.",,3. Cột Values hiển thị thêm XXL kèm product count; XXL ở trạng thái CHƯA được chọn; Small/Medium vẫn giữ nguyên trạng thái đã chọn.,
-FNPRODOPT_TC91,Integration,,"Sửa label 1 value đang được chọn trong filter node — label mới cập nhật đúng, giữ nguyên selection",Value đang được chọn,Node đã chọn value Too Large thuộc Shoe Size,"1. Trên BC đổi label value Too Large thành XX Large.
+91,Integration,,"Sửa label 1 value đang được chọn trong filter node — label mới cập nhật đúng, giữ nguyên selection",Value đang được chọn,Node đã chọn value Too Large thuộc Shoe Size,"1. Trên BC đổi label value Too Large thành XX Large.
 2. Chờ sync hoàn tất.
 3. Mở lại popup và quan sát Preview.",,"3. Value hiển thị đúng label mới XX Large ở popup lẫn Preview, vẫn ở trạng thái đã chọn (selected), không bị mất selection do đổi tên.",
-FNPRODOPT_TC92,Integration,,"Sửa label 1 value CHƯA được chọn — label mới cập nhật đúng, không ảnh hưởng cấu hình",Value chưa được chọn,Node chưa chọn value Large thuộc Shoe Size,"1. Trên BC đổi label value Large thành L.
+92,Integration,,"Sửa label 1 value CHƯA được chọn — label mới cập nhật đúng, không ảnh hưởng cấu hình",Value chưa được chọn,Node chưa chọn value Large thuộc Shoe Size,"1. Trên BC đổi label value Large thành L.
 2. Chờ sync hoàn tất.
 3. Mở lại popup Select filter options.",,3. Value hiển thị đúng label mới L; cấu hình hiện tại không đổi.,
-FNPRODOPT_TC93,Integration,,Xoá 1 value đang được chọn trong filter node — value bị loại khỏi selection đúng,Value đang được chọn,Node đã chọn Small và Medium thuộc Shoe Size,"1. Trên BC xoá hẳn value Medium khỏi Option Shoe Size.
+93,Integration,,Xoá 1 value đang được chọn trong filter node — value bị loại khỏi selection đúng,Value đang được chọn,Node đã chọn Small và Medium thuộc Shoe Size,"1. Trên BC xoá hẳn value Medium khỏi Option Shoe Size.
 2. Chờ sync hoàn tất.
 3. Mở lại popup, quan sát N selected và Preview.",,"3. Value Medium không còn xuất hiện trong popup; bị loại khỏi selection, N selected giảm đúng 1 đơn vị; Preview không còn hiển thị Medium.",
-FNPRODOPT_TC94,Integration,,Xoá 1 value CHƯA được chọn — không ảnh hưởng selection hiện tại,Value chưa được chọn,Node chưa chọn value Large thuộc Shoe Size,"1. Trên BC xoá hẳn value Large khỏi Option Shoe Size.
+94,Integration,,Xoá 1 value CHƯA được chọn — không ảnh hưởng selection hiện tại,Value chưa được chọn,Node chưa chọn value Large thuộc Shoe Size,"1. Trên BC xoá hẳn value Large khỏi Option Shoe Size.
 2. Chờ sync hoàn tất.
 3. Mở lại popup Select filter options.",,"3. Value Large không còn xuất hiện trong cột Values; selection hiện tại (Small, Medium) không đổi.",
-FNPRODOPT_TC95,Integration,,Đổi Type của Option trên BC khi filter node đã cấu hình Display Style trước đó — kiểm tra Display Style có bị ghi đè không,<cần confirm>,Node Product options đang có Display Style = Dropdown (merchant tự chọn); Option nguồn trên BC đang Type = Dropdown,"1. Trên BC đổi Type của Option Shoe Size từ Dropdown sang Rectangle List.
+95,Integration,,Đổi Type của Option trên BC khi filter node đã cấu hình Display Style trước đó — kiểm tra Display Style có bị ghi đè không,<cần confirm>,Node Product options đang có Display Style = Dropdown (merchant tự chọn); Option nguồn trên BC đang Type = Dropdown,"1. Trên BC đổi Type của Option Shoe Size từ Dropdown sang Rectangle List.
 2. Chờ sync hoàn tất.
 3. Mở lại Edit filter node Product options, quan sát field Display Style.",,3. <cần confirm> — chưa rõ Display Style có tự đổi theo Type mới từ BC hay giữ nguyên theo lựa chọn merchant đã cấu hình trước đó.,"<cần confirm> — spec Figma không mô tả rõ quan hệ giữa BC option Type và Display Style của filter node, cần xác nhận BA trước khi chốt expected result."
-FNPRODOPT_TC96,Integration,,Disable Purchasable 1 tổ hợp Variant đang có value được chọn — product count giảm đúng,Hướng Enable→Disable,Value Blue (Color) và Too Large (Shoe Size) đã được chọn trong filter node; Variant Too Large + Blue (SKU TSHIRT-1-TO-BL-1) đang Purchasable = Enabled,"1. Trên BC tắt Purchasable của Variant Too Large + Blue (SKU TSHIRT-1-TO-BL-1).
+96,Integration,,Disable Purchasable 1 tổ hợp Variant đang có value được chọn — product count giảm đúng,Hướng Enable→Disable,Value Blue (Color) và Too Large (Shoe Size) đã được chọn trong filter node; Variant Too Large + Blue (SKU TSHIRT-1-TO-BL-1) đang Purchasable = Enabled,"1. Trên BC tắt Purchasable của Variant Too Large + Blue (SKU TSHIRT-1-TO-BL-1).
 2. Chờ sync hoàn tất.
 3. Mở lại popup Select filter options, quan sát product count của Too Large và Blue.",,3. Product count của Too Large và Blue đều giảm đúng 1 đơn vị (trừ SKU vừa disable); các value khác không đổi.,
-FNPRODOPT_TC97,Integration,,Enable lại Purchasable 1 tổ hợp Variant vừa bị tắt — product count tăng đúng,Hướng Disable→Enable,Variant Too Large + Blue đang Purchasable = Disabled (từ TC96),"1. Trên BC bật lại Purchasable của Variant Too Large + Blue.
+97,Integration,,Enable lại Purchasable 1 tổ hợp Variant vừa bị tắt — product count tăng đúng,Hướng Disable→Enable,Variant Too Large + Blue đang Purchasable = Disabled (từ TC96),"1. Trên BC bật lại Purchasable của Variant Too Large + Blue.
 2. Chờ sync hoàn tất.
 3. Mở lại popup, quan sát product count của Too Large và Blue.",,"3. Product count của Too Large và Blue tăng đúng lại 1 đơn vị, khớp với trạng thái trước khi disable ở TC96.",
-FNPRODOPT_TC98,Integration,,Xoá hẳn 1 SKU/tổ hợp Variant cụ thể khỏi product — chỉ product count của value liên quan giảm đúng,Phạm vi: 1 SKU,"Product có ≥2 Variant khác nhau cùng chia sẻ value Blue (VD Small + Blue còn active, Too Large + Blue sắp xoá)","1. Trên BC xoá hẳn Variant Too Large + Blue (SKU TSHIRT-1-TO-BL-1) khỏi product.
+98,Integration,,Xoá hẳn 1 SKU/tổ hợp Variant cụ thể khỏi product — chỉ product count của value liên quan giảm đúng,Phạm vi: 1 SKU,"Product có ≥2 Variant khác nhau cùng chia sẻ value Blue (VD Small + Blue còn active, Too Large + Blue sắp xoá)","1. Trên BC xoá hẳn Variant Too Large + Blue (SKU TSHIRT-1-TO-BL-1) khỏi product.
 2. Chờ sync hoàn tất.
 3. Mở lại popup, quan sát product count của Too Large và Blue.",,3. Product count Too Large giảm đúng 1; product count Blue cũng giảm đúng 1 (do mất 1 SKU chia sẻ value này); các value không liên quan tới SKU đã xoá giữ nguyên.,
-FNPRODOPT_TC99,Integration,,Xoá/unpublish toàn bộ product (mọi Variant) — mọi value liên quan đều giảm count đúng,Phạm vi: toàn bộ product,Product đang có nhiều Option/Value đang được chọn trong filter node (cả Shoe Size lẫn Color),"1. Trên BC xoá hoặc unpublish toàn bộ product (mọi Variant/SKU).
+99,Integration,,Xoá/unpublish toàn bộ product (mọi Variant) — mọi value liên quan đều giảm count đúng,Phạm vi: toàn bộ product,Product đang có nhiều Option/Value đang được chọn trong filter node (cả Shoe Size lẫn Color),"1. Trên BC xoá hoặc unpublish toàn bộ product (mọi Variant/SKU).
 2. Chờ sync hoàn tất.
 3. Mở lại popup Select filter options, quan sát product count của toàn bộ value liên quan tới product này.",,"3. Product count của MỌI value từng gắn với product bị xoá (cả Shoe Size lẫn Color) đều giảm đúng tương ứng, không riêng 1 Option/Value nào.","So sánh với TC98 (chỉ 1 SKU) — 2 case cho 2 phạm vi tác động khác nhau, không suy diễn từ nhau."
-FNPRODOPT_TC100,Integration,Storefront - Product options filter,Sửa tên Option đang dùng để lọc — Storefront hiển thị đúng tên mới trên filter widget,Trigger: đổi tên Option,"Filter node Product options đã Apply cho 1 category/page, đã chọn value thuộc Option Shoe Size, storefront đang hiển thị đúng tên Shoe Size","1. Trên BC đổi display_name Option Shoe Size thành Size.
+100,Integration,Storefront - Product options filter,Sửa tên Option đang dùng để lọc — Storefront hiển thị đúng tên mới trên filter widget,Trigger: đổi tên Option,"Filter node Product options đã Apply cho 1 category/page, đã chọn value thuộc Option Shoe Size, storefront đang hiển thị đúng tên Shoe Size","1. Trên BC đổi display_name Option Shoe Size thành Size.
 2. Chờ sync hoàn tất.
 3. Truy cập storefront tại page/category đã Apply filter, quan sát block filter Product options.",,"3. Block filter hiển thị đúng tên mới Size, không còn tên cũ, không tạo trùng block.",
-FNPRODOPT_TC101,Integration,,Sửa label 1 value đang được chọn — Storefront hiển thị label mới và lọc đúng sản phẩm theo giá trị mới,Trigger: đổi label value,Value Too Large đang hiển thị trên storefront filter Product options,"1. Trên BC đổi label value Too Large thành XX Large.
+101,Integration,,Sửa label 1 value đang được chọn — Storefront hiển thị label mới và lọc đúng sản phẩm theo giá trị mới,Trigger: đổi label value,Value Too Large đang hiển thị trên storefront filter Product options,"1. Trên BC đổi label value Too Large thành XX Large.
 2. Chờ sync hoàn tất.
 3. Truy cập storefront, click chọn value vừa đổi tên trong block filter.",,"3. Block filter hiển thị đúng label mới XX Large; click chọn value này trả về đúng danh sách sản phẩm có Variant thuộc value đó, giống kết quả trước khi đổi tên, chỉ khác label hiển thị.",
-FNPRODOPT_TC102,Integration,,"Xoá 1 value đang được chọn — Storefront gỡ đúng value, không còn chọn được",Trigger: xoá value,Value Medium đang hiển thị và chọn được trên storefront filter,"1. Trên BC xoá hẳn value Medium khỏi Option Shoe Size.
+102,Integration,,"Xoá 1 value đang được chọn — Storefront gỡ đúng value, không còn chọn được",Trigger: xoá value,Value Medium đang hiển thị và chọn được trên storefront filter,"1. Trên BC xoá hẳn value Medium khỏi Option Shoe Size.
 2. Chờ sync hoàn tất.
 3. Truy cập storefront, quan sát block filter Product options.",,3. Value Medium không còn xuất hiện trong block filter; không còn cách nào chọn lọc theo giá trị này trên storefront.,
-FNPRODOPT_TC103,Integration,,Xoá cả 1 Option đang dùng để lọc — Storefront gỡ đúng toàn bộ block Option đó,<cần confirm>,"Filter node Product options đang chọn value thuộc CẢ 2 Option (Shoe Size, Color)","1. Trên BC xoá hẳn Variant Option Shoe Size khỏi product.
+103,Integration,,Xoá cả 1 Option đang dùng để lọc — Storefront gỡ đúng toàn bộ block Option đó,<cần confirm>,"Filter node Product options đang chọn value thuộc CẢ 2 Option (Shoe Size, Color)","1. Trên BC xoá hẳn Variant Option Shoe Size khỏi product.
 2. Chờ sync hoàn tất.
-3. Truy cập storefront, quan sát block filter Product options.",,"3. <cần confirm> — chưa rõ storefront chỉ gỡ riêng phần Shoe Size (giữ lại Color) hay ẩn hẳn toàn bộ filter node khi 1 trong các Option cấu thành bị xoá.","<cần confirm> — tham khảo pattern tương tự đã ghi nhận ở filter node Category (deselect toàn bộ category của 1 location cho kết quả khác với deselect từng phần), cần xác nhận BA."
-FNPRODOPT_TC104,Integration,,Disable Purchasable 1 Variant đang có value được chọn — Storefront giảm count và loại đúng sản phẩm khỏi kết quả lọc,Hướng Enable→Disable,Value Blue và Too Large đang hiển thị trên storefront kèm count; Variant Too Large + Blue đang Purchasable = Enabled,"1. Trên BC tắt Purchasable của Variant Too Large + Blue.
+3. Truy cập storefront, quan sát block filter Product options.",,3. <cần confirm> — chưa rõ storefront chỉ gỡ riêng phần Shoe Size (giữ lại Color) hay ẩn hẳn toàn bộ filter node khi 1 trong các Option cấu thành bị xoá.,"<cần confirm> — tham khảo pattern tương tự đã ghi nhận ở filter node Category (deselect toàn bộ category của 1 location cho kết quả khác với deselect từng phần), cần xác nhận BA."
+104,Integration,,Disable Purchasable 1 Variant đang có value được chọn — Storefront giảm count và loại đúng sản phẩm khỏi kết quả lọc,Hướng Enable→Disable,Value Blue và Too Large đang hiển thị trên storefront kèm count; Variant Too Large + Blue đang Purchasable = Enabled,"1. Trên BC tắt Purchasable của Variant Too Large + Blue.
 2. Chờ sync hoàn tất.
 3. Truy cập storefront, quan sát count cạnh value Too Large/Blue; click lọc theo từng value.",,3. Count cạnh Too Large và Blue đều giảm đúng 1; lọc theo Too Large hoặc Blue không còn trả về sản phẩm ở tổ hợp vừa disable trong danh sách kết quả.,
-FNPRODOPT_TC105,Integration,,Enable lại Purchasable Variant vừa tắt — Storefront tăng count và trả sản phẩm về đúng kết quả lọc,Hướng Disable→Enable,Variant Too Large + Blue đang Purchasable = Disabled (từ TC104),"1. Trên BC bật lại Purchasable của Variant Too Large + Blue.
+105,Integration,,Enable lại Purchasable Variant vừa tắt — Storefront tăng count và trả sản phẩm về đúng kết quả lọc,Hướng Disable→Enable,Variant Too Large + Blue đang Purchasable = Disabled (từ TC104),"1. Trên BC bật lại Purchasable của Variant Too Large + Blue.
 2. Chờ sync hoàn tất.
 3. Truy cập storefront, quan sát count và lọc lại theo Too Large/Blue.",,"3. Count tăng đúng lại 1 đơn vị; lọc theo Too Large hoặc Blue trả về đúng sản phẩm đã enable lại, khớp trạng thái trước khi disable.",
-FNPRODOPT_TC106,Integration,,"Xoá 1 SKU/tổ hợp Variant cụ thể — Storefront giảm đúng count, sản phẩm vẫn lọc được theo value khác còn active",Phạm vi: 1 SKU,"Product có ≥2 Variant chia sẻ value Blue (Small + Blue còn active, Too Large + Blue sắp xoá)","1. Trên BC xoá hẳn Variant Too Large + Blue (SKU TSHIRT-1-TO-BL-1).
+106,Integration,,"Xoá 1 SKU/tổ hợp Variant cụ thể — Storefront giảm đúng count, sản phẩm vẫn lọc được theo value khác còn active",Phạm vi: 1 SKU,"Product có ≥2 Variant chia sẻ value Blue (Small + Blue còn active, Too Large + Blue sắp xoá)","1. Trên BC xoá hẳn Variant Too Large + Blue (SKU TSHIRT-1-TO-BL-1).
 2. Chờ sync hoàn tất.
-3. Truy cập storefront, lọc theo Blue và theo Too Large riêng.",,"3. Lọc theo Blue vẫn trả về sản phẩm (do Small + Blue còn active); lọc theo Too Large không còn trả về sản phẩm này (SKU duy nhất của tổ hợp đã xoá); count 2 value cập nhật đúng tương ứng.",
-FNPRODOPT_TC107,Integration,,Xoá/unpublish toàn bộ product — sản phẩm biến mất khỏi mọi kết quả lọc theo bất kỳ Option/Value nào của nó,Phạm vi: toàn bộ product,Product đang lọc được theo cả Shoe Size lẫn Color trên storefront,"1. Trên BC xoá hoặc unpublish toàn bộ product.
+3. Truy cập storefront, lọc theo Blue và theo Too Large riêng.",,3. Lọc theo Blue vẫn trả về sản phẩm (do Small + Blue còn active); lọc theo Too Large không còn trả về sản phẩm này (SKU duy nhất của tổ hợp đã xoá); count 2 value cập nhật đúng tương ứng.,
+107,Integration,,Xoá/unpublish toàn bộ product — sản phẩm biến mất khỏi mọi kết quả lọc theo bất kỳ Option/Value nào của nó,Phạm vi: toàn bộ product,Product đang lọc được theo cả Shoe Size lẫn Color trên storefront,"1. Trên BC xoá hoặc unpublish toàn bộ product.
 2. Chờ sync hoàn tất.
 3. Truy cập storefront, lần lượt lọc theo từng value đã từng gắn với product này (cả Shoe Size lẫn Color).",,3. Sản phẩm không còn xuất hiện ở bất kỳ kết quả lọc nào theo mọi value liên quan; count mọi value liên quan giảm đúng tương ứng.,
-FNPRODOPT_TC108,Integration,,Product count 1 value về 0 khi toggle Show all irrelevant values = ON — value vẫn hiển thị trên storefront,Toggle = ON,Toggle Show all irrelevant values đang ON; value Too Large sắp có product count về 0 (SKU duy nhất vừa bị disable/xoá),"1. Trên BC disable/xoá toàn bộ Variant còn lại chứa value Too Large (đưa count value này về 0).
+108,Integration,,Product count 1 value về 0 khi toggle Show all irrelevant values = ON — value vẫn hiển thị trên storefront,Toggle = ON,Toggle Show all irrelevant values đang ON; value Too Large sắp có product count về 0 (SKU duy nhất vừa bị disable/xoá),"1. Trên BC disable/xoá toàn bộ Variant còn lại chứa value Too Large (đưa count value này về 0).
 2. Chờ sync hoàn tất.
 3. Truy cập storefront, quan sát block filter Product options.",,"3. Value Too Large vẫn hiển thị trên storefront (dạng disabled/count = 0), không bị ẩn hẳn, đúng theo pattern Show all irrelevant values đã xác nhận ở filter node Brand/Category.",
-FNPRODOPT_TC109,Integration,,Product count 1 value về 0 khi toggle Show all irrelevant values = OFF — value bị ẩn hẳn khỏi storefront,Toggle = OFF,Toggle Show all irrelevant values đang OFF; value Too Large sắp có product count về 0,"1. Trên BC disable/xoá toàn bộ Variant còn lại chứa value Too Large (đưa count value này về 0).
+109,Integration,,Product count 1 value về 0 khi toggle Show all irrelevant values = OFF — value bị ẩn hẳn khỏi storefront,Toggle = OFF,Toggle Show all irrelevant values đang OFF; value Too Large sắp có product count về 0,"1. Trên BC disable/xoá toàn bộ Variant còn lại chứa value Too Large (đưa count value này về 0).
 2. Chờ sync hoàn tất.
 3. Truy cập storefront, quan sát block filter Product options.",,"3. Value Too Large bị ẩn hẳn khỏi block filter trên storefront (không hiển thị dạng disabled), khác với case toggle ON.",

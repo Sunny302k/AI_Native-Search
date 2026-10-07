@@ -1,314 +1,315 @@
 ﻿ID,Test Type,Test Objective,,,Preconditions,Test Steps,Input DB/Setting,Expected Result,Note
+Purpose:,,"Lọc theo khoảng chiều cao sản phẩm (min–max tự tính từ dữ liệu đã sync), để shopper chọn sản phẩm vừa kích thước cần.",,,,,,,
 ,,=== ADD FILTER NODE - HEIGHT ===,,,,,,,
-FNHGT_TC01,UI,Page header,Breadcrumb title,,Mở MH Add Filter Node - Height,1. Kiểm tra breadcrumb phía trên trái.,,"Breadcrumb hiển thị ""← Height"".",
-FNHGT_TC02,UI,Button [Save as template] / [Save Changes],Hiển thị,,Mở MH Add Filter Node - Height,1. Kiểm tra 2 button góc trên phải.,,"- [Save as template]: outlined.
+1,UI,Page header,Breadcrumb title,,Mở MH Add Filter Node - Height,1. Kiểm tra breadcrumb phía trên trái.,,"Breadcrumb hiển thị ""← Height"".",
+2,UI,Button [Save as template] / [Save Changes],Hiển thị,,Mở MH Add Filter Node - Height,1. Kiểm tra 2 button góc trên phải.,,"- [Save as template]: outlined.
 - [Save Changes]: màu cam (primary), cạnh [Save as template].",
-FNHGT_TC03,UI,Page layout,3 section hiển thị đủ,,Mở MH Add Filter Node - Height,1. Scroll left panel.,,"3 section đúng thứ tự: GENERAL SETTINGS → FILTER SETTINGS → APPEARANCE SETTINGS, header màu cam.",
-FNHGT_TC04,Happy,Preview panel,Live update không cần Save,,- Đã mở MH Add Filter Node - Height,"1. Đổi bất kỳ setting nào (VD Title).
+3,UI,Page layout,3 section hiển thị đủ,,Mở MH Add Filter Node - Height,1. Scroll left panel.,,"3 section đúng thứ tự: GENERAL SETTINGS → FILTER SETTINGS → APPEARANCE SETTINGS, header màu cam.",
+4,Happy,Preview panel,Live update không cần Save,,- Đã mở MH Add Filter Node - Height,"1. Đổi bất kỳ setting nào (VD Title).
 2. Quan sát Preview ngay sau đó.",,2. Preview cập nhật ngay lập tức mà không cần nhấn [Save Changes].,
-FNHGT_TC05,Happy,,Switch tab Mobile,,,"1. Click tab Mobile trong Preview.
+5,Happy,,Switch tab Mobile,,,"1. Click tab Mobile trong Preview.
 2. Kiểm tra layout preview.",,"- Tab Mobile active.
 - Preview hiển thị layout mobile của Height filter.",
-FNHGT_TC06,UI,,Desktop / Mobile tabs,,Mở MH Add Filter Node - Height,1. Kiểm tra Preview panel.,,Tab Desktop và Mobile hiển thị; Desktop active mặc định.,
-FNHGT_TC07,Happy,Field [Title],Đổi giá trị,,- Field Title có giá trị mặc định,"1. Xóa giá trị Title hiện tại, nhập tên mới.
-2. Kiểm tra Preview.",Title = ""Height (cm)"","- Field lưu giá trị mới.
+6,UI,,Desktop / Mobile tabs,,Mở MH Add Filter Node - Height,1. Kiểm tra Preview panel.,,Tab Desktop và Mobile hiển thị; Desktop active mặc định.,
+7,Happy,Field [Title],Đổi giá trị,,- Field Title có giá trị mặc định,"1. Xóa giá trị Title hiện tại, nhập tên mới.
+2. Kiểm tra Preview.",Title = Height (cm),"- Field lưu giá trị mới.
 - Preview: tiêu đề filter cập nhật đúng tên mới.",
-FNHGT_TC08,Negative,,Để trống,,,"1. Xóa trống field Title.
+8,Negative,,Để trống,,,"1. Xóa trống field Title.
 2. Click [Save Changes].",Title = (rỗng),2. Lỗi: Title là bắt buộc; không cho phép lưu.,
-FNHGT_TC09,UI,,Default value lúc tạo mới,,,1. Kiểm tra field Title.,,"Title mặc định = ""Height"".",
-FNHGT_TC10,Happy,Title text color,Đổi màu,,,"1. Click color swatch.
+9,UI,,Default value lúc tạo mới,,,1. Kiểm tra field Title.,,"Title mặc định = ""Height"".",
+10,Happy,Title text color,Đổi màu,,,"1. Click color swatch.
 2. Chọn màu mới.
 3. Kiểm tra Preview.",,"- Màu lưu thành công.
 - Preview: tiêu đề filter hiển thị đúng màu mới.","<cần confirm>: rủi ro kế thừa — khi title dài >1 dòng, preview có thể luôn căn trái bất kể màu/alignment đã chọn (bug đã xác nhận NG ở Category/Special Offers/Sale Percentage/Width/Weight)"
-FNHGT_TC11,UI,,Default value lúc tạo mới,,,1. Kiểm tra color swatch.,,Màu mặc định (dark).,
-FNHGT_TC12,Happy,Title alignment,Chọn Center,,Title alignment = Left,"1. Click option Center.
+11,UI,,Default value lúc tạo mới,,,1. Kiểm tra color swatch.,,Màu mặc định (dark).,
+12,Happy,Title alignment,Chọn Center,,Title alignment = Left,"1. Click option Center.
 2. Kiểm tra Preview.",,"- Option Center active.
 - Preview: tiêu đề filter căn giữa.",
-FNHGT_TC13,Happy,,Chọn Right,,Title alignment = Left,"1. Click option Right.
+13,Happy,,Chọn Right,,Title alignment = Left,"1. Click option Right.
 2. Kiểm tra Preview.",,"- Option Right active.
-- Preview: tiêu đề filter căn phải.","<cần confirm>: rủi ro kế thừa — title dài >1 dòng luôn căn trái dù chọn Center/Right (xem TC10)"
-FNHGT_TC14,UI,,Default lúc tạo mới,,,1. Kiểm tra trạng thái mặc định.,,Option Left active (viền cam).,
-FNHGT_TC15,Happy,Display Style,Chuyển sang List,,Display Style = Slider - input,"1. Click option List.
+- Preview: tiêu đề filter căn phải.",<cần confirm>: rủi ro kế thừa — title dài >1 dòng luôn căn trái dù chọn Center/Right (xem TC10)
+14,UI,,Default lúc tạo mới,,,1. Kiểm tra trạng thái mặc định.,,Option Left active (viền cam).,
+15,Happy,Display Style,Chuyển sang List,,Display Style = Slider - input,"1. Click option List.
 2. Kiểm tra Preview.
 3. Kiểm tra Filter Settings.",,"- Option List active.
 - Preview: filter hiển thị dạng danh sách.
 - Toàn bộ setting chỉ dành cho Slider ẩn/disabled.",
-FNHGT_TC16,Happy,,Chuyển sang Grid,,Display Style = Slider - input,"1. Click option Grid.
+16,Happy,,Chuyển sang Grid,,Display Style = Slider - input,"1. Click option Grid.
 2. Kiểm tra Preview.
 3. Kiểm tra Filter Settings.",,"- Option Grid active.
 - Preview: filter hiển thị dạng lưới.
-- Toàn bộ setting chỉ dành cho Slider ẩn/disabled.","<cần confirm>: rủi ro kế thừa — record đầu tiên luôn bị highlight màu cam sẵn dù merchant chưa chọn gì (bug đã xác nhận NG ở Sale Percentage/Width/Weight)"
-FNHGT_TC17,Happy,,Quay lại Slider - input,,Display Style = List hoặc Grid,"1. Click option Slider - input.
+- Toàn bộ setting chỉ dành cho Slider ẩn/disabled.",<cần confirm>: rủi ro kế thừa — record đầu tiên luôn bị highlight màu cam sẵn dù merchant chưa chọn gì (bug đã xác nhận NG ở Sale Percentage/Width/Weight)
+17,Happy,,Quay lại Slider - input,,Display Style = List hoặc Grid,"1. Click option Slider - input.
 2. Kiểm tra Preview và Filter Settings.",,"- Slider - input active.
 - Preview: slider + input boxes hiển thị lại.
 - Toàn bộ slider-related settings visible trở lại.",
-FNHGT_TC18,Edge,,List/Grid không có sản phẩm nào có Height khớp,,Display Style = List hoặc Grid,1. Kiểm tra storefront khi không có data khớp.,Không có product nào trong khoảng hiển thị,Field ẩn hoàn toàn (không hiển thị record nào).,"<cần confirm>: rủi ro kế thừa — có thể hiển thị chữ ""null"" thay vì ẩn field, hoặc dư 1 record dạng ""{max} and More"" (bug đã xác nhận NG ở Sale Percentage/Width/Weight)"
-FNHGT_TC19,UI,,3 option hiển thị,,,1. Kiểm tra Display Style.,,"3 option: Slider - input, List, Grid. Slider - input active mặc định (viền cam).","<cần confirm>: chưa xác nhận dropdown chỉ đúng 3 giá trị hay thừa option Swatch (đối chiếu bug đã xác nhận ở Sale Percentage/Width/Weight)"
-FNHGT_TC20,Happy,Show range slider,Toggle OFF,,Show range slider = ON,"1. Toggle OFF.
+18,Edge,,List/Grid không có sản phẩm nào có Height khớp,,Display Style = List hoặc Grid,1. Kiểm tra storefront khi không có data khớp.,Không có product nào trong khoảng hiển thị,Field ẩn hoàn toàn (không hiển thị record nào).,"<cần confirm>: rủi ro kế thừa — có thể hiển thị chữ ""null"" thay vì ẩn field, hoặc dư 1 record dạng ""{max} and More"" (bug đã xác nhận NG ở Sale Percentage/Width/Weight)"
+19,UI,,3 option hiển thị,,,1. Kiểm tra Display Style.,,"3 option: Slider - input, List, Grid. Slider - input active mặc định (viền cam).",<cần confirm>: chưa xác nhận dropdown chỉ đúng 3 giá trị hay thừa option Swatch (đối chiếu bug đã xác nhận ở Sale Percentage/Width/Weight)
+20,Happy,Show range slider,Toggle OFF,,Show range slider = ON,"1. Toggle OFF.
 2. Kiểm tra Preview.
 3. Kiểm tra Filter Settings.",,"- Preview: slider ẩn (chỉ còn input nếu Show range input = ON).
 - Slide handle color, Show tooltip, Tooltip color, Has slider steps ẩn/disabled.",
-FNHGT_TC21,Happy,,Toggle ON lại,,Show range slider = OFF,"1. Toggle ON.
+21,Happy,,Toggle ON lại,,Show range slider = OFF,"1. Toggle ON.
 2. Kiểm tra Preview và Filter Settings.",,"- Preview: slider hiển thị lại.
 - Slide handle color, Show tooltip, Has slider steps visible trở lại.",
-FNHGT_TC22,UI,,Default state,,Display Style = Slider - input,1. Kiểm tra toggle.,,Toggle ON.,
-FNHGT_TC23,Happy,Slide handle color,Đổi màu,,- Show range slider = ON,"1. Click color swatch.
+22,UI,,Default state,,Display Style = Slider - input,1. Kiểm tra toggle.,,Toggle ON.,
+23,Happy,Slide handle color,Đổi màu,,- Show range slider = ON,"1. Click color swatch.
 2. Chọn màu mới.
 3. Kiểm tra Preview.",,"- Màu lưu thành công.
 - Preview: handle slider đổi màu mới.",
-FNHGT_TC24,Happy,Decimal Separator,Đổi separator,,,"1. Mở dropdown, chọn option khác (dấu phẩy).
+24,Happy,Decimal Separator,Đổi separator,,,"1. Mở dropdown, chọn option khác (dấu phẩy).
 2. Kiểm tra Preview.",,"- Setting lưu thành công.
 - Preview: giá trị Height hiển thị đúng format separator mới.",
-FNHGT_TC25,UI,,Default value,,,1. Kiểm tra dropdown.,,"Mặc định ""No separator (E.g. 1000)"".",
-FNHGT_TC26,Happy,Show tooltip of range slider,Uncheck,,Show tooltip of range slider = checked,"1. Uncheck.
+25,UI,,Default value,,,1. Kiểm tra dropdown.,,"Mặc định ""No separator (E.g. 1000)"".",
+26,Happy,Show tooltip of range slider,Uncheck,,Show tooltip of range slider = checked,"1. Uncheck.
 2. Kiểm tra Preview và field Tooltip color.",,"- Preview: tooltip ẩn khỏi slider handles.
 - Tooltip color field ẩn/disabled.",
-FNHGT_TC27,UI,,Default state,,Show range slider = ON,1. Kiểm tra checkbox.,,Checked.,
-FNHGT_TC28,Happy,Tooltip color,Đổi màu,,Show tooltip of range slider = checked,"1. Click color swatch.
+27,UI,,Default state,,Show range slider = ON,1. Kiểm tra checkbox.,,Checked.,
+28,Happy,Tooltip color,Đổi màu,,Show tooltip of range slider = checked,"1. Click color swatch.
 2. Chọn màu mới.
 3. Kiểm tra Preview.",,"- Màu lưu thành công.
 - Preview: tooltip trên slider handle đổi màu mới.",
-FNHGT_TC29,Happy,Has slider steps,Uncheck,,Has slider steps = checked,"1. Uncheck.
+29,Happy,Has slider steps,Uncheck,,Has slider steps = checked,"1. Uncheck.
 2. Kiểm tra Filter Settings panel và Preview.",,"- Amount of slider steps field ẩn.
 - Show step value checkbox ẩn.
 - Preview: slider không có step ticks và nhãn số.",
-FNHGT_TC30,Happy,,Check lại,,Has slider steps = unchecked,1. Check lại.,,"- Amount of slider steps field hiện lại.
+30,Happy,,Check lại,,Has slider steps = unchecked,1. Check lại.,,"- Amount of slider steps field hiện lại.
 - Show step value checkbox hiện lại.",
-FNHGT_TC31,UI,,Default state,,Show range slider = ON,1. Kiểm tra checkbox.,,Checked.,
-FNHGT_TC32,Happy,Amount of slider steps,Đổi giá trị,,Has slider steps = checked,"1. Xóa giá trị hiện tại, nhập số mới.
+31,UI,,Default state,,Show range slider = ON,1. Kiểm tra checkbox.,,Checked.,
+32,Happy,Amount of slider steps,Đổi giá trị,,Has slider steps = checked,"1. Xóa giá trị hiện tại, nhập số mới.
 2. Kiểm tra Preview.",Amount = 6,"- Giá trị lưu thành công.
 - Preview: slider hiển thị đúng số step (6 khoảng → 7 ticks).",
-FNHGT_TC33,Negative,,Nhập 0,,Has slider steps = checked,"1. Nhập Amount = 0.
-2. Click [Save Changes].",Amount = 0,"Lỗi: giá trị không hợp lệ, không cho phép lưu.","<cần confirm>: sheet gốc mô tả rule nhưng chưa có bằng chứng actual rõ ràng (xem spec mục 5)"
-FNHGT_TC34,Negative,,Nhập số âm,,Has slider steps = checked,1. Nhập Amount = -2 và thử save.,Amount = -2,"Lỗi: giá trị không hợp lệ, không cho phép lưu.","<cần confirm>: xem TC33"
-FNHGT_TC35,Negative,,Nhập chữ,,Has slider steps = checked,1. Nhập Amount = ""abc"" và thử save.,Amount = ""abc"",Field chỉ chấp nhận số nguyên dương; không cho lưu giá trị chữ.,
-FNHGT_TC36,UI,,Default value,,Has slider steps = checked,1. Kiểm tra giá trị mặc định.,,Giá trị mặc định = 4.,
-FNHGT_TC37,Happy,Show step value,Uncheck,,Has slider steps = checked; Show step value = checked,"1. Uncheck.
+33,Negative,,Nhập 0,,Has slider steps = checked,"1. Nhập Amount = 0.
+2. Click [Save Changes].",Amount = 0,"Lỗi: giá trị không hợp lệ, không cho phép lưu.",<cần confirm>: sheet gốc mô tả rule nhưng chưa có bằng chứng actual rõ ràng (xem spec mục 5)
+34,Negative,,Nhập số âm,,Has slider steps = checked,1. Nhập Amount = -2 và thử save.,Amount = -2,"Lỗi: giá trị không hợp lệ, không cho phép lưu.",<cần confirm>: xem TC33
+35,Negative,,Nhập chữ,,Has slider steps = checked,1. Nhập Amount = abc và thử save.,Amount = abc,Field chỉ chấp nhận số nguyên dương; không cho lưu giá trị chữ.,
+36,UI,,Default value,,Has slider steps = checked,1. Kiểm tra giá trị mặc định.,,Giá trị mặc định = 4.,
+37,Happy,Show step value,Uncheck,,Has slider steps = checked; Show step value = checked,"1. Uncheck.
 2. Kiểm tra Preview.",,"- Preview: nhãn số dưới slider ẩn.
 - Slider vẫn giữ step ticks.",
-FNHGT_TC38,Happy,Show range input,Toggle OFF,,Show range input = ON,"1. Toggle OFF.
+38,Happy,Show range input,Toggle OFF,,Show range input = ON,"1. Toggle OFF.
 2. Kiểm tra Preview và Filter Settings.",,"- Preview: input boxes ẩn.
 - Show placeholder text, Placeholder text, Unit Display Option ẩn/disabled.",
-FNHGT_TC39,Happy,,Toggle ON lại,,Show range input = OFF,"1. Toggle ON.
+39,Happy,,Toggle ON lại,,Show range input = OFF,"1. Toggle ON.
 2. Kiểm tra Preview và Filter Settings.",,"- Preview: input boxes hiển thị lại.
 - Show placeholder text, Placeholder text, Unit Display Option visible trở lại.",
-FNHGT_TC40,UI,,Default state,,Display Style = Slider - input,1. Kiểm tra toggle.,,Toggle ON.,
-FNHGT_TC41,Happy,Show placeholder text,Uncheck,,Show range input = ON; Show placeholder text = checked,"1. Uncheck.
+40,UI,,Default state,,Display Style = Slider - input,1. Kiểm tra toggle.,,Toggle ON.,
+41,Happy,Show placeholder text,Uncheck,,Show range input = ON; Show placeholder text = checked,"1. Uncheck.
 2. Kiểm tra field Placeholder text và Preview.",,"- Placeholder text field ẩn.
 - Preview: input boxes không hiển thị placeholder khi trống.",
-FNHGT_TC42,Happy,Placeholder text,Đổi giá trị,,Show range input = ON; Show placeholder text = checked,"1. Xóa giá trị mặc định, nhập text mới.
-2. Kiểm tra Preview.",Placeholder = ""Min - Max"","- Giá trị lưu thành công.
+42,Happy,Placeholder text,Đổi giá trị,,Show range input = ON; Show placeholder text = checked,"1. Xóa giá trị mặc định, nhập text mới.
+2. Kiểm tra Preview.",Placeholder = Min - Max,"- Giá trị lưu thành công.
 - Preview: input boxes hiển thị placeholder mới khi trống.",
-FNHGT_TC43,UI,,Default value,,Show range input = ON; Show placeholder text = checked,1. Kiểm tra giá trị mặc định.,,Mặc định: {{From}} - {{To}}.,
-FNHGT_TC44,Happy,Unit Display Option,Đổi option,,Show range input = ON,"1. Mở dropdown, chọn option khác.
+43,UI,,Default value,,Show range input = ON; Show placeholder text = checked,1. Kiểm tra giá trị mặc định.,,Mặc định: {{From}} - {{To}}.,
+44,Happy,Unit Display Option,Đổi option,,Show range input = ON,"1. Mở dropdown, chọn option khác.
 2. Kiểm tra Preview.",,"- Setting lưu thành công.
 - Preview: vị trí đơn vị (cm) đổi đúng theo option đã chọn.",
-FNHGT_TC45,UI,,Default value,,Show range input = ON,1. Kiểm tra dropdown.,,Mặc định: Inside input.,
-FNHGT_TC46,Happy,Range slider & Range input order,Chọn input on top,,Show range slider = ON; Show range input = ON,"1. Chọn ""input on top"".
+45,UI,,Default value,,Show range input = ON,1. Kiểm tra dropdown.,,Mặc định: Inside input.,
+46,Happy,Range slider & Range input order,Chọn input on top,,Show range slider = ON; Show range input = ON,"1. Chọn ""input on top"".
 2. Kiểm tra Preview.",,"- Setting lưu thành công.
 - Preview: input boxes hiển thị phía trên slider.",
-FNHGT_TC47,UI,,Default value,,Show range slider = ON; Show range input = ON,1. Kiểm tra lựa chọn mặc định.,,Option ""slider on top"" được chọn mặc định.,
-FNHGT_TC48,Edge,Setup dynamic filter,Bật ON,,Setup dynamic filter = OFF,"1. Toggle ON.
+47,UI,,Default value,,Show range slider = ON; Show range input = ON,1. Kiểm tra lựa chọn mặc định.,,Option slider on top được chọn mặc định.,
+48,Edge,Setup dynamic filter,Bật ON,,Setup dynamic filter = OFF,"1. Toggle ON.
 2. Save Changes.
 3. Kiểm tra storefront khi search/category thay đổi.",,2. Storefront: Height filter range tự động thu hẹp theo sản phẩm hiện có trong kết quả tìm kiếm.,"<cần confirm>: cơ chế chính xác chưa rõ — tự thu hẹp dựa trên search keyword hiện tại, Category Page đang xem, hay cả 2 (xem spec mục 6.6)"
-FNHGT_TC49,UI,,Default state,,,1. Kiểm tra toggle.,,Toggle OFF (mặc định) + icon tooltip (?) hiển thị.,
-FNHGT_TC50,Edge,Sort Order,Field có tồn tại trên UI không,,,1. Rà toàn bộ Filter Settings tìm field Sort Order (Lowest→Highest / Highest→Lowest / Manual order).,,"Field Sort Order hiển thị, default = Lowest→Highest.","<cần confirm>: sheet gốc KHÔNG có case riêng cho field này nhưng để lại note lạc gợi ý CÓ tồn tại (""Sai thứ tự, hiện tại đang là H-L, L-H, Manual order"" — relocate từ case Decimal Separator, xem spec mục 6.9). Case này viết theo giả thuyết field tồn tại, cần xác nhận lại với BA/ảnh Figma thật."
-FNHGT_TC51,Happy,Hide on customer group,Chọn 1 customer group,,Có ít nhất 1 customer group tồn tại,"1. Click [Edit].
+49,UI,,Default state,,,1. Kiểm tra toggle.,,Toggle OFF (mặc định) + icon tooltip (?) hiển thị.,
+50,Edge,Sort Order,Field có tồn tại trên UI không,,,1. Rà toàn bộ Filter Settings tìm field Sort Order (Lowest→Highest / Highest→Lowest / Manual order).,,"Field Sort Order hiển thị, default = Lowest→Highest.","<cần confirm>: sheet gốc KHÔNG có case riêng cho field này nhưng để lại note lạc gợi ý CÓ tồn tại (""Sai thứ tự, hiện tại đang là H-L, L-H, Manual order"" — relocate từ case Decimal Separator, xem spec mục 6.9). Case này viết theo giả thuyết field tồn tại, cần xác nhận lại với BA/ảnh Figma thật."
+51,Happy,Hide on customer group,Chọn 1 customer group,,Có ít nhất 1 customer group tồn tại,"1. Click [Edit].
 2. Chọn 1 group, xác nhận.
 3. Save Changes.
 4. Đăng nhập storefront bằng account thuộc group đã chọn.",,"- Admin: hiển thị ""1 selected"".
-- Storefront: Height filter không hiển thị với customer thuộc group đó.","<cần confirm>: rủi ro kế thừa — bug đã xác nhận NG ở Sale Percentage/Width/Weight: storefront vẫn hiển thị filter dù account thuộc group bị hide"
-FNHGT_TC52,Edge,,BC xoá customer group đã chọn,,Filter Height đã ẩn với ≥1 customer group,"1. Xóa customer group đó trong BC, trigger sync.
+- Storefront: Height filter không hiển thị với customer thuộc group đó.",<cần confirm>: rủi ro kế thừa — bug đã xác nhận NG ở Sale Percentage/Width/Weight: storefront vẫn hiển thị filter dù account thuộc group bị hide
+52,Edge,,BC xoá customer group đã chọn,,Filter Height đã ẩn với ≥1 customer group,"1. Xóa customer group đó trong BC, trigger sync.
 2. Mở lại popup Hide on customer group.",Customer group đã chọn bị xoá bên BC,Số lượng hiển thị ở popup cập nhật đúng (giảm số selected).,"<cần confirm>: rủi ro kế thừa — bug đã xác nhận NG ở Sale Percentage/Width/Weight: popup không update số lượng customer group; sheet gốc Height không có case riêng, viết theo pattern chung"
-FNHGT_TC53,UI,,Default state,,,1. Kiểm tra field.,,"- Hiển thị ""0 selected"".
+53,UI,,Default state,,,1. Kiểm tra field.,,"- Hiển thị ""0 selected"".
 - Button [Edit] màu cam visible.",
-FNHGT_TC54,Happy,Display tooltip,Toggle OFF,,Display tooltip = ON,"1. Toggle OFF.
+54,Happy,Display tooltip,Toggle OFF,,Display tooltip = ON,"1. Toggle OFF.
 2. Save Changes.
 3. Kiểm tra storefront.",,3. Icon tooltip (?) không hiển thị cạnh tiêu đề Height filter.,
-FNHGT_TC55,UI,,Default state,,Appearance Settings visible,1. Kiểm tra toggle.,,Toggle ON.,
-FNHGT_TC56,Happy,Tooltip content,Đổi nội dung,,Display tooltip = ON,"1. Xóa nội dung, nhập text mới.
+55,UI,,Default state,,Appearance Settings visible,1. Kiểm tra toggle.,,Toggle ON.,
+56,Happy,Tooltip content,Đổi nội dung,,Display tooltip = ON,"1. Xóa nội dung, nhập text mới.
 2. Save Changes.
-3. Hover icon (?) trên storefront.",Tooltip = ""Filter by product height (cm)"",3. Hover hiển thị đúng nội dung mới.,
-FNHGT_TC57,UI,,Default value,,Display tooltip = ON,1. Kiểm tra field.,,Field hiển thị text mặc định mô tả về Height filter.,
-FNHGT_TC58,Happy,Content View,Đổi option,,Appearance Settings visible,"1. Chọn option khác.
+3. Hover icon (?) trên storefront.",Tooltip = Filter by product height (cm),3. Hover hiển thị đúng nội dung mới.,
+57,UI,,Default value,,Display tooltip = ON,1. Kiểm tra field.,,Field hiển thị text mặc định mô tả về Height filter.,
+58,Happy,Content View,Đổi option,,Appearance Settings visible,"1. Chọn option khác.
 2. Save Changes.
 3. Kiểm tra storefront.",,3. Height filter hiển thị đúng content view đã chọn.,
-FNHGT_TC59,UI,,Default value,,Appearance Settings visible,1. Kiểm tra dropdown.,,Mặc định: Scrollable.,
-FNHGT_TC60,Happy,Collapse / Expand (Desktop) / (Mobile),Desktop = Collapse,,Appearance Settings visible,"1. Chọn Collapse (On Desktop).
+59,UI,,Default value,,Appearance Settings visible,1. Kiểm tra dropdown.,,Mặc định: Scrollable.,
+60,Happy,Collapse / Expand (Desktop) / (Mobile),Desktop = Collapse,,Appearance Settings visible,"1. Chọn Collapse (On Desktop).
 2. Save Changes.
 3. Kiểm tra Desktop storefront.",,3. Height filter ở trạng thái collapsed (chỉ hiện title + toggle mở rộng).,
-FNHGT_TC61,Happy,,Mobile = Collapse,,Appearance Settings visible,"1. Chọn Collapse (On Mobile).
+61,Happy,,Mobile = Collapse,,Appearance Settings visible,"1. Chọn Collapse (On Mobile).
 2. Save Changes.
 3. Kiểm tra Mobile storefront.",,3. Height filter ở trạng thái collapsed.,
-FNHGT_TC62,UI,,Default value,,Appearance Settings visible,1. Kiểm tra cả 2 dropdown.,,"- (On Desktop): Expand (mặc định).
+62,UI,,Default value,,Appearance Settings visible,1. Kiểm tra cả 2 dropdown.,,"- (On Desktop): Expand (mặc định).
 - (On Mobile): Expand (mặc định).",
-FNHGT_TC63,Happy,Show search box on desktop / mobile,Desktop = ON,,Show search box on desktop = OFF,"1. Toggle ON.
+63,Happy,Show search box on desktop / mobile,Desktop = ON,,Show search box on desktop = OFF,"1. Toggle ON.
 2. Save Changes.
 3. Kiểm tra Desktop storefront.",,3. Search box hiển thị trong Height filter.,
-FNHGT_TC64,Happy,,Mobile = ON,,Show search box on mobile = OFF,"1. Toggle ON.
+64,Happy,,Mobile = ON,,Show search box on mobile = OFF,"1. Toggle ON.
 2. Save Changes.
 3. Kiểm tra Mobile storefront.",,3. Search box hiển thị trong Height filter.,
-FNHGT_TC65,UI,,Default value,,Appearance Settings visible,1. Kiểm tra cả 2 toggle.,,"- On desktop: OFF (mặc định).
+65,UI,,Default value,,Appearance Settings visible,1. Kiểm tra cả 2 toggle.,,"- On desktop: OFF (mặc định).
 - On mobile: OFF (mặc định).",
-FNHGT_TC66,Happy,Button [Save Changes],Lưu thành công,,Tất cả required field đã điền hợp lệ,"1. Cấu hình các setting cho Height filter.
+66,Happy,Button [Save Changes],Lưu thành công,,Tất cả required field đã điền hợp lệ,"1. Cấu hình các setting cho Height filter.
 2. Click [Save Changes].
 3. Reload page.
 4. Kiểm tra storefront.",,"2. Toast success hiển thị.
 3. Settings persist sau reload.
 4. Storefront phản ánh đúng settings mới.",
-FNHGT_TC67,Negative,,Title trống,,Field Title đang trống,1. Click [Save Changes].,Title = (rỗng),"Lỗi validation hiển thị, không lưu thành công.",
-FNHGT_TC68,Happy,Button [Save as template],Lưu template,,Settings hợp lệ,"1. Cấu hình settings.
+67,Negative,,Title trống,,Field Title đang trống,1. Click [Save Changes].,Title = (rỗng),"Lỗi validation hiển thị, không lưu thành công.",
+68,Happy,Button [Save as template],Lưu template,,Settings hợp lệ,"1. Cấu hình settings.
 2. Click [Save as template].",,"- Template lưu thành công.
 - Template có thể tái sử dụng khi tạo filter mới.",
 ,,=== EDIT FILTER NODE - HEIGHT ===,,,,,,,
-FNHGT_TC69,Happy,Navigation,Mở đúng Edit screen,,Filter Height đã tồn tại,"1. Vào danh sách filter node.
+69,Happy,Navigation,Mở đúng Edit screen,,Filter Height đã tồn tại,"1. Vào danh sách filter node.
 2. Click filter ""Height"".",,"Mở Edit screen, panel title = ""Height"", load đúng data hiện có của filter này.",
-FNHGT_TC70,Edge,,Nhiều filter cùng tồn tại — không lẫn data,,Filter Height và Depth cùng tồn tại,"1. Mở Edit Depth, ghi nhận giá trị.
+70,Edge,,Nhiều filter cùng tồn tại — không lẫn data,,Filter Height và Depth cùng tồn tại,"1. Mở Edit Depth, ghi nhận giá trị.
 2. Quay lại danh sách, mở Edit Height.
 3. Kiểm tra toàn bộ field.",,"3. Toàn bộ field hiển thị đúng data của Height (range cm), không lẫn giá trị từ Depth.",
-FNHGT_TC71,Happy,Pre-fill General Settings,Title / color / Alignment,,"Filter Height đã lưu Title=""Height (cm)"", color khác default, Alignment=Center","1. Mở Edit Height, kiểm tra 3 setting.",,"Title, color, Alignment hiển thị đúng giá trị đã lưu, không reset về default.",
-FNHGT_TC72,Happy,Pre-fill Display Style,Không reset default,,Filter Height đã lưu Display Style=Grid,"1. Mở Edit Height, kiểm tra Display Style.",,Hiển thị đúng Grid (không reset về Slider-input default).,
-FNHGT_TC73,Happy,Pre-fill Slider sub-settings,Show range slider / Slide handle color,,Filter Height đã lưu Show range slider=OFF,"1. Mở Edit Height, kiểm tra toggle và color swatch.",,"Hiển thị đúng giá trị đã lưu (slider ẩn trên Preview, không hiện lại mặc định).",
-FNHGT_TC74,Happy,,Decimal Separator,,Filter Height đã lưu Decimal Separator khác default,"1. Mở Edit Height, kiểm tra dropdown.",,Hiển thị đúng giá trị đã lưu.,
-FNHGT_TC75,Happy,,Show tooltip / Tooltip color,,Filter Height đã lưu Show tooltip=unchecked,"1. Mở Edit Height, kiểm tra checkbox và color.",,Hiển thị unchecked đúng như đã lưu; Tooltip color field ẩn tương ứng.,
-FNHGT_TC76,Happy,,Has slider steps / Amount / Show step value,,"Filter Height đã lưu Amount=6, Show step value=unchecked","1. Mở Edit Height, kiểm tra 3 setting.",,"Has slider steps=checked, Amount=6, Show step value=unchecked — đúng giá trị đã lưu, không reset về default (4, checked).",
-FNHGT_TC77,Happy,,Show range input / placeholder / Unit Display Option,,"Filter Height đã lưu Placeholder=""Min - Max""","1. Mở Edit Height, kiểm tra 4 setting.",,"Hiển thị đúng giá trị đã lưu cho cả 4 field, không reset về default ({{From}} - {{To}}).",
-FNHGT_TC78,Happy,,Range slider & Range input order,,Filter Height đã lưu order=input on top,"1. Mở Edit Height, kiểm tra Preview.",,"Preview hiển thị input boxes phía trên slider, đúng order đã lưu.",
-FNHGT_TC79,Happy,Pre-fill Setup dynamic filter,Không reset default,,Filter Height đã lưu Setup dynamic filter=ON,"1. Mở Edit Height, kiểm tra toggle.",,Hiển thị ON đúng như đã lưu.,
-FNHGT_TC80,Happy,Pre-fill Hide on customer group,Đúng số group đã ẩn,,Filter Height đã ẩn với 2 customer group,"1. Mở Edit Height, kiểm tra setting.",,"Hiển thị ""2 selected"" đúng số đã lưu.",
-FNHGT_TC81,Happy,Pre-fill Appearance Settings,Toàn bộ setting,,Filter Height đã lưu Appearance setting khác default,"1. Mở Edit Height, kiểm tra toàn bộ Appearance Settings.",,"Tất cả toggle/dropdown hiển thị đúng giá trị đã lưu, không reset default.",
-FNHGT_TC82,Happy,Display Style,Đổi Display Style khi đã có data pre-loaded,,Filter Height đã lưu Display Style=Slider-input (đã tồn tại),"1. Mở Edit Height.
+71,Happy,Pre-fill General Settings,Title / color / Alignment,,"Filter Height đã lưu Title=""Height (cm)"", color khác default, Alignment=Center","1. Mở Edit Height, kiểm tra 3 setting.",,"Title, color, Alignment hiển thị đúng giá trị đã lưu, không reset về default.",
+72,Happy,Pre-fill Display Style,Không reset default,,Filter Height đã lưu Display Style=Grid,"1. Mở Edit Height, kiểm tra Display Style.",,Hiển thị đúng Grid (không reset về Slider-input default).,
+73,Happy,Pre-fill Slider sub-settings,Show range slider / Slide handle color,,Filter Height đã lưu Show range slider=OFF,"1. Mở Edit Height, kiểm tra toggle và color swatch.",,"Hiển thị đúng giá trị đã lưu (slider ẩn trên Preview, không hiện lại mặc định).",
+74,Happy,,Decimal Separator,,Filter Height đã lưu Decimal Separator khác default,"1. Mở Edit Height, kiểm tra dropdown.",,Hiển thị đúng giá trị đã lưu.,
+75,Happy,,Show tooltip / Tooltip color,,Filter Height đã lưu Show tooltip=unchecked,"1. Mở Edit Height, kiểm tra checkbox và color.",,Hiển thị unchecked đúng như đã lưu; Tooltip color field ẩn tương ứng.,
+76,Happy,,Has slider steps / Amount / Show step value,,"Filter Height đã lưu Amount=6, Show step value=unchecked","1. Mở Edit Height, kiểm tra 3 setting.",,"Has slider steps=checked, Amount=6, Show step value=unchecked — đúng giá trị đã lưu, không reset về default (4, checked).",
+77,Happy,,Show range input / placeholder / Unit Display Option,,"Filter Height đã lưu Placeholder=""Min - Max""","1. Mở Edit Height, kiểm tra 4 setting.",,"Hiển thị đúng giá trị đã lưu cho cả 4 field, không reset về default ({{From}} - {{To}}).",
+78,Happy,,Range slider & Range input order,,Filter Height đã lưu order=input on top,"1. Mở Edit Height, kiểm tra Preview.",,"Preview hiển thị input boxes phía trên slider, đúng order đã lưu.",
+79,Happy,Pre-fill Setup dynamic filter,Không reset default,,Filter Height đã lưu Setup dynamic filter=ON,"1. Mở Edit Height, kiểm tra toggle.",,Hiển thị ON đúng như đã lưu.,
+80,Happy,Pre-fill Hide on customer group,Đúng số group đã ẩn,,Filter Height đã ẩn với 2 customer group,"1. Mở Edit Height, kiểm tra setting.",,"Hiển thị ""2 selected"" đúng số đã lưu.",
+81,Happy,Pre-fill Appearance Settings,Toàn bộ setting,,Filter Height đã lưu Appearance setting khác default,"1. Mở Edit Height, kiểm tra toàn bộ Appearance Settings.",,"Tất cả toggle/dropdown hiển thị đúng giá trị đã lưu, không reset default.",
+82,Happy,Display Style,Đổi Display Style khi đã có data pre-loaded,,Filter Height đã lưu Display Style=Slider-input (đã tồn tại),"1. Mở Edit Height.
 2. Đổi Display Style sang List.
 3. Kiểm tra Preview và Filter Settings.",,"- Option List active.
 - Preview: filter hiển thị dạng danh sách.
 - Toàn bộ setting chỉ dành cho Slider ẩn/disabled đúng như khi tạo mới (state pre-loaded không gây lỗi cascade ẩn/hiện field).",
-FNHGT_TC83,Happy,Show range slider,Toggle OFF khi đã có data pre-loaded,,Filter Height đã lưu Show range slider=ON (đã tồn tại),"1. Mở Edit Height.
+83,Happy,Show range slider,Toggle OFF khi đã có data pre-loaded,,Filter Height đã lưu Show range slider=ON (đã tồn tại),"1. Mở Edit Height.
 2. Toggle Show range slider OFF.
 3. Kiểm tra Preview và Filter Settings.",,"- Preview: slider ẩn (chỉ còn input nếu Show range input = ON).
 - Slide handle color, Show tooltip, Tooltip color, Has slider steps ẩn/disabled đúng như khi tạo mới.",
-FNHGT_TC84,Happy,Has slider steps,Uncheck khi đã có data pre-loaded,,Filter Height đã lưu Has slider steps=checked (đã tồn tại),"1. Mở Edit Height.
+84,Happy,Has slider steps,Uncheck khi đã có data pre-loaded,,Filter Height đã lưu Has slider steps=checked (đã tồn tại),"1. Mở Edit Height.
 2. Uncheck Has slider steps.
 3. Kiểm tra Filter Settings panel và Preview.",,"- Amount of slider steps field ẩn.
 - Show step value checkbox ẩn.
 - Preview: slider không có step ticks và nhãn số.",
-FNHGT_TC85,Happy,Show range input,Toggle OFF khi đã có data pre-loaded,,Filter Height đã lưu Show range input=ON (đã tồn tại),"1. Mở Edit Height.
+85,Happy,Show range input,Toggle OFF khi đã có data pre-loaded,,Filter Height đã lưu Show range input=ON (đã tồn tại),"1. Mở Edit Height.
 2. Toggle Show range input OFF.
 3. Kiểm tra Preview và Filter Settings.",,"- Preview: input boxes ẩn.
 - Show placeholder text, Placeholder text, Unit Display Option ẩn/disabled đúng như khi tạo mới.",
-FNHGT_TC86,Happy,Hide on customer group,Chọn thêm group khi đã có selection sẵn,,Filter Height đã ẩn với 2 customer group (đã tồn tại),"1. Mở Edit Height.
+86,Happy,Hide on customer group,Chọn thêm group khi đã có selection sẵn,,Filter Height đã ẩn với 2 customer group (đã tồn tại),"1. Mở Edit Height.
 2. Click [Edit] tại Hide on customer group.
 3. Chọn thêm 1 group nữa (tổng 3).
 4. Save Changes.
 5. Đăng nhập storefront bằng account thuộc group mới thêm.",,"- Admin hiển thị ""3 selected"".
 - Storefront ẩn filter đúng với cả 3 group (bao gồm group mới thêm), không ảnh hưởng 2 group cũ.",
-FNHGT_TC87,Sync,Height Range,Tự tính từ data BC đã sync,,- Products BC có Height đã sync,"1. Kiểm tra dropdown Height Range trong Admin.
+87,Sync,Height Range,Tự tính từ data BC đã sync,,- Products BC có Height đã sync,"1. Kiểm tra dropdown Height Range trong Admin.
 2. Kiểm tra Preview slider.","BC Height: min = 5cm, max = 150cm","- Admin dropdown: [5] - [150].
 - Preview: slider min = 5, max = 150.",
-FNHGT_TC88,Sync,,BC tăng giá trị max của 1 product,,"Height Range đã sync lần trước = [5, 150]","1. Cập nhật Height của product trong BC (max mới = 200cm).
+88,Sync,,BC tăng giá trị max của 1 product,,"Height Range đã sync lần trước = [5, 150]","1. Cập nhật Height của product trong BC (max mới = 200cm).
 2. Trigger re-sync.
 3. Kiểm tra Admin dropdown và Preview.
 4. Kiểm tra storefront.",Height max mới = 200cm,"- Admin dropdown: [5] - [200].
 - Preview và storefront: slider max cập nhật = 200cm.",
-FNHGT_TC89,Sync,,BC xoá/giảm product có Height max,,"Height Range đã sync với range [5, 200]","1. Xóa product có Height = 200cm trong BC (hoặc sửa xuống thấp hơn).
+89,Sync,,BC xoá/giảm product có Height max,,"Height Range đã sync với range [5, 200]","1. Xóa product có Height = 200cm trong BC (hoặc sửa xuống thấp hơn).
 2. Trigger re-sync.
 3. Kiểm tra Admin dropdown và storefront.",,Range thu hẹp theo giá trị max mới còn lại (Admin + storefront khớp nhau).,
-FNHGT_TC90,Sync,,Xóa giá trị Height của 1 product (optional cho phép để trống) → re-sync,,Height đã có giá trị cũ và đã sync,"1. Xóa giá trị Height trong BC (để trống).
+90,Sync,,Xóa giá trị Height của 1 product (optional cho phép để trống) → re-sync,,Height đã có giá trị cũ và đã sync,"1. Xóa giá trị Height trong BC (để trống).
 2. Save product.
 3. Trigger re-sync.
 4. Kiểm tra staging.
 5. Kiểm tra storefront.",Height cũ = 30cm → mới = (empty),"- BC: Lưu thành công (field optional).
 - Staging: Height = null/empty cho product đó.
 - Storefront: product đó KHÔNG được tính vào Height Range/count — không kéo méo min/max.",
-FNHGT_TC91,Sync,,Toàn bộ product BC không có Height,,Tất cả products BC: Height = empty,"1. Xóa Height khỏi tất cả product trong BC (để trống, vì field optional cho phép).
+91,Sync,,Toàn bộ product BC không có Height,,Tất cả products BC: Height = empty,"1. Xóa Height khỏi tất cả product trong BC (để trống, vì field optional cho phép).
 2. Trigger sync.
 3. Kiểm tra Height filter trên storefront.",,"- Staging: Height Range = null/empty.
-- Storefront: Height filter ẩn hoặc disabled (không có data để filter).","<cần confirm>: chưa xác nhận UI cụ thể — ẩn hẳn field hay hiển thị disabled/cảnh báo"
-FNHGT_TC92,Sync,,"Một phần product có Height, phần còn lại để trống",,"Filter Height đang sync; 50% product có Height, 50% để trống","1. Mở Edit Height, kiểm tra Height Range.
+- Storefront: Height filter ẩn hoặc disabled (không có data để filter).",<cần confirm>: chưa xác nhận UI cụ thể — ẩn hẳn field hay hiển thị disabled/cảnh báo
+92,Sync,,"Một phần product có Height, phần còn lại để trống",,"Filter Height đang sync; 50% product có Height, 50% để trống","1. Mở Edit Height, kiểm tra Height Range.
 2. So sánh với số lượng product thực tế có Height.",,"Range chỉ tính trên các product CÓ giá trị Height, không tính product để trống vào min/max — khớp số lượng product thực có Height.",
-FNHGT_TC93,Sync,,Product mới thêm để trống Height (optional) → không ảnh hưởng range,,"Filter Height đang có range = [5, 100]","1. Thêm product mới vào BC, để trống Height (vì optional).
+93,Sync,,Product mới thêm để trống Height (optional) → không ảnh hưởng range,,"Filter Height đang có range = [5, 100]","1. Thêm product mới vào BC, để trống Height (vì optional).
 2. Trigger sync.
 3. Mở Edit Height, kiểm tra Height Range.",Product mới: Height = (empty),"Range giữ nguyên [5, 100], không bị ảnh hưởng bởi product không có Height — **đối lập hoàn toàn Weight** (Weight required nên default value luôn ảnh hưởng range; Height optional nên để trống hoàn toàn transparent với range).",
-FNHGT_TC94,Sync,,BC cập nhật Height nhưng chưa trigger sync lại (stale),,Height đã sync với giá trị cũ,"1. Thay đổi Height trong BC.
+94,Sync,,BC cập nhật Height nhưng chưa trigger sync lại (stale),,Height đã sync với giá trị cũ,"1. Thay đổi Height trong BC.
 2. Save product.
 3. KHÔNG trigger sync.
 4. Kiểm tra staging và storefront.",,"Staging vẫn giữ giá trị cũ; Storefront Height filter range vẫn dựa trên giá trị cũ, chưa phản ánh thay đổi mới cho tới khi sync chạy lại.",
-FNHGT_TC95,Sync,,Product Type = Digital ẩn field Height,,1 product Type = Digital tồn tại trong BC,"1. Tạo product Type = Digital (không có field Height để nhập, theo suy luận từ cơ chế đã xác nhận ở Weight).
+95,Sync,,Product Type = Digital ẩn field Height,,1 product Type = Digital tồn tại trong BC,"1. Tạo product Type = Digital (không có field Height để nhập, theo suy luận từ cơ chế đã xác nhận ở Weight).
 2. Sync về hệ thống.
 3. Trên storefront, kiểm tra Height Range và lọc theo Height.",,"- Product Digital không được tính vào Height Range/count.
 - Khi lọc theo Height trên storefront, product Digital không xuất hiện trong bất kỳ khoảng nào.","<cần confirm>: sheet gốc Height KHÔNG có case riêng test tình huống Digital (khác Weight có case #84/85) — đây là suy luận theo pattern đã xác nhận ở Weight, độ tin cậy thấp hơn, cần xác nhận lại"
-FNHGT_TC96,Sync,,Height = 0,,,"1. Nhập Height = 0 trong BC (nếu BC cho lưu).
+96,Sync,,Height = 0,,,"1. Nhập Height = 0 trong BC (nếu BC cho lưu).
 2. Save product, trigger sync.
-3. Kiểm tra staging/Admin và storefront.",Height = 0,Nếu BC cho lưu: Height Range/filter storefront bao gồm giá trị 0cm.,"<cần confirm>: chưa xác nhận BC có chặn Height=0 như số âm hay coi là hợp lệ (xem spec mục 9.1)"
-FNHGT_TC97,Sync,,Nhiều chữ số thập phân,,,"1. Nhập Height = 10.123456 trong BC.
+3. Kiểm tra staging/Admin và storefront.",Height = 0,Nếu BC cho lưu: Height Range/filter storefront bao gồm giá trị 0cm.,<cần confirm>: chưa xác nhận BC có chặn Height=0 như số âm hay coi là hợp lệ (xem spec mục 9.1)
+97,Sync,,Nhiều chữ số thập phân,,,"1. Nhập Height = 10.123456 trong BC.
 2. Save product, trigger sync.
-3. Kiểm tra staging và storefront.",Height = 10.123456cm,Staging/storefront phản ánh đúng giá trị BC đã lưu (nguyên hoặc làm tròn theo giới hạn thập phân của BC).,"<cần confirm>: chưa xác nhận BC làm tròn bao nhiêu chữ số thập phân (xem spec mục 9.1)"
-FNHGT_TC98,Sync,,Số rất lớn,,,"1. Nhập Height = 999999.99 trong BC.
+3. Kiểm tra staging và storefront.",Height = 10.123456cm,Staging/storefront phản ánh đúng giá trị BC đã lưu (nguyên hoặc làm tròn theo giới hạn thập phân của BC).,<cần confirm>: chưa xác nhận BC làm tròn bao nhiêu chữ số thập phân (xem spec mục 9.1)
+98,Sync,,Số rất lớn,,,"1. Nhập Height = 999999.99 trong BC.
 2. Save product, trigger sync.
-3. Kiểm tra Height Range max ở Admin và storefront.",Height = 999999.99cm,"Range max cập nhật đúng giá trị, không lỗi hiển thị/tràn số.","<cần confirm>: chưa xác nhận BC có giới hạn max value không (xem spec mục 9.1)"
-FNHGT_TC99,Sync,,Sync đang In Progress,,"Filter Height đang hiển thị range cũ [5,150]","1. BC đổi Height 1 product (max mới=200), trigger sync.
+3. Kiểm tra Height Range max ở Admin và storefront.",Height = 999999.99cm,"Range max cập nhật đúng giá trị, không lỗi hiển thị/tràn số.",<cần confirm>: chưa xác nhận BC có giới hạn max value không (xem spec mục 9.1)
+99,Sync,,Sync đang In Progress,,"Filter Height đang hiển thị range cũ [5,150]","1. BC đổi Height 1 product (max mới=200), trigger sync.
 2. Trong lúc batch sync đang chạy (In Progress), kiểm tra Admin Height Range và storefront.",Batch sync hiện tại = In Progress,Admin/Storefront hiển thị data theo config cũ hay mới trong lúc đang sync — cần xác nhận theo pattern chung dự án.,"<cần confirm>: câu hỏi Loại 2 đã ghi nhận chung ở docs/bigcommerce-platform-facts.md mục 4, áp dụng lại cho Height Range"
-FNHGT_TC100,Sync,,Batch sync gần nhất Failed,,"Filter Height đang hiển thị range [5,150]","1. BC đổi Height 1 product.
+100,Sync,,Batch sync gần nhất Failed,,"Filter Height đang hiển thị range [5,150]","1. BC đổi Height 1 product.
 2. Trigger sync nhưng để batch fail (giả lập lỗi).
 3. Kiểm tra Admin Height Range và storefront.",Batch sync = Failed,"Admin/Storefront giữ nguyên range cũ (data lần sync Success gần nhất), không hiển thị data lỗi/rỗng.","<cần confirm>: chưa có bằng chứng rõ trong spec, cần xác nhận BA"
-FNHGT_TC101,Sync,,Manual Sync và Schedule Sync trả kết quả Height Range như nhau,,"Cùng 1 thay đổi Height bên BC, chưa sync","1. Trigger Manual Sync, kiểm tra Height Range.
+101,Sync,,Manual Sync và Schedule Sync trả kết quả Height Range như nhau,,"Cùng 1 thay đổi Height bên BC, chưa sync","1. Trigger Manual Sync, kiểm tra Height Range.
 2. Revert lại thay đổi, lặp lại nhưng dùng Schedule Sync tới lượt Products.
 3. So sánh kết quả 2 lần.",,Height Range cập nhật giống nhau bất kể trigger qua Manual Sync hay Schedule Sync.,
-FNHGT_TC102,Sync,,Sync độc lập trong lúc Admin đang mở Edit,,Đang mở Edit Height (chưa Save),"1. Đồng thời sửa Height của 1 product trong BC, trigger sync.
+102,Sync,,Sync độc lập trong lúc Admin đang mở Edit,,Đang mở Edit Height (chưa Save),"1. Đồng thời sửa Height của 1 product trong BC, trigger sync.
 2. Admin Save Edit screen (không đụng field range), kiểm tra storefront.",,"Sync data Height (BC→staging→storefront) hoạt động độc lập, range cập nhật đúng dù Admin đang mở Edit screen của filter này.",5W1H: When (sync độc lập)
-FNHGT_TC103,Sync,,Preview/Height Range trên MH Edit có tự refresh real-time không,,"Đang mở Edit Height, range hiển thị [5,100]","1. Trigger sync làm range đổi thành [5,200] (ở tab/thiết bị khác).
-2. Quay lại tab Edit Height (không reload), kiểm tra Height Range và Preview.",,"Xác nhận spec: Preview/Height Range có tự refresh real-time, hay giữ snapshot tại thời điểm mở Edit cho đến khi reload trang.","<cần confirm>: 5W1H: Where (xem spec mục 9.3)"
-FNHGT_TC104,Sync,Height filter — kết quả lọc storefront,Lọc đúng theo range đã chọn,,Height filter đã sync; storefront đang mở,"1. Trên storefront kéo slider Height về khoảng [20, 80].
+103,Sync,,Preview/Height Range trên MH Edit có tự refresh real-time không,,"Đang mở Edit Height, range hiển thị [5,100]","1. Trigger sync làm range đổi thành [5,200] (ở tab/thiết bị khác).
+2. Quay lại tab Edit Height (không reload), kiểm tra Height Range và Preview.",,"Xác nhận spec: Preview/Height Range có tự refresh real-time, hay giữ snapshot tại thời điểm mở Edit cho đến khi reload trang.",<cần confirm>: 5W1H: Where (xem spec mục 9.3)
+104,Sync,Height filter — kết quả lọc storefront,Lọc đúng theo range đã chọn,,Height filter đã sync; storefront đang mở,"1. Trên storefront kéo slider Height về khoảng [20, 80].
 2. Kiểm tra danh sách sản phẩm.",Height range selected = 20–80cm,"Chỉ hiển thị sản phẩm có Height từ 20 đến 80cm, số lượng khớp data BC.",
-FNHGT_TC105,Sync,,Input From/To đồng bộ 2 chiều với slider,,Show range input = ON; storefront đang mở,"1. Nhập From = 15, To = 60 vào input boxes.
+105,Sync,,Input From/To đồng bộ 2 chiều với slider,,Show range input = ON; storefront đang mở,"1. Nhập From = 15, To = 60 vào input boxes.
 2. Confirm / Apply.
 3. Kiểm tra danh sách sản phẩm.
 4. Kiểm tra slider handles.","From = 15cm, To = 60cm","- Chỉ hiển thị sản phẩm có Height từ 15 đến 60cm.
 - Slider handles tự cập nhật về [15, 60].",
-FNHGT_TC106,Sync,,Clear filter → reset toàn bộ,,Height filter đang được áp dụng,"1. Clear / reset Height filter trên storefront.
+106,Sync,,Clear filter → reset toàn bộ,,Height filter đang được áp dụng,"1. Clear / reset Height filter trên storefront.
 2. Kiểm tra danh sách sản phẩm.
 3. Kiểm tra slider và input.",,"- Slider reset về full range.
 - Input fields reset về giá trị min/max.
 - Toàn bộ sản phẩm hiển thị lại.",
-FNHGT_TC107,Sync,,Input From > To khi nhập tay,,Show range input = ON; storefront đang mở,"1. Nhập From = 100, To = 20 (From > To).
-2. Confirm / Apply.","From = 100cm, To = 20cm","BC không cho phép apply filter với From > To, hoặc tự swap lại thành [20, 100].","<cần confirm>: chưa xác nhận cơ chế chặn hay tự swap (xem spec mục 9.2)"
-FNHGT_TC108,Sync,,Slider kéo 2 handles về cùng 1 điểm,,Show range slider = ON; storefront đang mở,"1. Kéo cả 2 handles về cùng giá trị (vd: cả 2 tại 50cm).
-2. Kiểm tra kết quả.",From = To = 50cm,"Hiển thị sản phẩm có Height = 50cm (exact match), hoặc xử lý khác theo spec (prevent/swap).","<cần confirm>: chưa xác nhận cơ chế xử lý (xem spec mục 9.2)"
-FNHGT_TC109,Sync,,Merchandising — product Hidden có tính vào Range/filter không,,1 product có Height trong range hiện tại nhưng bị set Hidden trên BC,"1. Trigger sync.
+107,Sync,,Input From > To khi nhập tay,,Show range input = ON; storefront đang mở,"1. Nhập From = 100, To = 20 (From > To).
+2. Confirm / Apply.","From = 100cm, To = 20cm","BC không cho phép apply filter với From > To, hoặc tự swap lại thành [20, 100].",<cần confirm>: chưa xác nhận cơ chế chặn hay tự swap (xem spec mục 9.2)
+108,Sync,,Slider kéo 2 handles về cùng 1 điểm,,Show range slider = ON; storefront đang mở,"1. Kéo cả 2 handles về cùng giá trị (vd: cả 2 tại 50cm).
+2. Kiểm tra kết quả.",From = To = 50cm,"Hiển thị sản phẩm có Height = 50cm (exact match), hoặc xử lý khác theo spec (prevent/swap).",<cần confirm>: chưa xác nhận cơ chế xử lý (xem spec mục 9.2)
+109,Sync,,Merchandising — product Hidden có tính vào Range/filter không,,1 product có Height trong range hiện tại nhưng bị set Hidden trên BC,"1. Trigger sync.
 2. Kiểm tra Height Range và kết quả filter trên storefront có còn tính product Hidden này không.",,Product Hidden không tính vào Height Range/count filter.,"<cần confirm>: suy luận theo pattern chung dự án, sheet gốc không có case riêng cho Height (xem spec mục 9.2)"
-FNHGT_TC110,Sync,Setup dynamic filter (Edit — live impact),Admin đổi Amount of slider steps khi customer đang ở range tuỳ chỉnh,,"Customer đang chọn range [20,80] cm trên storefront slider (Setup dynamic filter=ON)","1. Admin sửa Amount of slider steps từ 4 thành 8, Save, trigger sync.
+110,Sync,Setup dynamic filter (Edit — live impact),Admin đổi Amount of slider steps khi customer đang ở range tuỳ chỉnh,,"Customer đang chọn range [20,80] cm trên storefront slider (Setup dynamic filter=ON)","1. Admin sửa Amount of slider steps từ 4 thành 8, Save, trigger sync.
 2. Customer (không reload) tiếp tục tương tác.
 3. Customer reload trang.",,"- Trước reload: vị trí slider customer giữ nguyên [20,80].
 - Sau reload: slider hiển thị số step mới, vị trí reset về mặc định (không giữ [20,80]).",
-FNHGT_TC111,Sync,,Height Range co lại khi customer đang chọn range cũ ngoài phạm vi mới,,"Customer đang chọn range [150,200] cm trên storefront, range cũ=[5,200]","1. Sản phẩm có Height=200 bị xóa khỏi BC, trigger sync → range mới=[5,100].
+111,Sync,,Height Range co lại khi customer đang chọn range cũ ngoài phạm vi mới,,"Customer đang chọn range [150,200] cm trên storefront, range cũ=[5,200]","1. Sản phẩm có Height=200 bị xóa khỏi BC, trigger sync → range mới=[5,100].
 2. Customer (không reload) tiếp tục tương tác.
 3. Customer reload trang.",,"- Trước reload: customer vẫn ở range cũ (có thể trả về 0 kết quả vì vượt range mới).
 - Sau reload: slider tự động giới hạn theo range mới [5,100], reset về full range hoặc clamp giá trị hợp lý.",
-FNHGT_TC112,Happy,Button [Save Changes] (Edit),Sửa 1 field,,Filter Height đã tồn tại,"1. Chỉ sửa Amount of slider steps.
+112,Happy,Button [Save Changes] (Edit),Sửa 1 field,,Filter Height đã tồn tại,"1. Chỉ sửa Amount of slider steps.
 2. Save Changes.
 3. Reload, kiểm tra toàn bộ field.",Amount mới = 8,3. Amount cập nhật đúng; tất cả field khác giữ nguyên giá trị cũ.,
-FNHGT_TC113,Happy,,Sửa nhiều field cùng lúc,,Filter Height đã tồn tại,"1. Sửa Title, Display Style, và Placeholder text.
+113,Happy,,Sửa nhiều field cùng lúc,,Filter Height đã tồn tại,"1. Sửa Title, Display Style, và Placeholder text.
 2. Save Changes.
 3. Reload, kiểm tra.",3 field thay đổi cùng lúc,"3. Cả 3 thay đổi được lưu đồng thời, không có field nào bị bỏ sót.",
-FNHGT_TC114,Negative,,Title trống,,Title đang trống,1. Click [Save Changes].,Title = (rỗng),"Lỗi validation hiển thị, không lưu thành công.",
-FNHGT_TC115,Edge,,Save khi không sửa gì (no-op),,Filter Height đã tồn tại,"1. Mở Edit Height.
+114,Negative,,Title trống,,Title đang trống,1. Click [Save Changes].,Title = (rỗng),"Lỗi validation hiển thị, không lưu thành công.",
+115,Edge,,Save khi không sửa gì (no-op),,Filter Height đã tồn tại,"1. Mở Edit Height.
 2. Click [Save Changes] ngay.",Chưa sửa gì,"Lưu thành công bình thường, không lỗi.",
-FNHGT_TC116,Happy,Button [Save as template] (Edit),Không ảnh hưởng filter gốc,,Settings hợp lệ,"1. Cấu hình lại 1 vài setting.
+116,Happy,Button [Save as template] (Edit),Không ảnh hưởng filter gốc,,Settings hợp lệ,"1. Cấu hình lại 1 vài setting.
 2. Click [Save as template] (không Save Changes).",,Template mới được tạo với settings hiện tại; filter Height gốc KHÔNG bị thay đổi cho đến khi Save Changes.,
-FNHGT_TC117,Happy,Navigation guard,Cảnh báo unsaved changes,,Filter Height đã tồn tại,"1. Sửa Amount of slider steps (chưa Save).
+117,Happy,Navigation guard,Cảnh báo unsaved changes,,Filter Height đã tồn tại,"1. Sửa Amount of slider steps (chưa Save).
 2. Click Back (←).",,"Hiển thị dialog cảnh báo có thay đổi chưa lưu, với option Discard/Save/Cancel.",
-FNHGT_TC118,Happy,,Chọn Discard,,Đang hiển thị warning dialog,"1. Chọn ""Discard"".
+118,Happy,,Chọn Discard,,Đang hiển thị warning dialog,"1. Chọn ""Discard"".
 2. Mở lại Edit Height.",,Data hiển thị lại đúng giá trị gốc trước khi sửa.,
-FNHGT_TC119,Edge,,Reload/đóng tab khi có thay đổi chưa lưu,,"Đang sửa field, chưa Save","1. Sửa 1 field.
-2. Nhấn F5 hoặc đóng tab.",,Trình duyệt hiển thị cảnh báo native (nếu có implement) hoặc không có cảnh báo gì.,"<cần confirm>: chưa rõ có cảnh báo native browser hay không implement (xem spec mục 10)"
-FNHGT_TC120,Happy,Button [Delete],Confirm Delete,,Edit Height đang mở,"1. Click Delete, confirm.
+119,Edge,,Reload/đóng tab khi có thay đổi chưa lưu,,"Đang sửa field, chưa Save","1. Sửa 1 field.
+2. Nhấn F5 hoặc đóng tab.",,Trình duyệt hiển thị cảnh báo native (nếu có implement) hoặc không có cảnh báo gì.,<cần confirm>: chưa rõ có cảnh báo native browser hay không implement (xem spec mục 10)
+120,Happy,Button [Delete],Confirm Delete,,Edit Height đang mở,"1. Click Delete, confirm.
 2. Kiểm tra danh sách filter node.
 3. Trigger sync.
 4. Kiểm tra storefront.",,"2. Filter Height biến mất khỏi danh sách admin.
 4. Sau sync, không còn hiển thị trên storefront.",
-FNHGT_TC121,Happy,,Cancel Delete,,Đang hiển thị confirm dialog,1. Click Cancel.,,"Filter Height không bị xóa, vẫn còn nguyên.",
-FNHGT_TC122,UI,,Hiển thị action Delete,,Mở Edit Height,1. Kiểm tra toàn bộ Edit screen tìm action Delete.,,Có button/icon Delete filter node (Create screen không có action này).,
-FNHGT_TC123,Edge,Concurrent edit,2 admin cùng edit đồng thời,,2 admin cùng mở Edit Height,"1. Admin A sửa Title, Save.
-2. Admin B đã mở từ trước (chưa refresh), sửa Display Style, Save sau Admin A.",,"Xác nhận spec: thay đổi Admin B có ghi đè mất thay đổi Admin A không (lost update), hay có cảnh báo conflict.","<cần confirm>: xem spec mục 10"
-FNHGT_TC124,Edge,Đổi Title,Không vỡ liên kết,,Filter Height đang được tham chiếu ở filter tree/storefront,"1. Đổi Title thành ""Product Height"".
+121,Happy,,Cancel Delete,,Đang hiển thị confirm dialog,1. Click Cancel.,,"Filter Height không bị xóa, vẫn còn nguyên.",
+122,UI,,Hiển thị action Delete,,Mở Edit Height,1. Kiểm tra toàn bộ Edit screen tìm action Delete.,,Có button/icon Delete filter node (Create screen không có action này).,
+123,Edge,Concurrent edit,2 admin cùng edit đồng thời,,2 admin cùng mở Edit Height,"1. Admin A sửa Title, Save.
+2. Admin B đã mở từ trước (chưa refresh), sửa Display Style, Save sau Admin A.",,"Xác nhận spec: thay đổi Admin B có ghi đè mất thay đổi Admin A không (lost update), hay có cảnh báo conflict.",<cần confirm>: xem spec mục 10
+124,Edge,Đổi Title,Không vỡ liên kết,,Filter Height đang được tham chiếu ở filter tree/storefront,"1. Đổi Title thành ""Product Height"".
 2. Save.
 3. Kiểm tra filter tree và storefront.",,"3. Filter vẫn hoạt động đúng, không gãy link, không tạo filter trùng lặp.",

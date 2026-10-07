@@ -1,203 +1,204 @@
 ﻿ID,Test Type,Test Objective,,,Preconditions,Test Steps,Input DB/Setting,Expected Result,Note
-filter-advanced-settings_TC01,Happy,Show smart filter search,Bật ô search toàn cục,,- Filter tree đang test có ≥1 node Display style = List/Grid,"1. Bật toggle ""Show smart filter search"".
+Purpose:,,"Chỉnh chung 1 lần cho toàn bộ panel filter trên storefront (không riêng node nào): thêm công cụ giúp shopper tìm và gỡ filter, ẩn node không giúp thu hẹp kết quả, chọn định dạng URL gọn và thân thiện SEO — để shopper lọc sản phẩm nhanh hơn.",,,,,,,
+1,Happy,Show smart filter search,Bật ô search toàn cục,,- Filter tree đang test có ≥1 node Display style = List/Grid,"1. Bật toggle ""Show smart filter search"".
 2. Click Save Changes.
 3. Ra storefront, mở panel filter (Desktop).",,"3. Xuất hiện đúng 1 ô search, placeholder ""Search ...."", nằm phía trên block Refine by, không nằm trong node nào.",
-filter-advanced-settings_TC02,Happy,,Tắt lại ô search,,- Toggle đang ON (theo TC01),"1. Tắt toggle ""Show smart filter search"".
+2,Happy,,Tắt lại ô search,,- Toggle đang ON (theo TC01),"1. Tắt toggle ""Show smart filter search"".
 2. Click Save Changes.
 3. Ra storefront, mở panel filter.",,3. Ô search global không còn hiển thị trên panel.,
-filter-advanced-settings_TC03,Happy,,Song song với search box per-node,,"- Toggle ""Show smart filter search"" ON
+3,Happy,,Song song với search box per-node,,"- Toggle ""Show smart filter search"" ON
 - 1 filter node có riêng ""Show search box on desktop"" cũng đang ON","1. Ra storefront, mở panel filter.
 2. Quan sát cả ô search global và ô search riêng trong node.",,"2. Cả 2 ô search cùng hiển thị, hoạt động độc lập, không xung đột/không trùng lặp chức năng.",
-filter-advanced-settings_TC04,Negative,,Nhập input bất thường vào ô search,,- Toggle ON,"1. Gõ emoji, ký tự đặc biệt (VD !@#$%), hoặc chuỗi có khoảng trắng đầu/cuối vào ô search global.",,"1. Hệ thống không lỗi/crash; trả về danh sách rỗng hoặc không lọc gì, không hiển thị lỗi kỹ thuật ra UI.",
-filter-advanced-settings_TC05,Edge,,Phạm vi node được search,Option select type vs Display style,,"1. Với toggle đang ON, gõ vào ô search với 1 node Option select type = Multiple, Display style = List.
+4,Negative,,Nhập input bất thường vào ô search,,- Toggle ON,"1. Gõ emoji, ký tự đặc biệt (VD !@#$%), hoặc chuỗi có khoảng trắng đầu/cuối vào ô search global.",,"1. Hệ thống không lỗi/crash; trả về danh sách rỗng hoặc không lọc gì, không hiển thị lỗi kỹ thuật ra UI.",
+5,Edge,,Phạm vi node được search,Option select type vs Display style,,"1. Với toggle đang ON, gõ vào ô search với 1 node Option select type = Multiple, Display style = List.
 2. Thử tương tự với 1 node Option select type = Single.",,1-2. Xác nhận đúng field nào (Display style hay Option select type) quyết định node có được search hay không.,"<cần confirm> Q6 — tooltip ghi List/Grid nhưng đó là Display style, không phải Option select type"
-filter-advanced-settings_TC06,Edge,,Node dạng Slider/Swatch,,- Có node Display style = Slider (VD Price) và 1 node Display style = Swatch,"1. Toggle ON, gõ từ khoá trùng tên value của node Slider/Swatch vào ô search.",,1. Xác nhận node Slider/Swatch có được lọc theo từ khoá hay không.,<cần confirm> Q6
-filter-advanced-settings_TC07,Edge,,Hiển thị trên Mobile,,- Toggle ON,"1. Ra storefront trên Mobile (hoặc responsive Mobile), mở drawer filter.",,1. Xác nhận ô search global có xuất hiện trong drawer Mobile hay không.,<cần confirm> Q4 — preview mobile trong design không có ô search
-filter-advanced-settings_TC08,Edge,,Decision table: global search × per-node search box,"Global OFF, per-node ON","- Toggle ""Show smart filter search"" = OFF
+6,Edge,,Node dạng Slider/Swatch,,- Có node Display style = Slider (VD Price) và 1 node Display style = Swatch,"1. Toggle ON, gõ từ khoá trùng tên value của node Slider/Swatch vào ô search.",,1. Xác nhận node Slider/Swatch có được lọc theo từ khoá hay không.,<cần confirm> Q6
+7,Edge,,Hiển thị trên Mobile,,- Toggle ON,"1. Ra storefront trên Mobile (hoặc responsive Mobile), mở drawer filter.",,1. Xác nhận ô search global có xuất hiện trong drawer Mobile hay không.,<cần confirm> Q4 — preview mobile trong design không có ô search
+8,Edge,,Decision table: global search × per-node search box,"Global OFF, per-node ON","- Toggle ""Show smart filter search"" = OFF
 - 1 filter node có riêng ""Show search box on desktop"" đang ON","1. Ra storefront, mở panel filter.",,"1. Ô search riêng trong node vẫn hoạt động độc lập, không phụ thuộc trạng thái OFF của toggle toàn cục.",
-filter-advanced-settings_TC09,Edge,,Decision table: global search × per-node search box,"Global ON, per-node OFF","- Toggle ""Show smart filter search"" = ON
+9,Edge,,Decision table: global search × per-node search box,"Global ON, per-node OFF","- Toggle ""Show smart filter search"" = ON
 - Filter node đang test KHÔNG bật ""Show search box on desktop""","1. Ra storefront, mở panel filter.",,1. Chỉ có đúng 1 ô search toàn cục hiển thị; node không có ô search riêng của chính nó.,
-filter-advanced-settings_TC10,UI,,Default value + tooltip,,"- Role = [Merchant Admin]
+10,UI,,Default value + tooltip,,"- Role = [Merchant Admin]
 - Chưa từng Save Advanced Settings (trạng thái mặc định)","1. Vào Filter > Advanced Settings.
 2. Quan sát trạng thái toggle ""Show smart filter search"".
 3. Hover icon (?) cạnh field.",,"2. Toggle ở trạng thái OFF.
 3. Tooltip hiển thị đúng nội dung ""Applied to filter nodes having list/grid option select type"".","<cần confirm> Q6 — tooltip dùng thuật ngữ List/Grid (Display Style) nhưng tên field là Option select type, chưa xác nhận đây có phải lỗi thuật ngữ"
-filter-advanced-settings_TC11,Happy,Show product count,Hiển thị số lượng sản phẩm,,- Toggle giữ ON (default),"1. Click Save Changes.
+11,Happy,Show product count,Hiển thị số lượng sản phẩm,,- Toggle giữ ON (default),"1. Click Save Changes.
 2. Ra storefront, mở panel filter.",,"2. Mỗi filter option hiển thị đúng số lượng sản phẩm khớp với dữ liệu đã sync, đặt cạnh tên option.",
-filter-advanced-settings_TC12,Happy,,Ẩn số lượng,,,"1. Tắt toggle ""Show product count"".
+12,Happy,,Ẩn số lượng,,,"1. Tắt toggle ""Show product count"".
 2. Click Save Changes.
 3. Ra storefront, mở panel filter.",,3. Số lượng sản phẩm không còn hiển thị cạnh bất kỳ filter option nào.,
-filter-advanced-settings_TC13,Happy,,Bật lại số lượng,,- Toggle đang OFF (theo TC10),"1. Bật lại toggle ""Show product count"".
+13,Happy,,Bật lại số lượng,,- Toggle đang OFF (theo TC10),"1. Bật lại toggle ""Show product count"".
 2. Click Save Changes.
 3. Ra storefront, mở panel filter.",,3. Số lượng sản phẩm hiển thị lại đúng số liệu hiện tại cạnh mỗi option.,
-filter-advanced-settings_TC14,Edge,,Ẩn số nhưng rule ẩn theo count vẫn chạy,,"- Toggle ""Show product count"" = OFF
+14,Edge,,Ẩn số nhưng rule ẩn theo count vẫn chạy,,"- Toggle ""Show product count"" = OFF
 - Toggle ""Hide filter node with only one filter option"" = ON
 - Có 1 node option_count = 1","1. Ra storefront, mở panel filter, kiểm tra node có option_count = 1.",,"1. Node vẫn bị ẩn theo đúng rule của toggle #5, dù không thấy số lượng hiển thị ở bất kỳ option nào.",
-filter-advanced-settings_TC15,Sync,,Count tăng theo sản phẩm mới sync,,"- Toggle Show product count = ON
+15,Sync,,Count tăng theo sản phẩm mới sync,,"- Toggle Show product count = ON
 - Filter option A hiện có product count = 3","1. Bên BigCommerce, gán thêm 1 sản phẩm mới vào option A.
 2. Chạy sync (Manual hoặc Schedule).
 3. Ra storefront, kiểm tra count của option A.",Batch sync gần nhất = Success,"3. Count của option A cập nhật thành 4, đúng theo dữ liệu vừa sync.",
-filter-advanced-settings_TC16,Sync,,Count giảm khi sản phẩm bị xoá/archive bên BigCommerce,,- Filter option A hiện có product count = 4,"1. Bên BigCommerce, xoá/archive 1 sản phẩm đang thuộc option A.
+16,Sync,,Count giảm khi sản phẩm bị xoá/archive bên BigCommerce,,- Filter option A hiện có product count = 4,"1. Bên BigCommerce, xoá/archive 1 sản phẩm đang thuộc option A.
 2. Chạy sync.
 3. Ra storefront, kiểm tra count của option A.",Batch sync gần nhất = Success,3. Count của option A giảm còn 3.,
-filter-advanced-settings_TC17,Sync,,Sản phẩm unpublish khỏi channel storefront (chưa xoá hẳn),,- 1 sản phẩm thuộc option A đang published trên channel storefront đang test,"1. Bên BigCommerce, unpublish sản phẩm đó khỏi channel storefront (không xoá).
+17,Sync,,Sản phẩm unpublish khỏi channel storefront (chưa xoá hẳn),,- 1 sản phẩm thuộc option A đang published trên channel storefront đang test,"1. Bên BigCommerce, unpublish sản phẩm đó khỏi channel storefront (không xoá).
 2. Chạy sync.
 3. Ra storefront, kiểm tra count của option A.",Batch sync gần nhất = Success,"3. Xác nhận count có trừ sản phẩm vừa unpublish hay vẫn tính, tuỳ cách Native Search lọc dữ liệu theo channel visibility khi sync.",<cần confirm>
-filter-advanced-settings_TC18,Sync,,Count trong lúc sync đang chạy dở,,,"1. Bắt đầu 1 lần sync trong lúc dữ liệu BC vừa đổi số lượng sản phẩm của option A.
+18,Sync,,Count trong lúc sync đang chạy dở,,,"1. Bắt đầu 1 lần sync trong lúc dữ liệu BC vừa đổi số lượng sản phẩm của option A.
 2. Trong lúc sync đang In Progress, ra storefront kiểm tra count của option A.",Trạng thái sync = In Progress,"2. Xác nhận count hiển thị theo dữ liệu lần sync Success gần nhất trước đó, không nhảy số hoặc hiển thị giá trị rỗng/lỗi giữa chừng.",<cần confirm>
-filter-advanced-settings_TC19,Sync,,Count khi lần sync gần nhất Failed,,- Có 1 lần sync bị Failed sau lần sync Success gần nhất,"1. Ra storefront, kiểm tra count của option A.",Batch sync gần nhất = Failed (lần Success trước đó ghi nhận count = 4),"1. Count vẫn giữ nguyên theo dữ liệu lần sync Success gần nhất (4), không hiển thị lỗi/rỗng do sync Failed.",<cần confirm>
-filter-advanced-settings_TC20,Sync,,Dữ liệu đã đổi bên BC nhưng chưa chạy lại sync (stale),,"- Bên BigCommerce vừa thêm sản phẩm mới vào option A
+19,Sync,,Count khi lần sync gần nhất Failed,,- Có 1 lần sync bị Failed sau lần sync Success gần nhất,"1. Ra storefront, kiểm tra count của option A.",Batch sync gần nhất = Failed (lần Success trước đó ghi nhận count = 4),"1. Count vẫn giữ nguyên theo dữ liệu lần sync Success gần nhất (4), không hiển thị lỗi/rỗng do sync Failed.",<cần confirm>
+20,Sync,,Dữ liệu đã đổi bên BC nhưng chưa chạy lại sync (stale),,"- Bên BigCommerce vừa thêm sản phẩm mới vào option A
 - CHƯA chạy sync lại sau thay đổi này","1. Ra storefront, kiểm tra count của option A ngay (chưa sync).",Batch sync gần nhất (trước khi có thay đổi) = Success,"1. Count vẫn hiển thị theo dữ liệu cũ (chưa cộng thêm sản phẩm vừa thêm bên BC), do chưa qua lần sync mới.",
-filter-advanced-settings_TC21,UI,,Default value,,,"1. Vào Filter > Advanced Settings (chưa từng đổi).
+21,UI,,Default value,,,"1. Vào Filter > Advanced Settings (chưa từng đổi).
 2. Quan sát toggle ""Show product count"".",,2. Toggle ở trạng thái ON; không có icon tooltip (?) cạnh field.,
-filter-advanced-settings_TC22,Happy,Show Refine by block,Hiển thị block khi chọn filter,,"- Toggle ON, đã Save","1. Ra storefront, chọn 1 filter value bất kỳ.",,"1. Block ""Refine by"" xuất hiện ở đầu panel filter, gồm tiêu đề ""Refine by"" và link ""Clear all"".",
-filter-advanced-settings_TC23,Happy,,Nhiều value cùng 1 node,Không gộp chip,,"1. Chọn 2 value cùng thuộc 1 node (VD Color: Aura, Color: Black).",,"1. Hiển thị đúng 2 chip riêng biệt cho 2 value, không gộp chung 1 chip.",
-filter-advanced-settings_TC24,Happy,,Node dạng range,1 chip duy nhất,- Có node dạng range (VD Price),1. Chọn khoảng giá trên node range.,,"1. Hiển thị đúng 1 chip duy nhất dạng ""Price: $500 – $1000"".",
-filter-advanced-settings_TC25,Happy,,Bỏ chọn qua nút ×,,- Có ≥1 chip đang hiển thị,"1. Click nút ""×"" trên 1 chip.",,1. Chip biến mất khỏi block Refine by; value tương ứng bị bỏ chọn; checkbox trong node tương ứng chuyển về trạng thái chưa chọn.,
-filter-advanced-settings_TC26,Happy,,Clear all,,- Có ≥2 chip đang hiển thị,"1. Click link ""Clear all"".",,1. Toàn bộ value đang chọn bị bỏ chọn cùng lúc; tất cả chip biến mất; danh sách sản phẩm trả về trạng thái chưa lọc.,
-filter-advanced-settings_TC27,Happy,,Đổi Node title,,- Có 1 chip đang hiển thị ứng với 1 node cụ thể,"1. Vào Edit filter node của node đó, đổi Node title ở General Settings, Save.
+22,Happy,Show Refine by block,Hiển thị block khi chọn filter,,"- Toggle ON, đã Save","1. Ra storefront, chọn 1 filter value bất kỳ.",,"1. Block ""Refine by"" xuất hiện ở đầu panel filter, gồm tiêu đề ""Refine by"" và link ""Clear all"".",
+23,Happy,,Nhiều value cùng 1 node,Không gộp chip,,"1. Chọn 2 value cùng thuộc 1 node (VD Color: Aura, Color: Black).",,"1. Hiển thị đúng 2 chip riêng biệt cho 2 value, không gộp chung 1 chip.",
+24,Happy,,Node dạng range,1 chip duy nhất,- Có node dạng range (VD Price),1. Chọn khoảng giá trên node range.,,"1. Hiển thị đúng 1 chip duy nhất dạng ""Price: $500 – $1000"".",
+25,Happy,,Bỏ chọn qua nút ×,,- Có ≥1 chip đang hiển thị,"1. Click nút ""×"" trên 1 chip.",,1. Chip biến mất khỏi block Refine by; value tương ứng bị bỏ chọn; checkbox trong node tương ứng chuyển về trạng thái chưa chọn.,
+26,Happy,,Clear all,,- Có ≥2 chip đang hiển thị,"1. Click link ""Clear all"".",,1. Toàn bộ value đang chọn bị bỏ chọn cùng lúc; tất cả chip biến mất; danh sách sản phẩm trả về trạng thái chưa lọc.,
+27,Happy,,Đổi Node title,,- Có 1 chip đang hiển thị ứng với 1 node cụ thể,"1. Vào Edit filter node của node đó, đổi Node title ở General Settings, Save.
 2. Quay lại storefront, mở panel filter.",,2. Chip trên block Refine by hiển thị đúng Node title mới.,
-filter-advanced-settings_TC28,Happy,,Checkbox đồng bộ trạng thái,,"- Có ≥1 value đang chọn, Refine by đang hiển thị",1. Quan sát checkbox của value đang chọn trong node tương ứng trên panel filter.,,1. Checkbox hiển thị màu cam đúng tại value đang được chọn.,
-filter-advanced-settings_TC29,Edge,,Xoá hết chip,,- Chỉ còn đúng 1 chip đang hiển thị,"1. Click ""×"" trên chip cuối cùng.",,1. Xác nhận block Refine by ẩn hoàn toàn hay hiển thị ở trạng thái rỗng khi không còn chip nào.,<cần confirm> Q12
-filter-advanced-settings_TC30,Edge,,Chưa chọn filter nào,,"- Toggle ON, chưa chọn bất kỳ filter value nào","1. Ra storefront, mở panel filter, chưa chọn gì.",,1. Xác nhận block Refine by ẩn hẳn hay hiển thị dạng rỗng khi chưa có filter nào được chọn.,<cần confirm> Q12
-filter-advanced-settings_TC31,Edge,,Xoá chip trên Mobile,,"- Đang ở drawer Mobile, có ≥1 chip","1. Click ""×"" trên 1 chip trong drawer Mobile (chưa bấm Apply).",,"1. Xác nhận việc bỏ chọn có áp dụng lọc ngay lập tức hay phải bấm ""Apply"" mới áp dụng.",<cần confirm> Q8
-filter-advanced-settings_TC32,Integration,,Xoá node đang có value active trên Refine by — chip duy nhất,0 chip còn lại sau xoá,"- Refine by đang hiển thị ĐÚNG 1 chip, thuộc node sắp bị xoá","1. Vào Edit filter node/Filter Tree List, xoá hẳn node đó.
+28,Happy,,Checkbox đồng bộ trạng thái,,"- Có ≥1 value đang chọn, Refine by đang hiển thị",1. Quan sát checkbox của value đang chọn trong node tương ứng trên panel filter.,,1. Checkbox hiển thị màu cam đúng tại value đang được chọn.,
+29,Edge,,Xoá hết chip,,- Chỉ còn đúng 1 chip đang hiển thị,"1. Click ""×"" trên chip cuối cùng.",,1. Xác nhận block Refine by ẩn hoàn toàn hay hiển thị ở trạng thái rỗng khi không còn chip nào.,<cần confirm> Q12
+30,Edge,,Chưa chọn filter nào,,"- Toggle ON, chưa chọn bất kỳ filter value nào","1. Ra storefront, mở panel filter, chưa chọn gì.",,1. Xác nhận block Refine by ẩn hẳn hay hiển thị dạng rỗng khi chưa có filter nào được chọn.,<cần confirm> Q12
+31,Edge,,Xoá chip trên Mobile,,"- Đang ở drawer Mobile, có ≥1 chip","1. Click ""×"" trên 1 chip trong drawer Mobile (chưa bấm Apply).",,"1. Xác nhận việc bỏ chọn có áp dụng lọc ngay lập tức hay phải bấm ""Apply"" mới áp dụng.",<cần confirm> Q8
+32,Integration,,Xoá node đang có value active trên Refine by — chip duy nhất,0 chip còn lại sau xoá,"- Refine by đang hiển thị ĐÚNG 1 chip, thuộc node sắp bị xoá","1. Vào Edit filter node/Filter Tree List, xoá hẳn node đó.
 2. Ra storefront, kiểm tra lại panel filter (session đã mở từ trước hoặc load lại).",,"2. Chip của node đã xoá biến mất khỏi Refine by; không còn tham chiếu ""mồ côi"" tới node đã xoá; xác nhận block Refine by ẩn/rỗng theo đúng hành vi khi hết chip (Q12).",
-filter-advanced-settings_TC33,Integration,,Xoá node đang có value active trên Refine by — còn chip khác,≥1 chip còn lại sau xoá,- Refine by đang hiển thị ≥2 chip thuộc ≥2 node khác nhau,"1. Vào Edit filter node/Filter Tree List, xoá 1 trong các node đang có chip.
+33,Integration,,Xoá node đang có value active trên Refine by — còn chip khác,≥1 chip còn lại sau xoá,- Refine by đang hiển thị ≥2 chip thuộc ≥2 node khác nhau,"1. Vào Edit filter node/Filter Tree List, xoá 1 trong các node đang có chip.
 2. Ra storefront, kiểm tra lại panel filter.",,"2. Chỉ chip của node bị xoá biến mất; các chip còn lại của node khác vẫn hiển thị đúng, không bị ảnh hưởng.",
-filter-advanced-settings_TC34,UI,,Default value + tooltip,,,"1. Vào Filter > Advanced Settings (chưa từng đổi).
+34,UI,,Default value + tooltip,,,"1. Vào Filter > Advanced Settings (chưa từng đổi).
 2. Quan sát toggle ""Show Refine by block"".
 3. Hover icon (?).",,"2. Toggle OFF.
 3. Tooltip hiển thị đúng nội dung ""Shows the filters you've chosen. You can change or remove them here."".",
-filter-advanced-settings_TC35,UI,,Format chip,,,1. Quan sát chip vừa tạo ở TC20.,,"1. Chip đúng format ""{Node title}: {value}"", phần value in đậm, có nút ""×"" bên cạnh.",
-filter-advanced-settings_TC36,UI,,Hiển thị trên Mobile,,"- Toggle ON, đã chọn ≥1 filter value",1. Mở drawer filter trên Mobile.,,"1. Block Refine by hiển thị trong drawer Mobile tương tự Desktop, đủ chip + Clear all.",
-filter-advanced-settings_TC37,UI,Shorten URLs when selecting multiple filter options,Default value,,,"1. Vào Filter > Advanced Settings (chưa từng đổi).
+35,UI,,Format chip,,,1. Quan sát chip vừa tạo ở TC20.,,"1. Chip đúng format ""{Node title}: {value}"", phần value in đậm, có nút ""×"" bên cạnh.",
+36,UI,,Hiển thị trên Mobile,,"- Toggle ON, đã chọn ≥1 filter value",1. Mở drawer filter trên Mobile.,,"1. Block Refine by hiển thị trong drawer Mobile tương tự Desktop, đủ chip + Clear all.",
+37,UI,Shorten URLs when selecting multiple filter options,Default value,,,"1. Vào Filter > Advanced Settings (chưa từng đổi).
 2. Quan sát toggle ""Shorten URLs when selecting multiple filter options"".",,2. Toggle ở trạng thái OFF; không có icon tooltip (?) cạnh field.,
-filter-advanced-settings_TC38,Happy,Hide filter node with only one filter option,Ẩn node chỉ còn 1 option,Boundary: option_count = 1,- Có 1 filter node với option_count = 1 (theo dữ liệu đã sync),"1. Bật toggle, Save Changes.
+38,Happy,Hide filter node with only one filter option,Ẩn node chỉ còn 1 option,Boundary: option_count = 1,- Có 1 filter node với option_count = 1 (theo dữ liệu đã sync),"1. Bật toggle, Save Changes.
 2. Ra storefront, mở panel filter.",option_count của node test = 1,2. Node có option_count = 1 không còn hiển thị trên panel filter.,"<cần confirm> Q3 — giả thuyết theo nhãn panel, mâu thuẫn với bullet note trong thiết kế"
-filter-advanced-settings_TC39,Happy,,Tắt lại toggle,,"- Toggle đang ON (theo TC36), node option_count = 1","1. Tắt toggle, Save Changes.
+39,Happy,,Tắt lại toggle,,"- Toggle đang ON (theo TC36), node option_count = 1","1. Tắt toggle, Save Changes.
 2. Ra storefront, mở panel filter.",,2. Node có option_count = 1 hiển thị lại bình thường.,
-filter-advanced-settings_TC40,Edge,,Node còn ≥2 option vẫn hiển thị,Boundary: option_count = 2,"- Toggle ON
+40,Edge,,Node còn ≥2 option vẫn hiển thị,Boundary: option_count = 2,"- Toggle ON
 - Có 1 filter node với option_count = 2","1. Ra storefront, mở panel filter.",option_count của node test = 2,1. Node vẫn hiển thị đầy đủ với cả 2 option.,
-filter-advanced-settings_TC41,Edge,,Node option_count = 0,Boundary: option_count = 0,"- Toggle ON
+41,Edge,,Node option_count = 0,Boundary: option_count = 0,"- Toggle ON
 - Có 1 filter node với option_count = 0 (hết dữ liệu khớp)","1. Ra storefront, mở panel filter.",option_count của node test = 0,1. Xác nhận node hiển thị thế nào khi option_count = 0 (ẩn hay hiện node rỗng).,<cần confirm>
-filter-advanced-settings_TC42,Edge,,Tất cả node đều bị ẩn,,"- Toggle ON
+42,Edge,,Tất cả node đều bị ẩn,,"- Toggle ON
 - TẤT CẢ filter node trong tree đều có option_count = 1","1. Ra storefront, mở panel filter.",,1. Xác nhận khối filter hiển thị thế nào khi không còn node nào đủ điều kiện hiển thị.,<cần confirm> Q13
-filter-advanced-settings_TC43,Edge,,Node có ≥2 option nhưng mỗi option đều count=1,Phân biệt ẩn node vs ẩn option (Q3),"- Toggle = ON
+43,Edge,,Node có ≥2 option nhưng mỗi option đều count=1,Phân biệt ẩn node vs ẩn option (Q3),"- Toggle = ON
 - Node Y có đúng 2 option, mỗi option đều có product count = 1 (giống data mẫu Aura(1), Marine(1) trong design)","1. Ra storefront, mở panel filter, kiểm tra node Y.",option_count của node Y = 2; MỖI option trong node đều có product count = 1,"1. Theo giả thuyết nhãn panel (ẩn cả NODE khi node chỉ còn 1 option): node Y vẫn hiển thị đủ cả 2 option vì option_count = 2, không bị ẩn.
 - Nếu hệ thống lại ẩn mất 1 hoặc cả 2 option này (theo cách hiểu bullet note ""ẩn option có count=1""), đây là bằng chứng xác định Q3 theo hướng ngược lại với giả thuyết.","<cần confirm> Q3 — case DUY NHẤT phân biệt được 2 cách hiểu, vì data mẫu trong design (Aura(1)/Marine(1)...) rơi đúng vào tình huống này"
-filter-advanced-settings_TC44,Sync,,Node tự động hết ẩn khi option_count tăng sau sync,Sync đưa option_count: 1 → 2,"- Toggle = ON
+44,Sync,,Node tự động hết ẩn khi option_count tăng sau sync,Sync đưa option_count: 1 → 2,"- Toggle = ON
 - Node X đang có option_count = 1 → đang bị ẩn trên storefront","1. Bên BigCommerce, gán thêm dữ liệu để node X có thêm 1 option (VD thêm sản phẩm thuộc value thứ 2).
 2. Chạy sync.
 3. Ra storefront, kiểm tra node X.","Batch sync gần nhất = Success, option_count node X sau sync = 2","3. Node X tự động hiển thị lại, không cần merchant vào Advanced Settings thao tác gì thêm.",
-filter-advanced-settings_TC45,Sync,,Node tự động bị ẩn khi option_count giảm sau sync,Sync đưa option_count: 2 → 1,"- Toggle = ON
+45,Sync,,Node tự động bị ẩn khi option_count giảm sau sync,Sync đưa option_count: 2 → 1,"- Toggle = ON
 - Node X đang có option_count = 2 → đang hiển thị bình thường","1. Bên BigCommerce, xoá/archive sản phẩm khiến node X chỉ còn 1 option.
 2. Chạy sync.
 3. Ra storefront, kiểm tra node X.","Batch sync gần nhất = Success, option_count node X sau sync = 1",3. Node X tự động bị ẩn khỏi storefront ngay sau sync.,
-filter-advanced-settings_TC46,Sync,,Hành vi khi option_count đang ở ranh giới lúc sync chưa hoàn tất,,"- Toggle = ON
+46,Sync,,Hành vi khi option_count đang ở ranh giới lúc sync chưa hoàn tất,,"- Toggle = ON
 - Node X đang chuyển từ option_count = 2 sang 1 do dữ liệu BC vừa đổi","1. Bắt đầu sync trong lúc node X đang ở trạng thái chuyển tiếp.
 2. Trong lúc sync đang In Progress, ra storefront kiểm tra node X.",Trạng thái sync = In Progress,"2. Xác nhận node X hiển thị theo trạng thái option_count TRƯỚC khi sync này, không tự ẩn/hiện nhấp nháy trước khi sync hoàn tất.",<cần confirm>
-filter-advanced-settings_TC47,Sync,,Hành vi khi lần sync gần nhất Failed,,"- Toggle = ON
+47,Sync,,Hành vi khi lần sync gần nhất Failed,,"- Toggle = ON
 - Có 1 lần sync Failed sau lần Success gần nhất (option_count node X tại lần Success gần nhất = 1)","1. Ra storefront, kiểm tra node X.",Batch sync gần nhất = Failed,"1. Node X giữ nguyên trạng thái ẩn/hiện theo dữ liệu lần sync Success gần nhất, không đổi theo dữ liệu BC mới chưa sync thành công.",<cần confirm>
-filter-advanced-settings_TC48,UI,,Default value,,,"1. Vào Filter > Advanced Settings (chưa từng đổi).
+48,UI,,Default value,,,"1. Vào Filter > Advanced Settings (chưa từng đổi).
 2. Quan sát toggle ""Hide filter node with only one filter option"".",,2. Toggle ở trạng thái OFF; không có icon tooltip (?) cạnh field.,
-filter-advanced-settings_TC49,Edge,Change label of Refine By button on mobile when tapping on it,Đổi nhãn khi tap trên Mobile,,"- Toggle ON, đã Save","1. Ra storefront Mobile, tap vào nút mở filter.",,1. Xác nhận đúng nút nào đổi nhãn (nút mở drawer hay tiêu đề trong drawer) và đổi từ chữ gì sang chữ gì.,<cần confirm> Q7 — không có tài liệu/note mô tả hành vi cụ thể
-filter-advanced-settings_TC50,UI,,Default value,,,"1. Vào Filter > Advanced Settings (chưa từng đổi).
+49,Edge,Change label of Refine By button on mobile when tapping on it,Đổi nhãn khi tap trên Mobile,,"- Toggle ON, đã Save","1. Ra storefront Mobile, tap vào nút mở filter.",,1. Xác nhận đúng nút nào đổi nhãn (nút mở drawer hay tiêu đề trong drawer) và đổi từ chữ gì sang chữ gì.,<cần confirm> Q7 — không có tài liệu/note mô tả hành vi cụ thể
+50,UI,,Default value,,,"1. Vào Filter > Advanced Settings (chưa từng đổi).
 2. Quan sát toggle.",,2. Toggle ở trạng thái OFF; không có icon tooltip (?) cạnh field.,
-filter-advanced-settings_TC51,Happy,URL STRUCTURE,Chọn Old URL,,,"1. Chọn ""Old URL"", Save Changes.
+51,Happy,URL STRUCTURE,Chọn Old URL,,,"1. Chọn ""Old URL"", Save Changes.
 2. Ra storefront, chọn 1 filter value.
 3. Quan sát URL.",,"3. URL theo dạng ""/?filter[Color_3][]=100"" (dùng id nội bộ của node và value).",
-filter-advanced-settings_TC52,Happy,,Chọn New URL,,,"1. Chọn ""New URL"", Save Changes.
+52,Happy,,Chọn New URL,,,"1. Chọn ""New URL"", Save Changes.
 2. Ra storefront, chọn 1 filter value.
 3. Quan sát URL.",,"3. URL theo dạng ""/?Color_3=100"".",
-filter-advanced-settings_TC53,Happy,,Chọn SEO-friendly URL,,,"1. Chọn ""SEO-friendly URL"", Save Changes.
+53,Happy,,Chọn SEO-friendly URL,,,"1. Chọn ""SEO-friendly URL"", Save Changes.
 2. Ra storefront, chọn 1 filter value.
 3. Quan sát URL.",,"3. URL theo dạng ""/?Color=Grey"" (dùng tên thật của node và value).",
-filter-advanced-settings_TC54,Edge,,Value đã Merge Values,,"- URL STRUCTURE = SEO-friendly URL
+54,Edge,,Value đã Merge Values,,"- URL STRUCTURE = SEO-friendly URL
 - Có 1 value đã được Merge Values","1. Ra storefront, chọn value đã merge.
 2. Quan sát URL.",,2. Xác nhận URL hiển thị tên gốc hay tên merged.,<cần confirm> Q9
-filter-advanced-settings_TC55,Edge,,Value chứa ký tự đặc biệt/dấu tiếng Việt,,"- URL STRUCTURE = SEO-friendly URL
+55,Edge,,Value chứa ký tự đặc biệt/dấu tiếng Việt,,"- URL STRUCTURE = SEO-friendly URL
 - Có value chứa dấu tiếng Việt/khoảng trắng/ký tự đặc biệt","1. Ra storefront, chọn value đó.
 2. Quan sát URL.",,2. Xác nhận cách encode ký tự trong URL (giữ nguyên/encode %XX/loại bỏ dấu).,<cần confirm> Q9
-filter-advanced-settings_TC56,Edge,,2 node có value trùng tên,,"- URL STRUCTURE = SEO-friendly URL
+56,Edge,,2 node có value trùng tên,,"- URL STRUCTURE = SEO-friendly URL
 - 2 node khác nhau có value trùng tên","1. Ra storefront, chọn value trùng tên ở từng node.
 2. Quan sát URL sinh ra ở mỗi trường hợp.",,2. Xác nhận URL có phân biệt được 2 node hay bị nhầm lẫn value.,<cần confirm> Q9
-filter-advanced-settings_TC57,Edge,,"Đổi URL STRUCTURE sang kiểu khác, kiểm tra link cũ đã bookmark theo kiểu trước đó",,"- URL STRUCTURE đang = Old URL
+57,Edge,,"Đổi URL STRUCTURE sang kiểu khác, kiểm tra link cũ đã bookmark theo kiểu trước đó",,"- URL STRUCTURE đang = Old URL
 - Có sẵn 1 URL đã bookmark/share theo dạng Old URL (VD /?filter[Color_3][]=100)","1. Đổi URL STRUCTURE sang SEO-friendly URL, Save Changes.
 2. Truy cập trực tiếp URL cũ đã bookmark (vẫn ở dạng Old URL).",,"2. Xác nhận URL cũ (dạng Old URL) còn lọc đúng sản phẩm sau khi hệ thống đã đổi sang kiểu SEO-friendly, hay không còn khớp filter nào (404/không lọc được).","<cần confirm> — tương tự Q9 nhưng là đổi chính kiểu URL STRUCTURE, không phải đổi tên value"
-filter-advanced-settings_TC58,Sync,,URL SEO-friendly cập nhật theo tên value mới sau khi đổi bên BigCommerce,,"- URL STRUCTURE = SEO-friendly URL
+58,Sync,,URL SEO-friendly cập nhật theo tên value mới sau khi đổi bên BigCommerce,,"- URL STRUCTURE = SEO-friendly URL
 - 1 value đang có tên cũ (VD ""Grey"")","1. Bên BigCommerce, đổi tên value đó (VD ""Grey"" → ""Silver Grey"").
 2. Chạy sync.
 3. Ra storefront, chọn value đó, quan sát URL.",Batch sync gần nhất = Success,"3. URL hiển thị đúng tên MỚI (""Silver Grey""), không còn tên cũ.",
-filter-advanced-settings_TC59,Sync,,URL vẫn dùng tên cũ khi chưa chạy lại sync (stale),,- Đã đổi tên value bên BigCommerce nhưng CHƯA chạy sync lại,"1. Ra storefront, chọn value đó, quan sát URL ngay (chưa sync).",Batch sync gần nhất (trước khi đổi tên) = Success,"1. URL vẫn dùng tên CŨ theo dữ liệu lần sync gần nhất, chưa phản ánh tên mới.",
-filter-advanced-settings_TC60,Sync,,Link cũ (dùng tên trước khi đổi) đã được khách bookmark/share/index trước đó,,"- Value đã đổi tên bên BC và đã sync xong (tên mới đang có hiệu lực)
+59,Sync,,URL vẫn dùng tên cũ khi chưa chạy lại sync (stale),,- Đã đổi tên value bên BigCommerce nhưng CHƯA chạy sync lại,"1. Ra storefront, chọn value đó, quan sát URL ngay (chưa sync).",Batch sync gần nhất (trước khi đổi tên) = Success,"1. URL vẫn dùng tên CŨ theo dữ liệu lần sync gần nhất, chưa phản ánh tên mới.",
+60,Sync,,Link cũ (dùng tên trước khi đổi) đã được khách bookmark/share/index trước đó,,"- Value đã đổi tên bên BC và đã sync xong (tên mới đang có hiệu lực)
 - Có sẵn 1 URL dùng tên CŨ (VD lưu từ trước khi đổi)",1. Truy cập trực tiếp URL cũ (chứa tên value trước khi đổi).,,"1. Xác nhận URL cũ còn lọc đúng sản phẩm theo value đã đổi tên, hay không còn khớp filter nào (404/không lọc được).",<cần confirm> Q9
-filter-advanced-settings_TC61,Sync,,URL sinh ra trong lúc sync đang chạy dở đúng lúc khách chọn filter,,- Value đang được sync đổi tên (từ tên cũ sang tên mới),"1. Trong lúc sync đang In Progress, khách chọn value đó trên storefront.
+61,Sync,,URL sinh ra trong lúc sync đang chạy dở đúng lúc khách chọn filter,,- Value đang được sync đổi tên (từ tên cũ sang tên mới),"1. Trong lúc sync đang In Progress, khách chọn value đó trên storefront.
 2. Quan sát URL sinh ra.",Trạng thái sync = In Progress,"2. Xác nhận URL dùng tên theo trạng thái nào (tên cũ ổn định cho tới khi sync xong, hay có thể đổi giữa chừng).",<cần confirm>
-filter-advanced-settings_TC62,Integration,,URL SEO-friendly dùng tên nào khi value đã qua Merge Values,Value đã merge ≥2 value gốc,"- URL STRUCTURE = SEO-friendly URL
+62,Integration,,URL SEO-friendly dùng tên nào khi value đã qua Merge Values,Value đã merge ≥2 value gốc,"- URL STRUCTURE = SEO-friendly URL
 - Có 1 value là kết quả Merge Values của ≥2 value gốc (VD Emerald + Green → Green)","1. Ra storefront, chọn value đã merge trên filter node.
 2. Quan sát URL trên thanh địa chỉ.",,2. Xác nhận URL dùng tên merged (VD Green) hay 1 trong các tên gốc (VD Emerald) — không được hiển thị tên đã bị merge/không còn tồn tại.,<cần confirm> Q9
-filter-advanced-settings_TC63,UI,,Default hiển thị khi đóng dropdown,,,"1. Vào Filter > Advanced Settings (chưa từng đổi).
+63,UI,,Default hiển thị khi đóng dropdown,,,"1. Vào Filter > Advanced Settings (chưa từng đổi).
 2. Quan sát dòng ""URL STRUCTURE"".",,"2. Hiển thị nhãn ""SEO-friendly URL"" (chữ xám) kèm URL mẫu ""/?Color=Grey"" (chữ đậm).",<cần confirm> chưa xác nhận đây có phải giá trị default hệ thống hay chỉ là giá trị minh hoạ
-filter-advanced-settings_TC64,UI,,Mở dropdown,,,1. Click vào dòng URL STRUCTURE.,,"1. Dropdown mở ra, hiển thị đủ 3 lựa chọn: Old URL, New URL, SEO-friendly URL.",<cần confirm> chưa xác nhận đủ 3 lựa chọn và đúng nhãn hiển thị trong list
-filter-advanced-settings_TC65,UI,,Đóng dropdown không chọn,,"- Dropdown đang mở, giá trị hiện tại là SEO-friendly URL",1. Click ra ngoài dropdown mà không chọn giá trị mới.,,"1. Dropdown đóng lại, giá trị đang chọn giữ nguyên như trước khi mở (không tự đổi).",
-filter-advanced-settings_TC66,Happy,Save Changes,Lưu thay đổi thành công,,,"1. Đổi giá trị ≥1 field bất kỳ.
+64,UI,,Mở dropdown,,,1. Click vào dòng URL STRUCTURE.,,"1. Dropdown mở ra, hiển thị đủ 3 lựa chọn: Old URL, New URL, SEO-friendly URL.",<cần confirm> chưa xác nhận đủ 3 lựa chọn và đúng nhãn hiển thị trong list
+65,UI,,Đóng dropdown không chọn,,"- Dropdown đang mở, giá trị hiện tại là SEO-friendly URL",1. Click ra ngoài dropdown mà không chọn giá trị mới.,,"1. Dropdown đóng lại, giá trị đang chọn giữ nguyên như trước khi mở (không tự đổi).",
+66,Happy,Save Changes,Lưu thay đổi thành công,,,"1. Đổi giá trị ≥1 field bất kỳ.
 2. Click Save Changes.
 3. Reload lại trang.",,"2. Toast xác nhận lưu thành công hiển thị.
 3. Giá trị vừa đổi vẫn giữ nguyên sau khi reload.",
-filter-advanced-settings_TC67,Negative,,2 tab cùng sửa,,- Mở 2 tab cùng vào Advanced Settings,"1. Ở tab 1, đổi field A, Save Changes.
+67,Negative,,2 tab cùng sửa,,- Mở 2 tab cùng vào Advanced Settings,"1. Ở tab 1, đổi field A, Save Changes.
 2. Ở tab 2 (đang mở từ trước, chưa reload), đổi field B, Save Changes.",,"2. Xác nhận kết quả sau cùng: tab 2 ghi đè hoàn toàn lên thay đổi của tab 1, hay có cảnh báo xung đột.",
-filter-advanced-settings_TC68,Edge,,Double-click Save Changes,,- Đã đổi ≥1 field,1. Click liên tiếp 2 lần thật nhanh vào Save Changes.,,"1. Chỉ ghi nhận đúng 1 lần lưu, không phát sinh request/lỗi trùng.",<cần confirm> Q10
-filter-advanced-settings_TC69,Edge,,Rời trang khi chưa lưu,,"- Đã đổi ≥1 field, CHƯA Save",1. Click nút Back/điều hướng sang trang khác.,,1. Xác nhận có popup cảnh báo unsaved changes trước khi rời trang hay không.,<cần confirm> Q10
-filter-advanced-settings_TC70,UI,,Trạng thái ban đầu,,"- Vừa vào màn, chưa đổi giá trị nào",1. Quan sát nút Save Changes.,,1. Xác nhận nút đang enable sẵn (theo design) dù chưa có thay đổi nào.,<cần confirm> Q10 — khác khung chung Filter Tree (Save Changes phải disable khi chưa đổi gì)
-filter-advanced-settings_TC71,UI,Preview Desktop/Mobile,Tab mặc định,,,"1. Vào Filter > Advanced Settings.
+68,Edge,,Double-click Save Changes,,- Đã đổi ≥1 field,1. Click liên tiếp 2 lần thật nhanh vào Save Changes.,,"1. Chỉ ghi nhận đúng 1 lần lưu, không phát sinh request/lỗi trùng.",<cần confirm> Q10
+69,Edge,,Rời trang khi chưa lưu,,"- Đã đổi ≥1 field, CHƯA Save",1. Click nút Back/điều hướng sang trang khác.,,1. Xác nhận có popup cảnh báo unsaved changes trước khi rời trang hay không.,<cần confirm> Q10
+70,UI,,Trạng thái ban đầu,,"- Vừa vào màn, chưa đổi giá trị nào",1. Quan sát nút Save Changes.,,1. Xác nhận nút đang enable sẵn (theo design) dù chưa có thay đổi nào.,<cần confirm> Q10 — khác khung chung Filter Tree (Save Changes phải disable khi chưa đổi gì)
+71,UI,Preview Desktop/Mobile,Tab mặc định,,,"1. Vào Filter > Advanced Settings.
 2. Quan sát panel Preview bên phải.",,"2. Tab ""Desktop"" đang active mặc định.",
-filter-advanced-settings_TC72,UI,,Chuyển tab Mobile,,"- Bật toggle ""Show Refine by block"" = ON
+72,UI,,Chuyển tab Mobile,,"- Bật toggle ""Show Refine by block"" = ON
 - Bật toggle ""Show smart filter search"" = ON (chưa Save)","1. Click tab ""Mobile"".",,"1. Preview đổi sang layout Mobile.
 - Refine by block hiển thị đúng trong preview Mobile.
 - Ghi nhận rõ ô smart search có xuất hiện trong preview Mobile hay không.",<cần confirm> Q4 — liên quan trực tiếp câu hỏi smart search có áp dụng Mobile không
-filter-advanced-settings_TC73,Integration,Phạm vi áp dụng (multi-tree),Thay đổi lan truyền sang filter tree khác — kiểm tra Advanced Settings là setting toàn cục hay riêng từng tree,Toggle Show product count,"- Store có ≥2 filter tree khác nhau (Tree A, Tree B), cả 2 Active
+73,Integration,Phạm vi áp dụng (multi-tree),Thay đổi lan truyền sang filter tree khác — kiểm tra Advanced Settings là setting toàn cục hay riêng từng tree,Toggle Show product count,"- Store có ≥2 filter tree khác nhau (Tree A, Tree B), cả 2 Active
 - Tree A và Tree B hiện cùng giá trị Show product count = ON (default)","1. Vào Advanced Settings từ Tree A, tắt toggle ""Show product count"", Save Changes.
 2. Ra storefront kiểm tra Tree A.
 3. Ra storefront kiểm tra Tree B (không thao tác gì trên Tree B).",,"2. Tree A không còn hiển thị số lượng sản phẩm.
 3. Xác nhận Tree B có cùng bị ẩn số lượng theo (setting toàn cục) hay vẫn giữ nguyên hiển thị (setting riêng từng tree).",<cần confirm> Q1
-filter-advanced-settings_TC74,Integration,,Thay đổi rule ẩn node lan truyền sang tree khác,Toggle Hide filter node 1 option,- Tree A và Tree B đều có ≥1 node option_count = 1,"1. Vào Advanced Settings từ Tree A, bật toggle ""Hide filter node with only one filter option"", Save Changes.
+74,Integration,,Thay đổi rule ẩn node lan truyền sang tree khác,Toggle Hide filter node 1 option,- Tree A và Tree B đều có ≥1 node option_count = 1,"1. Vào Advanced Settings từ Tree A, bật toggle ""Hide filter node with only one filter option"", Save Changes.
 2. Ra storefront kiểm tra node option_count = 1 của Tree A.
 3. Ra storefront kiểm tra node option_count = 1 của Tree B.",,"2. Node của Tree A bị ẩn.
 3. Xác nhận node của Tree B có bị ẩn theo hay không — đối chiếu cùng kết luận phạm vi với case trên.",<cần confirm> Q1
-filter-advanced-settings_TC75,Integration,Filter Cache,Storefront có cập nhật ngay sau Save Changes hay cần chạy lại Filter Cache,Nhánh: cập nhật ngay,- Chưa chạy Manual Sync/Filter Cache rebuild sau khi Save,"1. Đổi 1 toggle bất kỳ (VD Show Refine by block), Save Changes.
+75,Integration,Filter Cache,Storefront có cập nhật ngay sau Save Changes hay cần chạy lại Filter Cache,Nhánh: cập nhật ngay,- Chưa chạy Manual Sync/Filter Cache rebuild sau khi Save,"1. Đổi 1 toggle bất kỳ (VD Show Refine by block), Save Changes.
 2. KHÔNG chạy lại Filter Cache.
 3. Ra storefront kiểm tra ngay.",,"3. Xác nhận storefront đã phản ánh thay đổi ngay, không cần đợi rebuild cache.","<cần confirm> Q11 — 2 nhánh loại trừ nhau với case tiếp theo, chỉ 1 nhánh đúng"
-filter-advanced-settings_TC76,Integration,,Storefront chỉ cập nhật sau khi Filter Cache được rebuild,Nhánh: cần rebuild cache,"- Đã Save Changes ở case trên, storefront CHƯA đổi","1. Vào Filter Cache, chạy rebuild/clear cache thủ công.
+76,Integration,,Storefront chỉ cập nhật sau khi Filter Cache được rebuild,Nhánh: cần rebuild cache,"- Đã Save Changes ở case trên, storefront CHƯA đổi","1. Vào Filter Cache, chạy rebuild/clear cache thủ công.
 2. Ra storefront kiểm tra lại.",,2. Xác nhận storefront chỉ phản ánh thay đổi sau bước rebuild cache này.,<cần confirm> Q11
-filter-advanced-settings_TC77,Edge,Phạm vi hiển thị (SRP vs Category Page),Cùng 1 field hiển thị nhất quán trên cả SRP và Category Page,,"- Toggle Show product count = ON
+77,Edge,Phạm vi hiển thị (SRP vs Category Page),Cùng 1 field hiển thị nhất quán trên cả SRP và Category Page,,"- Toggle Show product count = ON
 - Cùng filter node/value áp dụng cho cả Search Result Page (SRP) và Category Page","1. Ra storefront, mở panel filter tại Search Result Page, ghi nhận count hiển thị.
 2. Ra storefront, mở panel filter tại Category Page cùng dữ liệu, ghi nhận count hiển thị.",,"1-2. Count hiển thị nhất quán giữa SRP và Category Page cho cùng 1 node/value, không lệch nhau.",
-filter-advanced-settings_TC78,Happy,Shorten URLs × URL STRUCTURE (tổ hợp),Kết hợp Shorten URLs × URL STRUCTURE khi chọn nhiều filter value,Shorten ON × Old URL,- Node đang test có ≥2 filter value khả dụng để chọn đồng thời,"1. Bật toggle ""Shorten URLs when selecting multiple filter options"".
+78,Happy,Shorten URLs × URL STRUCTURE (tổ hợp),Kết hợp Shorten URLs × URL STRUCTURE khi chọn nhiều filter value,Shorten ON × Old URL,- Node đang test có ≥2 filter value khả dụng để chọn đồng thời,"1. Bật toggle ""Shorten URLs when selecting multiple filter options"".
 2. Chọn ""Old URL"" ở URL STRUCTURE.
 3. Click Save Changes.
 4. Ra storefront, chọn đúng 2 filter value cùng 1 node, quan sát URL.",,"4. Nhiều value gộp bằng dấu phẩy, giữ id nội bộ dạng filter[Color_3][]=100,101 (chưa xác nhận cú pháp thật).","<cần confirm> Q5 — design chỉ có ví dụ URL của nền tảng khác (Shopify), chưa xác nhận định dạng thật"
-filter-advanced-settings_TC79,Happy,,Kết hợp Shorten URLs × URL STRUCTURE khi chọn nhiều filter value,Shorten ON × New URL,- Node đang test có ≥2 filter value khả dụng để chọn đồng thời,"1. Bật toggle ""Shorten URLs when selecting multiple filter options"".
+79,Happy,,Kết hợp Shorten URLs × URL STRUCTURE khi chọn nhiều filter value,Shorten ON × New URL,- Node đang test có ≥2 filter value khả dụng để chọn đồng thời,"1. Bật toggle ""Shorten URLs when selecting multiple filter options"".
 2. Chọn ""New URL"" ở URL STRUCTURE.
 3. Click Save Changes.
 4. Ra storefront, chọn đúng 2 filter value cùng 1 node, quan sát URL.",,"4. Nhiều value gộp bằng dấu phẩy, dùng id phẳng dạng Color_3=100,101 (chưa xác nhận cú pháp thật).",<cần confirm> Q5
-filter-advanced-settings_TC80,Happy,,Kết hợp Shorten URLs × URL STRUCTURE khi chọn nhiều filter value,Shorten ON × SEO-friendly URL,- Node đang test có ≥2 filter value khả dụng để chọn đồng thời,"1. Bật toggle ""Shorten URLs when selecting multiple filter options"".
+80,Happy,,Kết hợp Shorten URLs × URL STRUCTURE khi chọn nhiều filter value,Shorten ON × SEO-friendly URL,- Node đang test có ≥2 filter value khả dụng để chọn đồng thời,"1. Bật toggle ""Shorten URLs when selecting multiple filter options"".
 2. Chọn ""SEO-friendly URL"" ở URL STRUCTURE.
 3. Click Save Changes.
 4. Ra storefront, chọn đúng 2 filter value cùng 1 node, quan sát URL.",,"4. Nhiều value gộp bằng dấu phẩy, dùng tên thật dạng Color=Grey,Black (chưa xác nhận cú pháp thật — ảnh minh hoạ trong spec là URL của nền tảng khác).",<cần confirm> Q5
-filter-advanced-settings_TC81,Happy,,Kết hợp Shorten URLs × URL STRUCTURE khi chọn nhiều filter value,Shorten OFF × Old URL,- Node đang test có ≥2 filter value khả dụng để chọn đồng thời,"1. Tắt toggle ""Shorten URLs when selecting multiple filter options"".
+81,Happy,,Kết hợp Shorten URLs × URL STRUCTURE khi chọn nhiều filter value,Shorten OFF × Old URL,- Node đang test có ≥2 filter value khả dụng để chọn đồng thời,"1. Tắt toggle ""Shorten URLs when selecting multiple filter options"".
 2. Chọn ""Old URL"" ở URL STRUCTURE.
 3. Click Save Changes.
 4. Ra storefront, chọn đúng 2 filter value cùng 1 node, quan sát URL.",,"4. Mỗi value giữ 1 tham số riêng, suy ra từ format Old URL đơn value: filter[Color_3][]=100&filter[Color_3][]=101.",<cần confirm>
-filter-advanced-settings_TC82,Happy,,Kết hợp Shorten URLs × URL STRUCTURE khi chọn nhiều filter value,Shorten OFF × New URL,- Node đang test có ≥2 filter value khả dụng để chọn đồng thời,"1. Tắt toggle ""Shorten URLs when selecting multiple filter options"".
+82,Happy,,Kết hợp Shorten URLs × URL STRUCTURE khi chọn nhiều filter value,Shorten OFF × New URL,- Node đang test có ≥2 filter value khả dụng để chọn đồng thời,"1. Tắt toggle ""Shorten URLs when selecting multiple filter options"".
 2. Chọn ""New URL"" ở URL STRUCTURE.
 3. Click Save Changes.
 4. Ra storefront, chọn đúng 2 filter value cùng 1 node, quan sát URL.",,"4. Mỗi value giữ 1 tham số riêng, suy ra từ format New URL đơn value: Color_3=100&Color_3=101.",<cần confirm>
-filter-advanced-settings_TC83,Happy,,Kết hợp Shorten URLs × URL STRUCTURE khi chọn nhiều filter value,Shorten OFF × SEO-friendly URL,- Node đang test có ≥2 filter value khả dụng để chọn đồng thời,"1. Tắt toggle ""Shorten URLs when selecting multiple filter options"".
+83,Happy,,Kết hợp Shorten URLs × URL STRUCTURE khi chọn nhiều filter value,Shorten OFF × SEO-friendly URL,- Node đang test có ≥2 filter value khả dụng để chọn đồng thời,"1. Tắt toggle ""Shorten URLs when selecting multiple filter options"".
 2. Chọn ""SEO-friendly URL"" ở URL STRUCTURE.
 3. Click Save Changes.
 4. Ra storefront, chọn đúng 2 filter value cùng 1 node, quan sát URL.",,"4. Mỗi value giữ 1 tham số riêng, suy ra từ format SEO-friendly đơn value: Color=Grey&Color=Black.",<cần confirm>
-filter-advanced-settings_TC84,Edge,,Kết hợp Shorten URLs × URL STRUCTURE khi chọn nhiều filter value,Boundary: ≥3 value (Shorten ON × SEO-friendly URL),- Node đang test có ≥3 filter value khả dụng để chọn đồng thời,"1. Bật toggle ""Shorten URLs when selecting multiple filter options"".
+84,Edge,,Kết hợp Shorten URLs × URL STRUCTURE khi chọn nhiều filter value,Boundary: ≥3 value (Shorten ON × SEO-friendly URL),- Node đang test có ≥3 filter value khả dụng để chọn đồng thời,"1. Bật toggle ""Shorten URLs when selecting multiple filter options"".
 2. Chọn ""SEO-friendly URL"" ở URL STRUCTURE.
 3. Click Save Changes.
 4. Ra storefront, chọn đúng 3 filter value cùng 1 node, quan sát URL.",,"4. Với ĐÚNG 3 value (không phải 2), vẫn gộp đủ cả 3 bằng dấu phẩy theo tên thật dạng Color=Grey,Black,Navy — không bị cắt/lỗi logic nối chỉ đúng cho 2 value.",<cần confirm>
