@@ -28,9 +28,9 @@ Không gộp nhiều rule khác nhau vào 1 mục — mỗi rule phải đủ nh
 
 ### Bước 3: Đối chiếu từng rule với test case đã có
 
-**Lưu ý cấu trúc file bảng 10 cột:** mỗi dòng trong file là 1 test case thật (không có dòng banner/dòng phụ nào). Để tránh lặp chữ, cột Field/Phần CHỈ có giá trị ở dòng đầu tiên của mỗi nhóm liên tiếp cùng Field/Phần — các dòng sau trong cùng nhóm để TRỐNG cột này. Khi audit, nếu 1 test case row có Field/Phần trống, nhóm của nó là nhóm của dòng gần nhất phía trên có giá trị Field/Phần (đọc từ trên xuống, không phải chính ô đó).
+**Lưu ý cấu trúc file bảng 10 cột:** mỗi dòng trong file là 1 test case thật, trừ dòng Purpose ngay sau header (ID = `Purpose:`, chỉ mô tả mục đích nghiệp vụ của file — bỏ qua khi audit). Để tránh lặp chữ, cột Field/Phần CHỈ có giá trị ở dòng đầu tiên của mỗi nhóm liên tiếp cùng Field/Phần — các dòng sau trong cùng nhóm để TRỐNG cột này. Khi audit, nếu 1 test case row có Field/Phần trống, nhóm của nó là nhóm của dòng gần nhất phía trên có giá trị Field/Phần (đọc từ trên xuống, không phải chính ô đó).
 
-**Lưu ý cấu trúc file matrix** (`userstoryID_matrix-<action>.csv`): đọc theo CỘT, không theo dòng — mỗi cột từ cột thứ 4 trở đi (`userstoryID_MTC01`, `MTC02`...) là 1 test case. Để biết 1 test case kiểm tra gì, đọc dọc cột đó: những dòng có điền số bước cho biết tổ hợp field × giá trị (Valid/Invalid) mà case này dùng, và các dòng trong section Output có điền số cho biết expected result của case đó. Rule validate/tổ hợp field thường CHỈ được cover ở đây (đã gỡ khỏi file bảng), nên phải đối chiếu cả file matrix trước khi kết luận 1 rule là "Not covered".
+**Lưu ý cấu trúc file matrix** (`userstoryID_matrix-<action>.csv`): đọc theo CỘT, không theo dòng — mỗi cột từ cột thứ 4 trở đi (`MTC01`, `MTC02`...) là 1 test case. Để biết 1 test case kiểm tra gì, đọc dọc cột đó: những dòng có điền số bước cho biết tổ hợp field × giá trị (Valid/Invalid) mà case này dùng, và các dòng trong section Output có điền số cho biết expected result của case đó. Rule validate/tổ hợp field thường CHỈ được cover ở đây (đã gỡ khỏi file bảng), nên phải đối chiếu cả file matrix trước khi kết luận 1 rule là "Not covered".
 
 Với mỗi rule ở Bước 2 (kể cả rule phụ rút ra từ trigger), rà toàn bộ các file test case đầu vào — file bảng (cột Field/Phần, Chi tiết test, Cụ thể hơn, Preconditions, Test Steps, Expected Result) và file matrix (đọc dọc từng cột MTC) — để xác định trạng thái:
 
@@ -38,7 +38,7 @@ Với mỗi rule ở Bước 2 (kể cả rule phụ rút ra từ trigger), rà 
 - **Partial**: có test case liên quan nhưng chưa đủ (ví dụ chỉ test happy path, thiếu boundary/negative mà rule ngụ ý cần).
 - **Not covered**: không có test case nào chạm tới rule này.
 
-Ghi lại ID test case liên quan (nếu có) cho từng rule để truy vết ngược dễ dàng — ghi đúng ID gốc để biết case nằm ở file nào (`userstoryID_TCxx` = file bảng, `userstoryID_MTCxx` = file matrix).
+Ghi lại ID test case liên quan (nếu có) cho từng rule để truy vết ngược dễ dàng — ghi đúng ID gốc để biết case nằm ở file nào (số thứ tự `1, 2, 3…` = file bảng, `MTCxx` = file matrix). Dòng Purpose ở đầu file bảng (ID = `Purpose:`) không phải test case — không tính vào tổng số case, không map rule vào dòng này.
 
 ### Bước 4: Xuất báo cáo coverage
 
@@ -57,8 +57,9 @@ Xuất file markdown checklist:
 
 ## Chi tiết
 
-- [x] AC-01 — <mô tả rule> — Covered — TC: US1234_TC01, US1234_TC02
-- [~] AC-02 — <mô tả rule> — Partial — TC: US1234_TC05 (thiếu case giá trị âm)
+- [x] AC-01 — <mô tả rule> — Covered — TC: 1, 2
+- [~] AC-02 — <mô tả rule> — Partial — TC: 5 (thiếu case giá trị âm)
+- [x] AC-03 — <mô tả rule> — Covered — TC: MTC01-MTC03 (file matrix)
 - [ ] AC-03 — <mô tả rule> — Not covered
 ```
 

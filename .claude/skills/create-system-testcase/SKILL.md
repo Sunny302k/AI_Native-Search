@@ -44,11 +44,11 @@ Mỗi luồng nghiệp vụ hoàn chỉnh (đi qua hết các tác nhân cần t
 
 Lưu ý: "1 record" ở đây là 1 dòng khi mở bằng Excel/Google Sheets, KHÔNG phải 1 dòng vật lý trong file text. Ô Test Steps/Expected Result của test case System thường rất dài nên record sẽ trải trên nhiều dòng vật lý — đó là đúng chuẩn (xem Quy tắc trình bày nội dung ô bên dưới).
 
-KHÔNG dùng dòng banner riêng (đã loại bỏ khỏi mọi skill test case — xem `create-functional-testcase` để biết lý do). Mỗi dòng là 1 test case System thật sự.
+KHÔNG dùng dòng banner riêng (đã loại bỏ khỏi mọi skill test case — xem `create-functional-testcase` để biết lý do). Mỗi dòng là 1 test case System thật sự. Ngoại lệ là dòng **Purpose** (ID = `Purpose:`, 1 câu mục đích nghiệp vụ ở cột Field/Phần) — luôn đứng ngay sau header, chi tiết ở skill `create-functional-testcase`; khi gộp/renumber ở Bước 3 phải giữ nguyên dòng này, không đưa vào nhóm sort.
 
 | ID | Test Type | Field / Phần | Chi tiết test | Cụ thể hơn | Preconditions | Test Steps | Input DB/Setting | Expected Result | Note |
 
-- **ID**: `userstoryID_TCNumber` (renumber lại khi gộp file, xem Bước 3).
+- **ID**: CHỈ đánh số thứ tự `1, 2, 3…` — không kèm tên task/userstoryID, không tiền tố `TC` (renumber lại khi gộp file, xem Bước 3).
 - **Test Type**: luôn là `Integration` (bộ giá trị chuẩn không có loại `System` riêng — luồng nghiệp vụ xuyên nhiều tác nhân thuộc chung nhóm Integration).
 - **Field / Phần**: **không có field cụ thể** vì đây là luồng xuyên nhiều màn hình/tác nhân — dùng **tên luồng nghiệp vụ chính** (ví dụ: `Merchant tạo Merchandise Campaign → Score re-evaluate sau Sync`, `BigCommerce trigger Schedule Sync → cập nhật Storefront`), KHÔNG ghi task ID. CHỈ điền ở dòng ĐẦU TIÊN trong số các test case cùng chung 1 luồng (các nhánh/kịch bản khác nhau của cùng luồng); các dòng sau để TRỐNG.
 - **Chi tiết test**: mô tả ngắn về kịch bản/nhánh cụ thể của luồng (ví dụ: `Luồng thành công — Sync Success → Storefront cập nhật đúng`). Ở dòng đầu tiên của luồng, có thể lồng thêm câu ngắn nêu các tác nhân tham gia nếu cần, không tách dòng riêng.
@@ -73,7 +73,7 @@ Ví dụ (2 test case cùng 1 luồng — nhánh success và nhánh failed, dòn
 
 ```
 ID,Test Type,Test Objective,,,Preconditions,Test Steps,Input DB/Setting,Expected Result,Note
-US1234_TC01,Integration,BigCommerce trigger Schedule Sync → cập nhật Storefront,Luồng thành công — Sync Success → Filter/Merchandise cập nhật đúng,,Schedule Sync = [Enabled, mỗi 6h],"1. [Merchant] Cấu hình Schedule Sync cho data type Product, lưu setting.
+1,Integration,BigCommerce trigger Schedule Sync → cập nhật Storefront,Luồng thành công — Sync Success → Filter/Merchandise cập nhật đúng,,Schedule Sync = [Enabled, mỗi 6h],"1. [Merchant] Cấu hình Schedule Sync cho data type Product, lưu setting.
 2. [System] Đến giờ trong lịch, tự động trigger Manual Sync ngầm cho Product.
 3. [System] Sync chạy xong, status chuyển Success, ghi Sync History.
 4. [System] Merchandise Campaign tự re-evaluate Score dựa trên data Product mới.
@@ -81,7 +81,7 @@ US1234_TC01,Integration,BigCommerce trigger Schedule Sync → cập nhật Store
 3. [Sync History] Record mới xuất hiện với status Success, đúng thời điểm theo lịch.
 4. [Merchandise] Score cập nhật đúng công thức dựa trên data Product mới nhất.
 5. [Storefront] Filter/Merchandise hiển thị đúng theo data đã sync + Score mới, không còn data cũ.",
-US1234_TC02,Integration,,Sync lỗi giữa chừng — Failed → giữ data cũ,Schedule Sync Failed,Schedule Sync = [Enabled, mỗi 6h],"1. [Merchant] Cấu hình Schedule Sync như TC01.
+2,Integration,,Sync lỗi giữa chừng — Failed → giữ data cũ,Schedule Sync Failed,Schedule Sync = [Enabled, mỗi 6h],"1. [Merchant] Cấu hình Schedule Sync cho data type Product, lưu setting.
 2. [System] Đến giờ, trigger sync nhưng gặp lỗi (VD mất kết nối BigCommerce), status chuyển Failed.
 3. [System] Ghi nhận Failed vào Sync History, gửi email thông báo cho Merchant (nếu Notification bật).
 4. [Customer] Truy cập Storefront trong lúc Sync đang Failed.",,"2. [Sync History] Record mới có status Failed, kèm lý do lỗi.
@@ -106,18 +106,19 @@ US1234_TC02,Integration,,Sync lỗi giữa chừng — Failed → giữ data cũ
   1. 3 byte đầu file đúng BOM `EF BB BF`.
   2. Số lần xuất hiện chuỗi `<br` trong file phải bằng **0**, và không có chuỗi literal `\n` trong nội dung ô. Nếu > 0 nghĩa là đã giả ngắt dòng bằng HTML/escape — phải sửa thành ngắt dòng thật rồi kiểm tra lại.
   3. Toàn bộ ký tự xuống dòng cuối record là CRLF, không có LF đơn lẻ.
-  4. Parse lại file bằng 1 CSV reader chuẩn (KHÔNG tự đếm dấu phẩy/đếm dòng vật lý): số record data đúng bằng tổng số test case trong file, và mỗi record đủ 10 cột.
+  4. Parse lại file bằng 1 CSV reader chuẩn (KHÔNG tự đếm dấu phẩy/đếm dòng vật lý): dòng ngay sau header phải là dòng Purpose (ID = `Purpose:`); số record data còn lại đúng bằng tổng số test case trong file, và mỗi record đủ 10 cột. Dòng Purpose không tính vào ID tuần tự — ID = 1 đứng ngay sau nó.
   5. Mỗi nhóm Field/Phần (mỗi luồng) chỉ có 1 dòng đầu tiên điền giá trị, các dòng sau trong cùng luồng để trống, không xen kẽ.
 - Folder: `test-cases/userstoryID/`.
 - **File đích**: `userstoryID_testcase.csv` — dùng CHUNG file với `create-functional-testcase`, `create-permission-testcase`, `create-impact-testcase` và `create-sync-testcase` (cả 5 skill cùng schema 10 cột này). Chỉ riêng `create-api-testcase` KHÔNG gộp vào file này (khác schema cột hoàn toàn).
 
-  - Nếu file `userstoryID_testcase.csv` CHƯA tồn tại: tạo file mới, chỉ chứa test case luồng nghiệp vụ (Test Type = Integration) vừa sinh.
-  - Nếu file ĐÃ tồn tại: đọc toàn bộ rows hiện có, giữ nguyên nội dung từng ô, thêm rows mới vào, rồi sắp xếp lại TOÀN BỘ file:
+  - Nếu file `userstoryID_testcase.csv` CHƯA tồn tại: tạo file mới, dòng đầu sau header là dòng Purpose, tiếp theo là test case luồng nghiệp vụ (Test Type = Integration) vừa sinh.
+  - Nếu file ĐÃ tồn tại: đọc toàn bộ rows hiện có, giữ nguyên nội dung từng ô, tách riêng dòng Purpose ra khỏi tập rows sẽ sắp xếp (chưa có thì bổ sung theo quy định ở `create-functional-testcase`), thêm rows mới vào, rồi sắp xếp lại TOÀN BỘ phần rows còn lại:
     1. Nhóm theo **Field / Phần** trước (test hết 1 Field/Phần mới sang Field/Phần khác, không xen kẽ). Với dòng System, Field/Phần chính là tên luồng nghiệp vụ đã xác định ở Bước 2.2 — dòng đang để trống Field/Phần coi là thuộc luồng của dòng gần nhất phía trên có giá trị.
     2. Trong cùng 1 nhóm Field/Phần, sắp theo thứ tự ưu tiên Test Type: `Happy → Negative → Edge → Sync → Permission → Integration → UI`.
-    3. Renumber lại cột **ID** tuần tự theo thứ tự mới sau khi sắp xếp: `US1234_TC01, TC02, TC03...`.
+    3. Renumber lại cột **ID** tuần tự theo thứ tự mới sau khi sắp xếp: `1, 2, 3...` — chỉ số thứ tự, không kèm tên task, không tiền tố `TC`.
     4. Sau khi sắp xếp, chỉ dòng đầu tiên của mỗi luồng giữ giá trị Field/Phần, các dòng còn lại để trống.
-  - Không xoá hoặc sửa nội dung rows đã có từ trước — chỉ thêm mới, sắp xếp lại, renumber ID.
+    5. Ghi lại dòng Purpose (giữ nguyên nội dung cũ) ngay sau header, rồi mới tới các rows đã renumber.
+  - Không xoá hoặc sửa nội dung rows đã có từ trước, kể cả dòng Purpose — chỉ thêm mới, sắp xếp lại, renumber ID.
 
 ### Bước 4: Tổng kết, báo cáo
 

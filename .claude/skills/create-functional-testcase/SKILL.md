@@ -77,9 +77,24 @@ Mặc định vẫn là 1 dòng = 1 test case, KHÔNG dùng banner cho từng nh
 - Banner KHÔNG tính là 1 giá trị Field/Phần thật khi kiểm tra contiguity (checklist mục 5) — vì đây không phải tên nhóm field, chỉ xuất hiện đúng 1 lần/luồng nên không phát sinh rủi ro xen kẽ.
 - Khi gộp/sắp xếp lại file (xem "Gộp file" bên dưới), banner đi kèm và được xếp lại cùng cụm case của đúng luồng đó — không renumber banner vì không có ID.
 
+### Dòng Purpose — bắt buộc, đúng 1 dòng/file
+
+Mỗi file test case bắt buộc có đúng **1 dòng Purpose**, nằm ngay dưới dòng header, đứng trước test case đầu tiên (ID = 1). Dòng Purpose khác bản chất với banner: chỉ xuất hiện **1 lần/file**, mô tả mục đích tổng thể của cả file để người mở file hiểu ngay task này test để làm gì mà không cần đọc hết các dòng.
+
+- Cột **ID**: ghi đúng chữ `Purpose:`.
+- Cột **Field / Phần** (cột đầu của nhóm Test Objective): ghi ĐÚNG 1 câu ngắn nêu **mục đích nghiệp vụ** của feature — ai được lợi, lợi ích gì — KHÔNG phải mô tả "test cái gì".
+  - Nguồn nội dung, theo thứ tự ưu tiên: vế **"So that"** trong User Story gốc (nếu có) → mục "Tổng quan" của spec trong `docs/specs/` → nếu vẫn không rõ mục đích nghiệp vụ, hỏi người dùng, không tự bịa.
+  - Đúng: `Cho merchant chỉnh 1 lần cho toàn bộ panel filter cách hiển thị, ẩn/hiện và định dạng URL, để shopper lọc và gỡ filter nhanh hơn.`
+  - Sai (mô tả phạm vi, không phải mục đích): `Test case cho màn Advanced Settings.`
+  - **Bắt buộc đối chiếu chéo với các file "anh em" trong cùng cụm** (feature liền kề, hay test cùng batch — VD Filter Cache / Merge Values / Advanced Settings; Brand / Condition / Product options): nếu câu Purpose mở đầu cùng 1 khuôn với file anh em thì đọc lướt sẽ thấy 2 file giống nhau dù 2 feature khác nhau. Đưa đúng cơ chế/động từ khác biệt lên **đầu câu** (VD "gộp nhiều value thành 1" vs "chỉnh chung cho toàn panel" vs "làm mới dữ liệu cache"), không chôn ở giữa/cuối câu.
+- Mọi cột còn lại: để trống (vẫn đủ dấu phẩy cho đủ 10 cột).
+- Dòng Purpose **KHÔNG tính vào ID tuần tự** và không tính vào tổng số case khi báo cáo.
+- Khi gộp/sắp xếp lại file: dòng Purpose LUÔN giữ nguyên vị trí ngay sau header — không tham gia nhóm Field/Phần, không sắp theo Test Type, không bị renumber hay xoá. Không tính vào kiểm tra contiguity của cột Field/Phần.
+- File mới: viết dòng Purpose trước case đầu tiên. File đã tồn tại mà chưa có dòng Purpose: bổ sung. File đã có Purpose: giữ nguyên, không ghi đè trừ khi người dùng yêu cầu sửa.
+
 ### Quy định từng cột
 
-- **ID**: định dạng là userstoryID_testcaseNumber (ví dụ: US1234_TC01), đánh số tuần tự cho MỌI dòng test case thật — không có dòng nào bị bỏ qua khi đánh số. Ngoại lệ duy nhất: dòng banner phân tách luồng (nếu có, xem mục "Nguyên tắc" phía trên) để trống ID vì không phải test case.
+- **ID**: CHỈ đánh số thứ tự `1, 2, 3…` — KHÔNG kèm tên task/userstoryID, KHÔNG thêm tiền tố `TC` (quy định của người dùng, 2026-09-26). Đánh số tuần tự cho MỌI dòng test case thật — không có dòng nào bị bỏ qua khi đánh số. Ngoại lệ: dòng Purpose (ID = `Purpose:`) và dòng banner phân tách luồng (nếu có, ID để trống) — cả 2 không phải test case nên không đánh số.
 - **Test Type**: dùng đúng bộ giá trị chuẩn dùng chung của team QA Timind — `Happy`, `Negative`, `UI`, `Permission`, `Integration`, `Edge` (không tự bịa thêm loại khác). Skill này chỉ tự sinh 4 loại:
 
   - Happy: Input/ luồng hợp lệ đúng theo specs, không cố ý gây lỗi. Chỉ gán `Happy` khi case thoả **ĐỦ CẢ 4** điều kiện dưới đây — thiếu 1 điều kiện là phải chuyển sang type khác:
@@ -133,9 +148,10 @@ Mặc định vẫn là 1 dòng = 1 test case, KHÔNG dùng banner cho từng nh
 
   ```
   ID,Test Type,Test Objective,,,Preconditions,Test Steps,Input DB/Setting,Expected Result,Note
-  US1234_TC01,Happy,Field [Filter name],Save successfully,,Filter tree chưa tồn tại,"1. Nhập Filter name hợp lệ.
+  Purpose:,,Tạo filter tree để merchant tự sắp xếp bộ filter riêng hiển thị cho shopper trên storefront.,,,,,,,
+  1,Happy,Field [Filter name],Save successfully,,Filter tree chưa tồn tại,"1. Nhập Filter name hợp lệ.
   2. Click [Create filter tree].",,2. Filter tree mới xuất hiện trong danh sách; toast ""Filter tree created successfully"" hiển thị.,
-  US1234_TC02,Negative,,Filter name trùng,,,1. Nhập Filter name trùng với filter tree đã tồn tại và Click [Create filter tree].,,Hiển thị lỗi ""Filter tree name already exists"".,
+  2,Negative,,Filter name trùng,,,1. Nhập Filter name trùng với filter tree đã tồn tại và Click [Create filter tree].,,Hiển thị lỗi ""Filter tree name already exists"".,
   ```
 
 - file format: csv UTF-8 BOM với quy tắc naming là userstoryID_testcase.csv (ví dụ: US1234_testcase.csv)
@@ -148,20 +164,22 @@ Mặc định vẫn là 1 dòng = 1 test case, KHÔNG dùng banner cho từng nh
   1. 3 byte đầu file đúng BOM `EF BB BF`.
   2. Số lần xuất hiện chuỗi `<br` trong file phải bằng **0**, và không có chuỗi literal `\n` trong nội dung ô. Nếu > 0 nghĩa là đã giả ngắt dòng bằng HTML/escape — phải sửa thành ngắt dòng thật rồi kiểm tra lại.
   3. Toàn bộ ký tự xuống dòng cuối record trong file là CRLF (`\r\n`) — không có LF đơn lẻ nào. Nếu có, sửa lại cho nhất quán.
-  4. Parse lại file bằng 1 CSV reader chuẩn (KHÔNG tự đếm dấu phẩy/đếm dòng vật lý): số record data đúng bằng tổng số test case đã sinh CỘNG số dòng banner phân tách luồng (nếu có), và mỗi record đủ 10 cột (kể cả dòng banner — 9 cột còn lại để trống nhưng vẫn đủ dấu phẩy).
-  5. Cột Field/Phần: mỗi nhóm liên tiếp cùng giá trị chỉ có DUY NHẤT 1 dòng đầu tiên điền giá trị, các dòng sau trong cùng nhóm để trống. Kiểm tra bằng cách duyệt tuần tự: nếu 2 dòng liên tiếp cùng thuộc 1 nhóm (dòng sau Field/Phần trống, ngầm hiểu là tiếp tục nhóm của dòng gần nhất có giá trị) thì hợp lệ; nếu 1 nhóm bị lặp giá trị ở nhiều dòng không liên tiếp là SAI (nhóm bị xen kẽ, cần gom lại). Dòng banner phân tách luồng (giá trị dạng `=== ... ===`, nếu có) không tính vào kiểm tra contiguity này.
+  4. Parse lại file bằng 1 CSV reader chuẩn (KHÔNG tự đếm dấu phẩy/đếm dòng vật lý): dòng ngay sau header phải là dòng Purpose (ID = `Purpose:`); số record data còn lại đúng bằng tổng số test case đã sinh CỘNG số dòng banner phân tách luồng (nếu có), và mỗi record đủ 10 cột (kể cả dòng banner — 9 cột còn lại để trống nhưng vẫn đủ dấu phẩy).
+  5. Cột Field/Phần: mỗi nhóm liên tiếp cùng giá trị chỉ có DUY NHẤT 1 dòng đầu tiên điền giá trị, các dòng sau trong cùng nhóm để trống. Kiểm tra bằng cách duyệt tuần tự: nếu 2 dòng liên tiếp cùng thuộc 1 nhóm (dòng sau Field/Phần trống, ngầm hiểu là tiếp tục nhóm của dòng gần nhất có giá trị) thì hợp lệ; nếu 1 nhóm bị lặp giá trị ở nhiều dòng không liên tiếp là SAI (nhóm bị xen kẽ, cần gom lại). Dòng banner phân tách luồng (giá trị dạng `=== ... ===`, nếu có) và dòng Purpose không tính vào kiểm tra contiguity này.
+  6. Dòng Purpose không bị tính vào ID tuần tự — ID = 1 đứng ngay sau dòng Purpose, cột ID chỉ là số thứ tự (không kèm tên task).
 
 - folder: lưu trữ trong thư mục có tên test-cases/userstoryID (ví dụ: testcases/US1234)
 
 - **Gộp file với các skill cùng schema 10 cột**: `userstoryID_testcase.csv` là file đích CHUNG cho `create-functional-testcase`, `create-permission-testcase`, `create-impact-testcase` và `create-sync-testcase` (cả 4 dùng đúng 10 cột này). `create-system-testcase` cũng gộp chung file (Test Type `Integration`). `create-api-testcase` KHÔNG gộp vào file này vì khác schema cột — vẫn giữ file riêng theo quy định của skill đó.
 
-  - Nếu file `userstoryID_testcase.csv` CHƯA tồn tại: tạo file mới, chỉ chứa test case vừa sinh ở bước này.
-  - Nếu file ĐÃ tồn tại (do skill khác đã chạy trước): đọc toàn bộ rows hiện có, giữ nguyên nội dung từng ô (kể cả rows đang để trống Field/Phần vì thuộc nhóm dòng trên), thêm rows mới vào, rồi sắp xếp lại TOÀN BỘ file:
+  - Nếu file `userstoryID_testcase.csv` CHƯA tồn tại: tạo file mới, dòng đầu sau header là dòng Purpose, tiếp theo là test case vừa sinh ở bước này.
+  - Nếu file ĐÃ tồn tại (do skill khác đã chạy trước): đọc toàn bộ rows hiện có, giữ nguyên nội dung từng ô (kể cả rows đang để trống Field/Phần vì thuộc nhóm dòng trên), tách riêng dòng Purpose ra khỏi tập rows sẽ sắp xếp (chưa có thì bổ sung), thêm rows mới vào, rồi sắp xếp lại TOÀN BỘ phần rows còn lại:
     1. Nhóm theo **Field / Phần** trước (test hết 1 Field/Phần mới sang Field/Phần khác, không xen kẽ) — khi nhóm lại, coi các dòng Field/Phần trống là thuộc về nhóm của dòng gần nhất phía trên có giá trị.
     2. Trong cùng 1 nhóm Field/Phần, sắp theo thứ tự ưu tiên Test Type: Happy → Negative → Edge → Sync → Permission → Integration → UI.
-    3. Renumber lại cột **ID** tuần tự theo thứ tự mới sau khi sắp xếp: `US1234_TC01, TC02, TC03...` (bỏ hậu tố riêng như `_PERM_`/`_IMP_` vì cột Test Type đã phân biệt loại).
+    3. Renumber lại cột **ID** tuần tự theo thứ tự mới sau khi sắp xếp: `1, 2, 3...` — chỉ số thứ tự, không kèm tên task, không tiền tố `TC`, không hậu tố `_PERM_`/`_IMP_` (cột Test Type đã phân biệt loại).
     4. Sau khi sắp xếp lại, chỉ dòng ĐẦU TIÊN của mỗi nhóm giữ giá trị Field/Phần, các dòng còn lại trong nhóm để trống — kể cả khi thứ tự dòng đã thay đổi so với trước khi gộp.
-  - Không xoá hoặc sửa nội dung rows đã có từ trước — chỉ thêm mới, sắp xếp lại, renumber ID.
+    5. Ghi lại dòng Purpose (giữ nguyên nội dung cũ) ngay sau header, rồi mới tới các rows đã renumber.
+  - Không xoá hoặc sửa nội dung rows đã có từ trước, kể cả dòng Purpose — chỉ thêm mới, sắp xếp lại, renumber ID.
   - Nếu file gộp có dùng banner phân tách luồng (xem "Nguyên tắc" phía trên): banner đi kèm cụm case của đúng luồng khi sắp xếp lại, đặt ngay trước case đầu tiên của luồng đó; banner không có ID nên không renumber.
 
 ### Bước 5: Sinh thêm bản trình bày dạng matrix

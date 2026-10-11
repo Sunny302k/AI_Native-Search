@@ -43,7 +43,7 @@ Nếu task cần matrix: xác định các **action** cần matrix hoá (mỗi a
 - Input bắt buộc: file `userstoryID_testcase.csv` đã tồn tại và đã ổn định ID (đã chạy xong toàn bộ các skill cùng ghi vào file này: `create-functional-testcase`/`create-permission-testcase`/`create-system-testcase`/`create-impact-testcase`/`create-sync-testcase`). Nếu file chưa tồn tại, dừng lại và chạy skill tạo test case phù hợp trước.
 - Duyệt toàn bộ rows, đánh dấu những case **thuộc phạm vi matrix** — tức case kiểm tra giá trị input của các field trong đúng action đang matrix hoá (Test Type thường là `Negative`, `Edge`, và case `Happy` của chính action đó).
 - **KHÔNG** đưa vào matrix: case `UI`/hiển thị thuần, case `Integration`/`Permission`/`Sync`, case thuộc action khác — những case này ở lại file bảng.
-- Với mỗi case được đánh dấu, giữ lại đủ thông tin để dựng matrix: tổ hợp giá trị từng field, thứ tự bước thực hiện, các expected result, **và ID gốc của case đó** (`userstoryID_TCxx`) — ID này dùng để xoá chính xác ở Bước 5, không suy luận lại bằng cách so khớp text.
+- Với mỗi case được đánh dấu, giữ lại đủ thông tin để dựng matrix: tổ hợp giá trị từng field, thứ tự bước thực hiện, các expected result, **và ID gốc của case đó** (số thứ tự ở cột ID của file bảng, VD `12`) — ID này dùng để xoá chính xác ở Bước 5, không suy luận lại bằng cách so khớp text.
 - Nếu phát hiện thiếu tổ hợp field×giá trị đáng lẽ phải có (theo kỹ thuật ở Bước 3) mà chưa có case tương ứng → được phép bổ sung thẳng case mới vào matrix (matrix là nơi sở hữu nhóm case này), miễn là có căn cứ từ spec; điểm nào spec chưa rõ thì đánh dấu `<cần confirm>` ở dòng Output tương ứng.
 
 ### Bước 3: Phân rã field theo kỹ thuật test
@@ -90,7 +90,7 @@ Cấu trúc cột cố định, đúng thứ tự:
 - **Valid/Invalid**: ghi đúng `Valid` hoặc `Invalid`.
 - **Thứ tự trong nhóm field**: trong cùng 1 nhóm field, toàn bộ dòng `Valid` phải xếp liền nhau TRƯỚC, rồi mới tới toàn bộ dòng `Invalid` liền nhau SAU — không xen kẽ (VD đúng: Valid, Valid, Invalid, Invalid, Invalid; VD sai: Valid, Invalid, Valid, Invalid). Khi phát hiện/bổ sung 1 nhánh Valid mới sau khi đã viết xong các dòng Invalid (thường xảy ra khi thêm giá trị biên), phải sắp xếp lại để Valid vẫn đứng trước, không chỉ nối thêm vào cuối nhóm.
 - **Giá trị**: mô tả ngắn gọn input cụ thể (ví dụ: `Bỏ trống`, `Nhập > 50 ký tự`, `SKU không tồn tại`, `Số âm`).
-- Từ cột thứ 4 trở đi, mỗi cột = 1 test case, đánh ID theo định dạng `userstoryID_MTC01`, `userstoryID_MTC02`... (`MTC` = Matrix Test Case). Dùng dải ID riêng, KHÔNG dùng chung dải `TC` với file bảng — để 2 file không bao giờ đụng ID nhau và ID matrix không bị xê dịch mỗi khi file bảng renumber.
+- Từ cột thứ 4 trở đi, mỗi cột = 1 test case, đánh ID theo định dạng `MTC01`, `MTC02`... (`MTC` = Matrix Test Case) — KHÔNG kèm tên task/userstoryID. Dùng dải ID riêng, KHÔNG dùng chung dải `TC` với file bảng — để 2 file không bao giờ đụng ID nhau và ID matrix không bị xê dịch mỗi khi file bảng renumber.
 - Ô giao giữa 1 dòng giá trị và 1 cột TC: điền **số thứ tự bước** thực hiện thao tác với field đó trong luồng của TC này (1, 2, 3...). Để trống nếu field/giá trị đó không thuộc luồng của TC này.
 - Dòng **hành động cố định** (ví dụ `Click [Submit]` / `Click [Save]` — thường là bước cuối, không gắn với field Valid/Invalid nào): để trống cột Field và Valid/Invalid, ghi hành động vào cột Giá trị, điền số bước tương ứng ở MỌI cột TC có đi qua bước đó.
 
@@ -147,9 +147,9 @@ Test Result,,,,,
 Sau khi matrix đã chứa đủ các case ở Bước 2:
 
 1. Xoá đúng những rows đã chuyển sang matrix khỏi `userstoryID_testcase.csv`, xác định rows cần xoá **bằng ID gốc đã ghi lại ở Bước 2** — KHÔNG so khớp lại theo nội dung text (Chi tiết test/Expected Result...). Lý do: 2 case cùng 1 kịch bản có thể diễn đạt lệch chữ giữa lúc viết ở file bảng và lúc dựng lại thành nhánh matrix, so khớp text sẽ bỏ sót và để lại case trùng ở cả 2 file — lỗi này đã xảy ra thực tế. Nếu vì lý do nào đó không còn xác định được ID gốc, liệt kê danh sách case nghi ngờ trùng cho người dùng xác nhận thay vì tự ý so khớp text rồi xoá.
-2. Renumber lại cột `ID` của file bảng tuần tự từ đầu (`userstoryID_TC01`, `TC02`...) theo thứ tự rows còn lại, giữ nguyên quy tắc sắp xếp cũ (nhóm theo Field/Phần → Test Type `Happy → Negative → Edge → Sync → Permission → Integration → UI`).
+2. Renumber lại cột `ID` của file bảng tuần tự từ đầu (`1`, `2`, `3`... — chỉ số thứ tự, không kèm tên task) theo thứ tự rows còn lại (không tính dòng Purpose — dòng này giữ nguyên ngay sau header), giữ nguyên quy tắc sắp xếp cũ (nhóm theo Field/Phần → Test Type `Happy → Negative → Edge → Sync → Permission → Integration → UI`).
 3. Áp lại quy tắc cột Field/Phần: chỉ dòng ĐẦU TIÊN của mỗi nhóm liên tiếp giữ giá trị, các dòng sau để trống — vì việc xoá rows có thể làm dòng đầu nhóm cũ biến mất.
-4. Chạy lại checklist kiểm tra file bảng (BOM, CRLF, không `<br`/literal `\n`, đủ 10 cột, nhóm Field/Phần không xen kẽ) sau khi sửa.
+4. Chạy lại checklist kiểm tra file bảng (BOM, CRLF, không `<br`/literal `\n`, đủ 10 cột, dòng Purpose vẫn đứng ngay sau header, nhóm Field/Phần không xen kẽ) sau khi sửa.
 
 Nếu sau khi gỡ mà 1 nhóm Field/Phần không còn row nào, bỏ luôn nhóm đó khỏi file bảng — không để lại nhóm rỗng.
 

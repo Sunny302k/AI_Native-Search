@@ -67,11 +67,11 @@ Chạy đủ 7 kỹ thuật dưới đây trước khi viết case. Với skill 
 
 Mỗi test case phải trả lời: "Sau khi thay đổi của task hiện tại được áp dụng, luồng/feature X còn hoạt động đúng như trước / đúng theo spec X không?" — không test lại toàn bộ chức năng của luồng X, chỉ test đúng điểm giao thoa bị ảnh hưởng.
 
-Quy định về output — dùng đúng 10 cột và quy tắc trình bày như skill `create-functional-testcase` (KHÔNG dùng dòng banner — đã loại bỏ, xem file đó để biết lý do):
+Quy định về output — dùng đúng 10 cột và quy tắc trình bày như skill `create-functional-testcase` (KHÔNG dùng dòng banner — đã loại bỏ, xem file đó để biết lý do). Ngoại lệ là dòng **Purpose** (ID = `Purpose:`, 1 câu mục đích nghiệp vụ ở cột Field/Phần) — luôn đứng ngay sau header, chi tiết ở skill `create-functional-testcase`; khi gộp/renumber ở Bước 4 phải giữ nguyên dòng này, không đưa vào nhóm sort:
 
 | ID | Test Type | Field / Phần | Chi tiết test | Cụ thể hơn | Preconditions | Test Steps | Input DB/Setting | Expected Result | Note |
 
-- **ID**: `userstoryID_TCNumber` tạm thời khi mới sinh (ví dụ: `US1234_TC01`) — ID cuối cùng sẽ được renumber lại theo đúng vị trí sau khi gộp/sắp xếp vào file chung ở Bước 4.
+- **ID**: CHỈ đánh số thứ tự `1, 2, 3…` — không kèm tên task/userstoryID, không tiền tố `TC`. Số tạm khi mới sinh sẽ được renumber lại theo đúng vị trí sau khi gộp/sắp xếp vào file chung ở Bước 4.
 - **Test Type**: luôn là `Integration`.
 - **Field / Phần**: tên **feature/màn hình bị ảnh hưởng** (ví dụ: `Merge Value`, `Merchandise Campaign`). CHỈ điền ở dòng ĐẦU TIÊN của mỗi nhóm liên tiếp cùng Field/Phần; các dòng sau trong cùng nhóm để TRỐNG. Nghiêm cấm ghi task ID/task name của task đang gây ảnh hưởng vào cột này.
 - **Chi tiết test**: mô tả điểm giao thoa đang test (ví dụ: "Merge Value hiển thị đúng sau khi đổi cấu trúc sync Brand", "Merchandise Score tính đúng sau khi đổi công thức Self-learning"). Ở dòng đầu tiên của nhóm, có thể lồng thêm 1 câu ngắn nêu lý do nhóm này bị ảnh hưởng (impact traceability từ Bước 2.3) nếu cần, không tách dòng riêng — diễn giải bằng lời, KHÔNG dán mã ticket của trigger (vd `NS-2473`, `AC-2`) vào câu đó.
@@ -90,18 +90,19 @@ Sắp xếp: gom nhóm theo từng luồng/feature bị ảnh hưởng (test h�
   1. 3 byte đầu file đúng BOM `EF BB BF`.
   2. Số lần xuất hiện chuỗi `<br` trong file phải bằng **0**, và không có chuỗi literal `\n` trong nội dung ô. Nếu > 0 nghĩa là đã giả ngắt dòng bằng HTML/escape — phải sửa thành ngắt dòng thật rồi kiểm tra lại.
   3. Toàn bộ ký tự xuống dòng cuối record là CRLF, không có LF đơn lẻ.
-  4. Parse lại file bằng 1 CSV reader chuẩn (KHÔNG tự đếm dấu phẩy/đếm dòng vật lý): số record data đúng bằng tổng số test case trong file, và mỗi record đủ 10 cột.
+  4. Parse lại file bằng 1 CSV reader chuẩn (KHÔNG tự đếm dấu phẩy/đếm dòng vật lý): dòng ngay sau header phải là dòng Purpose (ID = `Purpose:`); số record data còn lại đúng bằng tổng số test case trong file, và mỗi record đủ 10 cột. Dòng Purpose không tính vào ID tuần tự — ID = 1 đứng ngay sau nó.
   5. Mỗi nhóm Field/Phần chỉ có 1 dòng đầu tiên điền giá trị, các dòng sau trong cùng nhóm để trống, không xen kẽ.
 - Folder: `test-cases/userstoryID/` (cùng thư mục với test case chức năng chính của task đó).
 - **File đích**: `userstoryID_testcase.csv` — dùng CHUNG file với `create-functional-testcase`, `create-permission-testcase`, `create-system-testcase` và `create-sync-testcase` (cả 5 skill cùng schema 10 cột này). Chỉ riêng `create-api-testcase` KHÔNG gộp vào file này.
 
-  - Nếu file `userstoryID_testcase.csv` CHƯA tồn tại: tạo file mới, chỉ chứa test case Integration vừa sinh.
-  - Nếu file ĐÃ tồn tại: đọc toàn bộ rows hiện có, giữ nguyên nội dung từng ô, thêm rows Integration mới vào, rồi sắp xếp lại TOÀN BỘ file:
+  - Nếu file `userstoryID_testcase.csv` CHƯA tồn tại: tạo file mới, dòng đầu sau header là dòng Purpose, tiếp theo là test case Integration vừa sinh.
+  - Nếu file ĐÃ tồn tại: đọc toàn bộ rows hiện có, giữ nguyên nội dung từng ô, tách riêng dòng Purpose ra khỏi tập rows sẽ sắp xếp (chưa có thì bổ sung theo quy định ở `create-functional-testcase`), thêm rows Integration mới vào, rồi sắp xếp lại TOÀN BỘ phần rows còn lại:
     1. Nhóm theo **Field / Phần** trước (test hết 1 Field/Phần mới sang Field/Phần khác, không xen kẽ) — dòng nào đang để trống Field/Phần thì coi là thuộc nhóm của dòng gần nhất phía trên có giá trị.
     2. Trong cùng 1 nhóm Field/Phần, sắp theo thứ tự ưu tiên Test Type: `Happy → Negative → Edge → Sync → Permission → Integration → UI`.
-    3. Renumber lại cột **ID** tuần tự theo thứ tự mới sau khi sắp xếp: `US1234_TC01, TC02, TC03...` (bỏ hậu tố `_IMP_` vì cột Test Type đã phân biệt loại).
+    3. Renumber lại cột **ID** tuần tự theo thứ tự mới sau khi sắp xếp: `1, 2, 3...` — chỉ số thứ tự, không kèm tên task, không tiền tố `TC`, không hậu tố `_IMP_`.
     4. Sau khi sắp xếp, chỉ dòng đầu tiên của mỗi nhóm giữ giá trị Field/Phần, các dòng còn lại để trống.
-  - Không xoá hoặc sửa nội dung rows đã có từ trước — chỉ thêm mới, sắp xếp lại, renumber ID.
+    5. Ghi lại dòng Purpose (giữ nguyên nội dung cũ) ngay sau header, rồi mới tới các rows đã renumber.
+  - Không xoá hoặc sửa nội dung rows đã có từ trước, kể cả dòng Purpose — chỉ thêm mới, sắp xếp lại, renumber ID.
 
 ### Bước 5: Thông báo tới người dùng
 

@@ -43,7 +43,7 @@ Dùng đúng schema 10 cột như `create-functional-testcase` (ID | Test Type |
 
 ## Bước 4: Gộp file
 
-Cùng schema 10 cột nên gộp vào chung `userstoryID_testcase.csv` với `create-functional-testcase`/`create-permission-testcase`/`create-system-testcase`/`create-impact-testcase`, theo đúng cơ chế đọc → thêm rows → sắp xếp lại → renumber ID đã quy định trong `create-functional-testcase`. Khi sắp xếp theo Test Type trong cùng 1 nhóm Field/Phần, thứ tự ưu tiên là: `Happy → Negative → Edge → **Sync** → Permission → Integration → UI` (bộ giá trị chuẩn dùng chung của team QA Timind, đúng theo tag/dropdown thật của tool team đang dùng — không có `Validation`/`Edge Case`/`Other`/`System` riêng).
+Cùng schema 10 cột nên gộp vào chung `userstoryID_testcase.csv` với `create-functional-testcase`/`create-permission-testcase`/`create-system-testcase`/`create-impact-testcase`, theo đúng cơ chế đọc → thêm rows → sắp xếp lại → renumber ID đã quy định trong `create-functional-testcase` (ID chỉ là số thứ tự `1, 2, 3…`; dòng Purpose ID = `Purpose:` luôn giữ nguyên ngay sau header, không sort, không renumber — file chưa có thì bổ sung). Khi sắp xếp theo Test Type trong cùng 1 nhóm Field/Phần, thứ tự ưu tiên là: `Happy → Negative → Edge → **Sync** → Permission → Integration → UI` (bộ giá trị chuẩn dùng chung của team QA Timind, đúng theo tag/dropdown thật của tool team đang dùng — không có `Validation`/`Edge Case`/`Other`/`System` riêng).
 
 ## Bước 5: Thông báo tới người dùng
 
