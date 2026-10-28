@@ -128,7 +128,7 @@ Không quan sát được threshold/range cụ thể nào (khác Category có "N
 | 12 | Tooltip content có giới hạn 255 ký tự giống Brand không? | Loại 2 | 9 |
 | 13 | Rule "Collapse rồi Expand lại filter → mất trạng thái selected của option đã chọn" (Brand đang ghi nhận bug NG ở đây) có xảy ra tương tự với Product options không? | Loại 2 | 9 |
 
-Câu hỏi #7-13 phát hiện qua `review-figma-spec-consistency` (đối chiếu với Brand/Category, xem `checklists/filter-node-product-options-brand-category-consistency-checklist.md`).
+Câu hỏi #7-13 phát hiện qua `review-figma-spec-consistency` (đối chiếu với Brand/Category, xem `checklists/filter/filter-node-product-options-brand-category-consistency-checklist.md`).
 
 Không có câu hỏi Loại 1 (BC platform fact) nào phát sinh riêng cho spec này — các fact BC liên quan (cấu trúc Variant Options/Modifiers) đã tra và ghi nhận sẵn ở `docs/bigcommerce-platform-facts.md`.
 
@@ -137,5 +137,5 @@ Không có câu hỏi Loại 1 (BC platform fact) nào phát sinh riêng cho spe
 - **Feature:** Filter — Filter Tree/Node Setup — Product options filter node (Add + Edit), nhóm "Advanced filter"
 - **Tài liệu liên quan:** `filter-tree-common-specs.md` (khung chung), `edit-filter-node-brand-specs.md` (pattern gần giống nhất — dynamic value + popup Select filter options), `edit-filter-node-category-specs.md`, `docs/sync-fields-glossary.md` mục 10, `docs/bigcommerce-platform-facts.md` mục 3
 - **Nguồn:** Ảnh chụp Figma do người dùng gửi trực tiếp trong chat (3 khung + 2 sticky note), không qua `mcp__figma__*`; đối chiếu ảnh BC Admin thật (product "TShirt_24")
-- **Số câu hỏi CẦN XÁC NHẬN BA:** 13 (toàn bộ Loại 2) — 6 câu gốc từ `extract-figma-spec` + 7 câu bổ sung từ `review-figma-spec-consistency` (đối chiếu Brand/Category, xem `checklists/filter-node-product-options-brand-category-consistency-checklist.md`)
+- **Số câu hỏi CẦN XÁC NHẬN BA:** 13 (toàn bộ Loại 2) — 6 câu gốc từ `extract-figma-spec` + 7 câu bổ sung từ `review-figma-spec-consistency` (đối chiếu Brand/Category, xem `checklists/filter/filter-node-product-options-brand-category-consistency-checklist.md`)
 - **Cập nhật 2026-08-27:** câu hỏi #3 gốc ("mục đích Setup dynamic option") đã được giải qua ảnh Figma thật frame "Dynamic option" — xem mục 6; thay bằng câu hỏi mới về mâu thuẫn rule Swatch disable, tổng số câu hỏi giữ nguyên 13.

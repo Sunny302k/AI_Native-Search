@@ -28,7 +28,7 @@ Không gộp nhiều rule khác nhau vào 1 mục — mỗi rule phải đủ nh
 
 ### Bước 3: Đối chiếu từng rule với test case đã có
 
-**Lưu ý cấu trúc file bảng 10 cột:** mỗi dòng trong file là 1 test case thật, trừ dòng Purpose ngay sau header (ID = `Purpose:`, chỉ mô tả mục đích nghiệp vụ của file — bỏ qua khi audit). Để tránh lặp chữ, cột Field/Phần CHỈ có giá trị ở dòng đầu tiên của mỗi nhóm liên tiếp cùng Field/Phần — các dòng sau trong cùng nhóm để TRỐNG cột này. Khi audit, nếu 1 test case row có Field/Phần trống, nhóm của nó là nhóm của dòng gần nhất phía trên có giá trị Field/Phần (đọc từ trên xuống, không phải chính ô đó).
+**Lưu ý cấu trúc file bảng 10 cột:** mỗi dòng trong file là 1 test case thật, trừ dòng Purpose ngay sau header (ID = `Purpose:`, chỉ mô tả mục đích nghiệp vụ của file — bỏ qua khi audit) và dòng banner phân tách luồng nếu có (ID để trống, cột Field/Phần dạng `=== ... ===` — không phải test case, bỏ qua khi audit). Để tránh lặp chữ, cột Field/Phần CHỈ có giá trị ở dòng đầu tiên của mỗi nhóm liên tiếp cùng Field/Phần — các dòng sau trong cùng nhóm để TRỐNG cột này. Khi audit, nếu 1 test case row có Field/Phần trống, nhóm của nó là nhóm của dòng gần nhất phía trên có giá trị Field/Phần (đọc từ trên xuống, không phải chính ô đó).
 
 **Lưu ý cấu trúc file matrix** (`userstoryID_matrix-<action>.csv`): đọc theo CỘT, không theo dòng — mỗi cột từ cột thứ 4 trở đi (`MTC01`, `MTC02`...) là 1 test case. Để biết 1 test case kiểm tra gì, đọc dọc cột đó: những dòng có điền số bước cho biết tổ hợp field × giá trị (Valid/Invalid) mà case này dùng, và các dòng trong section Output có điền số cho biết expected result của case đó. Rule validate/tổ hợp field thường CHỈ được cover ở đây (đã gỡ khỏi file bảng), nên phải đối chiếu cả file matrix trước khi kết luận 1 rule là "Not covered".
 
@@ -68,7 +68,7 @@ Xuất file markdown checklist:
 
 - File format: markdown (theo đúng quy định checklist của project).
 - Naming: kebab-case, `userstoryID-coverage-checklist.md` (ví dụ: `us1234-coverage-checklist.md`).
-- Folder: `checklists/` (theo cấu trúc thư mục của project).
+- Folder: `checklists/<module>/` (module = filter / pricing / merchandise / search / sync, giống cấu trúc `test-cases/`; chưa có folder thì tạo mới).
 
 ### Bước 5: Thông báo tới người dùng
 

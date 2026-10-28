@@ -6,6 +6,12 @@ trigger: "tạo test case ảnh hưởng cho [task/feature]", "tạo test case i
 
 ## Hướng dẫn tạo test case impact/regression
 
+### Bước 0: Đọc cập nhật mới nhất trước khi làm (bắt buộc)
+
+**Cổng 3 nguồn — chạy đầu tiên, thiếu 1 nguồn thì KHÔNG được bắt đầu.** Phải có đủ cho mọi màn hình trong phạm vi: (1) **spec** — file trong `docs/specs/` (viết từ `extract-figma-spec` hoặc từ xác nhận của người dùng); (2) **ghi chú cập nhật** — file `docs/updates/<tinh-nang>-updates.md`, hoặc người dùng xác nhận trong chat "không có cập nhật"; (3) **Figma** — link file do người dùng đưa, hoặc link ghi trong spec đã được người dùng xác nhận là bản mới nhất, và đã mở được thật frame của từng màn, **kể cả toàn bộ note/sticky note vàng** (theo rule dự án, note Figma là spec chính thức). Mở Figma: gọi `create_session` trước, rồi `get_metadata` không truyền `nodeId` để liệt kê page và đi xuống section/frame; không đoán node ID. Danh sách page trả về có thể THIẾU — màn nào không tìm thấy trong các page được liệt kê thì xin người dùng link page/frame, không kết luận là design không có. Thiếu bất kỳ nguồn nào cho bất kỳ màn nào → dừng, gửi người dùng danh sách chính xác còn thiếu (nguồn nào, màn nào) và chờ; không viết gì, kể cả bản nháp gắn `<cần confirm>`, không thay nguồn thiếu bằng suy luận từ các nguồn còn lại. Đủ 3 nguồn mới làm tiếp phần dưới.
+
+Spec và Figma có thể chưa kịp cập nhật. Trước khi đọc spec: (1) `git pull` repo dự án, ghi lại commit mới nhất; (2) đọc `docs/updates/README.md` và file `docs/updates/<tinh-nang>-updates.md` của tính năng đang làm (nếu có), lấy mọi mục còn hiệu lực; (3) khi các nguồn mâu thuẫn nhau thì theo thứ tự ưu tiên: ghi chú cập nhật và câu trả lời xác nhận của người dùng trong chat → quan sát thực tế trên staging/ảnh người dùng gửi → note và frame Figma → spec/PDF. Riêng trường hợp PDF mâu thuẫn với note Figma, KHÔNG tự chọn bên nào (rule dự án): ghi rõ cả hai bên trong Note và đưa vào danh sách xác nhận gửi BA; (4) mọi case được thêm hoặc sửa vì một cập nhật phải có thẻ `[Cập nhật YYYY-MM-DD: <tiêu đề mục>]` ở cuối cột Note (quy ước trong `docs/updates/README.md`); (5) đầu báo cáo nêu "Đã đọc N ghi chú cập nhật cho [tính năng]; repo ở commit X".
+
 ### Bước 1: Xác định phạm vi thay đổi của task hiện tại
 
 Đọc spec của task hiện tại, xác định rõ những gì bị thay đổi:
@@ -67,7 +73,7 @@ Chạy đủ 7 kỹ thuật dưới đây trước khi viết case. Với skill 
 
 Mỗi test case phải trả lời: "Sau khi thay đổi của task hiện tại được áp dụng, luồng/feature X còn hoạt động đúng như trước / đúng theo spec X không?" — không test lại toàn bộ chức năng của luồng X, chỉ test đúng điểm giao thoa bị ảnh hưởng.
 
-Quy định về output — dùng đúng 10 cột và quy tắc trình bày như skill `create-functional-testcase` (KHÔNG dùng dòng banner — đã loại bỏ, xem file đó để biết lý do). Ngoại lệ là dòng **Purpose** (ID = `Purpose:`, 1 câu mục đích nghiệp vụ ở cột Field/Phần) — luôn đứng ngay sau header, chi tiết ở skill `create-functional-testcase`; khi gộp/renumber ở Bước 4 phải giữ nguyên dòng này, không đưa vào nhóm sort:
+Quy định về output — dùng đúng 10 cột và quy tắc trình bày như skill `create-functional-testcase` (mặc định KHÔNG dùng dòng banner; chỉ được dùng banner `=== [Tên luồng] ===` ở ngoại lệ khi 1 file gộp ≥2 luồng lớn của cùng feature — điều kiện và format xem mục "Nguyên tắc" của `create-functional-testcase`). Ngoại lệ là dòng **Purpose** (ID = `Purpose:`, 1 câu mục đích nghiệp vụ ở cột Field/Phần) — luôn đứng ngay sau header, chi tiết ở skill `create-functional-testcase`; khi gộp/renumber ở Bước 4 phải giữ nguyên dòng này, không đưa vào nhóm sort:
 
 | ID | Test Type | Field / Phần | Chi tiết test | Cụ thể hơn | Preconditions | Test Steps | Input DB/Setting | Expected Result | Note |
 

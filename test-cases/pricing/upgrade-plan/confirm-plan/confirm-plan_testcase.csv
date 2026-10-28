@@ -1,0 +1,105 @@
+﻿ID,Test Type,Test Objective,,,Preconditions,Test Steps,Input DB/Setting,Expected Result,Note
+Purpose:,,"Cho merchant xác nhận mua hoặc đổi gói cước qua các popup có bước xác nhận, để trả tiền đúng gói đã chọn.",,,,,,,
+1,Happy,Popup [Confirm your plan],Confirm mua gói,Chưa có gói,"- Store chưa có gói (hết trial)
+- GMV = [85k]; thẻ hợp lệ","1. Click [Select plan] của Growth.
+2. Click [Confirm].",,"2. Hiện popup ""Successful!""; gói Growth được kích hoạt; thẻ Growth hiển thị ""Selected"".",
+2,Negative,,Huỷ ở popup xác nhận,Cancel,Store chưa có gói; GMV = [85k],"1. Click [Select plan] của Growth.
+2. Click [Cancel].",,2. Popup đóng; không có giao dịch; store vẫn chưa có gói; nút [Select plan] giữ nguyên.,
+3,Negative,,Mất mạng khi Confirm,Lỗi mạng,Popup Confirm your plan đang mở; ngắt mạng,"1. Click [Confirm].
+2. Bật lại mạng, mở lại Pricing.",,"1. Popup hiển thị lỗi tại popup, cho thử lại; không hiện popup ""Successful!"".
+2. Trạng thái gói khớp giao dịch thật (không bị trừ tiền mà gói chưa kích hoạt).","<cần confirm> chữ thông báo lỗi thanh toán
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+4,Negative,,Thẻ thanh toán bị từ chối,Thẻ lỗi,Store chưa có gói; thẻ bị từ chối,"1. Chọn gói, click [Confirm].",Thẻ bị từ chối,"- Hiển thị lỗi tại popup, cho thử lại; không hiện popup ""Successful!""; gói không đổi; không trừ tiền","<cần confirm> chữ thông báo khi thẻ bị từ chối
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+5,Edge,,Giá theo gói chọn,5 gói có giá,Store chưa có gói; GMV = [20k],"1. Lần lượt click [Select plan] của từng gói được phép, đọc giá trong popup, rồi [Cancel].","Starter $29, Standard $59, Growth $119, Scale $249, Advanced $499",- Giá trong popup khớp giá trên thẻ gói đã chọn,
+6,Edge,,Đóng popup bằng cách khác,"Esc, click nền",Popup Confirm your plan đang mở,"1. Nhấn Esc.
+2. Mở lại popup và click vùng nền ngoài popup.",,"1. Esc: popup đóng như khi [Cancel], không có giao dịch.
+2. Click nền: popup đóng như khi [Cancel], không có giao dịch.","Popup xác nhận đóng được (đã xác nhận).
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+7,Edge,,Double click Confirm ở 2 popup,Chỉ 1 giao dịch,"- Store chưa có gói; mở popup Confirm your plan
+- Store có gói; mở popup Change plan?","1. Ở popup Confirm your plan, double click nhanh [Confirm].
+2. Ở popup Change plan?, double click nhanh [Confirm].",,"1. Chỉ 1 giao dịch mua gói, chỉ 1 popup ""Successful!"".
+2. Chỉ đổi gói 1 lần, chỉ 1 giao dịch.",
+8,Edge,,Chưa có phương thức thanh toán,Chưa có thẻ,Store chưa gắn thẻ thanh toán,"1. Chọn gói, click [Confirm].",,"- Hiển thị lỗi tại popup, cho thử lại; không kích hoạt gói","<cần confirm> luồng nhập thẻ khi chưa có phương thức thanh toán
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+9,Edge,,Thử lại thành công sau lỗi thanh toán,Đổi thẻ,"Store chưa có gói; thẻ đầu bị từ chối, thẻ thứ hai hợp lệ","1. Chọn gói Growth, click [Confirm] (thẻ bị từ chối).
+2. Đổi sang thẻ hợp lệ.
+3. Click [Confirm] lần nữa.",,"1. Hiển thị lỗi tại popup; gói không đổi.
+3. Hiện popup ""Successful!""; gói Growth kích hoạt; chỉ 1 giao dịch thành công.","<cần confirm> cách đổi thẻ khi chưa có luồng nhập thẻ
+[Cập nhật 2026-10-28: Bổ sung theo audit độ phủ]
+Blocked — chờ BA: chưa có luồng đổi thẻ"
+10,UI,,Nội dung popup,,"- Store chưa có gói
+- GMV = [85k]",1. Click [Select plan] của Growth.,,"- Popup ""Confirm your plan"": ""Are you sure to select this plan? You'll get immediate access to all Native AI Search features for $119/month.""
+- 2 nút [Cancel] và [Confirm]",
+11,Happy,Popup [Successful] mua gói,Click Get start,Mở tính năng,Vừa mua gói Growth sau khi hết trial,"1. Click [Get start!].
+2. Click menu Search.",,"1. Popup đóng.
+2. Vào được Search, không còn popup chặn.",
+12,Happy,,"Mua xong, thẻ gói đổi trạng thái",Selected,Vừa mua gói Growth,"1. Click [Get start!].
+2. Mở Pricing, quan sát 6 thẻ.",,"- Thẻ Growth hiển thị ""Selected"" (disabled)
+- Thẻ Starter, Standard xám kèm tooltip ""Current GMV exceeds this plan""",
+13,Edge,,Ngày charge trong popup,Khớp kỳ kế tiếp,Vừa mua gói Growth,"1. Đọc ngày charge ở popup.
+2. Mở Pricing, đọc ngày ở dòng thông báo trừ tiền.",,- Hai ngày giống nhau và đúng ngày bắt đầu kỳ kế tiếp,"Popup thành công dùng bản có ngày charge (đã xác nhận). <cần confirm> quy tắc ngày charge (hôm nay cộng 1 tháng)
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+14,Edge,,Reload khi popup thành công,Không mất trạng thái,Popup Successful đang mở,1. Reload trang.,,"- Gói vẫn là Growth, thẻ hiển thị ""Selected""; không charge lần 2",
+15,UI,,Nội dung popup,Hai phiên bản chữ,Vừa Confirm mua gói Growth,1. Quan sát popup thành công.,,"- Tiêu đề ""Successful!"", icon tick xanh, nút [Get start!]
+- Nội dung: ""You are all set. Native AI Search is now unlocked. $119 will be charged on {ngày}. Monthly billed. Cancel anytime."" ({ngày} đúng ngày kỳ kế tiếp, giá theo gói vừa mua)","Chữ theo bản có ngày charge (đã xác nhận).
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+16,Happy,Popup [Change plan?],Nâng gói áp dụng ngay,Growth lên Scale,"- Store đang dùng gói [Growth]
+- GMV = [85k]","1. Click [Select plan] của Scale.
+2. Click [Confirm].
+3. Mở Pricing, xem Monthly usage và thẻ gói.
+4. Xem số tiền trong thông báo thanh toán.",,"2. Hiện popup thành công.
+3. Gói đang dùng là Scale ngay lập tức; thẻ Scale hiển thị ""Selected""; hạn mức Monthly usage theo Scale.
+4. Số tiền thanh toán là đủ giá gói mới (Scale $249/month).","Nâng gói áp dụng ngay, seller trả đủ tiền gói mới trên hệ thống; hoàn tiền gói cũ do admin liên lạc qua chat, nằm ngoài hệ thống (không kiểm bằng giao diện).
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+17,Negative,,Keep current,Không đổi gói,Store đang dùng gói [Growth]; GMV = [85k],"1. Click [Select plan] của Scale.
+2. Click [Keep current].",,2. Popup đóng; gói vẫn là Growth; không có giao dịch.,
+18,Negative,,Thanh toán lỗi ở popup Change plan?,Thẻ bị từ chối,Store đang dùng gói [Growth]; GMV = [250k]; thẻ bị từ chối,"1. Click [Select plan] của Scale.
+2. Click [Confirm] ở popup Change plan?.",Thẻ bị từ chối,"2. Hiển thị lỗi tại popup, cho thử lại; gói vẫn là Growth; không trừ tiền; không hiện popup ""Successful!"".","Thanh toán lỗi hiển thị tại popup và cho thử lại (đã xác nhận). <cần confirm> chữ thông báo lỗi
+[Cập nhật 2026-10-28: Bổ sung theo audit độ phủ]"
+19,Edge,,Gói đích theo gói hiện tại,"Nâng, hạ, bị xám",Store đang dùng gói [Scale]; GMV = [250k],"1. Click [Select plan] của Advanced.
+2. Click [Keep current] ở popup.
+3. Click [Select plan] của Growth.
+4. Click [Select plan] của Starter.",,"1. Mở popup Change plan? (nâng gói).
+2. Popup đóng, gói vẫn là Scale.
+3. Nút xám (GMV 250k vượt khoảng của Growth), tooltip ""Current GMV exceeds this plan"", không mở popup.
+4. Nút xám, tooltip ""Current GMV exceeds this plan"", không mở popup.","Gói có khoảng GMV thấp hơn GMV hiện tại bị xám (đã xác nhận). Hạ gói thật được kiểm ở case ""Hạ gói"".
+[Cập nhật 2026-10-28: Bổ sung theo audit độ phủ]"
+20,Edge,,Hạ gói,Scale xuống Growth,"- Store đang dùng gói [Scale]
+- GMV = [85k]","1. Click [Select plan] của Growth.
+2. Click [Confirm].
+3. Mở Pricing.
+4. Mở danh sách mục vượt hạn mức (VD campaign thứ 101 trở đi).",,"2. Hiện popup ""Change plan?"" rồi xác nhận được.
+3. Gói đổi sang Growth ngay; số tiền thanh toán là đủ giá gói mới (Growth $119/month).
+4. Thẻ Growth hiển thị ""Selected""; các mục vượt hạn mức Growth (campaign, execution, filter tree, custom node tạo sau) bị lock: xem được, không sửa, không bật.","Hạ gói áp dụng ngay (đã xác nhận); giữ các mục tạo lâu nhất, lock các mục tạo sau.
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+21,Edge,,Đổi gói khi đang có add-on,Add-on giữ nguyên,"- Store đang dùng gói [Growth]
+- Đã mua add-on Analytics 270 days","1. Nâng lên Scale, [Confirm].
+2. Xem dòng Analytics ở Monthly usage.",,- Add-on vẫn Activated sau khi nâng gói; không bị trừ thêm hay đổi khoảng ngày,"Add-on độc lập với gói (đã xác nhận).
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+22,Edge,,Hạ gói khi đang có add-on,Add-on giữ nguyên,"- Store đang dùng gói [Scale]; GMV = [85k]
+- Đã mua add-on Analytics 365 days","1. Hạ xuống Growth, [Confirm].
+2. Xem dòng Analytics ở Monthly usage.",,"1. Gói đổi thành Growth ngay.
+2. Dòng Analytics vẫn 365 days, nhãn Activated; không bị trừ thêm.","Add-on độc lập với gói (đã xác nhận).
+[Cập nhật 2026-10-28: Bổ sung theo audit độ phủ]"
+23,Edge,,Đóng popup Change plan? bằng Esc và click nền,Không đổi gói,Store đang dùng gói [Growth]; GMV = [250k]; popup Change plan? đang mở,"1. Nhấn Esc.
+2. Mở lại popup, click vùng nền ngoài popup.
+3. Mở Pricing, kiểm tra gói.",,"1. Popup đóng, không có giao dịch.
+2. Popup đóng, không có giao dịch.
+3. Gói vẫn Growth.","Popup xác nhận đóng được (đã xác nhận).
+[Cập nhật 2026-10-28: Bổ sung theo audit độ phủ]"
+24,UI,,Nội dung popup,,"- Store đang dùng gói [Growth]
+- GMV = [85k]",1. Click [Select plan] của Scale.,,"- Popup ""Change plan?"": ""Are you sure you want to switch to this plan? Your billing will be updated accordingly.""
+- 2 nút [Keep current] và [Confirm]",
+25,UI,,Popup dùng chung cho nâng và hạ,Không nêu gói đích,"- Store đang dùng gói [Scale]
+- GMV = [85k]","1. Click [Select plan] của Growth (hạ gói).
+2. So nội dung popup với trường hợp nâng gói.",,"- Popup ""Change plan?"" chữ giống hệt khi nâng gói và hạ gói; không nêu gói đích, giá hay ngày hiệu lực",<cần confirm> có cần nêu gói đích và hậu quả lock khi hạ gói
+26,Integration,Merchant nâng gói → hệ thống áp dụng ngay → tính năng mở theo gói mới,Nâng gói giữa kỳ,Growth lên Scale,"- Store đang dùng gói [Growth], đã dùng 100 campaign Active
+- GMV = [250k]; thẻ hợp lệ","1. [Merchant] Mở Pricing, chọn Scale, [Confirm] ở popup ""Change plan?"".
+2. [System] Áp dụng gói Scale ngay.
+3. [Merchant] Mở Merchandise Campaign, tạo campaign thứ 101.
+4. [Merchant] Mở Pricing, xem Monthly usage và dòng thông báo trừ tiền.",,"1. Hiện popup thành công.
+2. Gói đang dùng là Scale ngay lập tức.
+3. Tạo được campaign thứ 101 (Scale Unlimited); nút [Create new] không bị khoá.
+4. Monthly usage theo hạn mức Scale; số tiền thanh toán là đủ giá gói Scale.","Nâng gói áp dụng ngay, trả đủ tiền gói mới; hoàn tiền gói cũ do admin xử lý ngoài hệ thống (đã xác nhận).
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"

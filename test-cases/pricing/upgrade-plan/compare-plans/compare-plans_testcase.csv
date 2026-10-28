@@ -1,0 +1,507 @@
+﻿ID,Test Type,Test Objective,,,Preconditions,Test Steps,Input DB/Setting,Expected Result,Note
+Purpose:,,"Kiểm tra từng tính năng trong bảng Compare plans ở từng gói: gói nào dùng được, gói nào bị khoá, để merchant không mua nhầm gói và không dùng được thứ ngoài gói của mình.",,,,,,,
+1,Happy,Compare plans — Phiên theo gói,Phiên gói Starter,Khoá 5 tính năng,"Store đang dùng gói [Starter]; có dữ liệu mẫu (campaign, filter tree, đơn đã sync); gói được đặt bằng cách QA chuẩn bị, không phát sinh thanh toán thật","1. Đặt store ở gói [Starter].
+2. Smart Relevance Searching Engine: mở General Setting › Search Relevance: đổi weight, Save.
+3. Customizable Search Interface: mở Instant Search Widget và Search Result Page: đổi 1 tuỳ chọn, Save.
+4. Autocomplete: mở Suggestion Dictionary: thêm 1 từ gợi ý, Save.
+5. Spelling Correction: mở màn Spelling Correction: bật và dùng.
+6. CSS Customization: mở Instant Search Widget › Custom CSS: nhập CSS, Save.
+7. AI Synonyms Recognition: mở Synonyms: bật gợi ý AI.
+8. AI-based Search Recommendation: mở menu Recommendation: mở và dùng.
+9. Visual Editor: mở Campaign: kéo thả 1 sản phẩm.
+10. Dynamic Product Ranking: mở Scoring System: đổi Base score, Save.
+11. Search Merchandising: mở Campaign trigger keyword: tạo, Save.
+12. Category-level Merchandising: mở Campaign trigger Category: chọn, Save.
+13. Rule-based Product Arrangement: mở Campaign ""By condition"": tạo rule Pin, Save.
+14. Campaign Segmentation by Customer Condition: mở Campaign › Condition: đặt điều kiện khách, Save.
+15. Scheduled Campaign Automation: mở Campaign time: bật và đặt lịch.
+16. Filter Node Pre-built Library: mở Add filter node: thêm node Brand.
+17. Filter by Options & Attributes: mở node Product Options: thêm, Save.
+18. Visual Swatch Filters: mở Edit filter node: chọn Swatch, Save.
+19. Multi-level Category Display: mở node Category: bật cấp cha và con, Save.
+20. Merging Values: mở Merge Values: gộp 2 value, Save.
+21. Custom Range Sliders: mở node Price: chọn slider, Save.
+22. Filter Display Customization: mở Edit filter node và Filter Layout: đổi 1 tuỳ chọn, Save.
+23. Filter Search Box: mở Advanced Settings: bật ô search chung, Save.
+24. Smart URL Configuation: mở Advanced Settings › URL STRUCTURE: bật Shorten, Save.
+25. Filter Refine Box: mở Advanced Settings: bật Show Refine by block, Save.
+26. Search Performance Analytics: mở Analytics › Search: mở báo cáo.
+27. Query to Products Analytics: mở Analytics: mở báo cáo Query to Products.
+28. Filter Analytics: mở Analytics: mở báo cáo Filter.
+29. Search Behavior Insights: mở Search behavior analytics: mở báo cáo.
+30. Product Performance Insights: mở Product Analytics: mở báo cáo.
+31. GA4 Integration: mở màn cấu hình GA4: kết nối.
+32. Variant display: mở Search Result Page: bật Show product SKU/variant và Default variant, Save.
+33. Notifications: mở module Notification: bật 1 loại, Save.
+34. Manual Sync: mở Manual sync: click [Sync Now].
+35. Sync history: mở Sync History: mở danh sách.","Gói = Starter; tính năng bị khoá: AI Synonyms Recognition, AI-based Search Recommendation, Category-level Merchandising, Scheduled Campaign Automation, Variant display","2. Smart Relevance Searching Engine: dùng được, thao tác thành công, không có tooltip khoá
+3. Customizable Search Interface: dùng được, thao tác thành công, không có tooltip khoá
+4. Autocomplete: dùng được, thao tác thành công, không có tooltip khoá
+5. Spelling Correction: dùng được, thao tác thành công, không có tooltip khoá
+6. CSS Customization: dùng được, thao tác thành công, không có tooltip khoá
+7. AI Synonyms Recognition: bị khoá, hover hiện tooltip ""Plan limit reached. This feature is temporarily locked."", click không đổi trạng thái
+8. AI-based Search Recommendation: bị khoá, hover hiện tooltip ""Plan limit reached. This feature is temporarily locked."", click không đổi trạng thái
+9. Visual Editor: dùng được, thao tác thành công, không có tooltip khoá
+10. Dynamic Product Ranking: dùng được, thao tác thành công, không có tooltip khoá
+11. Search Merchandising: dùng được, thao tác thành công, không có tooltip khoá
+12. Category-level Merchandising: bị khoá, hover hiện tooltip ""Plan limit reached. This feature is temporarily locked."", click không đổi trạng thái
+13. Rule-based Product Arrangement: dùng được, thao tác thành công, không có tooltip khoá
+14. Campaign Segmentation by Customer Condition: dùng được, thao tác thành công, không có tooltip khoá
+15. Scheduled Campaign Automation: bị khoá, hover hiện tooltip ""Plan limit reached. This feature is temporarily locked."", click không đổi trạng thái
+16. Filter Node Pre-built Library: dùng được, thao tác thành công, không có tooltip khoá
+17. Filter by Options & Attributes: dùng được, thao tác thành công, không có tooltip khoá
+18. Visual Swatch Filters: dùng được, thao tác thành công, không có tooltip khoá
+19. Multi-level Category Display: dùng được, thao tác thành công, không có tooltip khoá
+20. Merging Values: dùng được, thao tác thành công, không có tooltip khoá
+21. Custom Range Sliders: dùng được, thao tác thành công, không có tooltip khoá
+22. Filter Display Customization: dùng được, thao tác thành công, không có tooltip khoá
+23. Filter Search Box: dùng được, thao tác thành công, không có tooltip khoá
+24. Smart URL Configuation: dùng được, thao tác thành công, không có tooltip khoá
+25. Filter Refine Box: dùng được, thao tác thành công, không có tooltip khoá
+26. Search Performance Analytics: dùng được, thao tác thành công, không có tooltip khoá
+27. Query to Products Analytics: dùng được, thao tác thành công, không có tooltip khoá
+28. Filter Analytics: dùng được, thao tác thành công, không có tooltip khoá
+29. Search Behavior Insights: dùng được, thao tác thành công, không có tooltip khoá
+30. Product Performance Insights: dùng được, thao tác thành công, không có tooltip khoá
+31. GA4 Integration: dùng được, thao tác thành công, không có tooltip khoá
+32. Variant display: bị khoá, hover hiện tooltip ""Plan limit reached. This feature is temporarily locked."", click không đổi trạng thái
+33. Notifications: dùng được, thao tác thành công, không có tooltip khoá
+34. Manual Sync: dùng được, thao tác thành công, không có tooltip khoá
+35. Sync history: dùng được, thao tác thành công, không có tooltip khoá","<cần confirm> màn hình tương ứng của các dòng Spelling Correction, Analytics, GA4, Notifications, Filter Display Customization, AI Synonyms, AI-based Search Recommendation
+Tính năng bị khoá theo gói lấy từ ma trận Compare plans (đã xác nhận).
+Hạn mức số lượng và ngày kiểm ở task Plan Limit. <cần confirm> cách đặt gói trên môi trường test
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+2,Happy,,Phiên gói Standard,Khoá 1 tính năng,"Store đang dùng gói [Standard]; có dữ liệu mẫu (campaign, filter tree, đơn đã sync); gói được đặt bằng cách QA chuẩn bị, không phát sinh thanh toán thật","1. Đặt store ở gói [Standard].
+2. Smart Relevance Searching Engine: mở General Setting › Search Relevance: đổi weight, Save.
+3. Customizable Search Interface: mở Instant Search Widget và Search Result Page: đổi 1 tuỳ chọn, Save.
+4. Autocomplete: mở Suggestion Dictionary: thêm 1 từ gợi ý, Save.
+5. Spelling Correction: mở màn Spelling Correction: bật và dùng.
+6. CSS Customization: mở Instant Search Widget › Custom CSS: nhập CSS, Save.
+7. AI Synonyms Recognition: mở Synonyms: bật gợi ý AI.
+8. AI-based Search Recommendation: mở menu Recommendation: mở và dùng.
+9. Visual Editor: mở Campaign: kéo thả 1 sản phẩm.
+10. Dynamic Product Ranking: mở Scoring System: đổi Base score, Save.
+11. Search Merchandising: mở Campaign trigger keyword: tạo, Save.
+12. Category-level Merchandising: mở Campaign trigger Category: chọn, Save.
+13. Rule-based Product Arrangement: mở Campaign ""By condition"": tạo rule Pin, Save.
+14. Campaign Segmentation by Customer Condition: mở Campaign › Condition: đặt điều kiện khách, Save.
+15. Scheduled Campaign Automation: mở Campaign time: bật và đặt lịch.
+16. Filter Node Pre-built Library: mở Add filter node: thêm node Brand.
+17. Filter by Options & Attributes: mở node Product Options: thêm, Save.
+18. Visual Swatch Filters: mở Edit filter node: chọn Swatch, Save.
+19. Multi-level Category Display: mở node Category: bật cấp cha và con, Save.
+20. Merging Values: mở Merge Values: gộp 2 value, Save.
+21. Custom Range Sliders: mở node Price: chọn slider, Save.
+22. Filter Display Customization: mở Edit filter node và Filter Layout: đổi 1 tuỳ chọn, Save.
+23. Filter Search Box: mở Advanced Settings: bật ô search chung, Save.
+24. Smart URL Configuation: mở Advanced Settings › URL STRUCTURE: bật Shorten, Save.
+25. Filter Refine Box: mở Advanced Settings: bật Show Refine by block, Save.
+26. Search Performance Analytics: mở Analytics › Search: mở báo cáo.
+27. Query to Products Analytics: mở Analytics: mở báo cáo Query to Products.
+28. Filter Analytics: mở Analytics: mở báo cáo Filter.
+29. Search Behavior Insights: mở Search behavior analytics: mở báo cáo.
+30. Product Performance Insights: mở Product Analytics: mở báo cáo.
+31. GA4 Integration: mở màn cấu hình GA4: kết nối.
+32. Variant display: mở Search Result Page: bật Show product SKU/variant và Default variant, Save.
+33. Notifications: mở module Notification: bật 1 loại, Save.
+34. Manual Sync: mở Manual sync: click [Sync Now].
+35. Sync history: mở Sync History: mở danh sách.",Gói = Standard; tính năng bị khoá: Variant display,"2. Smart Relevance Searching Engine: dùng được, thao tác thành công, không có tooltip khoá
+3. Customizable Search Interface: dùng được, thao tác thành công, không có tooltip khoá
+4. Autocomplete: dùng được, thao tác thành công, không có tooltip khoá
+5. Spelling Correction: dùng được, thao tác thành công, không có tooltip khoá
+6. CSS Customization: dùng được, thao tác thành công, không có tooltip khoá
+7. AI Synonyms Recognition: dùng được, thao tác thành công, không có tooltip khoá
+8. AI-based Search Recommendation: dùng được, thao tác thành công, không có tooltip khoá
+9. Visual Editor: dùng được, thao tác thành công, không có tooltip khoá
+10. Dynamic Product Ranking: dùng được, thao tác thành công, không có tooltip khoá
+11. Search Merchandising: dùng được, thao tác thành công, không có tooltip khoá
+12. Category-level Merchandising: dùng được, thao tác thành công, không có tooltip khoá
+13. Rule-based Product Arrangement: dùng được, thao tác thành công, không có tooltip khoá
+14. Campaign Segmentation by Customer Condition: dùng được, thao tác thành công, không có tooltip khoá
+15. Scheduled Campaign Automation: dùng được, thao tác thành công, không có tooltip khoá
+16. Filter Node Pre-built Library: dùng được, thao tác thành công, không có tooltip khoá
+17. Filter by Options & Attributes: dùng được, thao tác thành công, không có tooltip khoá
+18. Visual Swatch Filters: dùng được, thao tác thành công, không có tooltip khoá
+19. Multi-level Category Display: dùng được, thao tác thành công, không có tooltip khoá
+20. Merging Values: dùng được, thao tác thành công, không có tooltip khoá
+21. Custom Range Sliders: dùng được, thao tác thành công, không có tooltip khoá
+22. Filter Display Customization: dùng được, thao tác thành công, không có tooltip khoá
+23. Filter Search Box: dùng được, thao tác thành công, không có tooltip khoá
+24. Smart URL Configuation: dùng được, thao tác thành công, không có tooltip khoá
+25. Filter Refine Box: dùng được, thao tác thành công, không có tooltip khoá
+26. Search Performance Analytics: dùng được, thao tác thành công, không có tooltip khoá
+27. Query to Products Analytics: dùng được, thao tác thành công, không có tooltip khoá
+28. Filter Analytics: dùng được, thao tác thành công, không có tooltip khoá
+29. Search Behavior Insights: dùng được, thao tác thành công, không có tooltip khoá
+30. Product Performance Insights: dùng được, thao tác thành công, không có tooltip khoá
+31. GA4 Integration: dùng được, thao tác thành công, không có tooltip khoá
+32. Variant display: bị khoá, hover hiện tooltip ""Plan limit reached. This feature is temporarily locked."", click không đổi trạng thái
+33. Notifications: dùng được, thao tác thành công, không có tooltip khoá
+34. Manual Sync: dùng được, thao tác thành công, không có tooltip khoá
+35. Sync history: dùng được, thao tác thành công, không có tooltip khoá","<cần confirm> màn hình tương ứng của các dòng Spelling Correction, Analytics, GA4, Notifications, Filter Display Customization, AI Synonyms, AI-based Search Recommendation
+Tính năng bị khoá theo gói lấy từ ma trận Compare plans (đã xác nhận).
+Hạn mức số lượng và ngày kiểm ở task Plan Limit. <cần confirm> cách đặt gói trên môi trường test
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+3,Happy,,Phiên gói Growth,Khoá 1 tính năng,"Store đang dùng gói [Growth]; có dữ liệu mẫu (campaign, filter tree, đơn đã sync); gói được đặt bằng cách QA chuẩn bị, không phát sinh thanh toán thật","1. Đặt store ở gói [Growth].
+2. Smart Relevance Searching Engine: mở General Setting › Search Relevance: đổi weight, Save.
+3. Customizable Search Interface: mở Instant Search Widget và Search Result Page: đổi 1 tuỳ chọn, Save.
+4. Autocomplete: mở Suggestion Dictionary: thêm 1 từ gợi ý, Save.
+5. Spelling Correction: mở màn Spelling Correction: bật và dùng.
+6. CSS Customization: mở Instant Search Widget › Custom CSS: nhập CSS, Save.
+7. AI Synonyms Recognition: mở Synonyms: bật gợi ý AI.
+8. AI-based Search Recommendation: mở menu Recommendation: mở và dùng.
+9. Visual Editor: mở Campaign: kéo thả 1 sản phẩm.
+10. Dynamic Product Ranking: mở Scoring System: đổi Base score, Save.
+11. Search Merchandising: mở Campaign trigger keyword: tạo, Save.
+12. Category-level Merchandising: mở Campaign trigger Category: chọn, Save.
+13. Rule-based Product Arrangement: mở Campaign ""By condition"": tạo rule Pin, Save.
+14. Campaign Segmentation by Customer Condition: mở Campaign › Condition: đặt điều kiện khách, Save.
+15. Scheduled Campaign Automation: mở Campaign time: bật và đặt lịch.
+16. Filter Node Pre-built Library: mở Add filter node: thêm node Brand.
+17. Filter by Options & Attributes: mở node Product Options: thêm, Save.
+18. Visual Swatch Filters: mở Edit filter node: chọn Swatch, Save.
+19. Multi-level Category Display: mở node Category: bật cấp cha và con, Save.
+20. Merging Values: mở Merge Values: gộp 2 value, Save.
+21. Custom Range Sliders: mở node Price: chọn slider, Save.
+22. Filter Display Customization: mở Edit filter node và Filter Layout: đổi 1 tuỳ chọn, Save.
+23. Filter Search Box: mở Advanced Settings: bật ô search chung, Save.
+24. Smart URL Configuation: mở Advanced Settings › URL STRUCTURE: bật Shorten, Save.
+25. Filter Refine Box: mở Advanced Settings: bật Show Refine by block, Save.
+26. Search Performance Analytics: mở Analytics › Search: mở báo cáo.
+27. Query to Products Analytics: mở Analytics: mở báo cáo Query to Products.
+28. Filter Analytics: mở Analytics: mở báo cáo Filter.
+29. Search Behavior Insights: mở Search behavior analytics: mở báo cáo.
+30. Product Performance Insights: mở Product Analytics: mở báo cáo.
+31. GA4 Integration: mở màn cấu hình GA4: kết nối.
+32. Variant display: mở Search Result Page: bật Show product SKU/variant và Default variant, Save.
+33. Notifications: mở module Notification: bật 1 loại, Save.
+34. Manual Sync: mở Manual sync: click [Sync Now].
+35. Sync history: mở Sync History: mở danh sách.",Gói = Growth; tính năng bị khoá: Variant display,"2. Smart Relevance Searching Engine: dùng được, thao tác thành công, không có tooltip khoá
+3. Customizable Search Interface: dùng được, thao tác thành công, không có tooltip khoá
+4. Autocomplete: dùng được, thao tác thành công, không có tooltip khoá
+5. Spelling Correction: dùng được, thao tác thành công, không có tooltip khoá
+6. CSS Customization: dùng được, thao tác thành công, không có tooltip khoá
+7. AI Synonyms Recognition: dùng được, thao tác thành công, không có tooltip khoá
+8. AI-based Search Recommendation: dùng được, thao tác thành công, không có tooltip khoá
+9. Visual Editor: dùng được, thao tác thành công, không có tooltip khoá
+10. Dynamic Product Ranking: dùng được, thao tác thành công, không có tooltip khoá
+11. Search Merchandising: dùng được, thao tác thành công, không có tooltip khoá
+12. Category-level Merchandising: dùng được, thao tác thành công, không có tooltip khoá
+13. Rule-based Product Arrangement: dùng được, thao tác thành công, không có tooltip khoá
+14. Campaign Segmentation by Customer Condition: dùng được, thao tác thành công, không có tooltip khoá
+15. Scheduled Campaign Automation: dùng được, thao tác thành công, không có tooltip khoá
+16. Filter Node Pre-built Library: dùng được, thao tác thành công, không có tooltip khoá
+17. Filter by Options & Attributes: dùng được, thao tác thành công, không có tooltip khoá
+18. Visual Swatch Filters: dùng được, thao tác thành công, không có tooltip khoá
+19. Multi-level Category Display: dùng được, thao tác thành công, không có tooltip khoá
+20. Merging Values: dùng được, thao tác thành công, không có tooltip khoá
+21. Custom Range Sliders: dùng được, thao tác thành công, không có tooltip khoá
+22. Filter Display Customization: dùng được, thao tác thành công, không có tooltip khoá
+23. Filter Search Box: dùng được, thao tác thành công, không có tooltip khoá
+24. Smart URL Configuation: dùng được, thao tác thành công, không có tooltip khoá
+25. Filter Refine Box: dùng được, thao tác thành công, không có tooltip khoá
+26. Search Performance Analytics: dùng được, thao tác thành công, không có tooltip khoá
+27. Query to Products Analytics: dùng được, thao tác thành công, không có tooltip khoá
+28. Filter Analytics: dùng được, thao tác thành công, không có tooltip khoá
+29. Search Behavior Insights: dùng được, thao tác thành công, không có tooltip khoá
+30. Product Performance Insights: dùng được, thao tác thành công, không có tooltip khoá
+31. GA4 Integration: dùng được, thao tác thành công, không có tooltip khoá
+32. Variant display: bị khoá, hover hiện tooltip ""Plan limit reached. This feature is temporarily locked."", click không đổi trạng thái
+33. Notifications: dùng được, thao tác thành công, không có tooltip khoá
+34. Manual Sync: dùng được, thao tác thành công, không có tooltip khoá
+35. Sync history: dùng được, thao tác thành công, không có tooltip khoá","<cần confirm> màn hình tương ứng của các dòng Spelling Correction, Analytics, GA4, Notifications, Filter Display Customization, AI Synonyms, AI-based Search Recommendation
+Tính năng bị khoá theo gói lấy từ ma trận Compare plans (đã xác nhận).
+Hạn mức số lượng và ngày kiểm ở task Plan Limit. <cần confirm> cách đặt gói trên môi trường test
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+4,Happy,,Phiên gói Scale,Khoá 1 tính năng,"Store đang dùng gói [Scale]; có dữ liệu mẫu (campaign, filter tree, đơn đã sync); gói được đặt bằng cách QA chuẩn bị, không phát sinh thanh toán thật","1. Đặt store ở gói [Scale].
+2. Smart Relevance Searching Engine: mở General Setting › Search Relevance: đổi weight, Save.
+3. Customizable Search Interface: mở Instant Search Widget và Search Result Page: đổi 1 tuỳ chọn, Save.
+4. Autocomplete: mở Suggestion Dictionary: thêm 1 từ gợi ý, Save.
+5. Spelling Correction: mở màn Spelling Correction: bật và dùng.
+6. CSS Customization: mở Instant Search Widget › Custom CSS: nhập CSS, Save.
+7. AI Synonyms Recognition: mở Synonyms: bật gợi ý AI.
+8. AI-based Search Recommendation: mở menu Recommendation: mở và dùng.
+9. Visual Editor: mở Campaign: kéo thả 1 sản phẩm.
+10. Dynamic Product Ranking: mở Scoring System: đổi Base score, Save.
+11. Search Merchandising: mở Campaign trigger keyword: tạo, Save.
+12. Category-level Merchandising: mở Campaign trigger Category: chọn, Save.
+13. Rule-based Product Arrangement: mở Campaign ""By condition"": tạo rule Pin, Save.
+14. Campaign Segmentation by Customer Condition: mở Campaign › Condition: đặt điều kiện khách, Save.
+15. Scheduled Campaign Automation: mở Campaign time: bật và đặt lịch.
+16. Filter Node Pre-built Library: mở Add filter node: thêm node Brand.
+17. Filter by Options & Attributes: mở node Product Options: thêm, Save.
+18. Visual Swatch Filters: mở Edit filter node: chọn Swatch, Save.
+19. Multi-level Category Display: mở node Category: bật cấp cha và con, Save.
+20. Merging Values: mở Merge Values: gộp 2 value, Save.
+21. Custom Range Sliders: mở node Price: chọn slider, Save.
+22. Filter Display Customization: mở Edit filter node và Filter Layout: đổi 1 tuỳ chọn, Save.
+23. Filter Search Box: mở Advanced Settings: bật ô search chung, Save.
+24. Smart URL Configuation: mở Advanced Settings › URL STRUCTURE: bật Shorten, Save.
+25. Filter Refine Box: mở Advanced Settings: bật Show Refine by block, Save.
+26. Search Performance Analytics: mở Analytics › Search: mở báo cáo.
+27. Query to Products Analytics: mở Analytics: mở báo cáo Query to Products.
+28. Filter Analytics: mở Analytics: mở báo cáo Filter.
+29. Search Behavior Insights: mở Search behavior analytics: mở báo cáo.
+30. Product Performance Insights: mở Product Analytics: mở báo cáo.
+31. GA4 Integration: mở màn cấu hình GA4: kết nối.
+32. Variant display: mở Search Result Page: bật Show product SKU/variant và Default variant, Save.
+33. Notifications: mở module Notification: bật 1 loại, Save.
+34. Manual Sync: mở Manual sync: click [Sync Now].
+35. Sync history: mở Sync History: mở danh sách.",Gói = Scale; tính năng bị khoá: Variant display,"2. Smart Relevance Searching Engine: dùng được, thao tác thành công, không có tooltip khoá
+3. Customizable Search Interface: dùng được, thao tác thành công, không có tooltip khoá
+4. Autocomplete: dùng được, thao tác thành công, không có tooltip khoá
+5. Spelling Correction: dùng được, thao tác thành công, không có tooltip khoá
+6. CSS Customization: dùng được, thao tác thành công, không có tooltip khoá
+7. AI Synonyms Recognition: dùng được, thao tác thành công, không có tooltip khoá
+8. AI-based Search Recommendation: dùng được, thao tác thành công, không có tooltip khoá
+9. Visual Editor: dùng được, thao tác thành công, không có tooltip khoá
+10. Dynamic Product Ranking: dùng được, thao tác thành công, không có tooltip khoá
+11. Search Merchandising: dùng được, thao tác thành công, không có tooltip khoá
+12. Category-level Merchandising: dùng được, thao tác thành công, không có tooltip khoá
+13. Rule-based Product Arrangement: dùng được, thao tác thành công, không có tooltip khoá
+14. Campaign Segmentation by Customer Condition: dùng được, thao tác thành công, không có tooltip khoá
+15. Scheduled Campaign Automation: dùng được, thao tác thành công, không có tooltip khoá
+16. Filter Node Pre-built Library: dùng được, thao tác thành công, không có tooltip khoá
+17. Filter by Options & Attributes: dùng được, thao tác thành công, không có tooltip khoá
+18. Visual Swatch Filters: dùng được, thao tác thành công, không có tooltip khoá
+19. Multi-level Category Display: dùng được, thao tác thành công, không có tooltip khoá
+20. Merging Values: dùng được, thao tác thành công, không có tooltip khoá
+21. Custom Range Sliders: dùng được, thao tác thành công, không có tooltip khoá
+22. Filter Display Customization: dùng được, thao tác thành công, không có tooltip khoá
+23. Filter Search Box: dùng được, thao tác thành công, không có tooltip khoá
+24. Smart URL Configuation: dùng được, thao tác thành công, không có tooltip khoá
+25. Filter Refine Box: dùng được, thao tác thành công, không có tooltip khoá
+26. Search Performance Analytics: dùng được, thao tác thành công, không có tooltip khoá
+27. Query to Products Analytics: dùng được, thao tác thành công, không có tooltip khoá
+28. Filter Analytics: dùng được, thao tác thành công, không có tooltip khoá
+29. Search Behavior Insights: dùng được, thao tác thành công, không có tooltip khoá
+30. Product Performance Insights: dùng được, thao tác thành công, không có tooltip khoá
+31. GA4 Integration: dùng được, thao tác thành công, không có tooltip khoá
+32. Variant display: bị khoá, hover hiện tooltip ""Plan limit reached. This feature is temporarily locked."", click không đổi trạng thái
+33. Notifications: dùng được, thao tác thành công, không có tooltip khoá
+34. Manual Sync: dùng được, thao tác thành công, không có tooltip khoá
+35. Sync history: dùng được, thao tác thành công, không có tooltip khoá","<cần confirm> màn hình tương ứng của các dòng Spelling Correction, Analytics, GA4, Notifications, Filter Display Customization, AI Synonyms, AI-based Search Recommendation
+Tính năng bị khoá theo gói lấy từ ma trận Compare plans (đã xác nhận).
+Hạn mức số lượng và ngày kiểm ở task Plan Limit. <cần confirm> cách đặt gói trên môi trường test
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+5,Happy,,Phiên gói Advanced,Không khoá tính năng nào,"Store đang dùng gói [Advanced]; có dữ liệu mẫu (campaign, filter tree, đơn đã sync); gói được đặt bằng cách QA chuẩn bị, không phát sinh thanh toán thật","1. Đặt store ở gói [Advanced].
+2. Smart Relevance Searching Engine: mở General Setting › Search Relevance: đổi weight, Save.
+3. Customizable Search Interface: mở Instant Search Widget và Search Result Page: đổi 1 tuỳ chọn, Save.
+4. Autocomplete: mở Suggestion Dictionary: thêm 1 từ gợi ý, Save.
+5. Spelling Correction: mở màn Spelling Correction: bật và dùng.
+6. CSS Customization: mở Instant Search Widget › Custom CSS: nhập CSS, Save.
+7. AI Synonyms Recognition: mở Synonyms: bật gợi ý AI.
+8. AI-based Search Recommendation: mở menu Recommendation: mở và dùng.
+9. Visual Editor: mở Campaign: kéo thả 1 sản phẩm.
+10. Dynamic Product Ranking: mở Scoring System: đổi Base score, Save.
+11. Search Merchandising: mở Campaign trigger keyword: tạo, Save.
+12. Category-level Merchandising: mở Campaign trigger Category: chọn, Save.
+13. Rule-based Product Arrangement: mở Campaign ""By condition"": tạo rule Pin, Save.
+14. Campaign Segmentation by Customer Condition: mở Campaign › Condition: đặt điều kiện khách, Save.
+15. Scheduled Campaign Automation: mở Campaign time: bật và đặt lịch.
+16. Filter Node Pre-built Library: mở Add filter node: thêm node Brand.
+17. Filter by Options & Attributes: mở node Product Options: thêm, Save.
+18. Visual Swatch Filters: mở Edit filter node: chọn Swatch, Save.
+19. Multi-level Category Display: mở node Category: bật cấp cha và con, Save.
+20. Merging Values: mở Merge Values: gộp 2 value, Save.
+21. Custom Range Sliders: mở node Price: chọn slider, Save.
+22. Filter Display Customization: mở Edit filter node và Filter Layout: đổi 1 tuỳ chọn, Save.
+23. Filter Search Box: mở Advanced Settings: bật ô search chung, Save.
+24. Smart URL Configuation: mở Advanced Settings › URL STRUCTURE: bật Shorten, Save.
+25. Filter Refine Box: mở Advanced Settings: bật Show Refine by block, Save.
+26. Search Performance Analytics: mở Analytics › Search: mở báo cáo.
+27. Query to Products Analytics: mở Analytics: mở báo cáo Query to Products.
+28. Filter Analytics: mở Analytics: mở báo cáo Filter.
+29. Search Behavior Insights: mở Search behavior analytics: mở báo cáo.
+30. Product Performance Insights: mở Product Analytics: mở báo cáo.
+31. GA4 Integration: mở màn cấu hình GA4: kết nối.
+32. Variant display: mở Search Result Page: bật Show product SKU/variant và Default variant, Save.
+33. Notifications: mở module Notification: bật 1 loại, Save.
+34. Manual Sync: mở Manual sync: click [Sync Now].
+35. Sync history: mở Sync History: mở danh sách.",Gói = Advanced,"2. Smart Relevance Searching Engine: dùng được, thao tác thành công, không có tooltip khoá
+3. Customizable Search Interface: dùng được, thao tác thành công, không có tooltip khoá
+4. Autocomplete: dùng được, thao tác thành công, không có tooltip khoá
+5. Spelling Correction: dùng được, thao tác thành công, không có tooltip khoá
+6. CSS Customization: dùng được, thao tác thành công, không có tooltip khoá
+7. AI Synonyms Recognition: dùng được, thao tác thành công, không có tooltip khoá
+8. AI-based Search Recommendation: dùng được, thao tác thành công, không có tooltip khoá
+9. Visual Editor: dùng được, thao tác thành công, không có tooltip khoá
+10. Dynamic Product Ranking: dùng được, thao tác thành công, không có tooltip khoá
+11. Search Merchandising: dùng được, thao tác thành công, không có tooltip khoá
+12. Category-level Merchandising: dùng được, thao tác thành công, không có tooltip khoá
+13. Rule-based Product Arrangement: dùng được, thao tác thành công, không có tooltip khoá
+14. Campaign Segmentation by Customer Condition: dùng được, thao tác thành công, không có tooltip khoá
+15. Scheduled Campaign Automation: dùng được, thao tác thành công, không có tooltip khoá
+16. Filter Node Pre-built Library: dùng được, thao tác thành công, không có tooltip khoá
+17. Filter by Options & Attributes: dùng được, thao tác thành công, không có tooltip khoá
+18. Visual Swatch Filters: dùng được, thao tác thành công, không có tooltip khoá
+19. Multi-level Category Display: dùng được, thao tác thành công, không có tooltip khoá
+20. Merging Values: dùng được, thao tác thành công, không có tooltip khoá
+21. Custom Range Sliders: dùng được, thao tác thành công, không có tooltip khoá
+22. Filter Display Customization: dùng được, thao tác thành công, không có tooltip khoá
+23. Filter Search Box: dùng được, thao tác thành công, không có tooltip khoá
+24. Smart URL Configuation: dùng được, thao tác thành công, không có tooltip khoá
+25. Filter Refine Box: dùng được, thao tác thành công, không có tooltip khoá
+26. Search Performance Analytics: dùng được, thao tác thành công, không có tooltip khoá
+27. Query to Products Analytics: dùng được, thao tác thành công, không có tooltip khoá
+28. Filter Analytics: dùng được, thao tác thành công, không có tooltip khoá
+29. Search Behavior Insights: dùng được, thao tác thành công, không có tooltip khoá
+30. Product Performance Insights: dùng được, thao tác thành công, không có tooltip khoá
+31. GA4 Integration: dùng được, thao tác thành công, không có tooltip khoá
+32. Variant display: dùng được, thao tác thành công, không có tooltip khoá
+33. Notifications: dùng được, thao tác thành công, không có tooltip khoá
+34. Manual Sync: dùng được, thao tác thành công, không có tooltip khoá
+35. Sync history: dùng được, thao tác thành công, không có tooltip khoá","<cần confirm> màn hình tương ứng của các dòng Spelling Correction, Analytics, GA4, Notifications, Filter Display Customization, AI Synonyms, AI-based Search Recommendation
+Gói này không có dòng ✗ (trừ Support, kiểm ở case riêng).
+Hạn mức số lượng và ngày kiểm ở task Plan Limit. <cần confirm> cách đặt gói trên môi trường test
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+6,Happy,,Phiên gói Enterprise,Không khoá tính năng nào,"Store đang dùng gói [Enterprise]; có dữ liệu mẫu (campaign, filter tree, đơn đã sync); gói được đặt bằng cách QA chuẩn bị, không phát sinh thanh toán thật","1. Đặt store ở gói [Enterprise].
+2. Smart Relevance Searching Engine: mở General Setting › Search Relevance: đổi weight, Save.
+3. Customizable Search Interface: mở Instant Search Widget và Search Result Page: đổi 1 tuỳ chọn, Save.
+4. Autocomplete: mở Suggestion Dictionary: thêm 1 từ gợi ý, Save.
+5. Spelling Correction: mở màn Spelling Correction: bật và dùng.
+6. CSS Customization: mở Instant Search Widget › Custom CSS: nhập CSS, Save.
+7. AI Synonyms Recognition: mở Synonyms: bật gợi ý AI.
+8. AI-based Search Recommendation: mở menu Recommendation: mở và dùng.
+9. Visual Editor: mở Campaign: kéo thả 1 sản phẩm.
+10. Dynamic Product Ranking: mở Scoring System: đổi Base score, Save.
+11. Search Merchandising: mở Campaign trigger keyword: tạo, Save.
+12. Category-level Merchandising: mở Campaign trigger Category: chọn, Save.
+13. Rule-based Product Arrangement: mở Campaign ""By condition"": tạo rule Pin, Save.
+14. Campaign Segmentation by Customer Condition: mở Campaign › Condition: đặt điều kiện khách, Save.
+15. Scheduled Campaign Automation: mở Campaign time: bật và đặt lịch.
+16. Filter Node Pre-built Library: mở Add filter node: thêm node Brand.
+17. Filter by Options & Attributes: mở node Product Options: thêm, Save.
+18. Visual Swatch Filters: mở Edit filter node: chọn Swatch, Save.
+19. Multi-level Category Display: mở node Category: bật cấp cha và con, Save.
+20. Merging Values: mở Merge Values: gộp 2 value, Save.
+21. Custom Range Sliders: mở node Price: chọn slider, Save.
+22. Filter Display Customization: mở Edit filter node và Filter Layout: đổi 1 tuỳ chọn, Save.
+23. Filter Search Box: mở Advanced Settings: bật ô search chung, Save.
+24. Smart URL Configuation: mở Advanced Settings › URL STRUCTURE: bật Shorten, Save.
+25. Filter Refine Box: mở Advanced Settings: bật Show Refine by block, Save.
+26. Search Performance Analytics: mở Analytics › Search: mở báo cáo.
+27. Query to Products Analytics: mở Analytics: mở báo cáo Query to Products.
+28. Filter Analytics: mở Analytics: mở báo cáo Filter.
+29. Search Behavior Insights: mở Search behavior analytics: mở báo cáo.
+30. Product Performance Insights: mở Product Analytics: mở báo cáo.
+31. GA4 Integration: mở màn cấu hình GA4: kết nối.
+32. Variant display: mở Search Result Page: bật Show product SKU/variant và Default variant, Save.
+33. Notifications: mở module Notification: bật 1 loại, Save.
+34. Manual Sync: mở Manual sync: click [Sync Now].
+35. Sync history: mở Sync History: mở danh sách.",Gói = Enterprise,"2. Smart Relevance Searching Engine: dùng được, thao tác thành công, không có tooltip khoá
+3. Customizable Search Interface: dùng được, thao tác thành công, không có tooltip khoá
+4. Autocomplete: dùng được, thao tác thành công, không có tooltip khoá
+5. Spelling Correction: dùng được, thao tác thành công, không có tooltip khoá
+6. CSS Customization: dùng được, thao tác thành công, không có tooltip khoá
+7. AI Synonyms Recognition: dùng được, thao tác thành công, không có tooltip khoá
+8. AI-based Search Recommendation: dùng được, thao tác thành công, không có tooltip khoá
+9. Visual Editor: dùng được, thao tác thành công, không có tooltip khoá
+10. Dynamic Product Ranking: dùng được, thao tác thành công, không có tooltip khoá
+11. Search Merchandising: dùng được, thao tác thành công, không có tooltip khoá
+12. Category-level Merchandising: dùng được, thao tác thành công, không có tooltip khoá
+13. Rule-based Product Arrangement: dùng được, thao tác thành công, không có tooltip khoá
+14. Campaign Segmentation by Customer Condition: dùng được, thao tác thành công, không có tooltip khoá
+15. Scheduled Campaign Automation: dùng được, thao tác thành công, không có tooltip khoá
+16. Filter Node Pre-built Library: dùng được, thao tác thành công, không có tooltip khoá
+17. Filter by Options & Attributes: dùng được, thao tác thành công, không có tooltip khoá
+18. Visual Swatch Filters: dùng được, thao tác thành công, không có tooltip khoá
+19. Multi-level Category Display: dùng được, thao tác thành công, không có tooltip khoá
+20. Merging Values: dùng được, thao tác thành công, không có tooltip khoá
+21. Custom Range Sliders: dùng được, thao tác thành công, không có tooltip khoá
+22. Filter Display Customization: dùng được, thao tác thành công, không có tooltip khoá
+23. Filter Search Box: dùng được, thao tác thành công, không có tooltip khoá
+24. Smart URL Configuation: dùng được, thao tác thành công, không có tooltip khoá
+25. Filter Refine Box: dùng được, thao tác thành công, không có tooltip khoá
+26. Search Performance Analytics: dùng được, thao tác thành công, không có tooltip khoá
+27. Query to Products Analytics: dùng được, thao tác thành công, không có tooltip khoá
+28. Filter Analytics: dùng được, thao tác thành công, không có tooltip khoá
+29. Search Behavior Insights: dùng được, thao tác thành công, không có tooltip khoá
+30. Product Performance Insights: dùng được, thao tác thành công, không có tooltip khoá
+31. GA4 Integration: dùng được, thao tác thành công, không có tooltip khoá
+32. Variant display: dùng được, thao tác thành công, không có tooltip khoá
+33. Notifications: dùng được, thao tác thành công, không có tooltip khoá
+34. Manual Sync: dùng được, thao tác thành công, không có tooltip khoá
+35. Sync history: dùng được, thao tác thành công, không có tooltip khoá","<cần confirm> màn hình tương ứng của các dòng Spelling Correction, Analytics, GA4, Notifications, Filter Display Customization, AI Synonyms, AI-based Search Recommendation
+Gói này không có dòng ✗ (trừ Support, kiểm ở case riêng).
+Hạn mức số lượng và ngày kiểm ở task Plan Limit. <cần confirm> cách đặt gói trên môi trường test
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+7,Happy,Compare plans — Search,"Nâng gói thì mở khoá ngay, không reload",Starter lên Standard,Store đang dùng gói [Starter]; thẻ hợp lệ,"1. Mở Search Engine Setup › Synonyms, quan sát bị khoá.
+2. Ở tab khác nâng lên Standard.
+3. Quay lại tab Synonyms, không reload, thao tác bật gợi ý AI synonyms.",,"1. Tính năng bị khoá kèm tooltip ""Plan limit reached. This feature is temporarily locked.""
+3. Sau khi nâng, thao tác được (hoặc chỉ cần reload 1 lần); không còn tooltip khoá.",<cần confirm> màn hình tương ứng; <cần confirm> có cần reload để mở khoá không
+8,Negative,,AI Synonyms Recognition bị khoá,Gói bị khoá: Starter,Đổi được gói của store,"1. Đặt store ở gói [Starter].
+2. Mở Search Engine Setup › Synonyms, hover vào thành phần của tính năng.
+3. Click thành phần đó, thử bật gợi ý AI synonyms.",Gói: Starter,"2. Thành phần bị khoá, hover hiện tooltip ""Plan limit reached. This feature is temporarily locked."".
+3. Click không đổi trạng thái; dữ liệu không thay đổi; không thực hiện được thao tác.","<cần confirm> màn hình tương ứng của dòng này (chưa có spec).
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+9,Negative,,AI-based Search Recommendation bị khoá,Gói bị khoá: Starter,Đổi được gói của store,"1. Đặt store ở gói [Starter].
+2. Mở menu Recommendation, hover vào thành phần của tính năng.
+3. Click thành phần đó, thử mở và dùng tính năng gợi ý tìm kiếm AI.",Gói: Starter,"2. Thành phần bị khoá, hover hiện tooltip ""Plan limit reached. This feature is temporarily locked."".
+3. Click không đổi trạng thái; dữ liệu không thay đổi; không thực hiện được thao tác.","<cần confirm> màn hình tương ứng của dòng này (chưa có spec).
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+10,Negative,,Mở thẳng bằng URL khi bị khoá,"Starter, URL trực tiếp",Store đang dùng gói [Starter],"1. Dán URL trực tiếp của màn Synonyms vào trình duyệt.
+2. Thử bật gợi ý AI synonyms.",,"1. Màn mở ra nhưng thành phần AI Synonyms bị khoá kèm tooltip.
+2. Không bật được; dữ liệu không đổi.",<cần confirm> URL của màn Synonyms và màn hình tương ứng
+11,Negative,Compare plans — Merchandise,Category-level Merchandising bị khoá,Gói bị khoá: Starter,Đổi được gói của store,"1. Đặt store ở gói [Starter].
+2. Mở Merchandise Campaign với trigger ""When customers visit a category page"", hover vào thành phần của tính năng.
+3. Click thành phần đó, thử chọn trigger Category và Save.",Gói: Starter,"2. Thành phần bị khoá, hover hiện tooltip ""Plan limit reached. This feature is temporarily locked."".
+3. Click không đổi trạng thái; dữ liệu không thay đổi; không thực hiện được thao tác.",[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]
+12,Negative,,Scheduled Campaign Automation bị khoá,Gói bị khoá: Starter,Đổi được gói của store,"1. Đặt store ở gói [Starter].
+2. Mở Merchandise Campaign › Campaign time, hover vào thành phần của tính năng.
+3. Click thành phần đó, thử bật ""Campaign time"" và đặt lịch.",Gói: Starter,"2. Thành phần bị khoá, hover hiện tooltip ""Plan limit reached. This feature is temporarily locked."".
+3. Click không đổi trạng thái; dữ liệu không thay đổi; không thực hiện được thao tác.",[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]
+13,UI,,Giá trị Active Merchandising Campaigns,"10, 40, 100, Unlimited","Mở Pricing › Upgrade plan, kéo tới bảng Compare plans",1. Đọc dòng tương ứng trong bảng Compare plans ở 6 cột gói.,,"1. Giá trị theo thứ tự cột Starter, Standard, Growth, Scale, Advanced, Enterprise: 10, 40, 100, Unlimited, Unlimited, Unlimited.","Hành vi khi chạm hạn mức của dòng này được kiểm ở task Plan Limit.
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+14,UI,,Giá trị Active Execution in Campaigns,"3, 5, 10","Mở Pricing › Upgrade plan, kéo tới bảng Compare plans",1. Đọc dòng tương ứng trong bảng Compare plans ở 6 cột gói.,,"1. Giá trị theo thứ tự cột Starter, Standard, Growth, Scale, Advanced, Enterprise: 3, 5, 10, 10, 10, 10.","Hành vi khi chạm hạn mức của dòng này được kiểm ở task Plan Limit.
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+15,UI,Compare plans — Navigation,Giá trị Number of Filter Trees,"3, 10, 20, Unlimited","Mở Pricing › Upgrade plan, kéo tới bảng Compare plans",1. Đọc dòng tương ứng trong bảng Compare plans ở 6 cột gói.,,"1. Giá trị theo thứ tự cột Starter, Standard, Growth, Scale, Advanced, Enterprise: 3, 10, 20, Unlimited, Unlimited, Unlimited.","Hành vi khi chạm hạn mức của dòng này được kiểm ở task Plan Limit.
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+16,UI,,Giá trị Filter Nodes Custom Builder,"3, 10, 20, Unlimited","Mở Pricing › Upgrade plan, kéo tới bảng Compare plans",1. Đọc dòng tương ứng trong bảng Compare plans ở 6 cột gói.,,"1. Giá trị theo thứ tự cột Starter, Standard, Growth, Scale, Advanced, Enterprise: 3, 10, 20, Unlimited, Unlimited, Unlimited.","Hành vi khi chạm hạn mức của dòng này được kiểm ở task Plan Limit.
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+17,UI,Compare plans — Analytics,Giá trị Analytics Date Range,"30 đến 365 days, Custom","Mở Pricing › Upgrade plan, kéo tới bảng Compare plans",1. Đọc dòng tương ứng trong bảng Compare plans ở 6 cột gói.,,"1. Giá trị theo thứ tự cột Starter, Standard, Growth, Scale, Advanced, Enterprise: 30 days, 90 days, 180 days, 270 days, 365 days, Custom.","Hành vi khi chạm hạn mức của dòng này được kiểm ở task Plan Limit. Enterprise ""Custom"" là cấu hình riêng theo hợp đồng (đã xác nhận).
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+18,UI,,Giá trị Refined Search Journey Analytics Date Range,7 đến 365 days,"Mở Pricing › Upgrade plan, kéo tới bảng Compare plans",1. Đọc dòng tương ứng trong bảng Compare plans ở 6 cột gói.,,"1. Giá trị theo thứ tự cột Starter, Standard, Growth, Scale, Advanced, Enterprise: 7 days, 30 days, 60 days, 90 days, 180 days, 365 days.","Hành vi khi chạm hạn mức của dòng này được kiểm ở task Plan Limit.
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+19,Happy,Compare plans — Compliment Features,Nâng gói mở khoá Variant display,Scale lên Advanced,Store đang dùng gói [Scale]; thẻ hợp lệ,"1. Mở Search Result Page, hover toggle ""Show product SKU/variant"".
+2. Nâng lên Advanced.
+3. Mở lại Search Result Page, bật ""Show product SKU/variant"" và ""Default variant"", Save.",,"1. Toggle bị khoá kèm tooltip ""Plan limit reached. This feature is temporarily locked.""
+3. Bật và lưu được cả 2 toggle; không còn tooltip khoá.","Biên giữa Scale (✗) và Advanced (✓) của Variant display.
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+20,Negative,,Variant display bị khoá,"Gói bị khoá: Starter, Standard, Growth, Scale",Đổi được gói của store,"1. Đặt store ở gói [Starter].
+2. Mở Search Result Page, hover vào thành phần của tính năng.
+3. Click thành phần đó, thử bật ""Show product SKU/variant"" và ""Default variant"" rồi Save.
+4. Lặp lại bước 1 đến 3 lần lượt ở Standard, Growth, Scale.","Gói: Starter, Standard, Growth, Scale","2. Thành phần bị khoá, hover hiện tooltip ""Plan limit reached. This feature is temporarily locked."".
+3. Click không đổi trạng thái; dữ liệu không thay đổi; không thực hiện được thao tác.
+4. Ở cả 4 gói đều khoá giống nhau."," Variant display bị khoá ở 4 gói thấp (đã xác nhận).
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+21,UI,Compare plans — Sync,Giá trị Auto Sync frequency,"3 days, 1 day, 2 times/day","Mở Pricing › Upgrade plan, kéo tới bảng Compare plans",1. Đọc dòng tương ứng trong bảng Compare plans ở 6 cột gói.,,"1. Giá trị theo thứ tự cột Starter, Standard, Growth, Scale, Advanced, Enterprise: 3 days, 1 day, 1 day, 1 day, 2 times/day, 3 times/day.","Hành vi khi chạm hạn mức của dòng này được kiểm ở task Plan Limit.
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+22,Edge,Compare plans — Support,Quyền lợi Support khi đổi gói,Theo gói,"Store lần lượt ở gói Starter, Growth, Scale, Enterprise","1. Đổi gói, mở bảng Compare plans, so cột gói đang dùng với quyền lợi Support thực nhận (VD liên hệ support).",,- Quyền lợi Support thực nhận khớp ô ✓ và ✗ của cột gói đang dùng,"<cần confirm> cách kiểm quyền lợi Support thực tế và người cung cấp. Blocked — chờ BA
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+23,UI,,Dòng Support hiển thị đúng,Giá trị 5 dòng,"Mở Pricing › Upgrade plan, kéo tới nhóm Support",1. Đọc 5 dòng của nhóm Support ở 6 cột gói.,,"1. Email Support: ✓ ở cả 6 gói.
+2. Premium Support Package: ✗ Starter, Standard; ✓ từ Growth.
+3. Customization Requests: ✗ Starter, Standard, Growth; ✓ từ Scale.
+4. Customer Success Manager: ✗ Starter, Standard, Growth; ✓ từ Scale.
+5. Dedicated Infrastructure: ✗ Starter đến Advanced; ✓ Enterprise.","Support không có màn trong app, chỉ kiểm tra hiển thị trên bảng. <cần confirm> cách kiểm quyền lợi Support thực tế
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+24,Happy,Bảng Compare plans,Cấu trúc bảng,"6 cột, 7 nhóm, 46 dòng","Mở Pricing › Upgrade plan, kéo tới bảng Compare plans","1. Đếm cột gói và đọc tên cột.
+2. Đếm nhóm và tên nhóm.
+3. Đếm số dòng tính năng.",,"1. 6 cột theo thứ tự Starter, Standard, Growth, Scale, Advanced, Enterprise; không có cột ""Free"".
+2. 7 nhóm: Search, Merchandise, Navigation, Analytics, Compliment Features, Sync, Support.
+3. Đủ 46 dòng tính năng.","Bảng không có cột ""Free"" (đã xác nhận)
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+25,Happy,,Cố định hàng tiêu đề khi cuộn,Sticky header,Mở bảng Compare plans,"1. Cuộn xuống giữa bảng.
+2. Quan sát hàng tên gói và nút [Select].",,- Hàng tên gói và nút [Select] cố định ở đầu khi cuộn; vẫn bấm được,"Note Figma: fix hàng feature row khi cuộn
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+26,Happy,,Highlight cột gói được gợi ý,Theo Average GMV,Store chưa có gói; Average GMV = [85k],"1. Mở bảng Compare plans, quan sát cột Growth.
+2. Đổi Average GMV thành 300k, sync, mở lại.",Average GMV 85k và 300k,"1. Cột Growth được highlight (nền cam nhạt).
+2. Cột Scale được highlight; cột Growth hết highlight.","Note Figma: highlight recommended plan
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+27,Edge,,Giá trị bảng khi đổi gói,Ma trận không đổi,Store lần lượt ở 3 gói khác nhau,"1. Mở bảng Compare plans ở từng gói, so ma trận.",,"- Ma trận ✓, ✗ và số giống hệt nhau ở mọi gói; chỉ khác cột được đánh dấu Selected",[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]
+28,UI,,Tên dòng tính năng,Khớp thiết kế,Mở bảng Compare plans,"1. Đọc tên từng dòng, đối chiếu với thiết kế.",,"- Tên 46 dòng đúng chữ, đúng hoa thường, đúng nhóm theo thiết kế (kể cả ""Smart URL Configuation"")","Tên ""Smart URL Configuation"" sai chính tả trên Figma. <cần confirm> giữ nguyên hay sửa thành ""Configuration""
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+29,UI,,Icon ✓ ✗ và giá trị số,Hiển thị từng ô,Mở bảng Compare plans,"1. Quan sát ô ✓, ô ✗, ô giá trị số và chữ (Unlimited, Custom).",,"- Ô ✓ dùng icon tick, ô ✗ dùng icon gạch xám, ô số và chữ in màu cam; mỗi ô khớp ma trận Figma",[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]
+30,UI,,Cột gói đang dùng,Nút Selected,Store đang dùng gói [Growth]; Average GMV = [110k],"1. Mở bảng Compare plans, quan sát nút ở đầu cột Growth và các cột khác.",,"- Cột Growth hiển thị ""Selected"" (disabled)
+- Cột Starter và Standard xám (disabled) kèm tooltip ""Current GMV exceeds this plan""
+- Cột Scale, Advanced hiển thị [Select] bấm được; cột Enterprise hiển thị [Select] mở bubble chat khi bấm",[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]

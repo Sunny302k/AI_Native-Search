@@ -1,0 +1,141 @@
+﻿ID,Test Type,Test Objective,,,Preconditions,Test Steps,Input DB/Setting,Expected Result,Note
+Purpose:,,"Cho merchant mới cài app dùng thử toàn bộ tính năng 14 ngày và biết rõ khi nào hết hạn, để quyết định chọn gói trả phí mà không mất dữ liệu đã thiết lập.",,,,,,,
+1,Happy,Popup [Congratulations],Bắt đầu trial,Start your free trial,Popup Congratulations đang mở,1. Click [Start your free trial].,,"1. Popup đóng, Dashboard dùng được; trial 14 ngày đang chạy.","Trial tính từ lúc bấm [Start your free trial] (đã xác nhận 2026-10-28).
+[Cập nhật 2026-10-28: Trả lời đợt câu hỏi sau audit độ phủ]"
+2,Negative,,Đóng popup bằng cách khác,"Esc, click nền",Popup Congratulations đang mở,"1. Nhấn Esc.
+2. Click vùng nền ngoài popup.",,- Hành vi theo thiết kế (đóng hoặc không đóng); trial không bị huỷ,Blocked — chờ designer: chưa rõ popup có đóng được ngoài nút. <cần confirm> popup có đóng được ngoài nút không
+3,Edge,,Mở lại Dashboard,Popup chỉ hiện 1 lần,Đã click [Start your free trial],"1. Rời Dashboard rồi vào lại.
+2. Reload trang.",,- Popup không hiện lại,<cần confirm> popup chỉ hiện lần đầu
+4,Edge,,"Đã cài app, chưa bấm Start",Trial chưa chạy,Store vừa cài app; chưa click [Start your free trial],"1. Chờ 10 phút ở Dashboard, không click nút.
+2. Quan sát đếm ngược trong popup.",,"- Đếm ngược vẫn 14 days 00 hrs, không giảm cho đến khi click [Start your free trial]","Trial tính từ lúc bấm Start nên chưa bấm thì chưa đếm (đã xác nhận 2026-10-28).
+[Cập nhật 2026-10-28: Trả lời đợt câu hỏi sau audit độ phủ]"
+5,Edge,,Reload khi popup đang mở,Chưa bấm Start,"Popup Congratulations đang mở, chưa click nút",1. Reload trang.,,"- Popup hiện lại, đếm ngược vẫn 14 days",<cần confirm> popup hiện lại hay không
+6,UI,,Nội dung popup lần đầu,,"Store vừa cài app, chưa mở Dashboard",1. Mở Dashboard lần đầu.,,"- Popup tiêu đề ""Congratulations!"" với nội dung ""You've unlocked 14-day trial of Native AI Search. You get free access to all features of our app…""
+- Bên phải: ""Explore All Features During Your 14-Day Trial"" và đếm ngược 14 days 00 hrs 00 mins 00 secs
+- Nút [Start your free trial]",
+7,Happy,Đếm ngược trial,Giá trị còn lại,Trial đã chạy 3 ngày 5 giờ,Trial đang chạy,1. Mở trang hiển thị đếm ngược.,trial_start = 3 ngày 5 giờ trước,"- Hiển thị 10 days 19 hrs (kèm mins, secs còn lại), giảm dần theo thời gian",<cần confirm> vị trí hiển thị đếm ngược khi đang trial (ngoài popup đầu tiên)
+8,Edge,,Vừa bắt đầu,14 days,Vừa click [Start your free trial],1. Quan sát đếm ngược.,trial_start = vừa xong,- 14 days 00 hrs 00 mins 00 secs (sai lệch tối đa vài giây),
+9,Edge,,Còn đúng 1 ngày,Biên 1 ngày,Trial đang chạy,1. Quan sát đếm ngược.,còn lại = 1 ngày,- Hiển thị 1 day 00 hrs 00 mins 00 secs (đúng ngữ pháp số ít/số nhiều theo thiết kế),"<cần confirm> định dạng ""1 days"" hay ""1 day"""
+10,Edge,,Còn dưới 1 giờ,Biên giờ,Trial đang chạy,1. Quan sát đếm ngược.,còn lại = 59 phút 30 giây,"- 00 days 00 hrs 59 mins 30 secs, giây đếm lùi từng giây",
+11,Edge,,Đúng thời điểm hết trial,Chuyển trạng thái,Trial còn 5 giây,"1. Ở trang tính năng, chờ hết 5 giây.
+2. Click 1 menu bất kỳ.",còn lại = 5 giây,"1. Đếm ngược về 00 days 00 hrs 00 mins 00 secs.
+2. Hiện popup ""Your trial has expired"".",
+12,Edge,,Múi giờ store,Không phụ thuộc múi giờ,Store có múi giờ khác UTC,1. So thời điểm hết trial thực tế với 14 × 24 giờ sau lúc bắt đầu.,Múi giờ = UTC+07,- Hết đúng 14 × 24 giờ sau lúc bắt đầu,<cần confirm> mốc tính thời gian
+13,Happy,Hạn mức trong trial,Hạn mức theo gói Advanced,Monthly usage,Trial đang chạy,"1. Mở menu Pricing, xem Monthly usage.",,"- Hạn mức hiển thị theo Advanced: Active Merchandising Campaigns Unlimited, Active Execution 10, Filter Trees Unlimited, Filter Nodes Custom Builder Unlimited, Analytics 365 days, Refined Search Journey 180 days, Auto Sync 2 times/day",<cần confirm> thẻ Current plan hiển thị gì khi đang trial
+14,Happy,,Vượt hạn mức gói thấp,Không bị khoá,"Trial đang chạy; có 10 campaign active, 3 filter tree","1. Tạo campaign thứ 11.
+2. Tạo filter tree thứ 4.",,"- Cả 2 tạo được, nút [Create new] không bị disable",
+15,Happy,,Tính năng chỉ có ở Advanced,Variant display,Trial đang chạy,"1. Vào Search Result Page, bật ""Show product SKU/variant"".",,"- Toggle bật được, không bị khoá",<cần confirm> vị trí toggle Variant display
+16,Happy,Popup [Your trial has expired],Chọn gói từ popup,Select plan,Popup Your trial has expired đang mở,1. Click [Select plan].,,"1. Chuyển sang trang Pricing, hiển thị Plan Recommendation.",
+17,Negative,,Đóng popup,"Esc, click nền",Popup Your trial has expired đang mở,"1. Nhấn Esc.
+2. Click vùng nền ngoài popup.",,"- Popup không đóng, vẫn chặn trang tính năng",<cần confirm> popup không có nút đóng
+18,Negative,,Vào trang bằng URL,Truy cập trực tiếp,"Trial đã hết, chưa mua gói",1. Nhập trực tiếp URL trang danh sách Filter Tree.,,"- Popup chặn hiện ngay, không thao tác được",
+19,Edge,,Reload khi bị chặn,,Popup Your trial has expired đang mở,1. Reload trang.,,- Popup vẫn hiện,
+20,Edge,,Dashboard và Help Center khi hết trial,Trang ngoài menu tính năng,"Trial đã hết, chưa mua gói","1. Mở Dashboard.
+2. Mở Help Center.",,"1. Dashboard mở bình thường, không bị popup chặn.
+2. Help Center mở bình thường, không bị popup chặn.","Store không có gói hiệu lực: Dashboard và Help Center không bị ảnh hưởng, mở bình thường (đã xác nhận).
+[Cập nhật 2026-10-26 (đợt 2): Chốt giá add-on, hạn mức date range, Monthly usage]"
+21,Edge,,Trang Pricing khi hết trial,Không bị chặn,"Trial đã hết, chưa mua gói",1. Mở menu Pricing.,,"- Trang Pricing mở được, không bị popup chặn; Plan Recommendation hiển thị","Pricing mở được khi store không có gói hiệu lực (đã xác nhận).
+[Cập nhật 2026-10-26 (đợt 2): Chốt giá add-on, hạn mức date range, Monthly usage]"
+22,Edge,,Hết trial khi đang mở trang,Không reload,"Đang ở trang Search, trial còn 10 giây","1. Chờ hết trial, không reload.
+2. Click thao tác bất kỳ trong trang.",,2. Popup Your trial has expired hiện ngay.,<cần confirm> thời điểm popup hiện (ngay hay khi chuyển trang)
+23,Edge,,Hai tab,Tab 2 mở trước khi hết,"Mở 2 tab Search, trial hết giữa chừng","1. Ở tab 2, click menu Filter.",,1. Popup chặn hiện ở tab 2.,
+24,UI,,Nội dung popup,,"Trial đã hết, chưa mua gói",1. Click menu Search.,,"- Popup ""Your trial has expired"" với ""Thank you for trying our service! Your 14-day trial has now expired. As a result, access to Native AI Search features has been temporarily suspended."" và ""To continue enjoying full access and smart features, please select a new plan…""
+- Bên phải ""Trial period expired!"" 00 days 00 hrs 00 mins 00 secs
+- Nút [Select plan]",
+25,Happy,Mua gói khi đang trial,Chọn gói lúc trial còn ngày,Charge cuối trial,"- Trial đang chạy, còn 9 ngày
+- GMV = [85k]","1. Click [Select plan] Growth.
+2. Click [Confirm] ở popup ""Confirm your plan"".",,2. Hiện popup thành công; nội dung báo tiền $119 sẽ được charge vào ngày trial kết thúc (không charge ngay); nút [Get start!].,"<cần confirm> nội dung popup lúc trial (popup xác nhận hiện đang ghi ""immediate access"")"
+26,Happy,,Quyền lợi trial còn nguyên,Đến hết 14 ngày,Vừa mua gói Growth trong lúc trial,"1. Xem Monthly usage.
+2. Tạo campaign thứ 101.",,"- Hạn mức vẫn theo Advanced (Unlimited) cho đến hết trial
+- Tạo được campaign thứ 101",
+27,Negative,,Thanh toán lỗi,Thẻ bị từ chối,Trial đang chạy; thẻ thanh toán bị từ chối,1. Chọn gói và Confirm.,,"- Hiển thị lỗi tại popup, cho thử lại; không hiện popup thành công; trial và gói không đổi; không trừ tiền","<cần confirm> chữ thông báo khi thanh toán lỗi
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+28,Edge,,Mua ở ngày cuối trial,Còn dưới 24 giờ,Trial còn 3 giờ,1. Chọn gói và Confirm.,,"- Charge vào ngày trial kết thúc (còn 3 giờ), không charge ngay lúc Confirm",<cần confirm> giờ charge (00:00 UTC hay đúng thời điểm trial kết thúc)
+29,Edge,,Đổi ý chọn gói khác,Hai lần chọn,Đã chọn Growth trong lúc trial,1. Chọn tiếp gói Scale và Confirm.,,"- Gói sẽ charge cuối trial là Scale, không charge Growth",<cần confirm> đổi gói lần 2 khi đang trial
+30,Happy,Mua gói sau khi hết trial,Mua và mở khoá ngay,Growth,"- Trial đã hết
+- GMV = [85k]","1. Click [Select plan] Growth, [Confirm].
+2. Click [Get start!].
+3. Click menu Search.",,"1. Hiện popup thành công: ""You are all set. Native AI Search is now unlocked. $119 will be charged on {ngày}. Monthly billed. Cancel anytime."" (giá theo gói vừa mua).
+3. Vào được trang Search, không còn popup chặn.","Popup thành công dùng bản có ngày charge (đã xác nhận).
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+31,Happy,,Hạn mức theo gói đã mua,Growth,Vừa mua Growth sau khi hết trial,1. Xem Monthly usage.,,"- Hạn mức theo Growth (Campaigns 100, Execution 10, Filter Trees 20, Custom Builder 20, Analytics 180 days, Refined Search Journey 60 days, Auto Sync 1 day)",
+32,Negative,,Thanh toán lỗi rồi thử lại,Thẻ bị từ chối,Trial đã hết; GMV = [85k]; thẻ bị từ chối,"1. Click [Select plan] Growth, [Confirm].
+2. Đổi sang thẻ hợp lệ, click [Confirm] lại.
+3. Click menu Search.",Thẻ bị từ chối,"1. Hiển thị lỗi tại popup, cho thử lại; chưa mở khoá; vẫn bị popup hết trial khi vào tính năng.
+2. Hiện popup thành công; gói Growth kích hoạt.
+3. Vào được trang Search, không còn popup chặn.","<cần confirm> chữ thông báo lỗi thanh toán
+[Cập nhật 2026-10-28: Bổ sung theo audit độ phủ]"
+33,Edge,,Double click Confirm,Chỉ 1 lần charge,Trial đã hết,1. Double click nhanh [Confirm] ở popup Confirm your plan.,,"- Chỉ thanh toán 1 lần, chỉ 1 popup thành công",
+34,Happy,Dữ liệu sau trial,Giữ dữ liệu khi bị khoá,"Campaign, filter tree",Trong trial đã tạo 3 campaign và 2 filter tree,"1. Để trial hết.
+2. Mua gói Growth.
+3. Mở danh sách campaign và filter tree.",,"- 3 campaign và 2 filter tree còn nguyên, đúng cấu hình và trạng thái trước khi hết trial",
+35,Edge,,Dữ liệu không bị đổi khi bị khoá,Trạng thái Active giữ nguyên,Có campaign đang Active khi trial hết,"1. Chờ trial hết và qua 1 ngày.
+2. Mua gói và mở danh sách campaign.",,- Campaign vẫn ở trạng thái Active như trước khi hết trial,"giữ dữ liệu, chỉ khoá tính năng."
+36,Edge,,Gỡ và cài lại app,Trial một lần,Store đã dùng hết trial,"1. Gỡ app.
+2. Cài lại app.",,- Hành vi theo thiết kế: nhận lại trial hoặc không,Blocked — chờ BA: chưa có quy tắc cấp lại trial. <cần confirm> trial có cấp lại khi cài lại không
+37,Sync,Merchant cài app → trial 14 ngày → hết trial → chọn gói,Sync đang chạy đúng lúc hết trial,Không treo In Progress,Trial còn vài giây; Manual Sync đang In Progress,"1. Chờ qua thời điểm hết trial.
+2. Mở Sync History sau khi hết trial.",,"2. Lượt sync có đúng 1 trạng thái cuối (Success hoặc Failed), không treo In Progress; không có lượt auto sync mới trong thời gian hết trial.","Blocked — chờ môi trường: cần giả lập thời gian
+[Cập nhật 2026-10-28: Bổ sung theo audit độ phủ]"
+38,Integration,,"Hết trial, mua gói, mở khoá",Không mua trong trial,"- Store vừa cài app
+- GMV = [85k]","1. [Merchant] Mở Dashboard, click [Start your free trial].
+2. [Merchant] Tạo 3 campaign và 2 filter tree trong trial.
+3. [System] Sau 14 ngày, trial kết thúc.
+4. [Merchant] Click menu Search.
+5. [Merchant] Click [Select plan] trên popup, chọn Growth, [Confirm].
+6. [Merchant] Click [Get start!], mở lại menu Search và danh sách campaign.",Gói chọn = Growth,"3. Trial chuyển Expired; đếm ngược về 00 days 00 hrs 00 mins 00 secs.
+4. Hiện popup ""Your trial has expired"".
+5. Hiện popup thành công; tính năng mở ngay.
+6. Vào được Search; 3 campaign và 2 filter tree còn nguyên.",
+39,Integration,,"Mua gói lúc trial, charge cuối trial thành công",Subscribe luôn,"- Trial còn 9 ngày
+- Thẻ thanh toán hợp lệ","1. [Merchant] Chọn gói Growth, [Confirm].
+2. [System] Giữ quyền lợi trial đến hết 14 ngày.
+3. [System] Đến thời điểm trial kết thúc, charge $119 cho Growth.
+4. [Merchant] Mở Pricing, xem Monthly usage và thẻ gói.",,"1. Hiện popup thành công, báo ngày charge là ngày trial kết thúc.
+2. Hạn mức vẫn theo Advanced trong lúc còn trial.
+3. Charge thành công; trạng thái chuyển Active gói Growth.
+4. Hạn mức theo Growth; thẻ gói hiện ""Selected"".",<cần confirm> nội dung popup thành công lúc trial
+40,Integration,,"Mua gói lúc trial, charge cuối trial thất bại",Thẻ bị từ chối,"- Trial còn 2 ngày
+- Đã chọn gói Growth","1. [System] Đến thời điểm trial kết thúc, charge Growth thất bại (thẻ bị từ chối).
+2. [Merchant] Click menu Search.
+3. [Merchant] Mở Pricing.",Thẻ bị từ chối,"2. Trạng thái do thiết kế (bị chặn như hết trial hoặc có thời gian chờ).
+3. Pricing hiển thị trạng thái thanh toán và cho chọn lại gói.",Blocked — chờ BA: chưa có thiết kế cho charge thất bại cuối trial. <cần confirm> kết cục khi charge cuối trial thất bại
+41,Integration,,"Hết trial, không mua, dữ liệu giữ nguyên",Bị khoá lâu ngày,"- Trong trial có 3 campaign Active
+- Trial đã hết, không mua gói","1. [System] Hết trial; merchant không thao tác.
+2. [Customer] Sau 7 ngày, mở Storefront (search, filter).
+3. [Merchant] Mua gói Growth.
+4. [Merchant] Mở danh sách campaign.",,"2. Storefront dừng chạy (search, filter không còn áp dụng cấu hình) trong thời gian hết trial.
+4. 3 campaign còn nguyên, trạng thái Active như trước khi hết trial.","Store không có gói hiệu lực: Storefront và auto sync dừng chạy, dữ liệu giữ nguyên (đã xác nhận).
+[Cập nhật 2026-10-26 (đợt 2): Chốt giá add-on, hạn mức date range, Monthly usage]"
+42,Integration,,Mua gói thấp hơn dữ liệu đã tạo,Vượt hạn mức gói chọn,"- Trong trial đã tạo 15 filter tree
+- GMV = [20k]","1. [System] Hết trial.
+2. [Merchant] Chọn gói Starter (3 filter tree), [Confirm].
+3. [Merchant] Mở danh sách Filter Tree.
+4. [Merchant] Thử sửa filter tree thứ 4 (tạo sau) và bật nó.",Filter tree = 15,"3. 3 filter tree tạo sớm nhất hoạt động bình thường; 12 cái tạo sau bị lock (xem được).
+4. Không sửa được, không bật được.",<cần confirm> quy tắc lock có áp dụng khi chuyển từ trial sang gói thấp không
+43,Integration,,Huỷ gói trong lúc trial,Trước khi charge,"- Trial còn 5 ngày
+- Đã chọn gói Growth","1. [Merchant] Menu ⋮ › Cancel plan, xác nhận.
+2. [System] Đến thời điểm trial kết thúc.
+3. [Merchant] Click menu Search.",,"2. Không charge.
+3. Hiện popup ""Your trial has expired"".",<cần confirm> huỷ gói khi chưa tính phí trong trial
+44,Integration,Các menu tính năng,Các menu tính năng bị chặn khi hết trial,"Search, Filter, Recommendation, Merchandising, Sync, Analytics","Trial đã hết, chưa mua gói","1. Click menu Search, thử đổi cài đặt Instant Search Widget.
+2. Click menu Filter, thử [Create new] ở Filter Tree.
+3. Click các mục con của menu Recommendation.
+4. Click menu Merchandising, mở 1 campaign cũ để xem.
+5. Click menu Sync, thử [Sync Now].
+6. Click mục Search behavior analytics, rồi mục Product analytics.",,"- Mỗi bước hiện popup ""Your trial has expired"" chặn trang; không thao tác được dữ liệu trong trang",<cần confirm> các mục con của Recommendation
+45,Integration,,Mua gói thì các menu mở khoá lại,Quay lui,Trial đã hết; popup chặn đang hiện,"1. Mua gói Growth qua popup.
+2. Lần lượt click Search, Filter, Recommendation, Merchandising, Sync, Analytics.",,"2. Cả 6 menu vào được, không còn popup chặn; dữ liệu cũ hiển thị đủ.",
+46,Integration,"Storefront (ISW, SRP, Filter)",Storefront khi hết trial,Shopper vẫn thấy gì,"- Trial đã hết, chưa mua gói
+- Có Filter Tree và campaign đã cấu hình","1. [Shopper] Gõ search ở Storefront, mở trang kết quả và Category Page.",,"- Storefront dừng chạy: search, filter, ranking campaign không còn áp dụng cấu hình của store","Store không có gói hiệu lực: Storefront dừng chạy (đã xác nhận).
+[Cập nhật 2026-10-26 (đợt 2): Chốt giá add-on, hạn mức date range, Monthly usage]"
+47,Integration,,Storefront và auto sync chạy trong trial,Vế đối chứng,"Trial đang chạy; có Filter Tree, campaign và lịch auto sync đã cấu hình","1. [Shopper] Gõ search, mở trang kết quả và Category Page.
+2. [System] Đến giờ lịch auto sync.
+3. Mở Sync History.",,"1. Storefront áp dụng cấu hình của store (search, filter, ranking campaign).
+2. Auto sync chạy theo lịch.
+3. Sync History có lượt auto sync mới.","<cần confirm> lịch auto sync trong trial theo gói Advanced
+Blocked — chờ môi trường: cần giả lập thời gian
+[Cập nhật 2026-10-28: Bổ sung theo audit độ phủ]"
+48,Integration,Auto Sync,Lịch đồng bộ khi hết trial,Có chạy tiếp không,"- Trial đã hết, chưa mua gói
+- Lịch auto sync đến hạn","1. Chờ đến giờ lịch đồng bộ.
+2. Mở Sync History sau khi mua gói.",,- Lượt auto sync đến hạn trong thời gian hết trial không chạy; Sync History không có lượt nào trong khoảng đó,"Store không có gói hiệu lực: auto sync dừng chạy (đã xác nhận).
+[Cập nhật 2026-10-26 (đợt 2): Chốt giá add-on, hạn mức date range, Monthly usage]"

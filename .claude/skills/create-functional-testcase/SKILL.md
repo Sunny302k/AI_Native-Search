@@ -5,6 +5,12 @@ trigger: "tạo test case cho [feature/màn hình]" hoặc "create test case cho
 ---
 ## Hướng dẫn tạo test case
 
+### Bước 0: Đọc cập nhật mới nhất trước khi làm (bắt buộc)
+
+**Cổng 3 nguồn — chạy đầu tiên, thiếu 1 nguồn thì KHÔNG được bắt đầu.** Phải có đủ cho mọi màn hình trong phạm vi: (1) **spec** — file trong `docs/specs/` (viết từ `extract-figma-spec` hoặc từ xác nhận của người dùng); (2) **ghi chú cập nhật** — file `docs/updates/<tinh-nang>-updates.md`, hoặc người dùng xác nhận trong chat "không có cập nhật"; (3) **Figma** — link file do người dùng đưa, hoặc link ghi trong spec đã được người dùng xác nhận là bản mới nhất, và đã mở được thật frame của từng màn, **kể cả toàn bộ note/sticky note vàng** (theo rule dự án, note Figma là spec chính thức). Mở Figma: gọi `create_session` trước, rồi `get_metadata` không truyền `nodeId` để liệt kê page và đi xuống section/frame; không đoán node ID. Danh sách page trả về có thể THIẾU — màn nào không tìm thấy trong các page được liệt kê thì xin người dùng link page/frame, không kết luận là design không có. Thiếu bất kỳ nguồn nào cho bất kỳ màn nào → dừng, gửi người dùng danh sách chính xác còn thiếu (nguồn nào, màn nào) và chờ; không viết gì, kể cả bản nháp gắn `<cần confirm>`, không thay nguồn thiếu bằng suy luận từ các nguồn còn lại. Đủ 3 nguồn mới làm tiếp phần dưới.
+
+Spec và Figma có thể chưa kịp cập nhật. Trước khi đọc spec: (1) `git pull` repo dự án, ghi lại commit mới nhất; (2) đọc `docs/updates/README.md` và file `docs/updates/<tinh-nang>-updates.md` của tính năng đang làm (nếu có), lấy mọi mục còn hiệu lực; (3) khi các nguồn mâu thuẫn nhau thì theo thứ tự ưu tiên: ghi chú cập nhật và câu trả lời xác nhận của người dùng trong chat → quan sát thực tế trên staging/ảnh người dùng gửi → note và frame Figma → spec/PDF. Riêng trường hợp PDF mâu thuẫn với note Figma, KHÔNG tự chọn bên nào (rule dự án): ghi rõ cả hai bên trong Note và đưa vào danh sách xác nhận gửi BA; (4) mọi case được thêm hoặc sửa vì một cập nhật phải có thẻ `[Cập nhật YYYY-MM-DD: <tiêu đề mục>]` ở cuối cột Note (quy ước trong `docs/updates/README.md`); (5) đầu báo cáo nêu "Đã đọc N ghi chú cập nhật cho [tính năng]; repo ở commit X".
+
 ### Bước 1
 
 Xác định đặc tả cần tạo test case, trong trường hợp người dùng không cung cấp thông tin cụ thể hãy tiến hành hỏi lại để có được thông tin về specs.
@@ -22,9 +28,23 @@ Trước khi viết test case, xác định vùng rủi ro cao trong feature đ�
 
 **Khi 1 rule/action được thực thi qua ≥2 kênh song song (vd Import/API/Sync Store/UI cùng validate 1 rule) — mỗi kênh phải được đào sâu ĐỦ NHÁNH như nhau, không lấy 1 kênh làm "kênh mẫu" rồi chỉ viết đại diện 1-2 case cho các kênh còn lại.** Lỗi thường gặp: dựng hẳn 1 ma trận đầy đủ cho kênh dễ test nhất (thường là kênh dạng file/Import, vì tự nhiên hợp format matrix), rồi chỉ viết 1 case "báo lỗi đúng cách của từng kênh" cho các kênh còn lại và coi là đã đủ — đây là lỗi đã xảy ra thực tế (Import có ma trận đầy đủ nhánh nhưng API/Sync Store mỗi kênh chỉ có 1-2 case, dù cả 3 đều nhận input thô không qua UI-constraint và đều phải chịu chung 1 bộ rule validate). Trước khi báo hoàn thành, liệt kê rõ: mỗi kênh phi-UI (nhận input trực tiếp, không bị giới hạn bởi dropdown/menu như UI) có đang có đủ cùng 1 tập nhánh Valid/Invalid như kênh đã test sâu nhất không — nếu thiếu, bổ sung ngay, không chờ người dùng nhắc.
 
-### Bước 3
+**Sau khi đọc tài liệu edge case nguồn (bảng edge case trong PDF spec của Sync/Merchandise, mục Edge Cases trong `docs/specs/`, `NOTE_*.md`...), đối chiếu TỪNG DÒNG trong đó với case sẽ viết — không đọc lướt rồi viết theo trí nhớ "cái nào thấy quan trọng".** Lỗi thường gặp: đọc đủ bảng edge case nhưng khi viết lại chỉ nhớ các mục "thấy quan trọng hơn" (validate, chọn nhiều...) và bỏ sót nguyên một nhóm ít nổi bật (VD dữ liệu đã bị xoá bên BigCommerce, trạng thái sync Failed). Trước khi báo hoàn thành, lập danh sách từng mục trong tài liệu edge case nguồn và đánh dấu đã có case tương ứng hay chưa — không dựa vào cảm giác "chắc đã đủ".
 
-Tiếp nhận các câu trả lời của người dùng. Trường hợp không có câu trả lời tất cả các test case mà cần phải làm rõ thì hãy thêm tag <cần confirm> vào phần test case đó để người dùng có thể dễ dàng nhận biết và xác nhận lại.
+**Với field/component dùng lại pattern đã có ở 1 file test case khác trong cùng dự án (search box, các filter node dùng chung UI, inline-rename, pagination, popup xác nhận...) — chủ động mở file đó, liệt kê case theo field tương ứng, rồi diff trực tiếp trước khi viết case mới.** Lỗi thường gặp: file test case của node Brand đã có sẵn 1 case cho 1 ô nhập, nhưng khi viết cho node Category (cùng component, khác màn hình) lại quên áp lại đúng case đó — dù đã đọc qua file kia trong cùng phiên làm việc. Việc "đã đọc qua" không đồng nghĩa "đã áp dụng lại" — phải chủ động diff, không dựa vào trí nhớ.
+
+### Bước 3: Rà soát TOÀN BỘ design + xác nhận trong chat trước khi viết (bắt buộc, không chờ người dùng nhắc)
+
+Trước khi sang Bước 3.5 và Bước 4 (viết test case), PHẢI chủ động đọc lại **toàn bộ** design của đúng khu vực đang test — không chỉ phần user vừa nêu tên. "Toàn bộ" nghĩa là: mọi node Figma con thuộc khu vực đó (modal, popup, dropdown, tooltip, empty state, error state, menu, toolbar, không chỉ màn hình chính), **mọi note/sticky note vàng gắn trên frame**, cộng với mọi spec/doc liên quan — rồi tự phân loại từng chi tiết tìm được vào 1 trong 3 nhóm:
+
+1. **Đủ căn cứ, viết thẳng** — có xác nhận rõ ràng, nhất quán từ ≥1 nguồn đáng tin (quan sát thực tế trên staging, câu trả lời của người dùng/BA, hoặc Figma và note khớp nhau ở nhiều vị trí độc lập).
+2. **Mâu thuẫn giữa các nguồn** — Figma nói khác spec/PDF, hoặc tài liệu cũ nói khác ảnh chụp mới — nêu rõ từng nguồn nói gì, không tự chọn nguồn nào đúng thay người dùng.
+3. **Chưa có bằng chứng nào** — gap thật sự, không suy diễn.
+
+Trình bày TOÀN BỘ danh sách 3 nhóm này cho người dùng **ngay trong chat, trước khi viết bất kỳ dòng test case nào** — đây là bước mặc định của skill, phải tự chạy dù người dùng không yêu cầu rà soát thêm, không phải bước tuỳ chọn chỉ bật khi bị nhắc lại. Chỉ sang bước viết sau khi người dùng đã trả lời, hoặc người dùng xác nhận rõ "cứ viết, phần còn thiếu gắn `<cần confirm>`".
+
+**Why**: đã xảy ra thực tế trong dự án — viết test case chỉ dựa trên phần design được nhắc tới trực tiếp, bỏ sót note vàng, popup hoặc ảnh con nằm trong cùng khu vực, để người dùng phải nhắc đi nhắc lại phải đọc cho hết. Vừa tốn công bổ sung sau, vừa khiến người dùng phải tự làm việc rà soát lẽ ra skill phải chủ động làm trước.
+
+Sau khi trình bày, tiếp nhận câu trả lời của người dùng cho từng điểm đã hỏi. Trường hợp người dùng không trả lời hết mọi điểm, giữ tag `<cần confirm>` cho phần chưa trả lời (đặt trong cột Note) — không tự suy đoán thay.
 
 ### Bước 3.5: Áp dụng đủ bộ kỹ thuật test — BẮT BUỘC cho từng field, từng action, từng trạng thái
 
@@ -36,7 +56,7 @@ Chạy đủ 7 kỹ thuật dưới đây trước khi viết case. Với skill 
 | **Equivalence Partitioning** | Mỗi field chia lớp hợp lệ/không hợp lệ; mỗi option của dropdown/toggle/radio dẫn tới hành vi khác nhau là 1 lớp riêng — không lấy 1 option đại diện cho cả danh sách khi các option cho kết quả khác nhau |
 | **Boundary Value Analysis** | Mọi field có ràng buộc số/độ dài/số lượng: `min-1`, `min`, `max`, `max+1`. Thêm biên hay quên: rỗng vs chỉ có khoảng trắng, 0, số thập phân, 1 phần tử vs nhiều phần tử, đúng ngưỡng hợp lệ (không chỉ vượt ngưỡng) |
 | **Decision Table** | Bắt buộc khi kết quả phụ thuộc ≥2 field/điều kiện (field B chỉ hiện khi field A = X; nút chỉ enable khi đủ nhiều điều kiện; hành vi đổi theo loại entity × trạng thái) |
-| **State Transition** | Entity/element có trạng thái (Draft/Active/Inactive, bật/tắt, đang chỉnh sửa, đang sync...): chuyển hợp lệ, chuyển bị chặn, trạng thái ranh giới (rỗng/cuối cùng/duy nhất), và **quay lui** (Cancel, bỏ thay đổi chưa lưu, rời trang khi chưa Save, tắt lại sau khi bật) |
+| **State Transition** | Entity/element có trạng thái (Draft/Active/Inactive, bật/tắt, đang chỉnh sửa, đang sync...): chuyển hợp lệ, chuyển bị chặn, trạng thái ranh giới (rỗng/cuối cùng/duy nhất), và **quay lui** (Cancel, bỏ thay đổi chưa lưu, rời trang khi chưa Save, tắt lại sau khi bật). **Áp dụng cả cho entry state của chính màn hình/popup đang test** (lần đầu mở vs đã có dữ liệu sẵn từ trước; mở khi chưa sync vs đã sync xong; mở từ nguồn A vs nguồn B) — không chỉ hành động xảy ra bên trong màn hình đó. Case "đóng rồi mở lại trong cùng phiên" trông giống nhưng KHÔNG thay được case "vào lại ở phiên mới khi dữ liệu đã có sẵn" |
 | **Error Guessing** | Spam click / double submit; mất mạng khi lưu; 2 tab cùng chỉnh 1 bản ghi; reload giữa chừng; thao tác đúng lúc job sync đang chạy; paste nội dung rất dài hoặc định dạng lạ; khoảng trắng đầu/cuối; emoji/Unicode/có dấu tiếng Việt; chuỗi dạng script/HTML |
 | **Exploratory** | Đề xuất 3-5 charter, ưu tiên các field/action mà spec mô tả sơ sài (đặc biệt module Search và Filter Tree/Node Setup) hoặc chỉ có trong note Figma |
 
@@ -91,6 +111,10 @@ Mỗi file test case bắt buộc có đúng **1 dòng Purpose**, nằm ngay dư
 - Dòng Purpose **KHÔNG tính vào ID tuần tự** và không tính vào tổng số case khi báo cáo.
 - Khi gộp/sắp xếp lại file: dòng Purpose LUÔN giữ nguyên vị trí ngay sau header — không tham gia nhóm Field/Phần, không sắp theo Test Type, không bị renumber hay xoá. Không tính vào kiểm tra contiguity của cột Field/Phần.
 - File mới: viết dòng Purpose trước case đầu tiên. File đã tồn tại mà chưa có dòng Purpose: bổ sung. File đã có Purpose: giữ nguyên, không ghi đè trừ khi người dùng yêu cầu sửa.
+
+### Không tham chiếu chéo ID test case khác
+
+Nội dung mỗi cột (đặc biệt Preconditions, Test Steps, Expected Result) KHÔNG được viết kiểu tham chiếu ngược sang ID test case khác trong cùng file (VD tránh: "giống case 5", "hành vi tương tự case 12", "xem case 3"). Mỗi test case phải tự đứng độc lập — người đọc không cần nhảy qua dòng khác mới hiểu được case đang đọc, kể cả khi 2 case rất giống nhau (chỉ khác nguồn/actor...): viết lại đủ ý ngắn gọn cho case đó, không viện dẫn case kia.
 
 ### Quy định từng cột
 
@@ -167,6 +191,8 @@ Mỗi file test case bắt buộc có đúng **1 dòng Purpose**, nằm ngay dư
   4. Parse lại file bằng 1 CSV reader chuẩn (KHÔNG tự đếm dấu phẩy/đếm dòng vật lý): dòng ngay sau header phải là dòng Purpose (ID = `Purpose:`); số record data còn lại đúng bằng tổng số test case đã sinh CỘNG số dòng banner phân tách luồng (nếu có), và mỗi record đủ 10 cột (kể cả dòng banner — 9 cột còn lại để trống nhưng vẫn đủ dấu phẩy).
   5. Cột Field/Phần: mỗi nhóm liên tiếp cùng giá trị chỉ có DUY NHẤT 1 dòng đầu tiên điền giá trị, các dòng sau trong cùng nhóm để trống. Kiểm tra bằng cách duyệt tuần tự: nếu 2 dòng liên tiếp cùng thuộc 1 nhóm (dòng sau Field/Phần trống, ngầm hiểu là tiếp tục nhóm của dòng gần nhất có giá trị) thì hợp lệ; nếu 1 nhóm bị lặp giá trị ở nhiều dòng không liên tiếp là SAI (nhóm bị xen kẽ, cần gom lại). Dòng banner phân tách luồng (giá trị dạng `=== ... ===`, nếu có) và dòng Purpose không tính vào kiểm tra contiguity này.
   6. Dòng Purpose không bị tính vào ID tuần tự — ID = 1 đứng ngay sau dòng Purpose, cột ID chỉ là số thứ tự (không kèm tên task).
+  7. **Đối chiếu field-level coverage**: với mọi case liệt kê nhiều field/control trên 1 panel/block (dạng "X hiển thị đủ...", "block Y gồm...", thường là Test Type = UI) — liệt kê lại từng field/control được nêu tên trong đó, rồi rà xem MỖI field đã có ít nhất 1 case hành vi riêng ở nơi khác trong file chưa (đổi giá trị, xem hiệu ứng, edge case, tương tác với field khác, hoặc persist qua save — không tính case liệt kê UI khác là đủ). Áp dụng cho MỌI field xuất hiện trên UI/Figma, kể cả field tài liệu chỉ nêu tên suông không mô tả hành vi — field thiếu spec chi tiết vẫn cần case hành vi cơ bản, phần nào thực sự chưa rõ (VD danh sách option) thì gắn `<cần confirm>` chứ không bỏ hẳn case. Field nào 0 case hành vi thì bổ sung trước khi báo hoàn thành.
+  8. **Đối chiếu ngược với danh sách edge case trong tài liệu nguồn**: mở lại bảng edge case / mục Edge Cases của spec đã dùng, liệt kê từng mục và đánh dấu đã có case tương ứng trong file chưa — không chỉ tự tin vì "đã đọc qua hết". Khuyến nghị chạy `check-testcase-coverage` đối chiếu độc lập trước khi coi task là xong, đặc biệt khi tài liệu nguồn có bảng edge case dài (nhiều khả năng bị bỏ sót nhóm không "nổi bật" khi viết theo trí nhớ).
 
 - folder: lưu trữ trong thư mục có tên test-cases/userstoryID (ví dụ: testcases/US1234)
 
@@ -203,4 +229,6 @@ Chỉ bỏ qua bước này khi task không có case validate nào VÀ không c�
 - Không được phép bịa test case nếu không có đủ thông tin từ đặc tả hoặc người dùng. Trong trường hợp này, hãy sử dụng tag <cần confirm> để đánh dấu các test case cần xác nhận lại.
 - Luôn tuân thủ quy định về định dạng và nội dung của test case để đảm bảo tính nhất quán và dễ hiểu cho người dùng.
 - **Không tự viết case Test Type = Integration trong skill này.** Nếu trong lúc phân tích phát hiện cần case Integration (ảnh hưởng luồng/feature khác, đặc biệt khi story hiện tại có issuelinks trên Jira trỏ tới ticket khác mô tả nơi tiêu thụ dữ liệu/entity vừa thay đổi), dừng lại và chạy skill `create-impact-testcase` đúng quy trình (dò đủ nhánh/trạng thái của trigger theo Bước 2 của skill đó) — không tự bịa 1 case đại diện rồi gắn nhãn Integration. Lấy 1 case đại diện cho cả không gian trạng thái của trigger là lỗi đã xảy ra thực tế và bỏ sót các nhánh quan trọng (ví dụ: giá đã có sẵn vs giá chưa từng override vs giá hoàn toàn thiếu — mỗi trạng thái cho hành vi khác nhau).
+- **Khi viết case chỉ dựa trên 1 ảnh chụp (không có doc text hỗ trợ), tag `<cần confirm>` KHÔNG được dùng để hợp thức hoá việc bịa — chỉ được khẳng định đúng những gì thấy được trong ảnh.** Khi chỉ có ảnh làm bằng chứng: (1) ghi rõ trong Note đang dựa vào đúng ảnh/bằng chứng nào; (2) không viết nguyên văn copy UI (message/label/tooltip) nếu chữ đó không thấy thật trong ảnh; (3) không bịa ra con số/ngưỡng cụ thể nếu ảnh không hiển thị; (4) nếu suy đoán theo pattern của feature khác, phải ghi rõ "suy đoán theo pattern [X], chưa có bằng chứng trực tiếp" trong Note, không viết như đã xác nhận.
+- **Không bỏ qua Bước 3 (rà soát toàn bộ design + xác nhận trong chat) dù task nghe đơn giản hay đã "rà rồi" ở lượt trước** — mỗi lần bổ sung case mới cho 1 khu vực, quét lại đúng khu vực đó 1 lượt đầy đủ (kể cả phần tưởng đã quen) trước khi viết, vì phần bị bỏ sót thường nằm ở đúng chỗ tưởng là đã biết rõ.
 - Chỉ thao tác trong folder dự án hiện tại (Native Search / Claude), nghiêm cấm thao tác trên folder khác.

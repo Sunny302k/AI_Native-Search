@@ -1,0 +1,99 @@
+﻿ID,Test Type,Test Objective,,,Preconditions,Test Steps,Input DB/Setting,Expected Result,Note
+Purpose:,,"Cho merchant huỷ gói cước qua khảo sát lý do, để huỷ đúng ý và vẫn dùng được đến hết kỳ.",,,,,,,
+1,Happy,Huỷ gói,Yes cancel mở khảo sát,Before you go,Popup Cancel Growth Plan? đang mở,"1. Click [Yes, cancel].",,"1. Hiện popup ""Before you go…"" với ""What made you want to cancel?"", 8 lý do và nút [Confirm to cancel]; gói chưa bị huỷ cho tới khi xác nhận.",
+2,Happy,,Huỷ gói kèm lý do,Chọn lý do và nhập,Popup Before you go… đang mở,"1. Tick ""Feature Gaps"", nhập ""Thiếu tính năng X"" vào ô.
+2. Click [Confirm to cancel].
+3. Click [OK].",Lý do = Feature Gaps; nội dung = Thiếu tính năng X,"2. Hiện popup ""Successful!"": ""Your plan is cancelled. Native AI Search features remains active until {ngày hết kỳ}."" với nút [OK].
+3. Popup đóng; gói vẫn dùng được đến hết kỳ.","<cần confirm> nơi lưu lý do (email, báo cáo cho admin) và có gửi đi không"
+3,Negative,,Keep current,Không huỷ,Store đang dùng gói [Growth],"1. Click ⋮, chọn ""Cancel plan"".
+2. Click [Keep current].",,2. Popup đóng; gói vẫn Growth; không mở màn khảo sát; không đổi ngày trừ tiền.,
+4,Negative,,Chưa chọn lý do,Nút Confirm to cancel,Popup Before you go… vừa mở; chưa tick lý do nào,"1. Quan sát nút [Confirm to cancel].
+2. Click nút.
+3. Tick 1 lý do, quan sát nút.
+4. Bỏ tick lý do đó, quan sát nút.",,"1. Nút bị disabled (màu nhạt).
+2. Không có phản hồi, gói chưa bị huỷ.
+3. Nút enabled.
+4. Nút disabled lại.","Bắt buộc chọn ít nhất 1 lý do; chưa chọn thì nút disabled, đúng thiết kế (đã xác nhận).
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+5,Negative,,Đóng popup khảo sát,"Esc, click nền",Popup Before you go… đang mở,"1. Nhấn Esc.
+2. Mở lại, click vùng nền ngoài popup.
+3. Mở Pricing, kiểm tra gói.",,"1. Esc: popup đóng, không huỷ gói.
+2. Click nền: popup đóng, không huỷ gói.
+3. Gói vẫn Active, chưa bị huỷ.","Popup khảo sát đóng được (đã xác nhận); đóng không coi là huỷ gói.
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+6,Negative,,Mất mạng khi Confirm to cancel,Lỗi mạng,Popup Before you go… đang mở; ngắt mạng,"1. Click [Confirm to cancel].
+2. Bật lại mạng, mở lại Pricing.",,"1. Hiển thị lỗi tại popup, cho thử lại; không hiện popup ""Successful!"".
+2. Trạng thái gói khớp với kết quả thật (chưa huỷ hoặc đã huỷ, không lệch).","<cần confirm> chữ thông báo lỗi khi huỷ gói
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+7,Negative,,Đóng popup Cancel plan bằng Esc và click nền,Không huỷ,"Store đang dùng gói [Growth]; popup ""Cancel Growth Plan?"" đang mở","1. Nhấn Esc.
+2. Mở lại popup, click vùng nền ngoài popup.
+3. Mở Pricing, kiểm tra gói.",,"1. Popup đóng, không mở khảo sát.
+2. Popup đóng, không mở khảo sát.
+3. Gói vẫn Active, chưa bị huỷ.","Popup xác nhận đóng được (đã xác nhận).
+[Cập nhật 2026-10-28: Bổ sung theo audit độ phủ]"
+8,Edge,,Tên gói theo gói đang dùng,Mỗi gói,"Lần lượt ở từng gói: Starter, Standard, Growth, Scale, Advanced","1. Click ⋮, chọn ""Cancel plan"", đọc tiêu đề popup, rồi [Keep current].",,"- Tiêu đề lần lượt ""Cancel Starter Plan?"", ""Cancel Standard Plan?"", ""Cancel Growth Plan?"", ""Cancel Scale Plan?"", ""Cancel Advanced Plan?""",Enterprise: chưa rõ có menu ⋮ hay không (liên hệ qua Contact us). <cần confirm> huỷ gói Enterprise
+9,Edge,,Chọn nhiều lý do,Nhiều checkbox,Popup Before you go… đang mở,"1. Tick ""Technical Issues"" và ""Low usage"".
+2. Quan sát ô nhập.
+3. Click [Confirm to cancel].",,"1. Cả 2 lý do cùng được chọn.
+2. Ô ""Tell me more about your experience…"" hiển thị theo thiết kế.
+3. Huỷ thành công.","<cần confirm> cho chọn nhiều lý do hay chỉ một, và số ô nhập"
+10,Edge,,Nhập nội dung đặc biệt,"Dài, emoji, HTML",Popup Before you go… đang mở; đã tick 1 lý do,"1. Nhập chuỗi 5000 ký tự, emoji, tiếng Việt có dấu và chuỗi dạng script.
+2. Click [Confirm to cancel].",,"- Huỷ thành công; nội dung được lưu nguyên văn hoặc cắt theo giới hạn; không chạy script, không vỡ popup",<cần confirm> giới hạn độ dài ô nhập
+11,Edge,,Ngày hết kỳ trong popup,Khớp ngày gia hạn,Vừa huỷ gói Growth,"1. Đọc ngày trong popup thành công.
+2. So với ngày gia hạn trước khi huỷ.",,"- Ngày ""remains active until"" đúng bằng ngày kết thúc kỳ hiện tại",<cần confirm> ngày hiển thị là ngày cuối kỳ hay ngày bắt đầu kỳ kế
+12,Edge,,Menu ⋮ và thẻ gói sau khi huỷ,Trạng thái đã huỷ,"Vừa huỷ gói Growth, còn trong kỳ","1. Mở menu ⋮.
+2. Quan sát thẻ gói đang dùng và nút [Upgrade plan].",,"- Menu và thẻ gói hiển thị đúng trạng thái đã huỷ, không cho huỷ lần hai","Blocked — chờ designer: chưa có frame trạng thái đã huỷ còn trong kỳ (store đã huỷ hoặc hết kỳ hiển thị như store chưa đăng ký, nhưng giai đoạn còn trong kỳ vẫn dùng đủ tính năng). <cần confirm> hiển thị sau khi huỷ"
+13,Edge,,Chọn lại gói sau khi huỷ,Trước hết kỳ,"Đã huỷ gói Growth, còn trong kỳ","1. Mở Pricing, click [Upgrade plan].
+2. Quan sát nút ở thẻ Growth (gói vừa huỷ, còn trong kỳ).",,2. Không có đường nào tạo giao dịch thứ hai cho gói Growth trong cùng kỳ.,"Gói đã huỷ chọn lại không charge kép trong cùng kỳ (đã xác nhận).
+Blocked — chờ designer: chưa có frame trạng thái đã huỷ còn trong kỳ (nút ở thẻ Growth là Selected hay Select plan)
+<cần confirm> hành vi nút ở thẻ Growth"
+14,Edge,,Thử lại sau lỗi khi Confirm to cancel,Mất mạng rồi có mạng,"Popup Before you go… đang mở, đã tick 1 lý do; ngắt mạng","1. Click [Confirm to cancel].
+2. Bật lại mạng, click [Confirm to cancel] lần nữa.",,"1. Hiển thị lỗi tại popup, cho thử lại; gói chưa bị huỷ.
+2. Hiện popup ""Successful!""; chỉ huỷ 1 lần.","<cần confirm> chữ thông báo lỗi khi huỷ gói
+[Cập nhật 2026-10-28: Bổ sung theo audit độ phủ]"
+15,Edge,,Chọn lại gói sau hết kỳ,Không charge kép,"Đã huỷ gói Growth, đã qua ngày hết kỳ; GMV = [85k]; thẻ hợp lệ","1. Mở Pricing.
+2. Click [Select plan] của Growth, [Confirm].
+3. Mở Pricing.",,"1. Trang chỉ có Plan Recommendation và Compare plans (như store chưa đăng ký).
+2. Popup Confirm your plan mở; thành công, hiện popup ""Successful!"".
+3. Gói Growth đang dùng; chỉ 1 giao dịch.","Gói đã huỷ chọn lại được, không charge kép (đã xác nhận). Blocked — chờ môi trường: cần store đã hết kỳ
+[Cập nhật 2026-10-28: Bổ sung theo audit độ phủ]"
+16,Edge,,Double click Confirm to cancel,Chỉ huỷ 1 lần,"Popup Before you go… đang mở, đã tick 1 lý do",1. Double click nhanh [Confirm to cancel].,,"1. Chỉ huỷ 1 lần, chỉ 1 popup ""Successful!"".",[Cập nhật 2026-10-28: Bổ sung theo audit độ phủ]
+17,Edge,,Huỷ ở tab A khi tab B nâng gói,2 tab,Store đang dùng gói [Growth]; mở Pricing ở tab A và tab B,"1. Tab A: huỷ gói Growth, hoàn tất.
+2. Tab B (chưa reload): click [Select plan] của Scale, [Confirm].",,"1. Huỷ thành công.
+2. Không tạo giao dịch nâng gói sai trạng thái; tab B báo gói đã thay đổi hoặc yêu cầu tải lại.","<cần confirm> chữ thông báo ở tab B
+[Cập nhật 2026-10-28: Bổ sung theo audit độ phủ]"
+18,Edge,,Huỷ gói khi plan đang suspend,Không có gói hiệu lực,Plan đang suspended,"1. Mở Pricing, tìm menu ⋮ và mục Cancel plan.",,1. Hành vi huỷ gói khi suspend theo quy tắc chốt với BA.,"<cần confirm> có huỷ được gói khi đang suspend không
+Blocked — chờ BA
+[Cập nhật 2026-10-28: Bổ sung theo audit độ phủ]"
+19,UI,,Popup Cancel plan,Tên gói trong tiêu đề,Store đang dùng gói [Growth],"1. Click ⋮, chọn ""Cancel plan"".",,"- Popup ""Cancel Growth Plan?"": ""Are you sure you want to cancel this plan subscription? You'll keep access until the end of your current billing period.""
+- 2 nút [Yes, cancel] và [Keep current] (Keep current là nút nhấn mạnh)",
+20,UI,,Nội dung khảo sát,8 lý do,Popup Before you go… đang mở,"1. Đọc danh sách lý do.
+2. Tick lý do ""Cost & Budget Issues"".",,"1. Có đúng 8 lý do: Cost & Budget Issues, Technical Issues, Feature Gaps, Poor User Experience, Lack of Results/ROI, Support & Service Issues, Competitive Switching, Low usage; lúc mở chưa lý do nào được tick.
+2. Hiện ô nhập ""Tell me more about your experience…"" dưới lý do được tick.",Figma có 2 trạng thái: chưa tick (nút Confirm to cancel disabled) và đã tick Cost & Budget Issues (có ô nhập).
+21,Integration,Merchant huỷ gói → dùng đến hết kỳ → bị chặn,"Huỷ gói, dùng bình thường đến hết kỳ",Không gia hạn,"- Store đang dùng gói [Growth], còn 3 ngày tới hết kỳ
+- Có 5 campaign Active, 4 filter tree","1. [Merchant] Click ⋮ › Cancel plan › [Yes, cancel], tick 1 lý do, [Confirm to cancel], [OK].
+2. [Merchant] Dùng Search, Filter, tạo 1 campaign bình thường.
+3. [System] Đến ngày gia hạn.",,"1. Hiện popup ""Successful!"" ghi ngày còn truy cập.
+2. Dùng được đầy đủ tính năng đến hết kỳ.
+3. Không có giao dịch kỳ mới.",Blocked — chờ môi trường: bước 3 cần giả lập thời gian
+22,Integration,,Sau hết kỳ của gói đã huỷ,Bị chặn,"- Đã huỷ gói Growth, đã qua ngày hết kỳ
+- Có 5 campaign Active, 4 filter tree","1. [Merchant] Click menu Search.
+2. [Customer] Mở Storefront (search, filter).
+3. [Merchant] Mở Dashboard, Help Center và Pricing.",,"1. Hiện popup chặn truy cập (như store chưa đăng ký).
+2. Storefront và auto sync dừng chạy.
+3. Dashboard và Help Center mở bình thường; Pricing mở được và hiển thị như store chưa đăng ký; dữ liệu campaign, filter tree còn nguyên.","Blocked — chờ môi trường: cần store đã hết kỳ của gói đã huỷ (giả lập thời gian).
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+23,Integration,,Huỷ gói khi đang có add-on,Add-on đăng ký riêng,"- Store đang dùng gói [Growth]
+- Đã mua add-on Analytics 270 days","1. [Merchant] Huỷ gói Growth, xác nhận qua khảo sát.
+2. [Merchant] Mở Pricing, xem dòng Analytics và khối Additional add-on.
+3. [System] Qua cuối tháng mà add-on đã đăng ký.",,"1. Huỷ gói thành công.
+2. Add-on vẫn Activated, đăng ký riêng, không bị huỷ theo gói ngay.
+3. Add-on tự huỷ khi hết tháng đã đăng ký; không bị trừ tiền kỳ sau.","Add-on đăng ký riêng và tự huỷ khi hết tháng đã đăng ký (đã xác nhận 2026-10-28).
+<cần confirm> quan hệ với quy tắc add-on tự gia hạn hằng tháng khi gói còn hiệu lực
+Blocked — chờ môi trường: cần giả lập thời gian
+[Cập nhật 2026-10-28: Trả lời bổ sung về Default Execution và add-on]"
+24,Integration,,Auto sync dừng sau hết kỳ của gói đã huỷ,Không chạy,"- Đã huỷ gói Growth, đã qua ngày hết kỳ
+- Lịch auto sync đến hạn","1. [System] Đến giờ lịch auto sync.
+2. [Merchant] Mở Sync History.",,"1. Lượt auto sync không chạy.
+2. Sync History không có lượt nào trong khoảng sau ngày hết kỳ.","Auto sync dừng khi store không có gói hiệu lực (đã xác nhận). Blocked — chờ môi trường: cần giả lập thời gian
+[Cập nhật 2026-10-28: Bổ sung theo audit độ phủ]"

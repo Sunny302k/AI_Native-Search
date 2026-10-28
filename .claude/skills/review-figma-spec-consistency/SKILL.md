@@ -57,7 +57,7 @@ File markdown checklist, cấu trúc:
 ```
 
 - Naming: kebab-case, `<pattern-slug>-consistency-checklist.md` (VD `filter-node-consistency-checklist.md`).
-- Folder: `checklists/`.
+- Folder: `checklists/<module>/` (giống cấu trúc `test-cases/`).
 
 ## Bước 5: Cập nhật spec gốc (chỉ khi được xác nhận)
 

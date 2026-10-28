@@ -5,6 +5,12 @@ trigger: "create api test case từ [CURL/API docs]" hoặc "tạo test case API
 ---
 ## Hướng dẫn tạo test case
 
+### Bước 0: Đọc cập nhật mới nhất trước khi làm (bắt buộc)
+
+**Cổng nguồn — chạy đầu tiên, thiếu nguồn thì KHÔNG được bắt đầu.** Phải có đủ: (1) **tài liệu API** (CURL, API docs hoặc spec endpoint); (2) **ghi chú cập nhật** — file `docs/updates/<tinh-nang>-updates.md`, hoặc người dùng xác nhận trong chat "không có cập nhật". Figma không bắt buộc với API vì API không có giao diện; chỉ yêu cầu Figma khi cần đối chiếu dữ liệu endpoint trả về với dữ liệu hiển thị trên 1 màn cụ thể. Thiếu nguồn → dừng, gửi người dùng danh sách chính xác còn thiếu và chờ; không viết gì, kể cả bản nháp gắn `<cần confirm>`.
+
+Tài liệu API có thể chưa kịp cập nhật. Trước khi đọc tài liệu: (1) `git pull` repo dự án, ghi lại commit mới nhất; (2) đọc `docs/updates/README.md` và file `docs/updates/<tinh-nang>-updates.md` của tính năng đang làm (nếu có), lấy mọi mục còn hiệu lực; (3) khi ghi chú cập nhật mâu thuẫn tài liệu API thì theo ghi chú cập nhật (thứ tự ưu tiên: ghi chú cập nhật → hành vi API thật → tài liệu), ghi rõ nguồn đang theo và đưa mâu thuẫn vào danh sách câu hỏi; (4) đầu báo cáo nêu "Đã đọc N ghi chú cập nhật cho [tính năng]".
+
 ### Bước 1: Tiếp nhận và xác định nguồn đầu vào
 
 Xác định nguồn tài liệu API cần tạo test case. Nguồn đầu vào có thể là:

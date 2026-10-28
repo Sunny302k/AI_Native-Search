@@ -1,0 +1,190 @@
+﻿ID,Test Type,Test Objective,,,Preconditions,Test Steps,Input DB/Setting,Expected Result,Note
+Purpose:,,"Cho merchant thấy ngay gói phù hợp với GMV của store và so sánh quyền lợi từng gói, để chọn đúng gói theo mức doanh thu trước khi nâng cấp.",,,,,,,
+1,Negative,Average GMV,Thanh GMV chỉ hiển thị,Không kéo được,GMV = [85k],"1. Kéo núm sang mốc $600K.
+2. Click vào mốc $25K trên thanh.",,"- Núm và giá trị 85k không đổi
+- Gói gợi ý và trạng thái nút không đổi",
+2,Negative,,Tải dữ liệu Pricing lỗi,API chậm hoặc lỗi,API lấy dữ liệu Pricing trả lỗi hoặc timeout,1. Mở menu Pricing.,,"- Không hiển thị giá trị sai (NaN, undefined, icon lỗi)
+- Có trạng thái lỗi hoặc tải lại được","<cần confirm> trạng thái lỗi (hiện có icon ""SVG not found"" và API có lúc treo)"
+3,Negative,,Đang tải dữ liệu Pricing,Loading,API lấy dữ liệu Pricing phản hồi chậm,"1. Mở menu Pricing, quan sát trước khi dữ liệu về.
+2. Click [Select plan] của 1 thẻ khi chưa có GMV.",,"1. Hiển thị trạng thái đang tải; không hiện GMV hoặc gói gợi ý sai.
+2. Không mở popup ""Confirm your plan"".",<cần confirm> trạng thái loading của trang Pricing
+4,Edge,,Store chưa có đơn hàng,GMV = 0,GMV trung bình 3 tháng = [0],1. Mở menu Pricing.,GMV = 0,"- Hiển thị GMV 0, núm ở mốc 0
+- Starter được gợi ý, không nút nào bị xám",<cần confirm> định dạng hiển thị khi GMV = 0
+5,Edge,,GMV rất lớn,Vượt mốc cuối,GMV trung bình 3 tháng = [2M],1. Mở menu Pricing.,"GMV = 2,000,000","- Núm ở cuối thanh (sau mốc $1.5M)
+- Enterprise được gợi ý",<cần confirm> định dạng hiển thị 2M
+6,Sync,,Đơn tháng trước sau khi sync,Sync Success,"- GMV trung bình 3 tháng trước = [60k]
+- Có đơn mới trên BigCommerce tạo trong tháng trước","1. Chạy Manual Sync, chờ Success.
+2. Mở Pricing.","Đơn mới tổng Revenue = 9,000 (tháng trước)","2. Average GMV tăng thêm 3,000 (9,000 / 3 tháng) thành 63k; thanh GMV và gói gợi ý cập nhật theo.","GMV lấy đúng giá trị Revenue của BigCommerce, quy đổi USD, cộng mọi channel, cập nhật sau mỗi sync (đã xác nhận). <cần confirm> làm tròn
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+7,Sync,,Đơn trong tháng hiện tại,Ngoài cửa sổ 3 tháng,GMV trung bình 3 tháng trước = [60k],"1. Tạo đơn trong tháng hiện tại trên BigCommerce, Revenue 9,000.
+2. Chạy Manual Sync, chờ Success.
+3. Mở Pricing.","Đơn tháng hiện tại = 9,000",3. Average GMV vẫn 60k (tháng hiện tại không tính).,"GMV lấy đúng giá trị Revenue của BigCommerce, quy đổi USD, cộng mọi channel, cập nhật sau mỗi sync (đã xác nhận).
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+8,Sync,,Đơn cũ hơn 3 tháng,Ngoài cửa sổ,GMV trung bình 3 tháng trước = [60k],"1. Có đơn tạo 4 tháng trước trên BigCommerce, Revenue 9,000.
+2. Chạy Manual Sync, chờ Success.
+3. Mở Pricing.","Đơn 4 tháng trước = 9,000",3. Average GMV vẫn 60k.,"GMV lấy đúng giá trị Revenue của BigCommerce, quy đổi USD, cộng mọi channel, cập nhật sau mỗi sync (đã xác nhận).
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+9,Sync,,"Dữ liệu đổi trên BigCommerce, chưa sync",Stale,GMV trung bình 3 tháng trước = [60k],"1. Tạo đơn tháng trước Revenue 9,000 trên BigCommerce, chưa sync.
+2. Mở Pricing.",Chưa chạy sync,2. Average GMV vẫn 60k (chưa cập nhật).,"GMV lấy đúng giá trị Revenue của BigCommerce, quy đổi USD, cộng mọi channel, cập nhật sau mỗi sync (đã xác nhận). GMV chỉ đổi sau lần sync kế tiếp.
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+10,Sync,,Mở Pricing khi sync đang chạy,In Progress,Manual Sync đang In Progress,1. Mở Pricing trong lúc sync chạy.,Sync = In Progress,"1. Hiển thị GMV của lần sync Success gần nhất, không hiện giá trị nửa chừng hoặc lỗi.","GMV lấy đúng giá trị Revenue của BigCommerce, quy đổi USD, cộng mọi channel, cập nhật sau mỗi sync (đã xác nhận). <cần confirm> hiển thị khi sync đang chạy
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+11,Sync,,Sync thất bại,Failed,"- GMV trung bình 3 tháng trước = [60k]
+- Có đơn mới chưa sync","1. Chạy Manual Sync và để Failed.
+2. Mở Pricing.",Sync gần nhất = Failed,2. Average GMV vẫn 60k (giữ lần Success gần nhất).,"GMV lấy đúng giá trị Revenue của BigCommerce, quy đổi USD, cộng mọi channel, cập nhật sau mỗi sync (đã xác nhận).
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+12,Sync,,Sync lặp không đổi dữ liệu,Không cộng dồn 2 lần,GMV trung bình 3 tháng trước = [60k],"1. Chạy Manual Sync, chờ Success, ghi lại GMV.
+2. Chạy Manual Sync lần 2 khi không có đơn mới.
+3. Mở Pricing.",Không đổi dữ liệu giữa 2 lần sync,3. Average GMV không đổi giữa 2 lần sync.,"GMV lấy đúng giá trị Revenue của BigCommerce, quy đổi USD, cộng mọi channel, cập nhật sau mỗi sync (đã xác nhận).
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+13,Sync,,Đơn bị archive sau khi đã tính,Soft delete,"- Đơn tháng trước 9,000 đã sync và tính vào GMV
+- GMV = [63k]","1. Xoá (archive) đơn đó trên BigCommerce.
+2. Chạy Manual Sync.
+3. Mở Pricing.",Đơn bị archive,3. GMV khớp giá trị Revenue của BigCommerce sau khi đơn bị archive (đối chiếu Analytics Overview của BigCommerce).,"GMV lấy đúng giá trị Revenue của BigCommerce, quy đổi USD, cộng mọi channel, cập nhật sau mỗi sync (đã xác nhận).
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+14,Sync,,Đơn hoàn tiền một phần,Refund,"Đơn tháng trước 9,000 đã tính vào GMV","1. Hoàn tiền 3,000 cho đơn đó trên BigCommerce.
+2. Chạy Manual Sync.
+3. Mở Pricing.","Refund = 3,000",3. GMV khớp giá trị Revenue của BigCommerce sau khi hoàn tiền (đối chiếu Analytics Overview của BigCommerce).,"GMV lấy đúng giá trị Revenue của BigCommerce, quy đổi USD, cộng mọi channel, cập nhật sau mỗi sync (đã xác nhận).
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+15,Sync,,Store dùng tiền tệ khác USD,VND,"Store có tiền tệ [VND]; Revenue 3 tháng = 1,500,000,000 VND","1. Chạy Manual Sync.
+2. Mở Pricing.",Tiền tệ = VND,2. GMV được quy đổi sang USD trước khi so với các mốc gói.,"GMV lấy đúng giá trị Revenue của BigCommerce, quy đổi USD, cộng mọi channel, cập nhật sau mỗi sync (đã xác nhận).
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+16,Sync,,Store nhiều channel,Cộng channel,"Store có 2 channel, mỗi channel Revenue 3 tháng riêng","1. Chạy Manual Sync.
+2. Mở Pricing.","Channel A = 40k, channel B = 30k",2. Average GMV = 70k (cộng 2 channel).,"GMV lấy đúng giá trị Revenue của BigCommerce, quy đổi USD, cộng mọi channel, cập nhật sau mỗi sync (đã xác nhận).
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+17,Sync,,Sang tháng mới,Cửa sổ dịch 1 tháng,"- Ngày cuối tháng, GMV tính trên tháng T-3, T-2, T-1
+- Tháng T-1 có doanh thu cao","1. Sang ngày 1 của tháng mới.
+2. Chạy Manual Sync (hoặc chờ lịch).
+3. Mở Pricing.",Ngày 1 tháng mới,"3. Cửa sổ dịch sang tháng T-2, T-1, T; GMV tính lại đúng 3 tháng đầy đủ gần nhất (không gồm tháng mới).","GMV lấy đúng giá trị Revenue của BigCommerce, quy đổi USD, cộng mọi channel, cập nhật sau mỗi sync (đã xác nhận). Cửa sổ dịch ở lần sync đầu tiên sau khi sang tháng mới.
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+18,UI,,Hiển thị GMV trung bình,,GMV trung bình 3 tháng trước = [85k],1. Mở menu Pricing.,"GMV = 85,000","- Hiển thị ""Your current average GMV/month"" kèm icon ? và giá trị 85k",
+19,UI,,Tooltip icon ?,,,"1. Hover icon ? cạnh Average GMV.
+2. Di chuột ra ngoài.",,"1. Hiện tooltip ""Calculated based on your latest average GMV on 3 months"".
+2. Tooltip ẩn.",
+20,UI,,Thanh GMV hiển thị,Mốc và núm,GMV = [85k],1. Quan sát thanh GMV.,,"- Có các mốc 0, $25K, $75K, $200K, $600K, $1.5M
+- Núm nằm giữa mốc $75K và $200K; phần thanh trước núm tô cam",
+21,UI,,Định dạng số GMV,Rút gọn k/M,,"1. Lần lượt đặt GMV 950, 85,000, 1,250,000 và mở Pricing.","GMV = 950 / 85,000 / 1,250,000",- Mỗi giá trị hiển thị đúng quy ước rút gọn,"<cần confirm> quy ước rút gọn (950, 85k, 1.25M?)"
+22,UI,,Tỷ lệ tăng trưởng GMV,14.3%,"- Trung bình 3 tháng gần nhất = [114.3k]
+- Trung bình 3 tháng liền trước đó = [100k]","1. Mở Pricing, đọc tỷ lệ cạnh Average GMV.
+2. Đổi dữ liệu để 3 tháng gần nhất thấp hơn 3 tháng trước đó, mở lại.",114.3k so với 100k; sau đó 90k so với 100k,"1. Hiển thị ""14.3%"" kèm mũi tên tăng màu xanh.
+2. Hiển thị tỷ lệ giảm (−10%) theo định dạng hiển thị của tỷ lệ âm.","14.3% là mức tăng trưởng trung bình so với 3 tháng trước đó (đã xác nhận 2026-10-25). <cần confirm> định dạng và màu khi tăng trưởng âm
+[Cập nhật 2026-10-28: Bổ sung theo audit độ phủ]"
+23,UI,Thẻ gói,Nội dung 6 thẻ gói,,,"1. Mở menu Pricing, quan sát 6 thẻ.",,"- Starter: Up to $25K avg GMV/mo, For launching your first store, $29/mo
+- Standard: $25K - $75K, For growing your sales, $59/mo
+- Growth: $75K - $200K, For fast-growing brands, $119/mo
+- Scale: $200K - $600K, For multi-channel operations, $249/mo
+- Advanced: $600K - $1.5M, For established enterprises, $499/mo
+- Enterprise: More than $1.5M, For large organizations, hiển thị ""Contact us"" thay giá",
+24,UI,,Hover thẻ gói,Highlight khi hover,GMV = [85k],"1. Hover thẻ Scale.
+2. Di chuột ra ngoài.
+3. Hover thẻ Starter (đang xám).",,"1. Thẻ Scale được highlight.
+2. Thẻ trở lại bình thường; Growth vẫn highlight (gói gợi ý).
+3. Hiển thị theo thiết kế.",Blocked — chờ designer chốt: bước 3 chưa có thiết kế hover cho thẻ xám. <cần confirm> hiển thị khi hover thẻ xám
+25,UI,,Nhãn gói gợi ý,Badge Best Plan,GMV = [85k],"1. Mở menu Pricing, quan sát 6 thẻ gói.",,"- Chỉ thẻ Growth (gói gợi ý) hiển thị badge gồm icon 👍 và chữ ""Best Plan""
+- 5 thẻ còn lại không có badge","Figma có badge ""Best Plan"" ở khối gói gợi ý.
+[Cập nhật 2026-10-28: Trả lời đợt câu hỏi sau audit độ phủ]"
+26,UI,,Dòng giới thiệu Plan Recommendation,Chữ giới thiệu,Mở Pricing › Upgrade plan,"1. Đọc dòng mô tả dưới tiêu đề ""Plan Recommendation"".",,"- Hiển thị đúng chữ ""You only pay fees based on the actual value and revenue your store generates.""",[Cập nhật 2026-10-28: Bổ sung theo audit độ phủ]
+27,Happy,[Select plan] và gói gợi ý theo GMV,Nút và highlight theo range GMV,Range đến $25K,"- Store chưa có gói
+- GMV trung bình 3 tháng = [20k]","1. Mở menu Pricing.
+2. Quan sát 6 thẻ gói và bảng Compare plans.","GMV = 20,000","- Thẻ Starter được highlight kèm icon 👍
+- Cả 6 nút [Select plan] bấm được
+- Cột Starter trong Compare plans được highlight",
+28,Happy,,Nút và highlight theo range GMV,Range $25K - $75K,"- Store chưa có gói
+- GMV trung bình 3 tháng = [50k]","1. Mở menu Pricing.
+2. Quan sát 6 thẻ gói và bảng Compare plans.","GMV = 50,000","- Thẻ Standard được highlight kèm icon 👍
+- Nút [Select plan] của Starter bị xám (disabled); các gói còn lại bấm được
+- Cột Standard trong Compare plans được highlight",
+29,Happy,,Nút và highlight theo range GMV,Range $75K - $200K,"- Store chưa có gói
+- GMV trung bình 3 tháng = [85k]","1. Mở menu Pricing.
+2. Quan sát 6 thẻ gói và bảng Compare plans.","GMV = 85,000","- Thẻ Growth được highlight kèm icon 👍
+- Nút [Select plan] của Starter, Standard bị xám (disabled); các gói còn lại bấm được
+- Cột Growth trong Compare plans được highlight",
+30,Happy,,Nút và highlight theo range GMV,Range $200K - $600K,"- Store chưa có gói
+- GMV trung bình 3 tháng = [300k]","1. Mở menu Pricing.
+2. Quan sát 6 thẻ gói và bảng Compare plans.","GMV = 300,000","- Thẻ Scale được highlight kèm icon 👍
+- Nút [Select plan] của Starter, Standard, Growth bị xám (disabled); các gói còn lại bấm được
+- Cột Scale trong Compare plans được highlight",
+31,Happy,,Nút và highlight theo range GMV,Range $600K - $1.5M,"- Store chưa có gói
+- GMV trung bình 3 tháng = [800k]","1. Mở menu Pricing.
+2. Quan sát 6 thẻ gói và bảng Compare plans.","GMV = 800,000","- Thẻ Advanced được highlight kèm icon 👍
+- Nút [Select plan] của Starter, Standard, Growth, Scale bị xám (disabled); các gói còn lại bấm được
+- Cột Advanced trong Compare plans được highlight",
+32,Happy,,Nút và highlight theo range GMV,Range trên $1.5M,"- Store chưa có gói
+- GMV trung bình 3 tháng = [2M]","1. Mở menu Pricing.
+2. Quan sát 6 thẻ gói và bảng Compare plans.","GMV = 2,000,000","- Thẻ Enterprise được highlight kèm icon 👍
+- Nút [Select plan] của Starter, Standard, Growth, Scale, Advanced bị xám (disabled); các gói còn lại bấm được
+- Cột Enterprise trong Compare plans được highlight",
+33,Happy,,Chọn gói được phép,Mở popup xác nhận,"- Store chưa có gói
+- GMV = [85k]",1. Click [Select plan] của Growth.,,"1. Hiện popup ""Confirm your plan"" với nội dung giá $119/month, 2 nút [Cancel] và [Confirm].",
+34,Happy,,Chọn gói cao hơn range GMV,Scale khi GMV 85k,"- Store chưa có gói
+- GMV = [85k]",1. Click [Select plan] của Scale.,,"1. Hiện popup ""Confirm your plan"" với giá $249/month.",
+35,Happy,,Gói đang dùng trùng gói gợi ý,Selected,"- Store đang dùng gói [Growth]
+- GMV = [85k]",1. Mở menu Pricing.,,"- Thẻ Growth highlight kèm 👍, nút hiển thị ""Selected"" (xám, không bấm được)
+- Starter, Standard xám kèm tooltip ""Current GMV exceeds this plan""",
+36,Negative,,Click nút Select plan bị xám,Starter và Standard,"- Store chưa có gói
+- GMV = [85k]","1. Hover nút [Select plan] của Starter.
+2. Click nút đó.
+3. Hover và click nút của Standard.",,"1. Hiện tooltip ""Current GMV exceeds this plan"".
+2. Không mở popup, không đổi trạng thái.
+3. Giống bước 1 và 2.",
+37,Negative,,Huỷ popup xác nhận gói,Cancel,GMV = [85k],"1. Click [Select plan] của Growth.
+2. Click [Cancel] trong popup.",,2. Popup đóng; không có gói nào được mua; nút và highlight giữ nguyên.,
+38,Edge,,Mốc biên $25K,"25,000 và 25,001",Store chưa có gói,"1. Đặt GMV = 25,000, mở Pricing, quan sát.
+2. Đặt GMV = 25,001, mở Pricing, quan sát.","- GMV = 25,000: tạo đơn 3 tháng trước có tổng Revenue 75,000
+- GMV = 25,001: tổng Revenue 75,003","1. Starter được gợi ý; không nút nào bị xám.
+2. Starter bị xám; Standard được gợi ý.",
+39,Edge,,Mốc biên $75K,"75,000 và 75,001",Store chưa có gói,"1. Đặt GMV = 75,000, mở Pricing, quan sát.
+2. Đặt GMV = 75,001, mở Pricing, quan sát.","- GMV = 75,000: tạo đơn 3 tháng trước có tổng Revenue 225,000
+- GMV = 75,001: tổng Revenue 225,003","1. Standard được gợi ý; Starter xám.
+2. Growth được gợi ý; Starter, Standard xám.",<cần confirm> mốc biên thuộc gói thấp hơn (suy theo quy tắc mốc $25K)
+40,Edge,,Mốc biên $200K,"200,000 và 200,001",Store chưa có gói,"1. Đặt GMV = 200,000, mở Pricing, quan sát.
+2. Đặt GMV = 200,001, mở Pricing, quan sát.","- GMV = 200,000: tạo đơn 3 tháng trước có tổng Revenue 600,000
+- GMV = 200,001: tổng Revenue 600,003","1. Growth được gợi ý.
+2. Scale được gợi ý; Starter, Standard, Growth xám.",<cần confirm> mốc biên thuộc gói thấp hơn
+41,Edge,,Mốc biên $600K,"600,000 và 600,001",Store chưa có gói,"1. Đặt GMV = 600,000, mở Pricing, quan sát.
+2. Đặt GMV = 600,001, mở Pricing, quan sát.","- GMV = 600,000: tạo đơn 3 tháng trước có tổng Revenue 1,800,000
+- GMV = 600,001: tổng Revenue 1,800,003","1. Scale được gợi ý.
+2. Advanced được gợi ý; 4 gói thấp xám.",<cần confirm> mốc biên thuộc gói thấp hơn
+42,Edge,,Mốc biên $1.5M,"1,500,000 và 1,500,001",Store chưa có gói,"1. Đặt GMV = 1,500,000, mở Pricing, quan sát.
+2. Đặt GMV = 1,500,001, mở Pricing, quan sát.","- GMV = 1,500,000: tạo đơn 3 tháng trước có tổng Revenue 4,500,000
+- GMV = 1,500,001: tổng Revenue 4,500,003","1. Advanced được gợi ý.
+2. Enterprise được gợi ý; 5 gói thấp xám.",<cần confirm> mốc biên thuộc gói thấp hơn
+43,Edge,,Double click Select plan,Spam click,GMV = [85k],1. Double click nhanh [Select plan] của Growth.,,"1. Chỉ mở 1 popup ""Confirm your plan"".",
+44,Edge,,Gói đang dùng khác gói gợi ý,"Dùng Scale, GMV 70k","- Store đang dùng gói [Scale]
+- GMV = [70k]",1. Mở menu Pricing.,,"- Standard được gợi ý (highlight 👍), bấm được
+- Scale hiển thị ""Selected"" (không bấm được)
+- Starter xám; Growth, Advanced, Enterprise bấm được",<cần confirm> hiển thị khi gói đang dùng khác gói gợi ý
+45,Sync,,GMV tăng vượt mốc $75K sau sync,Hướng tăng,"- Store chưa có gói
+- GMV = [74k]; Standard được gợi ý","1. Có đơn mới làm GMV thành 78k.
+2. Chạy Manual Sync, chờ Success.
+3. Mở Pricing.",GMV 74k thành 78k,3. Growth được gợi ý; nút [Select plan] của Standard chuyển sang xám.,"GMV lấy đúng giá trị Revenue của BigCommerce, quy đổi USD, cộng mọi channel, cập nhật sau mỗi sync (đã xác nhận).
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+46,Sync,,GMV giảm xuống dưới mốc $75K sau sync,Hướng giảm,"- Store chưa có gói
+- GMV = [78k]; Growth được gợi ý","1. Đơn lớn của tháng cũ rời cửa sổ, GMV thành 72k.
+2. Chạy Manual Sync, chờ Success.
+3. Mở Pricing.",GMV 78k thành 72k,3. Standard được gợi ý; nút [Select plan] của Standard bấm được lại.,"GMV lấy đúng giá trị Revenue của BigCommerce, quy đổi USD, cộng mọi channel, cập nhật sau mỗi sync (đã xác nhận).
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+47,Happy,Enterprise,Mở chat từ Select plan và Contact us,Hai cách vào,Store chưa có gói,"1. Click [Select plan] của Enterprise.
+2. Đóng chat.
+3. Click chữ ""Contact us"" trên thẻ Enterprise.",,"1. Mở popup chat để được hỗ trợ; không mở popup ""Confirm your plan"".
+3. Mở popup chat.",Select plan và Contact us của Enterprise đều mở chat hỗ trợ (đã xác nhận).
+48,Edge,,Mở chat nhiều lần,Không mở trùng,,"1. Click [Select plan] của Enterprise.
+2. Đóng chat và click lại.
+3. Click liên tiếp khi chat đang mở.",,- Mỗi lần chỉ có 1 cửa sổ chat; mở lại sau khi đóng được,
+49,Edge,,Enterprise khi GMV thấp,Gói cao hơn,GMV = [20k],"1. Mở Pricing, quan sát nút của Enterprise.",,- Nút [Select plan] của Enterprise bấm được,
+50,Happy,Compare plans,Select từ bảng,Giống nút ở thẻ,"- Store chưa có gói
+- GMV = [85k]",1. Click [Select] ở đầu cột Scale trong bảng.,,"1. Mở popup ""Confirm your plan"" giá $249/month.",
+51,Negative,,Select gói thấp hơn GMV từ bảng,Starter,"- Store chưa có gói
+- GMV = [85k]",1. Click [Select] ở đầu cột Starter trong bảng.,,1. Không mở popup; hành vi giống nút xám ở thẻ gói.,"Blocked — chờ BA: Figma vẽ nút [Select] của Starter và Standard trong bảng màu cam (bấm được), khác nút xám ở thẻ gói. <cần confirm> nút Select ở bảng có xám và tooltip như ở thẻ không"
+52,Edge,,Thu nhỏ cửa sổ,Responsive bảng,,"1. Thu hẹp cửa sổ trình duyệt.
+2. Cuộn ngang bảng nếu có.",,- Bảng không vỡ bố cục; tên gói và nút Select vẫn rõ,<cần confirm> hành vi bảng ở màn nhỏ
+53,Happy,Màn Upgrade plan,Vào từ nút Upgrade plan,Store đã có gói,Store đang dùng gói [Growth],"1. Ở Pricing, click [Upgrade plan] trên thẻ gói hiện tại.",,"1. Mở màn ""Upgrade plan"" có nút back ←, gồm Plan Recommendation và Compare plans.",
+54,Happy,,Vào từ nút Upgrade now ở sidebar,Entry point thứ hai,Store đang dùng gói [Growth],1. Click nút [Upgrade now] ở sidebar.,,1. Mở màn Upgrade plan (cùng URL /pricing) hiển thị Plan Recommendation và Compare plans.,"Nút [Upgrade now] có trong khối tài khoản ở sidebar (ảnh Figma Pricing).
+<cần confirm> điều kiện hiển thị nút và màn đích"
+55,Happy,,Quay lại từ Upgrade plan,Nút back,Đang ở màn Upgrade plan,1. Click nút back ←.,,"1. Trở về trang Pricing Plan, không đổi gói.",
+56,Edge,,Reload màn Upgrade plan,,Đang ở màn Upgrade plan,1. Reload trang.,,- Vẫn ở màn Upgrade plan (hoặc về Pricing) và hiển thị đúng gói hiện tại,Blocked — chờ dev: Expected hai nhánh chưa chốt. <cần confirm> URL của màn Upgrade plan và hành vi khi reload
+57,Sync,Current Plan,GMV vượt khoảng của gói đang dùng,Sau sync,"- Store đang dùng gói [Growth] ($75K đến $200K)
+- GMV = [180k]","1. Có đơn làm GMV thành 240k.
+2. Chạy Manual Sync, chờ Success.
+3. Mở Pricing.",GMV 180k thành 240k,"3. Hiện banner ""You have exceeded your current plan limit"" với Average GMV $240k và tỷ lệ tăng trưởng; Growth hiển thị ""Selected""; gói thấp hơn xám; có banner nhắc nâng gói trong tuần chờ.","GMV lấy đúng giá trị Revenue của BigCommerce, quy đổi USD, cộng mọi channel, cập nhật sau mỗi sync (đã xác nhận). Tuần chờ tính từ lúc hệ thống phát hiện GMV vượt (sau sync); chi tiết ở task Exceed GMV. <cần confirm> tỷ lệ tăng trưởng tính so với kỳ nào (Figma mẫu: $240k, 285%)
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"

@@ -1,0 +1,163 @@
+﻿ID,Test Type,Test Objective,,,Preconditions,Test Steps,Input DB/Setting,Expected Result,Note
+Purpose:,,"Cho merchant xem gói đang dùng, mức dùng so với hạn mức, kỳ trừ tiền kế tiếp và mua thêm add-on lịch sử analytics, để chủ động mở rộng dữ liệu trước khi chạm giới hạn của gói.",,,,,,,
+1,Happy,Gói hiện tại,Click Upgrade plan,Mở màn Upgrade plan,Store đang dùng gói [Growth],"1. Mở Pricing, click [Upgrade plan].
+2. Click nút ← quay lại.",,"1. Mở màn Upgrade plan (cùng URL /pricing) có Plan Recommendation và Compare plans.
+2. Quay lại trang Pricing với khối Current plan.",[Cập nhật 2026-10-28: Bổ sung theo audit độ phủ]
+2,Edge,,Store chưa có gói,Chưa từng đăng ký,"Store chưa từng có gói, không trial",1. Mở menu Pricing.,,"- Trang ""Pricing Plan"" chỉ có khối Plan Recommendation và bảng Compare plans
+- Không có khối Current plan, Monthly usage, Additional add-on","Theo frame Figma ""Pricing - default for non-subscribed user"".
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+3,Edge,,Store đã huỷ hoặc hết kỳ,Giống chưa đăng ký,"Store đã huỷ gói Growth, đã qua ngày hết kỳ",1. Mở menu Pricing.,,"- Trang ""Pricing Plan"" chỉ có khối Plan Recommendation và bảng Compare plans, giống store chưa từng đăng ký
+- Không có khối Current plan, Monthly usage, Additional add-on","Blocked — chờ môi trường: cần store đã hết kỳ của gói đã huỷ (giả lập thời gian).
+Store đã huỷ hoặc hết kỳ hiển thị giống store chưa đăng ký (đã xác nhận).
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+4,UI,,Tên gói và nút Upgrade plan,,Store đang dùng gói [Growth],1. Mở menu Pricing.,,"- Tiêu đề khối là ""Growth"" kèm dòng ""Monthly usage""
+- Có nút [Upgrade plan] và nút ⋮
+- Không hiển thị giá gói ở khối này","Theo frame Figma ""Pricing - for subscribed user""."
+5,UI,,Menu ⋮,Chỉ Cancel plan,Store đang dùng gói [Growth],1. Click nút ⋮ cạnh gói hiện tại.,,"- Menu chỉ có 1 mục ""Cancel plan""",
+6,UI,,Badge gói ở sidebar,Khớp gói đang dùng,Store đang dùng gói [Growth],"1. Quan sát badge dưới email ở sidebar.
+2. So với tên gói ở khối Monthly usage.",,- Badge và tên gói cùng là gói đang dùng,Figma có badge STARTER nhưng thẻ gói là Growth. <cần confirm> chữ badge theo gói
+7,Edge,Your current average GMV/month,Tăng trưởng âm,GMV giảm,GMV 3 tháng trước thấp hơn 3 tháng trước đó,1. Mở menu Pricing.,GMV hiện tại 80k; kỳ trước đó 100k,"- Hiển thị 80k kèm -20% (dấu âm, màu khác với tăng trưởng dương)",<cần confirm> định dạng và màu khi tăng trưởng âm
+8,Edge,,Kỳ trước đó không có đơn,Không chia được,GMV 3 tháng trước đó = [0],1. Mở menu Pricing.,GMV hiện tại 50k; kỳ trước đó 0,"- Không hiện NaN, Infinity hay undefined","<cần confirm> giá trị hiển thị tăng trưởng khi mẫu số bằng 0 (không hiện NaN, Infinity, undefined thì kiểm được ngay)"
+9,Edge,,Store chưa có đơn,GMV = 0,Store chưa có đơn nào,1. Mở menu Pricing.,GMV = 0,- Hiển thị GMV 0; tăng trưởng không hiện giá trị sai,<cần confirm> hiển thị tăng trưởng khi GMV = 0
+10,Integration,,GMV khớp giữa Current plan và Plan Recommendation,Cùng nguồn,Store đang dùng gói [Growth]; Average GMV = [110k],"1. Đọc GMV và tỷ lệ tăng trưởng ở khối Current plan.
+2. Click [Upgrade plan], đọc GMV và vị trí trên thanh GMV.",,- GMV ở hai nơi giống nhau (110k); thanh GMV đặt đúng mốc 110k; tỷ lệ tăng trưởng giống nhau,"GMV lấy từ Revenue BigCommerce, trung bình 3 tháng trước (đã xác nhận).
+[Cập nhật 2026-10-28: Bổ sung theo audit độ phủ]"
+11,UI,,GMV và tỷ lệ tăng trưởng,"110k, 35%","- Store đang dùng gói [Growth]
+- GMV trung bình 3 tháng trước = [110k]; tăng 35% so với 3 tháng trước đó",1. Mở menu Pricing.,"GMV = 110,000; tăng trưởng = 35%","- Hiển thị ""Your current average GMV/month"" với 110k kèm 35%","Số hiển thị là trung bình 3 tháng trước, không gồm tháng hiện tại (đã xác nhận).
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+12,UI,,Tooltip icon ?,Cạnh GMV,Store đang dùng gói [Growth],"1. Hover icon ? cạnh ""Your current average GMV/month"".",,"- Hiện tooltip ""Calculated based on your latest average GMV on 3 months""",
+13,Edge,Thông báo trừ tiền,Không có nút bật tắt,Tự thanh toán,Store đang dùng gói [Growth],1. Tìm nút hoặc công tắc bật tắt thanh toán tự động ở trang Pricing.,,- Không có nút hoặc công tắc nào; thanh toán tự động luôn áp dụng,
+14,Edge,,Trừ tiền lúc 00:00 UTC,Giờ trừ,Ngày trừ tiền = [ngày mai]; thẻ hợp lệ,"1. Đến 00:00 UTC của ngày trừ tiền, kiểm tra giao dịch.
+2. Mở menu Pricing.",Múi giờ store = UTC+07,"1. Giao dịch được trừ lúc 00:00 UTC (07:00 theo giờ store), không sớm hơn.
+2. Ngày trừ kế tiếp cập nhật sang kỳ sau.",Blocked — chờ môi trường: cần giả lập thời gian và sandbox thanh toán
+15,Edge,,Ngày trừ là hôm nay,Không email 24 giờ,Gói bắt đầu hôm nay; ngày trừ kế tiếp = [hôm nay],1. Kiểm tra hộp thư của merchant trong 24 giờ trước thời điểm trừ.,,"- Không có email ""24 hours before the charge"" vì không thể gửi trước 24 giờ",Blocked — chờ môi trường: cần hộp thư test
+16,Edge,,Sau khi huỷ gói,Dừng tự thanh toán,"Đã huỷ gói Growth, còn trong kỳ hiện tại","1. Mở menu Pricing, đọc dòng thông báo trừ tiền.",,- Không có giao dịch nào vào ngày gia hạn,"huỷ dừng tự thanh toán. <cần confirm> dòng ""automatically charged on …"" hiển thị thế nào sau khi huỷ"
+17,UI,,Nội dung và ngày trừ,,"Store đang dùng gói [Growth]; kỳ kế tiếp ngày [Mar 06, 2026]","1. Mở menu Pricing, đọc dòng thông báo dưới GMV.",,"- Hiển thị ""Your card will be automatically charged on Mar 06, 2026. You will receive an invoice via email 24 hours before the charge.""
+- Ngày trừ khớp ngày gia hạn của gói",
+18,Happy,Monthly usage,Click Need more,Cuộn tới add-on,Store đang dùng gói [Growth],"1. Click ""Need more ?"" ở dòng Analytics.
+2. Click ""Need more ?"" ở dòng Refined Search Journey Analytics.",,"1. URL không đổi, không mở popup, trang cuộn tới khối Additional add-on.
+2. Như bước 1.",
+19,Edge,,Icon tròn theo tỉ lệ dùng,"0%, 50%, 100%",Store đang dùng gói [Starter],"1. Đặt Active campaign = 0, quan sát icon.
+2. Đặt = 5 (5/10), quan sát icon.
+3. Đặt = 10 (10/10), quan sát icon.","Active campaign = 0, 5, 10","1. Vòng tròn rỗng.
+2. Vòng tô một nửa.
+3. Vòng tô đầy.",
+20,UI,,Danh sách 7 dòng,Growth,Store đang dùng gói [Growth],"1. Mở menu Pricing, quan sát khối Monthly usage.",,"- Có 7 dòng chia 4 nhóm: Merchandise (Active Merchandising Campaigns, Active Execution in Campaigns), Navigation (Filter Trees (include default), Filter Nodes Custom Builder), Analytics (Analytics, Refined Search Journey Analytics), Sync (Auto Sync frequency)
+- Mỗi dòng dạng đã dùng/hạn mức (hoặc số ngày với dòng Analytics) kèm icon","Monthly usage có 7 dòng theo ảnh Figma người dùng gửi (đã xác nhận). Hạn mức theo từng gói được kiểm ở task Plan Limit.
+[Cập nhật 2026-10-26 (đợt 2): Chốt giá add-on, hạn mức date range, Monthly usage]"
+21,UI,,Hạn mức Unlimited,Vòng rỗng,Store đang dùng gói [Scale]; Active campaign = [30],1. Quan sát dòng Active Merchandising Campaigns.,,"- Hiển thị 30/Unlimited; vòng tròn rỗng, không tô theo tỉ lệ",
+22,UI,,Chỉ 2 dòng có Need more,Analytics và Refined,Store đang dùng gói [Growth],1. Quan sát từng dòng trong Monthly usage.,,"- Chỉ dòng Analytics và Refined Search Journey Analytics có liên kết ""Need more ?""",
+23,UI,,Nhãn Locked ở dòng đủ hạn mức,Growth đủ hạn mức,"Store ở gói [Growth]; 100/100 campaign Active, 10/10 execution, 20/20 filter tree, 20/20 custom node; auto sync 1/1 day","1. Mở Pricing, quan sát khối Monthly usage.
+2. Giảm 1 campaign, quan sát lại dòng Active Merchandising Campaigns.
+3. Hover vào nhãn ""Locked"" của dòng 100/100 Active Merchandising Campaigns.",,"1. Các dòng 100/100 Active Merchandising Campaigns, 10/10 Active Execution in Campaigns, 20/20 Filter Trees (include default), 20/20 Filter Nodes Custom Builder, 1/1 day Auto Sync frequency đều có icon khoá và nhãn ""Locked""; dòng Analytics không có nhãn.
+2. Dòng 99/100 không còn nhãn ""Locked"".
+3. Hiện tooltip ""Limit reached. This feature is temporarily locked."" (theo Figma Monthly usage).","Theo ảnh Figma người dùng gửi (Monthly usage của Growth).
+[Cập nhật 2026-10-28: Bổ sung theo audit độ phủ]
+[Cập nhật 2026-10-28: Bổ sung theo audit độ phủ]"
+24,Happy,Additional add-on,Mua add-on Analytics,Chọn 270 days,"- Store đang dùng gói [Growth] (Analytics 180 days)
+- Chưa mua add-on","1. Ở thẻ Historical Analytics, chọn 270 days ở ô Select date range.
+2. Click [Buy add-on].
+3. Click [Confirm] ở popup.
+4. Click [Get start!] ở popup thành công.",Khoảng = 270 days,"2. Hiện popup ""Confirm your add-on"": ""Are you sure to select this add-on? You'll get access to 270 days of historical analytics for $45/month."" với [Cancel] và [Confirm].
+3. Hiện popup ""Successful!"": ""You're all set! 270 days of historical analytics is now unlocked. $45 will be charged on {ngày}. Monthly billed. Cancel anytime."" với [Get start!].
+4. Popup đóng; nút [Buy add-on] đổi thành ""Activated"" (disabled).","Giá theo bảng 90 days $15, 180 days $30, 270 days $45, 365 days $60 (đã xác nhận).
+[Cập nhật 2026-10-26 (đợt 2): Chốt giá add-on, hạn mức date range, Monthly usage]"
+25,Happy,,Dòng Analytics sau khi mua,Cập nhật Monthly usage,Vừa mua add-on Analytics 270 days,"1. Mở khối Monthly usage, quan sát dòng Analytics.",,"- Dòng Analytics hiển thị ""270 days Analytics"", nhãn ""Activated"", ""Renewed on {ngày}"" và liên kết ""Cancel""","Dòng Analytics lấy theo khoảng của add-on đã mua (đã xác nhận).
+[Cập nhật 2026-10-26 (đợt 2): Chốt giá add-on, hạn mức date range, Monthly usage]"
+26,Happy,,Mua add-on Refined Search Journey,Chọn 180 days,"- Store đang dùng gói [Growth] (Refined 60 days)
+- Chưa mua add-on này","1. Ở thẻ Refined Search Journey Historical Analytics, chọn 180 days.
+2. Click [Buy add-on], [Confirm].
+3. Click [Get start!].",Khoảng = 180 days,"2. Hiện popup xác nhận ghi ""$30/month"" rồi popup ""Successful!"" ghi ""$30 will be charged on {ngày}"".
+3. Nút đổi thành ""Activated""; dòng Refined Search Journey Analytics ở Monthly usage hiển thị ""180 days"" kèm ""Activated"", ""Renewed on {ngày}"", ""Cancel"".","Tên thẻ: Access to Refined Search Journey Historical Analytics. Giá 180 days = $30 (đã xác nhận).
+[Cập nhật 2026-10-26 (đợt 2): Chốt giá add-on, hạn mức date range, Monthly usage]"
+27,Happy,,Huỷ add-on,"Yes, cancel",Đã mua add-on Analytics 270 days,"1. Click liên kết ""Cancel"" ở dòng Analytics.
+2. Click [Yes, cancel] ở popup ""Cancel add-on?"".
+3. Click [OK] ở popup thành công.",,"1. Hiện popup ""Cancel add-on?"": ""Are you sure you want to cancel this add on subscription? You'll keep access until the end of your current billing period."" với [Yes, cancel] và [Keep current].
+2. Hiện popup ""Successful!"" có nút [OK].
+3. Popup đóng; add-on vẫn dùng được đến hết kỳ.","popup thành công đang dùng câu của huỷ gói (""Your plan is cancelled…""). <cần confirm> câu đúng cho huỷ add-on"
+28,Happy,,Giá ở tiêu đề thẻ theo khoảng ngày,Bảng 15/30/45/60,Store đang dùng gói [Starter] (Analytics 30 days); chưa mua add-on,"1. Ở thẻ Historical Analytics, lần lượt chọn 90, 180, 270, 365 days, đọc giá ở tiêu đề thẻ sau mỗi lần chọn.
+2. Lặp lại ở thẻ Refined Search Journey Historical Analytics.","Khoảng = 90, 180, 270, 365 days","1. Giá ở tiêu đề thẻ đổi theo từng lần chọn: 90 days $15, 180 days $30, 270 days $45, 365 days $60 (/mo).
+2. Cùng bảng giá như thẻ trên.","Bảng giá dùng chung cho cả hai add-on; giá ở tiêu đề thẻ cập nhật theo khoảng đang chọn (đã xác nhận).
+[Cập nhật 2026-10-26 (đợt 2): Chốt giá add-on, hạn mức date range, Monthly usage]"
+29,Negative,,Huỷ ở popup xác nhận,Cancel,Chưa mua add-on,"1. Chọn 270 days, click [Buy add-on].
+2. Click [Cancel] ở popup ""Confirm your add-on"".",,2. Popup đóng; không có giao dịch; nút [Buy add-on] vẫn bấm được; Monthly usage không đổi.,
+30,Negative,,Mất mạng khi Confirm,Lỗi mạng,Chưa mua add-on; ngắt mạng sau khi mở popup xác nhận,"1. Click [Confirm].
+2. Bật lại mạng, mở lại Pricing.",,"1. Hiển thị lỗi tại popup, cho thử lại; không hiện popup thành công; không có giao dịch.
+2. Trạng thái add-on khớp với giao dịch thật (không bị trừ tiền mà vẫn Buy add-on).","<cần confirm> chữ thông báo khi thanh toán add-on lỗi
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+31,Negative,,Keep current khi huỷ add-on,Giữ add-on,Đã mua add-on Analytics,"1. Click ""Cancel"" ở dòng Analytics.
+2. Click [Keep current].",,2. Popup đóng; add-on vẫn Activated; không đổi gì ở Monthly usage.,
+32,Edge,,Số ngày và giá trong popup,"90, 180, 270, 365",Store đang dùng gói [Starter] (Analytics 30 days); chưa mua add-on,"1. Lần lượt chọn từng khoảng ngày, click [Buy add-on], quan sát popup, rồi [Cancel].","Khoảng = 90, 180, 270, 365 days","- Popup ghi đúng ""access to {x} days of historical analytics for ${giá}/month"": 90 days $15, 180 days $30, 270 days $45, 365 days $60","Custom date range: giá và cách nhập chưa có (hoãn). <cần confirm> Custom date range
+[Cập nhật 2026-10-26 (đợt 2): Chốt giá add-on, hạn mức date range, Monthly usage]"
+33,Edge,,Hai add-on độc lập,Mua cả hai,Đã mua add-on Analytics,"1. Mua tiếp add-on Refined Search Journey.
+2. Xem Monthly usage.",,- Cả 2 dòng cùng hiển thị Activated; mỗi add-on có ngày Renewed riêng,
+34,Edge,,Add-on đã Activated,Không mua lại,Đã mua add-on Analytics 270 days,"1. Quan sát thẻ add-on Analytics.
+2. Click nút ""Activated"".
+3. Thử đổi ô Select date range.",,"1. Nút hiển thị ""Activated"", disabled.
+2. Không mở popup.
+3. Ô chọn ngày theo thiết kế.",Note Figma: đã mua với {x} ngày thì disable nút và đổi chữ thành Activated. <cần confirm> ô Select date range có khoá khi đã mua
+35,Edge,,Double click Confirm,Chỉ 1 giao dịch,Chưa mua add-on,"1. Chọn 270 days, click [Buy add-on].
+2. Double click nhanh [Confirm].",,"2. Chỉ 1 giao dịch $45 (270 days), chỉ 1 popup ""Successful!""","Giá 270 days = $45 (đã xác nhận).
+[Cập nhật 2026-10-26 (đợt 2): Chốt giá add-on, hạn mức date range, Monthly usage]"
+36,Edge,,Ngày charge và Renewed on,Khớp nhau,Vừa mua add-on Analytics 270 days,"1. Đọc ngày charge trong popup ""Successful!"".
+2. Đọc ""Renewed on"" ở dòng Analytics và ngày trừ ở banner Current plan.",,"- Ngày trong popup, ""Renewed on"" và ngày trên banner nhất quán với chu kỳ add-on","Figma ghi popup ""charged on Mar 06, 2026"" nhưng ""Renewed on Mar 05, 2026"" và banner ""Mar 05, 2026"". <cần confirm> ngày đúng và add-on có chu kỳ riêng hay theo chu kỳ gói"
+37,Edge,,Chặn mua khoảng nhỏ hơn hoặc bằng hạn mức gói,"Growth 180: 90, 180 bị chặn","- Store đang dùng gói [Growth] (Analytics 180 days)
+- Chưa mua add-on","1. Ở add-on Historical Analytics, chọn 90 days, thử click [Buy add-on].
+2. Chọn 180 days, thử click [Buy add-on].
+3. Chọn 270 days, click [Buy add-on].","Khoảng = 90, 180, 270 days","1. Không mua được (bị chặn), không mở popup xác nhận.
+2. Không mua được (bị chặn), không mở popup xác nhận.
+3. Mở popup xác nhận ""270 days of historical analytics for $45/month"".","Add-on chỉ mua được khoảng lớn hơn hạn mức gói (đã xác nhận 2026-10-28).
+<cần confirm> cách chặn (ẩn hoặc vô hiệu hoá tuỳ chọn trong dropdown, hay vô hiệu hoá nút Buy add-on) và thông báo
+[Cập nhật 2026-10-28: Trả lời đợt câu hỏi sau audit độ phủ]"
+38,Edge,,Nâng gói có sẵn khoảng ngày của add-on,Growth lên Scale,"- Store đang dùng gói [Growth]
+- Đã mua add-on Analytics 270 days","1. Nâng lên Scale (Analytics 270 days có sẵn trong gói).
+2. Xem dòng Analytics và giao dịch kỳ kế tiếp.",,- Add-on 270 days vẫn Activated; vẫn bị trừ $45/tháng theo chu kỳ riêng; dòng Analytics hiển thị 270 days,"Add-on độc lập với gói (đã xác nhận).
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+39,Edge,,Huỷ rồi mua lại add-on,Cùng kỳ,"Đã huỷ add-on Analytics, còn trong kỳ hiện tại","1. Quan sát nút ở thẻ add-on Analytics.
+2. Chọn 270 days và click [Buy add-on], [Confirm].",,"1. Nút hiển thị theo thiết kế sau khi huỷ (Activated hay Buy add-on).
+2. Không bị trừ tiền kép trong cùng kỳ; dòng Analytics hiển thị đúng.","Blocked — chờ BA: quy tắc chọn lại chỉ được xác nhận cho gói, chưa có cho add-on. <cần confirm> kích hoạt lại add-on"
+40,Edge,,Huỷ add-on thứ hai,Refined Search Journey,Đã mua add-on Refined Search Journey 180 days,"1. Click ""Cancel"" ở dòng Refined Search Journey Analytics, [Yes, cancel].",,1. Hiện popup thành công; add-on Refined vẫn dùng đến hết kỳ; add-on Analytics (nếu đã mua) không bị ảnh hưởng.,câu popup thành công. <cần confirm> câu đúng cho huỷ add-on
+41,Edge,,"Sau khi huỷ, trước hết kỳ",Còn Activated,Vừa huỷ add-on Analytics 270 days,"1. Mở Search behavior analytics, chọn khoảng 270 ngày, Apply.
+2. Xem dòng Analytics ở Monthly usage.",,"1. Áp dụng, không popup.
+2. Dòng Analytics hiển thị trạng thái theo thiết kế sau khi huỷ.","<cần confirm> hiển thị dòng Analytics sau khi huỷ (còn ""Renewed on"" hay đổi thành ngày hết hạn)"
+42,Edge,,Add-on tự gia hạn,Hằng tháng,Add-on Analytics đã mua; còn 1 ngày tới ngày gia hạn,"1. Qua ngày gia hạn.
+2. Mở Pricing.",,"- Add-on được trừ tiếp 1 tháng; ""Renewed on"" chuyển sang kỳ sau; vẫn Activated",Add-on tự gia hạn hằng tháng (đã xác nhận). Blocked — chờ môi trường: cần giả lập thời gian
+43,Edge,,Hạ gói khi add-on đang Activated,Scale xuống Growth,"- Store đang dùng gói [Scale]; GMV = [85k]
+- Đã mua add-on Analytics 365 days","1. Hạ xuống Growth, [Confirm].
+2. Xem dòng Analytics ở Monthly usage và khối Additional add-on.",GMV = 85k,"1. Gói đổi thành Growth ngay.
+2. Dòng Analytics vẫn 365 days, nhãn Activated; add-on không bị huỷ, không bị trừ thêm.","Add-on độc lập với gói (đã xác nhận).
+[Cập nhật 2026-10-28: Bổ sung theo audit độ phủ]"
+44,Edge,,Add-on khi gói hết kỳ,"Gói đã huỷ, add-on còn Activated","- Đã huỷ gói Growth, đã qua ngày hết kỳ
+- Đã mua add-on Analytics 270 days (Activated)","1. Mở Pricing sau ngày hết kỳ của gói.
+2. Chờ qua cuối tháng mà add-on đã đăng ký.
+3. Kiểm tra giao dịch.",,"1. Pricing chỉ có Plan Recommendation và Compare plans (như store chưa đăng ký).
+3. Add-on tự huỷ khi hết tháng đã đăng ký; không bị trừ tiền sau đó.","Add-on đăng ký riêng và tự huỷ khi hết tháng đã đăng ký (đã xác nhận 2026-10-28).
+<cần confirm> quan hệ với quy tắc add-on tự gia hạn hằng tháng khi gói còn hiệu lực
+Blocked — chờ môi trường: cần giả lập thời gian
+[Cập nhật 2026-10-28: Trả lời bổ sung về Default Execution và add-on]"
+45,UI,,Nội dung 2 thẻ add-on,,Store đang dùng gói [Growth],"1. Cuộn tới khối ""Unlock additional capabilities with flexible add-ons"".",,"- Có 2 thẻ: ""Access to Historical Analytics"" và ""Access to Refined Search Journey Historical Analytics""
+- Mỗi thẻ có giá theo khoảng đang chọn (VD +$30/mo khi chọn 180 days), mô tả, ô ""Select date range"", nút [Buy add-on]","Tên thẻ và giá theo ảnh người dùng gửi (đã xác nhận); giá tiêu đề thẻ cập nhật theo khoảng ngày đang chọn.
+[Cập nhật 2026-10-26 (đợt 2): Chốt giá add-on, hạn mức date range, Monthly usage]"
+46,UI,,Giá trị mặc định ô Select date range,270 hay 365 days,Chưa mua add-on,"1. Mở khối Additional add-on, đọc giá trị mặc định của ô Select date range ở cả 2 thẻ.",,- Cả 2 thẻ hiển thị giá trị mặc định đúng thiết kế,"Figma ghi 270 days, staging ghi 365 days (thẻ Refined: 180 days). <cần confirm> giá trị mặc định"
+47,Integration,Merchant mua add-on → Analytics mở rộng → trừ tiền hằng tháng,"Mua add-on, dùng khoảng ngày rộng, gia hạn",Thành công,"- Store đang dùng gói [Growth] (Analytics 180 days)
+- Thẻ thanh toán hợp lệ","1. [Merchant] Chọn 270 days ở add-on Historical Analytics, [Buy add-on], [Confirm].
+2. [System] Ghi nhận giao dịch $45, đặt ngày gia hạn kỳ kế tiếp.
+3. [Merchant] Mở Search behavior analytics, chọn khoảng 270 ngày, Apply.
+4. [System] Đến ngày gia hạn, trừ tiếp 1 tháng.",,"1. Hiện popup ""Successful!"" ghi 270 days, $45 và ngày charge.
+2. Dòng Analytics ở Monthly usage hiển thị 270 days, Activated, Renewed on {ngày}.
+3. Áp dụng khoảng 270 ngày, dữ liệu hiển thị, không popup.
+4. Trừ tiếp $45 cho 1 tháng; Renewed on chuyển sang kỳ sau.","<cần confirm> ngày charge và Renewed on (Figma ghi Mar 06 và Mar 05). Blocked — chờ môi trường: bước 4 cần giả lập thời gian
+[Cập nhật 2026-10-26 (đợt 2): Chốt giá add-on, hạn mức date range, Monthly usage]"
+48,Integration,,"Huỷ add-on, dùng đến hết kỳ",Không gia hạn,"Đã mua add-on Analytics 270 days, còn 10 ngày tới kỳ gia hạn","1. [Merchant] Click ""Cancel"" ở dòng Analytics, [Yes, cancel].
+2. [Merchant] Chọn khoảng 270 ngày ở Search behavior analytics, Apply.
+3. [System] Qua ngày hết kỳ.
+4. [Merchant] Chọn khoảng 270 ngày, Apply.",,"1. Hiện popup ""Successful!"" có nút [OK].
+2. Áp dụng, không popup.
+3. Không trừ tiền kỳ mới.
+4. Hiện popup Date Range Limit Exceeded ghi hạn mức của gói (180 days).",Blocked — chờ môi trường: bước 3 cần giả lập thời gian. <cần confirm> thời điểm hết hiệu lực add-on
+49,Integration,,Email invoice 24 giờ trước ngày trừ,Gửi đúng giờ,"- Gói [Growth], kỳ kế tiếp ngày [Mar 06, 2026]
+- Thẻ hợp lệ, hộp thư merchant dùng được","1. [System] Đến 24 giờ trước thời điểm trừ tiền.
+2. [Merchant] Mở hộp thư.
+3. [System] Đến 00:00 UTC ngày trừ tiền.",,"1. Gửi email invoice cho merchant.
+2. Email có đúng gói, số tiền $119 và ngày trừ.
+3. Trừ tiền; email invoice sau thanh toán (nếu có) theo thiết kế.",Blocked — chờ môi trường: cần hộp thư test và giả lập thời gian. <cần confirm> nội dung email invoice

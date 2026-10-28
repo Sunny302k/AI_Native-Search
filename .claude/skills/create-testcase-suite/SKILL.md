@@ -8,6 +8,27 @@ trigger: "viết test case cho task/user story [...]", "gen full test case cho [
 
 Skill này KHÔNG tự viết test case — chỉ quyết định cần gọi những skill con nào, theo thứ tự nào, rồi để từng skill con tự thực hiện đúng quy tắc riêng của nó (format, cột, file, naming... giữ nguyên như định nghĩa trong skill con).
 
+### Bước 0: Đọc cập nhật mới nhất trước khi làm (bắt buộc)
+
+**Cổng 3 nguồn — chạy đầu tiên, thiếu 1 nguồn thì KHÔNG được bắt đầu.** Phải có đủ cho mọi màn hình trong phạm vi: (1) **spec** — file trong `docs/specs/` (viết từ `extract-figma-spec` hoặc từ xác nhận của người dùng); (2) **ghi chú cập nhật** — file `docs/updates/<tinh-nang>-updates.md`, hoặc người dùng xác nhận trong chat "không có cập nhật"; (3) **Figma** — link file do người dùng đưa, hoặc link ghi trong spec đã được người dùng xác nhận là bản mới nhất, và đã mở được thật frame của từng màn, **kể cả toàn bộ note/sticky note vàng** (theo rule dự án, note Figma là spec chính thức). Mở Figma: gọi `create_session` trước, rồi `get_metadata` không truyền `nodeId` để liệt kê page và đi xuống section/frame; không đoán node ID. Danh sách page trả về có thể THIẾU — màn nào không tìm thấy trong các page được liệt kê thì xin người dùng link page/frame, không kết luận là design không có. Thiếu bất kỳ nguồn nào cho bất kỳ màn nào → dừng, gửi người dùng danh sách chính xác còn thiếu (nguồn nào, màn nào) và chờ; không viết gì, kể cả bản nháp gắn `<cần confirm>`, không thay nguồn thiếu bằng suy luận từ các nguồn còn lại. Đủ 3 nguồn mới làm tiếp phần dưới. Skill điều phối kiểm cổng này cho toàn bộ phạm vi task trước khi trình kế hoạch ở Bước 3; từng skill con vẫn kiểm lại lần nữa.
+
+Trước khi phân loại: `git pull` repo dự án, đọc `docs/updates/README.md` và các file `docs/updates/<tinh-nang>-updates.md` của tính năng trong task (và tính năng liên quan) để lấy các cập nhật còn hiệu lực. Truyền các cập nhật đó cho từng skill con. Thứ tự ưu tiên khi nguồn mâu thuẫn, và cách xử lý khi PDF mâu thuẫn note Figma, theo đúng Bước 0 của `create-functional-testcase`. Đầu báo cáo cuối nêu "Đã đọc N ghi chú cập nhật; repo ở commit X".
+
+### Bước 0b: Cổng chặn — mọi câu hỏi confirm phải được clear
+
+Chạy ngay sau khi qua cổng 3 nguồn ở Bước 0. Kiểm tra câu hỏi còn mở của feature sắp viết test case:
+
+1. File issue log `checklists/<module>/<feature>-design-issues.md` (VD `checklists/pricing/pricing-design-issues.md`) — nếu có.
+2. Mục "Câu hỏi mở" / các điểm `[CẦN XÁC NHẬN BA]` trong `docs/specs/<feature>-specs.md`.
+
+**Chặn** khi còn bất kỳ issue nào, ở **mọi mức** (🔴 🟡 🟢), có trạng thái khác Closed hoặc Hoãn. Khi chặn:
+
+- Dừng, không chạy Bước 1 trở đi.
+- Liệt kê từng issue còn treo: ID · câu hỏi · mức · người cần trả lời.
+- Nhắc bước tiếp: mang đi hỏi → ghi câu trả lời vào cột "Câu trả lời" và đổi trạng thái thành Closed trong file issue log (câu hỏi gửi BA có thể soạn bằng `create-ba-question`) → quay lại skill này.
+
+Không tìm thấy file issue log lẫn mục câu hỏi mở → báo cho người dùng biết là chưa có bước review/làm rõ nào cho feature này và hỏi có muốn chạy `/explain` hoặc `extract-figma-spec` trước không. Chỉ bỏ qua cổng khi người dùng nói rõ chấp nhận viết khi còn câu hỏi mở; khi đó mọi case đụng tới issue chưa đóng phải gắn `<cần confirm>`.
+
 ### Bước 1: Đọc task/spec
 
 Xác định task/user story cần viết test case. Nếu chưa có spec cụ thể, hỏi lại người dùng nguồn spec trước khi phân loại.
@@ -75,6 +96,7 @@ Sau khi tất cả skill đã chạy xong, tổng hợp 1 báo cáo duy nhất g
 - Không tự viết test case trực tiếp trong skill này — mọi nội dung/format do skill con đảm nhiệm nguyên vẹn theo đúng quy định riêng của nó.
 - Không tự ý bật 1 skill con khi không đủ căn cứ — phải hỏi lại người dùng cho các mục "chưa chắc".
 - Không bỏ qua Bước 3 (xác nhận kế hoạch) trừ khi người dùng đã yêu cầu rõ ràng chạy hết không cần hỏi.
+- Không bỏ qua Bước 0b (cổng chặn câu hỏi mở) trừ khi người dùng nói rõ chấp nhận viết khi còn câu hỏi mở.
 - **Không kết thúc suite khi chưa chạy `review-testcase-quality`** (trừ khi người dùng chủ động tắt) — và không được tự review thay nó trong cùng lượt: bắt buộc qua subagent context sạch, vì tự chấm bài ngay sau khi viết sẽ chỉ xác nhận lại chính mình.
 - Không để `review-testcase-quality` sửa file trong lúc chạy — báo cáo trước, chỉ sửa sau khi người dùng duyệt.
 - Chỉ thao tác trong folder dự án hiện tại (Native Search / Claude), nghiêm cấm thao tác trên folder khác.

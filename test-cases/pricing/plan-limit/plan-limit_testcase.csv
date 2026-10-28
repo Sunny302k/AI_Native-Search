@@ -1,0 +1,394 @@
+﻿ID,Test Type,Test Objective,,,Preconditions,Test Steps,Input DB/Setting,Expected Result,Note
+Purpose:,,"Cho merchant biết rõ mỗi gói được dùng tính năng nào và tới mức nào, để nâng gói đúng lúc thay vì bị chặn bất ngờ khi vận hành.",,,,,,,
+1,Happy,Active Merchandising Campaigns,Tạo campaign dưới hạn mức,Growth 99/100,"- Store đang dùng gói [Growth]
+- Active campaign = [99]","1. Mở Merchandise Campaign, quan sát [Create new].
+2. Tạo 1 campaign và bật Active.",Active campaign = 99,"1. [Create new] bấm được.
+2. Tạo thành công; đủ 100 active campaign; [Create new] chuyển sang disabled.",
+2,Happy,,Gói Unlimited,Scale không giới hạn,"- Store đang dùng gói [Scale]
+- Active campaign = [150]",1. Quan sát [Create new] và tạo thêm 1 campaign.,Active campaign = 150,- [Create new] luôn bấm được; tạo thành công,"Hạn mức Active Execution gồm Default Execution (Figma: ""Include Default Execution"").
+<cần confirm> Default Execution là mỗi campaign có 1 execution mặc định tính riêng, hay chỉ 1 execution mặc định của cả store (nếu mỗi campaign có 1 thì 150 campaign vượt hạn mức 10 execution)
+[Cập nhật 2026-10-28: Trả lời bổ sung về Default Execution và add-on]"
+3,Negative,,Click nút bị khoá,Không mở popup tạo,"- Gói [Growth]
+- Active campaign = [100]",1. Click [Create new] đang xám.,,"1. Không mở popup tạo campaign, không thay đổi dữ liệu.",
+4,Negative,,Ép request tạo khi đã đủ hạn mức,Server chặn,"Store ở gói [Starter]; đã đạt hạn mức: 10 campaign Active, 3 execution, 3 filter tree, 3 custom node","1. Bằng công cụ gọi API (hoặc phát lại request trong DevTools), gửi request tạo campaign mới.
+2. Gửi request tạo execution mới.
+3. Gửi request tạo filter tree mới.
+4. Gửi request tạo custom node mới.
+5. Mở Pricing xem Monthly usage.",,"1. Server từ chối, không tạo campaign.
+2. Server từ chối, không tạo execution.
+3. Server từ chối, không tạo filter tree.
+4. Server từ chối, không tạo custom node.
+5. Monthly usage vẫn 10/10, 3/3, 3/3, 3/3.","<cần confirm> mã lỗi và thông báo khi server từ chối
+[Cập nhật 2026-10-28: Bổ sung theo audit độ phủ]"
+5,Edge,,Chạm hạn mức,Growth 100/100,"- Gói [Growth]
+- Active campaign = [100]","1. Mở Merchandise Campaign.
+2. Hover [Create new].",Active campaign = 100,"1. [Create new] bị xám (disabled).
+2. Tooltip ""Plan limit reached. This feature is temporarily locked.""",
+6,Edge,,Biên hạn mức Starter và Standard,9 và 10 / 10; 39 và 40 / 40,"Đổi được gói của store lần lượt qua Starter, Standard","1. Ở gói Starter, có 9 active campaign, quan sát [Create new].
+2. Tạo thêm 1 để đủ 10, quan sát lại.
+3. Ở gói Standard, có 39 active campaign, quan sát [Create new].
+4. Tạo thêm 1 để đủ 40, quan sát lại.","Active campaign = 9, rồi 10
+Active campaign = 39, rồi 40","1. [Create new] bấm được.
+2. [Create new] disabled kèm tooltip.
+3. [Create new] bấm được.
+4. [Create new] disabled kèm tooltip.",
+7,Edge,,Tắt 1 campaign để mở lại nút,Hoàn tác về dưới hạn mức,"- Gói [Growth]
+- Active campaign = [100]","1. Tắt Active 1 campaign.
+2. Quan sát [Create new].",,"1. Còn 99 active.
+2. [Create new] bấm được trở lại.",
+8,Edge,,Xoá 1 campaign để mở lại nút,,"- Gói [Growth]
+- Active campaign = [100]","1. Xoá 1 campaign đang active.
+2. Quan sát [Create new].",,"1. Campaign đã xoá biến mất khỏi danh sách; còn 99 active.
+2. [Create new] bấm được trở lại.",
+9,Edge,,Bật lại campaign khi đã đủ hạn mức,Activate,"- Gói [Growth]
+- Active campaign = [100]
+- Có 1 campaign Inactive",1. Bật Active campaign Inactive đó.,,1. Không bật được: bị chặn kèm lý do trên campaign; số Active vẫn 100/100.,"Chặn bật lại khi đã đủ hạn mức (đã xác nhận).
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+10,Edge,,Campaign hết hạn hoặc Inactive,"""Active"" tính thế nào","- Gói [Starter]
+- 8 active, 5 inactive, 2 đã hết thời gian chạy",1. Quan sát [Create new] và số trong Monthly usage.,,"- Chỉ campaign đang chạy (Active, trong thời gian chạy) được tính: Monthly usage hiển thị 8/10; [Create new] bấm được","Active campaign = đang chạy trong thời gian chạy (đã xác nhận).
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+11,Edge,,Double click Create new ở hạn mức,Spam click,"- Gói [Growth]
+- Active campaign = [99]","1. Double click nhanh [Create new], lưu campaign.",,"1. Chỉ tạo đúng 1 campaign; tổng active = 100, không vượt hạn mức.",
+12,Edge,,Nhân bản campaign khi đủ hạn mức,Đường tạo khác,"- Gói [Growth]
+- Active campaign = [100]","1. Mở menu của 1 campaign, chọn Duplicate (nếu có).",,1. Không tạo được bản sao Active vượt hạn mức 100.,<cần confirm> có thao tác Duplicate và cách đếm bản sao
+13,Edge,,Hai tab cùng tạo,Race condition,"- Gói [Growth]
+- Active campaign = [99]
+- Mở 2 tab Merchandise Campaign","1. Ở tab 1 tạo campaign thứ 100.
+2. Ở tab 2 (chưa reload) click [Create new] và lưu campaign mới.",,2. Không tạo thêm campaign vượt 100 (bị chặn khi lưu hoặc báo lỗi).,<cần confirm> kiểm tra hạn mức phía server
+14,Edge,,Campaign Active nhưng chưa tới giờ chạy,Không tính vào hạn mức,Store ở gói [Starter]; 10 campaign Active đang chạy; 1 campaign Active có Campaign time bắt đầu ngày mai,"1. Mở Pricing xem Monthly usage.
+2. Quan sát [Create new].",,"1. Monthly usage hiển thị 10/10 (campaign chưa tới giờ chạy không tính).
+2. [Create new] bị khoá vì đã đủ 10 campaign đang chạy.","Chỉ campaign đang chạy trong thời gian chạy được tính (đã xác nhận).
+[Cập nhật 2026-10-28: Bổ sung theo audit độ phủ]"
+15,Edge,,Campaign hết hạn làm nút Create new mở lại,Chuyển trạng thái theo thời gian,"Store ở gói [Starter]; 10 campaign Active, 1 campaign có Campaign time kết thúc sau 1 phút","1. Chờ qua giờ kết thúc.
+2. Quan sát [Create new] và Monthly usage.",,2. Campaign hết hạn không còn tính: Monthly usage 9/10; [Create new] bấm được.,"Blocked — chờ môi trường: cần giả lập thời gian
+[Cập nhật 2026-10-28: Bổ sung theo audit độ phủ]"
+16,Happy,Active Execution in Campaigns,Default execution được tính,Gồm Default,"- Gói [Starter]
+- Chưa có campaign nào","1. Tạo campaign mới (tự có Default Execution).
+2. Xem Monthly usage.",,2. Active Execution tăng 1 (1/3),
+17,Edge,,Chạm hạn mức Growth,10/10,"- Gói [Growth]
+- Tổng active execution = [10]","1. Mở Campaign details.
+2. Hover [New execution].",Execution = 10,"1. [New execution] bị xám.
+2. Tooltip ""Plan limit reached. This feature is temporarily locked.""",
+18,Edge,,Biên hạn mức Starter và Standard,2 và 3 / 3; 4 và 5 / 5,"Đổi được gói của store lần lượt qua Starter, Standard","1. Ở gói Starter, có 2 execution (gồm Default), quan sát [New execution].
+2. Thêm 1 để đủ 3, quan sát lại.
+3. Ở gói Standard, có 4 execution, quan sát [New execution].
+4. Thêm 1 để đủ 5, quan sát lại.","Execution = 2, rồi 3
+Execution = 4, rồi 5","1. [New execution] bấm được.
+2. [New execution] disabled kèm tooltip.
+3. [New execution] bấm được.
+4. [New execution] disabled kèm tooltip.",
+19,Edge,,"Scale, Advanced, Enterprise vẫn giới hạn 10",Không Unlimited,"- Gói [Scale]
+- Tổng execution = [10]",1. Quan sát [New execution].,"Gói lần lượt: Scale, Advanced, Enterprise",- Cả 3 gói đều disabled kèm tooltip ở 10 execution,
+20,Edge,,Xoá execution để mở lại nút,,"- Gói [Growth]
+- Execution = [10]","1. Xoá 1 execution (Delete).
+2. Quan sát [New execution].",,2. [New execution] bấm được trở lại.,
+21,Edge,,Phạm vi đếm execution,Toàn store hay từng campaign,"- Gói [Starter]
+- Campaign A có 2 execution, campaign B có 1","1. Mở campaign C mới, quan sát [New execution].",,"- Hạn mức tính toàn store: 2 + 1 = 3/3 nên [New execution] ở campaign C bị khoá kèm tooltip ""Plan limit reached. This feature is temporarily locked.""","Execution tính toàn store (đã xác nhận).
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+22,Edge,,Dưới hạn mức Growth,9/10 rồi tạo execution thứ 10,Store ở gói [Growth]; 9 execution (gồm Default),"1. Quan sát [New execution].
+2. Tạo execution thứ 10.
+3. Quan sát [New execution].",,"1. [New execution] bấm được.
+2. Tạo thành công; Monthly usage 10/10.
+3. [New execution] bị khoá kèm tooltip ""Plan limit reached. This feature is temporarily locked.""",[Cập nhật 2026-10-28: Bổ sung theo audit độ phủ]
+23,Happy,Number of Filter Trees,Gói Unlimited,Scale,"- Gói [Scale]
+- Tree = [25]",1. Quan sát [Create new].,Tree = 25,- [Create new] luôn bấm được,
+24,Happy,,Default tree được tính,Gồm default,"- Gói [Starter]
+- Chỉ có Default filter tree",1. Xem Monthly usage.,,- Hiển thị 1/3 Filter Trees (include default),
+25,Edge,,"Biên hạn mức Starter, Standard, Growth",2 và 3 / 3; 9 và 10 / 10; 19 và 20 / 20,"Đổi được gói của store lần lượt qua Starter, Standard, Growth","1. Ở gói Starter, có Default + 1 tree (2/3), quan sát [Create new].
+2. Tạo thêm 1 để đủ 3, quan sát lại.
+3. Ở gói Standard, có 9 tree, quan sát [Create new].
+4. Tạo thêm 1 để đủ 10, quan sát lại.
+5. Ở gói Growth, có 19 tree, quan sát [Create new].
+6. Tạo thêm 1 để đủ 20, quan sát lại.","Tree = 2, rồi 3
+Tree = 9, rồi 10
+Tree = 19, rồi 20","1. [Create new] bấm được.
+2. [Create new] bị xám kèm tooltip ""Plan limit reached. This feature is temporarily locked.""
+3. [Create new] bấm được.
+4. [Create new] xám kèm tooltip.
+5. [Create new] bấm được.
+6. [Create new] xám kèm tooltip.",
+26,Edge,,Xoá tree để mở lại nút,,"- Gói [Starter]
+- Tree = [3]","1. Xoá 1 tree không phải Default.
+2. Quan sát [Create new].",,2. [Create new] bấm được trở lại.,
+27,Edge,,Tree Inactive,Có tính không,"- Gói [Starter]
+- 1 Default + 1 Active + 1 Inactive",1. Quan sát [Create new].,,"- Tree Inactive có tính: 3/3 nên [Create new] bị xám kèm tooltip ""Plan limit reached. This feature is temporarily locked.""","Filter tree Inactive có tính vào hạn mức (đã xác nhận).
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+28,Happy,Filter Nodes Custom Builder,Gói Unlimited,Scale,"- Gói [Scale]
+- Custom node = [30]","1. Quan sát thẻ ""My own filter"".",,- Thẻ luôn bấm được,
+29,Happy,,Node dựng sẵn không tính,Chỉ đếm Custom Builder,"- Gói [Starter]
+- 10 node dựng sẵn, 2 custom node","1. Xem Monthly usage.
+2. Thêm 1 node dựng sẵn (vd Brand) khi custom node = 3.",,"1. Hiển thị 2/3 Filter Nodes Custom Builder.
+2. Thêm được node dựng sẵn dù custom node đã đủ 3.",
+30,Edge,,"Biên hạn mức Starter, Standard, Growth",2 và 3 / 3; 9 và 10 / 10; 19 và 20 / 20,"Đổi được gói của store lần lượt qua Starter, Standard, Growth","1. Ở gói Starter với 3/3 custom node, mở Add filter node.
+2. Hover thẻ ""My own filter"".
+3. Ở gói Starter với 2/3 custom node, mở Add filter node.
+4. Click thẻ ""My own filter"".
+5. Ở gói Standard, có 9 custom node, quan sát thẻ.
+6. Tạo thêm 1 để đủ 10, quan sát lại.
+7. Ở gói Growth, có 19 custom node, quan sát thẻ.
+8. Tạo thêm 1 để đủ 20, quan sát lại.","Custom node = 3
+Custom node = 2
+Custom node = 9, rồi 10
+Custom node = 19, rồi 20","1. Thẻ ""My own filter"" bị mờ (disabled).
+2. Tooltip ""Plan limit reached. This feature is temporarily locked.""
+4. Mở trình tạo node tuỳ chỉnh.
+5. Thẻ bấm được.
+6. Thẻ disabled kèm tooltip.
+7. Thẻ bấm được.
+8. Thẻ disabled kèm tooltip.",
+31,Edge,,Sửa node đã tạo khi đủ hạn mức,Không bị khoá,"- Gói [Starter]
+- Custom node = [3]",1. Mở sửa 1 custom node đã có và lưu.,,- Sửa và lưu được; chỉ không tạo mới được,
+32,Edge,,Xoá custom node để mở lại thẻ,,"- Gói [Starter]
+- Custom node = [3]","1. Xoá 1 custom node.
+2. Mở Add filter node, quan sát thẻ.",,"2. Thẻ ""My own filter"" bấm được trở lại.",
+33,Edge,,Node dùng ở nhiều tree,Đếm 1 hay nhiều,"- Gói [Starter]
+- 1 custom node dùng ở 2 filter tree",1. Xem Monthly usage.,,- Node dùng ở nhiều tree đếm 1: Monthly usage hiển thị 1/3,"Node dùng nhiều tree đếm 1 (đã xác nhận).
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+34,Happy,Analytics Date Range,Chọn khoảng trong hạn mức,Growth 180 days,Gói [Growth],"1. Mở Search behavior analytics.
+2. Chọn khoảng có ngày bắt đầu cách hôm nay đúng 180 ngày, ngày kết thúc là hôm nay, click [Apply].",Ngày bắt đầu = hôm nay trừ 180 ngày,"2. Áp dụng khoảng ngày, dữ liệu hiển thị; không có popup.","Hạn mức date range là giới hạn lùi về quá khứ: ngày bắt đầu không được xa hôm nay quá số ngày hạn mức (đã xác nhận).
+[Cập nhật 2026-10-26 (đợt 2): Chốt giá add-on, hạn mức date range, Monthly usage]"
+35,Happy,,Nút Adjust range,,Popup Date Range Limit Exceeded đang mở,1. Click [Adjust range].,,"1. Popup đóng, quay lại lịch chọn ngày.",<cần confirm> lịch giữ khoảng đang chọn hay đặt lại
+36,Happy,,Nút Buy add-on,,Popup Date Range Limit Exceeded đang mở,1. Click [Buy add-on].,,"1. Chuyển tới trang Pricing, khối Additional add-on.",<cần confirm> đích chuyển của nút Buy add-on
+37,Happy,,Lựa chọn Select date range của add-on,"90, 180, 270, 365 days, Custom",Gói [Starter] (Analytics 30 days); mở khối Additional add-on ở Pricing,"1. Click ô Select date range của Historical Analytics.
+2. Chọn lần lượt từng mục.",,"1. Dropdown có đúng 5 mục: 90 days, 180 days, 270 days, 365 days, Custom date range.
+2. Mỗi mục chọn được và hiển thị trong ô; giá ở tiêu đề thẻ đổi theo: 90 days $15, 180 days $30, 270 days $45, 365 days $60.","<cần confirm> Custom date range
+[Cập nhật 2026-10-26 (đợt 2): Chốt giá add-on, hạn mức date range, Monthly usage]"
+38,Negative,,Mất mạng khi Apply,Lỗi mạng,Gói [Growth]; ngắt mạng sau khi chọn ngày bắt đầu cách hôm nay 181 ngày,"1. Click [Apply].
+2. Bật lại mạng và click [Apply] lần nữa.",,"1. Không hiện popup vượt hạn mức sai; khoảng ngày chưa áp dụng; có thông báo lỗi hoặc giữ nguyên trang.
+2. Hiện popup Date Range Limit Exceeded đúng nội dung.",<cần confirm> thông báo khi mất mạng lúc Apply
+39,Edge,,Lùi quá hạn mức 1 ngày,Growth 181 days,Gói [Growth],"1. Chọn ngày bắt đầu cách hôm nay 181 ngày, ngày kết thúc là hôm nay.
+2. Click [Apply].",Ngày bắt đầu = hôm nay trừ 181 ngày,"2. Hiện popup ""Date Range Limit Exceeded: Your Growth plan allows a maximum range of 180 days."" với 2 nút [Buy add-on] và [Adjust range]; khoảng ngày chưa áp dụng.","[Cập nhật 2026-10-26 (đợt 2): Chốt giá add-on, hạn mức date range, Monthly usage]"
+40,Edge,,Preset vượt hạn mức,"Starter, Last 3 months",Gói [Starter] (30 days),"1. Chọn preset ""Last 3 months"".
+2. Click [Apply].",,"2. Hiện popup ""Date Range Limit Exceeded: Your Starter plan allows a maximum range of 30 days.""","[Cập nhật 2026-10-26 (đợt 2): Chốt giá add-on, hạn mức date range, Monthly usage]"
+41,Edge,,Gói Enterprise Custom,Không giới hạn cố định,Gói [Enterprise],"1. Chọn khoảng 800 ngày, Apply.",,- Không áp dụng hạn mức mặc định; khoảng ngày theo cấu hình riêng của hợp đồng Enterprise,"Enterprise Custom là cấu hình riêng theo hợp đồng (đã xác nhận). <cần confirm> cách cấu hình Custom trên hệ thống
+[Cập nhật 2026-10-26 (đợt 2): Chốt giá add-on, hạn mức date range, Monthly usage]"
+42,Edge,,Khoảng ngắn nhưng bắt đầu quá xa,Lùi về quá khứ,Gói [Growth],"1. Chọn khoảng 7 ngày nhưng bắt đầu cách hôm nay 400 ngày.
+2. Click [Apply].",,"- Hiện popup ""Date Range Limit Exceeded: Your Growth plan allows a maximum range of 180 days."" với 2 nút [Buy add-on], [Adjust range]; khoảng chưa áp dụng dù độ dài chỉ 7 ngày vì ngày bắt đầu cách hôm nay hơn 180 ngày","Hạn mức là giới hạn lùi về quá khứ. VD hôm nay 26/10, chọn 01/03 đến 15/05 bị chặn vì 01/03 cách hôm nay hơn 180 ngày (đã xác nhận).
+[Cập nhật 2026-10-26 (đợt 2): Chốt giá add-on, hạn mức date range, Monthly usage]"
+43,Edge,,Khoảng ngắn nằm trọn trong hạn mức,Không kết thúc hôm nay,Gói [Growth],"1. Chọn khoảng có ngày bắt đầu cách hôm nay 150 ngày và ngày kết thúc cách hôm nay 100 ngày.
+2. Click [Apply].",Bắt đầu = hôm nay trừ 150 ngày; kết thúc = hôm nay trừ 100 ngày,"2. Áp dụng khoảng ngày, dữ liệu hiển thị; không có popup.","Hạn mức là giới hạn lùi về quá khứ (đã xác nhận).
+[Cập nhật 2026-10-26 (đợt 2): Chốt giá add-on, hạn mức date range, Monthly usage]"
+44,Edge,,Đúng hạn mức của từng gói,"Starter 30, Standard 90, Scale 270, Advanced 365",Đổi được gói của store lần lượt qua 4 gói,"1. Ở gói Starter, chọn ngày bắt đầu cách hôm nay đúng 30 ngày, ngày kết thúc là hôm nay, click [Apply].
+2. Lặp lại ở Standard (90 ngày), Scale (270 ngày), Advanced (365 ngày).","Ngày bắt đầu = hôm nay trừ 30, 90, 270, 365 ngày","1. Áp dụng khoảng ngày, dữ liệu hiển thị, không popup.
+2. Cả 3 gói còn lại giống Starter.","Hạn mức là giới hạn lùi về quá khứ (đã xác nhận).
+[Cập nhật 2026-10-28: Bổ sung theo audit độ phủ]"
+45,Edge,,Starter vượt hạn mức 1 ngày,31 ngày,Gói [Starter] (Analytics 30 days),"1. Chọn ngày bắt đầu cách hôm nay 31 ngày, ngày kết thúc là hôm nay, click [Apply].",Ngày bắt đầu = hôm nay trừ 31 ngày,"1. Hiện popup ""Date Range Limit Exceeded: Your Starter plan allows a maximum range of 30 days."" với [Buy add-on] và [Adjust range]; khoảng chưa áp dụng.",[Cập nhật 2026-10-28: Bổ sung theo audit độ phủ]
+46,UI,,Popup theo từng gói,Tên gói và số ngày,,"1. Lần lượt ở gói Standard, Scale, Advanced chọn ngày bắt đầu cách hôm nay vượt hạn mức 1 ngày (ngày kết thúc là hôm nay) và click [Apply].","Standard 91 ngày, Scale 271 ngày, Advanced 366 ngày","- Popup ghi đúng tên gói và số ngày tối đa: ""Your Standard plan allows a maximum range of 90 days"", 270 days, 365 days","[Cập nhật 2026-10-26 (đợt 2): Chốt giá add-on, hạn mức date range, Monthly usage]"
+47,Happy,Refined Search Journey Date Range,Chọn khoảng trong hạn mức,Growth 60 days,Gói [Growth],"1. Mở Refined search journey.
+2. Chọn ngày bắt đầu cách hôm nay đúng 60 ngày, ngày kết thúc là hôm nay, click [Apply].",Ngày bắt đầu = hôm nay trừ 60 ngày,"2. Áp dụng khoảng ngày, không có popup.","[Cập nhật 2026-10-26 (đợt 2): Chốt giá add-on, hạn mức date range, Monthly usage]"
+48,Happy,,Nút Buy add-on,Add-on Refined Search Journey,Popup Date Range Limit Exceeded đang mở ở Refined search journey,1. Click [Buy add-on].,,"1. Chuyển tới Pricing, khối Additional add-on.","<cần confirm> đích chuyển, và add-on nào được chọn sẵn
+[Cập nhật 2026-10-26 (đợt 2): Chốt giá add-on, hạn mức date range, Monthly usage]"
+49,Edge,,Vượt hạn mức 1 ngày,Growth 61 days,Gói [Growth],"1. Chọn ngày bắt đầu cách hôm nay 61 ngày, ngày kết thúc là hôm nay, click [Apply].",Ngày bắt đầu = hôm nay trừ 61 ngày,"1. Hiện popup ""Date Range Limit Exceeded: Your Growth plan allows a maximum range of 60 days."" với 2 nút [Buy add-on], [Adjust range]; khoảng ngày chưa áp dụng.","Blocked — chờ Designer: frame Refined search journey trong Figma ghi ""Your Growth plan allows a maximum range of 180 days"", lệch bảng Compare plans (Growth 60 days). <cần confirm> số ngày đúng trong popup
+[Cập nhật 2026-10-26 (đợt 2): Chốt giá add-on, hạn mức date range, Monthly usage]"
+50,Edge,,Hạn mức Starter,7 và 8 days,Gói [Starter],"1. Chọn ngày bắt đầu cách hôm nay 7 ngày, ngày kết thúc là hôm nay, Apply.
+2. Chọn ngày bắt đầu cách hôm nay 8 ngày, Apply.",,"1. Áp dụng.
+2. Hiện popup Date Range Limit Exceeded.","[Cập nhật 2026-10-26 (đợt 2): Chốt giá add-on, hạn mức date range, Monthly usage]"
+51,Edge,,Hạn mức Enterprise,365 days,Gói [Enterprise],"1. Chọn ngày bắt đầu cách hôm nay 365 ngày, ngày kết thúc là hôm nay, Apply.
+2. Chọn ngày bắt đầu cách hôm nay 366 ngày, Apply.",,"1. Áp dụng.
+2. Hiện popup Date Range Limit Exceeded.","[Cập nhật 2026-10-26 (đợt 2): Chốt giá add-on, hạn mức date range, Monthly usage]"
+52,Edge,,"Hạn mức Standard, Scale, Advanced","30, 90, 180 days",Store đã có gói,"1. Lần lượt ở từng gói, mở Refined search journey.
+2. Chọn ngày bắt đầu cách hôm nay đúng bằng hạn mức, ngày kết thúc là hôm nay, Apply.
+3. Chọn ngày bắt đầu cách hôm nay vượt hạn mức 1 ngày, Apply.","Standard 30 và 31, Scale 90 và 91, Advanced 180 và 181","2. Áp dụng, không popup.
+3. Hiện popup Date Range Limit Exceeded với đúng tên gói và số ngày tối đa của gói.","[Cập nhật 2026-10-26 (đợt 2): Chốt giá add-on, hạn mức date range, Monthly usage]"
+53,Happy,Auto Sync frequency,Manual Sync không giới hạn,Theo gói,"- Gói [Starter]
+- Không có sync nào đang chạy","1. Click [Sync Now], chờ xong.
+2. Click [Sync Now] lần 2 và lần 3.",,- Cả 3 lần đều chạy; không bị chặn bởi tần suất của gói,
+54,Edge,,Advanced 2 lần mỗi ngày,2 times/day,Gói [Advanced],"1. Mở Scheduled sync, cấu hình lịch.",,- Cấu hình được 2 lần mỗi ngày,"Blocked — chờ dev: chưa có UI cấu hình 2 lần mỗi ngày (màn hiện chỉ có Day/Week/Month). <cần confirm> nơi cấu hình ""2 times/day"""
+55,Sync,,Cấu hình vượt tần suất của gói,Scale 1 day,"- Store đang dùng gói [Scale] (1 day)
+- Đã cấu hình lịch 2 lượt mỗi ngày cho Products","1. Chờ qua 2 mốc lịch trong cùng 1 ngày.
+2. Mở Sync History.",Lịch cấu hình = 2 lượt/ngày; gói cho phép 1,2. Trong ngày chỉ có 1 lượt Schedule Sync cho Products; lượt vượt bị bỏ.,Blocked — chờ dev: chưa có UI cấu hình 2 hoặc 3 lần mỗi ngày. <cần confirm> Sync History có ghi lượt bị bỏ không và giờ sync giữ lượt nào
+56,Sync,,Starter chạy mỗi 3 ngày,Lịch mặc định,Gói [Starter]; chưa tuỳ chỉnh lịch,"1. Mở Sync › Scheduled sync, xem Next sync.
+2. Sau 3 ngày mở Sync History.",,"1. Hiển thị ""Your data is automatically synced every 3 days"" kèm Next sync; khớp bảng Compare plans (Starter 3 days).
+2. Có đúng 1 lượt tự động trong 3 ngày.",
+57,Sync,,Advanced và Enterprise chạy nhiều lần mỗi ngày,2 times/day và 3 times/day,"Gói [Advanced]; đã cấu hình 2 lượt mỗi ngày
+Gói [Enterprise]; đã cấu hình 3 lượt mỗi ngày","1. Ở gói Advanced, chờ qua 2 mốc lịch trong cùng 1 ngày.
+2. Mở Sync History.
+3. Ở gói Enterprise, chờ qua 3 mốc lịch trong cùng 1 ngày.
+4. Mở Sync History.",,"2. Có 2 lượt Schedule Sync trong ngày.
+4. Có 3 lượt Schedule Sync trong ngày.","Blocked — chờ dev: chưa có UI cấu hình 2 hoặc 3 lần mỗi ngày. <cần confirm> nơi cấu hình 2 lần mỗi ngày
+Blocked — chờ dev: chưa có UI cấu hình 2 hoặc 3 lần mỗi ngày. <cần confirm> nơi cấu hình 3 lần mỗi ngày"
+58,Sync,,Đổi gói thì tần suất auto sync đổi theo,Hạ và nâng gói,"Gói [Advanced], lịch 2 lượt mỗi ngày
+Gói [Scale], lịch 1 lượt mỗi ngày","1. Ở gói Advanced, hạ xuống Scale (1 day).
+2. Chờ qua 2 mốc lịch trong ngày.
+3. Mở Sync History.
+4. Nâng lên Advanced.
+5. Cấu hình lịch 2 lượt mỗi ngày, lưu.",,"3. Chỉ 1 lượt chạy; lượt vượt bị bỏ; lịch đã lưu không bị xoá.
+5. Lưu thành công; ngày tiếp theo chạy 2 lượt.","Blocked — chờ dev: chưa có UI cấu hình 2 hoặc 3 lần mỗi ngày. <cần confirm> lịch đã lưu sau khi hạ gói
+Blocked — chờ dev: chưa có UI cấu hình 2 hoặc 3 lần mỗi ngày. <cần confirm> nơi cấu hình nhiều lượt mỗi ngày"
+59,Sync,,Hạ gói khi sync đang chạy,In Progress,Auto Sync đang In Progress,"1. Hạ gói trong lúc sync chạy.
+2. Chờ sync xong, mở Sync History.",Sync = In Progress,"2. Lượt sync đang chạy hoàn tất bình thường (Success), không bị huỷ giữa chừng.",<cần confirm> hạ gói đúng lúc sync đang chạy
+60,Sync,,Auto Sync 1 lần mỗi ngày ở Standard và Growth,Không chạy thêm lượt,"Store ở gói [Standard], đã có lịch auto sync; sau đó đổi sang gói [Growth]","1. Chờ qua 2 mốc lịch liên tiếp (2 ngày), mở Sync History.
+2. Đổi sang gói Growth, chờ qua 2 mốc lịch liên tiếp, mở Sync History.","Gói = Standard, Growth (1 day)","1. Mỗi ngày đúng 1 lượt auto sync, không có lượt thứ hai trong cùng ngày.
+2. Giống bước 1 ở gói Growth.","Blocked — chờ môi trường: cần giả lập thời gian
+[Cập nhật 2026-10-28: Bổ sung theo audit độ phủ]"
+61,Sync,,Đổi gói khi Manual Sync đang chạy,Sync không bị huỷ,Store ở gói [Growth]; Manual Sync đang In Progress,"1. Nâng lên Scale trong lúc sync đang chạy.
+2. Chờ sync xong, mở Sync History.",,"1. Đổi gói thành công; sync tiếp tục chạy, không bị huỷ.
+2. Sync History có 1 lượt, trạng thái cuối là Success; không có lượt trùng.",[Cập nhật 2026-10-28: Bổ sung theo audit độ phủ]
+62,UI,,Hiển thị khi chạm hạn mức,Locked,Gói [Scale] (1 day),"1. Mở Pricing, xem dòng Auto Sync frequency ở Monthly usage.",,"- Hiển thị ""1/1 day Auto Sync frequency"" kèm nhãn Locked và ""Limit reached. This feature is temporarily locked.""","<cần confirm> chữ trên dòng Monthly usage (staging) là ""Limit reached…"", khác tooltip khoá trong Figma ""Plan limit reached. This feature is temporarily locked."""
+63,Negative,Tính năng khoá theo gói,Click control đã khoá,"Không mở popup, không tạo dữ liệu","Store ở gói [Starter], đã đạt hạn mức: 3 execution, 3 filter tree, 3 custom node","1. Click [New execution] đã bị khoá.
+2. Click [Create new] của Filter Tree đã bị khoá.
+3. Click thẻ ""My own filter"" đã bị khoá.
+4. Hover từng control.",,"1. Không mở form, không tạo execution.
+2. Không mở form, không tạo filter tree.
+3. Không mở form, không tạo node.
+4. Mỗi control hiện tooltip ""Plan limit reached. This feature is temporarily locked.""",[Cập nhật 2026-10-28: Bổ sung theo audit độ phủ]
+64,UI,,Nội dung tooltip khoá,,Một tính năng đang bị khoá,1. Hover phần bị khoá.,,"- Tooltip đúng chữ ""Plan limit reached. This feature is temporarily locked.""",
+65,Edge,Merchandise Campaign,Biên hạ gói: bằng và hơn 1 so với hạn mức mới,10 và 11 campaign xuống Starter,"Hai store cùng gói [Growth]: store A có 10 campaign Active, store B có 11 campaign Active (tạo vào các thời điểm khác nhau)","1. Ở store A, hạ xuống Starter (hạn mức 10), mở danh sách campaign.
+2. Ở store B, hạ xuống Starter, mở danh sách campaign.",Store A = 10; store B = 11,"1. Không có campaign nào bị lock; Monthly usage 10/10.
+2. Đúng 1 campaign tạo sau cùng bị lock (xem được, không sửa, không bật); 10 campaign còn lại hoạt động.","Biên min và max+1 của quy tắc giữ các mục tạo lâu nhất (đã xác nhận).
+[Cập nhật 2026-10-28: Bổ sung theo audit độ phủ]"
+66,Edge,,"Biên hạ gói của Execution, Filter Tree, Custom Node",Bằng và hơn 1,"Hai store cùng gói [Standard]: store A có 3 execution, 3 filter tree, 3 custom node; store B có 4 execution, 4 filter tree, 4 custom node (tạo vào các thời điểm khác nhau)","1. Ở store A, hạ xuống Starter (hạn mức 3), mở danh sách execution, filter tree, custom node.
+2. Ở store B, hạ xuống Starter, mở danh sách execution, filter tree, custom node.",Store A = 3; store B = 4,"1. Không có mục nào bị lock; Monthly usage 3/3 ở cả 3 loại.
+2. Mỗi loại có đúng 1 mục tạo sau cùng bị lock; 3 mục còn lại hoạt động; Monthly usage 3/3.","Biên của quy tắc giữ các mục tạo lâu nhất (đã xác nhận).
+[Cập nhật 2026-10-28: Bổ sung theo audit độ phủ]"
+67,Integration,,Nâng gói thì mở lại Create new,Starter lên Growth,"- Gói [Starter]
+- Active campaign = [10]; [Create new] đang xám","1. Nâng lên gói Growth.
+2. Mở Merchandise Campaign, quan sát [Create new].",,2. [Create new] bấm được; Monthly usage hiển thị 10/100.,<cần confirm> độ trễ cập nhật sau khi nâng gói
+68,Integration,,"Hạ gói, campaign Active vượt hạn mức bị lock",Growth xuống Starter,"- Store đang dùng gói [Growth]
+- campaign Active = [15], tạo vào các thời điểm khác nhau","1. Đổi sang gói Starter (hạn mức 10).
+2. Mở danh sách campaign Active, thử sửa và bật 1 mục tạo sau.
+3. [Shopper] Vào SRP và Category Page mà campaign bị lock từng áp dụng.
+4. Xoá 1 mục chưa bị lock, quan sát mục tạo sau.
+5. Mở Pricing xem Monthly usage.
+6. Nâng lại gói Growth.",campaign Active = 15,"1. Gói đổi thành Starter.
+2. 10 mục tạo lâu nhất hoạt động bình thường; 5 mục tạo sau bị lock (xem được, không sửa, không bật).
+3. Campaign bị lock không còn làm đổi thứ tự sản phẩm trên Storefront.
+4. Mục tạo sớm nhất trong số bị lock được mở lại (còn đúng 10 mục hoạt động).
+5. Monthly usage hiển thị 10/10 (chỉ tính các mục còn hoạt động, các mục tạo sớm nhất được giữ lại).
+6. Các mục bị lock mở lại.","Hạ gói áp dụng ngay (đã xác nhận); mục bị lock ngừng áp dụng trên Storefront và Filter Cache làm mới ở lần sync kế tiếp (đã xác nhận).
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]
+[Cập nhật 2026-10-28: Trả lời đợt câu hỏi sau audit độ phủ]"
+69,Integration,,Số campaign hiển thị ở Monthly usage,Tạo và xoá,"- Gói [Growth]
+- Active campaign = [5]","1. Tạo 1 campaign Active, mở Pricing xem Active Merchandising Campaigns.
+2. Xoá campaign đó, xem lại.",,"1. Hiển thị 6/100.
+2. Hiển thị 5/100.",
+70,Integration,,Campaign tự bật theo lịch khi đã đủ hạn mức,Campaign time vs hạn mức,"- Gói [Growth]
+- Active campaign = [100]
+- 1 campaign Inactive đã đặt lịch Campaign time bắt đầu trong 1 phút","1. Chờ tới giờ bắt đầu của campaign đặt lịch.
+2. Mở danh sách campaign và Monthly usage.",,"1. Campaign không tự bật; vẫn còn đúng 100 active; campaign hiển thị lý do không bật được.
+2. Monthly usage không hiển thị quá 100/100.","Không tự bật khi đã đủ hạn mức, hiển thị lý do trên campaign (đã xác nhận).
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+71,Integration,Campaign details,Nâng gói thì mở lại New execution,Starter lên Standard,"- Gói [Starter]
+- Execution = [3]; [New execution] đang xám","1. Nâng lên Standard.
+2. Mở Campaign details, quan sát [New execution].",,2. [New execution] bấm được; Monthly usage hiển thị 3/5.,
+72,Integration,,Số execution hiển thị ở Monthly usage,Thêm và xoá,"- Gói [Growth]
+- Execution = [2]","1. Thêm 1 execution, xem Pricing.
+2. Xoá execution đó, xem lại.",,"1. Hiển thị 3/10.
+2. Hiển thị 2/10.",
+73,Integration,,"Hạ gói, execution vượt hạn mức bị lock",Growth xuống Starter,"- Store đang dùng gói [Growth]
+- execution = [8], tạo vào các thời điểm khác nhau","1. Đổi sang gói Starter (hạn mức 3).
+2. Mở danh sách execution, thử sửa và bật 1 mục tạo sau.
+3. [Shopper] Vào SRP có execution bị lock đang trong thời gian chạy.
+4. Xoá 1 mục chưa bị lock, quan sát mục tạo sau.
+5. Mở Pricing xem Monthly usage.
+6. Nâng lại gói Growth.",execution = 8,"1. Gói đổi thành Starter.
+2. 3 mục tạo lâu nhất hoạt động bình thường; 5 mục tạo sau bị lock (xem được, không sửa, không bật).
+3. Execution bị lock không còn làm đổi thứ tự sản phẩm trên Storefront.
+4. Mục tạo sớm nhất trong số bị lock được mở lại (còn đúng 3 mục hoạt động).
+5. Monthly usage hiển thị 3/3 (chỉ tính các mục còn hoạt động, các mục tạo sớm nhất được giữ lại).
+6. Các mục bị lock mở lại.","Hạ gói áp dụng ngay (đã xác nhận); mục bị lock ngừng áp dụng trên Storefront và Filter Cache làm mới ở lần sync kế tiếp (đã xác nhận).
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]
+[Cập nhật 2026-10-28: Trả lời đợt câu hỏi sau audit độ phủ]"
+74,Integration,Filter Tree list,Nâng gói thì mở lại Create new,Starter lên Standard,"- Gói [Starter]
+- Tree = [3]; [Create new] đang xám","1. Nâng lên Standard.
+2. Mở Filter Tree list, quan sát [Create new].",,2. [Create new] bấm được; Monthly usage hiển thị 3/10.,
+75,Integration,,Số filter tree hiển thị ở Monthly usage,Tạo và xoá,"- Gói [Growth]
+- Tree = [4] (gồm default)","1. Tạo 1 tree, xem Pricing.
+2. Xoá tree đó, xem lại.",,"1. Hiển thị 5/20.
+2. Hiển thị 4/20.",
+76,Integration,,"Hạ gói, filter tree vượt hạn mức bị lock",Standard xuống Starter,"- Store đang dùng gói [Standard]
+- filter tree = [10], tạo vào các thời điểm khác nhau","1. Đổi sang gói Starter (hạn mức 3).
+2. Mở danh sách filter tree, thử sửa và bật 1 mục tạo sau.
+3. [Shopper] Vào Category Page và SRP dùng filter tree bị lock ngay sau khi hạ gói (chưa sync).
+4. Chạy Manual Sync, chờ Success (Filter Cache làm mới).
+5. [Shopper] Vào lại Category Page và SRP.
+6. Xoá 1 mục chưa bị lock, quan sát mục tạo sau.
+7. Mở Pricing xem Monthly usage.
+8. Nâng lại gói Standard.",filter tree = 10,"1. Gói đổi thành Starter ngay.
+2. 3 mục tạo lâu nhất hoạt động bình thường; 7 mục tạo sau bị lock (xem được, không sửa, không bật).
+3. Filter tree bị lock không còn hiện trên Storefront ngay (lock ngay); filter còn lại hiển thị bình thường.
+4. Sync thành công; Filter Cache không còn dữ liệu của filter tree bị lock.
+5. Filter tree bị lock vẫn không hiện; filter còn lại hiển thị bình thường.
+6. Mục tạo sớm nhất trong số bị lock được mở lại (còn đúng 3 mục hoạt động).
+7. Monthly usage hiển thị 3/3 (chỉ tính các mục còn hoạt động, các mục tạo sớm nhất được giữ lại).
+8. Các mục bị lock mở lại.","Hạ gói áp dụng ngay (đã xác nhận); mục bị lock ngừng áp dụng trên Storefront và Filter Cache làm mới ở lần sync kế tiếp (đã xác nhận).
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]
+[Cập nhật 2026-10-28: Trả lời đợt câu hỏi sau audit độ phủ]"
+77,Integration,,Filter Cache sau khi filter tree bị lock,Cache và Storefront,"- Gói [Standard]
+- Filter tree tạo sau đang hiển thị ở Category Page","1. Hạ xuống Starter để filter tree đó bị lock.
+2. Chạy Manual Sync hoặc chờ Filter Cache làm mới.
+3. [Shopper] Vào Category Page.",,"2. Sau lần sync kế tiếp, Filter Cache không còn dữ liệu của filter tree bị lock.
+3. Khối filter hiển thị khớp với cấu hình sau khi lock (không có filter tree bị lock).","Hạ gói áp dụng ngay (đã xác nhận); mục bị lock ngừng áp dụng trên Storefront và Filter Cache làm mới ở lần sync kế tiếp (đã xác nhận).
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+78,Integration,Add filter node,Nâng gói thì mở lại My own filter,Starter lên Standard,"- Gói [Starter]
+- Custom node = [3]; thẻ đang mờ","1. Nâng lên Standard.
+2. Mở Add filter node, quan sát thẻ ""My own filter"".",,2. Thẻ bấm được; Monthly usage hiển thị 3/10.,
+79,Integration,,Số custom node hiển thị ở Monthly usage,Tạo và xoá,"- Gói [Growth]
+- Custom node = [4]","1. Tạo 1 node bằng Custom Filter builder, xem Pricing.
+2. Xoá node đó, xem lại.",,"1. Hiển thị 5/20.
+2. Hiển thị 4/20.",
+80,Integration,,"Hạ gói, custom node vượt hạn mức bị lock",Standard xuống Starter,"- Store đang dùng gói [Standard]
+- custom node = [6], tạo vào các thời điểm khác nhau","1. Đổi sang gói Starter (hạn mức 3).
+2. Mở danh sách custom node, thử sửa và bật 1 mục tạo sau.
+3. [Shopper] Vào SRP có filter tree chứa custom node bị lock ngay sau khi hạ gói (chưa sync).
+4. Chạy Manual Sync, chờ Success (Filter Cache làm mới).
+5. [Shopper] Vào lại SRP.
+6. Xoá 1 mục chưa bị lock, quan sát mục tạo sau.
+7. Mở Pricing xem Monthly usage.
+8. Nâng lại gói Standard.",custom node = 6,"1. Gói đổi thành Starter ngay.
+2. 3 mục tạo lâu nhất hoạt động bình thường; 3 mục tạo sau bị lock (xem được, không sửa, không bật).
+3. Custom node bị lock không còn hiện trong khối filter trên Storefront ngay (lock ngay).
+4. Sync thành công; Filter Cache không còn dữ liệu của custom node bị lock.
+5. Custom node bị lock vẫn không hiện.
+6. Mục tạo sớm nhất trong số bị lock được mở lại (còn đúng 3 mục hoạt động).
+7. Monthly usage hiển thị 3/3 (chỉ tính các mục còn hoạt động, các mục tạo sớm nhất được giữ lại).
+8. Các mục bị lock mở lại.","Hạ gói áp dụng ngay (đã xác nhận); mục bị lock ngừng áp dụng trên Storefront và Filter Cache làm mới ở lần sync kế tiếp (đã xác nhận).
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]
+[Cập nhật 2026-10-28: Trả lời đợt câu hỏi sau audit độ phủ]"
+81,Integration,Search behavior analytics,Mua add-on mở rộng khoảng ngày,Growth lên 270 days,"- Gói [Growth] (180 days)
+- Chưa mua add-on Historical Analytics","1. Mua add-on Historical Analytics 270 days.
+2. Mở Pricing xem Monthly usage.
+3. Ở Search behavior analytics chọn khoảng 270 ngày, Apply.
+4. Chọn khoảng 271 ngày, Apply.",Add-on = 270 days,"2. Dòng Analytics hiển thị 270 days, Activated, Renewed on {ngày}, link Cancel.
+3. Áp dụng, không popup.
+4. Hiện popup Date Range Limit Exceeded với 270 days.",
+82,Integration,,Huỷ add-on thì khoảng ngày về hạn mức gói,Cancel add-on,Gói [Growth] đã mua add-on 270 days,"1. Cancel add-on, xác nhận.
+2. Trước và sau ngày hết chu kỳ, mở Search behavior analytics chọn ngày bắt đầu cách hôm nay 270 ngày.",,2. Còn dùng 270 ngày đến hết chu kỳ; sau đó về 180 days (popup khi vượt).,"<cần confirm> thời điểm hết hiệu lực add-on
+[Cập nhật 2026-10-26 (đợt 2): Chốt giá add-on, hạn mức date range, Monthly usage]"
+83,Integration,Refined search journey,Mua add-on mở rộng khoảng ngày,Growth lên 180 days,Gói [Growth] (60 days),"1. Mua add-on Refined Search Journey 180 days.
+2. Ở Refined search journey chọn ngày bắt đầu cách hôm nay 180 ngày, Apply.
+3. Chọn ngày bắt đầu cách hôm nay 181 ngày, Apply.",Add-on = 180 days,"2. Áp dụng, không popup.
+3. Hiện popup Date Range Limit Exceeded.","Tên add-on: Access to Refined Search Journey Historical Analytics.
+[Cập nhật 2026-10-26 (đợt 2): Chốt giá add-on, hạn mức date range, Monthly usage]"
+84,Integration,,Hạ gói thì khoảng ngày thu hẹp,Growth xuống Starter,Gói [Growth]; Analytics đang chọn 180 ngày,"1. Hạ xuống Starter (30 days).
+2. Mở Search behavior analytics với khoảng đã lưu 180 ngày.",,2. Khoảng cũ vượt hạn mức được xử lý theo thiết kế (về hạn mức mới hoặc popup).,<cần confirm> khoảng ngày đã lưu khi hạ gói
+85,Integration,Search Result Page,Hạ gói khi Variant display đang bật,Advanced xuống Scale,"- Gói [Advanced]
+- ""Show product SKU/variant"" = [ON]","1. Hạ xuống gói Scale.
+2. Mở cấu hình SRP.
+3. [Shopper] Xem SRP trên Storefront.",,"2. Toggle bị khoá kèm tooltip ""Plan limit reached. This feature is temporarily locked.""
+3. Storefront ngừng áp dụng SKU/variant (không hiển thị variant).","Hạ gói áp dụng ngay (đã xác nhận); mục bị lock ngừng áp dụng trên Storefront và Filter Cache làm mới ở lần sync kế tiếp (đã xác nhận). <cần confirm> trạng thái bật/tắt của toggle sau khi khoá
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+86,Integration,,Nâng gói thì mở khoá Variant display,Scale lên Advanced,Gói [Scale]; toggle bị khoá,"1. Nâng lên Advanced.
+2. Mở cấu hình SRP.",,2. 2 toggle bấm được.,
+87,Integration,Campaign đang chạy,Hạ gói khi có campaign trigger Category,Standard xuống Starter,"- Gói [Standard]
+- Có campaign Active trigger ""visit a category page""","1. Hạ xuống Starter.
+2. Mở campaign đó.
+3. [Shopper] Vào Category Page áp dụng campaign.",,"2. Campaign xem được; không sửa trigger.
+3. Campaign ngừng áp dụng trên Category Page.","Hạ gói áp dụng ngay (đã xác nhận); mục bị lock ngừng áp dụng trên Storefront và Filter Cache làm mới ở lần sync kế tiếp (đã xác nhận).
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+88,Integration,,Hạ gói khi campaign dùng Campaign time,Standard xuống Starter,"- Gói [Standard]
+- Campaign bật ""Campaign time""","1. Hạ xuống Starter.
+2. Mở campaign đó.",,2. Toggle Campaign time bị khoá; campaign ngừng tự chạy theo lịch.,"Hạ gói áp dụng ngay (đã xác nhận); mục bị lock ngừng áp dụng trên Storefront và Filter Cache làm mới ở lần sync kế tiếp (đã xác nhận). <cần confirm> lịch chạy của campaign đặt lịch sau khi hạ gói
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+89,Happy,Monthly usage,Unlimited ở Advanced và Enterprise,Không bị khoá,"Store lần lượt ở gói [Advanced], [Enterprise]; có 150 campaign Active, 30 filter tree, 30 custom node","1. Mở Merchandise Campaign, quan sát [Create new].
+2. Mở Filter, quan sát [Create new] của Filter Tree.
+3. Mở Add filter node, quan sát thẻ ""My own filter"".
+4. Mở Pricing, đọc Monthly usage.
+5. Lặp lại bước 1 đến 4 ở gói Enterprise.","Gói = Advanced, Enterprise","1. [Create new] bấm được.
+2. [Create new] của Filter Tree bấm được.
+3. Thẻ ""My own filter"" bấm được.
+4. Hiển thị 150/Unlimited, 30/Unlimited, 30/Unlimited, vòng icon rỗng.
+5. Kết quả giống Advanced.","Hạn mức Unlimited từ Scale trở lên (bảng Compare plans).
+[Cập nhật 2026-10-28: Bổ sung theo audit độ phủ]"
+90,Integration,,Hạn mức khớp bảng Compare plans,Cả 6 gói,,"1. Lần lượt ở từng gói, mở Pricing, đối chiếu Monthly usage với bảng Compare plans.","Gói: Starter, Standard, Growth, Scale, Advanced, Enterprise","- Hạn mức ở Monthly usage đúng bằng cột của gói trong Compare plans (Campaigns, Execution, Filter Trees, Custom Builder, Analytics, Refined Search Journey, Auto Sync); dòng Analytics của Enterprise hiển thị ""Custom""","Enterprise Custom là cấu hình riêng theo hợp đồng (đã xác nhận).
+[Cập nhật 2026-10-26 (đợt 2): Chốt giá add-on, hạn mức date range, Monthly usage]"

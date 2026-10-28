@@ -1,0 +1,203 @@
+﻿ID,Test Type,Test Objective,,,Preconditions,Test Steps,Input DB/Setting,Expected Result,Note
+Purpose:,,"Kiểm tra luồng vượt GMV: banner và tuần chờ nâng gói, suspend khi quá hạn và mở lại thủ công, để merchant không mất dịch vụ ngoài ý muốn và hệ thống chặn đúng lúc.",,,,,,,
+1,Happy,Banner vượt GMV,Hiện banner khi GMV vượt khoảng của gói,"Growth, GMV 240k","- Store đang dùng gói [Growth] ($75K đến $200K)
+- Average GMV = [180k]","1. Dựng dữ liệu: đơn có ngày tạo nằm trong 3 tháng trước, làm Average GMV 3 tháng gần nhất thành 240k.
+2. Chạy Manual Sync, chờ Success.
+3. Mở Pricing.",Trung bình 3 tháng gần nhất 240k; trung bình 3 tháng liền trước đó 62.3k (tăng 285%),"3. Hiện banner vượt hạn mức đúng chữ Figma:
+- Tiêu đề ""You've exceeded your current plan limit!""
+- ""Your average GMV: $240k ↗285% exceeds Growth plan limit ($75k - $200k)""
+- ""Your card will be automatically charged on {date}. You'll receive an invoice via email 24 hours before the charge.""
+- ""All features will be locked if you do not pay. Upgrade now to continue using all features.""
+- Banner không có nút bấm
+3. Gói Growth vẫn hiển thị ""Selected""; các gói thấp hơn GMV xám kèm tooltip ""Current GMV exceeds this plan"".","Banner hiện sau lần sync phát hiện GMV vượt (đã xác nhận). Chữ banner theo Figma (frame Pricing for subscribed user, banner vượt GMV).
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]
+Dòng ""Your card will be automatically charged…"" trên banner là nhắc nhở gói được thanh toán tự động (đã xác nhận 2026-10-28)."
+2,Negative,,GMV tăng mạnh nhưng vẫn trong khoảng,Không vượt,Store đang dùng gói [Growth]; Average GMV = [100k],"1. Tăng Average GMV lên 190k, sync.
+2. Mở Pricing.","Average GMV 190k
+Dựng dữ liệu bằng đơn có ngày tạo nằm trong 3 tháng trước (đơn tạo hôm nay không làm đổi Average GMV)",- Không hiện banner vượt hạn mức; hiển thị GMV 190k và tỷ lệ tăng trưởng bình thường,[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]
+3,Edge,,Banner theo từng gói,Starter đến Advanced,"Store lần lượt ở gói [Starter], [Standard], [Growth], [Scale], [Advanced]","1. Lần lượt cho Average GMV vượt khoảng của gói: Starter 30k, Standard 80k, Growth 210k, Scale 650k, Advanced 1.6M.
+2. Mở Pricing sau mỗi lần.","Starter 30k; Standard 80k; Growth 210k; Scale 650k; Advanced 1.6M
+Dựng dữ liệu bằng đơn có ngày tạo nằm trong 3 tháng trước (đơn tạo hôm nay không làm đổi Average GMV)","- Banner hiện ở cả 5 gói, ghi đúng tên gói và khoảng GMV của gói đó ($25K, $25K - $75K, $75K - $200K, $200K - $600K, $600K - $1.5M)",[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]
+4,Edge,,Mốc biên đúng bằng trần của gói,"Growth 200k và 200,001",Store đang dùng gói [Growth],"1. Đặt Average GMV = 200,000, sync, mở Pricing.
+2. Đặt Average GMV = 200,001, sync, mở Pricing.","200,000 và 200,001
+Dựng dữ liệu bằng đơn có ngày tạo nằm trong 3 tháng trước (đơn tạo hôm nay không làm đổi Average GMV)","1. Không có banner vượt hạn mức (mốc biên thuộc gói thấp hơn).
+2. Hiện banner vượt hạn mức.","Mốc biên thuộc gói thấp hơn, đã xác nhận ở mốc $25K; các mốc còn lại suy theo cùng quy tắc
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+5,Edge,,Gói Enterprise không có gói cao hơn,Enterprise,Store đang dùng gói [Enterprise],"1. Cho Average GMV = 5M, sync.
+2. Mở Pricing.",Average GMV = 5M,- Không hiện banner vượt hạn mức (Enterprise không có trần),"<cần confirm> hành vi khi store Enterprise vượt GMV
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+6,Edge,,Store đang trial,Trial Advanced,Store đang trial 14 ngày (hạn mức gói Advanced),"1. Dựng dữ liệu làm Average GMV 2M (vượt $1.5M của Advanced); chạy Manual Sync.
+2. Mở Pricing.",Average GMV 2M,2. Không hiện banner vượt hạn mức (store chưa có gói trả phí).,<cần confirm> GMV vượt khi đang trial có xử lý gì không
+7,Edge,,Store có dưới 3 tháng dữ liệu,Chia theo mấy tháng,Store mới có đơn trong 1 tháng gần nhất; Revenue tháng đó = 300k,"1. Chạy Manual Sync.
+2. Mở Pricing.",Revenue tháng duy nhất = 300k,"2. Average GMV hiển thị là số hợp lệ (không NaN, không undefined, không Infinity) và được so với khoảng của gói để quyết định banner.",<cần confirm> chia cho 1 tháng hay 3 tháng
+8,Sync,,Chưa sync thì chưa có banner,Stale,Store đang dùng gói [Growth]; Average GMV = [180k],"1. Tạo đơn (ngày tạo thuộc 3 tháng trước) trên BigCommerce làm Revenue vượt 200k, chưa sync.
+2. Mở Pricing.","Chưa chạy sync
+Dựng dữ liệu bằng đơn có ngày tạo nằm trong 3 tháng trước (đơn tạo hôm nay không làm đổi Average GMV)",- Chưa hiện banner; Average GMV vẫn 180k cho tới lần sync kế tiếp,"GMV cập nhật sau mỗi sync (đã xác nhận)
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+9,Sync,,Sync thất bại,Failed,Store đang dùng gói [Growth]; Average GMV = [180k],"1. Có đơn (ngày tạo thuộc 3 tháng trước) làm Revenue vượt 200k; chạy Manual Sync và để Failed.
+2. Mở Pricing.","Sync gần nhất = Failed
+Dựng dữ liệu bằng đơn có ngày tạo nằm trong 3 tháng trước (đơn tạo hôm nay không làm đổi Average GMV)",- Không hiện banner; Average GMV giữ giá trị của lần sync Success gần nhất,[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]
+10,Sync,,Chỉ tính 3 tháng trước,Đơn tháng hiện tại,Store đang dùng gói [Growth]; Average GMV = [180k],"1. Tạo đơn tháng hiện tại làm tổng Revenue tháng này rất lớn.
+2. Chạy Manual Sync, mở Pricing.",Đơn tháng hiện tại,"- Không hiện banner; Average GMV vẫn là trung bình 3 tháng trước, không gồm tháng hiện tại",[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]
+11,Sync,,Store dùng tiền tệ khác USD,Quy đổi USD,Store dùng gói [Growth]; tiền tệ store = [VND],"1. Dựng dữ liệu: đơn có ngày tạo trong 3 tháng trước, tổng Revenue trung bình 3 tháng tương đương 240k USD theo tỷ giá hệ thống.
+2. Chạy Manual Sync, chờ Success.
+3. Mở Pricing.","Revenue theo VND, tương đương 240k USD","3. GMV được quy đổi sang USD rồi mới so với khoảng của gói; hiện banner vượt hạn mức với ""$240k"".","GMV quy đổi sang USD (đã xác nhận). <cần confirm> nguồn tỷ giá
+[Cập nhật 2026-10-28: Bổ sung theo audit độ phủ]"
+12,Sync,,Store nhiều channel,Cộng mọi channel,"Store dùng gói [Growth]; có 2 channel, mỗi channel có Revenue 3 tháng riêng","1. Dựng dữ liệu: đơn có ngày tạo trong 3 tháng trước; channel A trung bình 130k, channel B trung bình 110k.
+2. Chạy Manual Sync, chờ Success.
+3. Mở Pricing.",Channel A 130k; channel B 110k,"3. Average GMV = 240k (cộng cả 2 channel), không chỉ 1 channel; hiện banner vượt hạn mức.","GMV cộng mọi channel (đã xác nhận).
+[Cập nhật 2026-10-28: Bổ sung theo audit độ phủ]"
+13,UI,,Nội dung banner,"Chữ, tên gói, khoảng GMV","- Store đang dùng gói [Growth]
+- Average GMV = [240k], tăng 285%","1. Mở Pricing, đọc banner vượt hạn mức.
+2. Đọc dòng ""Your card will be automatically charged on {date}"" ở khối Current plan.",,"1. Banner ghi đúng chữ Figma:
+- Tiêu đề ""You've exceeded your current plan limit!""
+- ""Your average GMV: $240k ↗285% exceeds Growth plan limit ($75k - $200k)""
+- ""Your card will be automatically charged on {date}. You'll receive an invoice via email 24 hours before the charge.""
+- ""All features will be locked if you do not pay. Upgrade now to continue using all features.""
+- Banner không có nút bấm
+2. Ngày {date} trên banner bằng ngày ở dòng thông báo trừ tiền của khối Current plan.","Gộp kiểm tra ngày charge của banner với khối Current plan.
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+14,Happy,Tuần chờ nâng gói,Vẫn dùng đầy đủ trong tuần chờ,Chưa nâng,"- Store đang dùng gói [Growth]
+- GMV đã vượt 200k, banner đang hiện (ngày 1 của tuần chờ)","1. Mở Merchandise Campaign, Filter, Search.
+2. [Shopper] Mở Storefront search và filter.",,"1. Vào được các menu tính năng, không bị popup chặn.
+2. Storefront search và filter chạy bình thường.",[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]
+15,Happy,,Nâng gói trong tuần chờ,Growth lên Scale,"- Store đang dùng gói [Growth]; GMV vượt (240k)
+- Thẻ thanh toán hợp lệ","1. Mở Pricing, click [Select plan] của Scale.
+2. Click [Confirm] ở popup.
+3. Mở Pricing.",Chọn Scale ($200K - $600K),"2. Hiện popup thành công; gói Scale áp dụng ngay.
+3. Banner vượt hạn mức biến mất; thẻ Scale hiển thị ""Selected""; số tiền thanh toán là đủ giá gói Scale ($249/month).","Nâng gói áp dụng ngay, trả đủ tiền gói mới (đã xác nhận)
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+16,Negative,,Chọn gói không đủ khoảng GMV,Gói thấp hơn GMV,"GMV vượt (240k), store ở Growth","1. Mở Pricing, quan sát nút [Select plan] của Starter, Standard.
+2. Click nút.",,"1. Starter và Standard xám kèm tooltip ""Current GMV exceeds this plan"".
+2. Không có phản hồi; gói không đổi.",[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]
+17,Negative,,Thanh toán lỗi khi nâng trong tuần chờ,Thẻ bị từ chối,"GMV vượt, trong tuần chờ; thẻ bị từ chối","1. Chọn Scale, [Confirm].
+2. Thử lại sau khi sửa thẻ.",Thẻ bị từ chối,"1. Hiển thị lỗi tại popup, cho thử lại; gói không đổi; mốc 1 tuần vẫn chạy tiếp.
+2. Thanh toán thành công thì gói Scale áp dụng.","Thanh toán lỗi hiển thị tại popup và cho thử lại (đã xác nhận). <cần confirm> chữ thông báo lỗi
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+18,Negative,,Nâng gói ở 2 tab,Chỉ 1 giao dịch,"GMV vượt, store ở Growth; mở popup Change plan? ở tab 1 và tab 2","1. Ở tab 1: [Confirm] chọn Scale.
+2. Ở tab 2 (chưa reload): [Confirm] chọn Scale.
+3. Mở Pricing ở cả 2 tab.",,"1. Nâng thành công.
+2. Không trừ tiền lần 2; tab 2 hiển thị lỗi hoặc gói đã đổi.
+3. Cả 2 tab hiển thị gói Scale; chỉ 1 giao dịch.",<cần confirm> chữ thông báo ở tab 2
+19,Edge,,Mốc 1 tuần tính từ lúc phát hiện,Sau sync,"Đơn vượt GMV có ngày tạo thuộc 3 tháng trước, được nhập vào BigCommerce ngày D; sync chạy ngày D+2","1. Chạy sync ngày D+2, mở Pricing.
+2. Đến ngày D+8 (7 ngày sau lần phát hiện), mở một menu tính năng.",Phát hiện ngày D+2,"1. Banner hiện từ ngày D+2.
+2. Chưa suspend (mốc 1 tuần tính từ D+2, không phải từ D).","Tuần chờ tính từ lúc hệ thống phát hiện GMV vượt, sau sync (đã xác nhận). Blocked — chờ môi trường: cần giả lập thời gian
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+20,Edge,,Biên của tuần chờ,"167 giờ 59 phút, 168 giờ","- 2 store cùng gói [Growth], GMV vượt, cùng được phát hiện cùng lúc, chưa nâng gói
+- Có cách giả lập thời gian","1. Store A: ở thời điểm 167 giờ 59 phút sau lúc phát hiện, nâng gói.
+2. Store B: không nâng gói, để qua đúng 168 giờ sau lúc phát hiện rồi mở một menu tính năng.",167 giờ 59 phút và 168 giờ,"1. Nâng được, không suspend.
+2. Hiện popup ""Your plan has been suspended"".","Mốc 1 tuần tính từ thời điểm (theo giờ) hệ thống phát hiện GMV vượt, đủ 168 giờ thì suspend (đã xác nhận 2026-10-28).
+Blocked — chờ môi trường: cần giả lập thời gian
+[Cập nhật 2026-10-28: Trả lời đợt câu hỏi sau audit độ phủ]"
+21,Edge,,Sync tiếp theo vẫn vượt,Không reset đếm,"GMV vượt, đã phát hiện ngày 1 của tuần chờ","1. Chạy thêm sync ở ngày 3 và ngày 5, GMV vẫn vượt.
+2. Mở Pricing sau mỗi lần.",,"- Mốc 1 tuần giữ nguyên từ ngày 1, không bị tính lại sau mỗi lần sync","Blocked — chờ môi trường: cần giả lập thời gian
+<cần confirm> cách xử lý sync lặp trong tuần chờ
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+22,Edge,,GMV giảm về trong khoảng,Tự hết vượt,"GMV vượt, đang trong tuần chờ","1. Đơn lớn rời cửa sổ 3 tháng, GMV về 150k; chạy sync.
+2. Mở Pricing.","Average GMV 150k
+Dựng dữ liệu bằng đơn có ngày tạo nằm trong 3 tháng trước (đơn tạo hôm nay không làm đổi Average GMV)",- Banner vượt hạn mức biến mất; không bị suspend,"<cần confirm> khi GMV tự giảm có reset tuần chờ không; nếu vượt lại thì đếm lại từ đầu hay tiếp tục
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+23,Edge,,Double click Confirm khi nâng,Chỉ 1 giao dịch,"GMV vượt, popup Change plan? đang mở",1. Double click nhanh [Confirm].,,"- Chỉ 1 giao dịch, chỉ nâng 1 lần",[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]
+24,Edge,,Huỷ gói trong tuần chờ,Cancel plan,"GMV vượt, đang trong tuần chờ","1. Click ⋮ › Cancel plan, hoàn tất huỷ gói.
+2. Mở Pricing.",,"1. Huỷ gói theo luồng huỷ: popup Cancel plan, khảo sát Before you go…, popup Successful; gói dùng được đến hết kỳ.
+2. Banner vượt hạn mức vẫn hiện ở Pricing.","<cần confirm> quan hệ giữa huỷ gói và tuần chờ (hết kỳ thì tuần chờ có còn ý nghĩa, suspend có xảy ra không)
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+25,Edge,,Nâng gói không liền kề,Growth lên Advanced,"- Store đang dùng gói [Growth]
+- GMV vượt, thẻ hợp lệ","1. Dựng dữ liệu: đơn có ngày tạo thuộc 3 tháng trước làm Average GMV 650k; chạy Manual Sync.
+2. Mở Pricing, click [Select plan] của Advanced, [Confirm].
+3. Mở Pricing.",Average GMV 650k,"2. Hiện popup thành công; gói Advanced áp dụng ngay, số tiền là đủ giá gói ($499/month).
+3. Banner vượt hạn mức biến mất; thẻ Advanced ""Selected""; thẻ Scale xám kèm tooltip ""Current GMV exceeds this plan"".",GMV 650k thuộc khoảng $600K - $1.5M của Advanced.
+26,Edge,,Vượt GMV lần 2 sau khi đã nâng,Scale vượt $600K,Store đã nâng từ Growth lên Scale trong lần vượt trước; banner đã biến mất,"1. Dựng dữ liệu làm Average GMV 650k (vượt $600K của Scale); chạy Manual Sync.
+2. Mở Pricing.",Average GMV 650k,2. Banner vượt hạn mức hiện lại với tên gói Scale và khoảng $200k - $600k; mốc 1 tuần mới tính từ lần phát hiện này.,<cần confirm> mốc 1 tuần của lần vượt trước có được giữ lại hay đếm mới
+27,UI,,Banner trong tuần chờ,Mỗi lần mở Pricing,Store đang trong tuần chờ (ngày 3),"1. Mở Pricing ở ngày 3 của tuần chờ.
+2. Mở lại Pricing ở ngày 6.",,"1. Banner vượt hạn mức hiện, chữ như ngày 1.
+2. Banner vẫn hiện, chữ không đổi, tính năng vẫn dùng được.","<cần confirm> có banner nhắc ở Dashboard hoặc email nhắc không (Figma chỉ có banner ở Pricing)
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+28,Happy,Suspend sau 1 tuần,Quá 1 tuần chưa nâng thì suspend,Popup chặn,"GMV vượt, đã qua 1 tuần kể từ lúc phát hiện, chưa nâng gói","1. Click menu Search.
+2. Click menu Merchandising.",,"- Mỗi lần hiện popup: ""Your plan has been suspended. Unfortunately, access to Native AI Search is temporarily paused. Please update your subscription to restore full access and smart features."" với nút [Contact us]","Blocked — chờ môi trường: cần giả lập thời gian
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]
+Suspend do job tự động kích hoạt, không phụ thuộc merchant mở app (đã xác nhận 2026-10-28).
+[Cập nhật 2026-10-28: Trả lời đợt câu hỏi sau audit độ phủ]"
+29,Negative,,Manual Sync khi suspend,Bị chặn,Plan đang suspended,1. Click menu Sync.,,"- Hiện popup suspend, không chạy được Manual Sync","Menu tính năng bị chặn bằng popup. Blocked — chờ môi trường
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+30,Edge,,Storefront khi suspend,Dừng dịch vụ,Plan đang suspended; có Filter Tree và campaign đã cấu hình,"1. [Shopper] Gõ search ở Storefront, mở trang kết quả và Category Page.",,"- Storefront dừng chạy: search, filter, ranking campaign không còn áp dụng cấu hình của store","Suspend ngừng cả dịch vụ trên Storefront (đã xác nhận). Blocked — chờ môi trường
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+31,Edge,,Auto sync khi suspend,Dừng chạy,Plan đang suspended; lịch auto sync đến hạn,"1. Chờ đến giờ lịch đồng bộ.
+2. Mở Sync History sau khi plan được mở lại.",,- Lượt auto sync đến hạn trong lúc suspend không chạy; Sync History không có lượt nào trong khoảng đó,"Auto sync dừng chạy khi store không có gói hiệu lực (đã xác nhận). Blocked — chờ môi trường
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+32,Edge,,"Dashboard, Help Center và Pricing khi suspend",Không bị chặn,Plan đang suspended,"1. Mở Dashboard.
+2. Mở Help Center.
+3. Mở Pricing.",,"- Cả 3 trang mở được, không bị popup chặn","Dashboard và Help Center không bị ảnh hưởng; Pricing mở được (đã xác nhận cho store không có gói hiệu lực).
+Blocked — chờ môi trường
+<cần confirm> quy tắc này áp dụng cho trạng thái suspend
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+33,Edge,,Giữ nguyên dữ liệu khi suspend,Không xoá,"Plan đang suspended; có 5 campaign Active, 4 filter tree","1. Admin mở lại plan.
+2. Mở danh sách campaign và filter tree.",,- 5 campaign còn nguyên trạng thái Active; 4 filter tree còn nguyên,"Dữ liệu giữ nguyên, chỉ khoá tính năng (khớp quy tắc hết trial). Blocked — chờ môi trường
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+34,Edge,,Mua gói ngay trong lúc suspend,Select plan,Plan đang suspended; GMV vượt,"1. Mở Pricing, click [Select plan] của gói phù hợp GMV mới.",,- Không tự mua để mở lại plan; vào menu tính năng vẫn hiện popup suspend; plan chỉ mở lại khi admin xác nhận thanh toán,"Blocked — chờ môi trường
+<cần confirm> nút [Select plan] ở Pricing khi suspend có bấm được không
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+35,Integration,,Suspend tự động khi merchant không mở app,Job kích hoạt,"GMV vượt, đã phát hiện; merchant không mở app trong cả tuần chờ; có Filter Tree và campaign đã cấu hình","1. [System] Đủ 168 giờ kể từ lúc phát hiện, job suspend chạy.
+2. [Shopper] Mở Storefront search và filter.
+3. [System] Đến giờ lịch auto sync.
+4. [Merchant] Mở app sau đó.",,"1. Plan chuyển sang suspended.
+2. Storefront dừng chạy (không còn áp dụng cấu hình của store).
+3. Auto sync không chạy.
+4. Hiện popup ""Your plan has been suspended"".","Suspend do job tự động (đã xác nhận 2026-10-28).
+Blocked — chờ môi trường: cần giả lập thời gian
+[Cập nhật 2026-10-28: Trả lời đợt câu hỏi sau audit độ phủ]"
+36,UI,,Nội dung và nút popup suspend,Contact us,Plan đang suspended,"1. Quan sát popup.
+2. Nhấn Esc, click nền.
+3. Click [Contact us].",,"1. Popup ghi đúng chữ và có nút [Contact us].
+2. Popup không đóng được (bắt buộc xử lý).
+3. Mở email liên hệ (link email peasisoft).","Contact us mở email (đã xác nhận); popup suspend bắt buộc xử lý (đã xác nhận). Blocked — chờ môi trường: cần store ở trạng thái suspended
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+37,Happy,Mở lại plan sau suspend,Admin mở lại thủ công,Sau khi thanh toán,Plan đang suspended; seller đã liên hệ qua Contact us và thanh toán,"1. [Admin] Xác nhận thanh toán, mở lại plan thủ công.
+2. [Merchant] Reload app, click menu Search.
+3. [Shopper] Mở Storefront.",,"2. Popup suspend không còn; vào được tính năng.
+3. Storefront chạy lại theo cấu hình cũ.","Admin xác nhận thanh toán rồi mở lại thủ công (đã xác nhận). Blocked — chờ môi trường: cần quyền admin và store suspended
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+38,Edge,,Auto sync chạy lại sau khi mở,Tiếp tục,Plan vừa được mở lại,"1. Chờ đến lịch auto sync kế tiếp.
+2. Mở Sync History.",,- Lượt auto sync kế tiếp chạy bình thường theo tần suất của gói,"Blocked — chờ môi trường
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+39,Edge,,Mở lại nhưng GMV vẫn vượt,Gói chưa đổi,Plan được mở lại thủ công; Average GMV vẫn vượt khoảng của gói,"1. Mở Pricing ngay sau khi mở lại.
+2. Chạy Manual Sync, chờ Success.
+3. Mở Pricing.",,"1. Plan hoạt động, chưa sync lại nên Average GMV vẫn là giá trị cũ.
+3. Average GMV cập nhật; nếu vẫn vượt khoảng của gói thì banner vượt hạn mức hiện lại.","Blocked — chờ môi trường
+<cần confirm> tuần chờ sau khi admin mở lại tính từ đâu
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+40,Sync,,Sync bù sau khi mở lại,Dữ liệu stale,Plan vừa được mở lại; trong thời gian suspend có đơn mới trên BigCommerce,"1. Chạy Manual Sync.
+2. Mở Sync History và Pricing.
+3. [Shopper] Mở Storefront search.",Đơn mới tạo trong thời gian suspend,"1. Sync chạy thành công.
+2. Sync History có lượt mới; Average GMV cập nhật theo đơn mới.
+3. Kết quả search phản ánh dữ liệu sản phẩm mới sau sync (không còn dữ liệu cũ của thời gian suspend).",Blocked — chờ môi trường: cần store ở trạng thái suspend
+41,Integration,,Email invoice sau khi thanh toán,Gửi invoice,Seller vừa thanh toán gói mới do vượt GMV,"1. Thanh toán thành công.
+2. Kiểm tra hộp thư.",,- Nhận email invoice của khoản thanh toán,"Note Figma: thanh toán xong thì gửi email invoice. <cần confirm> nội dung email. Blocked — chờ môi trường: cần hộp thư test
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+42,Integration,,Campaign tính lại sau khi mở lại,Ranking về đúng,Plan vừa được mở lại thủ công; có campaign Pin sản phẩm trên Category Page,"1. Chạy Manual Sync, chờ Success.
+2. [Shopper] Mở Category Page có campaign.",,2. Thứ tự sản phẩm áp dụng đúng campaign Pin (campaign được tính lại sau sync).,"Blocked — chờ môi trường
+[Cập nhật 2026-10-28: Bổ sung theo audit độ phủ]"
+43,Integration,Luồng vượt GMV → nâng gói,Seller nâng gói kịp trong tuần chờ,Thành công,"- Store đang dùng gói [Growth]
+- GMV = [180k]; thẻ hợp lệ","1. [System] Đơn có ngày tạo thuộc 3 tháng trước làm GMV vượt 200k; Manual Sync hoặc lịch sync phát hiện.
+2. [Merchant] Thấy banner, mở Pricing, chọn Scale, [Confirm].
+3. [System] Áp dụng gói Scale, ghi nhận giao dịch.
+4. [System] Gửi email invoice.
+5. [Shopper] Mở Storefront.","Average GMV 180k thành 240k
+Dựng dữ liệu bằng đơn có ngày tạo nằm trong 3 tháng trước (đơn tạo hôm nay không làm đổi Average GMV)","1. Banner vượt hạn mức hiện.
+2. Popup thành công.
+3. Gói đang dùng là Scale; banner biến mất.
+5. Storefront chạy bình thường suốt tuần chờ và sau khi nâng.","Blocked — chờ môi trường: cần hộp thư test cho email invoice
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"
+44,Integration,,"Seller không nâng, bị suspend, admin mở lại",Thất bại rồi khôi phục,"- Store đang dùng gói [Growth]
+- GMV = [180k]","1. [System] Đơn có ngày tạo thuộc 3 tháng trước làm GMV vượt 200k; sync phát hiện.
+2. [Merchant] Thấy banner, không nâng gói.
+3. [System] Qua 1 tuần kể từ lúc phát hiện, suspend plan, Storefront và auto sync dừng.
+4. [Merchant] Click menu tính năng, thấy popup, click [Contact us].
+5. [Admin] Xác nhận thanh toán, mở lại plan thủ công.
+6. [Shopper] Mở Storefront.","Qua 1 tuần
+Dựng dữ liệu bằng đơn có ngày tạo nằm trong 3 tháng trước (đơn tạo hôm nay không làm đổi Average GMV)","1. Banner hiện.
+3. Plan suspended; Storefront và auto sync dừng; dữ liệu giữ nguyên.
+4. Popup suspend; Contact us mở email.
+5. Popup không còn.
+6. Storefront chạy lại đúng cấu hình cũ.","Blocked — chờ môi trường: cần giả lập thời gian và quyền admin
+[Cập nhật 2026-10-26: Trả lời đợt câu hỏi Q1 đến Q27]"

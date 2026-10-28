@@ -30,9 +30,14 @@ Module **Analytics** có nhắc tên trong tài liệu tổng quan nhưng chưa 
 
 ```
 .
-├── checklists/        # checklist QA (hiện đang rỗng)
+├── checklists/         # checklist QA, gom theo MODULE giống test-cases (kebab-case)
+│   ├── filter/         # coverage + consistency checklist của module Filter
+│   ├── pricing/        # coverage checklist, issue list, note traceability của Pricing plan
+│   ├── merchandise/    # issue list + work packages của Merchandise
+│   └── system-feature-inventory-checklist.md   # checklist xuyên module, để ở gốc
 ├── docs/
 │   ├── sync-fields-glossary.md   # whitelist entity/field sync từ BigCommerce, dùng để gắn nhãn Nguồn dữ liệu
+│   ├── updates/        # ghi chú cập nhật theo tính năng khi spec/Figma chưa kịp cập nhật (xem README.md trong đó)
 │   └── specs/          # spec từng feature Native Search, viết ra từ extract-figma-spec hoặc viết ngược từ test case sheet gốc
 ├── test-cases/         # tài liệu test case, gom theo MODULE rồi mới tới feature (kebab-case)
 │   └── filter/         # module Filter
@@ -50,3 +55,11 @@ Module **Analytics** có nhắc tên trong tài liệu tổng quan nhưng chưa 
 3. Khi 1 yêu cầu khớp trigger của bất kỳ skill viết test case nào (`create-functional-testcase`, `create-permission-testcase`, `create-system-testcase`, `create-api-testcase`, `create-impact-testcase`, `create-sync-testcase`, `create-testcase-suite`, `check-testcase-coverage`) — luôn invoke qua tool `Skill`, không tự thực thi lại bằng script/trí nhớ nội dung skill. Đặc biệt lưu ý: vừa đọc/sửa chính skill đó trong cùng phiên KHÔNG phải lý do để bỏ qua bước invoke — trí nhớ diễn giải lại dễ lệch so với bản text hiện tại của skill.
 4. Khi báo cáo kết quả sau khi viết test case, luôn nói rõ đã viết qua skill nào — hoặc nói rõ nếu viết tay không qua skill nào kèm lý do. Không im lặng bỏ qua chi tiết này.
 
+# Nguồn tham chiếu cho /explain
+
+| Mục | Giá trị |
+|---|---|
+| Tài liệu | Spec từng module trên Lark (cần đăng nhập — không đọc trực tiếp được; người dùng export PDF/Word gửi vào chat hoặc lưu vào repo). Merchandise: `[Spec] Merchandise` — https://h4zq094ccpa.sg.larksuite.com/docx/COmGdJzHUoAdTkx30lJlDMY5gYc |
+| Figma | Merchandise: https://www.figma.com/design/fcjg1GDcLIl5HVdRFN4qhF/Merchandise?node-id=2-2 (đọc qua connector Figma khi đã kết nối; nếu chưa thì xin ảnh chụp frame + sticky note) |
+| App tham chiếu | Boost Commerce (app gốc của design Filter) + Searchspring (merchandising theo trigger) — mặc định do người dùng không chọn khác (2026-10-18) |
+| File overview | `docs/business/overview-project.md` |

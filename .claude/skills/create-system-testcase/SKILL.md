@@ -5,6 +5,12 @@ trigger: "tạo system test case cho [luồng nghiệp vụ]", "tạo test case 
 ---
 ## Hướng dẫn tạo test case
 
+### Bước 0: Đọc cập nhật mới nhất trước khi làm (bắt buộc)
+
+**Cổng 3 nguồn — chạy đầu tiên, thiếu 1 nguồn thì KHÔNG được bắt đầu.** Phải có đủ cho mọi màn hình trong phạm vi: (1) **spec** — file trong `docs/specs/` (viết từ `extract-figma-spec` hoặc từ xác nhận của người dùng); (2) **ghi chú cập nhật** — file `docs/updates/<tinh-nang>-updates.md`, hoặc người dùng xác nhận trong chat "không có cập nhật"; (3) **Figma** — link file do người dùng đưa, hoặc link ghi trong spec đã được người dùng xác nhận là bản mới nhất, và đã mở được thật frame của từng màn, **kể cả toàn bộ note/sticky note vàng** (theo rule dự án, note Figma là spec chính thức). Mở Figma: gọi `create_session` trước, rồi `get_metadata` không truyền `nodeId` để liệt kê page và đi xuống section/frame; không đoán node ID. Danh sách page trả về có thể THIẾU — màn nào không tìm thấy trong các page được liệt kê thì xin người dùng link page/frame, không kết luận là design không có. Thiếu bất kỳ nguồn nào cho bất kỳ màn nào → dừng, gửi người dùng danh sách chính xác còn thiếu (nguồn nào, màn nào) và chờ; không viết gì, kể cả bản nháp gắn `<cần confirm>`, không thay nguồn thiếu bằng suy luận từ các nguồn còn lại. Đủ 3 nguồn mới làm tiếp phần dưới.
+
+Spec và Figma có thể chưa kịp cập nhật. Trước khi đọc spec: (1) `git pull` repo dự án, ghi lại commit mới nhất; (2) đọc `docs/updates/README.md` và file `docs/updates/<tinh-nang>-updates.md` của tính năng đang làm (nếu có), lấy mọi mục còn hiệu lực; (3) khi các nguồn mâu thuẫn nhau thì theo thứ tự ưu tiên: ghi chú cập nhật và câu trả lời xác nhận của người dùng trong chat → quan sát thực tế trên staging/ảnh người dùng gửi → note và frame Figma → spec/PDF. Riêng trường hợp PDF mâu thuẫn với note Figma, KHÔNG tự chọn bên nào (rule dự án): ghi rõ cả hai bên trong Note và đưa vào danh sách xác nhận gửi BA; (4) mọi case được thêm hoặc sửa vì một cập nhật phải có thẻ `[Cập nhật YYYY-MM-DD: <tiêu đề mục>]` ở cuối cột Note (quy ước trong `docs/updates/README.md`); (5) đầu báo cáo nêu "Đã đọc N ghi chú cập nhật cho [tính năng]; repo ở commit X".
+
 ### Bước 1: Đọc hiểu specs
 
 Tìm hiểu xem trong luồng nghiệp vụ có những tác nhân (role/actor) nào — kể cả hệ thống tự động (VD Native Search tự chạy Schedule Sync theo lịch, hoặc Merchandise Campaign tự re-evaluate Score sau mỗi lần sync, không phải người thao tác). Có những check point nào với từng tác nhân. Xác định cụ thể được luồng tương tác nghiệp vụ giữa các tác nhân.
@@ -44,7 +50,7 @@ Mỗi luồng nghiệp vụ hoàn chỉnh (đi qua hết các tác nhân cần t
 
 Lưu ý: "1 record" ở đây là 1 dòng khi mở bằng Excel/Google Sheets, KHÔNG phải 1 dòng vật lý trong file text. Ô Test Steps/Expected Result của test case System thường rất dài nên record sẽ trải trên nhiều dòng vật lý — đó là đúng chuẩn (xem Quy tắc trình bày nội dung ô bên dưới).
 
-KHÔNG dùng dòng banner riêng (đã loại bỏ khỏi mọi skill test case — xem `create-functional-testcase` để biết lý do). Mỗi dòng là 1 test case System thật sự. Ngoại lệ là dòng **Purpose** (ID = `Purpose:`, 1 câu mục đích nghiệp vụ ở cột Field/Phần) — luôn đứng ngay sau header, chi tiết ở skill `create-functional-testcase`; khi gộp/renumber ở Bước 3 phải giữ nguyên dòng này, không đưa vào nhóm sort.
+Mặc định KHÔNG dùng dòng banner riêng; chỉ được dùng banner `=== [Tên luồng] ===` ở ngoại lệ khi 1 file gộp ≥2 luồng lớn của cùng feature (điều kiện và format xem mục "Nguyên tắc" của `create-functional-testcase`). Mỗi dòng là 1 test case System thật sự. Ngoại lệ là dòng **Purpose** (ID = `Purpose:`, 1 câu mục đích nghiệp vụ ở cột Field/Phần) — luôn đứng ngay sau header, chi tiết ở skill `create-functional-testcase`; khi gộp/renumber ở Bước 3 phải giữ nguyên dòng này, không đưa vào nhóm sort.
 
 | ID | Test Type | Field / Phần | Chi tiết test | Cụ thể hơn | Preconditions | Test Steps | Input DB/Setting | Expected Result | Note |
 

@@ -236,6 +236,7 @@ Tóm tắt báo cáo của subagent trong **tối đa 10 dòng**: số phát hi�
 - **Bắt buộc chạy qua subagent** — không được tự review trong cùng lượt đã viết case. Tự review tại chỗ là lỗi đã được xác định: người viết có xu hướng xác nhận lại chính mình và bỏ qua đúng phần chưa nghĩ tới.
 - Subagent không được sửa file; mọi thay đổi chỉ thực hiện ở Bước 6 sau khi người dùng duyệt.
 - Không được báo "đã đối chiếu Figma" nếu thực tế không mở được node — phải nói rõ node nào đọc được, node nào không.
+- **Độ trung thực khi đối chiếu**: subagent không thao tác trực tiếp được trên Figma, BigCommerce hay Storefront thật. Với mỗi nhận định về hành vi (của sản phẩm hoặc của BigCommerce), phải ghi rõ mức độ chắc chắn — đọc trực tiếp từ frame/note/spec nào, hay chỉ là suy luận cần người thật kiểm chứng lại. **Nghiêm cấm mô tả hành vi như đã tự tay kiểm tra khi chỉ suy luận.**
 - Mọi phát hiện phải chỉ đích danh ID case hoặc tên frame; nghiêm cấm nhận xét chung chung không truy ngược được.
 - Không tự ý mở rộng phạm vi review sang feature khác ngoài phạm vi người dùng nêu.
 - Chỉ thao tác trong folder dự án hiện tại (Native Search / Claude), nghiêm cấm thao tác trên folder khác. Tài liệu tham khảo ở `Auto Test/Native-Search` chỉ được đọc, không ghi/sửa/xoá.
