@@ -26,13 +26,6 @@ Module **Analytics** có nhắc tên trong tài liệu tổng quan nhưng chưa 
 - Chất lượng spec **không đồng đều giữa các module**: Sync và Merchandise có PDF spec khá đầy đủ, có bảng edge-case rõ ràng; ngược lại Search (Instant Search Widget, Search Result Page, Redirects, General Setting) và Filter Tree/Node Setup thường sơ sài, nhiều mục chỉ có tiêu đề không có nội dung, hoặc file note trống — với các module này càng cần đọc kỹ Figma + note thay vì tin vào PDF.
 - Có 1 bộ tài liệu requirement/tài liệu tham khảo đầy đủ hơn (SPEC PDF theo từng feature, `Figma.md`/`figma.md`, `NOTE_*.md`, quy trình test riêng) lưu ngoài phạm vi thao tác của Claude tại `C:\Users\hangu\OneDrive\Máy tính\Auto Test\Native-Search` — chỉ dùng để **đọc tham khảo/đối chiếu thuật ngữ, nghiệp vụ**, không thao tác ghi/sửa gì trong đó (vi phạm ràng buộc #1 bên dưới).
 
-## Nguồn tham chiếu cho /explain
-
-- **Tài liệu**: ưu tiên `docs/specs/<feature>-specs.md` của chính feature đang giải thích; đối chiếu thêm `docs/sync-fields-glossary.md` và `docs/bigcommerce-platform-facts.md` khi liên quan tới dữ liệu sync/fact nền tảng BigCommerce.
-- **Figma**: fileKey `HEHliiNcCQ0tnHxc0XcM3d` (file "Filter") — node-id cụ thể tuỳ feature, hỏi lại nếu chưa có cho feature đang giải thích. Node-id đã biết: Advanced Settings = `1902-36092`.
-- **App tham chiếu**: ưu tiên **Searchspring** và **Klevu** (app search/filter cài trên BigCommerce, sát ngữ cảnh nhất); **Algolia** tham khảo thêm cho trải nghiệm UX (không riêng BigCommerce).
-- **File overview**: không duy trì — theo yêu cầu người dùng, mỗi lần `/explain` không cần lưu lại tổng hợp.
-
 # Cấu trúc thư mục
 
 ```
@@ -64,9 +57,13 @@ Module **Analytics** có nhắc tên trong tài liệu tổng quan nhưng chưa 
 
 # Nguồn tham chiếu cho /explain
 
-| Mục | Giá trị |
-|---|---|
-| Tài liệu | Spec từng module trên Lark (cần đăng nhập — không đọc trực tiếp được; người dùng export PDF/Word gửi vào chat hoặc lưu vào repo). Merchandise: `[Spec] Merchandise` — https://h4zq094ccpa.sg.larksuite.com/docx/COmGdJzHUoAdTkx30lJlDMY5gYc |
-| Figma | Merchandise: https://www.figma.com/design/fcjg1GDcLIl5HVdRFN4qhF/Merchandise?node-id=2-2 (đọc qua connector Figma khi đã kết nối; nếu chưa thì xin ảnh chụp frame + sticky note) |
-| App tham chiếu | Boost Commerce (app gốc của design Filter) + Searchspring (merchandising theo trigger) — mặc định do người dùng không chọn khác (2026-10-18) |
-| File overview | `docs/business/overview-project.md` |
+- **Tài liệu**: ưu tiên `docs/specs/<feature>-specs.md` của chính feature đang giải thích; đối chiếu thêm `docs/sync-fields-glossary.md` và `docs/bigcommerce-platform-facts.md` khi liên quan tới dữ liệu sync/fact nền tảng BigCommerce. Spec gốc từng module: Spec từng module trên Lark (cần đăng nhập — không đọc trực tiếp được; người dùng export PDF/Word gửi vào chat hoặc lưu vào repo). Merchandise: `[Spec] Merchandise` — https://h4zq094ccpa.sg.larksuite.com/docx/COmGdJzHUoAdTkx30lJlDMY5gYc
+- **Figma**: Filter — fileKey `HEHliiNcCQ0tnHxc0XcM3d` (Advanced Settings = node `1902-36092`; node-id khác tuỳ feature, hỏi lại nếu chưa có). Merchandise và Pricing: Merchandise: https://www.figma.com/design/fcjg1GDcLIl5HVdRFN4qhF/Merchandise?node-id=2-2 (đọc qua connector Figma khi đã kết nối; nếu chưa thì xin ảnh chụp frame + sticky note); Pricing: https://www.figma.com/design/Qbx9Ftu1qVuJA1zBVA8aAw/Pricing
+- **App tham chiếu**: ưu tiên **Searchspring** và **Klevu** (app search/filter cài trên BigCommerce); **Algolia** tham khảo thêm cho trải nghiệm UX (người dùng chọn 2026-10-22). Boost Commerce chỉ ghi nhận là app gốc của design Filter.
+- **File overview**: không duy trì — theo yêu cầu người dùng, mỗi lần `/explain` không cần lưu lại tổng hợp.
+
+# Quy tắc Git
+
+- Repo chỉ có 1 người làm: **chỉ dùng nhánh `main`**, commit và push thẳng lên `main`, **không tạo nhánh mới**.
+- Chỉ push khi người dùng yêu cầu. Chạy `git pull` trước khi bắt đầu làm và trước khi push.
+- Sửa nhầm bằng `git revert`, không dùng `git push --force`.
