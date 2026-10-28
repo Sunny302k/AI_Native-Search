@@ -26,6 +26,13 @@ Module **Analytics** có nhắc tên trong tài liệu tổng quan nhưng chưa 
 - Chất lượng spec **không đồng đều giữa các module**: Sync và Merchandise có PDF spec khá đầy đủ, có bảng edge-case rõ ràng; ngược lại Search (Instant Search Widget, Search Result Page, Redirects, General Setting) và Filter Tree/Node Setup thường sơ sài, nhiều mục chỉ có tiêu đề không có nội dung, hoặc file note trống — với các module này càng cần đọc kỹ Figma + note thay vì tin vào PDF.
 - Có 1 bộ tài liệu requirement/tài liệu tham khảo đầy đủ hơn (SPEC PDF theo từng feature, `Figma.md`/`figma.md`, `NOTE_*.md`, quy trình test riêng) lưu ngoài phạm vi thao tác của Claude tại `C:\Users\hangu\OneDrive\Máy tính\Auto Test\Native-Search` — chỉ dùng để **đọc tham khảo/đối chiếu thuật ngữ, nghiệp vụ**, không thao tác ghi/sửa gì trong đó (vi phạm ràng buộc #1 bên dưới).
 
+## Nguồn tham chiếu cho /explain
+
+- **Tài liệu**: ưu tiên `docs/specs/<feature>-specs.md` của chính feature đang giải thích; đối chiếu thêm `docs/sync-fields-glossary.md` và `docs/bigcommerce-platform-facts.md` khi liên quan tới dữ liệu sync/fact nền tảng BigCommerce.
+- **Figma**: fileKey `HEHliiNcCQ0tnHxc0XcM3d` (file "Filter") — node-id cụ thể tuỳ feature, hỏi lại nếu chưa có cho feature đang giải thích. Node-id đã biết: Advanced Settings = `1902-36092`.
+- **App tham chiếu**: ưu tiên **Searchspring** và **Klevu** (app search/filter cài trên BigCommerce, sát ngữ cảnh nhất); **Algolia** tham khảo thêm cho trải nghiệm UX (không riêng BigCommerce).
+- **File overview**: không duy trì — theo yêu cầu người dùng, mỗi lần `/explain` không cần lưu lại tổng hợp.
+
 # Cấu trúc thư mục
 
 ```
