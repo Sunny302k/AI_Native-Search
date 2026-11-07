@@ -2,7 +2,8 @@
 Purpose:,,"Gộp nhiều filter value gần giống nhau (VD Emerald, Lime) thành 1 lựa chọn duy nhất, để shopper không phải chọn lần lượt từng value.",,,,,,,
 ,,=== MERGED VALUES LIST ===,,,,,,,
 1,Happy,Entry point - card [Merge Values],Mở màn Merged Values từ màn Filter,,Role = [Merchant Admin],"1. Vào màn Filter.
-2. Tại khối [Filter Settings], click card [Merge Values].",,"2. Chuyển sang màn [Merged Values]; card mô tả đúng ""Combine similar product options into a single, unified display.""",
+2. Tại khối [Filter Settings], click card [Merge Values].",,"1. Khối [Filter Settings] có card [Merge Values] với mô tả ""Combine similar product options into a single, unified display."".
+2. Chuyển sang màn [Merged Values].",
 2,UI,Feature Tour,Nội dung khối hướng dẫn,,Đang ở màn Merged Values,1. Quan sát khối FEATURE TOUR đầu màn.,,"1. Tiêu đề ""What is merge values ?""; nội dung ""Use merge options for simpler customer navigation"" kèm ảnh minh hoạ gộp value thành 1 filter option.",
 3,UI,,Thu gọn/mở lại,,Khối Feature Tour đang mở,"1. Click chevron thu gọn khối.
 2. Click lại để mở.",,"1. Khối thu gọn, chỉ còn tiêu đề.
@@ -41,7 +42,7 @@ Purpose:,,"Gộp nhiều filter value gần giống nhau (VD Emerald, Lime) thà
 24,Happy,,Chuyển sang chế độ nhập tay,,Đang ở chế độ dropdown,1. Click link [+ or enter manually].,,"1. Ô Filter option đổi thành input text với placeholder ""Enter filter option""; link đổi thành [+ Select filter option].",
 25,Happy,,Chuyển ngược về chế độ dropdown,,Đang ở chế độ nhập tay,1. Click link [+ Select filter option].,,1. Ô Filter option trở lại dạng dropdown.,
 26,UI,,Danh sách trong dropdown,,"Đã chọn 4 value ở bước 1: Avocado, Fern, Emerald, Lime",1. Mở dropdown [Select filter option] và đối chiếu danh sách.,,1. Dropdown CHỈ liệt kê 4 value đang có trong Selected values; không xuất hiện value ngoài danh sách đã chọn.,
-27,UI,Bước 2 - Review Filter Node,Khối minh hoạ hiển thị,,Đang ở bước 2,1. Quan sát khối [Review Filter Node].,,1. Khối hiển thị dạng minh hoạ before → after cho filter node.,"<cần confirm> Khối này là ẢNH DEMO TĨNH, không phản ánh dữ liệu filter tree thật — KHÔNG dùng số liệu trong khối này làm căn cứ verify; điểm đối chiếu thật là storefront."
+27,UI,Bước 2 - Review Filter Node,Khối minh hoạ hiển thị,,Đang ở bước 2,1. Quan sát khối [Review Filter Node].,,1. Khối hiển thị dạng minh hoạ before → after cho filter node.,"Khối này là ẢNH DEMO TĨNH (đã chốt 2026-09-08), không phản ánh dữ liệu filter tree thật — KHÔNG dùng số liệu trong khối này làm căn cứ verify; điểm đối chiếu thật là storefront."
 28,Happy,Bước 2 - Button [Back]/[Save],Back giữ nguyên selection,,Đã chọn 3 value và sang bước 2,"1. Click [Back].
 2. Quan sát panel Selected values.",,"2. Quay lại bước 1; 3 value vẫn còn nguyên trạng thái đã tick, counter không đổi.",
 29,Happy,Kết quả merge trên storefront,Hiển thị gộp đúng ở mọi filter node liên quan,Verify từng node,"- Đã tạo merged value gồm Avocado, Emerald, Lime → tên Green
@@ -49,7 +50,9 @@ Purpose:,,"Gộp nhiều filter value gần giống nhau (VD Emerald, Lime) thà
 2. Truy cập storefront, kiểm tra LẦN LƯỢT từng filter node đang dùng value đã gộp.",,"2. Mỗi node hiển thị 1 dòng duy nhất tên ""Green"" kèm product count của cả nhóm; không còn hiển thị Avocado/Emerald/Lime riêng lẻ.",
 30,Happy,,Node chỉ chọn 1 phần value con,Cơ chế tất cả hoặc không gì,"- Merged value gồm Avocado, Emerald, Lime → tên Green
 - Filter node chỉ chọn duy nhất Emerald","1. Truy cập storefront tại page dùng node đó.
-2. Quan sát dòng hiển thị.",,"2. Node hiển thị TRỌN VẸN merged value ""Green"" kèm count của cả nhóm (không phải riêng count của Emerald).",
+2. Quan sát dòng hiển thị.
+3. Click chọn merged value ""Green"" và đối chiếu danh sách sản phẩm trả về.",,"2. Node hiển thị TRỌN VẸN merged value ""Green"" kèm count của cả nhóm (không phải riêng count của Emerald).
+3. Danh sách trả về gồm mọi sản phẩm mang Avocado, Emerald hoặc Lime (không chỉ sản phẩm mang Emerald); số sản phẩm khớp count hiển thị ở bước 2.",
 31,Happy,,Count không đếm trùng sản phẩm,Đếm distinct,"- Merged value gồm Avocado + Emerald
 - Sản phẩm X có ĐỒNG THỜI cả Avocado và Emerald","1. Truy cập storefront, đọc count cạnh merged value.
 2. Click lọc theo merged value và đếm số sản phẩm trả về.","- Avocado: 3 sản phẩm (gồm X)
@@ -93,21 +96,35 @@ Purpose:,,"Gộp nhiều filter value gần giống nhau (VD Emerald, Lime) thà
 3. Chuyển ô Filter option sang chế độ nhập tay, nhập 256 ký tự.
 4. Click [Save].",Tên Filter option dài 256 ký tự,4. Chặn lưu; báo vượt giới hạn 255 ký tự.,
 ,,=== EDIT / DELETE MERGED VALUE ===,,,,,,,
-43,Happy,Toggle Status,Tắt Status,,Merged value đang có Status = ON,"1. Tắt toggle Status trên danh sách.
-2. Kiểm tra storefront tại từng filter node liên quan.",,2. Mỗi node hiển thị lại các value con RIÊNG LẺ kèm count riêng của từng value; không còn hiển thị merged value.,
+43,Happy,Toggle Status,Tắt Status,Node chọn đủ / chọn 1 phần value con,"- Merged value Green gồm Avocado, Emerald, Lime, Status = ON
+- Node N1 chọn đủ Avocado, Emerald, Lime
+- Node N2 chỉ chọn Emerald","1. Tắt toggle Status trên danh sách.
+2. Kiểm tra storefront tại node N1.
+3. Kiểm tra storefront tại node N2.",,"2. N1 hiển thị lại 3 value RIÊNG LẺ Avocado, Emerald, Lime, mỗi value kèm count riêng; không còn Green.
+3. N2 chỉ hiển thị Emerald kèm count riêng của Emerald (không hiện Avocado, Lime vì N2 không chọn); không còn Green.",
 44,Happy,,Bật lại Status,,Merged value đang có Status = OFF,"1. Bật lại toggle Status.
 2. Kiểm tra storefront tại từng filter node liên quan.",,2. Mỗi node hiển thị lại dạng gộp như trước khi tắt.,
 45,Happy,Edit merged value,Mở màn chỉnh sửa,,Đã có ≥1 merged value,1. Click icon Edit (bút chì) ở cột Actions.,,"1. Mở giao diện chỉnh sửa, load đúng danh sách value con và tên Filter option đã lưu.","<cần confirm> Chưa rõ Edit mở lại modal 2 bước như Create hay modal rút gọn, và có hiển thị cảnh báo tác động không."
 46,Happy,,Thêm value con,,"Merged value hiện có 3 value: Avocado, Emerald, Lime","1. Mở Edit, thêm value Fern vào nhóm.
 2. Lưu và kiểm tra storefront ở từng node liên quan.",,2. Cột Values trên danh sách có thêm Fern; storefront hiển thị count tăng đúng theo số sản phẩm bổ sung (đếm distinct).,
-47,Happy,,Bớt value con,,"Merged value hiện có 4 value: Avocado, Fern, Emerald, Lime","1. Mở Edit, gỡ value Lime khỏi nhóm.
-2. Lưu và kiểm tra storefront ở từng node liên quan.",,2. Lime quay lại hiển thị RIÊNG LẺ trên storefront (kèm count riêng); merged value còn 3 value và count giảm tương ứng.,
+47,Happy,,Bớt value con,Node có / không chọn value bị gỡ,"- Merged value Green gồm 4 value: Avocado, Fern, Emerald, Lime
+- Node N1 chọn đủ 4 value
+- Node N2 chọn Avocado, Emerald (không chọn Lime)","1. Mở Edit, gỡ value Lime khỏi nhóm, lưu.
+2. Kiểm tra cột Values trên danh sách.
+3. Kiểm tra storefront tại node N1.
+4. Kiểm tra storefront tại node N2.",Lime có sản phẩm riêng không trùng sản phẩm của 3 value còn lại,"2. Cột Values còn ""Avocado, Fern, Emerald"".
+3. N1 hiển thị Green với count giảm đúng số sản phẩm chỉ thuộc Lime, và Lime xuất hiện lại RIÊNG LẺ kèm count riêng.
+4. N2 hiển thị Green với count giảm tương ứng; KHÔNG xuất hiện Lime (N2 không chọn Lime).",
 48,Happy,,Đổi tên Filter option,,Merged value đang có Filter option = Avocado,"1. Mở Edit, đổi Filter option thành Green.
 2. Lưu và kiểm tra storefront ở từng node liên quan.",Filter option mới = Green,"2. Cột Filter option trên danh sách hiển thị Green; mọi node liên quan trên storefront đổi tên hiển thị thành Green, count giữ nguyên.",
 49,Negative,,Đổi tên thành tên đã tồn tại,,Đã có filter option khác tên Green,"1. Mở Edit, đổi Filter option thành Green.
 2. Lưu.",,2. Chặn lưu; báo lỗi trùng tên.,
 50,Happy,Delete merged value,Xoá không có popup xác nhận,Khác pattern Filter Tree,Đã có ≥1 merged value,1. Click icon Delete (thùng rác) ở cột Actions.,,"1. Merged value bị xoá NGAY, KHÔNG hiển thị popup xác nhận trước đó.","Điểm khác biệt có chủ đích so với Filter Tree (xoá filter tree CÓ popup xác nhận) — không phải bug, QA không báo nhầm."
-51,Happy,,Value con rollback sau khi xoá,,Vừa xoá 1 merged value,1. Kiểm tra storefront tại từng filter node từng dùng merged value đó.,,"1. Mọi value con quay lại hiển thị RIÊNG LẺ kèm count riêng, đúng như trạng thái trước khi merge.",
+51,Happy,,Value con rollback sau khi xoá,Node chọn đủ / chọn 1 phần value con,"- Vừa xoá merged value Green gồm Avocado, Emerald, Lime
+- Node N1 chọn đủ Avocado, Emerald, Lime
+- Node N2 chỉ chọn Emerald","1. Kiểm tra storefront tại node N1.
+2. Kiểm tra storefront tại node N2.",,"1. N1 hiển thị lại 3 value RIÊNG LẺ Avocado, Emerald, Lime, mỗi value kèm count riêng, đúng như trước khi merge.
+2. N2 chỉ hiển thị Emerald kèm count riêng (không hiện Avocado, Lime vì N2 không chọn).",
 52,UI,Setup dynamic option,Không có cấu hình localization,,Đang xem/chỉnh 1 merged value,1. Rà toàn bộ giao diện merged value.,,1. Không có toggle/mục [Setup dynamic option] — merged value không hỗ trợ cấu hình localization riêng.,
 ,,=== ẢNH HƯỞNG SANG LUỒNG KHÁC ===,,,,,,,
 53,Integration,Filter Tree Setup,Tắt Status filter tree chứa node đang dùng merged value,Hướng ON→OFF,"- Filter tree A Status = [ON]
@@ -151,12 +168,14 @@ Purpose:,,"Gộp nhiều filter value gần giống nhau (VD Emerald, Lime) thà
 63,Integration,,Xoá merged value khi Filter Cache đang bật,,"- Filter Cache = [đang bật]
 - Đã có merged value đang hiển thị trên storefront","1. Xoá merged value.
 2. Truy cập storefront ngay sau khi xoá.",,2. Storefront hiển thị lại các value con riêng lẻ ngay mà không cần refresh cache thủ công.,<cần confirm> Cùng câu hỏi với case trên về việc có bắt buộc refresh Filter Cache hay không.
-64,Integration,Merchandise Campaign,Campaign dùng action Filter trỏ tới value đã bị merge,,"- Campaign đang active, dùng action Filter theo value Emerald
-- Value Emerald sau đó bị gộp vào merged value Green","1. Tạo merged value chứa value Emerald.
-2. Truy cập storefront trong ngữ cảnh campaign đang chạy.
-3. Kiểm tra kết quả lọc/hiển thị sản phẩm của campaign.",,3. Campaign vẫn lọc đúng tập sản phẩm như trước khi merge (value bị gộp không làm campaign trỏ sai).,<cần confirm> Chưa xác định campaign đang trỏ tới value đã bị merge còn hoạt động đúng hay không.
-65,Integration,,Xoá merged value đang được campaign tham chiếu,,Campaign đang trỏ tới value nằm trong merged value Green,"1. Xoá merged value Green.
-2. Kiểm tra lại campaign trên storefront.",,2. Campaign hoạt động đúng như trước khi merged value tồn tại; không lỗi do mất tham chiếu.,<cần confirm> Cùng nhóm câu hỏi với case trên về tương tác giữa Merge Values và Merchandise Campaign.
+64,Integration,Merchandise Campaign,Campaign có condition Product Options trỏ tới value sau đó bị merge,,"- Campaign đang active, có action (VD Hide) với condition Product Options = Emerald
+- Emerald chưa thuộc merged value nào","1. Tạo merged value Green chứa Emerald, Avocado.
+2. Truy cập storefront, kích hoạt trigger của campaign.
+3. Đối chiếu tập sản phẩm bị campaign tác động.",,"3. Campaign vẫn tác động đúng tập sản phẩm mang Emerald như trước khi merge; không mở rộng sang sản phẩm chỉ mang Avocado.","<cần confirm> Q23 (checklists/merchandise/merchandise-setup-base-score-design-issues.md) và Q4 spec Merge Values chưa được trả lời. Condition Product Options dùng chung cho Hide, Bury, Filter results, Boost/Deboost và Bulk Edit base score."
+65,Integration,,Xoá merged value có value con đang được campaign tham chiếu,,"- Merged value Green gồm Emerald, Avocado
+- Campaign đang active, có condition Product Options = Emerald","1. Xoá merged value Green.
+2. Truy cập storefront, kích hoạt trigger của campaign.
+3. Đối chiếu tập sản phẩm bị campaign tác động.",,3. Campaign vẫn tác động đúng tập sản phẩm mang Emerald; không lỗi do mất tham chiếu.,<cần confirm> Cùng nhóm câu hỏi với case trên về tương tác giữa Merge Values và Merchandise Campaign.
 ,,=== ĐỒNG BỘ DỮ LIỆU TỪ BIGCOMMERCE ===,,,,,,,
 66,Sync,Value con - nguồn Product options,BC đổi tên value gốc đang nằm trong merged value,,"- Merged value Green gồm Avocado, Emerald, Lime
 - Filter option = Green","1. Trên BigCommerce, đổi tên value Emerald thành Emerald Deep.
