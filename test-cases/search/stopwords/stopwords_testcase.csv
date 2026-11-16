@@ -1,0 +1,88 @@
+﻿ID,Test Type,Test Objective,,,Preconditions,Test Steps,Input DB/Setting,Expected Result,Note
+Purpose:,,"Cho merchant loại bỏ các từ phổ biến ít mang ý nghĩa phân biệt ra khỏi việc so khớp khi search, để shopper nhận được kết quả search liên quan hơn.",,,,,,,
+,,=== STOP WORD LIST + SEARCH ===,,,,,,,
+1,Happy,Entry point - màn Stop words,Mở từ Search Engine Setup,,Role = [Merchant Admin],"1. Vào Search > Search Engine Setup.
+2. Click vào mục [Stop words].",,"2. Chuyển sang màn Stop words, hiển thị nút back + tiêu đề ""Stop words"".",
+2,UI,Feature Tour,"Nội dung khối ""What is stop word ?"" + thu gọn/mở lại",,Đang ở màn Stop words,"1. Quan sát khối FEATURE TOUR đầu màn.
+2. Click chevron thu gọn khối.
+3. Click lại để mở.",,"1. Tiêu đề ""What is stop word ?""; nội dung ""Use stop words to filter out certain words from the search and customer will get more relevant search results"" kèm ảnh minh hoạ ""the denim shirt"" → ""20 results for 'denim shirt'"" (ảnh demo tĩnh, không dùng số liệu này làm căn cứ verify).
+2. Khối thu gọn, chỉ còn tiêu đề.
+3. Khối mở lại đầy đủ nội dung.",
+3,UI,2 Tab Manual/AI Stop Word,Tab AI Stop Word bị khoá,,Đang ở màn Stop words,"1. Quan sát 2 tab cạnh nhau: ""Manual Stop Word"" và ""AI Stop Word"".
+2. Click vào tab ""AI Stop Word"".",,"1. Tab ""Manual Stop Word"" đang active (gạch chân cam); tab ""AI Stop Word"" có badge ""Coming soon"" cạnh tên.
+2. Tab không chuyển được nội dung (bị khoá) — chưa có màn hình/chức năng thật.",
+4,UI,Empty state,Chưa có stop word nào,,Stop Word List = [rỗng],1. Quan sát khu vực danh sách.,,"1. Hiển thị ""There are currently no stop word."" kèm nút [Create new].",
+5,Happy,Button [Create new],Mở modal,,Đang ở màn Stop words,1. Click nút [Create new] góc phải khối danh sách.,,"1. Mở modal ""Create new stop word"".",
+6,UI,Stop Word List,Cấu trúc lưới chip (không phải bảng cột),,Danh sách có ≥1 stop word,1. Quan sát cách hiển thị danh sách.,,1. Hiển thị dạng lưới chip dàn hàng (không phải bảng có header cột cố định); mỗi chip rộng theo độ dài chữ.,
+7,UI,,Mỗi chip chỉ có 1 icon Delete,,Danh sách có ≥1 stop word,1. Quan sát 1 chip bất kỳ.,,1. Chip chỉ có đúng 1 icon (thùng rác/Delete); KHÔNG có icon Edit nào khác.,
+8,UI,Pagination,Chuyển trang,,Danh sách có nhiều hơn 15 bản ghi,1. Click sang trang 2.,,"2. Trang 1 hiển thị đúng 15 chip; trang 2 hiển thị đúng phần còn lại, không lặp/thiếu.",<cần confirm> Câu hỏi mở #3 — chưa xác định 15 records/trang có phải số cố định hay chỉ là số lượng demo.
+9,Happy,Ô Stop word (search),Có kết quả,,"Đã có ≥2 stop word, VD ""the"", ""and""","1. Nhập ""the"" vào ô Stop word.
+2. Quan sát danh sách.",,2. Danh sách chỉ còn chip khớp từ khoá.,
+10,Edge,,No result,,Đã có dữ liệu stop word,1. Nhập 1 từ không khớp stop word nào.,,1. <cần confirm> — chưa xác định chính xác nội dung chữ empty-state khi search không ra kết quả (chưa đọc được state này qua Figma).,<cần confirm> Chưa có bằng chứng trực tiếp cho state này.
+11,Happy,,Xoá hết từ khoá tìm kiếm,,Đang hiển thị kết quả đã lọc theo từ khoá,"1. Xoá hết nội dung ô Stop word.
+2. Quan sát danh sách.",,2. Danh sách quay lại hiển thị đầy đủ như trước khi search.,
+12,Edge,,Search khớp chính xác hay khớp 1 phần,,"Đã có stop word ""and""","1. Nhập ""an"" (1 phần của ""and"") vào ô Stop word.
+2. Quan sát danh sách.",,"2. <cần confirm> — chưa xác định ô search khớp chính xác toàn bộ từ hay khớp 1 phần (""and"" có hiển thị lại khi gõ ""an"" không).",<cần confirm> Câu hỏi mở #9.
+13,Edge,,Paste chuỗi rất dài vào ô Search,,Đang ở màn Stop words,1. Paste 1 chuỗi ký tự rất dài (vài nghìn ký tự) vào ô Stop word.,,1. Ô nhận chuỗi không crash/treo trang; danh sách trả về empty state hợp lý (không khớp kết quả nào).,
+14,Edge,Kích thước chip,Stop word rất dài (vượt 100% chiều rộng dòng),,Đang ở modal Create,"1. Nhập 1 stop word rất dài (VD 1 câu dài không dấu cách phù hợp, dài hơn chiều rộng 1 dòng chip) và Save.
+2. Quan sát chip vừa tạo trên danh sách.",,"2. Chip chiếm trọn 100% chiều rộng dòng; phần nội dung vượt quá bị cắt và hiển thị dấu ""…"" ở cuối, không xuống dòng giữa chữ, không vỡ layout.",
+15,Edge,,"Stop word rất ngắn (1 ký tự, boundary min 285px)",,Đang ở modal Create,"1. Nhập 1 ký tự (VD ""a"") và Save.
+2. Quan sát chip vừa tạo.",,"2. Chip hiển thị đúng độ rộng tối thiểu 285px, đủ chứa 1 ký tự, không bị méo/cắt.",
+,,=== CREATE NEW STOP WORD ===,,,,,,,
+16,UI,Modal Create - trạng thái mặc định,Mở modal,,Vừa click [Create new],1. Quan sát modal vừa mở.,,"1. Tiêu đề ""Create new stop word""; bảng gồm cột ""Stop word"" + ""Action""; có sẵn 1 dòng input trống, placeholder ""Add a stop word"", kèm icon xoá dòng; nút [Save Stop Word] đang disable (xám).",
+17,Happy,,Nhập 1 stop word hợp lệ rồi Save,,Vừa mở modal Create,"1. Nhập ""the"" vào dòng input.
+2. Click [Save Stop Word].",,"1. Nút [Save Stop Word] chuyển sang trạng thái enable (cam) ngay khi có giá trị hợp lệ.
+2. Lưu thành công; hiện toast ""Success / Created stop word!""; chip ""the"" xuất hiện trên Stop Word List.",
+18,Happy,,Thêm nhiều dòng bằng [Add more stop word],,Đang ở modal Create,"1. Click nút [Add more stop word] 2 lần.
+2. Nhập giá trị khác nhau vào từng dòng mới.",,2. Thêm đúng 2 dòng input mới trống; modal tự cuộn xuống dòng mới nhất; mỗi dòng nhận giá trị độc lập.,
+19,Happy,,Xoá 1 dòng bằng icon trash (chưa Save),,Đang có ≥2 dòng input đã nhập dữ liệu,"1. Click icon trash của 1 dòng.
+2. Quan sát danh sách dòng trong modal.",,2. Dòng đó biến mất khỏi modal ngay lập tức (không có popup xác nhận riêng); các dòng còn lại giữ nguyên giá trị.,
+20,Negative,Validate khi Save,2 dòng trùng nhau trong cùng phiên Create,,Đang ở modal Create với ≥2 dòng input,"1. Nhập cùng 1 giá trị (VD ""the"") vào 2 dòng khác nhau.
+2. Click [Save Stop Word].",,"2. Hiện chữ đỏ ""Stopword must be unique!"" tại các dòng trùng; chặn lưu.",
+21,Negative,,1 dòng trùng với stop word đã tồn tại,,"Đã có stop word ""the"" trong danh sách","1. Nhập ""the"" vào 1 dòng input.
+2. Click [Save Stop Word].",,"2. Hiện chữ đỏ ""Stop word already existed"" tại dòng đó; chặn lưu.",
+22,Edge,,Stop word để trống rồi Save,,Đang ở modal Create với dòng input duy nhất để trống,1. Click [Save Stop Word] khi dòng input đang rỗng.,,"1. <cần confirm> — chưa xác định nút [Save Stop Word] có bị chặn do field rỗng hay cho phép lưu; theo quan sát hiện tại nút chỉ enable khi có giá trị, nhưng chưa rõ hành vi khi trộn dòng có giá trị và dòng rỗng trong cùng phiên.",<cần confirm> Câu hỏi mở #7.
+23,Edge,,Paste chuỗi dài/emoji vào ô input,,Đang ở modal Create,"1. Paste 1 chuỗi có emoji/ký tự Unicode rất dài vào dòng input.
+2. Quan sát giá trị vừa nhập.",,"2. Ô nhận đúng nguyên văn nội dung đã paste, không vỡ layout/encoding lỗi.",
+24,Happy,,Cancel đóng modal không lưu,,Đã nhập dữ liệu nhưng chưa Save,"1. Click [Cancel].
+2. Quan sát màn Stop words.",,"2. Modal đóng, không tạo stop word nào; danh sách giữ nguyên như trước.",
+25,Edge,Error guessing - Save,Spam click Save liên tiếp,,Đang ở modal Create với dữ liệu hợp lệ,1. Click liên tiếp nhiều lần thật nhanh vào nút [Save Stop Word].,,"1. Chỉ tạo/lưu đúng 1 lần, không sinh nhiều stop word trùng nhau hoặc lỗi double-submit.",
+,,=== DELETE STOP WORD ===,,,,,,,
+26,UI,Popup xác nhận xoá,Nội dung popup,,Đã có ≥1 stop word,1. Click icon Delete của 1 chip.,,"1. Mở popup icon vàng (i) + tiêu đề ""Delete stop word?"" + mô tả ""Deleted stop word cannot be recovered. Do you still want to continue?"" + 2 nút.",
+27,UI,,Màu/label 2 nút trong popup,,"Popup ""Delete stop word?"" đang mở",1. Quan sát 2 nút ở popup.,,"1. Nút nền xám viền ghi ""Delete""; nút nền cam ghi ""Cancel"" — nhãn/màu đảo ngược so với pattern chung của dự án (cam = hành động chính), giống hiện tượng đã ghi nhận ở Synonyms/Suggestion Dictionary (dùng chung component Popups).","<cần confirm> Câu hỏi mở #4 — chờ xác nhận designer/BA, chung cho cả 3 feature Search dùng component Popups."
+28,Happy,,"Bấm nút xám ""Delete"" xác nhận xoá",,"Popup ""Delete stop word?"" đang mở","1. Click nút nền xám ""Delete"".
+2. Quan sát màn Stop words.",,"2. Chip bị xoá khỏi Stop Word List; hiện toast xác nhận thành công.
+- <cần confirm> chưa xác định nội dung đúng là gì: nếu hệ thống hiện đúng nội dung riêng cho Delete (VD ""Deleted stop word!"") thì đạt; nếu hiện lại y nguyên ""Created stop word!"" (giống demo Figma quan sát được ở flow Delete) thì đây là bug nội dung toast sai ngữ cảnh, cần log lại.","<cần confirm> Câu hỏi mở #5 — Figma demo ở chính flow Delete hiển thị toast ""Created stop word!"" (tái dùng sai toast Create), chưa rõ đây là lỗi copy-paste demo hay đúng ý đồ thật."
+29,Happy,,"Bấm nút cam ""Cancel"" huỷ xoá",,"Popup ""Delete stop word?"" đang mở","1. Click nút cam ""Cancel"".
+2. Quan sát màn Stop words.",,"2. Popup đóng; stop word vẫn còn nguyên trên danh sách, không có gì thay đổi.",
+30,Edge,,Đóng popup bằng Esc/click ra ngoài,,"Popup ""Delete stop word?"" đang mở",1. Nhấn phím Esc hoặc click vào vùng tối bên ngoài popup.,,"1. Popup đóng, coi như huỷ xoá (hành vi giống bấm ""Cancel""); stop word không bị xoá.",
+,,=== EXPORT / IMPORT ===,,,,,,,
+31,UI,Nút Export/Import,Hiển thị cạnh nút Create new,,Đang ở màn Stop words (tab Manual Stop Word),1. Quan sát khu vực header danh sách cạnh nút [Create new].,,"1. Hiển thị 2 nút ""Export"" (icon mũi tên lên) và ""Import"" (icon mũi tên xuống), đang active — không có badge ""Coming soon"" (khác tab AI Stop Word).",
+32,Edge,,Click nút Export,,Danh sách có ≥1 stop word,1. Click nút [Export].,,"1. <cần confirm> — chưa xác định hành vi khi click (tải file ngay, định dạng file xuất ra là gì, hay mở modal cấu hình trước khi xuất) vì không tìm thấy modal/flow nào cho Export trong Figma.",<cần confirm> Câu hỏi mở #11 (phần mở rộng) — chưa có modal/flow thiết kế cho Export.
+33,Edge,,Click nút Import,,Đang ở màn Stop words,1. Click nút [Import].,,"1. <cần confirm> — chưa xác định hành vi khi click (mở file picker ngay, hay có modal hướng dẫn định dạng/tải file mẫu trước) vì không tìm thấy modal/flow nào cho Import trong Figma.",<cần confirm> Câu hỏi mở #11 (phần mở rộng) — chưa có modal/flow thiết kế cho Import.
+34,Edge,,Import file chứa dòng trùng với stop word đã tồn tại,,"Đã có stop word ""the""; file import có chứa dòng ""the""","1. Thực hiện Import 1 file chứa dòng trùng với stop word đã có.
+2. Quan sát kết quả.",File import chứa ≥1 dòng trùng dữ liệu đã có,"2. <cần confirm> — chưa xác định hệ thống có áp dụng đúng 2 rule validate đã có (""Stop word already existed""/""Stopword must be unique!"") cho luồng Import, hay có cơ chế xử lý khác (bỏ qua dòng trùng, báo lỗi toàn bộ file, hay hỏi xác nhận ghi đè).",<cần confirm> Không có modal/flow Import nào được thiết kế để đối chiếu.
+35,Edge,,Import file sai định dạng (không phải CSV),,Đang ở màn Stop words,1. Thực hiện Import 1 file không đúng định dạng mong đợi (VD .txt/.xlsx thay vì .csv).,,1. <cần confirm> — chưa xác định hệ thống có validate định dạng file và báo lỗi rõ ràng hay xử lý thế nào khi gặp file sai định dạng.,<cần confirm> Không có modal/flow Import nào được thiết kế để đối chiếu.
+,,=== IMPACT / REGRESSION ===,,,,,,,
+36,Integration,Instant Search Widget (ISW),Tạo mới stop word → ISW lọc đúng từ khỏi query ngay khi gõ khớp,,"Chưa có stop word ""the""; đã có sản phẩm tên chứa ""the denim shirt""","1. [Merchant] Tạo stop word ""the"", Save.
+2. [Shopper] Gõ ""the denim shirt"" vào Instant Search Widget.",,"2. ISW loại bỏ từ ""the"" khỏi query trước khi so khớp, trả kết quả tương đương search ""denim shirt"" (không bị thu hẹp bởi từ ""the"").",
+37,Integration,,Xoá stop word → ISW ngừng lọc từ đó,,"Stop word ""the"" đang tồn tại, có hiệu lực trên ISW","1. [Merchant] Xoá stop word ""the"" (qua popup Delete, xác nhận).
+2. [Shopper] Gõ lại ""the denim shirt"" vào ISW.",,"2. ISW KHÔNG còn loại từ ""the"" khỏi query — kết quả trả về theo đúng cụm ""the denim shirt"" nguyên văn (có thể ít/khác kết quả hơn so với khi stop word còn hiệu lực).",
+38,Integration,,Gõ thêm ký tự khiến query vừa khớp thêm 1 stopword giữa chừng,,"Stop word ""the"" đang tồn tại, Status/hiệu lực đang ON","1. [Shopper] Gõ ""th"" vào ISW (chưa khớp stopword nào), quan sát kết quả.
+2. [Shopper] Gõ thêm ký tự thành ""the "" (khớp đúng từ ""the""), quan sát lại kết quả.",,"1. Kết quả theo đúng chuỗi ""th"" gõ được, chưa áp dụng lọc stopword (""th"" không phải ""the"").
+2. Ngay khi query khớp đúng từ ""the"", ISW tự động lọc bỏ từ này và cập nhật lại kết quả — đúng theo dataflow ""mỗi lần gõ thêm ký tự → lặp lại kiểm tra stopword"" (Lark mục 3.5, bước 5).",
+39,Integration,,Xoá bớt ký tự khiến query không còn khớp stopword nữa,,"Shopper đang gõ ""the denim"" (đã được lọc bỏ ""the"")","1. [Shopper] Xoá bớt ký tự, sửa thành ""th denim"" (không còn khớp đúng từ ""the"").
+2. Quan sát lại kết quả ISW.",,"2. ISW không còn áp dụng lọc stopword cho phần ""th""; kết quả cập nhật lại theo đúng chuỗi mới đang gõ (chiều ngược của việc thêm ký tự — cũng phải tính lại theo từng keystroke).",
+40,Integration,,Stopword filter có áp dụng khi search trực tiếp trên Search Result Page (không qua ISW) không,,"Stop word ""the"" đang tồn tại, Status/hiệu lực đang ON","1. [Shopper] Bỏ qua ISW, search trực tiếp cụm ""the denim shirt"" rồi submit để vào Search Result Page.
+2. Đối chiếu kết quả SRP với kết quả ISW của cùng cụm từ.",,2. <cần confirm> — chưa xác định SRP có áp dụng lọc stopword giống ISW hay chỉ ISW mới có cơ chế lọc theo dataflow Lark mô tả (vốn chỉ nhắc rõ phạm vi ISW).,<cần confirm> Câu hỏi mở #10.
+41,Integration,Component Popups dùng chung (Synonyms / Suggestion Dictionary / Redirects),Nhãn/màu popup Delete của Stopwords nhất quán với 3 feature còn lại dùng chung component gốc,,"Popup Delete của Stopwords, Synonyms, Suggestion Dictionary, Redirects đều dùng chung 1 symbol ""Popups"" (quan sát qua Figma)","1. [QA] Mở popup Delete ở màn Stop words.
+2. [QA] Đối chiếu màu sắc + nhãn 2 nút với popup Delete đã ghi nhận ở Synonyms/Suggestion Dictionary (nút xám ""Delete"", nút cam ""Cancel"").",,"2. Popup Delete của Stopwords hiển thị giống hệt pattern đã ghi nhận ở 2 feature kia — xác nhận đây là 1 hiện tượng gốc duy nhất ở component chung, áp dụng xuyên suốt cả 4 feature Search (Redirects là feature cuối còn lại chưa xác nhận).",<cần confirm> Chờ xác nhận designer/BA chung cho cả 4 feature — khi có kết luận chỉ cần sửa 1 lần ở component gốc.
+42,Integration,Synonyms,Thêm 1 stop word MỚI trùng với 1 Unified synonym ĐÃ TỒN TẠI — rule nào áp dụng trước,,"Synonym Group đang có Unified synonym ""the"" (giả định để test, dù hiếm gặp thực tế)","1. [Merchant] Tạo stop word mới trùng giá trị ""the"".
+2. [Shopper] Search cụm có chứa từ ""the"" trên storefront.
+3. [Merchant] Đối chiếu kết quả — xem Stopword có bị loại bỏ trước khi áp Synonym hay Synonym mở rộng trước rồi mới lọc Stopword.",,"3. <cần confirm> — chưa xác định thứ tự áp dụng rule khi thêm stop word MỚI trùng với synonym đã tồn tại từ trước (chiều ngược của case đã ghi nhận ở Synonyms — ở đó test Synonym có sẵn rồi mới thêm Stopword, còn đây là Stopword mới thêm sau khi Synonym đã có sẵn); có thể cùng 1 câu trả lời nhưng cần xác nhận không có khác biệt theo thứ tự tạo trước/sau.","<cần confirm> Không có tài liệu mô tả pipeline xử lý search khi có cả 2 rule, bất kể thứ tự tạo trước/sau."
+43,Integration,Redirects,1 từ khoá vừa là Stopword vừa có Redirect rule — rule nào ưu tiên,,"Stop word ""sale"" đang tồn tại; đồng thời có Redirect trỏ từ khoá ""sale"" sang 1 trang cụ thể","1. [Shopper] Search đúng từ khoá ""sale"".
+2. [Merchant] Đối chiếu hành vi thật — có bị Redirect sang trang đích ngay (không hiện SRP) hay bị lọc bỏ như stopword trước (coi như search rỗng/không hiệu lực)?",,"2. <cần confirm> — chưa xác định Redirect có ưu tiên chạy trước khi Stopword filter kịp loại bỏ từ khoá, hay Stopword filter chạy trước khiến Redirect không còn từ khoá gốc để khớp.",<cần confirm> Không có bằng chứng trong search-redirects-specs.md lẫn search-stopwords-specs.md.
+44,Integration,Merchandise Campaign,Campaign trigger keyword chứa 1 stop word — Campaign match theo nguyên văn hay theo bản đã lọc stopword,,"Stop word ""the"" đang tồn tại; Campaign đang active, Trigger = ""When customers search a keyword"" = ""the shoes""","1. [Shopper] Search ""shoes"" (không gõ ""the"").
+2. [Merchant] Đối chiếu kết quả search có bị Campaign tác động (Pin/Hide/Boost...) hay không.",,"2. <cần confirm> — chưa xác định Campaign trigger keyword ""the shoes"" có tự khớp theo bản đã lọc stopword (""shoes"") hay chỉ khớp đúng nguyên văn ""the shoes"" (không bao giờ khớp nếu shopper không gõ đúng cả cụm có ""the"").",<cần confirm> Spec merchandise-campaign-specs.md không mô tả tương tác với Stopwords.
+45,Integration,Search Relevance (Advanced Settings),Stopword bị loại trước hay sau khi tính điểm relevance,,"Stop word ""the"" đang tồn tại; Search Relevance weighting đang cấu hình mặc định","1. [Shopper] Search cụm có chứa từ ""the"" và các từ khoá khác có trọng số relevance khác nhau.
+2. [Merchant] Đối chiếu thứ tự/điểm relevance của kết quả trả về.",,2. <cần confirm> — chưa xác định Stopword có bị loại khỏi query TRƯỚC khi tính relevance (không ảnh hưởng điểm) hay vẫn được tính vào rồi mới loại kết quả không liên quan sau (có thể ảnh hưởng điểm số trung gian).,<cần confirm> Không có bằng chứng trong search-advanced-setting-specs.md lẫn search-stopwords-specs.md.
