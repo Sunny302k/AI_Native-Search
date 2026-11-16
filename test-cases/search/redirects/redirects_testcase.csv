@@ -1,0 +1,124 @@
+﻿ID,Test Type,Test Objective,,,Preconditions,Test Steps,Input DB/Setting,Expected Result,Note
+Purpose:,,"Cho merchant chủ động trỏ search term cụ thể sang 1 URL đích thay vì để search engine tự trả kết quả, giúp shopper tìm đúng trang dù gõ sai/gõ từ khoá không khớp sản phẩm nào.",,,,,,,
+1,Happy,Redirects List,Nút back điều hướng đúng về màn trước,,Đang ở màn Redirects,"1. Click icon back ← cạnh tiêu đề ""Redirects"".",,1. Điều hướng đúng về màn trước đó (màn Search Engine Setup/danh sách feature Search).,
+2,Happy,,Feature Tour hiển thị đúng nội dung,,Lần đầu vào màn Redirects,"1. Vào màn Redirects.
+2. Quan sát card Feature Tour.",,"1. Card ""FEATURE TOUR / What is redirect ?"" hiển thị mở sẵn, đủ tiêu đề ""Use redirect to display relevant recommendations to customers when searching"", bullet mô tả, ảnh demo ""Search for: shipping"" → ""Redirect to: Shipping Policy"".",
+3,UI,,Feature Tour thu gọn/mở lại,State transition,,"1. Click icon mũi tên thu gọn card Feature Tour.
+2. Click lại để mở ra.",,"1. Card thu gọn, chỉ còn dòng tiêu đề.
+2. Card mở lại đúng nội dung ban đầu.",
+4,Happy,,Tab Manual Redirects hiển thị mặc định,,,1. Vào màn Redirects.,,"1. Chỉ có đúng 1 tab ""Manual Redirects"", đang active (gạch chân cam), không có tab AI nào khác.",
+5,Happy,,Danh sách redirect hiển thị đủ cột,,Đã có ít nhất 1 redirect,1. Quan sát bảng danh sách.,,"1. Hiển thị đủ cột Status (toggle)/Search terms/Redirect to (link xanh)/Action (icon Edit+Delete), đúng dữ liệu đã tạo.",
+6,UI,,Cột Redirect to là link có thể click,<cần confirm>,Đã có ít nhất 1 redirect,1. Click vào giá trị cột Redirect to.,,<cần confirm> chưa có bằng chứng URL có mở tab mới/điều hướng khi click hay chỉ là style gợi ý link — ghi nhận kết quả thực tế khi chạy.,<cần confirm>
+7,UI,,Icon cạnh header cột Status/Search terms/Redirect to,<cần confirm>,,"1. Click icon dropdown cạnh ""Status"".
+2. Click icon kính lúp cạnh ""Search terms"".
+3. Click icon ""?"" cạnh ""Redirect to"".",,"<cần confirm> chưa rõ các icon này có mở ô input search/filter ẩn, sort cột, hay chỉ hiển thị tooltip — ghi nhận hành vi thực tế từng icon khi chạy.",<cần confirm>
+8,UI,,Xác nhận màn List không có ô input search/filter dạng text-box độc lập,,,1. Quan sát toàn bộ khu vực header bảng danh sách (ngoài 3 icon nhỏ cạnh Status/Search terms/Redirect to).,,1. Không có ô input text-box search/filter nào hiển thị sẵn trên màn danh sách; chỉ có 3 icon nhỏ cạnh header cột (hành vi click từng icon đã test riêng ở case khác).,
+9,Edge,,Status toggle ON/OFF,,,"1. Click toggle Status của 1 redirect từ ON sang OFF.
+2. Bật lại ON.",,"1. Toggle chuyển trạng thái ngay, không cần Save riêng.
+2. Toggle trở lại ON đúng trạng thái ban đầu.",
+10,Happy,,Click icon Edit mở modal Edit,,,1. Click icon Edit ở 1 dòng.,,"1. Modal ""Edit redirect"" mở, load sẵn đúng Search terms + Redirect to của dòng đó.",
+11,Happy,,Click icon Delete mở popup xác nhận,,,1. Click icon Delete ở 1 dòng.,,"1. Popup ""Delete redirect?"" hiển thị.",
+12,Edge,,Pagination đúng 15 records/trang,Boundary 15/16,Có 16 redirect,"1. Quan sát trang 1.
+2. Chuyển sang trang 2.",,"1. Trang 1 hiển thị đúng 15 bản ghi.
+2. Trang 2 hiển thị 1 bản ghi còn lại.",
+13,UI,,Empty state khi chưa có redirect nào,<cần confirm>,Chưa tạo redirect nào,1. Vào màn Redirects.,,<cần confirm> chưa có bằng chứng nội dung/hình ảnh state rỗng — ghi nhận thực tế khi chạy.,<cần confirm>
+14,Happy,,Nút Create new mở modal Create,,,1. Click [Create new].,,"1. Modal ""Create new redirect"" mở, 1 dòng input trống mặc định.",
+15,UI,,Nút Export hiển thị và click,<cần confirm>,Đã có ít nhất 1 redirect,1. Click [Export].,,"<cần confirm> chưa có frame/flow mô tả hành vi Export cụ thể (file tải về định dạng gì, modal nào mở ra) — ghi nhận thực tế khi chạy.",<cần confirm>
+16,UI,,Nút Import hiển thị và click,<cần confirm>,,1. Click [Import].,,<cần confirm> chưa có frame/flow mô tả hành vi Import cụ thể — ghi nhận thực tế khi chạy.,<cần confirm>
+17,Negative,,Spam click Create new,Error guessing,,1. Click liên tục nhiều lần vào [Create new].,,"1. Chỉ mở đúng 1 modal, không mở nhiều modal chồng nhau.",
+18,Happy,Create New Redirect,Tạo 1 redirect hợp lệ,,Modal Create đang mở,"1. Nhập Search terms hợp lệ, chưa tồn tại.
+2. Nhập Redirect to là URL hợp lệ.
+3. Click [Save Redirects].",,"3. Lưu thành công, toast ""Success / Created redirect!"" hiển thị; redirect mới xuất hiện trong danh sách.",
+19,Happy,,Nhập nhiều search term phân tách dấu phẩy,,Modal Create đang mở,"1. Nhập Search terms dạng ""shipping, shipping policy"".
+2. Nhập Redirect to hợp lệ.
+3. Click [Save Redirects].",,3. Lưu thành công; cột Search terms hiển thị đúng cả 2 từ khoá phân tách phẩy.,
+20,UI,,Placeholder 2 ô input,,Modal Create vừa mở chưa nhập gì,1. Quan sát 2 ô input dòng đầu.,,"1. Ô Search terms placeholder ""Add a search term, separated by commas""; ô Redirect to placeholder ""https://example.com"".",
+21,Happy,,Add more redirect thêm dòng,,Modal Create đang mở,"1. Click [Add more redirect] nhiều lần.
+2. Quan sát danh sách dòng input.",,2. Mỗi lần click thêm đúng 1 dòng cặp input mới và tự cuộn xuống dòng mới thêm.,
+22,Edge,,Xoá 1 dòng bằng icon trash khi chưa Save,,Modal Create đang có từ 2 dòng trở lên,1. Click icon trash ở 1 dòng bất kỳ.,,"1. Dòng đó bị xoá khỏi modal, các dòng còn lại giữ nguyên dữ liệu đã nhập.",
+23,Negative,,Validate: Search term đã tồn tại trong list,Rule #1,"Đã có redirect với Search term ""shipping""","1. Nhập Search terms = ""shipping"".
+2. Nhập Redirect to hợp lệ.
+3. Click [Save Redirects].",,"3. Hiển thị lỗi ""Redirect already existed!"" ngay dưới ô Search terms, không lưu được.",<cần confirm> tiêu chí so khớp trùng — chính xác toàn chuỗi hay từng search term tách lẻ
+24,Negative,,Validate: 2 dòng cùng phiên Create trùng search term,Rule #2,Modal Create có 2 dòng,"1. Dòng 1 nhập Search terms = ""shipping"".
+2. Dòng 2 nhập Search terms = ""shipping"" (khác Redirect to).
+3. Click [Save Redirects].",,"3. Hiển thị lỗi ""Search term can't have two redirect"" ở cả 2 dòng, không lưu được — áp dụng dù 2 dòng có Redirect to khác nhau.",
+25,Negative,,Validate: Redirect to sai định dạng URL,Rule #3,Modal Create đang mở,"1. Nhập Search terms hợp lệ.
+2. Nhập Redirect to = ""domestic-shipping"" (thiếu scheme).
+3. Click [Save Redirects].",,"3. Hiển thị lỗi ""Redirect to is not a valid URL format."" ngay dưới ô Redirect to, không lưu được.",
+26,Negative,,Validate: nhiều dòng vi phạm nhiều loại rule khác nhau trong cùng 1 lần Save,Tổ hợp Rule #1+#2+#3,"Modal Create có 3 dòng; đã có sẵn redirect với Search term ""shipping""","1. Dòng 1 nhập Search terms = ""shipping"" (trùng bản ghi đã Save — phạm Rule #1).
+2. Dòng 2 nhập Search terms = ""sale"" và dòng 3 cũng nhập Search terms = ""sale"" (trùng nhau trong cùng phiên — phạm Rule #2), Redirect to ở 2 dòng này hợp lệ.
+3. Dòng còn lại (nếu Add more thêm) nhập Redirect to = ""domestic-shipping"" thiếu scheme (phạm Rule #3).
+4. Click [Save Redirects].",,"4. Mỗi dòng hiển thị đúng message lỗi riêng của rule nó vi phạm, đồng thời trên cùng 1 modal (dòng 1: ""Redirect already existed!""; dòng 2+3: ""Search term can't have two redirect""; dòng vi phạm Rule #3: ""Redirect to is not a valid URL format.""); không lưu được dòng nào cho tới khi toàn bộ lỗi được sửa.",
+27,Negative,,Validate: để trống Search terms,<cần confirm>,Modal Create đang mở,"1. Để trống ô Search terms, chỉ nhập Redirect to.
+2. Click [Save Redirects] (nếu nút enable được).",,<cần confirm> chưa rõ message lỗi khi trường bắt buộc để trống — chỉ quan sát được nút Save giữ trạng thái disable khi còn trống.,<cần confirm>
+28,Negative,,Validate: để trống Redirect to,<cần confirm>,Modal Create đang mở,"1. Nhập Search terms hợp lệ, để trống Redirect to.
+2. Click [Save Redirects] (nếu nút enable được).",,<cần confirm> tương tự case để trống Search terms — chưa rõ message lỗi cụ thể.,<cần confirm>
+29,Edge,,Save disable khi có dòng lỗi và enable khi toàn bộ hợp lệ,Decision table,Modal Create có 2 dòng,"1. Dòng 1 nhập hợp lệ.
+2. Dòng 2 để trống hoặc nhập sai định dạng URL.
+3. Quan sát nút Save Redirects.",,3. Nút Save Redirects giữ trạng thái disable (xám) khi còn ít nhất 1 dòng chưa hợp lệ; chỉ chuyển cam khi TOÀN BỘ dòng hợp lệ.,
+30,Edge,,Mất mạng/timeout giữa lúc Click Save Redirects,<cần confirm> Error guessing,Dữ liệu hợp lệ đã nhập đủ ở modal Create,"1. Ngắt kết nối mạng (hoặc giả lập timeout) ngay sau khi click [Save Redirects].
+2. Khôi phục mạng, tải lại danh sách Redirects.",,<cần confirm> không tạo bản ghi nửa vời (chỉ 1 phần search term/URL được lưu); hệ thống báo lỗi rõ ràng để merchant biết Save chưa thành công và có thể thử lại — ghi nhận hành vi thực tế khi chạy.,<cần confirm> chưa có bằng chứng tài liệu/Figma mô tả hành vi khi mất mạng giữa lúc Save
+31,Edge,,Giới hạn số dòng tối đa khi Create,<cần confirm>,Modal Create đang mở,1. Click [Add more redirect] liên tục nhiều lần (vd 50 lần).,,<cần confirm> chưa thấy giới hạn trên Figma — ghi nhận ngưỡng thực tế khi chạy.,<cần confirm>
+32,Edge,,Giới hạn số search term trong 1 dòng,<cần confirm>,Modal Create đang mở,1. Nhập Search terms rất nhiều từ khoá phân tách phẩy (vd 50 từ).,,<cần confirm> chưa thấy giới hạn trên Figma — ghi nhận ngưỡng thực tế khi chạy.,<cần confirm>
+33,Negative,,Paste search term dài/emoji/khoảng trắng,Error guessing,Modal Create đang mở,"1. Paste chuỗi rất dài, có emoji và khoảng trắng đầu/cuối vào ô Search terms.
+2. Click [Save Redirects].",,<cần confirm> 2 điểm cần xác nhận riêng khi chạy: (a) khoảng trắng đầu/cuối có bị tự động trim hay lưu nguyên văn; (b) chuỗi quá dài/chứa emoji có bị validate chặn riêng (message lỗi gì) hay được chấp nhận lưu nguyên vẹn. Hệ thống không được crash ở cả 2 điểm.,"<cần confirm> Expected Result gốc quá chung chung (""xử lý hợp lý""), đã tách rõ 2 nhánh cần xác nhận"
+34,Happy,,Cancel đóng modal không lưu,State transition,Modal Create đã nhập dữ liệu,"1. Nhập dữ liệu vào 1 dòng.
+2. Click [Cancel].",,"2. Modal đóng lại, không có redirect mới nào được tạo trong danh sách.",
+35,Negative,,Spam click Save Redirects,Error guessing,Dữ liệu hợp lệ đã nhập đủ,1. Click liên tục nhiều lần vào [Save Redirects].,,"1. Chỉ tạo đúng 1 redirect, không tạo trùng nhiều bản ghi do double-submit.",
+36,UI,,Đóng modal bằng icon Close/Esc/click ngoài,,,"1. Mở modal Create.
+2. Click icon Close (hoặc Esc / click vùng overlay ngoài modal).",,"2. Modal đóng, không lưu dữ liệu đã nhập dở.",
+37,Happy,Edit Redirect,Sửa redirect thành công,,Đã có ít nhất 1 redirect,"1. Click icon Edit ở 1 dòng.
+2. Sửa Redirect to sang URL hợp lệ khác.
+3. Click [Save Redirect].",,"3. Lưu thành công, toast ""Success / Saved changes!"" hiển thị — khác text toast của Create; danh sách cập nhật đúng giá trị mới.",
+38,UI,,Modal Edit load sẵn dữ liệu cũ,,,"1. Click icon Edit ở 1 dòng có Search terms = ""shipping, shipping policy"".",,"1. Modal ""Edit redirect"" mở, 2 ô input đã điền sẵn đúng giá trị Search terms/Redirect to của dòng đó.",
+39,UI,,"Modal Edit chỉ 1 dòng, không Action/Add more",,,1. Mở modal Edit.,,"1. Bảng chỉ có 2 cột Search terms/Redirect to (không có cột Action); không có icon xoá dòng, không có nút ""Add more redirect"".",
+40,Negative,,Validate: sửa Redirect to sai định dạng URL,Rule #3 áp dụng ở Edit,Modal Edit đang mở,"1. Sửa Redirect to = ""domestic-shipping"" (thiếu scheme).
+2. Click [Save Redirect].",,"2. Hiển thị lỗi ""Redirect to is not a valid URL format."", không lưu được.",
+41,Negative,,Validate: sửa Search terms trùng với bản ghi khác đã tồn tại,Rule #1 áp dụng ở Edit,"Có redirect A (search term ""shipping"") và redirect B (search term ""return"")","1. Mở Edit redirect B.
+2. Sửa Search terms = ""shipping"" (trùng redirect A).
+3. Click [Save Redirect].",,"3. Hiển thị lỗi ""Redirect already existed!"", không lưu được.",
+42,Negative,,Validate: để trống Search terms/Redirect to khi Edit,<cần confirm>,Modal Edit đang mở,"1. Xoá trống ô Search terms (hoặc Redirect to).
+2. Click [Save Redirect] (nếu nút enable được).",,<cần confirm> tương tự Create — chưa rõ message lỗi cụ thể khi trường bắt buộc để trống.,<cần confirm>
+43,Happy,,Cancel đóng modal Edit không lưu,State transition,Đã sửa dữ liệu trong modal Edit,"1. Sửa Redirect to.
+2. Click [Cancel].",,"2. Modal đóng, dữ liệu redirect trong danh sách giữ nguyên như trước khi sửa.",
+44,Edge,,Mất mạng/timeout giữa lúc Click Save Redirect,<cần confirm> Error guessing,"Modal Edit đang mở, đã sửa dữ liệu hợp lệ","1. Ngắt kết nối mạng (hoặc giả lập timeout) ngay sau khi click [Save Redirect].
+2. Khôi phục mạng, tải lại danh sách Redirects.",,"<cần confirm> dữ liệu redirect KHÔNG bị ghi dở (giữ nguyên giá trị cũ nếu Save chưa hoàn tất, hoặc cập nhật đủ cả 2 field nếu đã hoàn tất) — không rơi vào trạng thái lưng chừng (VD chỉ cập nhật Search terms mà không cập nhật Redirect to); hệ thống báo lỗi rõ ràng để merchant biết cần thử lại — ghi nhận hành vi thực tế khi chạy.",<cần confirm> chưa có bằng chứng tài liệu/Figma mô tả hành vi khi mất mạng giữa lúc Save
+45,Edge,,"2 tab cùng thao tác trên 1 redirect — Tab A Edit, Tab B Delete",<cần confirm> Error guessing,"Cùng 1 redirect đang Active, mở 2 tab trình duyệt cùng đăng nhập Admin","1. Tab A: mở modal Edit cho redirect X, sửa Redirect to hợp lệ nhưng CHƯA Save.
+2. Tab B: mở popup Delete cho chính redirect X, click [Delete] để xoá.
+3. Quay lại Tab A, click [Save Redirect].",,"<cần confirm> hành vi khi redirect X đã bị xoá ở Tab B trước khi Tab A Save — hệ thống báo lỗi ""bản ghi không còn tồn tại"" hay vô tình tạo lại redirect X như 1 bản ghi mới; không được để xảy ra lỗi ngầm/crash — ghi nhận hành vi thực tế khi chạy.",<cần confirm> chưa có bằng chứng tài liệu/Figma mô tả hành vi race condition giữa 2 phiên thao tác cùng 1 bản ghi
+46,Happy,Delete Redirect,Xác nhận xoá thành công,,Đã có ít nhất 1 redirect,"1. Click icon Delete ở 1 dòng.
+2. Click nút ""Delete"" trong popup.",,2. Redirect bị xoá khỏi danh sách; ghi nhận toast/kết quả thực tế (spec gốc không nêu rõ toast riêng cho Delete).,<cần confirm> nội dung toast khi Delete thành công
+47,UI,,Nội dung popup Delete,,,1. Click icon Delete ở 1 dòng.,,"1. Popup hiển thị tiêu đề ""Delete redirect?"", mô tả ""Deleted redirect cannot be recovered. Do you still want to continue?"", 2 nút: nền xám ghi ""Delete"", nền cam ghi ""Cancel"".","<cần confirm> nhãn/màu nút bị đảo ngược so với quy ước cam = primary action — bug chung component Popups dùng ở cả Synonyms/Suggestion Dictionary/Stopwords/Redirects, chỉ cần 1 câu hỏi/1 bug duy nhất gửi designer"
+48,Happy,,Cancel huỷ xoá,,Đã có ít nhất 1 redirect,"1. Click icon Delete ở 1 dòng.
+2. Click nút ""Cancel"" trong popup.",,"2. Popup đóng, redirect không bị xoá, vẫn còn nguyên trong danh sách.",
+49,UI,,Đóng popup Delete bằng Esc/click ngoài,,,"1. Mở popup Delete.
+2. Nhấn phím Esc (hoặc click vùng ngoài popup).",,"2. Popup đóng, redirect không bị xoá.",
+50,Negative,,Spam click Delete trong popup,Error guessing,,"1. Mở popup Delete.
+2. Click liên tục nhiều lần vào nút ""Delete"".",,"2. Redirect chỉ bị xoá đúng 1 lần, không phát sinh lỗi do double-click.",
+51,Edge,,Mất mạng/timeout giữa lúc Click Delete,<cần confirm> Error guessing,Popup Delete đang mở,"1. Ngắt kết nối mạng (hoặc giả lập timeout) ngay sau khi click [Delete] trong popup.
+2. Khôi phục mạng, tải lại danh sách Redirects.",,"<cần confirm> redirect không bị xoá ""lửng lơ"" (xoá 1 phần dữ liệu liên quan nhưng vẫn còn hiển thị trong danh sách, hoặc ngược lại); hệ thống báo lỗi rõ ràng để merchant biết Delete chưa thành công — ghi nhận hành vi thực tế khi chạy.",<cần confirm> chưa có bằng chứng tài liệu/Figma mô tả hành vi khi mất mạng giữa lúc Delete
+52,Integration,Instant Search Widget (ISW),Redirect áp dụng khi gõ đúng search term đơn + Enter trên ISW,,"Redirect Active, search term 1 từ đơn, ISW đang bật","1. Mở ISW trên storefront.
+2. Gõ đúng search term đã cấu hình redirect.
+3. Bấm Enter.","Redirect: search term = ""shipping"", redirect to = ""https://example.com/shipping-policy"", status = Active",3. Trình duyệt điều hướng đúng sang URL đã cấu hình ở Redirect to.,
+53,Integration,,"Nhiều redirect tạo cùng 1 lần Create, mỗi search term dẫn đúng URL riêng",2 dòng cùng 1 lần Save,"2 redirect Active, tạo cùng 1 lần Create: search term A → URL A, search term B → URL B","1. Gõ search term A + Enter trên ISW.
+2. Mở lại ISW, gõ search term B + Enter.","Redirect A: ""shipping"" → URL A. Redirect B: ""return policy"" → URL B.","1. Điều hướng đúng sang URL A.
+2. Điều hướng đúng sang URL B, không bị lẫn URL A.",
+54,Integration,,Redirect sang URL mới sau khi Edit,,"Redirect Active, vừa Edit đổi Redirect to sang URL khác với URL cũ",1. Gõ đúng search term + Enter trên ISW.,"Redirect to cũ = URL A, vừa Edit sang URL B","1. Điều hướng sang URL B (URL mới vừa Edit), không còn sang URL A (URL cũ).",
+55,Integration,,Status OFF thì ISW không redirect nữa,Hướng tắt,"Redirect đang Active, vừa toggle Status sang OFF",1. Gõ đúng search term + Enter trên ISW.,,"1. Không bị redirect, ISW trả về kết quả search bình thường theo engine search, không chuyển hướng.",
+56,Integration,,Status bật lại ON thì redirect hoạt động trở lại,Hướng bật,"Redirect đang OFF, vừa toggle Status sang ON lại",1. Gõ đúng search term + Enter trên ISW.,,"1. Điều hướng đúng sang URL đã cấu hình, redirect hoạt động trở lại bình thường.",
+57,Integration,,Xoá redirect thì không còn redirect trên ISW,,"Redirect đang Active, vừa Delete",1. Gõ đúng search term (đã bị xoá redirect) + Enter trên ISW.,,"1. Không bị redirect, trả về kết quả search bình thường.",
+58,Integration,,Khớp search term nhưng không bấm Enter,,Redirect Active,"1. Gõ đúng search term trên ISW, không bấm Enter.
+2. Thực hiện 1 trong 2 cách: (a) click ra ngoài khung search; (b) click vào 1 gợi ý sản phẩm khác trong dropdown ISW.",,2. <cần confirm> hành vi redirect khi không bấm Enter — chưa rõ có bị điều hướng hay không ở cả 2 cách.,"<cần confirm> theo spec chỉ xác nhận trigger ""khớp + Enter"", chưa rõ hành vi khi không Enter"
+59,Integration,,"Gõ dở ký tự giữa chừng, hint redirect hiện/ẩn theo đúng mức khớp",,"Redirect Active, search term nhiều ký tự","1. Gõ từng ký tự dần cho tới khi khớp đúng search term (chưa Enter).
+2. Gõ thêm 1 ký tự khiến query không còn khớp search term nữa (chưa Enter).",,"1. <cần confirm> ISW hiện ""hint redirect"" ngay khi query khớp.
+2. <cần confirm> hint redirect biến mất khi query không còn khớp.","<cần confirm> nội dung/vị trí hiển thị ""Show redirects hint"" chưa có bằng chứng Figma, chỉ có mô tả bước trong flow Lark"
+60,Integration,Search Result Page (SRP),"ISW tắt hẳn, submit search khớp term trực tiếp trên SRP",,"Redirect Active, Instant Search Widget đang bị tắt (Advanced Setting)","1. Tắt Instant Search Widget ở Advanced Setting.
+2. Trên storefront, gõ đúng search term đã cấu hình redirect vào ô search và submit (không qua dropdown ISW vì đã tắt).",,"2. <cần confirm> có bị redirect sang URL đích không, hay redirect chỉ hoạt động trong phạm vi ISW.",<cần confirm> câu hỏi mở: Redirect chỉ áp dụng ISW hay cả khi submit từ SRP; ISW tắt thì Redirect có vô hiệu theo không
+61,Integration,,"ISW đang bật nhưng submit trực tiếp từ ô search SRP, không qua dropdown gợi ý",,"Redirect Active, Instant Search Widget đang bật","1. Gõ đúng search term đã cấu hình redirect vào ô search.
+2. Submit search mà không chọn gợi ý nào trong dropdown ISW (VD bấm icon search thay vì Enter trong khung ISW, nếu có).",,2. <cần confirm> có bị redirect hay chỉ redirect khi đi đúng qua luồng ISW mô tả trong Lark (gõ + Enter trong khung ISW).,<cần confirm> chưa có bằng chứng Figma/Lark cho kênh submit này
+62,Integration,Synonyms,Gõ từ đồng nghĩa (không phải search term gốc) của 1 redirect đã cấu hình,,"Redirect Active với search term gốc = ""shipping""; Synonym cấu hình ""shipping"" ↔ ""delivery""","1. Gõ ""delivery"" (từ đồng nghĩa, không phải search term gốc) + Enter trên ISW.",,"1. <cần confirm> có bị redirect theo rule của search term gốc ""shipping"" không, hay hiển thị kết quả search mở rộng theo synonym như bình thường.",<cần confirm> chưa có bằng chứng về thứ tự xử lý Synonym mở rộng query trước hay Redirect match query trước
+63,Integration,,Gõ đúng search term gốc khi redirect đó cũng đang có synonym liên kết,,"Redirect Active với search term gốc = ""shipping""; Synonym cấu hình ""shipping"" ↔ ""delivery""","1. Gõ đúng ""shipping"" (search term gốc) + Enter trên ISW.",,1. Vẫn điều hướng đúng sang URL đã cấu hình ở Redirect to — rule Redirect không bị phá vỡ dù search term đó có Synonym liên kết.,
+64,Integration,Stopwords,"Search term redirect chứa 1 từ là Stopword, gõ đúng nguyên văn",,"Redirect Active với search term = ""the shipping policy"" (nhiều từ, trong đó ""the"" là Stopword đã cấu hình)","1. Gõ đúng nguyên văn ""the shipping policy"" (kể cả từ stopword) + Enter trên ISW.",,1. <cần confirm> có bị redirect đúng theo nguyên văn search term đã cấu hình không.,<cần confirm> chưa rõ hệ thống có strip Stopword trước khi match Redirect hay match nguyên văn cả cụm
+65,Integration,,Gõ thiếu từ Stopword so với search term redirect đã cấu hình,,"Redirect Active với search term = ""the shipping policy""; Stopword ""the"" đang Active","1. Gõ ""shipping policy"" (bỏ từ stopword ""the"") + Enter trên ISW.",,"1. <cần confirm> có bị redirect không — nếu hệ thống strip Stopword trước khi match thì 2 chuỗi được coi tương đương, nếu match nguyên văn thì không redirect.",<cần confirm> cùng câu hỏi thứ tự xử lý Stopword vs Redirect như case trên
+66,Integration,Merchandise Campaign,Redirect Active và Merchandise Campaign cùng trigger theo đúng 1 keyword,,"Redirect Active với search term = ""summer shirt"", redirect to = URL khác SRP; Merchandise Campaign Active, Trigger = ""search a keyword"" = ""summer shirt""","1. Gõ ""summer shirt"" + Enter trên ISW.",,"1. <cần confirm> hệ quả — Redirect điều hướng sang URL khác khiến SRP không hiển thị, chưa rõ Campaign có được ghi nhận ""activate"" hay coi như không bao giờ chạy được vì keyword này luôn bị Redirect chặn trước.",<cần confirm> chưa có bằng chứng về thứ tự ưu tiên giữa Redirect và Merchandise Campaign khi cùng khớp 1 keyword
+67,Integration,,"Redirect OFF, Merchandise Campaign vẫn Active cùng keyword — regression kiểm tra Campaign không bị ảnh hưởng",,"Redirect Status = OFF với search term = ""summer shirt""; Merchandise Campaign Active, Trigger = ""search a keyword"" = ""summer shirt"", có cấu hình Pin/Bury sản phẩm","1. Gõ ""summer shirt"" + Enter trên ISW (hoặc submit trên SRP).",,"1. SRP hiển thị kết quả search bình thường (không bị redirect vì Status OFF), Merchandise Campaign áp dụng đúng ranking (Pin/Bury) theo cấu hình — không bị ảnh hưởng bởi việc feature Redirect đang tồn tại song song.",
