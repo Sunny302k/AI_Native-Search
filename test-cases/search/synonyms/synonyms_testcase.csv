@@ -1,0 +1,240 @@
+﻿ID,Test Type,Test Objective,,,Preconditions,Test Steps,Input DB/Setting,Expected Result,Note
+Purpose:,,Cho merchant khai báo các nhóm từ khoá tương đương hoặc liên quan (không phải filter value) để công cụ search trả đúng kết quả dù shopper gõ từ khác tên gọi thật của sản phẩm trên site.,,,,,,,
+,,=== SYNONYMS LIST + SEARCH ===,,,,,,,
+1,Happy,Entry point - màn Synonyms,Mở từ Search Engine Setup,,Role = [Merchant Admin],"1. Vào Search > Search Engine Setup.
+2. Click vào mục [Synonyms].",,"2. Chuyển sang màn Synonyms, hiển thị nút back + tiêu đề ""Synonyms"".",
+2,UI,Feature Tour,"Nội dung khối """"What is synonym ?""""",,Đang ở màn Synonyms,1. Quan sát khối FEATURE TOUR đầu màn.,,"1. Tiêu đề ""What is synonym ?""; nội dung mô tả khác nhau giữa Unified synonyms và Supporting synonyms kèm ví dụ minh hoạ.",
+3,UI,,Thu gọn/mở lại,,Khối Feature Tour đang mở,"1. Click chevron thu gọn khối.
+2. Click lại để mở.",,"1. Khối thu gọn, chỉ còn tiêu đề.
+2. Khối mở lại đầy đủ nội dung.",
+4,UI,Empty state,Chưa có synonym group nào,,Synonym Group List = [rỗng],1. Quan sát khu vực bảng danh sách.,,"1. Hiển thị ""There is currently no synonym group."" kèm nút [Create new] ở giữa màn.",
+5,Happy,Button [Create new],Mở modal từ nút góc phải,,Đang ở màn Synonyms,1. Click nút [Create new] góc phải khối danh sách.,,"1. Mở modal ""Create new synonym group"".",
+6,Happy,,Mở modal từ nút giữa màn (empty state),,Synonym Group List = [rỗng],1. Click nút [Create new] ở giữa màn.,,1. Mở đúng modal như nút góc phải.,
+7,UI,Bảng danh sách,Cấu trúc cột,,Bảng có ≥1 dòng dữ liệu,1. Quan sát tiêu đề bảng.,,1. Đủ 4 cột theo thứ tự: Status | Synonym Group | Synonyms | Action.,
+8,UI,,Icon cột Action,,Bảng có ≥1 dòng dữ liệu,1. Quan sát 2 icon ở cột Action.,,"1. Đúng thứ tự trái→phải: icon Edit (bút chì) trước, icon Delete (thùng rác) sau.",
+9,UI,,Cột Synonyms - tag dài rút gọn,,1 Synonym Group có nhiều supporting synonym,1. Quan sát cột Synonyms của dòng đó.,,"1. Hiển thị dạng tag kèm ""+N more"" khi danh sách dài, không tràn layout.",
+10,UI,Pagination,Chuyển trang,,Danh sách có nhiều hơn 1 trang dữ liệu,1. Click sang trang 2.,,1. Bảng cập nhật đúng dữ liệu của trang 2; không lặp/thiếu dòng so với trang 1.,
+11,Happy,Toggle Status,Tắt Status 1 synonym group,,"Synonym Group ""Shoes for man"" Status = [ON]","1. Tắt toggle Status trên danh sách.
+2. Truy cập storefront, search bằng 1 từ thuộc Unified/Supporting synonyms của nhóm.",,"2. Kết quả search KHÔNG còn mở rộng theo synonym của nhóm này (chỉ trả đúng theo từ gõ), vì Status đã OFF.",<cần confirm> Câu hỏi mở #5 — hành vi storefront khi Status OFF chưa được BA xác nhận
+12,Happy,,Bật lại Status,,Synonym Group đang Status = [OFF],"1. Bật lại toggle Status.
+2. Truy cập storefront, search lại bằng từ thuộc synonym của nhóm.",,2. Kết quả search áp dụng lại đúng theo synonym của nhóm (giống hành vi trước khi tắt).,<cần confirm> Cùng câu hỏi mở #5 với case trên.
+13,Happy,Ô Search group synonym,Có kết quả,,"Đã có ≥2 Synonym Group, VD ""Shoes for man"", ""running shoes""","1. Nhập ""shoes"" vào ô Search group synonym.
+2. Quan sát bảng danh sách.",,"2. Bảng chỉ còn các Synonym Group khớp từ khoá (""Shoes for man"", ""running shoes""), giữ pagination.",
+14,UI,,No result,,Đã có dữ liệu Synonym Group,"1. Nhập ""shoes for girl"" (không khớp Synonym Group nào).
+2. Quan sát bảng danh sách.",,"2. Hiển thị dòng ""There is no synonym found."", vẫn giữ nguyên thanh pagination.",
+15,Happy,,Xoá hết từ khoá tìm kiếm,,Đang hiển thị kết quả đã lọc theo từ khoá,"1. Xoá hết nội dung ô Search group synonym.
+2. Quan sát bảng danh sách.",,2. Bảng quay lại hiển thị đầy đủ danh sách Synonym Group như trước khi search.,
+16,Edge,,Search theo giá trị bên trong synonym (không phải tên group),,"Synonym Group ""Shoes for man"" có Supporting synonym chứa ""nike air max""","1. Nhập ""nike air max"" vào ô Search group synonym (không khớp tên Synonym Group nào).
+2. Quan sát bảng danh sách.",,2. <cần confirm> — chưa xác định ô search có khớp theo giá trị synonym bên trong nhóm hay chỉ khớp tên Synonym Group.,"<cần confirm> Câu hỏi mở #9. Tín hiệu gợi ý: placeholder thật trên Figma là ""Search group, synonym"" (có dấu phẩy) — có thể ngầm chỉ phạm vi search gồm cả group lẫn synonym value, nhưng chỉ là suy luận từ copy, chưa phải bằng chứng chắc chắn."
+17,Edge,,Search không phân biệt hoa/thường và có dấu,,"Đã có Synonym Group tên ""Shoes for man""","1. Nhập ""SHOES FOR MAN"" (viết hoa toàn bộ) vào ô Search.",,1. <cần confirm> — chưa xác định search có case-insensitive/bỏ dấu giống quy tắc smart search ở Filter hay không.,<cần confirm> Câu hỏi mở #9.
+18,UI,,Debounce gõ ký tự vs cần Enter,,Đang ở màn Synonyms,1. Gõ từng ký tự vào ô Search group synonym mà không nhấn Enter.,,1. <cần confirm> — chưa xác định bảng lọc ngay khi gõ (debounce) hay cần nhấn Enter.,<cần confirm> Câu hỏi mở #9.
+19,Edge,,Paste chuỗi rất dài vào ô Search,,Đang ở màn Synonyms,1. Paste 1 chuỗi ký tự rất dài (vài nghìn ký tự) vào ô Search group synonym.,,1. Ô nhận chuỗi không crash/treo trang; bảng trả về empty state hợp lý (không khớp kết quả nào).,
+20,UI,Khối AI Synonyms Suggested,Chỉ hiện khi có gợi ý chưa xử lý,,Hệ thống vừa phát sinh ≥1 gợi ý AI chưa Confirm/Skip,1. Quan sát khu vực phía trên bảng Synonyms List.,,"1. Hiển thị khối ""AI Synonyms Suggested"" với card tương ứng từng Synonym Group có gợi ý.",
+21,UI,,Ẩn khi không còn gợi ý nào,,Đã xử lý (Confirm/Skip) hết mọi gợi ý AI đang có,1. Quan sát khu vực phía trên bảng Synonyms List.,,"1. Khối ""AI Synonyms Suggested"" không hiển thị.",
+,,=== CREATE / EDIT SYNONYM GROUP ===,,,,,,,
+22,UI,Modal Create - trạng thái mặc định,Mở modal,,Vừa click [Create new],1. Quan sát modal vừa mở.,,"1. Tiêu đề ""Create new synonym group""; SYNONYM GROUP NAME trống; Unified synonyms trống; có sẵn 1-2 dòng Supporting synonyms trống.",
+23,Happy,Unified synonyms,Nhập đủ tên + 1 Unified synonym rồi Save,,Vừa mở modal Create,"1. Nhập SYNONYM GROUP NAME hợp lệ.
+2. Nhập 1 Unified synonym rồi Enter.
+3. Click [Save].",,"3. Tạo thành công; Synonym Group mới xuất hiện ở List, Unified synonym vừa nhập được lưu.",
+24,Happy,,Nhập nhiều Unified synonyms bằng Enter,,Đang ở modal Create,"1. Gõ từng từ rồi Enter liên tiếp 3 lần vào ô Unified synonyms.
+2. Quan sát danh sách tag.",,2. Cả 3 tag xuất hiện đúng thứ tự đã nhập.,
+25,Happy,,Clear all xoá hết tag không có popup xác nhận,,Ô Unified synonyms đang có ≥1 tag,1. Click link [Clear all].,,"1. Toàn bộ tag bị xoá NGAY, KHÔNG hiển thị popup xác nhận (khác với xoá 1 dòng Supporting synonyms).",Hành vi khác biệt có chủ đích giữa Clear all và xoá dòng Supporting — xem mục 4.2 spec.
+26,Happy,Supporting synonyms,Thêm dòng mới bằng [New supporting synonyms],,Đang ở modal Create,"1. Click nút [New supporting synonyms].
+2. Quan sát danh sách dòng Supporting.",,2. Thêm đúng 1 dòng mới trống (input trái + tag input phải + icon thùng rác).,
+27,Happy,,Nhập general term + nhiều tag cụ thể,,Có ≥1 dòng Supporting trống,"1. Nhập ""shoes"" vào input trái.
+2. Gõ lần lượt ""nike air max"", ""ultraboost"" rồi Enter vào tag input phải.",,"2. Dòng hiển thị đúng ""shoes"" bên trái và 2 tag bên phải.",
+28,Happy,,Xoá 1 dòng Supporting (chưa Save),,Đang có ≥2 dòng Supporting đã nhập dữ liệu,"1. Click icon thùng rác của 1 dòng.
+2. Xác nhận ở popup ""Delete synonym?"" hiện ra.
+3. Quan sát danh sách dòng Supporting trong modal.",,3. Dòng bị xoá khỏi modal; dữ liệu CHƯA lưu xuống hệ thống cho tới khi bấm Save ở modal cha.,<cần confirm> Chưa xác nhận popup có hiện ngay trong lúc Create (chưa Save lần nào) hay chỉ xuất hiện khi Edit nhóm đã tồn tại — câu hỏi mở #6 chỉ nói riêng về modal Edit.
+29,Negative,Validate khi Save - field bắt buộc,SYNONYM GROUP NAME để trống,,Đang ở modal Create,"1. Để trống SYNONYM GROUP NAME, nhập ≥1 Unified synonym.
+2. Click [Save].",,2. <cần confirm> — chưa xác định có bị chặn lưu (required) hay cho phép lưu với tên rỗng.,<cần confirm> Câu hỏi mở #4.
+30,Negative,,Unified và Supporting đều để trống,,Đang ở modal Create,"1. Nhập SYNONYM GROUP NAME hợp lệ, không nhập bất kỳ Unified/Supporting synonym nào.
+2. Click [Save].",,2. <cần confirm> — chưa xác định có bắt buộc tối thiểu 1 giá trị ở Unified hoặc Supporting hay không.,<cần confirm> Câu hỏi mở #4.
+31,Edge,,SYNONYM GROUP NAME chỉ có khoảng trắng,,Đang ở modal Create,"1. Nhập toàn khoảng trắng vào SYNONYM GROUP NAME.
+2. Click [Save].",,2. <cần confirm> — chưa xác định hệ thống có tự trim và coi như rỗng (áp dụng rule case 29) hay chấp nhận lưu nguyên khoảng trắng.,"<cần confirm> Câu hỏi mở #4, #10."
+32,Edge,,SYNONYM GROUP NAME rất dài,,Đang ở modal Create,"1. Nhập 1 chuỗi rất dài (vài trăm ký tự) vào SYNONYM GROUP NAME.
+2. Click [Save].",,2. <cần confirm> — chưa xác định giới hạn độ dài ký tự cho field này.,<cần confirm> Câu hỏi mở #10.
+33,Happy,Validate khi Save - trùng tên,Tất cả field hợp lệ (happy path của action Save),,Đang ở modal Create,"1. Nhập SYNONYM GROUP NAME hợp lệ.
+2. Nhập 1 Unified synonym hợp lệ (không trùng).
+3. Nhập Supporting general term hợp lệ (không trùng ai).
+4. Nhập Supporting tag cụ thể hợp lệ (không trùng).
+5. Click [Save].",,5. Lưu thành công; Synonym Group mới xuất hiện trên List.,
+34,Negative,,Supporting general term trùng tên nhóm khác,,"Synonym Group khác đã có Supporting general term = ""shoes""","1. Nhập SYNONYM GROUP NAME hợp lệ.
+2. Nhập 1 Unified synonym hợp lệ.
+3. Nhập ""shoes"" vào Supporting general term (trùng với nhóm khác).
+4. Nhập Supporting tag cụ thể hợp lệ.
+5. Click [Save].",,"5. Hiện khung viền đỏ + chữ đỏ ""Synonym already existed!"" ngay dưới input trái; chặn lưu.",
+35,Negative,,Supporting general term trùng trong CÙNG modal,,Đang ở modal Create,"1. Nhập SYNONYM GROUP NAME hợp lệ.
+2. Nhập 1 Unified synonym hợp lệ.
+3. Nhập ""shoes"" vào Supporting general term dòng 1.
+4. Click [New supporting synonyms] thêm dòng Supporting thứ 2.
+5. Nhập ""shoes"" vào Supporting general term dòng 2 (trùng dòng 1, cùng modal).
+6. Nhập Supporting tag cụ thể hợp lệ cho cả 2 dòng.
+7. Click [Save].",,"7. <cần confirm> — chưa xác định lỗi ""Synonym already existed!"" có áp dụng khi trùng NGAY TRONG cùng modal (chặn lưu hay cho qua) hay chỉ so với dữ liệu đã tồn tại ở nhóm khác.",<cần confirm> Câu hỏi mở #3 (phạm vi so trùng).
+36,Negative,,Supporting tag cụ thể trùng trong cùng ô,,Đang ở modal Create,"1. Nhập SYNONYM GROUP NAME hợp lệ.
+2. Nhập 1 Unified synonym hợp lệ.
+3. Nhập Supporting general term hợp lệ.
+4. Nhập 2 tag giống nhau (VD ""nike air max"" x2) vào tag input phải của cùng 1 dòng.
+5. Click [Save].",,"5. Hiện khung viền đỏ + chữ đỏ ""Synonym must be unique!"" ngay dưới ô tag; chặn lưu.",
+37,Negative,,Unified synonyms nhập trùng giá trị trong cùng ô,,Đang ở modal Create,"1. Nhập SYNONYM GROUP NAME hợp lệ.
+2. Nhập 2 giá trị trùng nhau vào ô Unified synonyms (không nhập Supporting synonyms).
+3. Click [Save].",,2. <cần confirm> — chưa xác định validate trùng tên có áp dụng cho Unified synonyms (giống Supporting) hay không.,"<cần confirm> Câu hỏi mở #3. Case này không nhập Supporting synonyms để cô lập đúng biến test (trùng tên Unified) — nếu BA xác nhận Supporting là field bắt buộc, cần bổ sung 1 dòng Supporting hợp lệ."
+38,Negative,,Lỗi đồng thời cả 2 field validate,,"Synonym Group khác đã có Supporting general term = ""shoes""","1. Nhập SYNONYM GROUP NAME hợp lệ.
+2. Nhập 1 Unified synonym hợp lệ.
+3. Nhập ""shoes"" vào Supporting general term (trùng với nhóm khác).
+4. Nhập 2 tag giống nhau vào tag input phải của cùng dòng.
+5. Click [Save].",,"5. Cả 2 lỗi hiện ĐỒNG THỜI: ""Synonym already existed!"" ở input trái, ""Synonym must be unique!"" ở tag input phải; chặn lưu, không che lấp nhau.",
+39,Happy,Cancel/đóng modal,Cancel sau khi đã nhập liệu,,Đã nhập dữ liệu nhưng chưa Save,"1. Click [Cancel].
+2. Quan sát màn Synonyms.",,"2. Modal đóng, không tạo/sửa Synonym Group nào; danh sách giữ nguyên như trước.",
+40,UI,,Đóng bằng icon X góc modal,,Đã nhập dữ liệu nhưng chưa Save,1. Click icon X ở góc trên-phải modal.,,"1. Hành vi giống Cancel — đóng modal, không lưu dữ liệu đã nhập.",
+41,Happy,Edit synonym group,Mở Edit load đúng dữ liệu,,"Đã có Synonym Group ""Shoes for man"" với dữ liệu sẵn có",1. Click icon Edit ở cột Action của dòng đó.,,"1. Mở modal, tiêu đề đổi thành ""Edit synonym group""; SYNONYM GROUP NAME và toàn bộ Unified/Supporting synonyms load đúng dữ liệu hiện tại.",
+42,Happy,,Sửa tên rồi Save,,Đang ở modal Edit,"1. Đổi SYNONYM GROUP NAME sang tên mới hợp lệ.
+2. Click [Save].",,"2. Lưu thành công; hiện toast ""Success / Saved changes!""; cột Synonym Group trên List cập nhật tên mới.",
+43,Happy,,Thêm 1 Unified synonym mới rồi Save,,Đang ở modal Edit,"1. Nhập thêm 1 Unified synonym mới.
+2. Click [Save].",,2. Lưu thành công; synonym mới có hiệu lực khi search (không kèm badge AI vì merchant tự nhập tay).,
+44,Happy,,Xoá 1 dòng Supporting rồi Save,,Đang ở modal Edit với ≥2 dòng Supporting,"1. Xoá 1 dòng Supporting qua icon thùng rác, xác nhận popup.
+2. Click [Save].",,"2. Lưu thành công; hiện toast ""Success / Saved changes!""; dòng đã xoá biến mất hẳn khỏi dữ liệu (không còn ảnh hưởng kết quả search theo general term đó).",
+45,Edge,Error guessing - Save,Spam click Save liên tiếp,,Đang ở modal Create/Edit với dữ liệu hợp lệ,1. Click liên tiếp nhiều lần thật nhanh vào nút [Save].,,"1. Chỉ tạo/lưu đúng 1 lần, không sinh nhiều Synonym Group trùng nhau hoặc lỗi double-submit.",
+46,Edge,,Paste chuỗi dài/emoji vào tag input,,Đang ở modal Create,"1. Paste 1 chuỗi có emoji/ký tự Unicode vào ô Unified synonyms hoặc Supporting tag input, nhấn Enter.
+2. Quan sát tag vừa tạo.",,"2. Tag hiển thị đúng nguyên văn nội dung đã paste, không vỡ layout/encoding lỗi.",
+,,=== DELETE SYNONYM GROUP / SUPPORTING ROW ===,,,,,,,
+47,UI,Popup xác nhận xoá,Nội dung popup,,Đã có ≥1 Synonym Group,1. Click icon Delete ở cột Action.,,"1. Mở popup icon vàng (i) + tiêu đề ""Delete synonym?"" + mô tả ""Deleted synonyms cannot be recovered. Do you still want to continue?"" + 2 nút.",
+48,UI,,Màu/label 2 nút trong popup,,"Popup ""Delete synonym?"" đang mở",1. Quan sát 2 nút ở popup.,,"1. Nút nền xám viền ghi ""Delete""; nút nền cam ghi ""Cancel"" — nhãn/màu đảo ngược so với pattern chung của dự án (cam = hành động chính).",<cần confirm> Câu hỏi mở #2 — chưa xác nhận đây là chủ đích thiết kế hay lỗi gõ nhãn trong Figma; viết case theo đúng những gì quan sát được trên Figma.
+49,Happy,,"Bấm nút xám ""Delete"" xác nhận xoá",,"Popup ""Delete synonym?"" đang mở","1. Click nút nền xám ""Delete"".
+2. Quan sát màn Synonyms.",,2. Synonym Group bị xoá khỏi List; hiện toast xác nhận thành công.,"<cần confirm> Nội dung chính xác của toast chưa xác nhận được (chỉ thấy label chung ""Chọn Delete, xoá thành công"" trên note Figma, chưa thấy chữ hiển thị thật)."
+50,Happy,,"Bấm nút cam ""Cancel"" huỷ xoá",,"Popup ""Delete synonym?"" đang mở","1. Click nút cam ""Cancel"".
+2. Quan sát màn Synonyms.",,"2. Popup đóng; Synonym Group vẫn còn nguyên trên List, không có gì thay đổi.",
+51,Edge,,Đóng popup bằng Esc/click ra ngoài,,"Popup ""Delete synonym?"" đang mở",1. Nhấn phím Esc hoặc click vào vùng tối bên ngoài popup.,,"1. Popup đóng, coi như huỷ xoá (hành vi giống bấm ""Cancel""); Synonym Group không bị xoá.",
+52,Happy,Xoá dòng Supporting (trong Edit),Xoá 1 dòng Supporting trong modal Edit,,Đang ở modal Edit với ≥1 dòng Supporting,"1. Click icon thùng rác của 1 dòng.
+2. Ở popup ""Delete synonym?"" hiện ra, bấm nút xám ""Delete"".
+3. Quan sát danh sách dòng Supporting trong modal (chưa bấm Save modal cha).",,3. Dòng bị xoá khỏi modal; dữ liệu thật trên hệ thống CHƯA đổi cho tới khi bấm Save ở modal cha.,<cần confirm> Câu hỏi mở #6.
+53,Happy,,Cancel modal cha sau khi đã xoá dòng Supporting,,Vừa xoá 1 dòng Supporting trong modal Edit (chưa Save),"1. Click [Cancel] ở modal cha (không Save).
+2. Mở lại Edit cùng Synonym Group.",,2. Dòng Supporting đã xoá ở bước trước xuất hiện trở lại nguyên vẹn (thao tác xoá chưa từng được lưu thật).,
+54,Edge,,Xoá hết toàn bộ dòng Supporting rồi Save,,Đang ở modal Edit với mọi dòng Supporting đã xoá hết (còn 0 dòng),1. Click [Save] khi Supporting synonyms đang rỗng hoàn toàn.,,1. <cần confirm> — chưa xác định có bắt buộc tối thiểu 1 dòng Supporting hay cho phép lưu với 0 dòng (liên quan câu hỏi mở #4 về field bắt buộc).,<cần confirm> Câu hỏi mở #4.
+,,=== AI SYNONYM SUGGESTION ===,,,,,,,
+55,UI,Card AI Synonyms Suggested,Nội dung card,,"Hệ thống vừa phát sinh gợi ý cho Synonym Group ""Shoes for man""",1. Quan sát card tương ứng trên màn Synonyms.,,"1. Card hiển thị câu hỏi gợi ý dạng ""Help more customers find 'Shoes for man' with more unified synonyms?"" kèm 2-3 từ khoá rút gọn (VD ""trekking shoes"", ""sneakers"" + ""+N more"") và nút [View details].",
+56,Happy,Modal View details,Click [View details] mở modal,,Card AI Synonyms Suggested đang hiển thị,1. Click nút [View details].,,"1. Mở modal ""View details""; SYNONYM GROUP NAME hiển thị read-only; khối insight hiện lại đúng câu hỏi gợi ý kèm mô tả ""Add these keywords to synonym list"".",
+57,UI,,Confidence score từng từ khoá,,Đang ở modal View details có ≥2 từ khoá gợi ý,1. Quan sát từng card từ khoá gợi ý.,,"1. Mỗi từ khoá hiển thị đúng số Confidence score riêng (VD 99, 89) kèm 2 nút [Skip] / [Confirm].",
+58,UI,,"Tooltip icon ""?"" cạnh Confidence score",,Đang ở modal View details có ≥1 từ khoá gợi ý,"1. Hover/click icon ""?"" cạnh Confidence score của 1 từ khoá gợi ý.",,"1. <cần confirm> — chưa xác định nội dung tooltip giải thích Confidence score tính từ đâu (tần suất search, tỷ lệ click...); chỉ xác nhận được qua Figma rằng icon tooltip này tồn tại.","<cần confirm> Nội dung tooltip chưa đọc được qua Figma, cần BA/designer xác nhận."
+59,Edge,,Carousel điều hướng khi có >3 từ khoá gợi ý,,Synonym Group có >3 từ khoá gợi ý trong card,"1. Mở modal View details, quan sát card đầu tiên.
+2. Click nút mũi tên "">"" để cuộn carousel.
+3. Click [Confirm] cho 1 từ khoá vừa cuộn tới.",,"1. Card thứ 4 trở đi bị ẩn/cắt bởi overlay, có nút mũi tên "">"" cho biết còn thêm gợi ý.
+2. Carousel cuộn sang, hiện các card tiếp theo.
+3. Confirm hoạt động đúng trên card vừa cuộn tới — thêm đúng từ khoá vào Unified synonyms kèm badge ""AI"", giống hệt hành vi với card hiển thị sẵn.",
+60,Happy,Confirm/Skip từ khoá,Bấm Confirm 1 từ khoá,,Đang ở modal View details,"1. Click [Confirm] ở 1 từ khoá gợi ý (VD ""sneakers"").
+2. Quan sát khối Unified synonyms bên dưới.",,"2. Tag ""sneakers"" được thêm vào Unified synonyms, kèm badge cam nhỏ ghi ""AI"" để phân biệt với tag tự nhập tay.",
+61,Happy,,Bấm Skip 1 từ khoá,,Đang ở modal View details với ≥2 từ khoá gợi ý,"1. Click [Skip] ở 1 từ khoá gợi ý.
+2. Quan sát danh sách từ khoá gợi ý còn lại trong modal.",,2. Từ khoá đã Skip biến mất khỏi danh sách gợi ý đang hiển thị trong modal.,<cần confirm> Câu hỏi mở #7 — chưa xác định gợi ý đã Skip có hiện lại ở lần phát hiện sau không.
+62,Happy,,Confirm nhiều từ khoá rồi Save,,Đang ở modal View details có ≥2 từ khoá gợi ý,"1. Click [Confirm] lần lượt cho cả 2 từ khoá.
+2. Click [Save].",,"2. Lưu thành công; cả 2 tag xuất hiện trong Unified synonyms của nhóm, đều kèm badge ""AI"".",
+63,UI,Badge AI & Status tương tác,Badge AI có hiển thị lại ở màn List không,,Đã Confirm ≥1 từ khoá AI cho 1 Synonym Group,1. Quan sát cột Synonyms của nhóm đó trên màn Synonyms List.,,"1. <cần confirm> — chưa xác định badge ""AI"" có hiển thị lại ở cột Synonyms trên List hay chỉ hiện trong modal.",<cần confirm> Câu hỏi mở #3 (mục 3.3).
+64,Edge,,AI suggestion cho group đang Status = OFF,,Synonym Group Status = [OFF],1. Quan sát khối AI Synonyms Suggested có card cho nhóm này không.,,1. <cần confirm> — chưa xác định nhóm đang OFF có tiếp tục được AI gợi ý thêm từ khoá hay bị tạm dừng.,<cần confirm> Câu hỏi mở #11.
+65,Edge,Error guessing,Spam click Confirm trên cùng 1 từ khoá,,Đang ở modal View details,1. Click liên tiếp nhiều lần thật nhanh vào [Confirm] của cùng 1 từ khoá.,,"1. Chỉ thêm đúng 1 tag vào Unified synonyms, không bị thêm trùng lặp nhiều lần.",
+,,=== AI SYNONYM SUGGESTION - LUỒNG ĐA TÁC NHÂN (SYSTEM) ===,,,,,,,
+66,Integration,AI Synonym Suggestion — Shopper search hành vi → System phát hiện → Merchant Confirm/Skip → Save,"Luồng thành công — Confirm toàn bộ từ khoá gợi ý rồi Save, synonym có hiệu lực ngay cho search sau đó",,"Synonym Group ""Shoes for man"" Status = [ON], chưa có gợi ý AI nào đang chờ xử lý cho nhóm này","1. [Shopper] Thực hiện nhiều lượt search trên storefront bằng các từ khoá liên quan tới ""Shoes for man"" nhưng chưa có trong Unified synonyms (VD ""trekking shoes"", ""sneakers"").
+2. [System] Background job quét hành vi search thật của shopper, phát hiện pattern đủ tín hiệu, sinh gợi ý AI cho Synonym Group ""Shoes for man"".
+3. [Merchant] Vào màn Synonyms, thấy card ""AI Synonyms Suggested"" xuất hiện cho nhóm ""Shoes for man"".
+4. [Merchant] Click [View details], xem danh sách từ khoá gợi ý kèm Confidence score.
+5. [Merchant] Click [Confirm] cho toàn bộ từ khoá gợi ý.
+6. [Merchant] Click [Save].
+7. [Shopper] Search lại trên storefront bằng chính các từ khoá vừa được Confirm.",,"2. [System] Gợi ý được tạo, gắn đúng với Synonym Group ""Shoes for man"".
+3. [Merchant] Card hiển thị đúng câu hỏi gợi ý kèm nút [View details].
+6. [Merchant] Lưu thành công; toàn bộ từ khoá vừa Confirm xuất hiện trong Unified synonyms kèm badge ""AI""; card ""AI Synonyms Suggested"" của nhóm này biến mất khỏi List (đã xử lý hết gợi ý).
+7. [Shopper] Kết quả search mở rộng đúng theo Unified synonyms mới, trả về cùng tập sản phẩm như khi search ""Shoes for man"" — khép kín vòng lặp từ hành vi search thật đến cải thiện search cho shopper sau.",
+67,Integration,,Nhánh Skip toàn bộ → không thêm synonym nào,,"Synonym Group ""Shoes for man"" đang có gợi ý AI chưa xử lý (sinh ra từ hành vi search thật của shopper)","1. [System] Background job quét hành vi search thật của shopper, sinh gợi ý AI cho Synonym Group ""Shoes for man"".
+2. [Merchant] Vào màn Synonyms, click [View details] ở card gợi ý.
+3. [Merchant] Click [Skip] cho toàn bộ từ khoá gợi ý trong modal.
+4. [Merchant] Click [Save] (hoặc đóng modal).
+5. [Merchant] Quan sát lại màn Synonyms List và Unified synonyms của nhóm.",,"3. Toàn bộ từ khoá biến mất khỏi danh sách gợi ý đang hiển thị trong modal.
+5. <cần confirm> — chưa xác định card ""AI Synonyms Suggested"" có biến mất khỏi List ngay hay vẫn còn hiển thị; Unified synonyms của nhóm KHÔNG có thêm tag mới nào (Skip không làm thay đổi dữ liệu).",<cần confirm> Câu hỏi mở #7 (docs/specs/search-synonyms-specs.md mục 6).
+68,Integration,,Nhánh hỗn hợp — Confirm 1 từ khoá + Skip 1 từ khoá rồi Save,,"Synonym Group ""Shoes for man"" đang có gợi ý AI gồm ≥2 từ khoá chưa xử lý","1. [System] Background job sinh gợi ý AI gồm ≥2 từ khoá (VD A, B) cho Synonym Group ""Shoes for man"".
+2. [Merchant] Click [View details].
+3. [Merchant] Click [Confirm] cho từ khoá A, click [Skip] cho từ khoá B.
+4. [Merchant] Click [Save].
+5. [Merchant] Kiểm tra lại Unified synonyms của nhóm.",,"4. Lưu thành công.
+5. Chỉ từ khoá A xuất hiện trong Unified synonyms kèm badge ""AI""; từ khoá B không được thêm vào.",
+69,Integration,,Nhánh rollback — Confirm rồi Cancel (không Save),,"Synonym Group ""Shoes for man"" đang có gợi ý AI chưa xử lý","1. [System] Background job sinh gợi ý AI cho Synonym Group ""Shoes for man"".
+2. [Merchant] Click [View details], click [Confirm] cho 1 từ khoá.
+3. [Merchant] Click [Cancel] (không Save).
+4. [Merchant] Mở lại [View details] của cùng Synonym Group.
+5. [Merchant] Kiểm tra Unified synonyms trên màn List.",,"3. Modal đóng, không lưu bất kỳ thay đổi nào.
+4. <cần confirm> — chưa xác định từ khoá đã Confirm trước đó có quay lại trạng thái ""chưa xử lý"" trong card gợi ý hay bị mất hẳn khỏi danh sách gợi ý.
+5. Unified synonyms của nhóm KHÔNG có từ khoá vừa Confirm (vì chưa Save).",<cần confirm> Cùng nhóm câu hỏi rollback Confirm/Skip khi Cancel — spec chưa mô tả hành vi này.
+70,Integration,,Ngắt luồng giữa chừng — đóng tab ngay sau khi Confirm nhưng trước khi Save,,"Synonym Group ""Shoes for man"" đang có gợi ý AI chưa xử lý","1. [System] Background job sinh gợi ý AI cho Synonym Group ""Shoes for man"".
+2. [Merchant] Click [View details], click [Confirm] cho 1 từ khoá.
+3. [Merchant] Đóng tab trình duyệt ngay (không bấm Cancel/Save).
+4. [Merchant] Mở lại màn Synonyms List, click [View details] của cùng nhóm.",,"3. Không có hành động lưu nào được gửi đi (modal đóng theo tab, không gọi Save).
+4. <cần confirm> — chưa xác định hành vi có giống hệt nhánh Cancel (rollback, từ khoá chưa lưu) hay khác biệt khi ngắt bằng đóng tab.",<cần confirm> Spec không mô tả hành vi khi ngắt luồng giữa chừng bằng đóng tab/mất mạng.
+71,Integration,,2 Merchant cùng xử lý 1 gợi ý đồng thời (race condition),,"2 tài khoản Merchant Admin cùng có quyền truy cập; Synonym Group ""Shoes for man"" đang có gợi ý AI gồm ≥2 từ khoá (X, Y)","1. [System] Background job sinh gợi ý AI cho Synonym Group ""Shoes for man"".
+2. [Merchant A] Mở tab 1, đăng nhập, click [View details], Confirm từ khoá X.
+3. [Merchant B] Mở tab 2, đăng nhập, click [View details] của CÙNG nhóm, Confirm từ khoá Y.
+4. [Merchant A] Click [Save].
+5. [Merchant B] Click [Save] (sau Merchant A, không reload lại modal trước khi Save).
+6. [Merchant B] Kiểm tra lại Unified synonyms của nhóm sau cùng.",,"4. [Merchant A] Lưu thành công, từ khoá X được thêm vào Unified synonyms.
+5. <cần confirm> — chưa xác định lần Save sau của Merchant B có merge thêm từ khoá Y vào cùng với X đã lưu trước đó, hay ghi đè làm mất thay đổi của Merchant A (dữ liệu modal B đang là snapshot cũ).
+6. <cần confirm> Cùng câu hỏi với bước 5.",<cần confirm> Spec không mô tả cơ chế khoá/merge khi 2 merchant cùng sửa 1 Synonym Group đồng thời.
+72,Integration,,System sinh thêm gợi ý mới khi Merchant đang xử lý gợi ý cũ (chưa Save) của cùng nhóm,,"Synonym Group ""Shoes for man"" đang có gợi ý AI với từ khoá A chưa xử lý","1. [System] Background job (chu kỳ 1) sinh gợi ý AI gồm từ khoá A cho Synonym Group ""Shoes for man"".
+2. [Merchant] Mở [View details], chưa Confirm/Skip gì, giữ modal đang mở.
+3. [System] Background job (chu kỳ kế tiếp) phát hiện thêm pattern mới, sinh thêm gợi ý từ khoá B cho CÙNG nhóm.
+4. [Merchant] Không reload trang, quan sát modal đang mở.
+5. [Merchant] Đóng rồi mở lại [View details] của cùng nhóm.",,"4. <cần confirm> — chưa xác định modal đang mở có tự cập nhật thêm từ khoá B ngay (real-time) hay vẫn giữ nguyên danh sách tại thời điểm mở (snapshot).
+5. Sau khi mở lại, danh sách gợi ý phải phản ánh đủ cả từ khoá A (chưa xử lý từ trước) và từ khoá B (mới phát sinh).",<cần confirm> Spec không mô tả cơ chế cập nhật real-time/polling cho modal View details khi có gợi ý mới phát sinh giữa lúc đang mở.
+,,=== IMPACT / REGRESSION ===,,,,,,,
+73,Integration,Instant Search Widget (ISW) & Search Result Page (SRP),Tạo mới Unified synonym → ISW gợi ý mở rộng theo synonym mới,,"Synonym Group ""Shoes for man"" Status = [ON], chưa có Unified synonym ""sneaker boots""","1. [Merchant] Thêm Unified synonym mới ""sneaker boots"" vào nhóm ""Shoes for man"", Save.
+2. [Shopper] Gõ ""sneaker boots"" vào ô Instant Search Widget trên storefront.",,"2. ISW trả về đúng tập gợi ý/kết quả giống hệt khi gõ ""Shoes for man"" — synonym áp dụng ngay khi gõ, không cần đợi submit.",
+74,Integration,,Tạo mới Unified synonym → Search Result Page trả đúng kết quả mở rộng,,"Synonym Group ""Shoes for man"" Status = [ON], chưa có Unified synonym ""sneaker boots""","1. [Merchant] Thêm Unified synonym mới ""sneaker boots"" vào nhóm ""Shoes for man"", Save.
+2. [Shopper] Search ""sneaker boots"" và submit để vào Search Result Page.",,"2. SRP trả về đúng tập sản phẩm giống hệt khi search ""Shoes for man"".",
+75,Integration,,Thêm Supporting synonym → kiểm tra đúng chiều bất đối xứng trên cả ISW và SRP,,"Supporting synonym general term ""shoes"" → specific ""nike air max"", ""ultraboost"" vừa được thêm vào Synonym Group","1. [Shopper] Search ""shoes"" trên cả ISW và SRP.
+2. [Shopper] Search ""nike air max"" trên cả ISW và SRP.",,"1. Kết quả gồm CẢ sản phẩm thuộc ""shoes"" chung lẫn ""nike air max""/""ultraboost"" (mở rộng 1 chiều).
+2. Kết quả CHỈ gồm sản phẩm ""nike air max"" — KHÔNG mở rộng ngược sang các sản phẩm ""shoes"" chung khác (đúng bản chất bất đối xứng của Supporting synonyms).",
+76,Integration,,Search mở rộng theo Synonym → Filter block/facet trên SRP có cập nhật đúng theo tập sản phẩm mở rộng không,,"Supporting synonym general term ""shoes"" → specific ""nike air max""; sản phẩm ""nike air max"" có thuộc tính Color = ""Red"" khác với sản phẩm ""shoes"" gốc","1. [Shopper] Search ""shoes"" trên SRP (kết quả mở rộng gồm cả sản phẩm ""nike air max"").
+2. [Shopper] Quan sát block Filter (VD facet Color) trên SRP.",,"2. <cần confirm> — chưa xác định Filter facet/count có tính theo TOÀN BỘ tập sản phẩm đã mở rộng qua Synonym (gồm ""nike air max"" Color=Red) hay chỉ tính theo tập sản phẩm khớp đúng từ gõ gốc ""shoes"" (không tính Red) — sai lệch sẽ khiến facet/count không khớp kết quả hiển thị thật.",<cần confirm> Chưa có tài liệu (Search lẫn Filter) mô tả tương tác giữa Synonym mở rộng kết quả và Filter facet/count trên cùng trang SRP.
+77,Integration,,Xoá hẳn Synonym Group → ISW/SRP ngừng áp dụng vĩnh viễn (khác tắt Status tạm thời),,"Synonym Group ""Shoes for man"" đang Status = [ON], có hiệu lực trên storefront","1. [Merchant] Xoá hẳn Synonym Group ""Shoes for man"" (qua popup Delete synonym, xác nhận).
+2. [Shopper] Search 1 từ Unified synonym trước đây thuộc nhóm.
+3. [Merchant] Tạo lại 1 Synonym Group mới trùng tên ""Shoes for man"" với cùng nội dung.
+4. [Shopper] Search lại từ đó.",,"2. Kết quả search KHÔNG còn mở rộng theo synonym (giống như nhóm chưa từng tồn tại).
+4. <cần confirm> — chưa xác định việc tạo lại nhóm trùng tên có khôi phục đúng hành vi search như trước khi xoá hay bị coi là 1 nhóm hoàn toàn mới, ảnh hưởng tới thời điểm có hiệu lực.",<cần confirm> Chưa có tài liệu mô tả hành vi tạo lại nhóm trùng tên sau khi đã xoá.
+78,Integration,,Synonym được Confirm từ gợi ý AI → áp dụng trên storefront giống hệt synonym nhập tay,,"Vừa Confirm + Save 1 từ khoá gợi ý AI vào Unified synonyms (có badge ""AI"")",1. [Shopper] Search bằng từ khoá vừa được Confirm từ AI.,,"1. Kết quả mở rộng đúng như synonym nhập tay — badge ""AI"" chỉ là nhãn hiển thị trong Admin, không làm thay đổi hành vi search trên storefront.",
+79,Integration,,Thời điểm hiệu lực trên storefront sau khi Save — tức thời hay cần chờ xử lý riêng,,Synonym Group vừa Save thay đổi,"1. [Merchant] Save thay đổi Synonym Group.
+2. [Shopper] Search ngay lập tức (trong vòng vài giây) bằng từ khoá vừa thay đổi.",,2. <cần confirm> — chưa xác định thay đổi có hiệu lực ngay tức thời trên ISW/SRP hay cần đợi 1 chu kỳ xử lý/re-index riêng (khác dữ liệu Sync BigCommerce vốn đã biết cần chờ Sync).,<cần confirm> Không có tài liệu mô tả độ trễ hiệu lực của Synonyms trên storefront.
+80,Integration,,Merchant xoá synonym đúng lúc Shopper đang có dropdown ISW cũ mở sẵn,,"Shopper đã gõ 1 từ, ISW đang hiển thị dropdown gợi ý dựa trên synonym cũ","1. [Shopper] Gõ 1 từ khớp Unified synonym, ISW hiện dropdown gợi ý mở rộng.
+2. [Merchant] Ngay lúc đó, xoá synonym đó khỏi nhóm và Save.
+3. [Shopper] Không gõ thêm, giữ nguyên dropdown đang mở, click chọn 1 gợi ý trong dropdown cũ.",,3. <cần confirm> — chưa xác định dropdown cũ (client-side) có tự làm mới theo thay đổi mới nhất hay giữ nguyên kết quả cũ cho tới khi shopper gõ lại/reload.,<cần confirm> Không có tài liệu mô tả hành vi cache phía client của ISW khi dữ liệu nguồn vừa đổi.
+81,Integration,Component Popups dùng chung (Suggestion Dictionary / Stopwords / Redirects),Nhãn/màu popup Delete nhất quán trên cả 4 feature vì dùng chung 1 component gốc,,"Popup Delete của Synonyms, Suggestion Dictionary, Stopwords, Redirects đều dùng chung 1 symbol ""Popups"" (quan sát qua Figma)","1. [QA] Mở popup Delete ở từng màn: Synonyms, Suggestion Dictionary, Stopwords, Redirects.
+2. [QA] Đối chiếu màu sắc + nhãn 2 nút giữa 4 màn.",,"2. Cả 4 màn hiển thị giống hệt nhau (cùng pattern nút xám ghi ""Delete"", nút cam ghi ""Cancel"") — xác nhận đây là 1 hiện tượng gốc duy nhất ở component chung, không phải lỗi riêng lẻ từng feature.",<cần confirm> Chờ xác nhận designer/BA (câu hỏi dùng chung đã nêu ở cả 4 spec feature) — khi có kết luận chỉ cần sửa 1 lần ở component gốc.
+82,Integration,,Sau khi fix nhãn nút ở component gốc — verify cả 4 feature cập nhật đồng bộ không sót,,Component Popups đã được fix theo kết luận cuối cùng của designer/BA,"1. [QA] Mở lại popup Delete ở cả 4 màn: Synonyms, Suggestion Dictionary, Stopwords, Redirects.
+2. [QA] Kiểm tra nhãn/màu 2 nút ở từng màn.",,2. Cả 4 màn đều thể hiện ĐÚNG nhãn/màu mới theo kết luận đã fix — không còn màn nào hiển thị nhãn/màu cũ (tránh tình trạng chỉ sửa 1-2 feature rồi sót các feature còn lại dùng chung component).,<cần confirm> Case này chỉ chạy được sau khi đã có fix thật; ghi nhận trước để không bị bỏ sót khi regression.
+83,Integration,Suggestion Dictionary,Sửa Unified synonym trong Synonyms Group → kiểm tra Suggestion Dictionary có tự động đổi theo không,,Suggestion Dictionary đang có dữ liệu mẫu trùng với Unified synonyms của 1 Synonym Group,"1. [Merchant] Sửa/xoá 1 Unified synonym trong Synonym Group đang có dữ liệu trùng với Suggestion Dictionary.
+2. [Merchant] Mở lại màn Suggestion Dictionary, kiểm tra danh sách suggestion tương ứng.",,2. <cần confirm> — chưa xác định 2 feature có dùng chung nguồn dữ liệu/cấu hình hay hoàn toàn độc lập (trùng dữ liệu mẫu có thể chỉ do dùng chung ảnh demo).,<cần confirm> Câu hỏi mở #4 của chính search-suggestion-dictionary-specs.md.
+84,Integration,,Chiều ngược — sửa trigger term/suggestion trong Suggestion Dictionary → kiểm tra Synonyms Group có bị ảnh hưởng không,,Suggestion Dictionary đang có dữ liệu mẫu trùng với Unified synonyms của 1 Synonym Group,"1. [Merchant] Sửa 1 suggestion trong modal Create/Edit của Suggestion Dictionary.
+2. [Merchant] Mở lại Synonyms List, kiểm tra Synonym Group có dữ liệu trùng.",,"2. <cần confirm> — cùng câu hỏi chiều ngược, chưa xác định có ảnh hưởng 2 chiều hay không.",<cần confirm> Cùng câu hỏi mở #4 của search-suggestion-dictionary-specs.md.
+85,Integration,Merchandise Campaign,Shopper search bằng từ là Unified synonym của Campaign trigger keyword → Campaign có chạy không,,"Campaign đang active, Trigger = ""When customers search a keyword"" = ""shoes""; Synonym Group có Unified synonym ""sneakers"" cho ""shoes""","1. [Shopper] Search ""sneakers"" trên storefront (không gõ đúng ""shoes"").
+2. [Merchant] Đối chiếu kết quả search có bị Campaign tác động (Pin/Hide/Boost...) hay không.",,"2. <cần confirm> — chưa xác định Campaign trigger keyword có tự mở rộng khớp theo Unified synonym của Synonyms Group hay chỉ khớp theo cơ chế Smart/Custom synonyms RIÊNG của chính Campaign (độc lập, không đọc dữ liệu từ Synonyms Group).",<cần confirm> Spec merchandise-campaign-specs.md không mô tả nguồn Smart/Custom synonyms của Campaign có chia sẻ với Synonyms Group hay không.
+86,Integration,,Merchant thêm Custom synonyms ngay trong Trigger setup của Campaign → có merge vào Synonym Group tương ứng trên màn Synonyms không,,"Đang tạo/sửa Campaign, Trigger = ""When customers search a keyword""","1. [Merchant] Ở popup setup Trigger keyword của Campaign, nhập ""Custom synonyms"" cho từ khoá trigger.
+2. [Merchant] Lưu Campaign, sau đó mở màn Synonyms List.",,"2. <cần confirm> — chưa xác định ""Custom synonyms"" nhập trong Campaign có tạo/merge thành 1 Synonym Group mới xuất hiện trên màn Synonyms, hay là dữ liệu hoàn toàn tách biệt chỉ tồn tại trong phạm vi Campaign đó.",<cần confirm> Spec merchandise-campaign-specs.md và search-synonyms-specs.md đều không mô tả mối quan hệ 2 chiều này.
+87,Integration,Search Relevance (Advanced Settings),Kết quả khớp qua synonym có bị tính điểm relevance thấp hơn khớp trực tiếp không,,Search Relevance weighting đang cấu hình mặc định; có sản phẩm khớp trực tiếp từ khoá gõ VÀ có sản phẩm khác chỉ khớp qua Unified synonym,"1. [Shopper] Search 1 từ khoá vừa khớp trực tiếp tên sản phẩm, vừa mở rộng qua Unified synonym sang sản phẩm khác.
+2. [Merchant] Đối chiếu thứ tự hiển thị kết quả trên SRP.",,"2. <cần confirm> — chưa xác định sản phẩm khớp qua synonym có bị xếp hạng thấp hơn (match yếu hơn) so với sản phẩm khớp trực tiếp, hay 2 loại match được tính điểm ngang nhau.",<cần confirm> Không có bằng chứng trong search-relevance-specs.md lẫn search-synonyms-specs.md.
+88,Integration,Stopwords,1 từ vừa là Stopword vừa nằm trong Unified synonyms — rule nào áp dụng trước,,"Từ ""the"" vừa thuộc danh sách Stopwords, vừa được thêm làm Unified synonym của 1 Synonym Group","1. [Shopper] Search cụm chứa từ đó trên storefront.
+2. [Merchant] Đối chiếu kết quả — xem Stopword có bị loại bỏ trước khi áp Synonym hay Synonym mở rộng trước rồi mới lọc Stopword.",,"2. <cần confirm> — chưa xác định thứ tự áp dụng rule giữa Stopwords và Synonyms, không có tài liệu mô tả pipeline xử lý search khi có cả 2 rule.",<cần confirm> Không có bằng chứng trong search-stopwords-specs.md lẫn search-synonyms-specs.md.
+89,Integration,Redirects,1 từ khoá vừa có Redirect rule vừa nằm trong Synonym Group — rule nào ưu tiên,,"Từ khoá ""sale"" vừa có Redirect trỏ sang 1 trang cụ thể, vừa là Unified synonym của 1 Synonym Group khác","1. [Shopper] Search đúng từ khoá ""sale"".
+2. [Merchant] Đối chiếu hành vi thật — có bị Redirect sang trang đích ngay (không hiện SRP) hay vẫn vào SRP với kết quả mở rộng theo Synonym.",,2. <cần confirm> — chưa xác định Redirect có ưu tiên chạy trước Synonym hay ngược lại; nếu Redirect chạy trước thì Synonym coi như không có cơ hội áp dụng cho đúng từ khoá đó.,<cần confirm> Không có bằng chứng trong search-redirects-specs.md lẫn search-synonyms-specs.md.
+,,=== AI SYNONYMS SUGGESTED - NGUỒN DỮ LIỆU SYNC ===,,,,,,,
+90,Sync,Khối AI Synonyms Suggested — dữ liệu nguồn Products/Categories/Variant Options sau Sync,BC thêm sản phẩm mang thuộc tính mới → candidate gợi ý phản ánh dữ liệu mới,,"Chưa có sản phẩm nào mang thuộc tính """"trekking"""" trong tên/mô tả","1. Kiểm tra khối AI Synonyms Suggested trước khi thêm dữ liệu.
+2. Chạy Sync tới khi Success.
+3. Đến chu kỳ chạy job nền kế tiếp, kiểm tra lại khối AI Synonyms Suggested.","Trên BigCommerce, thêm sản phẩm mới có tên/mô tả chứa ""trekking shoes""; chạy Manual Sync tới khi Success","3. <cần confirm> — chưa xác định candidate mới có xuất hiện ngay ở chu kỳ job chạy kế tiếp (job chạy theo lịch riêng 1 tháng/lần, không trigger theo event Sync) hay job chỉ dùng snapshot dữ liệu tại đúng thời điểm nó chạy.",<cần confirm> Spec Lark không mô tả job có trigger lại ngay sau mỗi lần Sync hay chạy độc lập theo lịch riêng.
+91,Sync,,BC xoá sản phẩm là nguồn sinh ra 1 candidate đang chờ xử lý → candidate còn hiển thị không,,"Candidate ""trekking shoes"" đang hiển thị trên card AI Synonyms Suggested, sinh ra từ dữ liệu 1 sản phẩm cụ thể","1. Kiểm tra card gợi ý trước khi xoá sản phẩm.
+2. Trên BigCommerce xoá hẳn sản phẩm đó.
+3. Chạy Sync tới khi Success, kiểm tra lại card gợi ý.","Trên BigCommerce, xoá hẳn sản phẩm nguồn của candidate; chạy Sync tới khi Success","3. <cần confirm> — chưa xác định candidate đã sinh ra có tự động bị rút lại/ẩn khi dữ liệu nguồn không còn, hay vẫn giữ nguyên trên card cho tới khi Merchant tự Confirm/Skip.",<cần confirm> Spec không mô tả cơ chế rút hồi gợi ý khi dữ liệu nguồn mất.
+92,Sync,,BC đổi Category/Variant Option của sản phẩm → candidate có phản ánh thuộc tính mới,,"Sản phẩm đang có Variant Option Color = ""Black""","1. Trên BigCommerce, đổi Variant Option Color của sản phẩm từ ""Black"" sang ""Olive"".
+2. Chạy Sync tới khi Success.
+3. Đến chu kỳ chạy job nền kế tiếp, kiểm tra khối AI Synonyms Suggested.",Variant Option Color: Black → Olive,3. <cần confirm> — chưa xác định candidate có cập nhật theo thuộc tính mới (Olive) hay vẫn giữ theo dữ liệu cũ (Black) tại thời điểm job chạy.,<cần confirm> Spec không mô tả cơ chế cập nhật candidate khi thuộc tính entity nguồn đổi.
+93,Sync,,Sync đang In Progress đúng lúc tới lịch chạy job nền — job dùng data nào,,Trạng thái sync = In Progress đúng lúc tới lịch chạy Job 1/Job 3,1. Để trạng thái sync đang In Progress đúng lúc tới lịch chạy job nền.,Trạng thái sync = In Progress,"1. <cần confirm> — chưa xác định job có đợi Sync Success rồi mới chạy, hay chạy song song trên snapshot dữ liệu của lần Sync Success gần nhất (không chờ).",<cần confirm> Spec không mô tả hành vi job nền khi Sync đang chạy dở.
+94,Sync,,Lần Sync gần nhất Failed đúng lúc tới lịch chạy job nền — job dùng data nào,,Lần Sync gần nhất kết thúc Failed (trước đó đã có ≥1 lần Success),1. Để lần Sync gần nhất kết thúc Failed đúng lúc tới lịch chạy job nền.,Trạng thái sync gần nhất = Failed,1. <cần confirm> — chưa xác định job có dùng dữ liệu của lần Sync Success gần nhất (bỏ qua lần Failed) hay tạm ngưng không chạy khi phát hiện Failed.,<cần confirm> Spec không mô tả hành vi job nền khi Sync Failed.
+95,Sync,,Dữ liệu BC vừa đổi nhưng CHƯA chạy Sync lại — job nền dùng data cũ hay data mới,,Synonym Group đang hiển thị đúng theo lần Sync Success gần nhất,"1. Trên BigCommerce, đổi tên 1 sản phẩm.
+2. KHÔNG chạy Sync lại.
+3. Đến chu kỳ chạy job nền kế tiếp, kiểm tra candidate liên quan.","BC vừa đổi tên sản phẩm, Sync chưa chạy lại",3. Job nền chỉ dùng dữ liệu đã sync (lần Success gần nhất) để sinh candidate — KHÔNG đọc trực tiếp dữ liệu mới từ BigCommerce khi chưa qua Sync (đúng kiến trúc chung: Native Search chỉ đọc qua Elasticsearch đã sync).,
+96,Sync,,Candidate tích luỹ qua ≥2 chu kỳ job liên tiếp — không bị mất dữ liệu cũ,Tích luỹ nhiều chu kỳ,"Job nền đã chạy chu kỳ 1, sinh candidate A chưa được Confirm/Skip","1. Sau chu kỳ job lần 1, ghi nhận candidate A đang hiển thị trên card.
+2. Thêm dữ liệu sản phẩm mới làm nguồn cho candidate B, chạy Sync.
+3. Đến chu kỳ chạy job lần 2, kiểm tra lại card.",Thêm dữ liệu sản phẩm mới trước chu kỳ job lần 2,"3. Card hiển thị CẢ candidate A (chưa xử lý từ chu kỳ 1, vẫn còn treo) VÀ candidate B (mới sinh ở chu kỳ 2) — không bị mất/ghi đè candidate cũ chưa xử lý.",<cần confirm> Chưa có tài liệu xác nhận job có merge thêm candidate mới vào danh sách cũ hay thay thế toàn bộ mỗi chu kỳ.
+97,Sync,,Job 3 áp rule tối đa 10 synonym/từ + bắt buộc dạng số nhiều — kiểm tra khi dữ liệu sync đủ vượt ngưỡng,Rule riêng Job 3,Dữ liệu sync (Products) đủ phong phú để sinh > 10 ứng viên hợp lệ (confidence > 75%) cho cùng 1 từ,"1. Chạy Sync với dữ liệu Products đủ phong phú.
+2. Đến chu kỳ chạy Job 3, kiểm tra số lượng candidate và định dạng (số ít/số nhiều) của từng candidate liên quan tới từ đang xét.",Dữ liệu Products sinh > 10 ứng viên hợp lệ cho cùng 1 từ,"2. <cần confirm> — chưa xác định rule ""tối đa 10"" áp dụng ở cấp nào (10 candidate hiển thị trên card để Merchant chọn, hay 10 synonym tối đa được PHÉP LƯU chính thức sau khi Confirm) và rule bắt buộc dạng số nhiều áp dụng cho Unified hay Supporting synonyms.",<cần confirm> Câu hỏi mở #8c (docs/specs/search-synonyms-specs.md mục 6).
