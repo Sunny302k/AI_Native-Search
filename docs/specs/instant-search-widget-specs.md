@@ -119,6 +119,8 @@ Mọi field trên đều áp dụng đồng thời cho Preview (Desktop + Mobile
 
 `[CẦN XÁC NHẬN BA]` — nhập term quá dài (ISW-056) hiện đang **NG**, chưa rõ giới hạn ký tự đúng là bao nhiêu.
 
+**Cập nhật 2026-11-16 (đối chiếu chéo với `search-suggestion-dictionary-specs.md`)**: khối "Suggestion" này (Data source: Store data/Add manually, flat list, không trigger term) là **MÀN HÌNH RIÊNG**, khác với feature "Suggestion Dictionary" (Search > Search Engine Setup > Suggestion — trigger term + danh sách gợi ý có thứ tự, xem spec riêng). "Copy from..." (ISW-057, 058) chỉ liệt kê nguồn "SRP suggestion" và "Search box onclick suggestion" — không nhắc Suggestion Dictionary. Quan hệ thật giữa 2 màn này (ISW Data source toggle có đọc/ghi đè theo Suggestion Dictionary không) chưa xác nhận được — xem câu hỏi mở #12 trong `search-suggestion-dictionary-specs.md`.
+
 ## 7. Category
 
 | Field | Mô tả | Nguồn |
