@@ -62,6 +62,14 @@ Module **Analytics** có nhắc tên trong tài liệu tổng quan nhưng chưa 
 - **App tham chiếu**: ưu tiên **Searchspring** và **Klevu** (app search/filter cài trên BigCommerce); **Algolia** tham khảo thêm cho trải nghiệm UX (người dùng chọn 2026-10-22). Boost Commerce chỉ ghi nhận là app gốc của design Filter.
 - **File overview**: không duy trì — theo yêu cầu người dùng, mỗi lần `/explain` không cần lưu lại tổng hợp.
 
+# Cấu hình /log-bug
+
+- **Dự án**: Native Search. **Module**: Search, Sync, Filter, Merchandise (4 module chính) + Pricing (module bổ sung, xem `test-cases/pricing/`).
+- **Công cụ quản lý bug**: chưa có công cụ riêng (Jira/GitHub Issues...) — nội dung bug report dán trực tiếp dạng text thường vào cột O (No Bug) của Google Sheet test case tương ứng khi chạy test qua skill `execute-testcase-on-sheet`; tham chiếu local lưu thêm ở `test-reports/<feature>/bugs/<slug>.md`.
+- **Thang Priority**: dùng mặc định trong `references/classification.md` của skill `log-bug`.
+- **Môi trường mặc định**: staging `https://stg-search.peasisoft.com`.
+- **Nguồn Expected (ưu tiên giảm dần)**: `docs/updates/<feature>-updates.md` → xác nhận của người dùng trong chat → Figma (ngang hoặc cao hơn PDF, xem rule ở mục "Đặc thù tài liệu") → spec PDF/`docs/specs/<feature>-specs.md`.
+
 # Quy tắc Git
 
 - Repo chỉ có 1 người làm: **chỉ dùng nhánh `main`**, commit và push thẳng lên `main`, **không tạo nhánh mới**.

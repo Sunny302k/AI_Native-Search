@@ -1,4 +1,4 @@
-﻿ID,Test Type,Test Objective,,,Preconditions,Test Steps,Input DB/Setting,Expected Result,Note
+"ID",Test Type,Test Objective,,,Preconditions,Test Steps,Input DB/Setting,Expected Result,Note
 Purpose:,,Cho merchant khai báo các nhóm từ khoá tương đương hoặc liên quan (không phải filter value) để công cụ search trả đúng kết quả dù shopper gõ từ khác tên gọi thật của sản phẩm trên site.,,,,,,,
 1,Happy,Synonyms List + Search,Entry point - màn Synonyms,Mở từ Search Engine Setup,Role = [Merchant Admin],"1. Vào Search > Search Engine Setup.
 2. Click vào mục [Synonyms].",,"2. Chuyển sang màn Synonyms, hiển thị nút back + tiêu đề ""Synonyms"".",

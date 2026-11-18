@@ -6,7 +6,11 @@
       "ClaudeInChromeDomain(docs.google.com)",
       "mcp__claude-in-chrome__tabs_create_mcp",
       "ClaudeInChromeDomain(stg-search.peasisoft.com)",
-      "ClaudeInChromeDomain(github.com)"
+      "ClaudeInChromeDomain(github.com)",
+      "mcp__claude-in-chrome__browser_batch",
+      "ClaudeInChromeDomain(store-e8jb0xjd88.mybigcommerce.com)",
+      "ClaudeInChromeDomain(peasi-ns-stg.mybigcommerce.com)",
+      "ClaudeInChromeDomain(example.com)"
     ]
   }
 }
